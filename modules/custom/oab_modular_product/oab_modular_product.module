@@ -50,64 +50,64 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
 
   if (in_array($element['#paragraph_type'], $modules70_150)) {
     if (isset($element['subform']['field_title'])) {
-      $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getTitle70MaxCharacter();
-      $element['subform']['field_title']['widget'][0]['value']['#size'] = $conf_modular_product->getTitle70MaxCharacter()+10;
-      $element['subform']['field_title']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getTitle70MaxCharacter().' characters max');
+      $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getShortTitleMaxCharacter();
+      $element['subform']['field_title']['widget'][0]['value']['#size'] = $conf_modular_product->getShortTitleMaxCharacter()+10;
+      $element['subform']['field_title']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getShortTitleMaxCharacter().' characters max');
     }
 
     if (isset($element['subform']['field_accroche'])) {
-      $element['subform']['field_accroche']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getDescription150MaxCharacter();
-      $element['subform']['field_accroche']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getDescription150MaxCharacter().' characters max');
+      $element['subform']['field_accroche']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getShortDescriptionMaxCharacter();
+      $element['subform']['field_accroche']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getShortDescriptionMaxCharacter().' characters max');
     }
   }
 
   if (in_array($element['#paragraph_type'], $modules70_250)) {
     if (isset($element['subform']['field_title'])) {
-      $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getTitle70MaxCharacter();
-      $element['subform']['field_title']['widget'][0]['value']['#size'] = $conf_modular_product->getTitle70MaxCharacter()+10;
-      $element['subform']['field_title']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getTitle70MaxCharacter().' characters max');
+      $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getShortTitleMaxCharacter();
+      $element['subform']['field_title']['widget'][0]['value']['#size'] = $conf_modular_product->getShortTitleMaxCharacter()+10;
+      $element['subform']['field_title']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getShortTitleMaxCharacter().' characters max');
     }
 
     if (isset($element['subform']['field_tab_title'])) {
-      $element['subform']['field_tab_title']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getTitle70MaxCharacter();
-      $element['subform']['field_tab_title']['widget'][0]['value']['#size'] = $conf_modular_product->getTitle70MaxCharacter()+10;
-      $element['subform']['field_tab_title']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getTitle70MaxCharacter().' characters max');
+      $element['subform']['field_tab_title']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getShortTitleMaxCharacter();
+      $element['subform']['field_tab_title']['widget'][0]['value']['#size'] = $conf_modular_product->getShortTitleMaxCharacter()+10;
+      $element['subform']['field_tab_title']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getShortTitleMaxCharacter().' characters max');
     }
 
     if (isset($element['subform']['field_accroche'])) {
-      $element['subform']['field_accroche']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getDescription250MaxCharacter();
-      $element['subform']['field_accroche']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getDescription250MaxCharacter().' characters max');
+      $element['subform']['field_accroche']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getLongDescriptionMaxCharacter();
+      $element['subform']['field_accroche']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getLongDescriptionMaxCharacter().' characters max');
     }
 
     if (isset($element['subform']['field_highlight'])) {
-      $element['subform']['field_highlight']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getDescription250MaxCharacter();
-      $element['subform']['field_highlight']['widget'][0]['value']['#description'] .= ' ' . FieldFilteredMarkup::create($conf_modular_product->getDescription250MaxCharacter().' characters max');
+      $element['subform']['field_highlight']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getLongDescriptionMaxCharacter();
+      $element['subform']['field_highlight']['widget'][0]['value']['#description'] .= ' ' . FieldFilteredMarkup::create($conf_modular_product->getLongDescriptionMaxCharacter().' characters max');
       $element['subform']['field_highlight']['widget'][0]['value']['#rows'] = 2;
     }
 
     if (isset($element['subform']['field_key_points'])) {
-      $element['subform']['field_key_points']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getDescription250MaxCharacter();
-      $element['subform']['field_key_points']['widget'][0]['value']['#size'] = $conf_modular_product->getDescription250MaxCharacter()+10;
-      $element['subform']['field_key_points']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getDescription250MaxCharacter().' characters max');
+      $element['subform']['field_key_points']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getLongDescriptionMaxCharacter();
+      $element['subform']['field_key_points']['widget'][0]['value']['#size'] = $conf_modular_product->getLongDescriptionMaxCharacter()+10;
+      $element['subform']['field_key_points']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getLongDescriptionMaxCharacter().' characters max');
     }
 
     if (isset($element['subform']['field_description'])) {
-      $element['subform']['field_description']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getDescription250MaxCharacter();
-      $element['subform']['field_description']['widget'][0]['value']['#size'] = $conf_modular_product->getDescription250MaxCharacter()+10;
-      $element['subform']['field_description']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getTitle70MaxCharacter().' characters max');
+      $element['subform']['field_description']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getLongDescriptionMaxCharacter();
+      $element['subform']['field_description']['widget'][0]['value']['#size'] = $conf_modular_product->getLongDescriptionMaxCharacter()+10;
+      $element['subform']['field_description']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getLongDescriptionMaxCharacter().' characters max');
     }
   }
 
   if (in_array($element['#paragraph_type'], $module150_250)) {
     if (isset($element['subform']['field_title'])) {
-      $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getTitle150MaxCharacter();
-      $element['subform']['field_title']['widget'][0]['value']['#size'] = $conf_modular_product->getTitle150MaxCharacter()+10;
-      $element['subform']['field_title']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getTitle150MaxCharacter().' characters max');
+      $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getLongTitleMaxCharacter();
+      $element['subform']['field_title']['widget'][0]['value']['#size'] = $conf_modular_product->getLongTitleMaxCharacter()+10;
+      $element['subform']['field_title']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getLongTitleMaxCharacter().' characters max');
     }
 
     if (isset($element['subform']['field_accroche'])) {
-      $element['subform']['field_accroche']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getDescription250MaxCharacter();
-      $element['subform']['field_accroche']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getDescription250MaxCharacter().' characters max');
+      $element['subform']['field_accroche']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getLongDescriptionMaxCharacter();
+      $element['subform']['field_accroche']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getLongDescriptionMaxCharacter().' characters max');
     }
   }
 
@@ -199,6 +199,7 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
       ]
     ];
   }
+
   if ($element['#paragraph_type'] === 'module_presentation') {
     $element['subform']['field_for_who_title']['#states'] = [
       'visible' => [
@@ -239,14 +240,14 @@ function oab_modular_product_form_node_modular_product_edit_form_alter(&$form, F
     $conf_modular_product = \Drupal::service('oab_modular_product.settings');
 
     if (isset($form['field_product_name'])) {
-      $form['field_product_name']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getTitle70MaxCharacter();
-      $form['field_product_name']['widget'][0]['value']['#size'] = $conf_modular_product->getTitle70MaxCharacter()+10;
-      $form['field_product_name']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getTitle70MaxCharacter().' characters max');
+      $form['field_product_name']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getShortTitleMaxCharacter();
+      $form['field_product_name']['widget'][0]['value']['#size'] = $conf_modular_product->getShortTitleMaxCharacter()+10;
+      $form['field_product_name']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getShortTitleMaxCharacter().' characters max');
     }
 
     if (isset($form['field_teaser'])) {
-      $form['field_teaser']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getDescription250MaxCharacter();
-      $form['field_teaser']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getDescription250MaxCharacter().' characters max');
+      $form['field_teaser']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getLongDescriptionMaxCharacter();
+      $form['field_teaser']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getLongDescriptionMaxCharacter().' characters max');
     }
 
     if (isset($form["field_enable_wysiwyg_paragraph"])) {
