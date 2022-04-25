@@ -10,19 +10,19 @@ class OabModularProductService {
     private ImmutableConfig $config
   ) { }
 
-  public function getTitle70MaxCharacter(): mixed {
+  public function getShortTitleMaxCharacter(): mixed {
     return $this->get("titles.title_70");
   }
 
-  public function getTitle150MaxCharacter(): mixed {
+  public function getLongTitleMaxCharacter(): mixed {
     return $this->get("titles.title_150");
   }
 
-  public function getDescription150MaxCharacter(): mixed {
+  public function getShortDescriptionMaxCharacter(): mixed {
     return $this->get("descriptions.description_150");
   }
 
-  public function getDescription250MaxCharacter(): mixed {
+  public function getLongDescriptionMaxCharacter(): mixed {
     return $this->get("descriptions.description_250");
   }
 
