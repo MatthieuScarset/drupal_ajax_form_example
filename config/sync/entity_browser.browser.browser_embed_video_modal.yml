@@ -33,10 +33,10 @@ widgets:
   0e656900-bb01-49dc-be67-f94aed7c97bf:
     id: entity_form
     uuid: 0e656900-bb01-49dc-be67-f94aed7c97bf
-    label: Create
+    label: 'Upload Video'
     weight: 2
     settings:
-      submit_text: 'Save entity'
+      submit_text: 'Save video'
       entity_type: media
       bundle: embed_video
       form_mode: default

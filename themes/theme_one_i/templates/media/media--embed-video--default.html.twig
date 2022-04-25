@@ -31,9 +31,9 @@
  * @ingroup themeable
  */
 #}
-{% if elements.embed_url_youtube is defined and elements.embed_url_youtube is not empty %}
+{% if embed_url_youtube is defined and embed_url_youtube is not empty %}
   <div{{ attributes.addClass('embed-responsive embed-responsive-16by9') }}>
-      <iframe src="{{ elements.embed_url_youtube }}" allowfullscreen class="embed-responsive-item"></iframe>
+      <iframe src="{{ embed_url_youtube }}" allowfullscreen class="embed-responsive-item"></iframe>
   </div>
 {% else %}
   {{ media }}

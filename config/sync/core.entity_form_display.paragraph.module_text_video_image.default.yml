@@ -70,7 +70,7 @@ content:
     weight: 6
     region: content
     settings:
-      entity_browser: browser_modal_for_embed_videos
+      entity_browser: browser_embed_video_modal
       field_widget_display: label
       field_widget_edit: true
       field_widget_remove: true
