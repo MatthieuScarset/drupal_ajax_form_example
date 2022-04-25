@@ -1,4 +1,13 @@
 .paragraph--type--module-blog{
   margin-top: 4rem;
   margin-bottom: 6rem;
+  .field--name-field-image {
+    min-width: 100%;
+    img {
+      width: 100%;
+      min-width: 100%;
+      height: auto;
+      margin: auto;
+    }
+  }
 }
