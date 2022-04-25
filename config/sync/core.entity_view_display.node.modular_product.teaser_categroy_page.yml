@@ -63,6 +63,7 @@ hidden:
   field_faq: true
   field_modular_product_tarif: true
   field_modules: true
+  field_presentation: true
   field_visual: true
   langcode: true
   links: true
