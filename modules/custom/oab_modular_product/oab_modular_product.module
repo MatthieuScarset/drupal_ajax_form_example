@@ -41,7 +41,8 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
     'module_step',
     'module_text_video_image',
     'module_presentation',
-    'module_cross_sell'
+    'module_cross_sell',
+    'module_blog'
   ];
 
   $module150_250 = [
