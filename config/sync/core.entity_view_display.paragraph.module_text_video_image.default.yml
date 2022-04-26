@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.module_text_video_image.field_call_to_action_link
+    - field.field.paragraph.module_text_video_image.field_call_to_action_link_simple
     - field.field.paragraph.module_text_video_image.field_display_mode
     - field.field.paragraph.module_text_video_image.field_highlight
     - field.field.paragraph.module_text_video_image.field_media_type
@@ -19,7 +19,7 @@ targetEntityType: paragraph
 bundle: module_text_video_image
 mode: default
 content:
-  field_call_to_action_link:
+  field_call_to_action_link_simple:
     type: link
     label: hidden
     settings:
