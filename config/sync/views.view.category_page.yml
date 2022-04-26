@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser_categroy_page
     - field.storage.node.field_product_category
+    - node.type.modular_product
     - node.type.product
     - taxonomy.vocabulary.product_categories
   module:
@@ -239,21 +240,52 @@ display:
           id: type
           table: node_field_data
           field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
           entity_type: node
           entity_field: type
           plugin_id: bundle
+          operator: in
           value:
+            modular_product: modular_product
             product: product
+          group: 1
+          exposed: false
           expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
             operator_limit_selection: false
             operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       style:
         type: html_list
         options:
           grouping:
             -
               field: field_product_category
-              rendered: false
+              rendered: true
               rendered_strip: false
           row_class: ''
           default_row_class: true
@@ -297,7 +329,12 @@ display:
         - 'config:core.entity_view_display.node.blog_post.right_linked_content'
         - 'config:core.entity_view_display.node.blog_post.subhome'
         - 'config:core.entity_view_display.node.blog_post.teaser'
+        - 'config:core.entity_view_display.node.blog_post.teaser_paragraph_module_blog'
         - 'config:core.entity_view_display.node.blog_post.tile'
+        - 'config:core.entity_view_display.node.cloud_service_provider.default'
+        - 'config:core.entity_view_display.node.cloud_service_provider.subhome'
+        - 'config:core.entity_view_display.node.cloud_service_provider.teaser'
+        - 'config:core.entity_view_display.node.cloud_service_provider.tile'
         - 'config:core.entity_view_display.node.country.default'
         - 'config:core.entity_view_display.node.country.related_content'
         - 'config:core.entity_view_display.node.country.right_linked_content'
@@ -318,6 +355,7 @@ display:
         - 'config:core.entity_view_display.node.document.right_linked_content'
         - 'config:core.entity_view_display.node.document.subhome'
         - 'config:core.entity_view_display.node.document.teaser'
+        - 'config:core.entity_view_display.node.document.teaser_paragraph_module_blog'
         - 'config:core.entity_view_display.node.document.tile'
         - 'config:core.entity_view_display.node.external_content.default'
         - 'config:core.entity_view_display.node.external_content.subhome'
@@ -339,7 +377,13 @@ display:
         - 'config:core.entity_view_display.node.magazine.right_linked_content'
         - 'config:core.entity_view_display.node.magazine.subhome'
         - 'config:core.entity_view_display.node.magazine.teaser'
+        - 'config:core.entity_view_display.node.magazine.teaser_paragraph_module_blog'
         - 'config:core.entity_view_display.node.magazine.tile'
+        - 'config:core.entity_view_display.node.modular_product.default'
+        - 'config:core.entity_view_display.node.modular_product.teaser'
+        - 'config:core.entity_view_display.node.modular_product.teaser_categroy_page'
+        - 'config:core.entity_view_display.node.modular_product.teaser_product_cross_sell'
+        - 'config:core.entity_view_display.node.modular_product.tile'
         - 'config:core.entity_view_display.node.news.default'
         - 'config:core.entity_view_display.node.news.subhome'
         - 'config:core.entity_view_display.node.news.teaser'
@@ -356,18 +400,21 @@ display:
         - 'config:core.entity_view_display.node.press_kit.right_linked_content'
         - 'config:core.entity_view_display.node.press_kit.subhome'
         - 'config:core.entity_view_display.node.press_kit.teaser'
+        - 'config:core.entity_view_display.node.press_kit.teaser_paragraph_module_blog'
         - 'config:core.entity_view_display.node.press_kit.tile'
         - 'config:core.entity_view_display.node.press_release.default'
         - 'config:core.entity_view_display.node.press_release.related_content'
         - 'config:core.entity_view_display.node.press_release.right_linked_content'
         - 'config:core.entity_view_display.node.press_release.subhome'
         - 'config:core.entity_view_display.node.press_release.teaser'
+        - 'config:core.entity_view_display.node.press_release.teaser_paragraph_module_blog'
         - 'config:core.entity_view_display.node.press_release.tile'
         - 'config:core.entity_view_display.node.product.default'
         - 'config:core.entity_view_display.node.product.subhome'
         - 'config:core.entity_view_display.node.product.subhome_distributeur'
         - 'config:core.entity_view_display.node.product.teaser'
         - 'config:core.entity_view_display.node.product.teaser_categroy_page'
+        - 'config:core.entity_view_display.node.product.teaser_product_cross_sell'
         - 'config:core.entity_view_display.node.product.tile'
         - 'config:core.entity_view_display.node.profile.default'
         - 'config:core.entity_view_display.node.profile.subhome'
@@ -410,7 +457,12 @@ display:
         - 'config:core.entity_view_display.node.blog_post.right_linked_content'
         - 'config:core.entity_view_display.node.blog_post.subhome'
         - 'config:core.entity_view_display.node.blog_post.teaser'
+        - 'config:core.entity_view_display.node.blog_post.teaser_paragraph_module_blog'
         - 'config:core.entity_view_display.node.blog_post.tile'
+        - 'config:core.entity_view_display.node.cloud_service_provider.default'
+        - 'config:core.entity_view_display.node.cloud_service_provider.subhome'
+        - 'config:core.entity_view_display.node.cloud_service_provider.teaser'
+        - 'config:core.entity_view_display.node.cloud_service_provider.tile'
         - 'config:core.entity_view_display.node.country.default'
         - 'config:core.entity_view_display.node.country.related_content'
         - 'config:core.entity_view_display.node.country.right_linked_content'
@@ -431,6 +483,7 @@ display:
         - 'config:core.entity_view_display.node.document.right_linked_content'
         - 'config:core.entity_view_display.node.document.subhome'
         - 'config:core.entity_view_display.node.document.teaser'
+        - 'config:core.entity_view_display.node.document.teaser_paragraph_module_blog'
         - 'config:core.entity_view_display.node.document.tile'
         - 'config:core.entity_view_display.node.external_content.default'
         - 'config:core.entity_view_display.node.external_content.subhome'
@@ -452,7 +505,13 @@ display:
         - 'config:core.entity_view_display.node.magazine.right_linked_content'
         - 'config:core.entity_view_display.node.magazine.subhome'
         - 'config:core.entity_view_display.node.magazine.teaser'
+        - 'config:core.entity_view_display.node.magazine.teaser_paragraph_module_blog'
         - 'config:core.entity_view_display.node.magazine.tile'
+        - 'config:core.entity_view_display.node.modular_product.default'
+        - 'config:core.entity_view_display.node.modular_product.teaser'
+        - 'config:core.entity_view_display.node.modular_product.teaser_categroy_page'
+        - 'config:core.entity_view_display.node.modular_product.teaser_product_cross_sell'
+        - 'config:core.entity_view_display.node.modular_product.tile'
         - 'config:core.entity_view_display.node.news.default'
         - 'config:core.entity_view_display.node.news.subhome'
         - 'config:core.entity_view_display.node.news.teaser'
@@ -469,18 +528,21 @@ display:
         - 'config:core.entity_view_display.node.press_kit.right_linked_content'
         - 'config:core.entity_view_display.node.press_kit.subhome'
         - 'config:core.entity_view_display.node.press_kit.teaser'
+        - 'config:core.entity_view_display.node.press_kit.teaser_paragraph_module_blog'
         - 'config:core.entity_view_display.node.press_kit.tile'
         - 'config:core.entity_view_display.node.press_release.default'
         - 'config:core.entity_view_display.node.press_release.related_content'
         - 'config:core.entity_view_display.node.press_release.right_linked_content'
         - 'config:core.entity_view_display.node.press_release.subhome'
         - 'config:core.entity_view_display.node.press_release.teaser'
+        - 'config:core.entity_view_display.node.press_release.teaser_paragraph_module_blog'
         - 'config:core.entity_view_display.node.press_release.tile'
         - 'config:core.entity_view_display.node.product.default'
         - 'config:core.entity_view_display.node.product.subhome'
         - 'config:core.entity_view_display.node.product.subhome_distributeur'
         - 'config:core.entity_view_display.node.product.teaser'
         - 'config:core.entity_view_display.node.product.teaser_categroy_page'
+        - 'config:core.entity_view_display.node.product.teaser_product_cross_sell'
         - 'config:core.entity_view_display.node.product.tile'
         - 'config:core.entity_view_display.node.profile.default'
         - 'config:core.entity_view_display.node.profile.subhome'
