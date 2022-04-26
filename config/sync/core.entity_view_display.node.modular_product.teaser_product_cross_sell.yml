@@ -1,9 +1,9 @@
-uuid: 44936af2-5ec5-4dd2-8393-93444214a80b
+uuid: 860f51ca-a880-4273-b6c8-c517a4c6acd3
 langcode: fr
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser_modular_product
+    - core.entity_view_mode.node.teaser_product_cross_sell
     - field.field.node.modular_product.field_blogs
     - field.field.node.modular_product.field_call_to_action_button
     - field.field.node.modular_product.field_call_to_action_link
@@ -21,10 +21,10 @@ dependencies:
     - node.type.modular_product
   module:
     - user
-id: node.modular_product.teaser_modular_product
+id: node.modular_product.teaser_product_cross_sell
 targetEntityType: node
 bundle: modular_product
-mode: teaser_modular_product
+mode: teaser_product_cross_sell
 content:
   field_key_points:
     type: string
