@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.module_blog.field_call_to_action_link
+    - field.field.paragraph.module_blog.field_call_to_action_link_simple
     - field.field.paragraph.module_blog.field_content_reference_1
     - field.field.paragraph.module_blog.field_content_reference_2
     - field.field.paragraph.module_blog.field_highlight
@@ -18,7 +18,7 @@ targetEntityType: paragraph
 bundle: module_blog
 mode: default
 content:
-  field_call_to_action_link:
+  field_call_to_action_link_simple:
     type: link
     label: hidden
     settings:
