@@ -1,10 +1,20 @@
-<span class="font-weight-bold">{{ element['#title'] }}</span>
+<span class="font-weight-bold">{{ label }}</span>
   <div class="liste-offres my-1 pl-1">
-  <ul class="list exclus-icon ob1-list-tick mb-0">
-    {% for item in items %}
-      <li class="ml-0">
-        {{ item.content }}
-      </li>
-    {% endfor %}
-  </ul>
+    {% if (is_single) %}
+      <div class="row w-100">
+        {% for item in items %}
+          <div class="col-12 col-md-6">
+            <ul class="list exclus-icon ob1-list-tick mb-0">
+              <li class="ml-0">{{ item.content }}</li>
+            </ul>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <ul class="list exclus-icon ob1-list-tick mb-0">
+        {% for item in items %}
+          <li class="ml-0">{{ item.content }}</li>
+        {% endfor %}
+      </ul>
+    {%endif%}
 </div>

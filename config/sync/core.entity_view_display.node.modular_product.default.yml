@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.modular_product.field_call_to_action_button
     - field.field.node.modular_product.field_call_to_action_link
     - field.field.node.modular_product.field_cross_sell
+    - field.field.node.modular_product.field_detail_offre
     - field.field.node.modular_product.field_enable_wysiwyg_paragraph
     - field.field.node.modular_product.field_faq
     - field.field.node.modular_product.field_key_points
@@ -33,7 +34,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 5
+    weight: 6
     region: content
   field_cross_sell:
     type: entity_reference_revisions_entity_view
@@ -42,7 +43,16 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 4
+    weight: 5
+    region: content
+  field_detail_offre:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
     region: content
   field_faq:
     type: entity_reference_revisions_entity_view
@@ -51,7 +61,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 3
+    weight: 4
     region: content
   field_modules:
     type: entity_reference_revisions_entity_view
@@ -60,7 +70,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
   field_presentation:
     type: entity_reference_revisions_entity_view

@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.modular_product.field_call_to_action_button
     - field.field.node.modular_product.field_call_to_action_link
     - field.field.node.modular_product.field_cross_sell
+    - field.field.node.modular_product.field_detail_offre
     - field.field.node.modular_product.field_enable_wysiwyg_paragraph
     - field.field.node.modular_product.field_faq
     - field.field.node.modular_product.field_key_points
@@ -62,6 +63,7 @@ hidden:
   field_call_to_action_button: true
   field_call_to_action_link: true
   field_cross_sell: true
+  field_detail_offre: true
   field_enable_wysiwyg_paragraph: true
   field_faq: true
   field_modular_product_tarif: true
