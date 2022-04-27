@@ -45,28 +45,46 @@
   not paragraph.isPublished() ? 'paragraph--unpublished'
 ] %}
 {% block paragraph %}
-  <div class="detail-offre-item bg-white h-100 py-1 px-1 py-md-3 px-md-2 item-close">
-    {% block content %}
-      <div class="detail-offre-content">
-        <h3 class="pb-0 mb-1">{{ content.field_title }}</h3>
-        <span>{{ content.field_accroche }}</span>
-        <h4 class="text-primary py-0 my-1">{{ content.field_price_label }}</h4>
-
-        {{ content.field_link_button }}
-
-        <hr class="separator separator--gray4 my-1">
-          {{ (content.field_offres_inclus) }}
-          {{ content.field_offres_exclus }}
+  {% block content %}
+    {% if (is_single) %}
+      <div class="row justify-content-between align-items-center">
+        <div class="col-12 col-md-4">
+          <h4 class="pb-0 mb-1 mb-md-2">{{ content.field_title }}</h4>
+          <span class="lead">{{ content.field_accroche }}</span>
           {{ content.field_documentation }}
+          <h4 class="text-primary py-0 mt-1 mb-2">{{ content.field_price_label }}</h4>
+          {{ content.field_link_button }}
+        </div>
+        <div class="bg-white col-11 col-md-7 mt-2 mt-md-0 ml-1 ml-md-0">
+          {{ content.field_offres_inclus }}
+          {{ content.field_offres_exclus }}
+        </div>
       </div>
 
-      <button type="button"
-              class="o-link-arrow see-more down text-decoration-none font-weight-bold text-center pb-2 w-100"
-      >
-        <span class="text-voir-tout">{{ "See All"|t }}</span>
-        <span class="text-voir-moins d-none">{{ "See less"|t }}</span>
-      </button>
+    {% else %}
 
-    {% endblock %}
-  </div>
+      <div class="detail-offre-item bg-white h-100 py-1 px-1 py-md-4 px-md-2 item-close">
+        <div class="detail-offre-content">
+          <h4 class="pb-0 mb-1">{{ content.field_title }}</h4>
+          <span>{{ content.field_accroche }}</span>
+          <h4 class="text-primary py-0 my-1">{{ content.field_price_label }}</h4>
+
+          {{ content.field_link_button }}
+
+          <hr class="separator separator--gray4 mt-1 mt-sm-2">
+            {{ content.field_offres_inclus }}
+            {{ content.field_offres_exclus }}
+            {{ content.field_documentation }}
+        </div>
+
+        <button type="button"
+                class="o-link-arrow see-more down text-decoration-none font-weight-bold text-center pb-2 w-100"
+        >
+          <span class="text-voir-tout">{{ "See All"|t }}</span>
+          <span class="text-voir-moins d-none">{{ "See less"|t }}</span>
+        </button>
+      </div>
+
+    {%endif%}
+  {% endblock %}
 {% endblock paragraph %}

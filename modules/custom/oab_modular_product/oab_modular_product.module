@@ -6,9 +6,9 @@ use Drupal\oab_modular_product\Services\OabModularProductService;
 use Drupal\paragraphs\Entity\Paragraph;
 
 /**
- * Implements hook_field_widget_form_alter().
+ * Implements hook_field_widget_single_element_form_alter().
  */
-function oab_modular_product_field_widget_form_alter(&$element, FormStateInterface $form_state, $context) {
+function oab_modular_product_field_widget_single_element_form_alter(array &$element, FormStateInterface $form_state, array $context) {
   /*
    * Ici, on ne va gérer que les alterations du formulaire du paragraph
    */
@@ -22,17 +22,14 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
   $user_roles = \Drupal::currentUser()->getRoles();
   $user_is_admin = in_array('administrator', $user_roles);
 
-  $modules70_150 = [
-    'module_detail_offre_items'
-  ];
-
-  $modules70_250 = [
+  $modules = [
     'module_3_4_colonnes',
     'module_3_4_colonnes_items',
     'module_exemples',
     'module_exemples_items',
     'module_services',
     'module_detail_offre',
+    'module_detail_offre_items',
     'module_benefits',
     'module_benefits_item',
     'module_partner',
@@ -44,25 +41,12 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
     'module_cross_sell'
   ];
 
-  $module150_250 = [
+  $sous_modules = [
     'titre_and_description_and_link',
     'titre_and_description',
   ];
 
-  if (in_array($element['#paragraph_type'], $modules70_150)) {
-    if (isset($element['subform']['field_title'])) {
-      $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getShortTitleMaxCharacter();
-      $element['subform']['field_title']['widget'][0]['value']['#size'] = $conf_modular_product->getShortTitleMaxCharacter()+10;
-      $element['subform']['field_title']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getShortTitleMaxCharacter().' characters max');
-    }
-
-    if (isset($element['subform']['field_accroche'])) {
-      $element['subform']['field_accroche']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getShortDescriptionMaxCharacter();
-      $element['subform']['field_accroche']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($conf_modular_product->getShortDescriptionMaxCharacter().' characters max');
-    }
-  }
-
-  if (in_array($element['#paragraph_type'], $modules70_250)) {
+  if (in_array($element['#paragraph_type'], $modules)) {
     if (isset($element['subform']['field_title'])) {
       $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getShortTitleMaxCharacter();
       $element['subform']['field_title']['widget'][0]['value']['#size'] = $conf_modular_product->getShortTitleMaxCharacter()+10;
@@ -105,7 +89,7 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
     }
   }
 
-  if (in_array($element['#paragraph_type'], $module150_250)) {
+  if (in_array($element['#paragraph_type'], $sous_modules)) {
     if (isset($element['subform']['field_title'])) {
       $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = $conf_modular_product->getLongTitleMaxCharacter();
       $element['subform']['field_title']['widget'][0]['value']['#size'] = $conf_modular_product->getLongTitleMaxCharacter()+10;
@@ -119,10 +103,10 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
   }
 
   if ($element['#paragraph_type'] === 'module_faq') {
+  /*
+   * liste des fields seulement modifiable par les admins
+   */
 
-    /*
- * liste des fields seulement modifiable par les admins
- */
     $field_restricted = [
       'field_title',
       'field_highlight',
@@ -144,9 +128,8 @@ function oab_modular_product_field_widget_form_alter(&$element, FormStateInterfa
   }
 
   if ($element['#paragraph_type'] === 'module_exemples') {
-    /*
-   * liste des fields seulement modifiable par les admins
-   * utilisé pour le module Exemple de réalisation
+  /*
+   * liste des fields seulement modifiable par les admins dans le module Exemple de réalisation
    */
 
     if(in_array('administrator', $user_roles)) {
@@ -285,42 +268,79 @@ function oab_modular_product_entity_bundle_field_info_alter(&$fields, \Drupal\Co
   }
 }
 
-
-
 /**
  * Implements hook_preprocess_HOOK().
  */
 function oab_modular_product_preprocess_field(&$variables) {
 
-  if ($variables['field_name'] !== "field_link_button"
-    || $variables['entity_type'] !== "paragraph") {
-    return;
-  }
+  if ($variables['field_name'] === "field_link_button") {
+    //return;
+    /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+    $paragraph = $variables['element']['#object'];
 
-  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
-  $paragraph = $variables['element']['#object'];
+    if (isset($paragraph->field_call_to_action_type)) {
+      $variables['link_type'] = $paragraph->field_call_to_action_type->value;
 
-  if (isset($paragraph->field_call_to_action_type)) {
-    $variables['link_type'] = $paragraph->field_call_to_action_type->value;
+      if ($paragraph->field_call_to_action_type->value === "lien") {
+        /** @var \Drupal\Core\Field\FieldItemListInterface $field_link_button */
+        $field_link_button = $paragraph->field_link_button;
 
-    if ($paragraph->field_call_to_action_type->value === "lien") {
-      /** @var \Drupal\Core\Field\FieldItemListInterface $field_link_button */
-      $field_link_button = $paragraph->field_link_button;
+        /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link_item */
+        $link_item =$field_link_button->first();
 
-      /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link_item */
-      $link_item =$field_link_button->first();
-
-      if ($link_item->isExternal()) {
-        $variables['attributes']['class'][] = 'icon-Redo';
+        if ($link_item->isExternal()) {
+          $variables['attributes']['class'][] = 'icon-Redo';
+        }
+        else {
+          $variables['attributes']['class'][] = 'o-link-arrow';
+        }
       }
       else {
-        $variables['attributes']['class'][] = 'o-link-arrow';
+        $variables['attributes']['class'][] = 'btn btn-primary';
       }
     }
-    else {
-      $variables['attributes']['class'][] = 'btn btn-primary';
+  }
+
+  $field_offre = [
+    'field_offres_inclus',
+    'field_offres_exclus',
+    'field_documentation'
+  ];
+
+  if (in_array($variables['field_name'], $field_offre)) {
+    /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+    $paragraph = $variables['element']['#object'];
+    if (isset($paragraph->field_offres_inclus)) {
+      $is_single = false;
+      $parent = $paragraph->getParentEntity();
+      $number_items = count($parent->field_items);
+
+      if (1 == $number_items) {
+        $is_single = true;
+      }
+      $variables['is_single'] = $is_single;
     }
   }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function oab_modular_product_preprocess_paragraph__module_detail_offre_items(&$variables) {
+
+  /** @var Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+  $is_single = false;
+
+  if (isset($paragraph)) {
+    $parent = $paragraph->getParentEntity();
+    $number_items = count($parent->field_items);
+
+    if (1 == $number_items) {
+      $is_single = true;
+    }
+  }
+  $variables['is_single'] = $is_single;
 }
 
 function changeUrlToEmbedUrl($url) {

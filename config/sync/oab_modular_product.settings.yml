@@ -11,8 +11,7 @@ mp_title:
     description: '250'
 mp:
   titles:
-    title_70: '70'
-    title_150: '150'
+    title_short: '70'
+    title_long: '150'
   descriptions:
-    description_150: '150'
-    description_250: '250'
+    description_long: '250'

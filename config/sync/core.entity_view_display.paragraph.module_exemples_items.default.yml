@@ -3,6 +3,7 @@ langcode: fr
 status: true
 dependencies:
   config:
+    - field.field.paragraph.module_exemples_items.field_exemple_key_points
     - field.field.paragraph.module_exemples_items.field_highlight
     - field.field.paragraph.module_exemples_items.field_redirection_url
     - field.field.paragraph.module_exemples_items.field_title
@@ -15,6 +16,14 @@ targetEntityType: paragraph
 bundle: module_exemples_items
 mode: default
 content:
+  field_exemple_key_points:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
   field_highlight:
     type: basic_string
     label: hidden

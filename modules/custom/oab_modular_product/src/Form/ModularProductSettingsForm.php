@@ -42,19 +42,19 @@ class ModularProductSettingsForm extends ConfigFormBase {
         '#title' => t('Titles max character')
       ];
 
-      $form['mp']['titles']['title_70'] = [
+      $form['mp']['titles']['title_short'] = [
         '#type' => 'number',
         '#title' => t('Titles with 70 max character'),
-        '#default_value' => $conf->get('mp.title.title_70') ?? 70,
+        '#default_value' => $conf->get('mp.title.title_short') ?? 70,
         '#max' => 255,
         '#min' => 50,
         '#step' => 5
       ];
 
-      $form['mp']['titles']['title_150'] = [
+      $form['mp']['titles']['title_long'] = [
         '#type' => 'number',
         '#title' => t('Titles with 150 max character'),
-        '#default_value' => $conf->get('mp.title.title_150') ?? 150,
+        '#default_value' => $conf->get('mp.title.title_long') ?? 150,
         '#max' => 255,
         '#min' => 90,
         '#step' => 5
@@ -66,19 +66,10 @@ class ModularProductSettingsForm extends ConfigFormBase {
         '#title' => t('Descriptions max character')
       ];
 
-      $form['mp']['descriptions']['description_150'] = [
+      $form['mp']['descriptions']['description_long'] = [
         '#type' => 'number',
-        '#title' => t('Descriptions with 150 max character'),
-        '#default_value' => $conf->get('mp.descriptions.description_150') ?? 150,
-        '#max' => 255,
-        '#min' => 100,
-        '#step' => 5
-      ];
-
-      $form['mp']['descriptions']['description_250'] = [
-        '#type' => 'number',
-        '#title' => t('Descriptions with 250 max character'),
-        '#default_value' => $conf->get('mp.descriptions.descriptions_250') ?? 250,
+        '#title' => t('Descriptions max character'),
+        '#default_value' => $conf->get('mp.descriptions.descriptions_long') ?? 250,
         '#max' => 255,
         '#min' => 200,
         '#step' => 5

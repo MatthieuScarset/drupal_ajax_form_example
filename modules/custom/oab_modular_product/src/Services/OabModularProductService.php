@@ -11,19 +11,15 @@ class OabModularProductService {
   ) { }
 
   public function getShortTitleMaxCharacter(): mixed {
-    return $this->get("titles.title_70");
+    return $this->get("titles.title_short");
   }
 
   public function getLongTitleMaxCharacter(): mixed {
-    return $this->get("titles.title_150");
-  }
-
-  public function getShortDescriptionMaxCharacter(): mixed {
-    return $this->get("descriptions.description_150");
+    return $this->get("titles.title_long");
   }
 
   public function getLongDescriptionMaxCharacter(): mixed {
-    return $this->get("descriptions.description_250");
+    return $this->get("descriptions.description_long");
   }
 
   private function get(string $item): mixed {
