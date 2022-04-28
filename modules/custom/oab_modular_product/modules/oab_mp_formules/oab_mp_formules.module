@@ -1,0 +1,72 @@
+<?php
+
+/**
+ * @file
+ * Contains oab_mp_formules.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\node\NodeInterface;
+use Drupal\paragraphs\Entity\Paragraph;
+
+/**
+ * Implements hook_help().
+ */
+function oab_mp_formules_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the oab_mp_formules module.
+    case 'help.page.oab_mp_formules':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Manage the Product Formule entity') . '</p>';
+      return $output;
+
+    default:
+  }
+
+}
+
+
+function oab_mp_formules_theme($existing, $type, $theme, $path) {
+  return [
+    'product_formule_entity' => [
+      'render element' => 'elements',
+    ],
+  ];
+}
+
+
+function oab_mp_formules_preprocess_product_formule_entity(array &$variables) {
+// dd($variables);
+  /** @var \Drupal\oab_mp_formules\Entity\ProductFormuleEntity $product_formule */
+  $product_formule = $variables['elements']['#product_formule_entity'];
+  $variables['product_formule_entity'] = $product_formule;
+
+  foreach ($product_formule->getFormuleFields() as $formule_field) {
+    $variables['formule_fields'][] = \Drupal::entityTypeManager()->getViewBuilder('formule_field')->view($formule_field);
+    $variables['elements']['#attached']['drupalSettings']['formule_fields'][$formule_field->id()] = [
+      'sentence' => $formule_field->getSentence()
+    ];
+  }
+
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node instanceof NodeInterface) {
+    $variables['node_label'] = $node->hasField('field_product_name')
+      ? $node->field_product_name->value
+      : $node->getTitle();
+  }
+
+//  dd($variables);
+
+}
+
+
+function oab_mp_formules_preprocess_paragraph(array &$variables) {
+
+  if (isset($variables['paragraph'])
+    && $variables['paragraph'] instanceof Paragraph
+    && $variables['paragraph']->bundle() === 'module_detail_offre_items') {
+
+//    dd($variables);
+  }
+}

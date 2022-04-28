@@ -9,7 +9,8 @@ module.exports = {
   entry: {
     "css/one_i": './assets/scss/one_i.scss',
     "css/style": './assets/scss/style.scss',
-    "js/modular_product.min": './js/modular_product/main.js'
+    "js/modular_product.min": './js/modular_product/main.js',
+    "js/product_formule.min": './js/product_formule/main.js',
   },
   output: {
     filename: '[name].js',

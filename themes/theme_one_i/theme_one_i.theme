@@ -5,6 +5,8 @@ use Drupal\Core\Language\LanguageInterface;
 use Drupal\file\Entity\File;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
+use Drupal\oab_mp_formules\Entity\ProductFormuleEntity;
+use Drupal\oab_mp_product_formule_packages\Entity\FormulePackage;
 use Drupal\oab_subhomes\Entity\SubhomeEntity;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\taxonomy\Entity\Term;
@@ -125,6 +127,14 @@ function theme_one_i_preprocess_node(&$variables) {
   if ($node_type === 'modular_product') {
     $variables['#attached']['library'][] = 'theme_one_i/modular_product';
   }
+}
+
+function theme_one_i_preprocess_paragraph__module_detail_offre_items(&$variables) {
+//  dd($variables);
+  /** @var Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+
+  $variables['formule_package'] = ProductFormuleEntity::load($paragraph->field_formule->target_id);
 }
 
 /*****************************************/

@@ -1,0 +1,7 @@
+oab_mp_formules.structures:
+  path: '/admin/structure/oab_mp_formules'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'OAB Formules Structure'
+  requirements:
+    _permission: 'access administration pages'

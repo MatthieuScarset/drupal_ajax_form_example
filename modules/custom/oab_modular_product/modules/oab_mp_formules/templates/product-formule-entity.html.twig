@@ -1,0 +1,59 @@
+{#
+/**
+ * @file product_formule_entity.html.twig
+ * Default theme implementation to present Product formule entity data.
+ *
+ * This template is used when viewing Product formule entity pages.
+ *
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ * - attributes: HTML attributes for the container element.
+ *
+ * @see template_preprocess_product_formule_entity()
+ *
+ * @ingroup themeable
+ */
+#}
+
+
+{% set nb_questions = formule_fields|length %}
+{% set modal_id = "modal-formule-" ~ product_formule_entity.id() %}
+{#{{ dd() }}#}
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{ modal_id }}">
+  {{ "Choose this formule"|t }}
+</button>
+{#{{ dd(product_formule_entity) }}#}
+<div class="modal fade modal-product-formule" id="{{ modal_id }}" >
+  <div class="modal-dialog">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times; Fermer</span>
+    </button>
+    <div class="modal-content" data-step="reception">
+
+      <div class="left-zone">
+        <div>
+          <p class="product-label"><strong>{{ node_label }}</strong></p>
+          <p class="lead"><strong>{{ product_formule_entity.getName() }}</strong></p>
+        </div>
+
+      </div>
+      <div class="right-zone">
+        <p>Modal body text goes here.</p>
+      </div>
+    </div>
+    <div class="modal-content d-none" data-step="process">
+      <div class="left-zone">
+        <h5 class="left-zone">Modal title</h5>
+        <!-- Boosted mod: using visually hidden text instead of aria-label -->
+        <button type="button" class="close" data-dismiss="modal">
+          <span class="sr-only">Close static modal demo</span>
+        </button>
+      </div>
+      <div class="right-zone">
+        <p>Modal body text goes here.</p>
+      </div>
+    </div>
+  </div>
+</div>

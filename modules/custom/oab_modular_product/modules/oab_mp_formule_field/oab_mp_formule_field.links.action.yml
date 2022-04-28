@@ -1,0 +1,5 @@
+entity.formule_field.add_form:
+  route_name: entity.formule_field.add_form
+  title: 'Add Formule field'
+  appears_on:
+    - entity.formule_field.collection

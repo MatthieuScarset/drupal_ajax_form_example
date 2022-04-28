@@ -1,0 +1,18 @@
+
+# Formule package menu items definition
+entity.formule_package.collection:
+  title: 'Formule package'
+  route_name: entity.formule_package.collection
+  description: 'List Formule package entities'
+  parent: oab_mp_formules.entities
+  weight: 100
+
+
+# Formule package type menu items definition
+entity.formule_package_type.collection:
+  title: 'Formule package type'
+  route_name: entity.formule_package_type.collection
+  description: 'List Formule package type (bundles)'
+  parent: entity.formule_package.collection
+  weight: 99
+

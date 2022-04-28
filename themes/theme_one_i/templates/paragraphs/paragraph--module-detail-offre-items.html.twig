@@ -45,19 +45,28 @@
   not paragraph.isPublished() ? 'paragraph--unpublished'
 ] %}
 {% block paragraph %}
-  <div class="detail-offre-item bg-white h-100 py-1 px-1 py-md-3 px-md-2 item-close">
+
+  <div
+    class="detail-offre-item bg-white h-100 py-1 px-1 py-md-3 px-md-2 item-close"
+    data-formule="{{ formule_package.id()}}"
+  >
     {% block content %}
       <div class="detail-offre-content">
-        <h3 class="pb-0 mb-1">{{ content.field_title }}</h3>
+        <h3 class="pb-0 mb-1">{{ formule_package.label }}</h3>
         <span>{{ content.field_accroche }}</span>
         <h4 class="text-primary py-0 my-1">{{ content.field_price_label }}</h4>
 
-        {{ content.field_link_button }}
+        {{ content.field_formule }}
 
-        <hr class="separator separator--gray4 my-1">
-          {{ (content.field_offres_inclus) }}
-          {{ content.field_offres_exclus }}
-          {{ content.field_documentation }}
+
+{#        {{ content.field_link_button }}#}
+
+
+
+        <hr class="separator separator--gray4 my-1" />
+        {{ (content.field_offres_inclus) }}
+        {{ content.field_offres_exclus }}
+        {{ content.field_documentation }}
       </div>
 
       <button type="button"
@@ -66,6 +75,7 @@
         <span class="text-voir-tout">{{ "See All"|t }}</span>
         <span class="text-voir-moins d-none">{{ "See less"|t }}</span>
       </button>
+
 
     {% endblock %}
   </div>

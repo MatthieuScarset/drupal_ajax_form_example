@@ -1,0 +1,61 @@
+.modal.modal-product-formule {
+  z-index: 3000;
+  .modal-dialog {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    max-width: initial;
+    margin: 0;
+
+    button.close {
+      position: absolute;
+      top: 3rem;
+      right: 6rem;
+    }
+
+    .modal-content {
+      height: 100%;
+      padding: 0;
+      flex-direction: row;
+
+      & > div {
+        padding: 2rem;
+      }
+
+      .product-label {
+        color: $gray3;
+      }
+
+      .left-zone, .right-zone {
+        padding: 0 4rem;
+        display: flex;
+        align-items: center
+      }
+
+      &[data-step=reception] {
+        .left-zone {
+          flex-grow: 1
+        }
+
+        .right-zone {
+          width: 30%;
+          min-width: 400px;
+          background-color: #f4f4f4;
+        }
+      }
+      &[data-step=process] {
+        .left-zone {
+          width: 30%;
+          min-width: 400px;
+          background-color: #f4f4f4;
+        }
+
+        .right-zone {
+          flex-grow: 1
+        }
+      }
+    }
+  }
+}

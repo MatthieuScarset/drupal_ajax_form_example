@@ -40,6 +40,6 @@
 
 {% for item in items %}
 
-  <a href="{{ item.content['#url'] }}" {{ attributes.addClass('custom-link') }} >{{ item.content['#title'] }}</a>
+  <a href="{{ item.content['#url'] }}" {{ attributes.addClass('custom-link', 'btn-select-formule') }} >{{ item.content['#title'] }}</a>
 
 {% endfor %}

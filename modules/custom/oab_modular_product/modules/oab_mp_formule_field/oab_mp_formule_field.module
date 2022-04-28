@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * @file
+ * Contains oab_mp_formule_field.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function oab_mp_formule_field_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the oab_mp_formule_field module.
+    case 'help.page.oab_mp_formule_field':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('[MP] OAB Formule Field') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+
+function oab_mp_formule_field_theme($existing, $type, $theme, $path) {
+  return [
+    'formule_field' => [
+      'render element' => 'elements',
+    ],
+  ];
+}
+
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function oab_mp_formule_field_theme_suggestions_formule_field(array $variables) {
+//  dd($variables);
+  /** @var \Drupal\oab_mp_formule_field\Entity\FormuleField $formule_field */
+  $formule_field = $variables['elements']['#formule_field'];
+
+  return [
+     'formule_field__' . $formule_field->getDisplayMode()
+  ];
+}
+
