@@ -1,0 +1,10 @@
+uuid: f0ed1d59-2d31-4e16-a259-e12a638f47c8
+langcode: fr
+status: true
+dependencies: {  }
+id: module_testimonial_item
+label: '[MP] Module testimonial item'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }
