@@ -345,33 +345,26 @@ function oab_modular_product_preprocess_paragraph__module_detail_offre_items(&$v
 }
 
 function changeUrlToEmbedUrl($url) {
-
   $embed_url = '';
+  $videoId = '';
   // full youtube url
   if (str_contains($url, 'youtube')) {
     $videoId = getVideoId($url, "?v=", 3);
-    if (str_contains($videoId, '&list=')) {
-      $lastId = getVideoId($videoId, "&list=", 6);
-      $embed_url = 'https://www.youtube.com/embed/' . $videoId ;//. '?list=' . $lastId . '&autoplay=' . $autoplay;
-    }
-    $embed_url = 'https://www.youtube.com/embed/' . $videoId;// . '?autoplay=' . $autoplay;
   }
   // tiny youtube url
   if (str_contains($url, 'youtu.be')) {
-    $videoId = getId($url);
-    // if this is a playlist
-    if (str_contains($videoId, '&list=')) {
-      $lastId = getId($videoId, "&list=", 6);
-      $embed_url = 'https://www.youtube.com/embed/' . $videoId;// . '?list=' . $lastId . '&autoplay=' . $autoplay;
-    }
-    $embed_url = 'https://www.youtube.com/embed/' . $videoId ;//. '?autoplay=' . $autoplay;
+    $videoId = getVideoId($url);
   }
+  if(!empty($videoId)) {
+    $embed_url = 'https://www.youtube.com/embed/' . $videoId ;
+    $embed_url = str_replace('&list=', '?list=', $embed_url);
+  }
+
   return $embed_url;
 }
 
 // Return video ID from URL
 function getVideoId( $url, $separator = "/", $index = 1) {
-  //  return $url.substring($url.lastIndexOf($separator) + $index, $url.length);
   return substr($url, strrpos($url, $separator)+$index, strlen($url));
 }
 
