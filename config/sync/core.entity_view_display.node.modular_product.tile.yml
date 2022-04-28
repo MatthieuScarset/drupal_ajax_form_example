@@ -4,7 +4,9 @@ status: false
 dependencies:
   config:
     - core.entity_view_mode.node.tile
+    - field.field.node.modular_product.field_badge
     - field.field.node.modular_product.field_blogs
+    - field.field.node.modular_product.field_call_to_action
     - field.field.node.modular_product.field_call_to_action_button
     - field.field.node.modular_product.field_call_to_action_link
     - field.field.node.modular_product.field_cross_sell
@@ -32,7 +34,9 @@ content:
     weight: 0
     region: content
 hidden:
+  field_badge: true
   field_blogs: true
+  field_call_to_action: true
   field_call_to_action_button: true
   field_call_to_action_link: true
   field_cross_sell: true

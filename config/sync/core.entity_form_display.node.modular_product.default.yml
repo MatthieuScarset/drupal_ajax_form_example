@@ -4,7 +4,9 @@ status: true
 dependencies:
   config:
     - entity_browser.browser.browse_media_modal
+    - field.field.node.modular_product.field_badge
     - field.field.node.modular_product.field_blogs
+    - field.field.node.modular_product.field_call_to_action
     - field.field.node.modular_product.field_call_to_action_button
     - field.field.node.modular_product.field_call_to_action_link
     - field.field.node.modular_product.field_cross_sell
@@ -53,7 +55,6 @@ third_party_settings:
     group_write:
       children:
         - langcode
-        - field_key_points
         - group_modules_configuration
       label: Write
       region: content
@@ -74,6 +75,7 @@ third_party_settings:
         - group_presentation
         - group_modules
         - group_bottom_of_page
+        - group_category_page
       label: Onglets
       region: content
       parent_name: ''
@@ -147,11 +149,34 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
+    group_category_page:
+      children:
+        - field_key_points
+        - field_badge
+        - field_call_to_action
+      label: 'Category page'
+      region: content
+      parent_name: group_onglets
+      weight: 8
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
 id: node.modular_product.default
 targetEntityType: node
 bundle: modular_product
 mode: default
 content:
+  field_badge:
+    type: options_select
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_blogs:
     type: paragraphs
     weight: 39
@@ -169,6 +194,18 @@ content:
       features:
         collapse_edit_all: collapse_edit_all
         duplicate: duplicate
+    third_party_settings: {  }
+  field_call_to_action:
+    type: entity_reference_paragraphs
+    weight: 6
+    region: content
+    settings:
+      title: Call-to-action
+      title_plural: Call-to-action
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
     third_party_settings: {  }
   field_call_to_action_button:
     type: link_default
@@ -323,13 +360,13 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 3
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 4
+    weight: 5
     region: content
     settings:
       display_label: true
@@ -344,7 +381,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 1
+    weight: 2
     region: content
     settings:
       match_operator: CONTAINS
@@ -353,7 +390,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 2
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
