@@ -4,7 +4,9 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser_categroy_page
+    - field.field.node.modular_product.field_badge
     - field.field.node.modular_product.field_blogs
+    - field.field.node.modular_product.field_call_to_action
     - field.field.node.modular_product.field_call_to_action_button
     - field.field.node.modular_product.field_call_to_action_link
     - field.field.node.modular_product.field_cross_sell
@@ -21,27 +23,37 @@ dependencies:
     - field.field.node.modular_product.field_visual
     - node.type.modular_product
   module:
+    - entity_reference_revisions
     - user
 id: node.modular_product.teaser_categroy_page
 targetEntityType: node
 bundle: modular_product
 mode: teaser_categroy_page
 content:
+  field_badge:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_call_to_action:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
   field_key_points:
     type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 3
-    region: content
-  field_product_category:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: false
-    third_party_settings: {  }
-    weight: 0
+    weight: 4
     region: content
   field_product_name:
     type: string
@@ -49,14 +61,14 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 1
+    weight: 0
     region: content
   field_teaser:
     type: basic_string
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 2
+    weight: 1
     region: content
 hidden:
   field_blogs: true
@@ -69,6 +81,7 @@ hidden:
   field_modular_product_tarif: true
   field_modules: true
   field_presentation: true
+  field_product_category: true
   field_visual: true
   langcode: true
   links: true
