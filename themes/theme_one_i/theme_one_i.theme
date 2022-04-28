@@ -121,6 +121,24 @@ function theme_one_i_preprocess_paragraph__module_faq(&$variables) {
   }
 }
 
+function theme_one_i_preprocess_paragraph__module_testimonial_item(&$variables) {
+
+  /** @var Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+
+  $testimonial_number = 0;
+
+  if (isset($paragraph)) {
+    $parent = $paragraph->getParentEntity();
+    if(isset($parent->field_testimonial)) {
+      $testimonial_number = count($parent->field_testimonial);
+    }
+  }
+
+  $variables['nb_testimonial'] = $testimonial_number;
+
+}
+
 function theme_one_i_preprocess_node(&$variables) {
   $node_type = $variables['node']->type->entity->get('type');
 

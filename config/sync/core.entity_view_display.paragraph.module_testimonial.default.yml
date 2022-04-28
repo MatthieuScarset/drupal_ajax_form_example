@@ -1,0 +1,33 @@
+uuid: ad122cbe-03ad-4d1b-8b1e-2e91564de487
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.module_testimonial.field_testimonial
+    - field.field.paragraph.module_testimonial.field_title
+    - paragraphs.paragraphs_type.module_testimonial
+  module:
+    - entity_reference_revisions
+id: paragraph.module_testimonial.default
+targetEntityType: paragraph
+bundle: module_testimonial
+mode: default
+content:
+  field_testimonial:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }
