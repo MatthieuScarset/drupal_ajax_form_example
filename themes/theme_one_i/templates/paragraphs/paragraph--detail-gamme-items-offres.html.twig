@@ -38,27 +38,51 @@
  * @ingroup themeable
  */
 #}
-{%
-  set classes = [
-    'paragraph',
-    'paragraph--type--' ~ paragraph.bundle|clean_class,
-    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-    not paragraph.isPublished() ? 'paragraph--unpublished'
-  ]
-%}
+{% set classes = [
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  not paragraph.isPublished() ? 'paragraph--unpublished'
+] %}
 {% block paragraph %}
   {% block content %}
-    <div {{ attributes.addClass("bg-dark pt-2 pt-md-0 pb-2 pb-md-5 text-white") }}>
-      <div id="exemple" class="container-fluid site-width">
-        <div class="row justify-content-between align-items-end">
-          <div class="col-12 col-md-7 small text-gray4 font-weight-bold pt-0 pt-md-5">{{ "Example of realization"|t }}</div>
-          <div class="col-4 text-right d-none d-md-block"> {{ content.field_illustration }} </div>
+    <div class="row justify-content-between mb-0 mb-md-2">
+      <div class="col-md-7">
+        <h4 class="pb-0 mb-1">{{ content.field_title }}</h4>
+        <span class="lead">{{ content.field_accroche }}</span>
+      </div>
+      <div class="col-md-4 text-md-right">
+        <h4 class="text-primary my-1 mt-md-0 mb-md-1">{{ content.field_price_label }}</h4>
+        <div class="text-md-right call-to-action">
+          {{ content.field_cta}}
         </div>
-        <h2 class="no-signature col-12 col-md-7 mb-2 mb-md-4 p-0 pt-md-1">{{ content.field_title }}</h2>
-
-        {{ content.field_items_3_4 }}
-
       </div>
     </div>
+
+    <div class="row justify-content-between">
+      <div id="collapsed-text-{{ paragraph.id() }}"
+           class="col-12 collapse order-md-12" role="region"
+           aria-labelledby="collapsed-header">
+        <hr class="separator separator--gray4 my-1 mt-md-0 mb-md-1">
+        {{ content.field_inclus_offre_gamme }}
+      </div>
+
+      <div class="col-12 order-md-0">
+        <hr class="d-md-none separator separator--gray4 my-1">
+        <button type="button"
+                id="collapsed-header-{{ paragraph.id() }}"
+                class="o-link-arrow see-details down collapsed text-decoration-none text-md-left text-center font-weight-bold w-100 mw-100"
+                data-toggle="collapse"
+                data-target="#collapsed-text-{{ paragraph.id() }}"
+                aria-expanded="false"
+        >
+          <span class="text-voir-detail">{{ "See details"|t }}</span>
+          <span class="text-reduce">{{ "Reduce"|t }}</span>
+        </button>
+      </div>
+    </div>
+
+
+
   {% endblock %}
 {% endblock paragraph %}

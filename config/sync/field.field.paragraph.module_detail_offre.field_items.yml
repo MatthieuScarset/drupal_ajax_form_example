@@ -12,7 +12,7 @@ id: paragraph.module_detail_offre.field_items
 field_name: field_items
 entity_type: paragraph
 bundle: module_detail_offre
-label: 'Bloc formule'
+label: Offres
 description: ''
 required: false
 translatable: true
@@ -25,11 +25,17 @@ settings:
       module_detail_offre_items: module_detail_offre_items
     negate: 0
     target_bundles_drag_drop:
+      call_to_action:
+        weight: 46
+        enabled: false
       contact_button_item:
         weight: 26
         enabled: false
       default_button:
         weight: 27
+        enabled: false
+      detail_gamme_items_offres:
+        weight: 49
         enabled: false
       documentation:
         weight: 30
@@ -79,12 +85,54 @@ settings:
       module_benefits_item:
         weight: 42
         enabled: false
+      module_blog:
+        weight: 66
+        enabled: false
+      module_cross_sell:
+        weight: 67
+        enabled: false
+      module_detail_gamme:
+        weight: 68
+        enabled: false
+      module_detail_gamme_items:
+        weight: 69
+        enabled: false
       module_detail_offre:
         weight: 43
         enabled: false
       module_detail_offre_items:
         weight: 44
         enabled: true
+      module_exemples:
+        weight: 72
+        enabled: false
+      module_exemples_items:
+        weight: 73
+        enabled: false
+      module_faq:
+        weight: 74
+        enabled: false
+      module_faq_quesions:
+        weight: 75
+        enabled: false
+      module_partner:
+        weight: 76
+        enabled: false
+      module_presentation:
+        weight: 77
+        enabled: false
+      module_services:
+        weight: 78
+        enabled: false
+      module_step:
+        weight: 79
+        enabled: false
+      module_steps:
+        weight: 80
+        enabled: false
+      module_text_video_image:
+        weight: 81
+        enabled: false
       paragraph_block_rebond:
         weight: 45
         enabled: false
@@ -103,7 +151,13 @@ settings:
       subhome_presse_carrousel:
         weight: 50
         enabled: false
+      title_and_link:
+        weight: 88
+        enabled: false
       titre_and_description:
         weight: 54
+        enabled: false
+      titre_and_description_and_link:
+        weight: 90
         enabled: false
 field_type: entity_reference_revisions

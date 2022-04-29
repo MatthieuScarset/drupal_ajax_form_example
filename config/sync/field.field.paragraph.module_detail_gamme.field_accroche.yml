@@ -1,0 +1,19 @@
+uuid: 70d76d34-f3ab-406a-b39f-45aecfc1f414
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_accroche
+    - paragraphs.paragraphs_type.module_detail_gamme
+id: paragraph.module_detail_gamme.field_accroche
+field_name: field_accroche
+entity_type: paragraph
+bundle: module_detail_gamme
+label: Description
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

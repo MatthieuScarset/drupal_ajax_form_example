@@ -1,25 +1,18 @@
-uuid: 3ed29cc6-61d0-4671-8c2f-d9c7f31f0db0
-langcode: en
+uuid: 9041bfab-a261-4705-88fd-b682047de9e3
+langcode: fr
 status: true
 dependencies:
   config:
-    - field.storage.node.field_modules
-    - node.type.modular_product
-    - paragraphs.paragraphs_type.module_3_4_colonnes
-    - paragraphs.paragraphs_type.module_benefits
-    - paragraphs.paragraphs_type.module_exemples
-    - paragraphs.paragraphs_type.module_partner
-    - paragraphs.paragraphs_type.module_services
-    - paragraphs.paragraphs_type.module_steps
-    - paragraphs.paragraphs_type.module_text_video_image
-    - paragraphs.paragraphs_type.paragraph_wysiwyg
+    - field.storage.paragraph.field_gamme
+    - paragraphs.paragraphs_type.module_detail_gamme
+    - paragraphs.paragraphs_type.module_detail_gamme_items
   module:
     - entity_reference_revisions
-id: node.modular_product.field_modules
-field_name: field_modules
-entity_type: node
-bundle: modular_product
-label: Modules
+id: paragraph.module_detail_gamme.field_gamme
+field_name: field_gamme
+entity_type: paragraph
+bundle: module_detail_gamme
+label: Gammes
 description: ''
 required: false
 translatable: false
@@ -29,146 +22,142 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
-      module_text_video_image: module_text_video_image
-      module_3_4_colonnes: module_3_4_colonnes
-      paragraph_wysiwyg: paragraph_wysiwyg
-      module_benefits: module_benefits
-      module_partner: module_partner
-      module_services: module_services
-      module_steps: module_steps
-      module_exemples: module_exemples
+      module_detail_gamme_items: module_detail_gamme_items
     negate: 0
     target_bundles_drag_drop:
+      call_to_action:
+        weight: 46
+        enabled: false
       contact_button_item:
-        weight: 20
+        weight: 45
         enabled: false
       default_button:
-        weight: 21
+        weight: 46
         enabled: false
       detail_gamme_items_offres:
         weight: 47
         enabled: false
       documentation:
-        weight: 33
+        weight: 48
         enabled: false
       home_banner:
-        weight: 22
+        weight: 52
         enabled: false
       home_caroussel:
-        weight: 23
+        weight: 53
         enabled: false
       home_column:
-        weight: 24
+        weight: 54
         enabled: false
       home_column_section:
-        weight: 25
+        weight: 55
         enabled: false
       home_playlist:
-        weight: 26
+        weight: 56
         enabled: false
       home_thematic_columns:
-        weight: 27
+        weight: 57
         enabled: false
       homepage_banner_experience:
-        weight: 28
+        weight: 49
         enabled: false
       homepage_banner_item:
-        weight: 29
+        weight: 50
         enabled: false
       homepage_news:
-        weight: 30
+        weight: 51
         enabled: false
       infography_partner:
-        weight: 31
+        weight: 58
         enabled: false
       marketo:
-        weight: 32
+        weight: 59
         enabled: false
       module_3_4_colonnes:
-        weight: 35
-        enabled: true
-      module_3_4_colonnes_items:
-        weight: 36
-        enabled: false
-      module_benefits:
-        weight: 37
-        enabled: true
-      module_benefits_item:
-        weight: 38
-        enabled: false
-      module_blog:
         weight: 60
         enabled: false
-      module_cross_sell:
+      module_3_4_colonnes_items:
         weight: 61
+        enabled: false
+      module_benefits:
+        weight: 62
+        enabled: false
+      module_benefits_item:
+        weight: 63
+        enabled: false
+      module_blog:
+        weight: 64
+        enabled: false
+      module_cross_sell:
+        weight: 65
         enabled: false
       module_detail_gamme:
         weight: 66
         enabled: false
       module_detail_gamme_items:
         weight: 67
-        enabled: false
+        enabled: true
       module_detail_offre:
-        weight: 43
+        weight: 68
         enabled: false
       module_detail_offre_items:
-        weight: 44
-        enabled: false
-      module_exemples:
-        weight: 58
-        enabled: true
-      module_exemples_items:
-        weight: 59
-        enabled: false
-      module_faq:
-        weight: 56
-        enabled: false
-      module_faq_quesions:
-        weight: 57
-        enabled: false
-      module_partner:
-        weight: 42
-        enabled: true
-      module_presentation:
         weight: 69
         enabled: false
+      module_exemples:
+        weight: 70
+        enabled: false
+      module_exemples_items:
+        weight: 71
+        enabled: false
+      module_faq:
+        weight: 72
+        enabled: false
+      module_faq_quesions:
+        weight: 73
+        enabled: false
+      module_partner:
+        weight: 74
+        enabled: false
+      module_presentation:
+        weight: 75
+        enabled: false
       module_services:
-        weight: 51
-        enabled: true
+        weight: 76
+        enabled: false
       module_step:
-        weight: 52
+        weight: 77
         enabled: false
       module_steps:
-        weight: 53
-        enabled: true
+        weight: 78
+        enabled: false
       module_text_video_image:
-        weight: 34
-        enabled: true
+        weight: 79
+        enabled: false
       paragraph_block_rebond:
-        weight: 33
-        enabled: false
-      paragraph_product_call_to_action:
-        weight: 34
-        enabled: false
-      paragraph_wysiwyg:
-        weight: 35
-        enabled: true
-      rebond_wysiwyg:
-        weight: 36
-        enabled: false
-      related_content:
-        weight: 37
-        enabled: false
-      subhome_presse_carrousel:
-        weight: 38
-        enabled: false
-      title_and_link:
         weight: 80
         enabled: false
+      paragraph_product_call_to_action:
+        weight: 81
+        enabled: false
+      paragraph_wysiwyg:
+        weight: 82
+        enabled: false
+      rebond_wysiwyg:
+        weight: 83
+        enabled: false
+      related_content:
+        weight: 84
+        enabled: false
+      subhome_presse_carrousel:
+        weight: 85
+        enabled: false
+      title_and_link:
+        weight: 86
+        enabled: false
       titre_and_description:
-        weight: 58
+        weight: 87
         enabled: false
       titre_and_description_and_link:
-        weight: 70
+        weight: 88
         enabled: false
 field_type: entity_reference_revisions

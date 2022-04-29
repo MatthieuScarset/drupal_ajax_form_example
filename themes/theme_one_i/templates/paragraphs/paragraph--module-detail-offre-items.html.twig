@@ -47,13 +47,15 @@
 {% block paragraph %}
   {% block content %}
     {% if (is_single) %}
-      <div class="row justify-content-between align-items-center">
-        <div class="col-12 col-md-4">
+      <div class="row justify-content-between">
+        <div class="col-12 col-md-4 pt-md-1">
           <h4 class="pb-0 mb-1 mb-md-2">{{ content.field_title }}</h4>
           <span class="lead">{{ content.field_accroche }}</span>
           {{ content.field_documentation }}
           <h4 class="text-primary py-0 mt-1 mb-2">{{ content.field_price_label }}</h4>
-          {{ content.field_link_button }}
+          <div class="call-to-action">
+            {{ content.field_cta}}
+          </div>
         </div>
         <div class="bg-white col-11 col-md-7 mt-2 mt-md-0 ml-1 ml-md-0">
           {{ content.field_offres_inclus }}
@@ -68,9 +70,9 @@
           <h4 class="pb-0 mb-1">{{ content.field_title }}</h4>
           <span>{{ content.field_accroche }}</span>
           <h4 class="text-primary py-0 my-1">{{ content.field_price_label }}</h4>
-
-          {{ content.field_link_button }}
-
+          <div class="call-to-action">
+            {{ content.field_cta}}
+          </div>
           <hr class="separator separator--gray4 mt-1 mt-sm-2">
             {{ content.field_offres_inclus }}
             {{ content.field_offres_exclus }}

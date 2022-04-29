@@ -1,20 +1,20 @@
-uuid: 3d962825-5f44-4ccb-a262-64ada1601843
+uuid: 61f12fbf-e131-4eca-98d4-467250e16a9d
 langcode: fr
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_link_button
-    - paragraphs.paragraphs_type.module_detail_offre_items
+    - paragraphs.paragraphs_type.call_to_action
   module:
     - link
-id: paragraph.module_detail_offre_items.field_link_button
+id: paragraph.call_to_action.field_link_button
 field_name: field_link_button
 entity_type: paragraph
-bundle: module_detail_offre_items
+bundle: call_to_action
 label: 'Call to action'
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
