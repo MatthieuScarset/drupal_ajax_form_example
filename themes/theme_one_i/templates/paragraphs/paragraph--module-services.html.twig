@@ -47,9 +47,9 @@
 ]
 %}
 {% block paragraph %}
-  <div{{ attributes.addClass(classes,"py-2 py-md-5") }}>
-    <div class="container-fluid site-width">
-      {% block content %}
+  {% block content %}
+    <div{{ attributes.addClass(classes,"py-2 py-md-5") }}>
+      <div class="container-fluid site-width">
         <div class="row justify-content-between">
           <div class="col-12">
             <span class="small text-gray3 font-weight-bold">{{ "Tailor-made services"|t }}</span>
@@ -63,7 +63,7 @@
            {{ content.field_items_services }}
          </div>
         </div>
-      {% endblock %}
+      </div>
     </div>
-  </div>
+  {% endblock %}
 {% endblock paragraph %}

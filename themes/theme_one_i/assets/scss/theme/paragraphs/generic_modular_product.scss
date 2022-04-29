@@ -1,4 +1,8 @@
-a.icon-Redo::before {
-  color: $orange2;
-  margin-right: 0.625rem;
+a.icon-Redo {
+  font-weight: bold;
+
+  &::before {
+    color: $orange2;
+    margin-right: 0.625rem;
+  }
 }

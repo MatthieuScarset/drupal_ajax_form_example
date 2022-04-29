@@ -47,6 +47,9 @@ settings:
       default_button:
         weight: 21
         enabled: false
+      detail_gamme_items_offres:
+        weight: 47
+        enabled: false
       documentation:
         weight: 33
         enabled: false
@@ -100,6 +103,12 @@ settings:
         enabled: false
       module_cross_sell:
         weight: 63
+        enabled: false
+      module_detail_gamme:
+        weight: 66
+        enabled: false
+      module_detail_gamme_items:
+        weight: 67
         enabled: false
       module_detail_offre:
         weight: 43

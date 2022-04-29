@@ -1,0 +1,56 @@
+.offres-gamme {
+  .call-to-action {
+    .field > div {
+      margin-bottom: 0.75rem;
+    }
+
+    .custom-link {
+      &.o-link-arrow {
+        text-decoration: none;
+        margin-right: 1rem;
+        padding-top: 0;
+        padding-bottom: 0;
+        @include media-breakpoint-up(md) {
+          margin-top: 1rem;
+        }
+      }
+
+      &.icon-Redo {
+        @include media-breakpoint-up(md) {
+          margin-top: 1rem;
+        }
+      }
+
+      &.btn {
+        width: 100%;
+        @include media-breakpoint-up(md) {
+          width: auto;
+        }
+      }
+    }
+  }
+
+  button.see-details {
+    &[aria-expanded="false"] {
+      span.text-reduce {
+        display: none;
+      }
+    }
+
+    &[aria-expanded="true"] {
+      span.text-voir-detail {
+        display: none;
+      }
+
+      span.text-reduce {
+        display: inline;
+      }
+    }
+
+    &.o-link-arrow {
+      &:active {
+        color: black;
+      }
+    }
+  }
+}

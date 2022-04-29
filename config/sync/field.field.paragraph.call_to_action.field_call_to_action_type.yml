@@ -1,20 +1,20 @@
-uuid: df42f380-8e3a-4e62-8809-61b4548f138f
+uuid: 26788604-a85b-4edc-8d4f-fb28745c38c5
 langcode: fr
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_call_to_action_type
-    - paragraphs.paragraphs_type.module_detail_offre_items
+    - paragraphs.paragraphs_type.call_to_action
   module:
     - options
-id: paragraph.module_detail_offre_items.field_call_to_action_type
+id: paragraph.call_to_action.field_call_to_action_type
 field_name: field_call_to_action_type
 entity_type: paragraph
-bundle: module_detail_offre_items
+bundle: call_to_action
 label: 'Call to action type'
 description: ''
-required: true
-translatable: false
+required: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

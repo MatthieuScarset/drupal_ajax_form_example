@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_detail_offre
     - node.type.modular_product
+    - paragraphs.paragraphs_type.module_detail_gamme
     - paragraphs.paragraphs_type.module_detail_offre
   module:
     - entity_reference_revisions
@@ -12,7 +13,7 @@ id: node.modular_product.field_detail_offre
 field_name: field_detail_offre
 entity_type: node
 bundle: modular_product
-label: 'Détail de l''offre'
+label: 'Détail de l''offre/gamme'
 description: ''
 required: true
 translatable: false
@@ -23,13 +24,20 @@ settings:
   handler_settings:
     target_bundles:
       module_detail_offre: module_detail_offre
+      module_detail_gamme: module_detail_gamme
     negate: 0
     target_bundles_drag_drop:
+      call_to_action:
+        weight: 46
+        enabled: false
       contact_button_item:
         weight: 42
         enabled: false
       default_button:
         weight: 43
+        enabled: false
+      detail_gamme_items_offres:
+        weight: 47
         enabled: false
       documentation:
         weight: 44
@@ -84,6 +92,12 @@ settings:
         enabled: false
       module_cross_sell:
         weight: 61
+        enabled: false
+      module_detail_gamme:
+        weight: 66
+        enabled: true
+      module_detail_gamme_items:
+        weight: 67
         enabled: false
       module_detail_offre:
         weight: 62

@@ -1,18 +1,18 @@
-uuid: 698012f0-2c54-48fd-bd08-fc0d2d99a115
-langcode: en
+uuid: 2fa2ca60-d211-4ae6-9180-e367f61ecdd2
+langcode: fr
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_items
-    - paragraphs.paragraphs_type.module_detail_offre
+    - field.storage.paragraph.field_cta
+    - paragraphs.paragraphs_type.call_to_action
     - paragraphs.paragraphs_type.module_detail_offre_items
   module:
     - entity_reference_revisions
-id: paragraph.module_detail_offre.field_items
-field_name: field_items
+id: paragraph.module_detail_offre_items.field_cta
+field_name: field_cta
 entity_type: paragraph
-bundle: module_detail_offre
-label: Offres
+bundle: module_detail_offre_items
+label: 'Call to action'
 description: ''
 required: false
 translatable: true
@@ -22,68 +22,68 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
-      module_detail_offre_items: module_detail_offre_items
+      call_to_action: call_to_action
     negate: 0
     target_bundles_drag_drop:
       call_to_action:
         weight: 46
-        enabled: false
+        enabled: true
       contact_button_item:
-        weight: 26
+        weight: 47
         enabled: false
       default_button:
-        weight: 27
+        weight: 48
         enabled: false
       detail_gamme_items_offres:
         weight: 49
         enabled: false
       documentation:
-        weight: 30
+        weight: 50
         enabled: false
       home_banner:
-        weight: 31
+        weight: 54
         enabled: false
       home_caroussel:
-        weight: 32
+        weight: 55
         enabled: false
       home_column:
-        weight: 33
+        weight: 56
         enabled: false
       home_column_section:
-        weight: 34
+        weight: 57
         enabled: false
       home_playlist:
-        weight: 35
+        weight: 58
         enabled: false
       home_thematic_columns:
-        weight: 36
+        weight: 59
         enabled: false
       homepage_banner_experience:
-        weight: 28
+        weight: 51
         enabled: false
       homepage_banner_item:
-        weight: 29
+        weight: 52
         enabled: false
       homepage_news:
-        weight: 30
+        weight: 53
         enabled: false
       infography_partner:
-        weight: 37
+        weight: 60
         enabled: false
       marketo:
-        weight: 38
+        weight: 61
         enabled: false
       module_3_4_colonnes:
-        weight: 39
+        weight: 62
         enabled: false
       module_3_4_colonnes_items:
-        weight: 40
+        weight: 63
         enabled: false
       module_benefits:
-        weight: 41
+        weight: 64
         enabled: false
       module_benefits_item:
-        weight: 42
+        weight: 65
         enabled: false
       module_blog:
         weight: 66
@@ -98,11 +98,11 @@ settings:
         weight: 69
         enabled: false
       module_detail_offre:
-        weight: 43
+        weight: 70
         enabled: false
       module_detail_offre_items:
-        weight: 44
-        enabled: true
+        weight: 71
+        enabled: false
       module_exemples:
         weight: 72
         enabled: false
@@ -134,28 +134,28 @@ settings:
         weight: 81
         enabled: false
       paragraph_block_rebond:
-        weight: 45
+        weight: 82
         enabled: false
       paragraph_product_call_to_action:
-        weight: 46
+        weight: 83
         enabled: false
       paragraph_wysiwyg:
-        weight: 47
+        weight: 84
         enabled: false
       rebond_wysiwyg:
-        weight: 48
+        weight: 85
         enabled: false
       related_content:
-        weight: 49
+        weight: 86
         enabled: false
       subhome_presse_carrousel:
-        weight: 50
+        weight: 87
         enabled: false
       title_and_link:
         weight: 88
         enabled: false
       titre_and_description:
-        weight: 54
+        weight: 89
         enabled: false
       titre_and_description_and_link:
         weight: 90
