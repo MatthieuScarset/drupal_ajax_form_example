@@ -50,6 +50,17 @@
         }
       }
     }
+
+    .detail-offre-content-header {
+      min-height: revert;
+      @include media-breakpoint-up(md) {
+        min-height: 12.5rem;
+      }
+
+      .accroche {
+          min-height: 2.75rem;
+      }
+    }
   }
 
   .field-items-modules {
