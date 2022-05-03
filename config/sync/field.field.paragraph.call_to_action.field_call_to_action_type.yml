@@ -15,7 +15,9 @@ label: 'Call to action type'
 description: ''
 required: false
 translatable: true
-default_value: {  }
+default_value:
+  -
+    value: bouton
 default_value_callback: ''
 settings: {  }
 field_type: list_string
