@@ -48,8 +48,8 @@
 %}
 {% block paragraph %}
   {% block content %}
-    <div {{ attributes.addClass("bg-gray2 py-2 py-md-5") }}>
-      <div id="detail-offre" class="container-fluid site-width">
+    <div id="detail-offre" {{ attributes.addClass("bg-gray2 py-2 py-md-5") }}>
+      <div class="container-fluid site-width">
         <span class="small text-gray3 font-weight-bold">{{ "Offer Detail"|t }}</span>
         <h2 class="no-signature col-12 col-md-7 mb-2 mb-md-4 px-0 pt-1 pb-0">{{ content.field_title }}</h2>
 
