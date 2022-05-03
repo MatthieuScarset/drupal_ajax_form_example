@@ -358,29 +358,6 @@ function oab_modular_product_preprocess_paragraph__module_detail_offre_items(&$v
   $variables['is_single'] = $is_single;
 }
 
-function changeUrlToEmbedUrl($url) {
-  $embed_url = '';
-  $videoId = '';
-  // full youtube url
-  if (str_contains($url, 'youtube')) {
-    $videoId = getVideoId($url, "?v=", 3);
-  }
-  // tiny youtube url
-  if (str_contains($url, 'youtu.be')) {
-    $videoId = getVideoId($url);
-  }
-  if(!empty($videoId)) {
-    $embed_url = 'https://www.youtube.com/embed/' . $videoId ;
-    $embed_url = str_replace('&list=', '?list=', $embed_url);
-  }
-
-  return $embed_url;
-}
-
-// Return video ID from URL
-function getVideoId( $url, $separator = "/", $index = 1) {
-  return substr($url, strrpos($url, $separator)+$index, strlen($url));
-}
 
 /**
  * Implements hook_preprocess_HOOK().
@@ -389,8 +366,11 @@ function oab_modular_product_preprocess_media(&$variables) {
   /** @var \Drupal\media\Entity\Media $media */
   $media = $variables['media'];
   if($media->bundle() === "embed_video") {
-    $url = $media->field_video_url?->uri;
-    $variables['embed_url_youtube'] = changeUrlToEmbedUrl($url);
+    if(isset($media->field_video_url->uri)) {
+      /** @var \Drupal\oab_frontoffice\Services\OabEmbedVideoUrlService $embedVideoService */
+      $embedVideoService = \Drupal::service('oab_frontoffice.embed_video_url');
+      $variables['embed_url_youtube'] = $embedVideoService->changeUrlToEmbedUrl($media->field_video_url->uri);
+    }
   }
 }
 

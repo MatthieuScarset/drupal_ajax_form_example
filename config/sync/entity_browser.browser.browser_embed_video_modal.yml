@@ -11,9 +11,9 @@ name: browser_embed_video_modal
 label: 'Browser modal for embed videos'
 display: modal
 display_configuration:
-  width: '650'
-  height: '500'
-  link_text: 'Select entities'
+  width: '700'
+  height: ''
+  link_text: 'Select video'
   auto_open: false
 selection_display: no_display
 selection_display_configuration: {  }
