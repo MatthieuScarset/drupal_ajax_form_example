@@ -48,8 +48,8 @@
 %}
 {% block paragraph %}
   {% block content %}
-    <div {{ attributes.addClass("bg-dark pt-2 pt-md-0 pb-2 pb-md-5 text-white") }}>
-      <div id="exemple" class="container-fluid site-width">
+    <div id="exemple" {{ attributes.addClass("bg-dark pt-2 pt-md-0 pb-2 pb-md-5 text-white") }}>
+      <div class="container-fluid site-width">
         <div class="row justify-content-between align-items-end">
           <div class="col-12 col-md-7 small text-gray4 font-weight-bold pt-0 pt-md-5">{{ "Example of realization"|t }}</div>
           <div class="col-4 text-right d-none d-md-block"> {{ content.field_illustration }} </div>
