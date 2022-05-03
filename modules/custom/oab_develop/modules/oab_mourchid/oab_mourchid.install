@@ -1,0 +1,12 @@
+<?php
+
+function oab_mourchid_install() {
+  \Drupal::service('update.update_hook_registry')->setInstalledVersion('oab_mourchid', 9000);
+}
+
+/**
+ *  Traduction EN FR des modules du modular product
+ */
+function oab_mourchid_update_9001() {
+  include_once("updates/update_9001.inc");
+}
