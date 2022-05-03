@@ -67,7 +67,7 @@
               {% else %}
                   <div class="col-12 col-lg-7 order-lg-1">
               {% endif %}
-                    <div class="standard font-weight-bold text-gray3">{{ "Presentation"|t }}</div>
+                    <div class="small font-weight-bold text-gray3">{{ "Presentation"|t }}</div>
                     <h2 class="mb-1 mb-md-2 no-signature">{{ content.field_title }}</h2>
                     <div class="lead font-weight-bold highlight mb-1 mb-md-2">{{ content.field_highlight }}</div>
                     <div class="standard mb-1 mb-md-2">{{ content.field_standard_text }}</div>
@@ -76,7 +76,7 @@
                     <div class="for_who_block">
                       <span class="h4 mb-0">{{ content.field_for_who_title }}</span>
                       {% if parent_node_title %}
-                        <div class="lead font-weight-bold subtitle">{{ parent_node_title }} {{ 'is made for you'|t }}</div>
+                        <div class="lead font-weight-bold subtitle">{{ '@product_label is made for you' | t({'@product_label':parent_node_title}) }}</div>
                       {% endif %}
                       <div>{{ content.field_for_who_links_list }}</div>
                     </div>
