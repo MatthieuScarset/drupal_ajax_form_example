@@ -63,6 +63,7 @@ class OabExtension extends AbstractExtension {
           new TwigFunction('oab_drupal_view_count', [$this, 'view_count']),
           new TwigFunction('specialCharacters', [$this, 'specialCharacters']),
           new TwigFunction('isAjaxContext', [$this, 'isAjaxContext']),
+          new TwigFunction('is_string', [$this, 'isString']),
           new TwigFunction('kint_t', array($this, 'kint_t'), array(
             'is_safe' => array('html'),
             'needs_environment' => TRUE,
@@ -86,6 +87,10 @@ class OabExtension extends AbstractExtension {
     ];
 
     return $filters;
+  }
+
+  public function isString($value) {
+    return is_string($value);
   }
 
   /**
