@@ -1,6 +1,8 @@
 
-import ModalProductFormule from './ModalProductFormule';
+import ProductFormuleSelector from './ProductFormuleSelector';
+import FormuleSelectorStep from "./FormuleSelectorStep";
 
 export {
-  ModalProductFormule
+  ProductFormuleSelector,
+  FormuleSelectorStep
 };

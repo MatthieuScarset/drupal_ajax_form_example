@@ -1,5 +1,6 @@
 .modal.modal-product-formule {
   z-index: 3000;
+
   .modal-dialog {
     position: fixed;
     left: 0;
@@ -13,6 +14,13 @@
       position: absolute;
       top: 3rem;
       right: 6rem;
+      z-index: 9000;
+      font-size: 14px;
+
+      &::before {
+        content: '\00D7';
+        font-size: 34px;
+      }
     }
 
     .modal-content {
@@ -34,18 +42,27 @@
         align-items: center
       }
 
-      &[data-step=reception] {
+      &[data-show=reception] {
+        [data-step]:not([data-step=reception]) {
+          display: none
+        }
+
         .left-zone {
-          flex-grow: 1
+          flex-grow: 1;
+          padding-right: 25%;
+          background-color: #f4f4f4;
         }
 
         .right-zone {
           width: 30%;
           min-width: 400px;
-          background-color: #f4f4f4;
         }
       }
-      &[data-step=process] {
+      &[data-show=process] {
+        [data-step]:not([data-step=process]) {
+          display: none
+        }
+
         .left-zone {
           width: 30%;
           min-width: 400px;
@@ -56,6 +73,17 @@
           flex-grow: 1
         }
       }
+
+      .product-label {
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      .formule-label {
+        padding-top: 0;
+      }
+
+
     }
   }
 }

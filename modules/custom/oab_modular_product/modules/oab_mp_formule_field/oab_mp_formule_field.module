@@ -37,7 +37,7 @@ function oab_mp_formule_field_theme($existing, $type, $theme, $path) {
  * Implements hook_theme_suggestions_HOOK().
  */
 function oab_mp_formule_field_theme_suggestions_formule_field(array $variables) {
-//  dd($variables);
+
   /** @var \Drupal\oab_mp_formule_field\Entity\FormuleField $formule_field */
   $formule_field = $variables['elements']['#formule_field'];
 
@@ -46,3 +46,32 @@ function oab_mp_formule_field_theme_suggestions_formule_field(array $variables) 
   ];
 }
 
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function oab_mp_formule_field_preprocess_formule_field(&$variables) {
+//  dd($variables);
+  if (!isset($variables['elements']['#formule_field'])) {
+    return;
+  }
+
+  /** @var \Drupal\oab_mp_formule_field\Entity\FormuleField $formule_field */
+  $formule_field = $variables['elements']['#formule_field'];
+
+  $variables['display_label'] = $formule_field->getDisplayLabel();
+  $variables['description'] = $formule_field->getDescription();
+  $variables['choices'] = $formule_field->getChoices();
+  $variables['has_null_value'] = $formule_field->hasNullValue();
+  if ($formule_field->hasNullValue()) {
+    $variables['null_label'] = $formule_field->getNullLabel();
+  }
+
+  $variables['id'] = $formule_field->id();
+
+  $variables['#attached']['drupalSettings']['formule_field'][$formule_field->id()] = [
+    'label' => $formule_field->label(),
+    'display_label' => $formule_field->getDisplayLabel(),
+    'result_sentence' => $formule_field->getSentence()
+  ];
+
+}

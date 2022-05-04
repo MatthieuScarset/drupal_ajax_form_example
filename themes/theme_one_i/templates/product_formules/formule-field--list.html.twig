@@ -1,0 +1,41 @@
+
+<div class="formule_field" data-formule-field="{{ id }}">
+
+  <span class="h1">{{ display_label }}</span>
+  <p>{{ description }}</p>
+
+  <ul class="items-list" data-ob1-component="FilterChipsBar" aria-label="Liste des filtres pour restreindre la liste de résultats">
+    {% for choice, choice_label in choices %}
+      {{ _self.input(choice, choice_label, "radio-" ~ id) }}
+    {% endfor %}
+    {% if has_null_value %}
+      {{ _self.input('nil', null_label, "radio-" ~ id) }}
+    {% endif %}
+  </ul>
+</div>
+
+
+{% macro input(value, label, name) %}
+  {% set input_id = "formule-field-chips-" ~ value %}
+  {% set input_label_id = "formule-field-chips-label-" ~ value %}
+
+  <li>
+    <div class="items-list-item">
+      <div class="item-container item-container-sm">
+        <div class="custom-control custom-radio">
+          <input
+            type="radio" id="{{ input_id }}"
+            aria-labelledby="{{ input_label_id }}"
+            name="{{ name }}"
+            class="custom-control-input"
+            value="{{ choice }}">
+          <label aria-hidden="true" class="custom-control-label" for="{{ input_id }}"></label>
+        </div>
+        <label id="{{ input_label_id }}" for="{{ input_id }}" class="item-text">
+          <span>{{ label }}</span>
+        </label>
+      </div>
+    </div>
+  </li>
+
+{% endmacro %}
