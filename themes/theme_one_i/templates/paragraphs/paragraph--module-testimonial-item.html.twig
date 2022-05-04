@@ -1,36 +1,33 @@
 {% block content %}
   {% if nb_testimonial == 1 %}
     {% if content.field_video.0 %}
-      <div class="col-6">
+      <div class="col-12 col-md-6 mt-3 mt-md-0">
         {{ content.field_video }}
       </div>
-      <div class="col-5 offset-1">
+      <div class="col-12 col-md-5 offset-md-1">
     {% endif %}
         <div class="row">
           <div class="col-12 lead text-gray3 pb-1">
             {{ content.field_title }}
           </div>
-          <div class="col-12 pb-1">
+          <div class="col-12 pb-md-1">
             <h4 class="font-weight-bold">{{ content.field_highlight }}</h4>
           </div>
           <div class="col-12">
-            <a class="o-link-arrow no-decoration" href="{{ content.field_testimonial_link.0["#url"] }}">{{ content.field_testimonial_link.0["#title"]}}</a>
+            <a class="o-link-arrow no-decoration" href="{{ content.field_testimonial_link.0["#url"] }}">{{ "Read the customer story"|t }}</a>
           </div>
         </div>
       </div>
-    {% if content.field_video.0 %}
-      <img class="d-none d-md-block testimonial-right-img" src="/themes/theme_one_i/assets/image/Illustrations-temoignages-2.png" alt="illustration temoignage right">
-    {% endif %}
   {% else %}
       <div class="row">
         <div class="col-12 lead text-gray3 pb-1">
           {{ content.field_title }}
         </div>
-        <div class="col-12 pb-1">
+        <div class="col-12 pb-md-1">
           <h4 class="font-weight-bold">{{ content.field_highlight }}</h4>
         </div>
         <div class="col-12">
-          <a class="o-link-arrow no-decoration" href="{{ content.field_testimonial_link.0["#url"] }}">{{ content.field_testimonial_link.0["#title"]}}</a>
+          <a class="o-link-arrow no-decoration" href="{{ content.field_testimonial_link.0["#url"] }}">{{ "Read the customer story"|t }}</a>
         </div>
       </div>
   {% endif %}
