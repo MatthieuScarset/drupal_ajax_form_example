@@ -12,18 +12,18 @@
                 or field.Attributes.video|trim is not empty
                 %}
                 <div class="col col-md-12 nopadding">
-                    {% if field.Attributes.title|trim is not empty %}
+                    {% if is_string(field.Attributes.title) and field.Attributes.title|trim is not empty %}
                         <h2 class="titre2">{{ field.Attributes.title }}</h2>
                     {% endif %}
-                    {% if field.Attributes.paragraph|trim is not empty %}
+                    {% if is_string(field.Attributes.paragraph) and field.Attributes.paragraph|trim is not empty %}
                         <p class="axiometext">{{ field.Attributes.paragraph|linkAxiome|raw }}</p>
                     {% endif %}
-                    {% if field.Attributes.schema.url_archive|trim is not empty %}
+                    {% if is_string(field.Attributes.schema.url_archive) and field.Attributes.schema.url_archive|trim is not empty %}
                         <div class="col col-md-12 nopadding image">
                             <img src="/sites/default/files/axiome2/fiches/{{ id_fiche }}{{ field.Attributes.schema.url_archive }}" alt="{{ field.Attributes.schema.balise_alt }}" />
                         </div>
                     {% endif %}
-                    {% if field.Attributes.video|trim is not empty %}
+                    {% if is_string(field.Attributes.video) and field.Attributes.video|trim is not empty %}
                         <div> {{ field.Attributes.video|replace({'https://': "//"})|raw }}</div>
                     {% endif %}
                 </div>

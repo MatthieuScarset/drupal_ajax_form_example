@@ -638,15 +638,14 @@ function theme_boosted_preprocess_field(&$variables){
   }
   */
 
-        if($variables['field_name'] == 'field_visual'){
-            /** @var \Drupal\image\Plugin\Field\FieldType\ImageItem $field */
-            $field = $variables['element']['#items'][0];
-
-            $field_image_url = get_image_uri($field->getEntity(), 'field_visual');
-
-            $variables['banner_url'] = file_create_url($field_image_url);
-        }
-
+  if($variables['field_name'] == 'field_visual'){
+      /** @var \Drupal\image\Plugin\Field\FieldType\ImageItem $field */
+      $field = $variables['element']['#items'][0];
+      $field_image_url = get_image_uri($field->getEntity(), 'field_visual');
+      if (is_string($field_image_url)) {
+        $variables['banner_url'] = $service_file_url_generator->generateAbsoluteString($field_image_url);
+      }
+  }
 }
 
 function theme_boosted_preprocess_file_link(&$variables){
