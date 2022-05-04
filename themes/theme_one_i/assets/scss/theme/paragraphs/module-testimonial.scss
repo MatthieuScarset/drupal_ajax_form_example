@@ -1,13 +1,29 @@
 .testimonial-right-img {
   position: absolute;
-  bottom: -7rem;
-  right: 0;
+  bottom: -10rem;
+  right: 1rem;
+  width: 150px;
+
+  @include media-breakpoint-up(lg) {
+    position: absolute;
+    bottom: -10.5rem;
+    right: 1rem;
+    width: 180px
+  }
 }
 
 .testimonial-left-img {
   position: absolute;
-  top: -6.3rem;
-  left: 0;
+  top: -5.6rem;
+  left: 1rem;
+  width: 130px;
+
+  @include media-breakpoint-up(md) {
+    position: absolute;
+    top: -6.3rem;
+    left: 1rem;
+    width: 180px
+  }
 }
 
 .testimonial-item-container {

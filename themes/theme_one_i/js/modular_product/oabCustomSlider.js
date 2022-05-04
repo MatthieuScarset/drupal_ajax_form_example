@@ -7,7 +7,11 @@ class OabCustomSlider {
 
     this.$root = elem;
     this.$container = this.$root.querySelector('.slider-container');
-    this.$containerChildrens = this.$container.children;
+    if (this.$container) {
+      this.$containerChildrens = this.$container.children;
+    } else {
+      return;
+    }
 
     this.$root.querySelectorAll('.slider-controller > [data-direction]')
       .forEach((button) => {
@@ -43,8 +47,8 @@ class OabCustomSlider {
       const position = (rect.left + rect.right) / 2;
 
       const basePosition = sens === 'left' ? this.$container.getBoundingClientRect().left : this.$container.getBoundingClientRect().right;
-
-      if ((sens === 'left' && position < basePosition) || (sens === 'right' && position > basePosition)) {
+      //verify if the element is hidden or partially hidden
+      if ((sens === 'left' && (rect.left < (basePosition-10) || position < basePosition)) || (sens === 'right' && (position > basePosition || Math.trunc(rect.right) > basePosition))) {
         firstHidden = el;
       }
     });
