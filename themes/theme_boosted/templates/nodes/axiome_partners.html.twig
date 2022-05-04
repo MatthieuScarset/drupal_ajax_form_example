@@ -1,9 +1,9 @@
 <div class="node-axiome-partners col-md-12 nopadding">
     <div>
-        {% if field_partners.Attributes.title|trim is not empty %}
+        {% if is_string(field_partners.Attributes.title) and field_partners.Attributes.title|trim is not empty %}
             <h2 class="titre2">{{ field_partners.Attributes.midtitle }}</h2>
         {% endif %}
-        {% if field_partners.Attributes.text|trim is not empty %}
+        {% if is_string(field_partners.Attributes.text) and field_partners.Attributes.text|trim is not empty %}
             <p class="axiometext">{{ field_partners.Attributes.text|raw|nl2br }}</p>
         {% endif %}
     </div>
