@@ -61,8 +61,10 @@ function theme_one_i_preprocess_page(&$variables)
   //tealium
   $variables['#attached']['drupalSettings']['tealium']['titre_page'] = $title;
 
+  $node = $route_match->getParameter('node');
+
   //On cache le block Page Title
-  if (preg_match('/^view.category_page/', $route_name)) {
+  if (preg_match('/^view.category_page/', $route_name) || $node->bundle() === 'modular_product') {
     $variables['page']['content']['theme_one_i_page_title']['#access'] = FALSE;
   }
 }
@@ -85,9 +87,6 @@ function theme_one_i_preprocess_views_view(&$variables) {
     }
   }
 }
-
-
-
 
 function theme_one_i_preprocess_paragraph__module_benefits_item(&$variables) {
 
