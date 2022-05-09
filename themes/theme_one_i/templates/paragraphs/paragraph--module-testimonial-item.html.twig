@@ -17,7 +17,9 @@
             <a class="o-link-arrow no-decoration" href="{{ content.field_testimonial_link.0["#url"] }}">{{ "Read the customer story"|t }}</a>
           </div>
         </div>
+    {% if content.field_video.0 %}
       </div>
+    {% endif %}
   {% else %}
       <div class="row">
         <div class="col-12 lead text-gray3 pb-1">

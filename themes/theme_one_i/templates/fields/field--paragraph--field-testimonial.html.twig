@@ -9,9 +9,9 @@
 
 {% if 1 == items|length %}
   <div{{ attributes.addClass(classes,"container-fluid", "site-width", "row", "mt-4", "mb-2", "my-md-4", "position-relative") }}>
-    <img class="d-block d-md-none testimonial-left-img" src="/themes/theme_one_i/assets/image/Illustrations-temoignagnes.png" alt="illustration temoignage left">
     {% if items.0.content["#paragraph"].field_video|length != 1 %}
-      <div class="col-12 col-md-9 offset-md-3">
+    <img class="d-block testimonial-left-img" src="/themes/theme_one_i/assets/image/Illustrations-temoignagnes.png" alt="illustration temoignage left">
+    <div class="col-12 col-md-9 offset-md-3">
     {% else %}
       <div class="col-12 px-0">
     {% endif %}
