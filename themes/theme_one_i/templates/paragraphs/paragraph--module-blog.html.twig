@@ -43,11 +43,12 @@
   'paragraph',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-  not paragraph.isPublished() ? 'paragraph--unpublished'
+  not paragraph.isPublished() ? 'paragraph--unpublished',
+  'py-2 py-md-5'
 ]
 %}
 {% block paragraph %}
-<div {{ attributes.addClass(classes, 'mt-lg-4') }}>
+<div {{ attributes.addClass(classes) }}>
   <div class="container-fluid site-width">
     <div class="row mb-0 pt-1">
       <div class="col-12">
