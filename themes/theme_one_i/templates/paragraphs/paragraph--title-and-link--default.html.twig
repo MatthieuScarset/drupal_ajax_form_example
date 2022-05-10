@@ -46,13 +46,15 @@
   not paragraph.isPublished() ? 'paragraph--unpublished'
 ]
 %}
-{% block paragraph %}
-  <div{{ attributes.addClass(classes) }}>
-    {% block content %}
-      <div class="callout">
-        <div class="lead p-0">{{ content.field_title }}</div>
-        {{ content.field_link_title }}
-      </div>
-    {% endblock %}
-  </div>
-{% endblock paragraph %}
+<div{{ attributes.addClass(classes) }}>
+  {% if content.field_link_title.0['#url'] %}
+    <a href="{{ content.field_link_title.0['#url'] }}">
+  {% endif %}
+    <div class="callout">
+      <div class="lead p-0">{{ content.field_title }}</div>
+      {{ content.field_link_title }}
+    </div>
+  {% if content.field_link_title.0['#url'] %}
+    </a>
+  {% endif %}
+</div>
