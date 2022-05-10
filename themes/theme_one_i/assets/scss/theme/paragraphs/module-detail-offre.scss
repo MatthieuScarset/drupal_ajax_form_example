@@ -114,10 +114,14 @@
         &::after {
           color: black;
           right: 0;
+          padding-left: 0;
         }
         &:active {
           color: black;
         }
+      }
+      & > div {
+        padding-right: 1rem;
       }
     }
 
