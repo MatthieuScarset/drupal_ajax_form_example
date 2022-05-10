@@ -139,23 +139,6 @@ function oab_modular_product_field_widget_single_element_form_alter(array &$elem
     }
   }
 
-  if ($element['#paragraph_type'] === 'module_exemples') {
-  /*
-   * liste des fields seulement modifiable par les admins dans le module Exemple de réalisation
-   */
-
-    if(in_array('administrator', $user_roles)) {
-
-      if (isset($element['subform']['field_illustration'])) {
-        $element['subform']['field_illustration']['widget']['#access'] = true;
-      }
-      else {
-        $element['subform']['field_illustration']['widget']['#access'] = false;
-      }
-
-    }
-  }
-
   if ($element['#paragraph_type'] === 'module_detail_offre_items') {
     if (isset($element['subform']['field_offres_inclus'], $element['subform']['field_offres_exclus'])) {
       $element['subform']['field_offres_inclus']['widget']['#cardinality'] = 15;

@@ -1,13 +1,9 @@
-import { elementScrollIntoViewPolyfill } from "seamless-scroll-polyfill";
-
-class oabExempleRealisation {
+class OabExempleSlider {
   constructor(elem) {
-    elementScrollIntoViewPolyfill();
-
     this.$root = elem;
     this.$current = 0;
-    this.$examples = this.$root.querySelectorAll('.example');
-    this.container = this.$root.querySelector('.example-content');
+    this.$examples = this.$root.querySelectorAll('.example-progress-bar');
+    this.$content = this.$root.querySelector('.example-content');
     this.$delay = this.$root.dataset.delay ? 1000 * this.$root.dataset.delay : 1000;
 
     if (typeof this.$root.dataset.startAtLaunch !== 'undefined') {
@@ -29,7 +25,7 @@ class oabExempleRealisation {
   }
 
   /**
-   * Start the animation if the steps are visible
+   * Start the animation if the examples are visible
    * @private
    */
   _startIfVisible() {
@@ -39,7 +35,7 @@ class oabExempleRealisation {
   }
 
   /**
-   * Check if the steps are visible
+   * Check if the examples are visible
    * @private
    */
   _checkIfVisible() {
@@ -60,18 +56,18 @@ class oabExempleRealisation {
    */
   _nextExample() {
     this.$current++;
-    this.$width = $(this.container).width() ;
-    this.$root.querySelectorAll('.example.active').forEach((example) => {
-      example.classList.remove('active');
-      example.classList.remove('col-6');
-      example.classList.add('done');
-      example.querySelector('.ob1-progress-bar-determined').classList.add('d-none');
-      $(this.container).animate({scrollLeft : "+="+this.$width}, 800);
+    this.$width = $(this.$content).width() ;
+    this.$root.querySelectorAll('.example-progress-bar.active').forEach((progress_bar) => {
+      if (window.matchMedia("(max-width: 736px)").matches) {
+        progress_bar.classList.remove('col-6');
+      }
+      progress_bar.classList.remove('active');
+      progress_bar.querySelector('.ob1-progress-bar-determined').classList.add('d-none');
+      $(this.$content).animate({scrollLeft : "+="+this.$width}, 800);
     });
 
     // Si $current existe pas... on va dire qu'on est à la fin
     if (this.$examples[this.$current-1]) {
-
       //Gestion du col mobile qui devient un col-6
       if (window.matchMedia("(max-width: 736px)").matches) {
         this.$examples[this.$current-1].classList.add('col-6');
@@ -81,8 +77,9 @@ class oabExempleRealisation {
       this.$examples[this.$current-1].querySelector('.ob1-progress-bar-determined').classList.remove('d-none');
     }
     else  {
+      $(this.$content).animate({scrollLeft : 0}, 800);
       clearInterval(this.$intervalId);
-      $(this.container).animate({scrollLeft : 0}, 0);
+      this._start();
     }
   }
 
@@ -90,12 +87,12 @@ class oabExempleRealisation {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  Array.from(document.querySelectorAll(".example-slider")).forEach((exempleRealisation) => {
-    new oabExempleRealisation(exempleRealisation);
+  Array.from(document.querySelectorAll(".example-items")).forEach((exempleSlider) => {
+    new OabExempleSlider(exempleSlider);
   });
 });
 
 // rattachement au contexte window pour pouvoir l'utiliser en dehors du JS
-window.oabExempleRealisation = oabExempleRealisation;
+window.OabExempleSlider = OabExempleSlider;
 
-export default oabExempleRealisation;
+export default OabExempleSlider;

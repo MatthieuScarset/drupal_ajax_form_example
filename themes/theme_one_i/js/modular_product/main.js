@@ -2,11 +2,11 @@
 import OabCustomSlider from "./oabCustomSlider";
 import StepSlider from "./stepSlider";
 import OabDetailOffre from "./oabDetailOffre";
-import OabExempleRealisation from "./oabExempleRealisation";
+import OabExempleSlider from "./oabExempleSlider";
 
 export {
   OabCustomSlider,
   StepSlider,
   OabDetailOffre,
-  OabExempleRealisation
+  OabExempleSlider,
 };
