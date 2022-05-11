@@ -1,0 +1,19 @@
+uuid: 8b600e51-e861-4300-8b4b-b8b6e7fd9016
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_key_points_step
+    - paragraphs.paragraphs_type.module_step
+id: paragraph.module_step.field_key_points_step
+field_name: field_key_points_step
+entity_type: paragraph
+bundle: module_step
+label: 'key points Step'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\FieldFilteredMarkup;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\oab_modular_product\Services\OabModularProductService;
@@ -92,6 +93,12 @@ function oab_modular_product_field_widget_single_element_form_alter(array &$elem
       $element['subform']['field_key_points']['widget'][0]['value']['#maxlength'] = $description;
       $element['subform']['field_key_points']['widget'][0]['value']['#size'] = $size_description;
       $element['subform']['field_key_points']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($description.' characters max');
+    }
+
+    if (isset($element['subform']['field_key_points_step'])) {
+      $element['subform']['field_key_points_step']['widget'][0]['value']['#maxlength'] = $description;
+      $element['subform']['field_key_points_step']['widget'][0]['value']['#size'] = $size_description;
+      $element['subform']['field_key_points_step']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($description.' characters max');
     }
 
     if (isset($element['subform']['field_description'])) {
@@ -257,7 +264,7 @@ function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, 
 /**
  * Implements hook_entity_bundle_field_info_alter().
  */
-function oab_modular_product_entity_bundle_field_info_alter(&$fields, \Drupal\Core\Entity\EntityTypeInterface $entity_type, $bundle) {
+function oab_modular_product_entity_bundle_field_info_alter(&$fields, EntityTypeInterface $entity_type, $bundle) {
   if ($entity_type->id() === "paragraph" && $bundle === "module_steps") {
     $fields['field_step']->addConstraint('ModularProductMinSteps');
   }

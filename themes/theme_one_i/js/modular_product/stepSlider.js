@@ -1,9 +1,6 @@
-import { elementScrollIntoViewPolyfill } from "seamless-scroll-polyfill";
-
 class StepSlider {
   constructor(elem) {
-    elementScrollIntoViewPolyfill();
-    
+
     this.$root = elem;
     this.$current = 0;
     this.$steps = this.$root.querySelectorAll('.step');
@@ -59,23 +56,29 @@ class StepSlider {
    */
   _nextStep() {
     this.$current++;
+    this.$width = ($(this.$root).width() + $(this.$root.children).width())/2;
     this.$root.querySelectorAll('.step.active').forEach((step) => {
       step.classList.remove('active');
       step.classList.add('done');
       step.querySelector('.ob1-spinner-determined').classList.add('d-none');
+
+      //Gestion du scroll des éléments en version mobile
+      if (window.matchMedia("(max-width: 736px)").matches) {
+        $(this.$root).animate({scrollLeft : "+="+this.$width}, 800);
+      }
     });
     // Si $current existe pas... on va dire qu'on est à la fin
     if (this.$steps[this.$current-1]) {
       this.$steps[this.$current-1].classList.add('active');
       this.$steps[this.$current-1].querySelector('.ob1-spinner-determined').classList.remove('d-none');
-      this.$steps[this.$current-1].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     } else {
       clearInterval(this.$intervalId);
+      //On revient au début des éléments en mobile
+      if (window.matchMedia("(max-width: 736px)").matches) {
+        $(this.$root).animate({scrollLeft : 0}, 800);
+      }
     }
   }
-
-
-
 }
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -38,10 +38,9 @@ class ModularProductOrderModuleValidator extends ConstraintValidator {
 //On récupère les modules ajoutés en BO en excluant les modules supplémentaires
     $paragraph_order = [];
     foreach ($items as $item) {
-      if (isset($item->target_id)) {
-        $paragraph = Paragraph::load($item->target_id ?? 0);
-        if ($paragraph && !in_array($paragraph->bundle(), $not_in_order)) {
-          $paragraph_order[] = $paragraph->bundle();
+      if (isset($item->entity)) {
+        if (!in_array($item->entity->bundle(), $not_in_order)) {
+          $paragraph_order[] = $item->entity->bundle();
         }
       }
     }

@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.module_step.field_description
+    - field.field.paragraph.module_step.field_key_points_step
     - field.field.paragraph.module_step.field_title
     - paragraphs.paragraphs_type.module_step
 id: paragraph.module_step.default
@@ -11,17 +11,17 @@ targetEntityType: paragraph
 bundle: module_step
 mode: default
 content:
-  field_description:
+  field_key_points_step:
     type: string
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   field_title:
     type: string
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
