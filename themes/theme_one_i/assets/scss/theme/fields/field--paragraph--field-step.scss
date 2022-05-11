@@ -3,6 +3,7 @@
   @include media-breakpoint-down(md) {
     overflow-x: auto;
     flex-wrap: initial;
+    scrollbar-width: none;
 
     padding-top: 1rem;
     padding-bottom: 3rem;
@@ -63,6 +64,19 @@
       }
     }
 
+    .step-content {
+      li {
+        color: $gray3;
+        &::before {
+          background-color: $gray3;
+        }
+      }
+
+      strong {
+       color: $gray3;
+      }
+    }
+
     &.active, &:hover {
       box-shadow: 0 16px 32px -8px $gray4;
 
@@ -71,6 +85,19 @@
           font-weight: bold;
           border-color: $gray3;
           border-width: 2px;
+        }
+      }
+
+      .step-content {
+        li {
+          color: $black;
+          &::before {
+            background-color: $orange2;
+          }
+        }
+
+        strong {
+          color: $black;
         }
       }
     }
@@ -114,6 +141,19 @@
             border-color: $orange1;
             border-width: 3px;
           }
+        }
+      }
+
+      .step-content {
+        li {
+          color: black;
+          &::before {
+            background-color: $orange2;
+          }
+        }
+
+        strong {
+          color: $black;
         }
       }
     }

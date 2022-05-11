@@ -43,29 +43,12 @@
   'field--name-' ~ field_name|clean_class,
   'field--type-' ~ field_type|clean_class,
   'field--label-' ~ label_display,
+  'mb-1'
 ]
 %}
-<div {{ attributes.addClass(classes) }}>
-
-  {% set defaultDelay = 10 %}
-
-  <div class="row step-slider" data-delay="{{ defaultDelay }}" >
-    {% for key, item in items %}
-        <div class="col-9 col-md step pt-1 mx-1 px-1 px-md-2 pb-3 ">
-          <div class="step-header">
-            <div class="ob1-spinner-determined d-none" data-ob1-component="SpinnerDetermined" data-spinnerdetermined-timer="{{ defaultDelay }}"></div>
-            <span class="step-position">
-            {{ key+1 }}
-            </span>
-            <hr class="separator ml-1">
-          </div>
-          <div class="step-content mt-1 mt-md-2">
-            {{ item }}
-          </div>
-        </div>
-    {% endfor %}
-  </div>
-</div>
-
-
-
+{#{{ dd() }}#}
+<ul class="list mb-0">
+  {% for item in items %}
+    <li class="ml-0"><span class="lead">{{ item }}</span></li>
+  {% endfor %}
+</ul>

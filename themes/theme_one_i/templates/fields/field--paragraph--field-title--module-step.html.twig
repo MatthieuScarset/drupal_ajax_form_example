@@ -43,10 +43,9 @@
   'field--name-' ~ field_name|clean_class,
   'field--type-' ~ field_type|clean_class,
   'field--label-' ~ label_display,
-  'mb-1'
+  'mb-1 mb-md-2', 'lead', 'pb-0'
 ]
 %}
-{#{{ dd() }}#}
 
 {% for item in items %}
   <div {{ attributes.addClass(classes) }}><strong>{{ item }}</strong></div>

@@ -43,23 +43,22 @@
   'paragraph',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-  not paragraph.isPublished() ? 'paragraph--unpublished'
+  not paragraph.isPublished() ? 'paragraph--unpublished',
+  "py-2 py-md-5"
 ]
 %}
 {% block paragraph %}
   {% block content %}
-    <div id="services" {{ attributes.addClass(classes,"py-2 py-md-5") }}>
+    <div id="services" {{ attributes.addClass(classes) }}>
       <div class="container-fluid site-width">
         <div class="row justify-content-between">
-          <div class="col-12">
-            <span class="small text-gray3 font-weight-bold">{{ "Tailor-made services"|t }}</span>
-          </div>
           <div class="col-12 col-md-4">
-            <h2 class="no-signature mb-2 mb-md-3 px-0 pt-1 pb-0">{{ content.field_title }}</h2>
-            <div class="lead font-weight-bold mb-2 mb-md-4 p-0">{{ content.field_accroche }}</div>
+            <div class="small text-gray3 font-weight-bold pt-0">{{ "Tailor-made services"|t }}</div>
+            <h2 class="no-signature mb-2 pb-0">{{ content.field_title }}</h2>
+            <div class="lead font-weight-bold p-0">{{ content.field_accroche }}</div>
           </div>
          <div class="items-services col-12 col-md-7">
-           <hr class="separator separator--gray4">
+           <hr class="separator mt-2 separator--gray4">
            {{ content.field_items_services }}
          </div>
         </div>

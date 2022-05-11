@@ -18,6 +18,7 @@ $translations = [
   "@product_label is made for you" => "@product_label est fait pour vous",
   "Tailor-made services" => "Services sur-mesure",
   "Read the customer story" => "Lire le témoignage complet",
+  "Customer story" => "Témoignages"
 ];
 
 foreach ($translations AS $source => $translation) {
