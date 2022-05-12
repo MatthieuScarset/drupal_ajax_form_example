@@ -6,3 +6,4 @@ package: 'OAB Commerce'
 
 dependencies:
   - oab_mp_formules
+  - oab_mp_formule_field

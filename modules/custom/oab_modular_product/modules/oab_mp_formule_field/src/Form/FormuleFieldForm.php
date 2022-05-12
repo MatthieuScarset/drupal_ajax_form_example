@@ -16,9 +16,21 @@ class FormuleFieldForm extends EntityForm {
   public function form(array $form, FormStateInterface $form_state) {
     $form = parent::form($form, $form_state);
 
+    $form['tabs'] = [
+      '#type' => 'vertical_tabs',
+      '#tree' => true
+    ];
+
+
+    $form['group_field_config'] = [
+      '#type' => 'details',
+      '#title' => t('Field configuration'),
+      '#group' => "tabs"
+    ];
+
     /** @var \Drupal\oab_mp_formule_field\Entity\FormuleField $formule_field */
     $formule_field = $this->entity;
-    $form['label'] = [
+    $form['group_field_config']['label'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Setting Label'),
       '#maxlength' => 255,
@@ -27,7 +39,7 @@ class FormuleFieldForm extends EntityForm {
       '#required' => TRUE,
     ];
 
-    $form['id'] = [
+    $form['group_field_config']['id'] = [
       '#type' => 'machine_name',
       '#default_value' => $formule_field->id(),
       '#machine_name' => [
@@ -35,7 +47,7 @@ class FormuleFieldForm extends EntityForm {
       ],
       '#disabled' => !$formule_field->isNew(),
     ];
-    $form['display_label'] = [
+    $form['group_field_config']['display_label'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Display Label'),
       '#default_value' => $formule_field->getDisplayLabel(),
@@ -43,7 +55,7 @@ class FormuleFieldForm extends EntityForm {
       '#required' => TRUE,
     ];
 
-    $form['description'] = [
+    $form['group_field_config']['description'] = [
       '#type' => 'textarea',
       '#default_value' => $formule_field->getDescription(),
       '#title' => $this->t('Description'),
@@ -51,12 +63,29 @@ class FormuleFieldForm extends EntityForm {
       '#required' => true,
     ];
 
+    $form['group_field_config']['display_mode'] = [
+      '#type' => 'radios',
+      '#default_value' => $formule_field->getDisplayMode(),
+      '#title' => $this->t('Display mode'),
+      '#options' => [
+        'chips' => t("Chips"),
+        'list' => t("List")
+      ],
+      '#required' => true
+    ];
+
+    $form['group_inputs'] = [
+      '#type' => 'details',
+      '#title' => t('Inputs'),
+      '#group' => "tabs"
+    ];
+
     $choices = "";
     foreach ($formule_field->getChoices() as $key => $value) {
       $choices .= "$key|$value\n";
     }
 
-    $form['choices'] = [
+    $form['group_inputs']['choices'] = [
       '#type' => 'textarea',
       '#default_value' => $choices,
       '#title' => $this->t('Choices'),
@@ -64,14 +93,14 @@ class FormuleFieldForm extends EntityForm {
       '#required' => true,
     ];
 
-    $form['null_value'] = [
+    $form['group_inputs']['null_value'] = [
       '#type' => 'checkbox',
       '#default_value' => $formule_field->hasNullValue(),
       '#title' => $this->t('Has null value'),
       '#description' => $this->t('If you want to add a null value'),
     ];
 
-    $form['null_label'] = [
+    $form['group_inputs']['null_label'] = [
       '#type' => 'textfield',
       '#default_value' => $formule_field->getNullLabel(),
       '#title' => $this->t('Null value label'),
@@ -87,25 +116,65 @@ class FormuleFieldForm extends EntityForm {
       '#required' => $formule_field->hasNullValue()
     ];
 
-    $form['display_mode'] = [
-      '#type' => 'radios',
-      '#default_value' => $formule_field->getDisplayMode(),
-      '#title' => $this->t('Display mode'),
-      '#options' => [
-        'chips' => t("Chips"),
-        'list' => t("List")
-      ],
-      '#required' => true
+    $form['group_result'] = [
+      '#type' => 'details',
+      '#title' => t('Result'),
+      '#group' => "tabs"
     ];
 
-    $form['sentence'] = [
+    $form['group_result']['sentence'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Choice sentence'),
       '#maxlength' => 255,
       '#default_value' => $formule_field->getSentence(),
-      '#description' => $this->t("The choice sentence display in the configurateur. Add %answer where you want to print the user answer in the sentence"),
+      '#description' => $this->t("The choice sentence display in the configurateur. Add %answer where you want to print the user answer in the sentence", [
+        '%answer' => "{answer}"
+      ]),
       '#required' => TRUE,
     ];
+
+    $form['group_empty_config'] = [
+      '#type' => 'details',
+      '#title' => t('Empty configuration'),
+      '#description' => t("Configuration if no package available"),
+      '#tree' => true,
+      '#group' => "tabs"
+    ];
+
+    $third_party_settings = $formule_field->getThirdPartySettings('oab_mp_formule_field');
+    $empty_config = $third_party_settings['empty_config'] ?? [];
+
+
+    $form['group_empty_config']['no_result_title'] = [
+      '#type' => 'textarea',
+      '#title' => $this->t("No result title"),
+      '#description' => $this->t("Title of the no-result page. Use %answer to print the user answer. "
+              . "Use [formule-field:color:orange] and [formule-field:color:normal] pour mettre le texte en orange",
+        [
+          '%answer' => "{answer}"
+        ]),
+      '#default_value' => $empty_config['no_result_title'] ?? ""
+    ];
+
+    $form['group_empty_config']['no_result_sentence'] = [
+      '#type' => 'textarea',
+      '#title' => $this->t("No result sentence"),
+      '#description' => $this->t("Display just under the title on no-result page"),
+      '#default_value' => $empty_config['no_result_sentence'] ?? ""
+    ];
+
+    $form['group_empty_config']['button_text'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t("Button text"),
+      '#default_value' => $empty_config['button_text'] ?? ""
+    ];
+
+    $form['group_empty_config']['button_link'] = [
+      '#type' => 'url',
+      '#title' => $this->t("Button link"),
+      '#default_value' => $empty_config['button_link'] ?? ""
+    ];
+
 
     return $form;
   }
@@ -128,6 +197,9 @@ class FormuleFieldForm extends EntityForm {
 
     /** @var \Drupal\oab_mp_formule_field\Entity\FormuleField $formule_field */
     $formule_field = $this->entity;
+
+    // La flemme de créer les fields dans la conf....
+    $formule_field->setThirdPartySetting('oab_mp_formule_field', 'empty_config', $form_state->getValue('group_empty_config'));
 
     $status = $formule_field->save();
 

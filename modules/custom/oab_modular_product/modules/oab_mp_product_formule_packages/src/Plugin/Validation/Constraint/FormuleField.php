@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\oab_mp_formule_field\Plugin\Validation\Constraint;
+namespace Drupal\oab_mp_product_formule_packages\Plugin\Validation\Constraint;
 
 use Symfony\Component\Validator\Constraint;
 

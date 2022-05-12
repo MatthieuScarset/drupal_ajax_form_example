@@ -19,16 +19,16 @@
 
 {% set nb_questions = formule_fields|length %}
 {% set modal_id = "modal-formule-" ~ product_formule_entity.id() %}
-{#{{ dd() }}#}
+
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{ modal_id }}">
   {{ "Choose this formule"|t }}
 </button>
-{#{{ dd() }}#}
-<div class="modal fade modal-product-formule" id="{{ modal_id }}" >
+
+<div class="modal fade modal-product-formule" id="{{ modal_id }}" data-product="{{ product_formule_entity.id() }}" >
   <div class="modal-dialog">
     <button type="button" class="close d-flex align-center" data-dismiss="modal" aria-label="Close">
-{#      <span aria-hidden="true" class="close-cross">&times</span>#}
+      <span aria-hidden="true" class="close-cross">&times</span>
       Fermer
     </button>
     <div class="modal-content" data-show="reception">
@@ -46,11 +46,12 @@
 
             <button class="btn btn-primary btn-begin">Commencer</button>
           </div>
-          <div data-step="process">
-            <div class="progressbar">
-              <progress max="{{ nb_questions + 1 }}" value="1"></progress>
-              <div class="progressbar-label">Question 1/{{ nb_questions}}</div>
-            </div>
+          <div class="progressbar d-none" data-label="Question {num_question}/{{ nb_questions }}">
+            <progress max="{{ nb_questions + 1 }}" value="1"></progress>
+            <div class="progressbar-label" >Question 1/{{ nb_questions}}</div>
+          </div>
+          <div class="result-stack d-none">
+
           </div>
         </div>
 
@@ -64,6 +65,12 @@
             {{ formule_field }}
           </div>
         {% endfor %}
+        <div data-step="contact-form">
+          <div><span class="h1" data-field="no-result-title"></span></div>
+          <div><span data-field="no-result-sentence"></span></div>
+          <a class="btn btn-primary" data-field="no-result-link"></a>
+        </div>
+        <div data-step="result"></div>
       </div>
     </div>
   </div>

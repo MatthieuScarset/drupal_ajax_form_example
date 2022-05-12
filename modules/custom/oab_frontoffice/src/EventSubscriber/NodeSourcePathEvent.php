@@ -40,7 +40,8 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
         // Pour être sur, pour les API Marketo/Altares.
         // Gestion des exceptions dans leur module
         $route_name = \Drupal::routeMatch()->getRouteName();
-        if (strpos($route_name, 'oab_marketo.altares_api') !== false) {
+        if (str_contains($route_name, 'oab_marketo.altares_api')
+          || str_contains($route_name, 'oab_mp_product_formule_packages')) {
           return;
         }
 

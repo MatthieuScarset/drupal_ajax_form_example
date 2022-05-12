@@ -1,3 +1,34 @@
+
+@mixin step($step, $inverse: false) {
+  &[data-show="#{$step}"] {
+    [data-step]:not([data-step="#{$step}"]) {
+      display: none
+    }
+
+    @if $inverse {
+      .left-zone {
+        flex-grow: 1;
+        padding-right: 25%;
+      }
+
+      .right-zone {
+        width: 30%;
+        min-width: 400px;
+      }
+    } @else {
+      .left-zone {
+        width: 30%;
+        min-width: 400px;
+      }
+
+      .right-zone {
+        flex-grow: 1;
+      }
+    }
+  }
+}
+
+
 .modal.modal-product-formule {
   z-index: 3000;
 
@@ -16,17 +47,17 @@
       right: 6rem;
       z-index: 9000;
       font-size: 14px;
-
-      &::before {
-        content: '\00D7';
-        font-size: 34px;
-      }
     }
 
     .modal-content {
       height: 100%;
       padding: 0;
       flex-direction: row;
+
+      @include step('reception', true);
+      @include step('process');
+      @include step('contact-form');
+      @include step('result');
 
       & > div {
         padding: 2rem;
@@ -42,36 +73,15 @@
         align-items: center
       }
 
-      &[data-show=reception] {
-        [data-step]:not([data-step=reception]) {
-          display: none
+      .right-zone {
+        background-color: #f4f4f4;
+        overflow-y: scroll;
+
+        & > div {
+          padding-top: 2rem;
+          padding-bottom: 2rem;
         }
 
-        .left-zone {
-          flex-grow: 1;
-          padding-right: 25%;
-          background-color: #f4f4f4;
-        }
-
-        .right-zone {
-          width: 30%;
-          min-width: 400px;
-        }
-      }
-      &[data-show=process] {
-        [data-step]:not([data-step=process]) {
-          display: none
-        }
-
-        .left-zone {
-          width: 30%;
-          min-width: 400px;
-          background-color: #f4f4f4;
-        }
-
-        .right-zone {
-          flex-grow: 1
-        }
       }
 
       .product-label {
@@ -82,7 +92,6 @@
       .formule-label {
         padding-top: 0;
       }
-
 
     }
   }

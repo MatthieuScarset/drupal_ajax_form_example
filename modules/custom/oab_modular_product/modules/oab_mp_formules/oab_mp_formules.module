@@ -59,14 +59,3 @@ function oab_mp_formules_preprocess_product_formule_entity(array &$variables) {
 //  dd($variables);
 
 }
-
-
-function oab_mp_formules_preprocess_paragraph(array &$variables) {
-
-  if (isset($variables['paragraph'])
-    && $variables['paragraph'] instanceof Paragraph
-    && $variables['paragraph']->bundle() === 'module_detail_offre_items') {
-
-//    dd($variables);
-  }
-}

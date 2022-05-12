@@ -21,6 +21,7 @@ class FormulePackageListBuilder extends EntityListBuilder {
     $header['id'] = $this->t('Formule package ID');
     $header['name'] = $this->t('Name');
     $header['bundle'] = $this->t('Formule Type');
+    $header['field_values'] = $this->t('Field values');
     $header['published'] = $this->t("Published");
     return $header + parent::buildHeader();
   }
@@ -40,7 +41,18 @@ class FormulePackageListBuilder extends EntityListBuilder {
 
     $type = FormulePackageType::load($entity->bundle());
     $row['bundle'] = $type->label();
+
+
+    $values = $entity->getFormuleValues();
+    $rendered_values = "";
+    foreach ($values as $target => $value) {
+      $rendered_values .= "$target : $value | ";
+    }
+
+    $row['field_values'] = $rendered_values;
+
     $row['published'] = $entity->isPublished() ? $this->t("Published") : $this->t("Not Published");
+
     return $row + parent::buildRow($entity);
   }
 

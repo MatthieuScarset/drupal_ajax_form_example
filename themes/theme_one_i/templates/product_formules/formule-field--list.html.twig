@@ -1,17 +1,21 @@
 
-<div class="formule_field" data-formule-field="{{ id }}">
+
+{% set input_name = "radio-" ~ id %}
+
+<div class="formule-field field--list" id="{{ "formule-field-list-" ~ id }}" data-type="list" data-target="{{ id }}" data-input-name="{{ input_name }}">
 
   <span class="h1">{{ display_label }}</span>
   <p>{{ description }}</p>
 
-  <ul class="items-list" data-ob1-component="FilterChipsBar" aria-label="Liste des filtres pour restreindre la liste de résultats">
+  <ul class="items-list" data-ob1-component="FilterChipsBar" aria-label="{{ "List of choices for @label"|t({'@label': id}) }}">
     {% for choice, choice_label in choices %}
-      {{ _self.input(choice, choice_label, "radio-" ~ id) }}
+      {{ _self.input(choice, choice_label, input_name) }}
     {% endfor %}
     {% if has_null_value %}
-      {{ _self.input('nil', null_label, "radio-" ~ id) }}
+      {{ _self.input('nil', null_label, input_name) }}
     {% endif %}
   </ul>
+  <button class="btn btn-primary formule-submit" disabled>{{ "Next"|t }}</button>
 </div>
 
 
@@ -28,7 +32,7 @@
             aria-labelledby="{{ input_label_id }}"
             name="{{ name }}"
             class="custom-control-input"
-            value="{{ choice }}">
+            value="{{ value }}">
           <label aria-hidden="true" class="custom-control-label" for="{{ input_id }}"></label>
         </div>
         <label id="{{ input_label_id }}" for="{{ input_id }}" class="item-text">

@@ -68,10 +68,64 @@ function oab_mp_formule_field_preprocess_formule_field(&$variables) {
 
   $variables['id'] = $formule_field->id();
 
-  $variables['#attached']['drupalSettings']['formule_field'][$formule_field->id()] = [
+
+  $third_party_settings = $formule_field->getThirdPartySettings('oab_mp_formule_field');
+  $empty_config = $third_party_settings['empty_config'] ?? [];
+
+
+  $token = Drupal::token();
+//dd($token->getInfo()['tokens']);
+  $variables['#attached']['drupalSettings']['formuleField'][$formule_field->id()] = [
     'label' => $formule_field->label(),
-    'display_label' => $formule_field->getDisplayLabel(),
-    'result_sentence' => $formule_field->getSentence()
+    'displayLabel' => $formule_field->getDisplayLabel(),
+    'resultSentence' => $formule_field->getSentence(),
+    'noResultTitle' => $token->replace($empty_config['no_result_title'] ?? ""),
+    'buttonText' => $empty_config['button_text'] ?? "",
+    'buttonLink' => $empty_config['button_link'] ?? "",
+    'noResultSentence' => $empty_config['no_result_sentence'] ?? "",
+    'options' => $formule_field->getChoices()
   ];
 
+}
+
+
+
+/*
+* implement hook_token_info()
+*/
+function oab_mp_formule_field_token_info() {
+  $types = [];
+  $tokens = [];
+
+  $types['formule-field'] = array(
+    'name' => t('Formule Field specific tokens'),
+  );
+
+  $tokens['formule-field']['formule-field:color-orange'] = array(
+    'name' => "Orange",
+  );
+  $tokens['formule-field']['formule-field:color-end'] = array(
+    'name' => "Fin couleur",
+  );
+
+
+  return [
+    'types' => $types,
+    'tokens' => $tokens
+  ];
+}
+/*
+* implement hook_token()
+*/
+function oab_mp_formule_field_tokens($type, $tokens, array $data, array $options, \Drupal\Core\Render\BubbleableMetadata $bubbleable_metadata) {
+  $replacements = array();
+  // Replacement values for tokens that can be calculated without any additional
+  // data.
+
+  if ($type == 'formule-field') {
+    $replacements['[formule-field:color-orange]'] = '<span class="field-color-orange">';
+    $replacements['[formule-field:color-end]'] = '</span>';
+  }
+  // An array of replacement values keyed by original token string.
+  return $replacements;
 }

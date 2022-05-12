@@ -60,26 +60,6 @@ use Drupal\Core\Config\Entity\ConfigEntityBase;
 class FormuleField extends ConfigEntityBase implements FormuleFieldInterface {
 
   /**
-   *     "display_label",
-   *     "description",
-   *     "choices",
-   *     "null_value",
-   *     "null_label"
-   *     "display_mode",
-   *     "sentence" */
-
-  /**
-   *  *     "display_label" = "display label",
-   *     "description" = "description",
-   *     "choices" = "choices",
-   *     "null_value" = "has null value,
-   *     "null_label" = "null label",
-   *     "display_mode" = "display mode",
-   *     "sentence" = "sentence
-   */
-
-
-  /**
    * The Formule field ID.
    *
    * @var string
