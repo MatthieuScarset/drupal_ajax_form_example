@@ -20,41 +20,59 @@
   }
 
 
-
   .step {
 
     .step-header {
       display: flex;
 
-      .ob1-spinner-determined {
-        position: absolute;
-        height: px-to-rem(45);
-        width: px-to-rem(45);
+      .countdown {
+        position: relative;
+        height: 44px;
+        width: 44px;
+        margin: auto;
 
-        .ob1-spinner-determined-loader2,
-        .ob1-spinner-determined-loader1 {
-          width: px-to-rem(45);
-          height: px-to-rem(45);
+        .step-position {
+          color: $gray3;
+          z-index: 3;
+          border: 1px solid $gray4;
+          border-radius: 100%;
+          min-height: 44px;
+          min-width: 44px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.25rem;
+          text-align: center;
+          line-height: 40px;
         }
 
-        .ob1-spinner-determined-loader1 {
+        svg {
+          position: absolute;
+          display: none;
           top: 0;
-          left: 1rem;
-        }
-      }
+          right: 0;
+          width: 50px;
+          height: 50px;
+          transform: rotateY(-180deg) rotateZ(-90deg);
 
-      .step-position {
-        z-index: 3;
-        border: 1px solid $gray4;
-        border-radius: 100%;
-        min-height: 44px;
-        min-width: 44px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.25rem;
-        text-align: center;
-        line-height: 24px;
+          circle {
+            stroke-dasharray: 125px;
+            stroke-dashoffset: 0;
+            stroke-linecap: round;
+            stroke-width: 3px;
+            stroke: $orange2;
+            fill: none;
+
+            @keyframes countdown {
+              from {
+                stroke-dashoffset: 125px;
+              }
+              to {
+                stroke-dashoffset: 250px;
+              }
+            }
+          }
+        }
       }
 
       hr.separator {
@@ -67,13 +85,14 @@
     .step-content {
       li {
         color: $gray3;
+
         &::before {
           background-color: $gray3;
         }
       }
 
       strong {
-       color: $gray3;
+        color: $gray3;
       }
     }
 
@@ -91,6 +110,7 @@
       .step-content {
         li {
           color: $black;
+
           &::before {
             background-color: $orange2;
           }
@@ -108,13 +128,13 @@
         .step-position {
           border: none;
         }
-      }
 
-      .step-header {
-        .step-position {
-          font-weight: bold;
-          border-color: $gray3;
-          border-width: 2px;
+        svg {
+          display: initial;
+
+          circle {
+            animation: countdown 10s linear forwards;
+          }
         }
       }
 
@@ -129,6 +149,7 @@
         .step-position {
           border-color: $gray3;
         }
+
         hr.separator {
           display: initial;
           background-color: $gray3;
@@ -147,6 +168,7 @@
       .step-content {
         li {
           color: black;
+
           &::before {
             background-color: $orange2;
           }
