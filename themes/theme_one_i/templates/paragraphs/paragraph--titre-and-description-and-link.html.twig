@@ -79,7 +79,11 @@
                  aria-labelledby="serviceTitle-{{ paragraph.id() }}">
               <div class="accordion-card-body standard mw-100">
                 {{ content.field_accroche }}
-                <a href="{{ content.field_redirection_url[0]['#title'] }}" class="o-link-arrow text-decoration-none mt-1">{{ 'More information'|t }}</a>
+
+                {% if content.field_redirection_url[0]['#url']|length > 0 %}
+                  <a href="{{ content.field_redirection_url[0]['#url'] }}" class="o-link-arrow text-decoration-none mt-1">{{ 'More information'|t }}</a>
+                {% endif %}
+
               </div>
             </div>
           </div>
