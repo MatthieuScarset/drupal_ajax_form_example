@@ -68,14 +68,16 @@
  * @ingroup themeable
  */
 #}
-<article{{ attributes }}>
-  <div class="h4 mb-0">{{ field_title_limit }}</div>
-  {% if field_highlight_limit %}
-    <div class="text-gray3 mb-1 d-none d-lg-block">
-      {{ field_highlight_limit }}
-    </div>
-  {% endif %}
-  <span class="link_button">
-    <a href="{{ url }}" class="o-link-arrow" rel="bookmark">{{ "Read more"|t }}</a>
-  </span>
+<article{{ attributes.addClass('node-teaser-paragraph-module-blog') }}>
+  <a href="{{ url }}">
+    <div class="h4 mb-0">{{ field_title_limit }}</div>
+    {% if field_highlight_limit %}
+      <div class="text-gray3 mb-1 d-none d-lg-block">
+        {{ field_highlight_limit }}
+      </div>
+    {% endif %}
+    <span class="link_button">
+      <span class="o-link-arrow" >{{ "Read more"|t }}</span>
+    </span>
+  </a>
 </article>

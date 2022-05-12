@@ -8,4 +8,14 @@
       margin: auto;
     }
   }
+  a{
+    &:hover, &:focus{
+      .o-link-arrow{
+        color: $black;
+        text-decoration-color: $black;
+        text-decoration: underline;
+      }
+    }
+  }
+
 }

@@ -1,0 +1,11 @@
+.node-teaser-paragraph-module-blog{
+  a{
+    &:hover, &:focus{
+      .o-link-arrow{
+        color: $black;
+        text-decoration-color: $black;
+        text-decoration: underline;
+      }
+    }
+  }
+}
