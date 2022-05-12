@@ -1,0 +1,74 @@
+uuid: 93b6a9cc-7754-4f11-ad6c-e2fbf567c79d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.module_cross_sell_item.field_external_product
+    - field.field.paragraph.module_cross_sell_item.field_highlight
+    - field.field.paragraph.module_cross_sell_item.field_internal_product
+    - field.field.paragraph.module_cross_sell_item.field_key_points
+    - field.field.paragraph.module_cross_sell_item.field_name
+    - field.field.paragraph.module_cross_sell_item.field_redirection_url
+    - paragraphs.paragraphs_type.module_cross_sell_item
+  module:
+    - link
+id: paragraph.module_cross_sell_item.default
+targetEntityType: paragraph
+bundle: module_cross_sell_item
+mode: default
+content:
+  field_external_product:
+    type: boolean
+    label: hidden
+    settings:
+      format: boolean
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_highlight:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_internal_product:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: teaser_product_cross_sell
+      link: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_key_points:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_redirection_url:
+    type: link_separate
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+hidden: {  }

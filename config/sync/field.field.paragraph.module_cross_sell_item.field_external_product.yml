@@ -1,0 +1,23 @@
+uuid: c8875bab-8578-4432-a339-3ac888c0d774
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_external_product
+    - paragraphs.paragraphs_type.module_cross_sell_item
+id: paragraph.module_cross_sell_item.field_external_product
+field_name: field_external_product
+entity_type: paragraph
+bundle: module_cross_sell_item
+label: 'External Product'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

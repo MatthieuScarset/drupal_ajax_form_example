@@ -1,19 +1,17 @@
-uuid: 6f199e15-91e1-4f11-b41e-1126981ef208
+uuid: 49966891-6ab8-4887-9f53-fa73b781c2a5
 langcode: fr
 status: true
 dependencies:
   module:
-    - node
     - paragraphs
-id: paragraph.field_cross_sell
-field_name: field_cross_sell
+id: paragraph.field_external_product
+field_name: field_external_product
 entity_type: paragraph
-type: entity_reference
-settings:
-  target_type: node
+type: boolean
+settings: {  }
 module: core
 locked: false
-cardinality: 2
+cardinality: 1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

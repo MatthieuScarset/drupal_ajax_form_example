@@ -3,21 +3,23 @@ langcode: fr
 status: true
 dependencies:
   config:
-    - field.field.paragraph.module_cross_sell.field_cross_sell
+    - field.field.paragraph.module_cross_sell.field_offer_item
     - field.field.paragraph.module_cross_sell.field_title
     - field.field.paragraph.module_cross_sell.field_visual
     - paragraphs.paragraphs_type.module_cross_sell
+  module:
+    - entity_reference_revisions
 id: paragraph.module_cross_sell.default
 targetEntityType: paragraph
 bundle: module_cross_sell
 mode: default
 content:
-  field_cross_sell:
-    type: entity_reference_entity_view
+  field_offer_item:
+    type: entity_reference_revisions_entity_view
     label: hidden
     settings:
-      view_mode: teaser_product_cross_sell
-      link: false
+      view_mode: default
+      link: ''
     third_party_settings: {  }
     weight: 2
     region: content

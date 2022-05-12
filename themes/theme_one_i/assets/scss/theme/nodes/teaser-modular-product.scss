@@ -23,11 +23,5 @@
   @include media-breakpoint-up(md) {
     overflow-x: hidden;
     flex-wrap: wrap;
-
-    .teaser-product {
-      .btn {
-        max-width: 50% !important;
-      }
-    }
   }
 }

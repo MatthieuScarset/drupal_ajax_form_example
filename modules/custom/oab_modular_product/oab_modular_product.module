@@ -193,6 +193,7 @@ function oab_modular_product_field_widget_single_element_form_alter(array &$elem
   }
 
   if ($element['#paragraph_type'] === 'module_presentation') {
+//    dd($element);
     $element['subform']['field_for_who_title']['#states'] = [
       'visible' => [
         ':input[name="field_presentation[0][subform][field_enable_for_who][value]"]' => ['checked' => TRUE],
@@ -219,6 +220,37 @@ function oab_modular_product_field_widget_single_element_form_alter(array &$elem
         ':input[name="field_presentation[0][subform][field_media_type]"]' => ['value' => 'video'],
       ]
     ];
+  }
+
+  if ($element['#paragraph_type'] === 'module_cross_sell_item') {
+    $position = $element['subform']['#parents'][4];
+
+    $element['subform']['field_internal_product']['#states'] = [
+      'visible' => [
+        ':input[name="field_cross_sell[0][subform][field_offer_item]['.$position.'][subform][field_external_product][value]"]' => ['checked' => FALSE],
+      ]
+    ];
+
+    $element['subform']['external_product'] = [
+      '#type' => 'fieldset',
+      '#title' => t('External Offer'),
+      '#states' => [
+        'visible' => [
+          ':input[name="field_cross_sell[0][subform][field_offer_item]['.$position.'][subform][field_external_product][value]"]' => ['checked' => TRUE],
+        ]
+      ],
+      '#weight' => 500,
+      'field_name' => $element['subform']['field_name'],
+      'field_highlight' => $element['subform']['field_highlight'],
+      'field_redirection_url' => $element['subform']['field_redirection_url'],
+      'field_key_points' => $element['subform']['field_key_points']
+
+    ];
+
+    unset($element['subform']['field_name']);
+    unset($element['subform']['field_highlight']);
+    unset($element['subform']['field_redirection_url']);
+    unset($element['subform']['field_key_points']);
   }
 }
 
