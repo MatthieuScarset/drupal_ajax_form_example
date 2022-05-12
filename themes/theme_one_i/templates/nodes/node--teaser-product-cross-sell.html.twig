@@ -1,17 +1,19 @@
 <div class="row flex-column mx-1 my-0 p-1 bg-white teaser-product">
-  <div class="col-12 ml-1 mt-1 small bg-warning font-weight-bold teaser-product-category">
+  <div class="col-12 ml-0 mt-1 ml-md-1 small ob1-tag ob1-tag-primary teaser-product-category">
     {{ content.field_product_category }}
   </div>
-  <div class="col-12 lead font-weight-bold">
+  <div class="col-12 pl-0 pl-md-1 lead font-weight-bold">
     {{ content.field_product_name }}
   </div>
-  <h4 class="col-12 mb-2 text-break">
+  <h4 class="col-12 px-0 px-md-1 mb-2 text-break">
     {{ content.field_teaser }}
   </h4>
   <div class="col-12 d-none d-md-block">
     {{ content.field_key_points }}
   </div>
-  <a class="col-12 col-md-5 mb-1 mt-auto mb-md-2 ml-md-1 btn btn-primary" href="{{ path('entity.node.canonical', {'node': node.id}) }}">
-    {% trans %}See offer{% endtrans %}
-  </a>
+  <div class="col-12 col-md-6 mb-1 mt-auto mb-md-2 px-0 px-md-1">
+    <a href="{{ path('entity.node.canonical', {'node': node.id}) }}" class="btn btn-primary px-1 w-100">
+      {% trans %}See offer{% endtrans %}
+    </a>
+  </div>
 </div>

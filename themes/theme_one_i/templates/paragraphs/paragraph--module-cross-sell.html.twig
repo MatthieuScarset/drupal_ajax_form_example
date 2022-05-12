@@ -3,13 +3,13 @@
     <div class="py-md-5 py-3 container-fluid site-width">
     {% block content %}
       <div class="row">
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-xl-3">
           <div class="row">
-            <h2 class="col-12 pl-0 ml-1">{{ content.field_title }}</h2>
-            <div class="image-cross-sell col-12 d-none d-md-block pl-0 ml--3">{{ content.field_visual }}</div>
+            <h2 class="col-12 col-xl-10 pl-0 ml-1">{{ content.field_title }}</h2>
+            <div class="image-cross-sell col-12 d-none d-xl-block pl-0 ml--3">{{ content.field_visual }}</div>
           </div>
         </div>
-        <div class="col-12 col-md-8">{{ content.field_cross_sell }}</div>
+        <div class="col-12 offset-xl-1 col-xl-8">{{ content.field_offer_item }}</div>
       </div>
     {% endblock %}
     </div>
