@@ -43,7 +43,8 @@ function oab_modular_product_field_widget_single_element_form_alter(array &$elem
     'module_blog',
     'detail_gamme_items_offres',
     'module_detail_gamme',
-    'module_detail_gamme_items'
+    'module_detail_gamme_items',
+    'module_customer_space'
   ];
 
   $sous_modules = [
