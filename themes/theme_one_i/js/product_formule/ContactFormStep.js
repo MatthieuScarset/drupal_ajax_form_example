@@ -19,15 +19,24 @@ class ContactFormStep {
       return false;
     }
 
-    const fieldData = this.$fieldConfigs[id];
+    let config = Object.values(this.$fieldConfigs[id].emptyConfigs).find((config) => {
+      return config.inputs && Object.values(config.inputs).find((input) => input === id);
+    });
+    
+    if (!config) {
+      config = this.$fieldConfigs[id].emptyConfigs.default;
+    }
 
-    const title = (new DOMParser().parseFromString(fieldData.noResultTitle, "text/html")).documentElement.textContent;
+
+    // const fieldData = this.$fieldConfigs[id];
+
+    const title = (new DOMParser().parseFromString(config.no_result_title, "text/html")).documentElement.textContent;
     this.$root.querySelector('[data-field=no-result-title]').innerHTML =
-      Utils.replaceToken(title, {answer: fieldData.options[this.$parent.getFieldValue(id)] || ""});
+      Utils.replaceToken(title, {answer: this.$fieldConfigs[id].options[this.$parent.getFieldValue(id)] || ""});
 
-    this.$root.querySelector('[data-field=no-result-sentence]').innerHTML = fieldData.noResultSentence;
-    this.$root.querySelector('[data-field=no-result-link]').setAttribute('href', fieldData.buttonLink);
-    this.$root.querySelector('[data-field=no-result-link]').innerHTML = fieldData.buttonText;
+    this.$root.querySelector('[data-field=no-result-sentence]').innerHTML = config.no_result_sentence;
+    this.$root.querySelector('[data-field=no-result-link]').setAttribute('href', config.button_link);
+    this.$root.querySelector('[data-field=no-result-link]').innerHTML = config.button_text;
 
     return true;
   }

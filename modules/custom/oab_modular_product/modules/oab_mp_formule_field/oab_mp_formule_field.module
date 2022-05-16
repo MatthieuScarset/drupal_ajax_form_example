@@ -70,19 +70,19 @@ function oab_mp_formule_field_preprocess_formule_field(&$variables) {
 
 
   $third_party_settings = $formule_field->getThirdPartySettings('oab_mp_formule_field');
-  $empty_config = $third_party_settings['empty_config'] ?? [];
-
+  $empty_configs = $third_party_settings['empty_configs'] ?? [];
 
   $token = Drupal::token();
-//dd($token->getInfo()['tokens']);
+  foreach ($empty_configs as $key => &$empty_config) {
+    $empty_config['no_result_title'] = $token->replace($empty_config['no_result_title'] ?? "");
+  }
+
+  //dd($token->getInfo()['tokens']);
   $variables['#attached']['drupalSettings']['formuleField'][$formule_field->id()] = [
     'label' => $formule_field->label(),
     'displayLabel' => $formule_field->getDisplayLabel(),
     'resultSentence' => $formule_field->getSentence(),
-    'noResultTitle' => $token->replace($empty_config['no_result_title'] ?? ""),
-    'buttonText' => $empty_config['button_text'] ?? "",
-    'buttonLink' => $empty_config['button_link'] ?? "",
-    'noResultSentence' => $empty_config['no_result_sentence'] ?? "",
+    'emptyConfigs' => $empty_configs,
     'options' => $formule_field->getChoices()
   ];
 

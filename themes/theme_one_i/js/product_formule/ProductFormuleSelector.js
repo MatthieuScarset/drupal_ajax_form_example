@@ -81,7 +81,6 @@ class ProductFormuleSelector {
             this._toResult();
           }
         } else {
-          console.log(this._getFieldValues());
           // Si on a aucun résultat, on redirige vers le formulaire de contact
           this._toContactForm(Object.keys(this._getFieldValues()).pop());
         }

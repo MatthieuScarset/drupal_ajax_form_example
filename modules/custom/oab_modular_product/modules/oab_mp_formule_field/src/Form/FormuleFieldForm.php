@@ -136,47 +136,145 @@ class FormuleFieldForm extends EntityForm {
     $form['group_empty_config'] = [
       '#type' => 'details',
       '#title' => t('Empty configuration'),
-      '#description' => t("Configuration if no package available"),
-      '#tree' => true,
-      '#group' => "tabs"
+      '#description' => t("Configuration if no available package"),
+      '#group' => "tabs",
+      'empty_configs' => [
+        '#type' => 'fieldgroup',
+        '#tree' => true,
+        '#prefix' => '<div id="group-empty-config">',
+        '#suffix' => '</div>',
+        'add_more_button' => [
+          '#type' => 'submit',
+          '#value' => $this->t('Add one more'),
+          '#weight' => 100,
+          '#submit' => [
+            '::addEmptyConfig'
+          ],
+          '#ajax' => [
+            'callback' => '::addEmptyConfigCallback',
+            'wrapper' => 'group-empty-config'
+          ]
+        ]
+      ],
     ];
 
     $third_party_settings = $formule_field->getThirdPartySettings('oab_mp_formule_field');
-    $empty_config = $third_party_settings['empty_config'] ?? [];
+
+//    $empty_config_inputs =
 
 
-    $form['group_empty_config']['no_result_title'] = [
-      '#type' => 'textarea',
-      '#title' => $this->t("No result title"),
-      '#description' => $this->t("Title of the no-result page. Use %answer to print the user answer. "
-              . "Use [formule-field:color:orange] and [formule-field:color:normal] pour mettre le texte en orange",
-        [
-          '%answer' => "{answer}"
-        ]),
-      '#default_value' => $empty_config['no_result_title'] ?? ""
-    ];
+    if (is_array($third_party_settings['empty_configs'])) {
 
-    $form['group_empty_config']['no_result_sentence'] = [
-      '#type' => 'textarea',
-      '#title' => $this->t("No result sentence"),
-      '#description' => $this->t("Display just under the title on no-result page"),
-      '#default_value' => $empty_config['no_result_sentence'] ?? ""
-    ];
+      $empty_configs = array_merge(
+        $form_state->getValue('empty_configs') ?? [],
+        $third_party_settings['empty_configs']
+      );
+      if (isset($empty_configs['add_more_button'])) {
+        unset($empty_configs['add_more_button']);
+      }
 
-    $form['group_empty_config']['button_text'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t("Button text"),
-      '#default_value' => $empty_config['button_text'] ?? ""
-    ];
+      foreach ($empty_configs as $config_id => $empty_config) {
 
-    $form['group_empty_config']['button_link'] = [
-      '#type' => 'url',
-      '#title' => $this->t("Button link"),
-      '#default_value' => $empty_config['button_link'] ?? ""
-    ];
+        $form['group_empty_config']['empty_configs'][$config_id] = $this->generateEmptyConfig(
+          $empty_config + ['name' => $config_id === "default" ? "Default" : "Config $config_id"],
+          $formule_field->getChoices()
+        );
+
+      }
+
+      if ($form_state->has('need_empty_config')) {
+        $index_new_item = count($empty_configs);
+
+        // Pour être sur que l'index n'existe pas déjà
+        while (isset($empty_configs["config_$index_new_item"])) {
+          $index_new_item++;
+        }
+
+        $form['group_empty_config']['empty_configs']["config_$index_new_item"]
+          = $this->generateEmptyConfig(
+            ['name' => "Config $index_new_item"],
+            $formule_field->getChoices()
+        );
+      }
+
+    } else {
+      $form['group_empty_config']['empty_configs']['default'] = $this->generateEmptyConfig(['name' => "Default"], $formule_field->getChoices());
+    }
 
 
     return $form;
+  }
+
+  /**
+   * Callback for both ajax-enabled buttons.
+   *
+   * Selects and returns the fieldset with the names in it.
+   */
+  public function addEmptyConfigCallback(array &$form, FormStateInterface $form_state) {
+    return $form['group_empty_config']['empty_configs'];
+  }
+
+  public function addEmptyConfig(array &$form, FormStateInterface $form_state) {
+    $form_state->set('need_empty_config', true);
+    $form_state
+      ->setRebuild();
+  }
+
+
+  private function generateEmptyConfig(array $values, array $choices): array {
+
+    $detail = [
+      '#type' => "details",
+      "#title" => $values['name']
+    ];
+
+    $detail['name'] = [
+      '#type' => 'hidden',
+      '#value' => $values['name']
+    ];
+
+    $detail['no_result_title'] = [
+      '#type' => 'textarea',
+      '#title' => $this->t("No result title"),
+      '#description' => $this->t("Title of the no-result page. Use %answer to print the user answer. "
+        . "Use [formule-field:color:orange] and [formule-field:color:normal] pour mettre le texte en orange",
+        [
+          '%answer' => "{answer}"
+        ]),
+      '#default_value' => $values['no_result_title'] ?? ""
+    ];
+
+    $detail['no_result_sentence'] = [
+      '#type' => 'textarea',
+      '#title' => $this->t("No result sentence"),
+      '#description' => $this->t("Display just under the title on no-result page"),
+      '#default_value' => $values['no_result_sentence'] ?? ""
+    ];
+
+    $detail['button_text'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t("Button text"),
+      '#default_value' => $values['button_text'] ?? ""
+    ];
+
+    $detail['button_link'] = [
+      '#type' => 'url',
+      '#title' => $this->t("Button link"),
+      '#default_value' => $values['button_link'] ?? ""
+    ];
+
+    if ($values['name'] !== 'Default') {
+      $detail['inputs'] = [
+        '#type' => 'checkboxes',
+        '#title' => "Inputs",
+        '#description' => "Select inputs that emtpy config applies to",
+        '#options' => $choices,
+        '#default_value' => $values['inputs']
+      ];
+    }
+
+
+    return $detail;
   }
 
 
@@ -198,8 +296,18 @@ class FormuleFieldForm extends EntityForm {
     /** @var \Drupal\oab_mp_formule_field\Entity\FormuleField $formule_field */
     $formule_field = $this->entity;
 
+    $empty_configs = $form_state->getValue('empty_configs');
+    foreach ($empty_configs as $key => $empty_config) {
+      if (empty($empty_config['no_result_title']) && empty($empty_config['no_result_sentence'])) {
+        unset($empty_configs[$key]);
+      } elseif (isset($empty_config['inputs'])) {
+
+        $empty_configs[$key]['inputs'] = array_filter($empty_config['inputs']);
+      }
+    }
+
     // La flemme de créer les fields dans la conf....
-    $formule_field->setThirdPartySetting('oab_mp_formule_field', 'empty_config', $form_state->getValue('group_empty_config'));
+    $formule_field->setThirdPartySetting('oab_mp_formule_field', 'empty_configs', $empty_configs);
 
     $status = $formule_field->save();
 
@@ -226,7 +334,11 @@ class FormuleFieldForm extends EntityForm {
   }
 
 
-  private function getChoicesAsArray(string $input): array {
+  private function getChoicesAsArray(string|array $input): array {
+    if (is_array($input)) {
+      return $input;
+    }
+
     $choices = [];
     $choice_values = explode(PHP_EOL, $input);
     if ($choice_values != false) {
