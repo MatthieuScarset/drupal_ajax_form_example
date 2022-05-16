@@ -7,6 +7,7 @@
 
 
 use Drupal\Core\Database\Database;
+use Drupal\taxonomy\Entity\Term;
 
 /**
  * clean les options du menu déroulant des filtres exposés
@@ -16,11 +17,11 @@ use Drupal\Core\Database\Database;
  *
  * @return array
  */
-function clean_exposed_filters_by_language($options, $txt_all): array {
+function clean_exposed_filters_by_language(array $options, ?string $txt_all = null): array {
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
     foreach ($options as $key => $value) {
         if ($key != 'All') {
-            $term = \Drupal\taxonomy\Entity\Term::load($key);
+            $term = Term::load($key);
             if (isset($term) && $term != null) {
                 $lang = $term->language();
                 if ($lang->getId() != $current_language) {
@@ -28,7 +29,9 @@ function clean_exposed_filters_by_language($options, $txt_all): array {
                 }
             }
         } else {
+          if ($txt_all !== null) {
             $options['All'] = t($txt_all);
+          }
         }
     }
     return $options;

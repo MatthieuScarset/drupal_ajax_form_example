@@ -459,7 +459,8 @@ a.link-subhomes:hover .encart-image.subhome-image {
 .view-subhomes .form-group{
   margin-bottom: 40px;
 }
-.view-subhomes .subhomes-filterbar select{
+.view-subhomes .subhomes-filterbar select,
+.view-subhomes-archive .subhomes-filterbar select{
   margin-right: 20px;
 }
 

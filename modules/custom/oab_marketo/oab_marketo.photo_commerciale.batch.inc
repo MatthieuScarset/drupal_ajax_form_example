@@ -34,6 +34,15 @@ function oab_marketo_importPhotoCommerciale($file_name, &$context) {
   }
 
   $file = fopen($final_file_name, 'r');
+
+  if ($file === false) {
+    Drupal::logger('oab_import')->warning(t('Cannot open %file', [
+      '%file' => $final_file_name
+    ]));
+    $context['finished'] = true;
+    return;
+  }
+
   if (isset($context['sandbox']['file_position'])) {
     fseek($file, $context['sandbox']['file_position']);
   } else {

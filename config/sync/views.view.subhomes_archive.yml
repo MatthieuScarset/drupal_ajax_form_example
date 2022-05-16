@@ -341,7 +341,7 @@ display:
             operator: field_solution_target_id_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: field_solution_target_id
+            identifier: solutions
             required: false
             remember: false
             multiple: false
@@ -389,12 +389,12 @@ display:
           entity_type: node
           plugin_id: node_year
           operator: '='
-          value: '2018'
+          value: ''
           group: 1
           exposed: true
           expose:
             operator_id: node_year_op
-            label: 'Year '
+            label: 'Year'
             description: ''
             use_operator: false
             operator: node_year_op
@@ -419,7 +419,7 @@ display:
               dvi: '0'
               chief_editor_hub: '0'
               webform_business_analyst: '0'
-            placeholder: 'toute les années'
+            placeholder: ''
             min_placeholder: ''
             max_placeholder: ''
           is_grouped: false
@@ -444,12 +444,12 @@ display:
           entity_type: node
           plugin_id: node_month
           operator: '='
-          value: '01'
+          value: ''
           group: 1
           exposed: true
           expose:
             operator_id: node_month_op
-            label: month
+            label: Month
             description: ''
             use_operator: false
             operator: node_month_op
@@ -689,7 +689,7 @@ display:
           entity_type: node
           plugin_id: node_year
           operator: '='
-          value: '2018'
+          value: ''
           group: 1
           exposed: true
           expose:
@@ -744,7 +744,7 @@ display:
           entity_type: node
           plugin_id: node_month
           operator: '='
-          value: '01'
+          value: ''
           group: 1
           exposed: true
           expose:
