@@ -27,11 +27,23 @@ class OabCustomSlider {
     const elem = this._getFirstHidden(direction);
 
     if (typeof elem !== 'undefined') {
-      elem.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'nearest'
-      });
+
+      if (elem.classList.contains('item-detail-offre')) {
+        this.$width = elem.getBoundingClientRect().width;
+        if (direction === 'left') {
+          $(this.$container).animate({scrollLeft : "-="+this.$width}, 800);
+        }
+        else {
+          $(this.$container).animate({scrollLeft : "+="+this.$width}, 800);
+        }
+      }
+      else {
+        elem.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'nearest'
+        });
+      }
     }
   }
 

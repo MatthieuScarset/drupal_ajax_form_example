@@ -1,6 +1,9 @@
 .offres-gamme {
   .call-to-action {
-    .field > div {
+    margin: auto;
+    margin-right: 0 !important;
+
+    > div.cta-two-1 {
       margin-bottom: 0.75rem;
     }
 
@@ -8,16 +11,16 @@
       &.o-link-arrow {
         text-decoration: none;
         margin-right: 1rem;
-        padding-top: 0;
-        padding-bottom: 0;
-        @include media-breakpoint-up(md) {
-          margin-top: 1rem;
+        padding: 0.8125rem 0;
+        @include media-breakpoint-up(md){
+          padding: 0;
         }
       }
 
       &.icon-Redo {
-        @include media-breakpoint-up(md) {
-          margin-top: 1rem;
+        padding: 0.8125rem 0;
+        @include media-breakpoint-up(md){
+          padding: 0;
         }
       }
 
