@@ -13,9 +13,11 @@
           <div class="col-12 pb-md-1">
             <h4 class="font-weight-bold">{{ content.field_highlight }}</h4>
           </div>
-          <div class="col-12">
-            <a class="o-link-arrow no-decoration" href="{{ content.field_testimonial_link.0["#url"] }}">{{ "Read the customer story"|t }}</a>
-          </div>
+          {% if content.field_testimonial_link.0["#url"] %}
+            <div class="col-12">
+              <a class="o-link-arrow no-decoration" href="{{ content.field_testimonial_link.0["#url"] }}">{{ "Read the customer story"|t }}</a>
+            </div>
+          {% endif %}
         </div>
     {% if content.field_video.0 %}
       </div>
@@ -28,9 +30,11 @@
         <div class="col-12 pb-md-1">
           <h4 class="font-weight-bold">{{ content.field_highlight }}</h4>
         </div>
-        <div class="col-12">
-          <a class="o-link-arrow no-decoration" href="{{ content.field_testimonial_link.0["#url"] }}">{{ "Read the customer story"|t }}</a>
-        </div>
+        {% if content.field_testimonial_link.0["#url"] %}
+          <div class="col-12">
+            <a class="o-link-arrow no-decoration" href="{{ content.field_testimonial_link.0["#url"] }}">{{ "Read the customer story"|t }}</a>
+          </div>
+        {% endif %}
       </div>
   {% endif %}
 {% endblock %}
