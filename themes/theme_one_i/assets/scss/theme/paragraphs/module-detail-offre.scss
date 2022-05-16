@@ -35,6 +35,12 @@
           padding-top: 8.125rem;
           background: linear-gradient(rgba(255, 255, 255, 0) 20%, white, white);
         }
+
+        span.text-voir-tout {
+          @media (max-width: 735px) {
+            display: none;
+          }
+        }
       }
     }
 
@@ -47,6 +53,12 @@
           position: absolute;
           max-width: 88%;
           padding-right: 2rem;
+        }
+
+        span.text-voir-tout {
+          @media (max-width: 735px) {
+            display: none;
+          }
         }
       }
     }

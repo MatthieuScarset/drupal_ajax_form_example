@@ -10,7 +10,7 @@ class OabDetailOffre {
 
   _toggleItems = (event) => {
 
-    if (window.matchMedia("(max-width: 736px)").matches) {
+    if (window.matchMedia("(max-width: 767px)").matches) {
       const is_initially_open = event.currentTarget.closest('.detail-offre-item').classList.contains('item-open');
 
       this.$offres.forEach((offre) => {
@@ -20,8 +20,8 @@ class OabDetailOffre {
         offre.querySelector('button.see-more').classList.remove('up');
         offre.querySelector('button.see-more').classList.add('down');
 
-        offre.querySelector('button.see-more .text-voir-tout').classList.remove('d-none');
-        offre.querySelector('button.see-more .text-voir-moins').classList.add('d-none');
+        offre.querySelector('button.see-more .text-voir-detail').classList.remove('d-none');
+        offre.querySelector('button.see-more .text-masquer-detail').classList.add('d-none');
       });
 
       if (!is_initially_open) {
@@ -32,12 +32,12 @@ class OabDetailOffre {
       }
 
       if (event.currentTarget.classList.contains('up')) {
-       event.currentTarget.querySelector('button.see-more .text-voir-tout').classList.add('d-none');
-       event.currentTarget.querySelector('button.see-more .text-voir-moins').classList.remove('d-none');
+       event.currentTarget.querySelector('button.see-more .text-voir-detail').classList.add('d-none');
+       event.currentTarget.querySelector('button.see-more .text-masquer-detail').classList.remove('d-none');
       }
       else {
-        event.currentTarget.querySelector('button.see-more .text-voir-tout').classList.remove('d-none');
-        event.currentTarget.querySelector('button.see-more .text-voir-moins').classList.add('d-none');
+        event.currentTarget.querySelector('button.see-more .text-voir-detail').classList.remove('d-none');
+        event.currentTarget.querySelector('button.see-more .text-masquer-detail').classList.add('d-none');
       }
     }
 

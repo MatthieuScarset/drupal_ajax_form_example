@@ -1,0 +1,10 @@
+{% for item in items %}
+  {% if 1 == items|length %}
+    {{ item }}
+  {% else %}
+    <div class="cta-two-{{loop.index}}">
+      {{ item }}
+    </div>
+  {% endif %}
+{% endfor %}
+
