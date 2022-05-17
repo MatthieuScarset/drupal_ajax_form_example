@@ -301,6 +301,9 @@ function oab_modular_product_entity_bundle_field_info_alter(&$fields, EntityType
   if ($entity_type->id() === "paragraph" && $bundle === "module_steps") {
     $fields['field_step']->addConstraint('ModularProductMinSteps');
   }
+  if ($entity_type->id() === "paragraph" && $bundle === "module_customer_space") {
+    $fields['field_item']->addConstraint('ModularProductMinSteps');
+  }
 
   if ($entity_type->id() === "node" && $bundle === "modular_product") {
     if (isset($fields['field_modules'])) {
@@ -407,4 +410,12 @@ function oab_modular_product_preprocess_paragraph__module_presentation(&$variabl
   /** @var Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   $variables['parent_node_title'] = $paragraph->getParentEntity()?->getTitle();
+}
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function oab_modular_product_preprocess_paragraph__module_customer_space(&$variables) {
+  /** @var OabModularProductService $conf_modular_product */
+  $conf_modular_product = \Drupal::service('oab_modular_product.settings');
+  $variables['module_title'] = $conf_modular_product->getCustomerSpaceModuleTitle();
 }

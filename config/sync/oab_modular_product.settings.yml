@@ -15,3 +15,5 @@ mp:
     title_long: '150'
   descriptions:
     description_long: '250'
+modules_titles:
+  module_customer_space: 'Customer space'

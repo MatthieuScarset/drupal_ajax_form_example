@@ -9,16 +9,16 @@
 ]
 %}
 {% block paragraph %}
-  <div {{ attributes.addClass(classes) }}>
+  <div id="customer-space" {{ attributes.addClass(classes) }}>
     <div class="container-fluid site-width">
-      <div class="row w-100 justify-content-between">
-        <div class="col-12 col-lg-12">
-          <div class="small font-weight-bold text-gray3">{{ "Customer space"|t }}</div>
+      <div class="row">
+        <div class="col-12 pr-0 pr-md-1">
+          <div class="small font-weight-bold text-gray3">{{ module_title|t }}</div>
           <h2 class="mb-1 pb-0 no-signature">{{ content.field_title }}</h2>
           <div class="p-0 lead font-weight-bold highlight mb-1 mb-md-2">{{ content.field_highlight }}</div>
           <div class=" ">{{ content.field_call_to_action_buton }}</div>
-          <div class=" ">{{ content.field_call_to_action_link_simple }}</div>
-          <div class=" ">{{ content.field_item }}</div>
+          <div class="mt-0 mt-md-1">{{ content.field_call_to_action_link_simple }}</div>
+          <div class="mt-1 mt-md-4">{{ content.field_item }}</div>
         </div>
       </div>
     </div>
