@@ -11,19 +11,23 @@ class OabModularProductService {
   ) { }
 
   public function getShortTitleMaxCharacter(): mixed {
-    return $this->get("titles.title_short");
+    return $this->get("mp.titles.title_short");
   }
 
   public function getLongTitleMaxCharacter(): mixed {
-    return $this->get("titles.title_long");
+    return $this->get("mp.titles.title_long");
   }
 
   public function getLongDescriptionMaxCharacter(): mixed {
-    return $this->get("descriptions.description_long");
+    return $this->get("mp.descriptions.description_long");
+  }
+
+  public function getCustomerSpaceModuleTitle(): string {
+    return $this->get("modules_titles.module_customer_space");
   }
 
   private function get(string $item): mixed {
-    return $this->config->get("mp.$item") ?? [];
+    return $this->config->get($item) ?? [];
   }
 }
 

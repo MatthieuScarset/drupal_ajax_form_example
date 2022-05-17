@@ -19,6 +19,7 @@ class ModularProductOrderModuleValidator extends ConstraintValidator {
 //liste de modules optionnels de la page produit dans le bon ordre
     $default_order = [
       "module_services",
+      "module_customer_space",
       "module_steps",
       "module_exemples",
       "module_benefits",

@@ -49,6 +49,8 @@ class PageMenuModularProductBlock extends BlockBase {
   public function build(): array {
     $block = [];
     $node = $this->getContextValue('node');
+    /** @var OabModularProductService $conf_modular_product */
+    $conf_modular_product = \Drupal::service('oab_modular_product.settings');
 
     // PRESENTATION
     $paragraphEntity = Paragraph::load($node->field_presentation->target_id ?? 0);
@@ -79,6 +81,7 @@ class PageMenuModularProductBlock extends BlockBase {
       }
     }
 
+    $variables['module_title'] = $conf_modular_product->getCustomerSpaceModuleTitle();
     //MODULES
     /** @var \Drupal\Core\Field\FieldItemList $module */
     foreach ( $node->field_modules as $module ) {
@@ -88,6 +91,12 @@ class PageMenuModularProductBlock extends BlockBase {
           $block['children_items'][] = [
             'id' => 'services',
             'label' => $this->t('Tailor-made services'),
+          ];
+        }
+        if($paragraphModuleEntity->bundle() == 'module_customer_space') {
+          $block['children_items'][] = [
+            'id' => 'customer-space',
+            'label' => $this->t($conf_modular_product->getCustomerSpaceModuleTitle()),
           ];
         }
         if($paragraphModuleEntity->bundle() == 'module_exemples') {
