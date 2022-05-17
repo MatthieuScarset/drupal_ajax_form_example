@@ -75,17 +75,28 @@ class ModularProductSettingsForm extends ConfigFormBase {
         '#step' => 5
       ];
 
+    $form['modules_titles'] = [
+      '#type' => 'details',
+      '#tree' => TRUE,
+      '#open' => false,
+      '#title' => t('Modules titles'),
+      '#description'    => t("Config modules titles "),
+      '#group' => 'tabs'
+    ];
+    $form['modules_titles']['module_customer_space'] = [
+      '#type' => 'textfield',
+      '#title' => t('Customer space module title'),
+      '#default_value' => $conf->get('modules_titles.module_customer_space') ?? 'Customer space',
+    ];
+
     return parent::buildForm($form, $form_state);
   }
 
   public function submitForm(array &$form, FormStateInterface $form_state) {
-
     $config = $this->config($this->getConfigName());
-
     $config->set('mp', $form_state->getValue('mp', []));
-
+    $config->set('modules_titles', $form_state->getValue('modules_titles', []));
     $config->save();
-
     parent::submitForm($form, $form_state);
   }
 }

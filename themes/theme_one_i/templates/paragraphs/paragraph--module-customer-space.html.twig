@@ -1,0 +1,27 @@
+
+{%
+  set classes = [
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  not paragraph.isPublished() ? 'paragraph--unpublished',
+  'py-2 py-md-5'
+]
+%}
+{% block paragraph %}
+  <div id="customer-space" {{ attributes.addClass(classes) }}>
+    <div class="container-fluid site-width">
+      <div class="row">
+        <div class="col-12 pr-0 pr-md-1">
+          <div class="small font-weight-bold text-gray3">{{ module_title|t }}</div>
+          <h2 class="mb-1 pb-0 no-signature">{{ content.field_title }}</h2>
+          <div class="p-0 lead font-weight-bold highlight mb-1 mb-md-2">{{ content.field_highlight }}</div>
+          <div class=" ">{{ content.field_call_to_action_buton }}</div>
+          <div class="mt-0 mt-md-1">{{ content.field_call_to_action_link_simple }}</div>
+          <div class="mt-1 mt-md-4">{{ content.field_item }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+{% endblock paragraph %}

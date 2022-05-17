@@ -1,0 +1,68 @@
+uuid: c8646400-cb31-4e04-a20e-80cf95b938b2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.module_customer_space.field_call_to_action_buton
+    - field.field.paragraph.module_customer_space.field_call_to_action_link_simple
+    - field.field.paragraph.module_customer_space.field_highlight
+    - field.field.paragraph.module_customer_space.field_item
+    - field.field.paragraph.module_customer_space.field_title
+    - paragraphs.paragraphs_type.module_customer_space
+  module:
+    - entity_reference_revisions
+    - link
+id: paragraph.module_customer_space.default
+targetEntityType: paragraph
+bundle: module_customer_space
+mode: default
+content:
+  field_call_to_action_buton:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_call_to_action_link_simple:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_highlight:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_item:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

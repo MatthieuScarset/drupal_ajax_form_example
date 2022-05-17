@@ -1,0 +1,10 @@
+uuid: 1c640ba9-81e9-4485-867c-fc01ab5df51f
+langcode: en
+status: true
+dependencies: {  }
+id: module_customer_space
+label: '[MP] Module Customer space'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }
