@@ -304,6 +304,9 @@ function oab_modular_product_entity_bundle_field_info_alter(&$fields, EntityType
   if ($entity_type->id() === "paragraph" && $bundle === "module_customer_space") {
     $fields['field_item']->addConstraint('ModularProductMinSteps');
   }
+  if ($entity_type->id() === "paragraph" && $bundle === "module_benefits") {
+    $fields['field_item']->addConstraint('ModularProductMinSteps');
+  }
 
   if ($entity_type->id() === "node" && $bundle === "modular_product") {
     if (isset($fields['field_modules'])) {
