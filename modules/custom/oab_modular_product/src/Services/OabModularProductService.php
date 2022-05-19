@@ -22,31 +22,31 @@ class OabModularProductService {
     return $this->get("mp.descriptions.description_long");
   }
 
-  public function getPresentationModuleTitle(): string {
+  public function getPresentationModuleTitle(): mixed {
     return $this->get("modules_titles.module_presentation");
   }
 
-  public function getOfferDetailTitle(): string {
+  public function getOfferDetailTitle(): mixed {
     return $this->get("modules_titles.module_detail_offre");
   }
 
-  public function getDetailGammeModuleTitle(): string {
+  public function getDetailGammeModuleTitle(): mixed {
     return $this->get("modules_titles.module_detail_gamme");
   }
 
-  public function getServicesModuleTitle(): string {
+  public function getServicesModuleTitle(): mixed {
     return $this->get("modules_titles.module_services");
   }
 
-  public function getCustomerSpaceModuleTitle(): string {
+  public function getCustomerSpaceModuleTitle(): mixed {
     return $this->get("modules_titles.module_customer_space");
   }
 
-  public function getExamplesModuleTitle(): string {
+  public function getExamplesModuleTitle(): mixed {
     return $this->get("modules_titles.module_exemples");
   }
 
-  public function getTestimonialModuleTitle(): string {
+  public function getTestimonialModuleTitle(): mixed {
     return $this->get("modules_titles.module_testimonial");
   }
 
