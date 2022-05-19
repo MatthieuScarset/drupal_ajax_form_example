@@ -299,13 +299,13 @@ function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, 
  */
 function oab_modular_product_entity_bundle_field_info_alter(&$fields, EntityTypeInterface $entity_type, $bundle) {
   if ($entity_type->id() === "paragraph" && $bundle === "module_steps") {
-    $fields['field_step']->addConstraint('ModularProductMinSteps');
+    $fields['field_step']->addConstraint('ModularProductMinItems');
   }
   if ($entity_type->id() === "paragraph" && $bundle === "module_customer_space") {
-    $fields['field_item']->addConstraint('ModularProductMinSteps');
+    $fields['field_item']->addConstraint('ModularProductMinItems');
   }
   if ($entity_type->id() === "paragraph" && $bundle === "module_benefits") {
-    $fields['field_item']->addConstraint('ModularProductMinSteps');
+    $fields['field_item']->addConstraint('ModularProductMinItems');
   }
 
   if ($entity_type->id() === "node" && $bundle === "modular_product") {

@@ -9,7 +9,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 /**
  * Validates the UniqueInteger constraint.
  */
-class ModularProductMinStepsValidator extends ConstraintValidator {
+class ModularProductMinItemsValidator extends ConstraintValidator {
 
   /**
    * {@inheritdoc}
