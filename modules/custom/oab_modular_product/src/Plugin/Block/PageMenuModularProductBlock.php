@@ -12,6 +12,7 @@ use Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\taxonomy\Entity\Term;
 use Symfony\Contracts\Translation\TranslatorTrait;
+use Drupal\oab_modular_product\Services;
 
 /**
  *
@@ -58,7 +59,7 @@ class PageMenuModularProductBlock extends BlockBase {
       if ($paragraphEntity->bundle() == 'module_presentation') {
         $block['children_items'][] = [
           'id' => 'presentation',
-          'label' => $this->t('Presentation'),
+          'label' => $this->t($conf_modular_product->getPresentationModuleTitle()),
         ];
       }
     }
@@ -70,13 +71,13 @@ class PageMenuModularProductBlock extends BlockBase {
       if($paragraphEntity->bundle() == 'module_detail_offre') {
         $block['children_items'][] = [
           'id' => 'detail-offre',
-          'label' => $this->t('Offer Detail'),
+          'label' => $this->t($conf_modular_product->getOfferDetailTitle()),
         ];
       }
       if($paragraphEntity->bundle() == 'module_detail_gamme') {
         $block['children_items'][] = [
           'id' => 'detail-gamme',
-          'label' => $this->t('Detail of the range'),
+          'label' => $this->t($conf_modular_product->getDetailGammeModuleTitle()),
         ];
       }
     }
@@ -90,7 +91,7 @@ class PageMenuModularProductBlock extends BlockBase {
         if($paragraphModuleEntity->bundle() == 'module_services') {
           $block['children_items'][] = [
             'id' => 'services',
-            'label' => $this->t('Tailor-made services'),
+            'label' => $this->t($conf_modular_product->getServicesModuleTitle()),
           ];
         }
         if($paragraphModuleEntity->bundle() == 'module_customer_space') {
@@ -102,13 +103,13 @@ class PageMenuModularProductBlock extends BlockBase {
         if($paragraphModuleEntity->bundle() == 'module_exemples') {
           $block['children_items'][] = [
             'id' => 'exemple',
-            'label' => $this->t('Examples'),
+            'label' => $this->t($conf_modular_product->getExamplesModuleTitle()),
           ];
         }
         if($paragraphModuleEntity->bundle() == 'module_testimonial') {
           $block['children_items'][] = [
             'id' => 'temoignages',
-            'label' => $this->t('Testimonials'),
+            'label' => $this->t($conf_modular_product->getTestimonialModuleTitle()),
           ];
         }
       }

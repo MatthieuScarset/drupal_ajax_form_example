@@ -22,8 +22,32 @@ class OabModularProductService {
     return $this->get("mp.descriptions.description_long");
   }
 
+  public function getPresentationModuleTitle(): string {
+    return $this->get("modules_titles.module_presentation");
+  }
+
+  public function getOfferDetailTitle(): string {
+    return $this->get("modules_titles.module_detail_offre");
+  }
+
+  public function getDetailGammeModuleTitle(): string {
+    return $this->get("modules_titles.module_detail_gamme");
+  }
+
+  public function getServicesModuleTitle(): string {
+    return $this->get("modules_titles.module_services");
+  }
+
   public function getCustomerSpaceModuleTitle(): string {
     return $this->get("modules_titles.module_customer_space");
+  }
+
+  public function getExamplesModuleTitle(): string {
+    return $this->get("modules_titles.module_exemples");
+  }
+
+  public function getTestimonialModuleTitle(): string {
+    return $this->get("modules_titles.module_testimonial");
   }
 
   private function get(string $item): mixed {

@@ -83,10 +83,40 @@ class ModularProductSettingsForm extends ConfigFormBase {
       '#description'    => t("Config modules titles "),
       '#group' => 'tabs'
     ];
+    $form['modules_titles']['module_presentation'] = [
+      '#type' => 'textfield',
+      '#title' => t('Presentation module title'),
+      '#default_value' => $conf->get('modules_titles.module_presentation') ?? 'Presentation',
+    ];
+    $form['modules_titles']['module_detail_offre'] = [
+      '#type' => 'textfield',
+      '#title' => t('Offer Detail module title'),
+      '#default_value' => $conf->get('modules_titles.module_detail_offre') ?? 'Offer Detail',
+    ];
+    $form['modules_titles']['module_detail_gamme'] = [
+      '#type' => 'textfield',
+      '#title' => t('Detail of the range module title'),
+      '#default_value' => $conf->get('modules_titles.module_detail_gamme') ?? 'Detail of the range',
+    ];
+    $form['modules_titles']['module_services'] = [
+      '#type' => 'textfield',
+      '#title' => t('Tailor-made services module title'),
+      '#default_value' => $conf->get('modules_titles.module_services') ?? 'Tailor-made services',
+    ];
     $form['modules_titles']['module_customer_space'] = [
       '#type' => 'textfield',
       '#title' => t('Customer space module title'),
       '#default_value' => $conf->get('modules_titles.module_customer_space') ?? 'Customer space',
+    ];
+    $form['modules_titles']['module_exemples'] = [
+      '#type' => 'textfield',
+      '#title' => t('Examples module title'),
+      '#default_value' => $conf->get('modules_titles.module_exemples') ?? 'Examples',
+    ];
+    $form['modules_titles']['module_testimonial'] = [
+      '#type' => 'textfield',
+      '#title' => t('Testimonials module title'),
+      '#default_value' => $conf->get('modules_titles.module_testimonial') ?? 'Testimonials',
     ];
 
     return parent::buildForm($form, $form_state);
