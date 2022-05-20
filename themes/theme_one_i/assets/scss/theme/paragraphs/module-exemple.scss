@@ -6,6 +6,10 @@
     }
   }
 
+  .example-title {
+    cursor: pointer;
+  }
+
   .example-content {
     flex-wrap: initial;
     overflow-x: scroll;
