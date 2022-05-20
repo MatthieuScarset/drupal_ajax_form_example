@@ -109,7 +109,7 @@ class OabExempleSlider {
     }
     else  {
       clearInterval(this.$intervalId);
-      $(this.$content_slider).animate({scrollLeft : 0}, 800);
+      $(this.$content_slider).animate({scrollLeft : 0}, 500);
       this._start();
     }
   }
