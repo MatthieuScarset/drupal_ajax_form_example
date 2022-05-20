@@ -8,6 +8,17 @@
 
   .example-title {
     cursor: pointer;
+    a {
+      color: $white;
+
+      &.active {
+        font-weight: bold;
+      }
+
+      &:hover {
+        color: $gray4;
+      }
+    }
   }
 
   .example-content {
