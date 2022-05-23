@@ -50,6 +50,10 @@ class OabModularProductService {
     return $this->get("modules_titles.module_testimonial");
   }
 
+  public function getToGoFurtherTitle(): mixed {
+    return $this->get("modules_titles.to_go_further");
+  }
+
   private function get(string $item): mixed {
     return $this->config->get($item) ?? [];
   }

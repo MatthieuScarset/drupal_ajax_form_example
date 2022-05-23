@@ -114,6 +114,10 @@ class PageMenuModularProductBlock extends BlockBase {
         }
       }
     }
+    $block['children_items'][] = [
+      'id' => 'to_go_further',
+      'label' => $this->t($conf_modular_product->getToGoFurtherTitle()),
+    ];
     return $block;
   }
 }
