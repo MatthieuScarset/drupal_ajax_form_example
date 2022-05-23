@@ -52,8 +52,12 @@
     {% block content %}
       <h2 class="col-12 col-md-7 pt-3 pt-md-5 mb-2 mb-md-3 px-0">{{ content.field_title }}</h2>
 
-      <div class="col-12 col-md-7 lead font-weight-bold mb-2 mb-md-3 px-0">
-        {{ content.field_accroche }}
+      {% if paragraph.field_accroche.value is not empty %}
+      {% set margin = "mb-2 mb-md-3"%}
+      {% endif %}
+
+      <div class="col-12 col-md-7 lead font-weight-bold {{ margin }} p-0">
+      {{ content.field_accroche }}
       </div>
 
       <div class="items-module-3-4-colonnes px-0">
