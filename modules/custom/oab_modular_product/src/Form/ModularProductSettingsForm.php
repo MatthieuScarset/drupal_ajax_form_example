@@ -118,6 +118,11 @@ class ModularProductSettingsForm extends ConfigFormBase {
       '#title' => t('Testimonials module title'),
       '#default_value' => $conf->get('modules_titles.module_testimonial') ?? 'Testimonials',
     ];
+    $form['modules_titles']['to_go_further'] = [
+      '#type' => 'textfield',
+      '#title' => t('To go further title'),
+      '#default_value' => $conf->get('modules_titles.to_go_further') ?? 'To go further',
+    ];
 
     return parent::buildForm($form, $form_state);
   }
