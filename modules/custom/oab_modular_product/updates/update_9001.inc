@@ -20,7 +20,8 @@ $translations = [
   "Read the customer story" => "Lire le témoignage complet",
   "Customer story" => "Témoignages",
   "See the range" => "Voir la gamme",
-  "Customer space" => "Espace client"
+  "Customer space" => "Espace client",
+  "See offer" => "Voir l'offre"
 ];
 
 foreach ($translations AS $source => $translation) {
