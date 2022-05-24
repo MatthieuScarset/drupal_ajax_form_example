@@ -16,6 +16,10 @@
       &:hover, &:active, &:focus {
         border-left-color: $primary;
         background-color: $gray2;
+
+        .o-link-arrow{
+          text-decoration: underline;
+        }
       }
     }
   }
