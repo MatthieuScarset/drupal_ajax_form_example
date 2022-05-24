@@ -47,8 +47,8 @@
 {% block paragraph %}
   {% block content %}
     {% if (is_single) %}
-      <div class="row justify-content-between">
-        <div class="col-12 col-md-4 pt-md-1">
+      <div class="row justify-content-between mx-0">
+        <div class="col-12 col-md-4 pt-md-1 px-0">
           <h4 class="pb-0 mb-1 mb-md-2">{{ content.field_title }}</h4>
           <span class="lead">{{ content.field_accroche }}</span>
           {{ content.field_documentation }}
@@ -57,7 +57,7 @@
             {{ content.field_cta}}
           </div>
         </div>
-        <div class="bg-white col-11 col-md-7 mt-2 mt-md-0 ml-1 ml-md-0">
+        <div class="bg-white col-12 col-md-7 p-1 p-md-2">
           {{ content.field_offres_inclus }}
           {{ content.field_offres_exclus }}
         </div>

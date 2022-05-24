@@ -1,20 +1,23 @@
-<div class="font-weight-bold mt-2">{{ label }}</div>
-<div class="liste-offres my-1 pl-1">
-  {% if (is_single) %}
-    <div class="row w-100">
-      {% for item in items %}
-        <div class="col-12 col-md-6">
-          <ul class="list ob1-list-tick mb-0">
+{% if (is_single) %}
+  <div class="font-weight-bold">{{ label }}</div>
+  <div class="liste-offres mt-1 pl-1">
+    <ul class="list ob1-list-tick mb-0">
+      <div class="row">
+        {% for item in items %}
+          <div class="col-12 col-md-6">
             <li class="ml-0">{{ item.content }}</li>
-          </ul>
-        </div>
-      {% endfor %}
-    </div>
-  {% else %}
+          </div>
+        {% endfor %}
+      </div>
+    </ul>
+  </div>
+{% else %}
+  <div class="font-weight-bold mt-2">{{ label }}</div>
+  <div class="liste-offres my-1 pl-1">
     <ul class="list ob1-list-tick mb-0">
       {% for item in items %}
           <li class="ml-0">{{ item.content }}</li>
       {% endfor %}
     </ul>
-  {%endif%}
-</div>
+  </div>
+{%endif%}
