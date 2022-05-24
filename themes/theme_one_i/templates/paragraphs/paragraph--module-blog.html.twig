@@ -60,10 +60,12 @@
         {% if content.field_call_to_action_link_simple.0['#url'] %}
           <a href="{{ content.field_call_to_action_link_simple.0['#url'] }}">
         {% endif %}
-          <div class="mb-1 mb-lg-1">{{ content.field_visual }}</div>
-          <div class="mb-1 mb-lg-1 h4 pb-0">{{ content.field_subtitle }}</div>
-          <div class="mb-1 text-gray3 d-none d-lg-block">{{ content.field_highlight }}</div>
-          <div class="mb-0">
+          <div class="pb-1 pb-lg-1">{{ content.field_visual }}</div>
+          <div class="pb-1 pb-lg-1 h4 pb-0 m-0">{{ content.field_subtitle }}</div>
+          {% if content.field_highlight %}
+            <div class="pb-1 text-gray3 d-none d-lg-block">{{ content.field_highlight }}</div>
+          {% endif %}
+          <div class="pb-0">
             <span class="o-link-arrow">{{ content.field_call_to_action_link_simple.0['#title'] }}</span>
           </div>
 
