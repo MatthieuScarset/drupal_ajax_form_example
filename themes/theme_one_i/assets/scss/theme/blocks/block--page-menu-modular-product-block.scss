@@ -1,3 +1,9 @@
 .block.page-menu-modular-product.sticky-top {
-  z-index: 1019
+  z-index: 1019;
+
+  .ob1-menu-page .o-nav-light > .nav-item > .nav-link {
+    @include media-breakpoint-down(md) {
+      padding-bottom: 0.9375rem;
+    }
+  }
 }
