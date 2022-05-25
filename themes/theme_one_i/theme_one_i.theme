@@ -93,18 +93,21 @@ function theme_one_i_preprocess_paragraph__module_benefits_item(&$variables) {
   /** @var Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
 
-  $is_numerical = FALSE;
 
   if (isset($paragraph)) {
     $parent = $paragraph->getParentEntity();
-    $field_numerical_benefit = $parent->field_numericals_benefits->value;
 
-    if (isset($field_numerical_benefit) && 1 == $field_numerical_benefit) {
-      $is_numerical = TRUE;
+    if ($parent->bundle() === "module_benefits") {
+      $is_numerical = FALSE;
+
+      $field_numerical_benefit = $parent->field_numericals_benefits->value;
+      if (isset($field_numerical_benefit) && 1 == $field_numerical_benefit) {
+        $is_numerical = TRUE;
+      }
+
+      $variables['is_numerical'] = $is_numerical;
     }
   }
-
-  $variables['is_numerical'] = $is_numerical;
 }
 
 function theme_one_i_preprocess_paragraph__module_faq(&$variables) {
