@@ -9,7 +9,6 @@
 
     .custom-link {
       &.o-link-arrow {
-        text-decoration: none;
         margin-right: 1rem;
         padding: 0.8125rem 0;
         @include media-breakpoint-up(md){
