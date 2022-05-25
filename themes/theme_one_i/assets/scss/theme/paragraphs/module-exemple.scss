@@ -27,9 +27,9 @@
     scrollbar-width: none;
 
     .link-example.o-link-arrow {
-      color: $white;
+      color: $white !important;
       &:hover{
-        color: $gray4;
+        color: $gray4 !important;
       }
     }
   }
