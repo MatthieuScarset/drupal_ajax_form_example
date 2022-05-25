@@ -6,6 +6,19 @@
     }
   }
 
+  .example-content {
+    flex-wrap: initial;
+    overflow-x: scroll;
+    scrollbar-width: none;
+
+    .o-link-arrow {
+      color: white;
+      &:hover{
+        color: $gray4;
+      }
+    }
+  }
+  
   .example-title {
     cursor: pointer;
     a {
@@ -16,19 +29,6 @@
       }
 
       &:hover {
-        color: $gray4;
-      }
-    }
-  }
-
-  .example-content {
-    flex-wrap: initial;
-    overflow-x: scroll;
-    scrollbar-width: none;
-
-    .o-link-arrow {
-      color: $white;
-      &:hover{
         color: $gray4;
       }
     }
