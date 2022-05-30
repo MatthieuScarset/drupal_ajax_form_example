@@ -16,7 +16,7 @@ content:
     type: svg_image_field_formatter
     label: hidden
     settings:
-      inline: false
+      inline: true
       apply_dimensions: true
       width: 210
       height: 100

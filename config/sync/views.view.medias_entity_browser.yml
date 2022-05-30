@@ -1146,7 +1146,7 @@ display:
           click_sort_column: target_id
           type: svg_image_field_formatter
           settings:
-            inline: false
+            inline: true
             apply_dimensions: true
             width: 100
             height: 100
