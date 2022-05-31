@@ -16,6 +16,6 @@ use Symfony\Component\Validator\Constraint;
 class ModularProductMinItems extends Constraint {
 
   // The message that will be shown if the value is not an integer.
-  public $minValue = 'You should have at least 3 items.';
+  public $minValue = 'You should have at least 3 items in %value.';
 
 }
