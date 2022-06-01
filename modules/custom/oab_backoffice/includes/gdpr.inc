@@ -516,7 +516,6 @@ function gdpr_hook_form_alter(&$form, $form_state, $form_id) {
             array_slice($old_submit, count($old_submit) - 1, count($old_submit) - 1, true);
 
         $form['actions']['submit']['#submit'] = array_values($submit);
-        $form['#validate'][] = '_oab_webform_gdpr_validate';
     }
 }
 
