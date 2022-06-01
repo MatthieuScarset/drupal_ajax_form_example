@@ -43,14 +43,15 @@
     'paragraph',
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-    not paragraph.isPublished() ? 'paragraph--unpublished'
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+    "py-2 py-md-5"
   ]
 %}
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     <div class="container-fluid site-width">
     {% block content %}
-      <h2 class="col-12 col-md-7 pt-3 pt-md-5 mb-2 mb-md-3 px-0">{{ content.field_title }}</h2>
+      <h2 class="col-12 col-md-7 mb-2 mb-md-3 px-0">{{ content.field_title }}</h2>
 
       {% if paragraph.field_accroche.value is not empty %}
       {% set margin = "mb-2 mb-md-3"%}

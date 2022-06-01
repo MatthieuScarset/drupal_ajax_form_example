@@ -5,6 +5,10 @@
     flex-wrap: initial;
     scrollbar-width: none;
 
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
     padding-top: 1rem;
     padding-bottom: 3rem;
 

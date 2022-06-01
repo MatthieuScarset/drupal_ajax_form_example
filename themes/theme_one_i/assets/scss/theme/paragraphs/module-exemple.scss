@@ -26,6 +26,10 @@
     overflow-x: scroll;
     scrollbar-width: none;
 
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
     .o-link-arrow {
       &:hover{
         color: $gray4 !important;
