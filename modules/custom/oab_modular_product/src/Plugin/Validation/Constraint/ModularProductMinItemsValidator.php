@@ -16,10 +16,10 @@ class ModularProductMinItemsValidator extends ConstraintValidator {
    * @var \Drupal\entity_reference_revisions\EntityReferenceRevisionsFieldItemList $entity
    */
   public function validate($entity, Constraint $constraint) {
-
-//dd($entity, $constraint);
     if ($entity->count() < 3) {
-      $this->context->addViolation($constraint->minValue);
+      $this->context->addViolation($constraint->minValue, [
+        '%value' => $entity->getEntity()->bundle()
+      ]);
     }
   }
 
