@@ -3,6 +3,10 @@
     overflow-x: scroll;
     flex-wrap: unset;
     scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
     @include media-breakpoint-up(md) {
       overflow-x: revert;
       flex-wrap: revert;

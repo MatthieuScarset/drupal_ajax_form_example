@@ -81,6 +81,10 @@
       overflow-y: hidden;
       flex-wrap: unset;
       scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
 
     .custom-link {
