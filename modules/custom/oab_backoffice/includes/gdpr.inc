@@ -49,8 +49,7 @@ function gdpr_is_webform_authorized(Drupal\webform\Entity\Webform $entity, $oper
         ##Je recupère la liste des business analysts du formulaire pour checker que les utilisateurs en font partis
         $business_analaysts_list = $entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_business_analysts');
 
-        if (array_key_exists($account->id(), $business_analaysts_list)) {
-
+        if (is_array($business_analaysts_list) && array_key_exists($account->id(), $business_analaysts_list)) {
             return Drupal\Core\Access\AccessResult::allowed();
         }
 
