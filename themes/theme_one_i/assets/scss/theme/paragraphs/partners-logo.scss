@@ -16,14 +16,13 @@
     }
 
     img {
-      height: 3.75rem;
+      height: auto;
       width: 7.875rem;
     }
 
     @include media-breakpoint-up(md) {
 
       img {
-        height: 6.25rem;
         width: 13.125rem;
       }
     }
