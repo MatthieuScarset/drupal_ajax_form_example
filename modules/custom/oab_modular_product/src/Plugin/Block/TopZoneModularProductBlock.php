@@ -54,8 +54,7 @@ class TopZoneModularProductBlock extends BlockBase {
       if ($node->hasField('field_product_category')) {
         $sous_product_category = Term::load($node->field_product_category->target_id ?? 0);
         if ($sous_product_category) {
-          $product_category = Term::load($sous_product_category->parent->target_id ?? 0);
-          $block['product_category'] = $product_category->getName();
+          $block['product_category'] = $sous_product_category->getName();
         }
       }
 

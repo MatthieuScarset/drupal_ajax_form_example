@@ -62,7 +62,7 @@
 
     <div class="block-text col-12 col-lg-6 col-6 no-gutters order-lg-0">
       <p class="product-category text-gray3 font-weight-bold">{{ content.product_category }}</p>
-      <p class="product-name lead font-weight-bold">{{ content.product.field_product_name[0].value }}</p>
+      <h1 class="product-name lead font-weight-bold">{{ content.product.field_product_name[0].value }}</h1>
       {% if content.product_top_zone_image_uri|length > 0 %}
         {% set teaser_class = "product-teaser" %}
       {% else %}
