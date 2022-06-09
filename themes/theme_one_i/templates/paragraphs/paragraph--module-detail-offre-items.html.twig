@@ -84,10 +84,9 @@
           </div>
 
         </div>
-
         <button type="button"
                 class="o-link-arrow see-more down font-weight-bold text-center pb-2 w-100"
-        >
+                onmousedown="utag_link(utag_data.titre_page,'detail offre' ,'{{ content.field_title.0["#context"]["value"]|escape('html') }}','voir tout')">
             <span class="text-voir-tout">{{ "see more"|t }}</span>
             <span class="text-voir-moins d-none">{{ "see less"|t }}</span>
 

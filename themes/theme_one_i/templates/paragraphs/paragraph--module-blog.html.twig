@@ -58,7 +58,8 @@
     <div class="row w-100 justify-content-between">
       <div class="col-12 col-lg-5">
         {% if content.field_call_to_action_link_simple.0['#url'] %}
-          <a href="{{ content.field_call_to_action_link_simple.0['#url'] }}">
+          <a href="{{ content.field_call_to_action_link_simple.0['#url'] }}"
+             onmousedown="utag_link(utag_data.titre_page,'aller plus loin','edito','{{ content.field_subtitle.0["#context"]["value"]|escape('html') }}')">
         {% endif %}
           <div class="pb-1 pb-lg-1">{{ content.field_visual }}</div>
           <div class="pb-1 pb-lg-1 h4 pb-0 m-0">{{ content.field_subtitle }}</div>

@@ -4,7 +4,9 @@
       <ul class="nav o-nav-light site-width ">
         {% for child in content.children_items %}
           <li class="nav-item">
-            <a class="nav-link" href="#{{ child.id }}" >{{ child.label }}</a>
+            <a class="nav-link"
+               onmousedown="utag_link(utag_data.titre_page,'navigation','localnav','{{ child.label }}')"
+               href="#{{ child.id }}" >{{ child.label }}</a>
           </li>
         {% endfor %}
       </ul>
