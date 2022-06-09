@@ -77,8 +77,10 @@
     {% endif %}
     <div class="block-cta row no-gutters pb-1">
       <a href="{{ content.product.field_call_to_action_button[0].url }}"
+         onmousedown="utag_link(utag_data.titre_page,'topzone','CTA_1','{{ content.product.field_call_to_action_button[0].title }}')"
          class="product-cta-button btn btn-primary mr-sm-4 mb-1 mb-xl-0">{{ content.product.field_call_to_action_button[0].title }}</a>
       <a href="{{ content.product.field_call_to_action_link[0].url }}"
+         onmousedown="utag_link(utag_data.titre_page,'topzone','CTA_2','{{ content.product.field_call_to_action_button[0].title }}')"
          class="product-cta-link-text {{ link_arrow }} pt-1 mw-100">{{ content.product.field_call_to_action_link[0].title }}</a>
     </div>
   </div>

@@ -89,7 +89,7 @@
                 data-toggle="collapse"
                 data-target="#collapsed-text-{{ paragraph.id() }}"
                 aria-expanded="false"
-        >
+                onmousedown="utag_link(utag_data.titre_page,'detail de la gamme' ,'{{ content.field_title.0["#context"]["value"]|escape('html') }}','voir le détail')">
           <span class="text-voir-detail">{{ "Show details"|t }}</span>
           <span class="text-reduce">{{ "Hide details"|t }}</span>
         </button>

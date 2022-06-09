@@ -19,7 +19,8 @@
         <div class="row">
           {% for key, item in items %}
             <div class="col example-title">
-              <a data-index="{{ key }}">
+              <a data-index="{{ key }}"
+                 onmousedown="utag_link(utag_data.titre_page,'exemples' ,'navbar','{{ item.content['#paragraph'].field_title.value|escape('html') }}')">
                 0{{ key+1 }}. {{ item.content['#paragraph'].field_title.value }}
               </a>
             </div>

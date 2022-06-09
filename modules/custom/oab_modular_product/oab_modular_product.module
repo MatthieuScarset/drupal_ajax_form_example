@@ -368,6 +368,33 @@ function oab_modular_product_preprocess_field(&$variables) {
       $variables['is_single'] = $is_single;
     }
   }
+
+  if (in_array($variables['field_name'], array("field_pdf", "field_call_to_action_link"))) {
+    /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+    $paragraph = $variables['element']['#object'];
+    if($paragraph->bundle() == "documentation"){
+      $paragraphParent = Paragraph::load($paragraph->getParentEntity()->id());
+      if($paragraphParent->bundle() == "module_detail_offre_items"){
+        $variables['track_zone'] = 'detail offre';
+        $variables['track_nom'] = $paragraphParent->get('field_title')->value;
+      }
+    }
+  }
+  if (in_array($variables['field_name'], array("field_link_button"))) {
+    /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+    $paragraph = $variables['element']['#object'];
+    if($paragraph->bundle() == "call_to_action"){
+      $paragraphParent = Paragraph::load($paragraph->getParentEntity()->id());
+      if($paragraphParent->bundle() == "module_detail_offre_items"){
+        $variables['track_zone'] = 'detail offre';
+        $variables['track_nom'] = $paragraphParent->get('field_title')->value;
+      }
+      if($paragraphParent->bundle() == "detail_gamme_items_offres"){
+        $variables['track_zone'] = 'detail de la gamme';
+        $variables['track_nom'] = $paragraphParent->get('field_title')->value;
+      }
+    }
+  }
 }
 
 /**

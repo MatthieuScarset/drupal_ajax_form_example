@@ -51,12 +51,11 @@
   label_display == 'visually_hidden' ? 'sr-only',
 ]
 %}
-
     {% for item in items %}
       <div{{ attributes.addClass(classes, 'field--item') }}>
-        <a href="{{ item.content["#url"] }}" class="o-link-arrow text-white font-weight-bold mt-1 mw-100"
-           onmousedown="utag_link(utag_data.titre_page,'exemples' ,'{{ element['#object'].field_title.value|escape('html') }}','{{ item.content['#title']|escape('html') }}')">
-          {{ item.content["#title"] }}</a>
+        <a href="{{ item.content["#url"] }}"
+           onmousedown="utag_link(utag_data.titre_page,'espace client' ,'CTA_2','{{ item.content['#title']|escape('html') }}')"
+           class="o-link-arrow pt-1 mw-100"> {{ item.content["#title"] }}</a>
         <span ></span>
       </div>
     {% endfor %}

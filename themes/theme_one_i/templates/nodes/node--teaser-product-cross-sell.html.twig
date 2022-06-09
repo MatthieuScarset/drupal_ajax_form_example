@@ -12,7 +12,9 @@
     {{ content.field_key_points }}
   </div>
   <div class="col-12 col-md-6 mb-1 mt-auto mb-md-2 px-0 px-md-1">
-    <a href="{{ path('entity.node.canonical', {'node': node.id}) }}" class="btn btn-primary px-1 w-100">
+    <a href="{{ path('entity.node.canonical', {'node': node.id}) }}"
+       onmousedown="utag_link(utag_data.titre_page,'aller plus loin','offre','Voir l\'offre')"
+      class="btn btn-primary px-1 w-100">
       {% trans %}See offer{% endtrans %}
     </a>
   </div>
