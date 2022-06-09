@@ -321,7 +321,6 @@ function oab_modular_product_entity_bundle_field_info_alter(&$fields, EntityType
 function oab_modular_product_preprocess_field(&$variables) {
 
   if ($variables['field_name'] === "field_link_button") {
-    //return;
     /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
     $paragraph = $variables['element']['#object'];
 
@@ -357,7 +356,9 @@ function oab_modular_product_preprocess_field(&$variables) {
   if (in_array($variables['field_name'], $field_offre)) {
     /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
     $paragraph = $variables['element']['#object'];
-    if (isset($paragraph->field_offres_inclus)) {
+    if (isset($paragraph->field_offres_inclus) ||
+        isset($paragraph->field_offres_exclus) ||
+        isset($paragraph->field_documentation)) {
       $is_single = false;
       $parent = $paragraph->getParentEntity();
       $number_items = count($parent->field_items);

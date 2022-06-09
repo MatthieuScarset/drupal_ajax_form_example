@@ -22,7 +22,9 @@ $translations = [
   "See the range" => "Voir la gamme",
   "Customer space" => "Espace client",
   "See offer" => "Voir l'offre",
-  "Home" => "Accueil"
+  "Home" => "Accueil",
+  "Excluded" => "Exclus",
+  "Included" => "Inclus"
 ];
 
 foreach ($translations AS $source => $translation) {
