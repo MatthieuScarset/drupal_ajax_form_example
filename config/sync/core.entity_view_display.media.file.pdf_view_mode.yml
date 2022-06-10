@@ -1,30 +1,37 @@
-uuid: cc4ea871-b8e5-4f42-959c-25df2e48c57d
+uuid: 6dc730ef-842d-4e02-aa2f-758d158abae6
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.media.pdf_view_mode
     - field.field.media.file.field_file
     - field.field.media.file.field_media_generic
     - media.type.file
   module:
     - file
-id: media.file.default
+id: media.file.pdf_view_mode
 targetEntityType: media
 bundle: file
-mode: default
+mode: pdf_view_mode
 content:
   field_file:
-    type: file_default
+    type: file_url_plain
     label: hidden
-    settings:
-      use_description_as_link_text: true
+    settings: {  }
     third_party_settings: {  }
-    weight: 2
+    weight: 1
+    region: content
+  name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   created: true
   field_media_generic: true
   langcode: true
-  name: true
   thumbnail: true
   uid: true
