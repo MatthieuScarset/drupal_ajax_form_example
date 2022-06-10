@@ -13,7 +13,7 @@
     {% endfor %}
     {% if has_null_value %}
       <li class="ob1-filterchip">
-        <input class="ob1-filterchip-input sr-only" id="formule-field-chips-nil" type="checkbox" value="nil">
+        <input class="ob1-filterchip-input sr-only" id="formule-field-chips-nil" type="checkbox" value="{{ constant('NULL_ID', elements['#formule_field']) }}">
         <label for="formule-field-chips-nil" class="ob1-filterchip-label" data-title="{{ null_label }}">{{ null_label }}</label>
       </li>
     {% endif %}

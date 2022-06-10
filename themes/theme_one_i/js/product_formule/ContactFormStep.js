@@ -9,6 +9,12 @@ class ContactFormStep {
     this.$fieldConfigs = window.drupalSettings.formuleField || [];
   }
 
+  show() {
+    this.$root.style.opacity = 0;
+    this.$root.classList.remove("d-none");
+    this.$root.style.opacity = 1;
+  }
+
   /**
    * Return true/false si la config du Form s'est bien faite
    * @param id
@@ -22,7 +28,7 @@ class ContactFormStep {
     let config = Object.values(this.$fieldConfigs[id].emptyConfigs).find((config) => {
       return config.inputs && Object.values(config.inputs).find((input) => input === id);
     });
-    
+
     if (!config) {
       config = this.$fieldConfigs[id].emptyConfigs.default;
     }

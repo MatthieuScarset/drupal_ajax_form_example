@@ -1,5 +1,4 @@
 
-
 {% set input_name = "radio-" ~ id %}
 
 <div class="formule-field field--list" id="{{ "formule-field-list-" ~ id }}" data-type="list" data-target="{{ id }}" data-input-name="{{ input_name }}">
@@ -12,7 +11,7 @@
       {{ _self.input(choice, choice_label, input_name) }}
     {% endfor %}
     {% if has_null_value %}
-      {{ _self.input('nil', null_label, input_name) }}
+      {{ _self.input(constant('NULL_ID', elements['#formule_field']), null_label, input_name) }}
     {% endif %}
   </ul>
   <button class="btn btn-primary formule-submit" disabled>{{ "Next"|t }}</button>

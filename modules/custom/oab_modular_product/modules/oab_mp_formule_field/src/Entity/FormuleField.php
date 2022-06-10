@@ -154,11 +154,6 @@ class FormuleField extends ConfigEntityBase implements FormuleFieldInterface {
    * @param array|string $choices
    */
   public function setChoices(array|string $choices): void {
-
-    if (is_string($choices)) {
-      dd($choices, PHP_EOL);
-    }
-
     $this->choices = $choices;
   }
 

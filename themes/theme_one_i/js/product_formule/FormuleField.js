@@ -22,7 +22,7 @@ class FormuleField {
     this.$inputs = [];
     Array.from(this.$root.querySelectorAll('li')).forEach((input) => {
       this.$inputs.push(input);
-      input.querySelector('input').addEventListener('change', (e) => {
+      input.querySelector('input').addEventListener('change', () => {
         this.unactiveAll();
         input.classList.add('active');
         this.$submit.disabled = false;
@@ -31,6 +31,9 @@ class FormuleField {
 
   }
 
+  /**
+   * Remove the "active" from every inputs
+   */
   unactiveAll() {
     this.$inputs.forEach((input) => {
       input.classList.remove('active');
@@ -41,6 +44,10 @@ class FormuleField {
     return this.$root.dataset.target;
   }
 
+  /**
+   * Return selected value
+   * @return {null|*}
+   */
   getValue() {
     if (this.$root.querySelector(`input[name="${this.$inputName}"]:checked`)) {
       return this.$root.querySelector(`input[name="${this.$inputName}"]:checked`).value;

@@ -6,6 +6,8 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\oab_mp_formule_field\Entity\FormuleField;
+use Drupal\oab_mp_formule_field\Entity\FormuleFieldInterface;
 
 /**
  * Implements hook_help().
@@ -55,7 +57,7 @@ function oab_mp_formule_field_preprocess_formule_field(&$variables) {
     return;
   }
 
-  /** @var \Drupal\oab_mp_formule_field\Entity\FormuleField $formule_field */
+  /** @var FormuleField $formule_field */
   $formule_field = $variables['elements']['#formule_field'];
 
   $variables['display_label'] = $formule_field->getDisplayLabel();
@@ -77,13 +79,17 @@ function oab_mp_formule_field_preprocess_formule_field(&$variables) {
     $empty_config['no_result_title'] = $token->replace($empty_config['no_result_title'] ?? "");
   }
 
-  //dd($token->getInfo()['tokens']);
+  $options = $formule_field->getChoices();
+  if ($formule_field->hasNullValue()) {
+    $options[FormuleFieldInterface::NULL_ID] = $formule_field->getNullLabel();
+  }
+
   $variables['#attached']['drupalSettings']['formuleField'][$formule_field->id()] = [
     'label' => $formule_field->label(),
     'displayLabel' => $formule_field->getDisplayLabel(),
     'resultSentence' => $formule_field->getSentence(),
     'emptyConfigs' => $empty_configs,
-    'options' => $formule_field->getChoices()
+    'options' => $options
   ];
 
 }

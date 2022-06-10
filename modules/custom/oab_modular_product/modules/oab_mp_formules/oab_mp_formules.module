@@ -37,16 +37,13 @@ function oab_mp_formules_theme($existing, $type, $theme, $path) {
 
 
 function oab_mp_formules_preprocess_product_formule_entity(array &$variables) {
-// dd($variables);
+
   /** @var \Drupal\oab_mp_formules\Entity\ProductFormuleEntity $product_formule */
   $product_formule = $variables['elements']['#product_formule_entity'];
   $variables['product_formule_entity'] = $product_formule;
 
   foreach ($product_formule->getFormuleFields() as $formule_field) {
     $variables['formule_fields'][] = \Drupal::entityTypeManager()->getViewBuilder('formule_field')->view($formule_field);
-    $variables['elements']['#attached']['drupalSettings']['formule_fields'][$formule_field->id()] = [
-      'sentence' => $formule_field->getSentence()
-    ];
   }
 
   $node = \Drupal::routeMatch()->getParameter('node');
@@ -55,7 +52,5 @@ function oab_mp_formules_preprocess_product_formule_entity(array &$variables) {
       ? $node->field_product_name->value
       : $node->getTitle();
   }
-
-//  dd($variables);
 
 }

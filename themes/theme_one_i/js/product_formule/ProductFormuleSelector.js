@@ -30,6 +30,14 @@ class ProductFormuleSelector {
     this.$resultStack = new ResultStack(this.$root.querySelector('.result-stack'), this);
 
     this.$fields = Array.from(this.$root.querySelectorAll('.modal-content .right-zone [data-step="process"]'));
+    this.$fields.forEach((field) => {
+      field.ontransitionend = (e) => {
+        if (e.propertyName === 'opacity' && this.$root.style.opacity === 0) {
+          this.$root.classList.add('d-none');
+        }
+      };
+    });
+
     this.$formContact = new ContactFormStep(this.$root.querySelector('[data-step="contact-form"]'), this);
 
 
@@ -69,23 +77,44 @@ class ProductFormuleSelector {
           // On masque le field actuel
           const i = this.$fields.findIndex((field) => !field.classList.contains('d-none'));
           if (this.$fields[i]) {
-            this.$fields[i].classList.add('d-none');
+            this.$fields[i].addEventListener('transitionend', () => {
+              this.$fields[i].classList.add('d-none');
+              // Et on affiche le prochain s'il existe
+              if (this.$fields[i + 1]) {
+                this.showField(this.$fields[i + 1]);
+                this.$progressBar.nextStep();
+              }
+              else {
+                // sinon on affiche le panneau de fin
+                this._toResult();
+              }
+            }, {capture: false, once: true});
+            this.$fields[i].style.opacity = 0;
           }
-
-          // Et on affiche le prochain s'il existe
-          if (this.$fields[i+1]) {
-            this.$fields[i+1].classList.remove('d-none');
-            this.$progressBar.nextStep();
-          } else {
-            // sinon on affiche le panneau de fin
-            this._toResult();
+        }
+        else {
+          const i = this.$fields.findIndex((field) => !field.classList.contains('d-none'));
+          if (this.$fields[i]) {
+            this.$fields[i].addEventListener('transitionend', () => {
+              this.$fields[i].classList.add('d-none');
+              // Si on a aucun résultat, on redirige vers le formulaire de contact
+              this._toContactForm(Object.keys(this._getFieldValues()).pop());
+            }, {capture: false, once: true});
+            this.$fields[i].style.opacity = 0;
           }
-        } else {
-          // Si on a aucun résultat, on redirige vers le formulaire de contact
-          this._toContactForm(Object.keys(this._getFieldValues()).pop());
         }
       });
   }
+
+
+  /**
+   * Show the formule field with CSS transition
+   */
+  showField(field) {
+    field.classList.remove("d-none");
+    field.style.opacity = 1;
+  }
+
 
   goToField(formuleFieldId) {
     const field = this.$root.querySelector(`[data-target=${formuleFieldId}]`);
@@ -97,12 +126,23 @@ class ProductFormuleSelector {
         this.$progressBar.goToStep(index + 1);
       }
 
-      Array.from(this.$root.querySelectorAll('[data-step="process"]')).forEach((item) => {
-        item.classList.add('d-none');
-      });
+      const parent = field.closest('[data-step]');
 
-      field.closest('[data-step]').classList.remove('d-none');
-      this.$content.dataset.show = "process";
+      const currentDisplayedItem = this.$content.dataset.show === 'process' ?
+        this.$root.querySelector(`[data-step="process"]:not(.d-none)`) :
+        this.$root.querySelector(`[data-step="${this.$content.dataset.show}"]`);
+      if (currentDisplayedItem) {
+        currentDisplayedItem.addEventListener('transitionend', (e) => {
+          if (e.propertyName && e.propertyName === "opacity") {
+            currentDisplayedItem.classList.add('d-none');
+
+            this.$content.dataset.show = "process";
+            parent.classList.remove('d-none');
+            parent.style.opacity = 1;
+          }
+        }, {capture: false, once: true});
+        currentDisplayedItem.style.opacity = 0;
+      }
     }
   }
 
@@ -119,6 +159,14 @@ class ProductFormuleSelector {
    */
   _start() {
     this.$content.dataset.show = "process";
+    this.$root.querySelector('.right-zone').ontransitionend = (e) => {
+      if (e.propertyName === 'width') {
+        if (this.$fields[0]) {
+          this.showField(this.$fields[0]);
+        }
+      }
+    };
+
     this.$progressBar.display();
   }
 
@@ -149,6 +197,7 @@ class ProductFormuleSelector {
   _toContactForm(formuleFieldId) {
     if (this.$formContact.setFormuleField(formuleFieldId)) {
       this._show("contact-form");
+      this.$formContact.show();
     }
   }
 
@@ -158,9 +207,11 @@ class ProductFormuleSelector {
    * @private
    */
   _toResult() {
-    if (this.$resultStep._setUp(this.$formuleId, this._getFieldValues())) {
+    this.$resultStep.setUp(this.$formuleId, this._getFieldValues()).then(() => {
       this._show('result');
-    }
+      this.$resultStep.show();
+    });
+
   }
 
 

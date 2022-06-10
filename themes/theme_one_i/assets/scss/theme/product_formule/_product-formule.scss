@@ -7,8 +7,8 @@
 
     @if $inverse {
       .left-zone {
-        flex-grow: 1;
         padding-right: 25%;
+        width: 70%
       }
 
       .right-zone {
@@ -22,7 +22,7 @@
       }
 
       .right-zone {
-        flex-grow: 1;
+        width: 70%;
       }
     }
   }
@@ -70,7 +70,8 @@
       .left-zone, .right-zone {
         padding: 0 4rem;
         display: flex;
-        align-items: center
+        align-items: center;
+        transition: width .5s;
       }
 
       .right-zone {
@@ -80,6 +81,8 @@
         & > div {
           padding-top: 2rem;
           padding-bottom: 2rem;
+          opacity: 0;
+          transition: opacity .5s ease-in;
         }
 
       }
