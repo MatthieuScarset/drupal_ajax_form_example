@@ -1,8 +1,10 @@
 .example-items {
   .img-module-exemple {
     img {
-      width: 100%;
-      height: auto;
+      @include media-breakpoint-down(md) {
+        width: 100%;
+        height: auto;
+      }
     }
   }
 
