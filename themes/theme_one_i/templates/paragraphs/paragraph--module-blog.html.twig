@@ -50,13 +50,13 @@
 {% block paragraph %}
 <div {{ attributes.addClass(classes) }}>
   <div class="container-fluid site-width">
-    <div class="row mb-0 pt-1">
-      <div class="col-12">
+    <div class="row m-0 pt-1">
+      <div class="col-12 p-0">
         <h2>{{ content.field_title }}</h2>
       </div>
     </div>
-    <div class="row w-100 justify-content-between">
-      <div class="col-12 col-lg-5">
+    <div class="row m-0 w-100 justify-content-between">
+      <div class="col-12 p-0 col-lg-5">
         {% if content.field_call_to_action_link_simple.0['#url'] %}
           <a href="{{ content.field_call_to_action_link_simple.0['#url'] }}"
              onmousedown="utag_link(utag_data.titre_page,'aller plus loin','edito','{{ content.field_subtitle.0["#context"]["value"]|escape('html') }}')">
@@ -74,7 +74,7 @@
           </a>
         {% endif %}
       </div>
-      <div class="col-12 col-lg-6">
+      <div class="col-12 p-0 col-lg-6">
         <hr class="separator separator--gray4 mb-1 mt-1 d-block d-lg-none">
         {{ content.field_content_reference_1 }}
         <hr class="separator separator--gray4 mb-1 mt-1 mb-lg-2 mt-lg-2">
