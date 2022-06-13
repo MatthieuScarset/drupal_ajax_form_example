@@ -49,3 +49,4 @@ modular_product:
   version: VERSION
   js:
     assets/js/modular_product.min.js: {attributes: { type: module }}
+    js/tealium_modular_product.js: {}
