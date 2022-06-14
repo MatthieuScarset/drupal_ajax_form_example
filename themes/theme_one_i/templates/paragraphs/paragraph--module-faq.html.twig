@@ -6,7 +6,7 @@
         <div class="row bg-warning  pr-0 pl-1 pl-md-0">
           <div class="col-12 col-md-5 offset-md-1 px-0 px-md-1 pt-md-3 pb-2">
             <div class="row">
-              <h2 class="col-6 col-md-12 no-signature mb-0 pb-1 pt-3 pt-md-0">{{ content.field_title }}</h2>
+              <h2 class="h1 col-6 col-md-12 mb-0 pb-1 pt-3 pt-md-0">{{ content.field_title }}</h2>
               <div class="col-6 d-flex d-md-none justify-content-end">
                 {% for image in content.field_visual if image.entity is defined  %}
                   {% set media = image.entity %}
