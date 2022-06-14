@@ -336,6 +336,7 @@ function oab_modular_product_preprocess_field(&$variables) {
 
         if ($link_item->isExternal()) {
           $variables['attributes']['class'][] = 'icon-Redo';
+          $variables['attributes']['target'][] = '_blank';
         }
         else {
           $variables['attributes']['class'][] = 'o-link-arrow';
