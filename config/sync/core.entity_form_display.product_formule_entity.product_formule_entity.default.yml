@@ -1,0 +1,38 @@
+uuid: 29aee10e-7dc6-4c7c-9006-537ec6aa2464
+langcode: en
+status: true
+dependencies:
+  module:
+    - oab_mp_formules
+id: product_formule_entity.product_formule_entity.default
+targetEntityType: product_formule_entity
+bundle: product_formule_entity
+mode: default
+content:
+  formule_fields:
+    type: entity_reference_autocomplete
+    weight: 26
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    target_type: formule_field
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: -4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

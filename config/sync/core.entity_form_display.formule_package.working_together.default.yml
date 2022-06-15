@@ -1,0 +1,38 @@
+uuid: 8d150efd-9d1d-420b-b324-5c906fe12f13
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.formule_package.working_together.field_price
+    - oab_mp_product_formule_packages.formule_package_type.working_together
+  module:
+    - oab_mp_formule_field
+    - workbench_moderation
+id: formule_package.working_together.default
+targetEntityType: formule_package
+bundle: working_together
+mode: default
+content:
+  field_price:
+    type: number
+    weight: 101
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: -4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

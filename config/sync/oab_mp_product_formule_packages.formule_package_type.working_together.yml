@@ -1,0 +1,7 @@
+uuid: 08f36edf-b4ac-4449-8e4f-b47e157e8cde
+langcode: fr
+status: true
+dependencies: {  }
+id: working_together
+label: 'Working Together'
+formule: '2'

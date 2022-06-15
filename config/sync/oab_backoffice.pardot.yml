@@ -8,7 +8,7 @@ marketo:
     mkto_sous_domaine: 'market automation'
     mkto_univers_affichage: mar
     libraries:
-      awe: TestOBSExternalEmbed.js
+      awe: OBSExternalEmbedCode.js
       simple_dto: SimpleDTO.js
       enhanced_form: enhancedFormFunctions-v2.js
       forms2: forms2.min.js

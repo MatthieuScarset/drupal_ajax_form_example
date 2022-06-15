@@ -1,0 +1,20 @@
+uuid: 856e867f-a1ea-47b8-802c-ccc8fd37e485
+langcode: fr
+status: true
+dependencies:
+  module:
+    - oab_mp_formules
+    - paragraphs
+id: paragraph.field_formule
+field_name: field_formule
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: product_formule_entity
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

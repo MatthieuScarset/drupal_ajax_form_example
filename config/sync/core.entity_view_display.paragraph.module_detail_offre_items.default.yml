@@ -6,6 +6,7 @@ dependencies:
     - field.field.paragraph.module_detail_offre_items.field_accroche
     - field.field.paragraph.module_detail_offre_items.field_call_to_action_type
     - field.field.paragraph.module_detail_offre_items.field_documentation
+    - field.field.paragraph.module_detail_offre_items.field_formule
     - field.field.paragraph.module_detail_offre_items.field_link_button
     - field.field.paragraph.module_detail_offre_items.field_offres_exclus
     - field.field.paragraph.module_detail_offre_items.field_offres_inclus
@@ -43,6 +44,15 @@ content:
       link: ''
     third_party_settings: {  }
     weight: 7
+    region: content
+  field_formule:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: true
+    third_party_settings: {  }
+    weight: 8
     region: content
   field_link_button:
     type: link
