@@ -164,11 +164,7 @@ function theme_one_i_preprocess_node(&$variables) {
       $variables["field_highlight_limit"] = $text_highlight;
     }
     //gestion du champ TITLE
-    $maxCharsTitle = $conf_modular_product->getShortTitleMaxCharacter();
     $text_title = $nodeEntity->label();
-    if(strlen($text_title) > $maxCharsTitle) {
-      $text_title = substr($text_title, 0, $maxCharsTitle) . '...';
-    }
     $variables["field_title_limit"] = $text_title;
   }
 }
