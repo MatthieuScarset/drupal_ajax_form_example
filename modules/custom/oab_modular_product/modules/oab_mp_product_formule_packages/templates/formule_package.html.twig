@@ -18,5 +18,30 @@
 <div{{ attributes.addClass('formule_package') }}>
   {% if content %}
     {{- content -}}
+
+    {% set price = formule_package.field_price[0].getValue() ?? 0 %}
+
+    <a class="btn btn-primary" href="{{ drupal_url('/fr/formulaire-contact',
+      {
+        query: {
+          mKTOPMCF1String: formule_values.taille_entreprise,
+          mKTOPMCF2String: formule_package.label(),
+          mKTOPMCF3String: price.value,
+          SMB_Customer_Request__c: "Demande de commande commerciale :" ~ formule_package.label()
+              ~ "\r\nPack Sélectionné : " ~ formule_values.taille_entreprise
+              ~ "\r\nPrix du deviseur retenu :" ~ price.value
+        },
+        absolute: true
+      })
+    }}">Commander</a>
+
+
+{#    url.searchParams.set('mKTOPMCF1String', values.taille_entreprise);
+      url.searchParams.set('mKTOPMCF2String', this.$parent.formuleName);
+      url.searchParams.set('mKTOPMCF3String', this.$parent.formulePrice);
+      url.searchParams.set('SMB_Customer_Request__c',
+        `<${this.$parent.formuleName}><${values.taille_entreprise}><${this.$parent.formulePrice}>`);
+#}
+
   {% endif %}
 </div>

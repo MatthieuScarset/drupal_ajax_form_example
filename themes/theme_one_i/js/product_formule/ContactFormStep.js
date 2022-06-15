@@ -6,6 +6,7 @@ class ContactFormStep {
   constructor(root, parent) {
     this.$root = root;
     this.$parent = parent;
+    this.$drupalSettings = window.drupalSettings;
     this.$fieldConfigs = window.drupalSettings.formuleField || [];
   }
 
@@ -20,29 +21,36 @@ class ContactFormStep {
    * @param id
    * @return {boolean}
    */
-  setFormuleField(id) {
+  setFormuleField(id, value) {
     if (!this.$fieldConfigs[id]) {
       return false;
     }
 
-    let config = Object.values(this.$fieldConfigs[id].emptyConfigs).find((config) => {
-      return config.inputs && Object.values(config.inputs).find((input) => input === id);
+
+
+    let emptyConfig = Object.values(this.$fieldConfigs[id].emptyConfigs).find((config) => {
+      return config.inputs && Object.values(config.inputs).find((input) => { return input === value});
     });
 
-    if (!config) {
-      config = this.$fieldConfigs[id].emptyConfigs.default;
+    if (!emptyConfig) {
+      emptyConfig = this.$fieldConfigs[id].emptyConfigs.default;
     }
 
 
     // const fieldData = this.$fieldConfigs[id];
 
-    const title = (new DOMParser().parseFromString(config.no_result_title, "text/html")).documentElement.textContent;
+    const tokensReplacement = {answer: this.$fieldConfigs[id].options[this.$parent.getFieldValue(id)] || ""};
+    const title = (new DOMParser().parseFromString(emptyConfig.no_result_title, "text/html")).documentElement.textContent;
     this.$root.querySelector('[data-field=no-result-title]').innerHTML =
-      Utils.replaceToken(title, {answer: this.$fieldConfigs[id].options[this.$parent.getFieldValue(id)] || ""});
+      Utils.replaceToken(title, tokensReplacement);
 
-    this.$root.querySelector('[data-field=no-result-sentence]').innerHTML = config.no_result_sentence;
-    this.$root.querySelector('[data-field=no-result-link]').setAttribute('href', config.button_link);
-    this.$root.querySelector('[data-field=no-result-link]').innerHTML = config.button_text;
+    this.$root.querySelector('[data-field=no-result-sentence]').innerHTML =
+      Utils.replaceToken(emptyConfig.no_result_sentence, tokensReplacement);
+    const link = this.$root.querySelector('[data-field=no-result-link]');
+
+    link.setAttribute('href', emptyConfig.button_link);
+    link.innerHTML = emptyConfig.button_text;
+
 
     return true;
   }

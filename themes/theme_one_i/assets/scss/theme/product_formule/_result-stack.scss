@@ -1,0 +1,18 @@
+.result-stack {
+  .stack-item {
+    padding: 1rem 0 1rem 1rem;
+    border-left: 4px solid $gray4;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    &-result {
+      padding-right: 0.5rem;
+    }
+  }
+
+  a.o-link {
+    margin-left: auto;
+    cursor: pointer;
+  }
+}

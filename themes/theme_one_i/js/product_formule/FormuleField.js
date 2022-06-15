@@ -55,6 +55,13 @@ class FormuleField {
     return null;
   }
 
+  resetValue() {
+    if (this.$root.querySelector(`input[name="${this.$inputName}"]:checked`)) {
+      this.$root.querySelector(`input[name="${this.$inputName}"]:checked`).checked = false;
+      this.unactiveAll();
+      this.$submit.disabled = true;
+    }
+  }
 }
 
 export default FormuleField;

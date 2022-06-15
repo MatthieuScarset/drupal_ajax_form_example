@@ -20,12 +20,16 @@
 {% set nb_questions = formule_fields|length %}
 {% set modal_id = "modal-formule-" ~ product_formule_entity.id() %}
 
-
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{ modal_id }}">
   {{ "Choose this formule"|t }}
 </button>
 
-<div class="modal fade modal-product-formule" id="{{ modal_id }}" data-product="{{ product_formule_entity.id() }}" >
+
+<div class="modal fade modal-product-formule" id="{{ modal_id }}"
+     data-formule="{{ product_formule_entity.id() }}"
+     data-formule-name="{{ product_formule_entity.label() }}"
+     data-formule-price="{{ product_formule_entity.field_price[0].value }}"
+>
   <div class="modal-dialog">
     <button type="button" class="close d-flex align-center" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true" class="close-cross">&times</span>
@@ -33,7 +37,7 @@
     </button>
     <div class="modal-content" data-show="reception">
       <div class="left-zone">
-        <div>
+        <div class="content">
           <p class="product-label"><strong>{{ node_label }}</strong></p>
           <p class="formule-label lead"><strong>{{ product_formule_entity.getName() }}</strong></p>
           <div data-step="reception">

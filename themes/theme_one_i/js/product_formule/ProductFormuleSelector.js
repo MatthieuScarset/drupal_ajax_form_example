@@ -19,7 +19,10 @@ class ProductFormuleSelector {
     this.$content = this.$root.querySelector('.modal-content');
 
     this.$modalIsOpen = false;
-    this.$modal.on('shown.bs.modal', () => {this.$modalIsOpen = true;});
+    this.$modal.on('shown.bs.modal', () => {
+      this.$modalIsOpen = true;
+      this._reset();
+    });
     this.$modal.on('hide.bs.modal', () => {
       this.$modalIsOpen = false;
       this._reset();
@@ -50,6 +53,18 @@ class ProductFormuleSelector {
       this.$steps.push(new FormuleField(formuleField, this));
     });
 
+  }
+
+  get formuleName() {
+    return this.$root.dataset.formuleName;
+  }
+
+  get formuleId() {
+    return this.$root.dataset.formule;
+  }
+
+  get formulePrice() {
+    return this.$root.dataset.formulePrice;
   }
 
   /**
@@ -116,6 +131,11 @@ class ProductFormuleSelector {
   }
 
 
+  /**
+   * Retourne au field passé en paramètre
+   * Reset les fields suivants
+   * @param formuleFieldId
+   */
   goToField(formuleFieldId) {
     const field = this.$root.querySelector(`[data-target=${formuleFieldId}]`);
     if (field) {
@@ -131,7 +151,21 @@ class ProductFormuleSelector {
       const currentDisplayedItem = this.$content.dataset.show === 'process' ?
         this.$root.querySelector(`[data-step="process"]:not(.d-none)`) :
         this.$root.querySelector(`[data-step="${this.$content.dataset.show}"]`);
+
       if (currentDisplayedItem) {
+        const currentStepIndex = this.$steps.findIndex((step) =>
+          step.getTarget() === formuleFieldId
+        );
+
+        // Suppression des résultats dans la stack et les étapes
+        this.$steps.forEach((step, key) => {
+          if (key > currentStepIndex) {
+            step.resetValue();
+            this.$resultStack.removeResult(step.getTarget());
+          }
+        });
+
+
         currentDisplayedItem.addEventListener('transitionend', (e) => {
           if (e.propertyName && e.propertyName === "opacity") {
             currentDisplayedItem.classList.add('d-none');
@@ -144,13 +178,6 @@ class ProductFormuleSelector {
         currentDisplayedItem.style.opacity = 0;
       }
     }
-  }
-
-  /**
-   * Go to previous field
-   */
-  previousField() {
-    // TODO previous field
   }
 
   /**
@@ -175,7 +202,10 @@ class ProductFormuleSelector {
    * @private
    */
   _reset() {
-    // TODO purger les données
+    this.$steps.forEach((step) => {
+      step.resetValue();
+      this.$resultStack.removeResult(step.getTarget());
+    });
   }
 
   _show(step) {
@@ -195,7 +225,7 @@ class ProductFormuleSelector {
    * @private
    */
   _toContactForm(formuleFieldId) {
-    if (this.$formContact.setFormuleField(formuleFieldId)) {
+    if (this.$formContact.setFormuleField(formuleFieldId, this.getFieldValue(formuleFieldId))) {
       this._show("contact-form");
       this.$formContact.show();
     }
@@ -241,7 +271,6 @@ class ProductFormuleSelector {
 
     return values;
   }
-
 
 }
 

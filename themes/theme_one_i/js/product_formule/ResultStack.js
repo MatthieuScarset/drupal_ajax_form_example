@@ -9,10 +9,10 @@ class ResultStack {
 
     this.$defaultTemplate = `<div class="stack-item" data-item="" >` +
         `<div class="stack-item-result"></div>` +
-        `<button class="btn btn-link" >${this.$drupal.t('edit')}</button>` +
+        `<a class="o-link" data->${this.$drupal.t('edit')}</a>` +
       `</div>`;
 
-    this.results = {};
+    this.$results = {};
   }
 
   display() {
@@ -21,7 +21,7 @@ class ResultStack {
 
   setResult(formuleFieldId, value) {
     this.display();
-    this.results[formuleFieldId] = value;
+    this.$results[formuleFieldId] = value;
     if (this.$root.querySelector(`[data-item=${formuleFieldId}]`)) {
       this.$root.querySelector(`[data-item=${formuleFieldId}] .stack-item-result`).innerHTML =
         Utils.replaceToken(
@@ -31,7 +31,6 @@ class ResultStack {
     } else {
       this.$root.append(this._createItem(formuleFieldId, value));
     }
-
   }
 
   _createItem(formuleFieldId, value) {
@@ -39,7 +38,7 @@ class ResultStack {
     template.innerHTML = this.$defaultTemplate.trim(); // Never return a text node of whitespace as the result
 
     template.content.querySelector('.stack-item').dataset.item = formuleFieldId;
-    template.content.querySelector('button').addEventListener('click', () => {
+    template.content.querySelector('a.o-link').addEventListener('click', () => {
       this.$parent.goToField(formuleFieldId);
     });
 
@@ -50,6 +49,17 @@ class ResultStack {
       );
 
     return template.content.firstChild;
+  }
+
+  removeResult(formuleFieldId) {
+    const stackItem = this.$root.querySelector(`[data-item=${formuleFieldId}]`);
+    if (stackItem) {
+      stackItem.parentElement.removeChild(stackItem);
+    }
+
+    if (this.$results[formuleFieldId]) {
+      delete this.$results[formuleFieldId];
+    }
   }
 }
 

@@ -64,6 +64,7 @@ class FormulePackageApiController extends ControllerBase {
     if ($package = $this->getUniquePackage($product_formule, $values)) {
       $view_builder = $this->entityTypeManager()->getViewBuilder('formule_package');
       $elements = $view_builder->view($package);
+
       try {
         $render = $this->renderer->render($elements);
       } catch (\Exception) {

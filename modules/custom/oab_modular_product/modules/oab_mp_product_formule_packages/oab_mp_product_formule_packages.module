@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Render\Element;
 
 /**
  * Implements hook_help().
@@ -36,9 +37,35 @@ function oab_mp_product_formule_packages_theme() {
   $theme['formule_package_content_add_list'] = [
     'render element' => 'content',
     'variables' => ['content' => NULL],
-    'file' => 'formule_package.page.inc',
   ];
   return $theme;
+}
+
+/**
+ * Prepares variables for Formule package templates.
+ *
+ * Default template: formule_package.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing the user information and any
+ *   - attributes: HTML attributes for the containing element.
+ */
+function template_preprocess_formule_package(array &$variables) {
+  // Fetch FormulePackage Entity Object.
+  $formule_package = $variables['elements']['#formule_package'];
+
+  // Helpful $content variable for templates.
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+
+  /** @var \Drupal\oab_mp_product_formule_packages\Entity\FormulePackage $formule_package */
+  $formule_package = $variables['elements']['#formule_package'];
+
+  $variables['formule_package'] = $formule_package;
+  $variables['formule_values'] = $formule_package->getFormuleValues();
+
 }
 
 /**
