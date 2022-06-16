@@ -24,6 +24,7 @@ third_party_settings:
         id: ''
         classes: ''
       label: 'Call to action'
+      region: content
 id: paragraph.paragraph_product_call_to_action.default
 targetEntityType: paragraph
 bundle: paragraph_product_call_to_action

@@ -33,6 +33,11 @@ visibility:
     negate: false
     context_mapping:
       language: '@language.current_language_context:language_interface'
+  request_path:
+    id: request_path
+    pages: '/produits/categories/*'
+    negate: true
+    context_mapping: {  }
   'entity_bundle:node':
     id: 'entity_bundle:node'
     bundles:
@@ -40,8 +45,3 @@ visibility:
     negate: true
     context_mapping:
       node: '@node.node_route_context:node'
-  request_path:
-    id: request_path
-    pages: '/produits/categories/*'
-    negate: true
-    context_mapping: {  }

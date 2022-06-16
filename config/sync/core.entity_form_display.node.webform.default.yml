@@ -37,6 +37,7 @@ third_party_settings:
         id: ''
         classes: ''
       label: Rebond
+      region: content
     group_onglets:
       children:
         - group_rebond
@@ -48,6 +49,7 @@ third_party_settings:
         classes: ''
         direction: vertical
       label: Onglets
+      region: content
 _core:
   default_config_hash: 3QPllhmSDNxHFnxrVUPmO5RhAOJtt5AWVmXxyfHQBS0
 id: node.webform.default

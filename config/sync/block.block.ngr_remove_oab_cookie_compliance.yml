@@ -1,0 +1,25 @@
+uuid: d37edf9f-dcf0-480e-86be-6ec532d9b2b2
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:01e8ed61-868f-48bf-8dd5-ea7d2d94bc58'
+  module:
+    - block_content
+  theme:
+    - theme_boosted
+id: ngr_remove_oab_cookie_compliance
+theme: theme_boosted
+region: prefooter
+weight: 0
+provider: null
+plugin: 'block_content:01e8ed61-868f-48bf-8dd5-ea7d2d94bc58'
+settings:
+  id: 'block_content:01e8ed61-868f-48bf-8dd5-ea7d2d94bc58'
+  label: remove_oab_cookie_compliance
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

@@ -30,6 +30,7 @@ third_party_settings:
         classes: ''
         direction: vertical
       label: Onglets
+      region: content
     group_niveau_1:
       children:
         - description
@@ -45,6 +46,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: 'Niveau 1'
+      region: content
     group_niveau_2:
       children:
         - field_icon
@@ -59,6 +61,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: 'Niveau 2'
+      region: content
     group_general:
       children:
         - langcode
@@ -76,6 +79,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Général
+      region: content
 id: taxonomy_term.product_categories.default
 targetEntityType: taxonomy_term
 bundle: product_categories

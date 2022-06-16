@@ -1,0 +1,33 @@
+uuid: 34026ebe-e4a6-4821-87e6-10d53d4daf15
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:a0a43c1d-1250-4ad4-b23b-4d495c213810'
+  module:
+    - block_content
+    - ctools
+  theme:
+    - theme_boosted
+id: ngrfixtabshp
+theme: theme_boosted
+region: prefooter
+weight: 0
+provider: null
+plugin: 'block_content:a0a43c1d-1250-4ad4-b23b-4d495c213810'
+settings:
+  id: 'block_content:a0a43c1d-1250-4ad4-b23b-4d495c213810'
+  label: '[NGR] Fix tabs HP'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      homepage: homepage
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

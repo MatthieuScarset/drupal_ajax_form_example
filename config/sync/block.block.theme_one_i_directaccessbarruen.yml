@@ -12,7 +12,7 @@ dependencies:
 id: theme_one_i_directaccessbarruen
 theme: theme_one_i
 region: prefooter
-weight: -35
+weight: -51
 provider: null
 plugin: 'system_menu_block:direct-access-bar-ru-en'
 settings:

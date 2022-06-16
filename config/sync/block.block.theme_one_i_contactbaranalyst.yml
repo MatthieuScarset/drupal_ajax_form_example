@@ -11,7 +11,7 @@ dependencies:
 id: theme_one_i_contactbaranalyst
 theme: theme_one_i
 region: prefooter
-weight: -49
+weight: -63
 provider: null
 plugin: contact_bar_analyst_block
 settings:

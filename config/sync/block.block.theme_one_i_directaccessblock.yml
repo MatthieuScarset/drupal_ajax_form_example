@@ -7,7 +7,7 @@ dependencies:
 id: theme_one_i_directaccessblock
 theme: theme_one_i
 region: prefooter
-weight: -33
+weight: -43
 provider: null
 plugin: direct_access_block
 settings:

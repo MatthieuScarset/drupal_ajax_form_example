@@ -1,6 +1,6 @@
 uuid: acf761cc-68fa-48ff-afdc-e53f2407b2ea
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - ctools
@@ -12,7 +12,7 @@ dependencies:
 id: theme_one_i_contactbarstandard
 theme: theme_one_i
 region: prefooter
-weight: -42
+weight: -44
 provider: null
 plugin: contact_bar_standard_block
 settings:

@@ -1,12 +1,11 @@
 uuid: ff21a70d-beec-471e-a59c-a5924072f39e
 langcode: fr
-status: false
+status: true
 dependencies:
   content:
     - 'block_content:contact_button:a3ad8ae0-2cae-4bd7-bc88-1ca7d7616242'
   module:
     - block_content
-    - ctools
     - language
   theme:
     - theme_boosted
@@ -25,13 +24,6 @@ settings:
   info: ''
   view_mode: full
 visibility:
-  'entity_bundle:node':
-    id: 'entity_bundle:node'
-    bundles:
-      product: product
-    negate: true
-    context_mapping:
-      node: '@node.node_route_context:node'
   language:
     id: language
     langcodes:

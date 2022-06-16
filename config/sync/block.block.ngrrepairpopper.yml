@@ -1,0 +1,25 @@
+uuid: 9540cd80-08f3-4dea-a029-870c4fa5b202
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:ff968ee2-caea-4184-ad51-be7589ae8b06'
+  module:
+    - block_content
+  theme:
+    - theme_one_i
+id: ngrrepairpopper
+theme: theme_one_i
+region: prefooter
+weight: -47
+provider: null
+plugin: 'block_content:ff968ee2-caea-4184-ad51-be7589ae8b06'
+settings:
+  id: 'block_content:ff968ee2-caea-4184-ad51-be7589ae8b06'
+  label: '[NGR] Repair Popper'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }
