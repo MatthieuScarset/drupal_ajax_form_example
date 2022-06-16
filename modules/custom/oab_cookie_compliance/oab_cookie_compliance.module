@@ -22,9 +22,9 @@ function oab_cookie_compliance_theme($existing, $type, $theme, $path) {
  * pour faire une 2nde verif sur le bloc en JS en plus de celle dans le bloc
  */
 function oab_cookie_compliance_preprocess_page(&$variables) {
-    $variables['#attached']['drupalSettings']['cookie_compliance']['cookie_name'] = CookieComplianceBlock::COOKIE_NAME;
-    $variables['#attached']['drupalSettings']['cookie_compliance']['block_id'] = CookieComplianceBlock::BLOCK_ID;
-    $variables['#attached']['drupalSettings']['cookie_compliance']['expiration_nb_month'] = CookieComplianceBlock::EXPIRATION_NB_MONTH;
-    $variables['#attached']['library'][] = 'oab_cookie_compliance/block-library';
+//    $variables['#attached']['drupalSettings']['cookie_compliance']['cookie_name'] = CookieComplianceBlock::COOKIE_NAME;
+//    $variables['#attached']['drupalSettings']['cookie_compliance']['block_id'] = CookieComplianceBlock::BLOCK_ID;
+//    $variables['#attached']['drupalSettings']['cookie_compliance']['expiration_nb_month'] = CookieComplianceBlock::EXPIRATION_NB_MONTH;
+//    $variables['#attached']['library'][] = 'oab_cookie_compliance/block-library';
 
 }
