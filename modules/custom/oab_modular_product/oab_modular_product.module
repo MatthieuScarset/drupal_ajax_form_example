@@ -298,15 +298,14 @@ function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, 
  * Implements hook_entity_bundle_field_info_alter().
  */
 function oab_modular_product_entity_bundle_field_info_alter(&$fields, EntityTypeInterface $entity_type, $bundle) {
-  if ($entity_type->id() === "paragraph" && $bundle === "module_steps") {
-    $fields['field_step']->addConstraint('ModularProductMinItems');
+  if ($entity_type->id() === "paragraph") {
+    if ($bundle === "module_steps" && isset($fields['field_step'])) {
+      $fields['field_step']->addConstraint('ModularProductMinItems');
+    } elseif (($bundle === "module_customer_space" || $bundle === "module_benefits") && isset($fields['field_item'])) {
+      $fields['field_item']->addConstraint('ModularProductMinItems');
+    }
   }
-  if ($entity_type->id() === "paragraph" && $bundle === "module_customer_space") {
-    $fields['field_item']->addConstraint('ModularProductMinItems');
-  }
-  if ($entity_type->id() === "paragraph" && $bundle === "module_benefits") {
-    $fields['field_item']->addConstraint('ModularProductMinItems');
-  }
+
 
   if ($entity_type->id() === "node" && $bundle === "modular_product") {
     if (isset($fields['field_modules'])) {
