@@ -1,0 +1,19 @@
+uuid: 1af76c90-15fe-4cb6-b464-08b3ed39de6c
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_modular_product_tarif
+    - node.type.modular_product
+id: node.modular_product.field_modular_product_tarif
+field_name: field_modular_product_tarif
+entity_type: node
+bundle: modular_product
+label: 'Product Tarif'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

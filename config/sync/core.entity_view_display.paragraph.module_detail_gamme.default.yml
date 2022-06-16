@@ -1,0 +1,41 @@
+uuid: 8aa08faf-35e7-4850-90c9-1f4fa20bab9d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.module_detail_gamme.field_accroche
+    - field.field.paragraph.module_detail_gamme.field_gamme
+    - field.field.paragraph.module_detail_gamme.field_title
+    - paragraphs.paragraphs_type.module_detail_gamme
+  module:
+    - entity_reference_revisions
+id: paragraph.module_detail_gamme.default
+targetEntityType: paragraph
+bundle: module_detail_gamme
+mode: default
+content:
+  field_accroche:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_gamme:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

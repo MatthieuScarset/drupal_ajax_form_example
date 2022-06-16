@@ -1,0 +1,133 @@
+uuid: 3adceb1c-d76d-4c2b-bf14-909947fc3f39
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_faq
+    - node.type.modular_product
+    - paragraphs.paragraphs_type.module_faq
+  module:
+    - entity_reference_revisions
+id: node.modular_product.field_faq
+field_name: field_faq
+entity_type: node
+bundle: modular_product
+label: FAQ
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      module_faq: module_faq
+    negate: 0
+    target_bundles_drag_drop:
+      contact_button_item:
+        weight: 36
+        enabled: false
+      default_button:
+        weight: 37
+        enabled: false
+      documentation:
+        weight: 38
+        enabled: false
+      home_banner:
+        weight: 39
+        enabled: false
+      home_caroussel:
+        weight: 40
+        enabled: false
+      home_column:
+        weight: 41
+        enabled: false
+      home_column_section:
+        weight: 42
+        enabled: false
+      home_playlist:
+        weight: 43
+        enabled: false
+      home_thematic_columns:
+        weight: 44
+        enabled: false
+      homepage_banner_experience:
+        weight: 45
+        enabled: false
+      homepage_banner_item:
+        weight: 46
+        enabled: false
+      homepage_news:
+        weight: 47
+        enabled: false
+      infography_partner:
+        weight: 48
+        enabled: false
+      marketo:
+        weight: 49
+        enabled: false
+      module_3_4_colonnes:
+        weight: 50
+        enabled: false
+      module_3_4_colonnes_items:
+        weight: 51
+        enabled: false
+      module_benefits:
+        weight: 52
+        enabled: false
+      module_benefits_item:
+        weight: 53
+        enabled: false
+      module_detail_offre:
+        weight: 54
+        enabled: false
+      module_detail_offre_items:
+        weight: 55
+        enabled: false
+      module_faq:
+        weight: 56
+        enabled: true
+      module_faq_quesions:
+        weight: 57
+        enabled: false
+      module_partner:
+        weight: 58
+        enabled: false
+      module_services:
+        weight: 59
+        enabled: false
+      module_step:
+        weight: 60
+        enabled: false
+      module_steps:
+        weight: 61
+        enabled: false
+      module_text_video_image:
+        weight: 62
+        enabled: false
+      paragraph_block_rebond:
+        weight: 63
+        enabled: false
+      paragraph_product_call_to_action:
+        weight: 64
+        enabled: false
+      paragraph_wysiwyg:
+        weight: 65
+        enabled: false
+      rebond_wysiwyg:
+        weight: 66
+        enabled: false
+      related_content:
+        weight: 67
+        enabled: false
+      subhome_presse_carrousel:
+        weight: 68
+        enabled: false
+      titre_and_description:
+        weight: 69
+        enabled: false
+      titre_and_description_and_link:
+        weight: 70
+        enabled: false
+field_type: entity_reference_revisions

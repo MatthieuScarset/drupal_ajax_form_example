@@ -1,0 +1,19 @@
+uuid: 3bbd2a6c-f660-4f95-991f-eeff4676e09b
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.module_detail_gamme_items
+id: paragraph.module_detail_gamme_items.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: module_detail_gamme_items
+label: Titre
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

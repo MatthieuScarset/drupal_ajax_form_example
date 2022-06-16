@@ -1,0 +1,12 @@
+uuid: 4cebc3a8-caea-4552-bcd6-bcb2234c6be7
+langcode: fr
+status: true
+dependencies: {  }
+label: 'Crop 630:630'
+id: crop_630_630
+description: ''
+aspect_ratio: '630:630'
+soft_limit_width: null
+soft_limit_height: null
+hard_limit_width: null
+hard_limit_height: null

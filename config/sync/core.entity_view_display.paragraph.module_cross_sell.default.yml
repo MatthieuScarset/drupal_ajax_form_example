@@ -1,0 +1,43 @@
+uuid: 60074d33-4352-4d39-933a-d2373bb24995
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.module_cross_sell.field_offer_item
+    - field.field.paragraph.module_cross_sell.field_title
+    - field.field.paragraph.module_cross_sell.field_visual
+    - paragraphs.paragraphs_type.module_cross_sell
+  module:
+    - entity_reference_revisions
+id: paragraph.module_cross_sell.default
+targetEntityType: paragraph
+bundle: module_cross_sell
+mode: default
+content:
+  field_offer_item:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_visual:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: image_max_630x630
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden: {  }

@@ -1,7 +1,7 @@
 {
-  "name": "sass_theme",
+  "name": "theme_one_i",
   "version": "1.0.0",
-  "description": "SassthemewithBootstrap",
+  "description": "Sass Theme for One-I",
   "license": "MIT",
   "scripts": {
     "build": "webpack",
@@ -22,5 +22,8 @@
     "webpack": "5.41.1",
     "webpack-cli": "4.7.2",
     "webpack-import-glob-loader": "1.6.3"
+  },
+  "dependencies": {
+    "seamless-scroll-polyfill": "^2.1.8"
   }
 }

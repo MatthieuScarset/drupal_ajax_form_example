@@ -1,0 +1,10 @@
+uuid: 203460f4-1379-4b1f-b261-9e53cddf2457
+langcode: en
+status: true
+dependencies: {  }
+id: title_and_link
+label: '[MP] [Presentation] Title and link'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

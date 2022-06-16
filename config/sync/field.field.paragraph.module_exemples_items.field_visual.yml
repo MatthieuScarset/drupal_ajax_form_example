@@ -1,0 +1,29 @@
+uuid: b1f62559-3056-403e-98eb-15b7bc63c52a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_visual
+    - media.type.image
+    - paragraphs.paragraphs_type.module_exemples_items
+id: paragraph.module_exemples_items.field_visual
+field_name: field_visual
+entity_type: paragraph
+bundle: module_exemples_items
+label: 'Image Item'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

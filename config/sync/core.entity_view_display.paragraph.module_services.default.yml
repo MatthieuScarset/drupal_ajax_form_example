@@ -1,0 +1,41 @@
+uuid: d9677ab8-77f4-4201-b239-f149cd901e11
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.module_services.field_accroche
+    - field.field.paragraph.module_services.field_items_services
+    - field.field.paragraph.module_services.field_title
+    - paragraphs.paragraphs_type.module_services
+  module:
+    - entity_reference_revisions
+id: paragraph.module_services.default
+targetEntityType: paragraph
+bundle: module_services
+mode: default
+content:
+  field_accroche:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_items_services:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

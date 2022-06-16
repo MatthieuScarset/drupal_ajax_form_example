@@ -1,0 +1,10 @@
+{% if 1 == items|length %}
+  <div class="field-items-modules">{{ items }}</div>
+{% else %}
+  <div class="field-items-modules slider-container row">
+    {% for item in items %}
+        <div class="item-detail-offre col-12 mb-1 mb-md-0 col-md-4">{{ item.content }}</div>
+    {% endfor %}
+  </div>
+{% endif %}
+

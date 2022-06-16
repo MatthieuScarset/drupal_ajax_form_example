@@ -1,0 +1,10 @@
+uuid: 64e3b5c6-1c0a-4d64-8100-115184506893
+langcode: en
+status: true
+dependencies: {  }
+id: module_detail_offre_items
+label: '[MP] Module detail offre items'
+icon_uuid: null
+icon_default: null
+description: 'Les items du module détail de l''offre'
+behavior_plugins: {  }

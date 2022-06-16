@@ -1,0 +1,18 @@
+uuid: 6642cf79-94f1-4b9f-a915-6bb8a180cd60
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.modular_product
+id: node.modular_product.title
+field_name: title
+entity_type: node
+bundle: modular_product
+label: Title
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

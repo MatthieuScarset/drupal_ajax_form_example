@@ -1,0 +1,10 @@
+uuid: dc4c97b4-960c-4a3f-b28a-2e0067bce593
+langcode: fr
+status: true
+dependencies: {  }
+id: module_faq
+label: '[MP] Module FAQ'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

@@ -1,0 +1,30 @@
+uuid: 925ef9a5-a5f3-4557-82b8-fa04f6e59d73
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - oab_modular_product
+  theme:
+    - theme_one_i
+id: pagemenumodularproduct
+theme: theme_one_i
+region: content
+weight: -64
+provider: null
+plugin: page_menu_modular_product_block
+settings:
+  id: page_menu_modular_product_block
+  label: 'Page Menu Modular Product'
+  label_display: '0'
+  provider: oab_modular_product
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      modular_product: modular_product

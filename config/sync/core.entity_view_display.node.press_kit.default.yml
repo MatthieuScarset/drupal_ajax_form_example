@@ -1,9 +1,9 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
   config:
     - field.field.node.press_kit.field_aplat
-    - field.field.node.press_kit.field_blog_thematic
     - field.field.node.press_kit.field_content
     - field.field.node.press_kit.field_content_owner
     - field.field.node.press_kit.field_display_title

@@ -1,0 +1,19 @@
+uuid: 90a8071d-44cc-48c2-a2ed-59b62dc46fea
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.module_customer_space
+id: paragraph.module_customer_space.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: module_customer_space
+label: Titre
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

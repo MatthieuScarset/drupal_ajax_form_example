@@ -1,0 +1,27 @@
+.cross-sell-slider {
+  overflow-x: auto;
+  flex-wrap: initial;
+  scrollbar-width: none;
+  min-height: 100%;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .teaser-product {
+    min-height: 100%;
+
+    .btn {
+      max-width: 100% !important;
+    }
+
+    .teaser-product-category {
+      max-width: fit-content;
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    overflow-x: hidden;
+    flex-wrap: wrap;
+  }
+}

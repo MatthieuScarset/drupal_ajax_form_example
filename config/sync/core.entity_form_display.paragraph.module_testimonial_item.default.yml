@@ -1,0 +1,62 @@
+uuid: 59c9fd1a-2c1c-4cf1-a98a-f343f7d9448b
+langcode: fr
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.browser_embed_video_modal
+    - field.field.paragraph.module_testimonial_item.field_highlight
+    - field.field.paragraph.module_testimonial_item.field_testimonial_link
+    - field.field.paragraph.module_testimonial_item.field_title
+    - field.field.paragraph.module_testimonial_item.field_video
+    - paragraphs.paragraphs_type.module_testimonial_item
+  module:
+    - entity_browser
+id: paragraph.module_testimonial_item.default
+targetEntityType: paragraph
+bundle: module_testimonial_item
+mode: default
+content:
+  field_highlight:
+    type: string_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_testimonial_link:
+    type: entity_reference_autocomplete
+    weight: 3
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_video:
+    type: entity_browser_entity_reference
+    weight: 1
+    region: content
+    settings:
+      entity_browser: browser_embed_video_modal
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      field_widget_replace: false
+      open: false
+      field_widget_display_settings:
+        view_mode: default
+      selection_mode: selection_append
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

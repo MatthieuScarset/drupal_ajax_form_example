@@ -1,0 +1,10 @@
+uuid: 60f65500-aedd-4e84-8e4b-11cd81569245
+langcode: fr
+status: true
+dependencies: {  }
+id: detail_gamme_items_offres
+label: '[MP][Detail gamme items] Offres'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

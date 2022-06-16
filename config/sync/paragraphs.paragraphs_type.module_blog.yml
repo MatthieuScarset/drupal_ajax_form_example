@@ -1,0 +1,10 @@
+uuid: 235fadbd-611c-463f-8833-2254749ea150
+langcode: en
+status: true
+dependencies: {  }
+id: module_blog
+label: '[MP] Module Blog'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

@@ -1,0 +1,38 @@
+uuid: 59cbcbbd-cd73-4e4f-bf90-9e41872b232a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.media.logo.field_media_svg
+    - media.type.logo
+  module:
+    - svg_image_field
+    - workbench_moderation
+id: media.logo.default
+targetEntityType: media
+bundle: logo
+mode: default
+content:
+  field_media_svg:
+    type: svg_image_field_widget
+    weight: -1
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_max_width: 300
+      preview_image_max_height: 300
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: -2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  langcode: true
+  path: true
+  status: true
+  uid: true

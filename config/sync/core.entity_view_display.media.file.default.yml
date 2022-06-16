@@ -16,7 +16,8 @@ content:
   field_file:
     type: file_default
     label: hidden
-    settings: {  }
+    settings:
+      use_description_as_link_text: true
     third_party_settings: {  }
     weight: 2
     region: content

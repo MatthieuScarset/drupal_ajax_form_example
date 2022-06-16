@@ -1,0 +1,26 @@
+uuid: b627d059-9f1d-4cae-b1d9-359e4957f43a
+langcode: en
+status: true
+dependencies:
+  config:
+    - crop.type.crop_free_ratio
+  module:
+    - crop
+name: modular_product_image_blog
+label: 'Modular Product Image Blog (533x253)'
+effects:
+  91407c77-aff1-4f44-8c83-58cd85ee3a5a:
+    uuid: 91407c77-aff1-4f44-8c83-58cd85ee3a5a
+    id: crop_crop
+    weight: 1
+    data:
+      crop_type: crop_free_ratio
+      automatic_crop_provider: null
+  7dab0803-4f28-4336-85ab-0897bdbc2646:
+    uuid: 7dab0803-4f28-4336-85ab-0897bdbc2646
+    id: image_scale
+    weight: 2
+    data:
+      width: 533
+      height: 253
+      upscale: true

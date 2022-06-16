@@ -1,0 +1,7 @@
+oab_modular_product.settings:
+  path: '/admin/structure/oab/settings/modular_product/settings'
+  defaults:
+    _form: '\Drupal\oab_modular_product\Form\ModularProductSettingsForm'
+    _title: 'Modular product settings'
+  requirements:
+    _permission: 'administer site configuration'

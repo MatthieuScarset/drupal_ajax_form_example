@@ -1,0 +1,91 @@
+uuid: a3e4550f-1b00-4231-9457-fe825abf9d23
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_item
+    - paragraphs.paragraphs_type.module_benefits
+    - paragraphs.paragraphs_type.module_benefits_item
+  module:
+    - entity_reference_revisions
+id: paragraph.module_benefits.field_item
+field_name: field_item
+entity_type: paragraph
+bundle: module_benefits
+label: 'benefits Item'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      module_benefits_item: module_benefits_item
+    negate: 0
+    target_bundles_drag_drop:
+      contact_button_item:
+        weight: 22
+        enabled: false
+      default_button:
+        weight: 23
+        enabled: false
+      home_banner:
+        weight: 27
+        enabled: false
+      home_caroussel:
+        weight: 28
+        enabled: false
+      home_column:
+        weight: 29
+        enabled: false
+      home_column_section:
+        weight: 30
+        enabled: false
+      home_playlist:
+        weight: 31
+        enabled: false
+      home_thematic_columns:
+        weight: 32
+        enabled: false
+      homepage_banner_experience:
+        weight: 24
+        enabled: false
+      homepage_banner_item:
+        weight: 25
+        enabled: false
+      homepage_news:
+        weight: 26
+        enabled: false
+      infography_partner:
+        weight: 33
+        enabled: false
+      marketo:
+        weight: 34
+        enabled: false
+      module_benefits:
+        weight: 35
+        enabled: false
+      module_benefits_item:
+        weight: 36
+        enabled: true
+      paragraph_block_rebond:
+        weight: 37
+        enabled: false
+      paragraph_product_call_to_action:
+        weight: 38
+        enabled: false
+      paragraph_wysiwyg:
+        weight: 39
+        enabled: false
+      rebond_wysiwyg:
+        weight: 40
+        enabled: false
+      related_content:
+        weight: 41
+        enabled: false
+      subhome_presse_carrousel:
+        weight: 42
+        enabled: false
+field_type: entity_reference_revisions

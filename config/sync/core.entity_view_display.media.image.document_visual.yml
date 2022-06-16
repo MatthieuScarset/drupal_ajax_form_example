@@ -1,13 +1,15 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
   config:
     - core.entity_view_mode.media.document_visual
     - field.field.media.image.field_image
+    - field.field.media.image.field_media_image
     - field.field.media.image.field_tags
     - field.field.media.image.field_thematic
     - image.style.max_650
-    - media_entity.bundle.image
+    - media.type.image
   module:
     - image
 id: media.image.document_visual
@@ -26,6 +28,7 @@ content:
     region: content
 hidden:
   created: true
+  field_media_image: true
   field_tags: true
   field_thematic: true
   langcode: true

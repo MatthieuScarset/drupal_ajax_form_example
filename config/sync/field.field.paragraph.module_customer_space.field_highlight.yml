@@ -1,0 +1,19 @@
+uuid: fff75701-b010-4727-9f70-60c71f666e63
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_highlight
+    - paragraphs.paragraphs_type.module_customer_space
+id: paragraph.module_customer_space.field_highlight
+field_name: field_highlight
+entity_type: paragraph
+bundle: module_customer_space
+label: Highlight
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long
