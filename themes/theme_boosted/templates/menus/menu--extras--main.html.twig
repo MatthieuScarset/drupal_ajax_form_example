@@ -55,7 +55,7 @@ We call a macro which calls itself to render the full tree.
           </ul>
         {% else %}
           <ul class="container-fluid dropdown-menu megamenu row" role="menu">
-            {{ menus.mega_menu_items(item.content, item.below) }}
+            {{ menus.mega_menu_items(item, item.below) }}
           </ul>
         {% endif %}
       {% endif %}
@@ -65,23 +65,23 @@ We call a macro which calls itself to render the full tree.
   {% endmacro %}
 
 
-  {% macro mega_menu_items(content, items) %}
+  {% macro mega_menu_items(parent, items) %}
     <div id="items_megamenu" class="container">
       <div class="col-xs-12 item_soft_col">
         <div class="row mega_menu_soft_header">
-          <h4 class="col-xs-3">{{ content.field_subtitle }}</h4>
-          <a class="col-xs-offset-6 col-xs-3 o-link-arrow mega_menu_global_link" href="{{ content.field_global_link.0['#url'] }}">{{ content.field_global_link.0['#title'] }}</a>
+          <h4 class="col-xs-3">{{ parent.content.field_subtitle }}</h4>
+          <a class="col-xs-offset-6 col-xs-3 o-link-arrow mega_menu_global_link" href="{{ parent.content.field_global_link.0['#url'] }}">{{ parent.content.field_global_link.0['#title'] }}</a>
         </div>
       </div>
       {% for item in items %}
         {% set link_target = item.url.options.target ? '_blank' : '_self' %}
         <div class="col-xs-12 col-lg-4 item_soft_col">
-          <span> {{ link(item.title, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ title ~ '\', \'' ~ item.title ~ '\');'}) }}</span>
+          <span> {{ link(item.title, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ parent.title ~ '\', \'' ~ item.title ~ '\');'}) }}</span>
           {% if item.below %}
             <ul class="sous-items">
               {% for sous_item in item.below %}
                 <li>
-                  {{ link(sous_item.title, hub_getHubSubhomeUrl(sous_item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ title ~ '\', \'' ~ sous_item.title ~'\');'}) }}
+                  {{ link(sous_item.title, hub_getHubSubhomeUrl(sous_item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ parent.title ~ '\', \'' ~ sous_item.title ~'\');'}) }}
                 </li>
               {% endfor %}
             </ul>
