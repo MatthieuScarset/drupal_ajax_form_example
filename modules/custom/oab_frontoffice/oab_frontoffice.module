@@ -497,17 +497,6 @@ function oab_frontoffice_views_post_render($view) {
             }
         }
     }
-    elseif ($view->id() == 'category_page') {
-      if (\Drupal::routeMatch()->getParameters()->has('tid')) {
-        /** @var \Drupal\views\Plugin\views\argument\NumericArgument $argument */
-        $tid = \Drupal::routeMatch()->getParameters()->get('tid');
-        if (null !== ($term = \Drupal\taxonomy\Entity\Term::load($tid))) {
-          $view->setTitle($term->getName());
-          $route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT);
-          $route->setDefault('_title', $term->getName());
-        }
-      }
-    }
 }
 
 function oab_frontoffice_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadcrumb &$breadcrumb, \Drupal\Core\Routing\RouteMatchInterface $route_match, array $context) {
@@ -794,6 +783,19 @@ function oab_frontoffice_preprocess_html(&$variables) {
         if (isset($variables['carousel_bg'])) {
           $variables['attributes']['class'][] = "oab_background_image";
         }
+    }
+  }
+  elseif(\Drupal::routeMatch()->getParameters()->has('view_id') && \Drupal::routeMatch()->getParameter('view_id') === "category_page"){
+    if (\Drupal::routeMatch()->getParameters()->has('tid')) {
+      /** @var \Drupal\views\Plugin\views\argument\NumericArgument $argument */
+      $tid = \Drupal::routeMatch()->getParameters()->get('tid');
+      if (null !== ($term = \Drupal\taxonomy\Entity\Term::load($tid))) {
+        $request = \Drupal::request();
+        if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)) {
+          $route->setDefault('_title', $term->getName());
+          $variables['head_title'] = $term->getName();
+        }
+      }
     }
   }
 
