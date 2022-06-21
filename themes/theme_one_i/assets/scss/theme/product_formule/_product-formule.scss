@@ -136,6 +136,15 @@
           .close-cross {
             font-size: 18px;
           }
+
+          &.o-link-arrow {
+            padding-top: 0;
+            padding-bottom: 0;
+
+            &::before {
+              top: 0.3rem;
+            }
+          }
         }
       }
 

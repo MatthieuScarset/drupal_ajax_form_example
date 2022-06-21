@@ -34,10 +34,11 @@
     <div class="modal-content" data-show="reception">
       <div class="row header justify-content-between m-0 p-0">
         <div class="col-5 p-0 order-md-12">
-          <button type="button" class="close d-flex align-center" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true" class="close-cross">&times</span>
-            <span class="button-text"> Fermer </span>
+          <button type="button" class="close d-none d-md-block d-flex align-center" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" class="d-none d-md-block close-cross">&times</span>
+            <span class="d-none d-md-block button-text"> {{ 'Close'|t }} </span>
           </button>
+          <button type="button" class="close d-md-none o-link-arrow o-link-small back" data-dismiss="modal">{{ 'Close'|t }}</button>
         </div>
         <div class="col-7 p-0 order-md-0">
           <a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home">
