@@ -11,6 +11,7 @@ class ResultStep {
       return response.text();
     }).then((html) => {
       this.$root.innerHTML = html;
+      this.$accordion = new Accordion(this.$root.querySelector('.accordion'));
     });
   }
 
