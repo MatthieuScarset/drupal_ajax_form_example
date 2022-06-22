@@ -1,0 +1,26 @@
+uuid: 6af63cf1-3b80-4d04-bf0d-e93142ce7373
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_formule
+    - paragraphs.paragraphs_type.module_detail_offre_items
+id: paragraph.module_detail_offre_items.field_formule
+field_name: field_formule
+entity_type: paragraph
+bundle: module_detail_offre_items
+label: Formule
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:product_formule_entity'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+field_type: entity_reference

@@ -1,0 +1,34 @@
+uuid: 8174ad57-c439-4d65-9b57-ba3826211e98
+langcode: en
+status: true
+dependencies: {  }
+third_party_settings:
+  oab_mp_formule_field:
+    empty_configs:
+      default:
+        name: Default
+        no_result_title: 'Vous avez indiqué travailler avec [formule-field:color-orange]{answer}[formule-field:color-end]'
+        no_result_sentence: 'Cette demande spécifique doit être traitée par l''un de nos experts. Contactez-nous pour obtenir plus d''informations'
+        button_text: Contactez-nous
+        button_link: 'http://ruby.local:8000/fr/contact'
+      config_1:
+        name: 'Config 1'
+        no_result_title: 'Vous avez indiqué travailler avec [formule-field:color-orange]{answer}[formule-field:color-end]'
+        no_result_sentence: 'Cette demande spécifique doit être traitée par l''un de nos experts. Contactez-nous pour obtenir plus d''informations'
+        button_text: Contactez-nous
+        button_link: 'http://ruby.local:8000/fr/formulaire-contact'
+        inputs: {  }
+id: fournisseur
+label: Fournisseur
+display_label: 'Avec quel fournisseur souhaitez-vous travailler ?'
+description: 'Cliquez sur l''un des fournisseurs pour le sélectionner, puis valider en cliquant sur "Suivant"'
+choices:
+  microsoft: Microsoft
+  google: Google
+  webex: Webex
+  Zoom: zoom
+  no_pref: 'Pas de préférence'
+display_mode: list
+sentence: 'Fournisseur : {answer}'
+null_value: false
+null_label: Autres

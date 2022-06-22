@@ -1,0 +1,22 @@
+# Formule package routing definition
+
+entity.formule_package.canonical:
+  route_name: entity.formule_package.canonical
+  base_route: entity.formule_package.canonical
+  title: 'View'
+
+entity.formule_package.edit_form:
+  route_name: entity.formule_package.edit_form
+  base_route: entity.formule_package.canonical
+  title: 'Edit'
+
+entity.formule_package.version_history:
+  route_name: entity.formule_package.version_history
+  base_route: entity.formule_package.canonical
+  title: 'Revisions'
+
+entity.formule_package.delete_form:
+  route_name:  entity.formule_package.delete_form
+  base_route:  entity.formule_package.canonical
+  title: Delete
+  weight: 10

@@ -1,0 +1,137 @@
+<?php
+
+/**
+ * @file
+ * Contains oab_mp_formule_field.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\oab_mp_formule_field\Entity\FormuleField;
+use Drupal\oab_mp_formule_field\Entity\FormuleFieldInterface;
+
+/**
+ * Implements hook_help().
+ */
+function oab_mp_formule_field_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the oab_mp_formule_field module.
+    case 'help.page.oab_mp_formule_field':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('[MP] OAB Formule Field') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+
+function oab_mp_formule_field_theme($existing, $type, $theme, $path) {
+  return [
+    'formule_field' => [
+      'render element' => 'elements',
+    ],
+  ];
+}
+
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function oab_mp_formule_field_theme_suggestions_formule_field(array $variables) {
+
+  /** @var \Drupal\oab_mp_formule_field\Entity\FormuleField $formule_field */
+  $formule_field = $variables['elements']['#formule_field'];
+
+  return [
+     'formule_field__' . $formule_field->getDisplayMode()
+  ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function oab_mp_formule_field_preprocess_formule_field(&$variables) {
+//  dd($variables);
+  if (!isset($variables['elements']['#formule_field'])) {
+    return;
+  }
+
+  /** @var FormuleField $formule_field */
+  $formule_field = $variables['elements']['#formule_field'];
+
+  $variables['display_label'] = $formule_field->getDisplayLabel();
+  $variables['description'] = $formule_field->getDescription();
+  $variables['choices'] = $formule_field->getChoices();
+  $variables['has_null_value'] = $formule_field->hasNullValue();
+  if ($formule_field->hasNullValue()) {
+    $variables['null_label'] = $formule_field->getNullLabel();
+  }
+
+  $variables['id'] = $formule_field->id();
+
+
+  $third_party_settings = $formule_field->getThirdPartySettings('oab_mp_formule_field');
+  $empty_configs = $third_party_settings['empty_configs'] ?? [];
+
+  $token = Drupal::token();
+  foreach ($empty_configs as $key => &$empty_config) {
+    $empty_config['no_result_title'] = $token->replace($empty_config['no_result_title'] ?? "");
+  }
+
+  $options = $formule_field->getChoices();
+  if ($formule_field->hasNullValue()) {
+    $options[FormuleFieldInterface::NULL_ID] = $formule_field->getNullLabel();
+  }
+
+  $variables['#attached']['drupalSettings']['formuleField'][$formule_field->id()] = [
+    'label' => $formule_field->label(),
+    'displayLabel' => $formule_field->getDisplayLabel(),
+    'resultSentence' => $formule_field->getSentence(),
+    'emptyConfigs' => $empty_configs,
+    'options' => $options
+  ];
+
+}
+
+
+
+/*
+* implement hook_token_info()
+*/
+function oab_mp_formule_field_token_info() {
+  $types = [];
+  $tokens = [];
+
+  $types['formule-field'] = array(
+    'name' => t('Formule Field specific tokens'),
+  );
+
+  $tokens['formule-field']['formule-field:color-orange'] = array(
+    'name' => "Orange",
+  );
+  $tokens['formule-field']['formule-field:color-end'] = array(
+    'name' => "Fin couleur",
+  );
+
+
+  return [
+    'types' => $types,
+    'tokens' => $tokens
+  ];
+}
+/*
+* implement hook_token()
+*/
+function oab_mp_formule_field_tokens($type, $tokens, array $data, array $options, \Drupal\Core\Render\BubbleableMetadata $bubbleable_metadata) {
+  $replacements = array();
+  // Replacement values for tokens that can be calculated without any additional
+  // data.
+
+  if ($type == 'formule-field') {
+    $replacements['[formule-field:color-orange]'] = '<span class="field-color-orange">';
+    $replacements['[formule-field:color-end]'] = '</span>';
+  }
+  // An array of replacement values keyed by original token string.
+  return $replacements;
+}

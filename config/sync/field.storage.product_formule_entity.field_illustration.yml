@@ -1,0 +1,20 @@
+uuid: 3c79bbf8-916a-446c-aad1-432c84725aed
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - oab_mp_formules
+id: product_formule_entity.field_illustration
+field_name: field_illustration
+entity_type: product_formule_entity
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

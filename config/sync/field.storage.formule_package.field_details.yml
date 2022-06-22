@@ -1,0 +1,21 @@
+uuid: 495ed90d-ab15-4dd3-a35d-6d599a9c2201
+langcode: fr
+status: true
+dependencies:
+  module:
+    - entity_reference_revisions
+    - oab_mp_product_formule_packages
+    - paragraphs
+id: formule_package.field_details
+field_name: field_details
+entity_type: formule_package
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

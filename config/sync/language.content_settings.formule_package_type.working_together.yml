@@ -1,0 +1,11 @@
+uuid: a8f91f6a-af2d-4ab0-bb37-2a78cbf19db1
+langcode: fr
+status: true
+dependencies:
+  module:
+    - oab_mp_product_formule_packages
+id: formule_package_type.working_together
+target_entity_type_id: formule_package_type
+target_bundle: working_together
+default_langcode: site_default
+language_alterable: false

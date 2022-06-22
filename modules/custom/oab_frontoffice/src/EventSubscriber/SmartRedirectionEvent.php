@@ -40,13 +40,14 @@ class SmartRedirectionEvent implements EventSubscriberInterface {
     // Pour être sur, pour les API Marketo/Altares.
     // Gestion des exceptions dans leur module
     $route_name = \Drupal::routeMatch()->getRouteName();
-    if (strpos($route_name, 'oab_marketo.altares_api') !== false) {
+    if (str_contains($route_name, 'oab_marketo.altares_api')
+      || str_contains($route_name, 'oab_mp_product_formule_packages')) {
       return;
     }
 
     //Gestion des erreurs de la JSON Api par un autre service
     $path = \Drupal::service('path.current')->getPath();
-    if (strpos($route_name, 'jsonapi') !== false || strpos($path, 'jsonapi') !== false) {
+    if (str_contains($route_name, 'jsonapi') || str_contains($path, 'jsonapi')) {
       return;
     }
 

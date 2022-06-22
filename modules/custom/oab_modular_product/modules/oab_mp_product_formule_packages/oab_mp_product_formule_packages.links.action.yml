@@ -1,0 +1,10 @@
+entity.formule_package.add_form:
+  route_name: entity.formule_package.add_page
+  title: 'Add Formule package'
+  appears_on:
+    - entity.formule_package.collection
+entity.formule_package_type.add_form:
+  route_name: entity.formule_package_type.add_form
+  title: 'Add Formule package type'
+  appears_on:
+    - entity.formule_package_type.collection

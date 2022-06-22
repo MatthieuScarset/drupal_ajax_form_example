@@ -41,6 +41,6 @@
 {% for item in items %}
   <a href="{{ item.content['#url'] }}"
      onmousedown="utag_link(utag_data.titre_page,'{{ track_zone|escape('html') }}' ,'{{ track_nom|escape('html') }}','{{ item.content['#title']|escape('html') }}')"
-    {{ attributes.addClass('custom-link') }} >{{ item.content['#title'] }}</a>
+    {{ attributes.addClass('custom-link', 'btn-select-formule') }} >{{ item.content['#title'] }}</a>
 
 {% endfor %}

@@ -12,7 +12,24 @@
       let referrer = document.referrer;
       drupalSettings.marketo_data.mktoFrom = referrer.replace(window.location.origin, '');
 
+
+      setTimeout(() => {
+        console.log((new URL(decodeURI(window.location))).searchParams.entries());
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const mktoForm = document.querySelector(".mktoForm");
+        if (mktoForm) {
+          urlParams.forEach((value, key) => {
+            const input = mktoForm.querySelector(`input[name=${key}]`);
+            if (input) {
+              input.value = value;
+            }
+          });
+        }
+
+      }, 3000);
       instantiateMktoForm(drupalSettings.marketo_data.mktoFormID, drupalSettings.marketo_data);
+
     }
 
   });

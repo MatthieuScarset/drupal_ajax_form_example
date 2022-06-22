@@ -1,0 +1,31 @@
+add formule package entities:
+  title: 'Create new Formule package entities'
+
+administer formule package entities:
+  title: 'Administer Formule package entities'
+  description: 'Allow to access the administration form to configure Formule package entities.'
+  restrict access: true
+
+delete formule package entities:
+  title: 'Delete Formule package entities'
+
+edit formule package entities:
+  title: 'Edit Formule package entities'
+
+view published formule package entities:
+  title: 'View published Formule package entities'
+
+view unpublished formule package entities:
+  title: 'View unpublished Formule package entities'
+
+view all formule package revisions:
+  title: 'View all Formule package revisions'
+
+revert all formule package revisions:
+  title: 'Revert all Formule package revisions'
+  description: 'Role requires permission <em>view Formule package revisions</em> and <em>edit rights</em> for formule package entities in question or <em>administer formule package entities</em>.'
+
+delete all formule package revisions:
+  title: 'Delete all revisions'
+  description: 'Role requires permission to <em>view Formule package revisions</em> and <em>delete rights</em> for formule package entities in question or <em>administer formule package entities</em>.'
+

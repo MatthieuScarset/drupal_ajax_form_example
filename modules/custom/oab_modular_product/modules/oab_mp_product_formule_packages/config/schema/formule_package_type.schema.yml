@@ -1,0 +1,12 @@
+oab_mp_product_formule_packages.formule_package_type.*:
+  type: config_entity
+  label: 'Formule package type config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    uuid:
+      type: string

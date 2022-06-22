@@ -36,4 +36,4 @@ visibility:
     id: request_path
     negate: false
     context_mapping: {  }
-    pages: "/contact\r\n/node/14239"
+    pages: "/contact\r\n/node/14239\r\n/formulaire-contact"

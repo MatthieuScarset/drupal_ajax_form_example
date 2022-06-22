@@ -1,0 +1,21 @@
+
+<div class="formule_field" data-formule-field="{{ id }}">
+
+  <span class="h1">{{ display_label }}</span>
+  <p>{{ description }}</p>
+
+  <ul class="ob1-filter-chips-bar" data-ob1-component="FilterChipsBar" aria-label="Liste des filtres pour restreindre la liste de résultats">
+    {% for choice, choice_label in choices %}
+      <li class="ob1-filterchip">
+        <input class="ob1-filterchip-input sr-only" id="formule-field-chips-{{ choice }}" type="checkbox" value="{{ choice }}">
+        <label for="formule-field-chips-{{ choice }}" class="ob1-filterchip-label" data-title="{{ choice_label }}">{{ choice_label }}</label>
+      </li>
+    {% endfor %}
+    {% if has_null_value %}
+      <li class="ob1-filterchip">
+        <input class="ob1-filterchip-input sr-only" id="formule-field-chips-nil" type="checkbox" value="{{ constant('NULL_ID', elements['#formule_field']) }}">
+        <label for="formule-field-chips-nil" class="ob1-filterchip-label" data-title="{{ null_label }}">{{ null_label }}</label>
+      </li>
+    {% endif %}
+  </ul>
+</div>
