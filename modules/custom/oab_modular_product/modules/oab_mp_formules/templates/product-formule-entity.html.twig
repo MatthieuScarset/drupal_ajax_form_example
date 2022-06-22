@@ -54,9 +54,37 @@
             <progress max="{{ nb_questions + 1 }}" value="1"></progress>
             <div class="progressbar-label" >Question 1/{{ nb_questions}}</div>
           </div>
-          <div class="result-stack d-none">
+          <div class="d-none d-md-block">
+            <div class="result-stack d-none">
+              <div class="result-items">
 
+              </div>
+            </div>
           </div>
+          <div class="d-md-none">
+            <div class="accordion result-stack d-none">
+              <div class="card multi">
+                <div class="card-header">
+                  <a id="headingOne-1" class="show" data-toggle="collapse" data-target="collapseOne-1" href="#collapseOne-1" role="button" aria-expanded="true">
+                    <div class="accordion-card-title">
+                      <div class="accordion-title">
+                        Ce document est conçu
+                      </div>
+                      <span class="accordion-icon" aria-hidden="true"></span>
+                    </div>
+                  </a>
+                </div>
+                <div id="collapseOne-1" class="show collapse" aria-labelledby="headingOne-1" role="region">
+                  <div class="accordion-card-body standard">
+                    <div class="result-items">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
 
       </div>

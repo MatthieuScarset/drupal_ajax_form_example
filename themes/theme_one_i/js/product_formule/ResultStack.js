@@ -1,8 +1,9 @@
 import Utils from "./Utils";
 
 class ResultStack {
-  constructor(root, parent) {
-    this.$root = root;
+  constructor(parent) {
+    this.$stacks = Array.from(parent.querySelectorAll(''));
+
     this.$parent = parent;
     this.$fieldConfigs = window.drupalSettings.formuleField || [];
     this.$drupal = window.Drupal;
