@@ -1,33 +1,61 @@
-uuid: 31d9bb44-a25e-4507-98e4-608644606312
-langcode: en
+uuid: 012a6c07-665c-4056-bf3d-e68b8a146c37
+langcode: fr
 status: true
 dependencies:
   config:
+    - field.field.formule_package.working_together.field_description
+    - field.field.formule_package.working_together.field_details
     - field.field.formule_package.working_together.field_price
+    - field.field.formule_package.working_together.field_teaser
     - oab_mp_product_formule_packages.formule_package_type.working_together
+  module:
+    - entity_reference_revisions
 id: formule_package.working_together.default
 targetEntityType: formule_package
 bundle: working_together
 mode: default
 content:
+  field_description:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_details:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
   field_price:
     type: number_decimal
-    label: above
+    label: hidden
     settings:
       thousand_separator: ''
       decimal_separator: .
-      scale: 2
+      scale: 0
       prefix_suffix: true
     third_party_settings: {  }
-    weight: -3
+    weight: 2
+    region: content
+  field_teaser:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
     region: content
   name:
     type: string
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: -4
+    weight: 0
     region: content
 hidden:
   langcode: true

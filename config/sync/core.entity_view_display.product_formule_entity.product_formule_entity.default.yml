@@ -2,8 +2,6 @@ uuid: fc176cc0-9f1c-4dc3-bb5d-8bf4946f91fe
 langcode: en
 status: true
 dependencies:
-  config:
-    - field.field.product_formule_entity.product_formule_entity.field_illustration
   module:
     - oab_mp_formules
 id: product_formule_entity.product_formule_entity.default
@@ -11,15 +9,6 @@ targetEntityType: product_formule_entity
 bundle: product_formule_entity
 mode: default
 content:
-  field_illustration:
-    type: entity_reference_entity_view
-    label: hidden
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
-    weight: 2
-    region: content
   formule_fields:
     type: entity_reference_entity_view
     label: hidden
@@ -27,7 +16,7 @@ content:
       view_mode: default
       link: false
     third_party_settings: {  }
-    weight: 0
+    weight: -4
     region: content
   langcode:
     type: language
@@ -36,7 +25,7 @@ content:
       link_to_entity: false
       native_language: false
     third_party_settings: {  }
-    weight: 3
+    weight: 1
     region: content
   name:
     type: string
@@ -44,6 +33,6 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 1
+    weight: 0
     region: content
 hidden: {  }

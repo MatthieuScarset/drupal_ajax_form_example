@@ -8,4 +8,4 @@ id: formule_package_type.working_together
 target_entity_type_id: formule_package_type
 target_bundle: working_together
 default_langcode: site_default
-language_alterable: true
+language_alterable: false
