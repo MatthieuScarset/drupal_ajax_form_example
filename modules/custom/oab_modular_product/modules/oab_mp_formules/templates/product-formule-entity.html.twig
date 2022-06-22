@@ -31,28 +31,43 @@
      data-formule-price="{{ product_formule_entity.field_price[0].value }}"
 >
   <div class="modal-dialog">
-    <button type="button" class="close d-flex align-center" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true" class="close-cross">&times</span>
-      Fermer
-    </button>
     <div class="modal-content" data-show="reception">
+      <div class="row header justify-content-between m-0 p-0">
+        <div class="col-5 p-0 order-md-12">
+          <button type="button" class="close d-none d-md-block" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" class="close-cross">&times</span>
+            <span class="button-text"> {{ 'Close'|t }} </span>
+          </button>
+          <button type="button" class="close d-md-none o-link-arrow o-link-small back" data-dismiss="modal">{{ 'Close'|t }}</button>
+        </div>
+        <div class="col-7 p-0 order-md-0">
+          <a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home">
+            <img class="site-logo d-none d-md-block" src="/{{ base_path ~ directory }}/logo-fond-blanc.png" alt="{{ 'Home'|t }}" />
+            <img class="site-logo logo-mobile-one-i d-md-none float-right mr-1"
+                 src="/{{ base_path ~ directory }}/assets/image/logo-mobile-text-black.png" alt="{{ 'Home'|t }}" />
+          </a>
+        </div>
+      </div>
+
       <div class="left-zone">
         <div class="content">
-          <p class="product-label"><strong>{{ node_label }}</strong></p>
-          <p class="formule-label lead"><strong>{{ product_formule_entity.getName() }}</strong></p>
+          <p class="d-none d-md-block product-label"><strong>{{ node_label }}</strong></p>
+          <p class="d-none d-md-block formule-label lead"><strong>{{ product_formule_entity.getName() }}</strong></p>
+          <p class="d-md-none product-formule-label"><strong>{{ node_label }}</strong> &bull; <strong>{{ product_formule_entity.getName() }}</strong></p>
           <div data-step="reception">
             <span class="h1">
             Vérifions votre éligibilité à la pré-commande
           </span>
-            <p>Afin de vérifier votre éligibilité à la pré-commande en ligne et de nous permettre de configurer votre formule,
+            <p class="accroche lead">Afin de vérifier votre éligibilité à la pré-commande en ligne et de nous permettre de configurer votre
+              formule,
               répondez aux {{ nb_questions }} questions suivantes.
             </p>
 
             <button class="btn btn-primary btn-begin">Commencer</button>
           </div>
           <div class="progressbar d-none" data-label="Question {num_question}/{{ nb_questions }}">
-            <progress max="{{ nb_questions + 1 }}" value="1"></progress>
-            <div class="progressbar-label" >Question 1/{{ nb_questions}}</div>
+            <progress max="{{ nb_questions + 1}}" value="1"></progress>
+            <div class="progressbar-label">Question 1/{{ nb_questions }}</div>
           </div>
           <div class="result-stack d-none">
 
@@ -62,7 +77,15 @@
       </div>
       <div class="right-zone">
         <div data-step="reception">
-          <p>RIGHT ZONE RECEPTION</p>
+          <p class="d-none">RIGHT ZONE RECEPTION</p>
+          <div class="illustration">
+            {% set illustration = {
+              '#theme':'image',
+              '#uri': field_illustration_uri,
+              '#alt': field_illustration_alt,
+            } %}
+            {{ illustration }}
+          </div>
         </div>
         {% for formule_field in formule_fields %}
           <div class="{% if loop.index != 1 %}d-none{% endif %}" data-step="process">
