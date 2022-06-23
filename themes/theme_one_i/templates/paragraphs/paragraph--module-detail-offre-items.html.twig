@@ -45,37 +45,55 @@
   not paragraph.isPublished() ? 'paragraph--unpublished'
 ] %}
 {% block paragraph %}
-
-  <div
-    class="detail-offre-item bg-white h-100 py-1 px-1 py-md-3 px-md-2 item-close"
-    data-formule="{{ formule_package.id()}}"
-  >
-    {% block content %}
-      <div class="detail-offre-content">
-        <h3 class="pb-0 mb-1">{{ formule_package.label }}</h3>
-        <span>{{ content.field_accroche }}</span>
-        <h4 class="text-primary py-0 my-1">{{ content.field_price_label }}</h4>
-
-        {{ content.field_formule }}
-
-
-{#        {{ content.field_link_button }}#}
-
-
-
-        <hr class="separator separator--gray4 my-1" />
-        {{ (content.field_offres_inclus) }}
-        {{ content.field_offres_exclus }}
-        {{ content.field_documentation }}
+  {% block content %}
+    {% if (is_single) %}
+      <div class="row justify-content-between mx-0" data-paragraph="{{ paragraph.bundle }}" data-track-nom="{{ content.field_title|render|striptags|trim }}">
+        <div class="col-12 col-md-4 pt-md-1 px-0">
+          <h4 class="pb-0 mb-1 mb-md-2">{{ content.field_title }}</h4>
+          <span class="lead">{{ content.field_accroche }}</span>
+          {{ content.field_documentation }}
+          <h4 class="text-primary py-0 mt-1 mb-2">{{ content.field_price_label }}</h4>
+          <div class="call-to-action">
+            {{ content.field_cta}}
+          </div>
+        </div>
+        <div class="bg-white col-12 col-md-7 p-1 p-md-2">
+          {{ content.field_offres_inclus }}
+          {{ content.field_offres_exclus }}
+        </div>
       </div>
 
-      <button type="button"
-              class="o-link-arrow see-more down text-decoration-none font-weight-bold text-center pb-2 w-100"
-      >
-        <span class="text-voir-tout">{{ "See All"|t }}</span>
-        <span class="text-voir-moins d-none">{{ "See less"|t }}</span>
-      </button>
+    {% else %}
 
+      <div class="detail-offre-item bg-white h-100 py-1 px-1 py-md-3 px-md-2 item-close">
+        <div class="detail-offre-content">
+          <div class="detail-offre-content-header">
+            <h4 class="pb-0 mb-1">{{ content.field_title }}</h4>
+            <div class="accroche">{{ content.field_accroche }}</div>
+            <h4 class="text-primary py-0 my-1">{{ content.field_price_label }}</h4>
+            <div class="call-to-action">
+              {{ content.field_cta}}
+            </div>
+          </div>
+          <hr class="separator separator--gray4 mt-1 mt-sm-2">
+
+          <div class="mb-2 mb-md-3">
+            {{ content.field_offres_inclus }}
+            {{ content.field_offres_exclus }}
+            {{ content.field_documentation }}
+          </div>
+
+        </div>
+        <button type="button"
+                class="o-link-arrow see-more down font-weight-bold text-center pb-2 w-100"
+                onmousedown="utag_link(utag_data.titre_page,'detail offre' ,'{{ content.field_title.0["#context"]["value"]|escape('html') }}','voir tout')">
+          <span class="text-voir-tout">{{ "see more"|t }}</span>
+          <span class="text-voir-moins d-none">{{ "see less"|t }}</span>
+
+          <span class="d-md-none text-voir-detail">{{ "show details"|t }}</span>
+          <span class="text-masquer-detail d-none">{{ "hide details"|t }}</span>
+        </button>
+      </div>
 
     {%endif%}
   {% endblock %}
