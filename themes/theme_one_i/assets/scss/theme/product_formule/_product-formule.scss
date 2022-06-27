@@ -106,7 +106,6 @@
         }
 
         display: flex;
-        align-items: center;
         transition: width .5s;
       }
 
@@ -126,9 +125,12 @@
 
       }
 
+
       .left-zone > .content {
         width: 100%;
-        max-width: 350px;
+        @include media-breakpoint-up(md) {
+          max-width: 350px;
+        }
       }
 
       .product-label {

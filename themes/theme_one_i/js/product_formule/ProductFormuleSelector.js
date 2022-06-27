@@ -23,14 +23,10 @@ class ProductFormuleSelector {
       this.$modalIsOpen = true;
       this._reset();
     });
-    this.$modal.on('hide.bs.modal', () => {
-      this.$modalIsOpen = false;
-      this._reset();
-    });
 
     this.$progressBar = new CustomProgressBar(this.$root.querySelector('.progressbar'));
     this.$resultStep = new ResultStep(this.$root.querySelector('[data-step="result"]'));
-    this.$resultStack = new ResultStack(this);
+    this.$resultStack = new ResultStack(this.$root);
 
     this.$fields = Array.from(this.$root.querySelectorAll('.modal-content .right-zone [data-step="process"]'));
     this.$fields.forEach((field) => {
@@ -206,6 +202,8 @@ class ProductFormuleSelector {
       step.resetValue();
       this.$resultStack.removeResult(step.getTarget());
     });
+    this._show('reception');
+    this.$progressBar.restart();
   }
 
   _show(step) {

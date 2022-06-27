@@ -2,7 +2,7 @@ import Utils from "./Utils";
 
 class ResultStack {
   constructor(parent) {
-    this.$stacks = Array.from(parent.querySelectorAll(''));
+    this.$stacks = Array.from(parent.querySelectorAll('.result-stack'));
 
     this.$parent = parent;
     this.$fieldConfigs = window.drupalSettings.formuleField || [];
@@ -17,21 +17,25 @@ class ResultStack {
   }
 
   display() {
-    this.$root.classList.remove('d-none');
+    this.$stacks.forEach((stack) => {
+      stack.classList.remove('d-none');
+    });
   }
 
   setResult(formuleFieldId, value) {
     this.display();
     this.$results[formuleFieldId] = value;
-    if (this.$root.querySelector(`[data-item=${formuleFieldId}]`)) {
-      this.$root.querySelector(`[data-item=${formuleFieldId}] .stack-item-result`).innerHTML =
-        Utils.replaceToken(
-          this.$fieldConfigs[formuleFieldId].resultSentence,
-          {answer: this.$fieldConfigs[formuleFieldId].options[value] || ""}
-        );
-    } else {
-      this.$root.append(this._createItem(formuleFieldId, value));
-    }
+    this.$stacks.forEach((stack) => {
+      if (stack.querySelector(`[data-item=${formuleFieldId}]`)) {
+        stack.querySelector(`[data-item=${formuleFieldId}] .stack-item-result`).innerHTML =
+          Utils.replaceToken(
+            this.$fieldConfigs[formuleFieldId].resultSentence,
+            {answer: this.$fieldConfigs[formuleFieldId].options[value] || ""}
+          );
+      } else {
+          stack.querySelector('.result-items').append(this._createItem(formuleFieldId, value));
+      }
+    });
   }
 
   _createItem(formuleFieldId, value) {
@@ -53,10 +57,12 @@ class ResultStack {
   }
 
   removeResult(formuleFieldId) {
-    const stackItem = this.$root.querySelector(`[data-item=${formuleFieldId}]`);
-    if (stackItem) {
-      stackItem.parentElement.removeChild(stackItem);
-    }
+    this.$stacks.forEach((stack) => {
+      const stackItem = stack.querySelector(`[data-item=${formuleFieldId}]`);
+      if (stackItem) {
+        stackItem.parentElement.removeChild(stackItem);
+      }
+    });
 
     if (this.$results[formuleFieldId]) {
       delete this.$results[formuleFieldId];
