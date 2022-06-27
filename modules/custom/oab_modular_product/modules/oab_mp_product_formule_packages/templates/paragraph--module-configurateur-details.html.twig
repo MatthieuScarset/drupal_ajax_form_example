@@ -4,7 +4,7 @@
       <a id="detail-{{ elements['#paragraph'].id() }}" class="collapsed" data-toggle="collapse" data-target="#collapseDetail-{{ elements['#paragraph'].id() }}" href="#collapseDetail-{{ elements['#paragraph'].id() }}" aria-expanded="false" role="button">
         <div class="accordion-card-title">
           <div class="accordion-title text-decoration-none">
-            {{ elements.field_question }}
+            {{ elements.field_detail_title }}
           </div>
           <span class="accordion-icon" aria-hidden="true"></span>
         </div>
@@ -12,7 +12,7 @@
     </div>
     <div id="collapseDetail-{{ elements['#paragraph'].id() }}" class="collapse col-12 px-0" aria-labelledby="detail-{{ elements['#paragraph'].id() }}" data-parent="#formulePackageDetailAccordion" role="region">
       <div class="accordion-card-body standard">
-        {{ elements.field_answered }}
+        {{ elements.field_detail_description }}
       </div>
     </div>
   </div>

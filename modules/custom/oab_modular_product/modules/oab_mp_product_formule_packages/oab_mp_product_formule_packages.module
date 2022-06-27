@@ -41,7 +41,7 @@ function oab_mp_product_formule_packages_theme() {
   $theme['field__formule_package__field_details'] = [
     'render element' => 'elements',
   ];
-  $theme['paragraph__module_faq_quesions'] = [
+  $theme['paragraph__module_configurateur_details'] = [
     'render element' => 'elements',
   ];
   return $theme;
