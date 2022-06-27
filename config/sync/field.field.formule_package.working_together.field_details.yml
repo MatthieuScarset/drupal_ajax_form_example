@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.storage.formule_package.field_details
     - oab_mp_product_formule_packages.formule_package_type.working_together
-    - paragraphs.paragraphs_type.module_faq_quesions
+    - paragraphs.paragraphs_type.module_configurateur_details
   module:
     - entity_reference_revisions
 id: formule_package.working_together.field_details
@@ -22,7 +22,7 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
-      module_faq_quesions: module_faq_quesions
+      module_configurateur_details: module_configurateur_details
     negate: 0
     target_bundles_drag_drop:
       contact_button_item:
@@ -79,6 +79,9 @@ settings:
       module_benefits_item:
         weight: 53
         enabled: false
+      module_configurateur_details:
+        weight: 55
+        enabled: true
       module_detail_offre:
         weight: 54
         enabled: false
@@ -90,7 +93,7 @@ settings:
         enabled: false
       module_faq_quesions:
         weight: 57
-        enabled: true
+        enabled: false
       module_partner:
         weight: 58
         enabled: false
