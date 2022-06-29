@@ -1,0 +1,19 @@
+uuid: 0ac91993-ddc9-4f00-ac23-50e0b58e9811
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_detail_title
+    - paragraphs.paragraphs_type.module_configurateur_details
+id: paragraph.module_configurateur_details.field_detail_title
+field_name: field_detail_title
+entity_type: paragraph
+bundle: module_configurateur_details
+label: 'Detail title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

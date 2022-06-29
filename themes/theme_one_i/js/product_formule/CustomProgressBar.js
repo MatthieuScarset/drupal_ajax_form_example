@@ -42,6 +42,12 @@ class CustomProgressBar {
 
   display() {
     this.$root.classList.remove('d-none');
+    this._changeStep();
+  }
+
+  restart() {
+    this.$root.classList.add('d-none');
+    this.$currentStep = 1;
   }
 }
 

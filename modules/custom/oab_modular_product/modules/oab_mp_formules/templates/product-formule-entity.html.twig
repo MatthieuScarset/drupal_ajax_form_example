@@ -69,15 +69,39 @@
             <progress max="{{ nb_questions + 1}}" value="1"></progress>
             <div class="progressbar-label">Question 1/{{ nb_questions }}</div>
           </div>
-          <div class="result-stack d-none">
+          <div class="d-none d-md-block">
+            <div class="result-stack d-none">
+              <div class="result-items">
 
+              </div>
+            </div>
           </div>
+          <div class="d-md-none">
+            {% set stack_list_btn_id = "stack-list-collapsed-btn-" ~ product_formule_entity.id() %}
+            {% set stack_list_id = "stack-list-collapsed-" ~ product_formule_entity.id() %}
+            <div class="result-stack stack-mobile d-none">
+              <button id="{{ stack_list_btn_id }}"
+                      type="button"
+                      class="o-link-arrow down collapsed py-1"
+                      data-toggle="collapse"
+                      data-target="#{{ stack_list_id }}"
+                      aria-expanded="false"
+                      aria-controls="{{ stack_list_id }}"
+              >
+                Modifier mes réponses</button>
+              <div id="{{ stack_list_id }}" class=" collapse" role="region" aria-labelledby="{{ stack_list_btn_id }}">
+                <div class="result-items">
+
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
 
       </div>
       <div class="right-zone">
         <div data-step="reception">
-          <p class="d-none">RIGHT ZONE RECEPTION</p>
           <div class="illustration">
             {% set illustration = {
               '#theme':'image',
@@ -99,7 +123,9 @@
               <div class="pb-3 pb-md-2"><span data-field="no-result-sentence"></span></div>
               <a class="btn btn-primary mb-3" data-field="no-result-link"></a>
             </div>
-            <img class="col-7 col-md-3 offset-6 offset-md-0 pr-0 pr-md-1" src="/themes/theme_one_i/assets/image/illustration-contact-orange.png" alt="illustration contact">
+            <div class="col-7 col-md-3 offset-6 offset-md-0 px-0 h-100">
+              <img class="" src="/themes/theme_one_i/assets/image/illustration-contact-orange.png" alt="illustration contact">
+            </div>
           </div>
         </div>
         <div data-step="result"></div>

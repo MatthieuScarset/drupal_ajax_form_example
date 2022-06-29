@@ -13,24 +13,21 @@ class ProductFormuleSelector {
    */
   constructor(root) {
     this.$root = root;
-    this.$modal = jQuery(this.$root.querySelector('.modal.modal-product-formule'));
+    this.$modal = jQuery(this.$root);
     this.$formuleId = this.$root.dataset.formule || 0;
 
     this.$content = this.$root.querySelector('.modal-content');
 
     this.$modalIsOpen = false;
-    this.$modal.on('shown.bs.modal', () => {
-      this.$modalIsOpen = true;
-      this._reset();
-    });
+
     this.$modal.on('hide.bs.modal', () => {
-      this.$modalIsOpen = false;
+      this.$modalIsOpen = true;
       this._reset();
     });
 
     this.$progressBar = new CustomProgressBar(this.$root.querySelector('.progressbar'));
     this.$resultStep = new ResultStep(this.$root.querySelector('[data-step="result"]'));
-    this.$resultStack = new ResultStack(this.$root.querySelector('.result-stack'), this);
+    this.$resultStack = new ResultStack(this, this.$root.querySelectorAll('.result-stack'));
 
     this.$fields = Array.from(this.$root.querySelectorAll('.modal-content .right-zone [data-step="process"]'));
     this.$fields.forEach((field) => {
@@ -44,8 +41,9 @@ class ProductFormuleSelector {
     this.$formContact = new ContactFormStep(this.$root.querySelector('[data-step="contact-form"]'), this);
 
 
-    this.$root.querySelector('.modal-content .left-zone [data-step="reception"] .btn.btn-begin').addEventListener('click', () => {
-      this._start();
+    this.$root.querySelector('.modal-content .left-zone [data-step="reception"] .btn.btn-begin')
+      .addEventListener('click', () => {
+        this._start();
     });
 
     this.$steps = [];
@@ -206,6 +204,11 @@ class ProductFormuleSelector {
       step.resetValue();
       this.$resultStack.removeResult(step.getTarget());
     });
+    this.$fields[0].classList.remove('d-none');
+    this.$fields[0].style.opacity = null;
+    this.$resultStack.hide();
+    this._show('reception');
+    this.$progressBar.restart();
   }
 
   _show(step) {
