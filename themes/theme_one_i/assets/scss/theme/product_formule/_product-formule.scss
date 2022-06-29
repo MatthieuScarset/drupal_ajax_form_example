@@ -6,17 +6,14 @@
 
     @if $inverse {
       .left-zone {
-        height: 75%;
+        height: 100%;
 
         @include media-breakpoint-up(md) {
           padding-right: 25%;
           width: 60%;
-          height: revert;
         }
 
         .content {
-          margin-top: -13rem;
-
           .product-formule-label {
             margin-bottom: 45px;
           }
@@ -24,20 +21,17 @@
       }
 
       .right-zone {
-        height: 25%;
+        height: 40%;
         @include media-breakpoint-up(md) {
+          height: 100%;
           width: 40%;
           min-width: 400px;
-          height: revert;
         }
       }
     } @else {
       .left-zone {
-        height: 30%;
         align-items: start;
         @include media-breakpoint-up(md) {
-          width: 30%;
-          height: revert;
           min-width: 400px;
         }
 
@@ -61,11 +55,7 @@
       }
 
       .right-zone {
-        height: 70%;
-        @include media-breakpoint-up(md) {
-          width: 70%;
-          height: revert;
-        }
+        height: 100%;
       }
     }
   }
@@ -149,9 +139,9 @@
       }
 
       .left-zone {
-          margin-top: 5rem !important;
+          margin-top: 5rem;
         @include media-breakpoint-up(md) {
-          margin-top: revert !important;
+          margin-top: revert;
         }
 
         .content {
@@ -182,6 +172,12 @@
         }
       }
 
+      .left-zone {
+        @include media-breakpoint-down(sm) {
+          align-items: start;
+        }
+      }
+
       .right-zone {
         background-color: #f4f4f4;
         overflow-y: scroll;
@@ -189,6 +185,10 @@
 
         &::-webkit-scrollbar {
           display: none;
+        }
+
+        @include media-breakpoint-down(sm) {
+          padding-top: 3rem;
         }
 
 
@@ -202,7 +202,7 @@
 
         .illustration {
           position: absolute;
-          bottom: 10%;
+          bottom: 6rem;
           left: 1rem;
           right: 1rem;
           @include media-breakpoint-up(md) {
@@ -236,6 +236,19 @@
 
       .formule-label {
         padding-top: 0;
+      }
+
+      .stack-mobile {
+        margin-left: -1rem;
+        margin-right: -1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        border-top: 1px solid $gray4;
+
+       /* button {
+          padding-top: 13px;
+          padding-bottom: 13px;
+        }*/
       }
 
     }
