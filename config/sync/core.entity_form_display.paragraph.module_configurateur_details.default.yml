@@ -1,0 +1,34 @@
+uuid: 196c83c1-336c-4ece-8526-afa25167c796
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.module_configurateur_details.field_detail_description
+    - field.field.paragraph.module_configurateur_details.field_detail_title
+    - paragraphs.paragraphs_type.module_configurateur_details
+  module:
+    - text
+id: paragraph.module_configurateur_details.default
+targetEntityType: paragraph
+bundle: module_configurateur_details
+mode: default
+content:
+  field_detail_description:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_detail_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
