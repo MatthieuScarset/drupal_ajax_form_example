@@ -62,24 +62,21 @@
             </div>
           </div>
           <div class="d-md-none">
-            <div class="accordion result-stack d-none">
-              <div class="card multi">
-                <div class="card-header">
-                  <a id="headingOne-1" class="show" data-toggle="collapse" data-target="collapseOne-1" href="#collapseOne-1" role="button" aria-expanded="true">
-                    <div class="accordion-card-title">
-                      <div class="accordion-title">
-                        Ce document est conçu
-                      </div>
-                      <span class="accordion-icon" aria-hidden="true"></span>
-                    </div>
-                  </a>
-                </div>
-                <div id="collapseOne-1" class="collapse" aria-labelledby="headingOne-1" role="region">
-                  <div class="accordion-card-body standard">
-                    <div class="result-items">
+            {% set stack_list_btn_id = "stack-list-collapsed-btn-" ~ product_formule_entity.id() %}
+            {% set stack_list_id = "stack-list-collapsed-" ~ product_formule_entity.id() %}
+            <div class="result-stack stack-mobile d-none">
+              <button id="{{ stack_list_btn_id }}"
+                      type="button"
+                      class="o-link-arrow down collapsed py-1"
+                      data-toggle="collapse"
+                      data-target="#{{ stack_list_id }}"
+                      aria-expanded="false"
+                      aria-controls="{{ stack_list_id }}"
+              >
+                Modifier mes réponses</button>
+              <div id="{{ stack_list_id }}" class=" collapse" role="region" aria-labelledby="{{ stack_list_btn_id }}">
+                <div class="result-items">
 
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

@@ -26,7 +26,7 @@ class ProductFormuleSelector {
 
     this.$progressBar = new CustomProgressBar(this.$root.querySelector('.progressbar'));
     this.$resultStep = new ResultStep(this.$root.querySelector('[data-step="result"]'));
-    this.$resultStack = new ResultStack(this.$root);
+    this.$resultStack = new ResultStack(this, this.$root.querySelectorAll('.result-stack'));
 
     this.$fields = Array.from(this.$root.querySelectorAll('.modal-content .right-zone [data-step="process"]'));
     this.$fields.forEach((field) => {
@@ -139,6 +139,7 @@ class ProductFormuleSelector {
         return f.querySelector(`[data-target="${formuleFieldId}"]`) !== null;
       });
       if (index !== -1) {
+        alert("i'm here");
         this.$progressBar.goToStep(index + 1);
       }
 
