@@ -33,18 +33,17 @@
 
         {% set price = formule_package.field_price[0].getValue() ?? 0 %}
 
-        <a class="btn btn-primary" href="{{ drupal_url('/fr/formulaire-contact',
-          {
-            query: {
+        {# Encodage des données à envoyer à Marketo en Base64 #}
+        {% set query_data = {
             mKTOPMCF1String: formule_values.taille_entreprise,
             mKTOPMCF2String: formule_package.label(),
             mKTOPMCF3String: price.value,
             SMB_Customer_Request__c: "Demande de commande commerciale :" ~ formule_package.label()
             ~ "\r\nPack Sélectionné : " ~ formule_values.taille_entreprise
             ~ "\r\nPrix du deviseur retenu :" ~ price.value
-          },
-            absolute: true
-          })
+          }|json_encode()|base64_encode %}
+
+        <a class="btn btn-primary" href="{{ drupal_url('/fr/formulaire-contact', { query: { data: query_data }, absolute: true })
         }}">{{ "Commander"|t }}</a>
       </div>
       <div class="col-12 col-md-6 pl-1 pl-md-2 pt-md-0 ml-1 ml-md-0 mt-3 lead border-left border-gray4">

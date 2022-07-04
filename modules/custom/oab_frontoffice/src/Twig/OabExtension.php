@@ -83,6 +83,7 @@ class OabExtension extends AbstractExtension {
       new TwigFilter('get_files_folder_pardot', [$this, 'get_files_folder_pardot']),
       new TwigFilter('formatDate', [$this, 'formatDate']),
       new TwigFilter('linkAxiome', [$this, 'linkAxiome']),
+      new TwigFilter('base64_encode', [$this, 'base64_encode']),
     ];
 
     return $filters;
@@ -343,6 +344,14 @@ class OabExtension extends AbstractExtension {
     $content = str_replace("<link", "<a", $content);
     $content = str_replace("</link>", "</a>", $content);
     return $content;
+  }
+
+  public function base64_encode(mixed $content): string {
+    // Pour éviter de faire tomber, retour d'une string vide
+    if (!is_string($content)) {
+      return "";
+    }
+    return base64_encode($content);
   }
 
   public function specialCharacters($string) {
