@@ -32,22 +32,21 @@
 >
   <div class="modal-dialog">
     <div class="modal-content" data-show="reception">
-      <div class="row header justify-content-between m-0 p-0">
-        <div class="col-5 p-0 order-md-12">
+      <div class="header-logo">
+        <a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home">
+          <img class="site-logo d-none d-md-block" src="/{{ base_path ~ directory }}/logo-fond-blanc.png" alt="{{ 'Home'|t }}" />
+          <img class="site-logo logo-mobile-one-i d-md-none float-right mr-1"
+               src="/{{ base_path ~ directory }}/assets/image/logo-mobile-text-black.png" alt="{{ 'Home'|t }}" />
+        </a>
+      </div>
+
+      <div class="header-btn-close">
           <button type="button" class="close d-none d-md-block" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true" class="close-cross">&times</span>
+            <span aria-hidden="true" class="close-cross">x</span>
             <span class="button-text"> {{ 'Fermer'|t }} </span>
           </button>
           <button type="button" class="close d-md-none o-link-arrow o-link-small back" data-dismiss="modal">{{ 'Fermer'|t }}</button>
         </div>
-        <div class="col-7 p-0 order-md-0">
-          <a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home">
-            <img class="site-logo d-none d-md-block" src="/{{ base_path ~ directory }}/logo-fond-blanc.png" alt="{{ 'Home'|t }}" />
-            <img class="site-logo logo-mobile-one-i d-md-none float-right mr-1"
-                 src="/{{ base_path ~ directory }}/assets/image/logo-mobile-text-black.png" alt="{{ 'Home'|t }}" />
-          </a>
-        </div>
-      </div>
 
       <div class="left-zone">
         <div class="content">
