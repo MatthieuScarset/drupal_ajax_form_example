@@ -7,6 +7,9 @@ dependencies:
   module:
     - filter
     - media
+    - oab_marketo
+    - oab_mp_formules
+    - oab_mp_product_formule_packages
     - system
 _core:
   default_config_hash: j5zLMOdJBqC0bMvSdth5UebkprJB8g_2FXHqhfpJzow
@@ -19,3 +22,5 @@ permissions:
   - 'use text format comments'
   - 'view marketo form'
   - 'view media'
+  - 'view published formule package entities'
+  - 'view published product formule entity entities'

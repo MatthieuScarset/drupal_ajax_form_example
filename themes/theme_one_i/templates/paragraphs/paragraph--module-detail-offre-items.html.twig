@@ -47,7 +47,7 @@
 {% block paragraph %}
   {% block content %}
     {% if (is_single) %}
-      <div class="row justify-content-between mx-0" data-paragraph="{{ paragraph.bundle }}" data-track-nom="{{ content.field_title|render|striptags|trim }}">
+      <div class="row justify-content-between mx-0" data-paragraph="{{ paragraph.bundle }}" data-track-nom="{{ paragraph.field_title.getValue[0]['value'] }}">
         <div class="col-12 col-md-4 pt-md-1 px-0">
           <h4 class="pb-0 mb-1 mb-md-2">{{ content.field_title }}</h4>
           <span class="lead">{{ content.field_accroche }}</span>
@@ -88,7 +88,7 @@
         </div>
         <button type="button"
                 class="o-link-arrow see-more down font-weight-bold text-center pb-2 w-100"
-                onmousedown="utag_link(utag_data.titre_page,'detail offre' ,'{{ content.field_title.0["#context"]["value"]|escape('html') }}','voir tout')">
+                onmousedown="utag_link(utag_data.titre_page,'detail offre' ,'{{ paragraph.field_title.getValue[0]['value'] }}','voir tout')">
           <span class="text-voir-tout">{{ "see more"|t }}</span>
           <span class="text-voir-moins d-none">{{ "see less"|t }}</span>
 
