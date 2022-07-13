@@ -70,7 +70,11 @@ We call a macro which calls itself to render the full tree.
       <div class="col-xs-12 item_soft_col">
         <div class="row mega_menu_soft_header">
           <h4 class="col-xs-3">{{ parent.content.field_subtitle }}</h4>
-          <a class="col-xs-offset-6 col-xs-3 o-link-arrow mega_menu_global_link" href="{{ parent.content.field_global_link.0['#url'] }}">{{ parent.content.field_global_link.0['#title'] }}</a>
+          <a class="col-xs-offset-6 col-xs-3 o-link-arrow mega_menu_global_link"
+             href="{{ parent.content.field_global_link.0['#url'] }}"
+             onmousedown="utag_link(utag_data.titre_page,'Menu','{{ parent.title }}','{{ parent.content.field_global_link.0['#title'] }}')"
+          >
+            {{ parent.content.field_global_link.0['#title'] }}</a>
         </div>
       </div>
       {% for item in items %}
@@ -133,7 +137,7 @@ We call a macro which calls itself to render the full tree.
                 <li role="presentation">
                   <a class="items" href="{{ item.url }}" data-toggle="tab" data-target="#item-{{ loop.index }}"
                      aria-controls="item-{{ loop.index }}"
-                     onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ title }}','track_cible':'{{ item.title }}','track_type_evt':'clic'})"
+                     onmousedown="utag_link(utag_data.titre_page,'Menu','{{ title }}','{{ item.title }}')"
                      role="tab">{{ item.title }} </a>
                 </li>
               {% endfor %}
@@ -147,7 +151,7 @@ We call a macro which calls itself to render the full tree.
                     <div class="en_ce_moment col-xs-6">{{ 'Key solutions'|t }}</div>
                     <div class="col-xs-6 text-right">
                       <a href="{{ item.url }}"
-                         onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item.title }}','track_cible':'Voir tous les produits','track_type_evt':'clic'});">{{ 'See all solutions'|t }}
+                         onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item.title }}','{{ 'See all solutions'|t }}')">{{ 'See all solutions'|t }}
                         <span class="all_product_glyphicon glyphicon glyphicon-menu-right"></span>
                       </a>
                     </div>
@@ -156,7 +160,7 @@ We call a macro which calls itself to render the full tree.
                     {% for sous_item in item.below %}
                       <div class="sous-items col-xs-6">
                         <a href="{{ sous_item.url }}"
-                           onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item.title }}','track_cible':'{{ sous_item.title }}','track_type_evt':'clic'});">{{ sous_item.title }}
+                           onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item.title }}','{{ sous_item.title }}')">{{ sous_item.title }}
                           <p class="teaser">{{ sous_item.entity.field_teaser.value }}</p>
                         </a>
                       </div>
