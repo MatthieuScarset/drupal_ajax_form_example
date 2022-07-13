@@ -5,8 +5,12 @@ namespace Drupal\oab_develop\Plugin\Block;
 use Composer\InstalledVersions;
 use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Theme\ThemeManagerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  *
@@ -19,7 +23,7 @@ use Drupal\Core\Form\FormStateInterface;
  *
  */
 
-class VersionBarBlock extends BlockBase {
+class VersionBarBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
   /** @var string[]  */
   private array $envs = [
@@ -30,48 +34,70 @@ class VersionBarBlock extends BlockBase {
   ];
 
   /**
+   * @var \Drupal\Core\Theme\ThemeManagerInterface
+   */
+  private ThemeManagerInterface $themeManager;
+
+
+  /**
+   * Constructs a \Drupal\Component\Plugin\PluginBase object.
+   *
+   * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin_id for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ThemeManagerInterface $theme_manager) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->themeManager = $theme_manager;
+  }
+
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new self(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('theme.manager')
+    );
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function build() {
 
-    // partie : version
     $version = "";
     $composer = InstalledVersions::getRootPackage();
     $file = "modules/custom/oab_develop/.version";
-    // version find by CI
+
+    // get version by the file ".version" from CI/CD
     if (file_exists($file)) {
-      $version = file_get_contents($file);
+      // find the version written by the CI/CD -> remove the special chars
+      $version = str_replace(["\r", "\n"], '', file_get_contents($file));
     }
-    // version find by composer
+    // if the file ".version" doesn't exist, the version is given by composer
     if (strlen($version) === 0 ) {
-      if (isset($composer["pretty_version"])) {
-        $version = $composer['pretty_version'];
-      }
-      else if (isset($composer["version"])) {
-        $version = $composer["version"];
-      }
-      else {
-        $version = "Not Found";
-      }
+      $version = $composer['pretty_version'] ?? $composer["version"] ?? "Not Found";
     }
 
-    // partie : environment
+    // get the environment by the environment variables
     $env = $_ENV['ENV'] ?? "Local";
-    $envLabel = $this->envs[$env] ?? "Local";
+    $env_label = $this->envs[$env] ?? $env;
 
-    // partie : theme
-    $themeHandler = \Drupal::theme();
-    $themeName = $themeHandler->getActiveTheme()->getName();
+    // get the current theme name
+    $theme_name = $this->themeManager->getActiveTheme()->getName();
 
-    // partie : message
+    // get the message from the block configuration
     $config = $this->getConfiguration();
     $message = $config['message'] ?? '';
 
     return [
       "version" => $version,
       "env" => $env,
-      "envLabel" => $envLabel,
-      "theme" => $themeName,
+      "envLabel" => $env_label,
+      "theme" => $theme_name,
       "message" => $message,
     ];
   }
@@ -107,7 +133,5 @@ class VersionBarBlock extends BlockBase {
   public function blockSubmit($form, FormStateInterface $form_state) {
     // Save our custom settings when the form is submitted.
     $this->setConfigurationValue('message', $form_state->getValue('message'));
-
-
   }
 }
