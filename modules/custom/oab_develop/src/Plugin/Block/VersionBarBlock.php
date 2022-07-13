@@ -35,17 +35,24 @@ class VersionBarBlock extends BlockBase {
   public function build() {
 
     // partie : version
-    $version = "Not Found";
+    $version = "";
     $composer = InstalledVersions::getRootPackage();
     $file = "modules/custom/oab_develop/.version";
+    // version find by CI
     if (file_exists($file)) {
       $version = file_get_contents($file);
     }
-    else if(isset($composer["pretty_version"])) {
-      $version = $composer['pretty_version'];
-    }
-    else if (isset($composer["version"])) {
-      $version = $composer["version"];
+    // version find by composer
+    if (strlen($version) === 0 ) {
+      if (isset($composer["pretty_version"])) {
+        $version = $composer['pretty_version'];
+      }
+      else if (isset($composer["version"])) {
+        $version = $composer["version"];
+      }
+      else {
+        $version = "Not Found";
+      }
     }
 
     // partie : environment
