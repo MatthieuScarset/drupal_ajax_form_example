@@ -1,11 +1,16 @@
 /*-- Different background --*/
-.prp {
-  background: #32c732;
+.local {
+  background: #67b2e0;
   color: #000000;
 }
 
-.local {
-  background: #67b2e0;
+.dev {
+  background: #fdb3e5;
+  color: #000000;
+}
+
+.prp {
+  background: #32c732;
   color: #000000;
 }
 
