@@ -757,7 +757,7 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
  * ADD EDITED CONF HERE
  */
 
-$settings['config_sync_directory'] = '../config/sync';
+$settings['config_sync_directory'] = 'config/sync';
 
 $settings['update_free_access'] = FALSE;
 

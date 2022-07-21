@@ -23,6 +23,8 @@ content:
     settings:
       image_link: ''
       image_style: modular_product_mobile_image_faq
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
     weight: 2
     region: content
