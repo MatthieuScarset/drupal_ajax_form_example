@@ -5,11 +5,13 @@ namespace Drupal\oab_develop\Plugin\Block;
 use Composer\InstalledVersions;
 use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Composer\Composer;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Theme\ThemeManagerInterface;
+use Symfony\Component\Config\Resource\ComposerResource;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -27,6 +29,7 @@ class VersionBarBlock extends BlockBase implements ContainerFactoryPluginInterfa
 
   /** @var string[]  */
   private array $envs = [
+    'DEV' => 'DEVELOPMENT',
     'PRP' => 'PRE-PRODUCTION',
     'PROD' => 'PRODUCTION',
     'TEST' => 'TEST',
