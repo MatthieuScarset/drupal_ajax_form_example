@@ -77,7 +77,7 @@ class ProductBreadcrumbBuilder implements BreadcrumbBuilderInterface
       #on vérifie si c'est un terme parent ou terme enfant en récupérant la liste de ses parents
       $parents = $this->termStorage->loadAllParents($term->id());
       # si le term est un enfant, on redirige vers le term parent
-      if(count($parents) > 1){ //count($parents) = depth
+      if (count($parents) > 1) { //count($parents) = depth
         $term = $this->termStorage->loadParents($term->id());
         $term = reset($term);
       }
