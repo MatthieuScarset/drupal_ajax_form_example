@@ -6,7 +6,7 @@ dependencies:
     - oab_develop
   theme:
     - theme_obs_backoffice
-id: versionbarblock
+id: theme_obs_backoffice_versionbarblock
 theme: theme_obs_backoffice
 region: footer
 weight: 0

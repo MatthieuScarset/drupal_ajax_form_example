@@ -7,7 +7,7 @@ dependencies:
     - user
   theme:
     - theme_boosted
-id: versionbarblock_2
+id: theme_boosted_versionbarblock
 theme: theme_boosted
 region: prefooter
 weight: 0

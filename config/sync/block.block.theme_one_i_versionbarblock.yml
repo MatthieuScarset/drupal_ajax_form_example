@@ -7,7 +7,7 @@ dependencies:
     - user
   theme:
     - theme_one_i
-id: versionbarblock_3
+id: theme_one_i_versionbarblock
 theme: theme_one_i
 region: prefooter
 weight: 0
