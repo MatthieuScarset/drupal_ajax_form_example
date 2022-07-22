@@ -1,25 +1,29 @@
 label: Cодержание
 display:
   default:
+    display_title: Master
     display_options:
-      exposed_form:
-        options:
-          submit_button: Фильтр
-          exposed_sorts_label: Фильтр
-      pager:
-        options:
-          tags:
-            previous: Предыдущая
+      title: Cодержание
       fields:
         type:
           label: 'Тип материала'
         operations:
           label: Операции
+      pager:
+        options:
+          tags:
+            previous: Предыдущая
+      exposed_form:
+        options:
+          submit_button: Фильтр
+          exposed_sorts_label: Фильтр
       filters:
         type:
           expose:
             label: 'Тип материала'
-      title: Cодержание
+        langcode:
+          expose:
+            label: Language
   page_1:
     display_options:
       menu:

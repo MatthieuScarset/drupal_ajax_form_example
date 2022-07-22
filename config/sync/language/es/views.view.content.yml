@@ -1,15 +1,19 @@
 display:
   default:
+    display_title: Master
     display_options:
-      exposed_form:
-        options:
-          submit_button: Filtro
       fields:
         type:
           label: 'Tipo de contenido'
         operations:
           label: Operaciones
+      exposed_form:
+        options:
+          submit_button: Filtro
       filters:
         type:
           expose:
             label: 'Tipo de contenido'
+        langcode:
+          expose:
+            label: Language

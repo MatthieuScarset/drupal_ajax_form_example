@@ -1,9 +1,7 @@
 display:
   default:
+    display_title: Master
     display_options:
-      exposed_form:
-        options:
-          submit_button: Filtro
       fields:
         nothing:
           admin_label: Icono
@@ -13,6 +11,9 @@ display:
           label: Usuario
         link:
           label: Operaciones
+      exposed_form:
+        options:
+          submit_button: Filtro
       filters:
         type:
           expose:

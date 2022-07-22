@@ -7,7 +7,6 @@ dependencies:
     - field.field.paragraph.home_thematic_columns.field_function
     - field.field.paragraph.home_thematic_columns.field_highlight
     - field.field.paragraph.home_thematic_columns.field_image
-    - field.field.paragraph.home_thematic_columns.field_link
     - field.field.paragraph.home_thematic_columns.field_link_title
     - field.field.paragraph.home_thematic_columns.field_name
     - field.field.paragraph.home_thematic_columns.field_title
