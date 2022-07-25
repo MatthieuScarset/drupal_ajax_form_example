@@ -329,7 +329,7 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, FormStateInterfac
         $form['field_region_target_id']['#options'] = $region;
 
         if ($current_language != 'en') {
-            unset($form['field_region_target_id']);
+            $form['field_region_target_id']['#access'] = false;
         }
     }
 
