@@ -99,7 +99,7 @@ function subhomes_views_exposed_form(&$form) {
         // HACK POUR LA SORTIE
         if ($current_language == 'en'
             || $current_language == 'ru') {
-            unset($form['blog_formats']);
+          $form['blog_formats']['#access'] = false;
         }
     }
 
@@ -115,7 +115,7 @@ function subhomes_views_exposed_form(&$form) {
         //Suppression ees filtres format, metier et industry pour la subhome RU
         if ($current_language == 'en'
             || $current_language == 'ru') {
-            unset($form['magazine_types']);
+            $form['magazine_types']['#access'] = false;
         }
     }
 
@@ -136,13 +136,12 @@ function subhomes_views_exposed_form(&$form) {
         if ($current_language == 'fr') {
             // on supprime "eBook"
             unset($form['field_document_type_target_id']['#options']['E-book']);
-            //devel_dump($form);
         }
         if ($current_language == 'en') {
             // on supprime "position paper"
             unset($form['field_document_type_target_id']['#options']['Position paper']);
         } else {
-            unset($form['document_language']);
+            $form['document_language']['#access'] = false;
         }
     }
 
@@ -158,7 +157,7 @@ function subhomes_views_exposed_form(&$form) {
 
         //Suppression de filtres pour le russe
         if ($current_language == 'ru') {
-            unset($form['press_formats']);
+            $form['press_formats']['#access'] = false;
         }
 
         if (isset($form['created-max'])) {
@@ -187,8 +186,8 @@ function subhomes_views_exposed_form(&$form) {
         //Suppression de filtres pour le russe
         if ($current_language == 'ru'
             || $current_language == 'en') {
-            unset($form['industries']);
-            unset($form['jobs_profiles']);
+            $form['industries']['#access'] = false;
+            $form['jobs_profiles']['#access'] = false;
         }
         // HACK POUR LA SORTIE
         if ($current_language == 'fr') {
@@ -217,7 +216,7 @@ function subhomes_views_exposed_form(&$form) {
             unset($form['industries']['#options']["transport"]);
         }
         if ($current_language == 'ru') {
-            unset($form['industries']);
+            $form['industries']['#access'] = false;
         }
     }
 
