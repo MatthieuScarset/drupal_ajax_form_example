@@ -2,7 +2,6 @@
 
 // Gestion de l'affichage des forms spécifiques aux subhomes via une fonction pour ne pas surcharger le .module
 
-
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\views\ViewExecutable;
@@ -11,7 +10,7 @@ use Drupal\views\ViewExecutable;
 function subhomes_views_exposed_form(&$form) {
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
-    if (strpos($form['#id'], 'views-exposed-form-subhomes') !== false) {
+    if (strpos($form['#id'], 'views-exposed-form-subhomes') !== false && $form['#id'] !== 'views-exposed-form-subhomes-archive-archive-press') {
       foreach ($form AS $key => $value) {
         if (isset($value['#type'])
           && $value['#type'] == "textfield") {
@@ -81,10 +80,10 @@ function subhomes_views_exposed_form(&$form) {
 
   // Pour tous les contenus avec le filtre thématic/ field_insight
     if (isset($form['field_insight'])) {
-        $form['field_insight']['#options'] = clean_exposed_filters_by_language(
-            $form['field_insight']['#options'],
-            'Thematic'
-        );;
+      $form['field_insight']['#options'] = clean_exposed_filters_by_language(
+        $form['field_insight']['#options'],
+        'Thematic'
+      );
     }
 
     // subhome blogs
