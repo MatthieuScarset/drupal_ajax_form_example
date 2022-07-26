@@ -735,3 +735,14 @@ function oab_tristan_update_8096() {
 
   $field_map_kv_store->set('node', $node_map);
 }
+
+/**
+ * Update 8097 > Remove the "easy_breacrumb" entry in the system.schema key/value storage
+ */
+function oab_tristan_update_9001() {
+  $system_schema = \Drupal::keyValue('system.schema');
+  if ($system_schema->has('easy_breadcrumb')) {
+    \Drupal::keyValue('system.schema')->delete('easy_breadcrumb');
+  }
+}
+
