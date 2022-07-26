@@ -164,7 +164,7 @@ function theme_one_i_preprocess_paragraph__module_detail_offre_items(&$variables
   /** @var Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
 
-  $variables['formule_package'] = ProductFormuleEntity::load($paragraph->field_formule->target_id);
+  $variables['formule_package'] = ProductFormuleEntity::load($paragraph->field_formule->target_id ?? 0);
 }
 
 /*****************************************/
