@@ -746,3 +746,55 @@ function oab_tristan_update_9001() {
   }
 }
 
+
+/**
+ * Update 9002 > Correct many error : A non-existent config entity name returned by FieldStorageConfigInterface::getBundles()
+ */
+function oab_tristan_update_9002() {
+
+  $fieldMap = \Drupal::keyValue('entity.definitions.bundle_field_map');
+  $node_map = $fieldMap->get('node');
+
+  // Remove the field_deadline field from the bundle field map for the page bundle.
+  unset($node_map['field_location']['bundles']['profile']);
+
+  $fieldMap->set('node', $node_map);
+}
+
+/**
+ * Update 9003 > Remove old field from FieldMap config (can create PHP warnings)
+ */
+function oab_tristan_update_9003() {
+  /** @var Drupal\Core\Entity\EntityFieldManager $manager */
+  $manager = \Drupal::service('entity_field.manager');
+  $entity_reference_fields = $manager->getFieldMapByFieldType('entity_reference');
+
+
+  $update_entity_type = 'node';
+  $fields_to_delete = [];
+  foreach ($entity_reference_fields['node'] as $field => $field_data) {
+    $to_delete = false;
+    foreach ($field_data['bundles'] as $bundle) {
+      $fieldDefinition = $manager->getFieldDefinitions($update_entity_type, $bundle);
+      $to_delete = $to_delete || !isset($fieldDefinition[$field]);
+    }
+
+    if ($to_delete) {
+      $fields_to_delete[] = $field;
+    }
+  }
+
+  if (count($fields_to_delete) > 0) {
+    $field_map = \Drupal::keyValue('entity.definitions.bundle_field_map');
+    $field_map_node = $field_map->get('node');
+    foreach ($fields_to_delete as $field) {
+      unset($field_map_node[$field]);
+    }
+    $field_map->set('node', $field_map_node);
+    \Drupal::messenger()->addStatus(t("Deleted fields from FieldMap : %fields", ['%fields' => implode(", ", $fields_to_delete)]));
+    \Drupal::cache('discovery')->invalidateAll();
+  } else {
+    \Drupal::messenger()->addStatus(t("No field to remove from FieldMap"));
+  }
+
+}
