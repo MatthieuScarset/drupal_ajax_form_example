@@ -52,7 +52,6 @@ class OfficesMapFilter extends FilterBase implements ContainerFactoryPluginInter
     }
 
     public function process($text, $langcode) {
-        $result = new FilterProcessResult($text);
 
         //on regarde d'abord s'il y a des paramètres dans l'url
         $parameters = UrlHelper::filterQueryParameters(\Drupal::request()->query->all());
@@ -76,22 +75,25 @@ class OfficesMapFilter extends FilterBase implements ContainerFactoryPluginInter
         $has_map_filter = false;
         //Recherche du pattern
         while (preg_match($this->pattern, $text, $search_results) && !$error) {
-            $has_map_filter = true;
+
             $chaine_trouvee = $search_results[0];
             //on teste s'il y a plusieurs maps dans un résultat
             $count = mb_substr_count($chaine_trouvee, "}||");
+            $error = !($has_map_filter = $count > 0);
+
             if ($count > 1) {
                 $pos = strpos($chaine_trouvee, "}||" ); //on cherche la premiere fin
                 $sous_chaine = substr($chaine_trouvee, 0, $pos+2);
                 $sous_chaine_remplacee = $this->render_offices_map_block($sous_chaine);
                 $text = str_replace($sous_chaine, $sous_chaine_remplacee, $text);
-            } else {
+            } elseif ($count === 1) {
                 //il n'y a qu'une map a remplacer
                 $new_chaine = $this->render_offices_map_block($chaine_trouvee);
                 $text = str_replace($search_results[0], $new_chaine, $text);
             }
         }
 
+        $result = new FilterProcessResult($text);
         if ($has_map_filter) {
           $result->addAttachments(
               array(
