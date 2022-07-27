@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <ul class="items-list" data-ob1-component="FilterChipsBar" aria-label="{{ "List of choices for @label"|t({'@label': id}) }}">
+  <ul class="items-list" aria-label="{{ "List of choices for @label"|t({'@label': id}) }}">
     {% for choice, choice_label in choices %}
       {{ _self.input(choice, choice_label, input_name) }}
     {% endfor %}
