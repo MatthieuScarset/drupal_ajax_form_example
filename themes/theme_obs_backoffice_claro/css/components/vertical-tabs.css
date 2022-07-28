@@ -13,3 +13,27 @@
 [dir=rtl] .vertical-tabs__menu-item.is-selected .vertical-tabs__menu-link::before {
   border-right-color: #f16e00;
 }
+
+.vertical-tabs {
+  display: flex;
+  width: 100%;
+}
+
+.vertical-tabs__menu {
+  min-width: 10em;
+}
+
+@media screen and (min-width: 85em) {
+  .vertical-tabs__items--processed {
+    margin-left: 0; /* LTR */
+  }
+
+  .js .vertical-tabs__item {
+   overflow: initial;
+   }
+  
+  .vertical-tabs__items--processed {
+    width: 100%;
+  }
+}
+
