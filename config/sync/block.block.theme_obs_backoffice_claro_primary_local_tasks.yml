@@ -1,0 +1,20 @@
+uuid: d2e60d3e-a55f-4876-8638-c6a3b79ccda2
+langcode: en
+status: true
+dependencies:
+  theme:
+    - theme_obs_backoffice_claro
+id: theme_obs_backoffice_claro_primary_local_tasks
+theme: theme_obs_backoffice_claro
+region: header
+weight: 0
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Primary tabs'
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: false
+visibility: {  }

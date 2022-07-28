@@ -1,0 +1,28 @@
+/* Partie Classify - add part */
+@media screen and (min-width: 85em) {
+  #edit-group-classify .claro-details__content--vertical-tabs-item {
+    margin: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  #edit-group-classify .claro-details__content > .field--type-entity-reference {
+    width: 33%;
+  }
+
+  #edit-group-classify .claro-details__content > .field--type-entity-reference .form-element--type-select-multiple {
+    width: 85%;
+  }
+
+  #edit-group-classify #edit-field-country-wrapper {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 85em) {
+
+  #edit-group-classify .claro-details__content > .field--type-entity-reference .form-element--type-select-multiple {
+    width: 95%;
+  }
+}

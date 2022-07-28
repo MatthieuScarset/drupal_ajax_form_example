@@ -1,0 +1,34 @@
+global-styling:
+  version: VERSION
+  css:
+    base:
+      css/base/style.css: {}
+    component:
+      css/components/details.css: {}
+      css/components/vertical-tabs.css: {weight: 50}
+      css/components/form.css: {}
+  dependencies:
+    - claro/global-styling
+    - system/admin
+    - oab_icomoon/icomoon
+
+global-scripts:
+  version: VERSION
+  js:
+    js/script.js: {}
+  dependencies:
+    - core/jquery
+
+node-form:
+  version: VERSION
+  css:
+    layout:
+      css/layout/node-add.css: { }
+
+neon:
+  version: VERSION
+  css:
+    base:
+      css/base/neon.css: {}
+
+

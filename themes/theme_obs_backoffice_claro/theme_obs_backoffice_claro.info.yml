@@ -1,0 +1,35 @@
+name: OBS backoffice claro
+type: theme
+base theme: claro
+description: 'The default administration theme for Drupal 8 was designed with clean lines, simple blocks, and sans-serif font to emphasize the tools and tasks at hand.'
+alt text: 'Default administration theme for Drupal 8 with simple blocks and clean lines.'
+package: Core
+# version: VERSION
+# core: 8.x
+libraries:
+  - theme_obs_backoffice_claro/global-styling
+  - theme_obs_backoffice_claro/global-scripts
+
+libraries-extend:
+  claro/node-form:
+    - theme_obs_backoffice_claro/node-form
+
+
+regions:
+  header: 'Header'
+  pre_content: 'Pre-content'
+  breadcrumb: Breadcrumb
+  highlighted: Highlighted
+  help: Help
+  content: Content
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+  sidebar_first: 'First sidebar'
+regions_hidden:
+  - sidebar_first
+
+# Information added by Drupal.org packaging script on 2016-01-06
+version: VERSION
+core_version_requirement: ^8.8.0 || ^9.0
+project: 'drupal'
+datestamp: 1452121068
