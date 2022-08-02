@@ -95,6 +95,7 @@ module:
   oab_offices_map: 0
   oab_orange_business_lounge: 0
   oab_riad: 0
+  oab_siu_connexion: 0
   oab_stephanie: 0
   oab_subhomes: 0
   oab_synomia_search: 0
@@ -125,6 +126,8 @@ module:
   responsive_image: 0
   robotstxt: 0
   roleassign: 0
+  saml_sp: 0
+  saml_sp_drupal_login: 0
   scheduled_updates: 0
   seckit: 0
   serialization: 0
@@ -157,6 +160,7 @@ module:
   xmlsitemap_engines: 0
   oab_password_policy_alter: 5
   content_translation: 10
+  externalauth: 10
   password_policy: 10
   paragraphs: 11
   oab_eddy: 30

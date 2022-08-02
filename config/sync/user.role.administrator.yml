@@ -61,6 +61,7 @@ dependencies:
     - responsive_image
     - robotstxt
     - roleassign
+    - saml_sp
     - scheduled_updates
     - seckit
     - shortcut
@@ -173,6 +174,7 @@ permissions:
   - 'cancel account'
   - 'change own logout threshold'
   - 'change own username'
+  - 'configure saml sp'
   - 'create blog_post content'
   - 'create cloud_service_provider content'
   - 'create content translations'
