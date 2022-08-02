@@ -15,42 +15,21 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SIUAuthenticationProvider implements AuthenticationProviderInterface {
 
-  /**
-   * The current user.
-   *
-   * @var \Drupal\Core\Session\AccountInterface
+ /**
+   * @param \Drupal\Core\Session\AccountInterface $currentUser
+   * @param \Drupal\Core\Path\CurrentPathStack $currentPath
+   * @param \Drupal\oab_siu_connexion\Services\OabSIUConnexionService $SIUConnexionService
+   * @param \Drupal\Core\Session\SessionConfigurationInterface $sessionConfiguration
    */
-  protected $currentUser;
-
-  /**
-   * The current path.
-   *
-   * @var \Drupal\Core\Path\CurrentPathStack
-   */
-  protected $currentPath;
-
-
-  /**
-   * The session configuration.
-   *
-   * @var \Drupal\Core\Session\SessionConfigurationInterface
-   */
-  protected $sessionConfiguration;
-
-  /**
-   * Constructs a new SIUAuthenticationProvider instance.
-   *
-   * @param \Drupal\Core\Session\AccountInterface $current_user
-   *   The current user.
-   * @param \Drupal\Core\Path\CurrentPathStack $current_path
-   *   The current path.
-   */
-  public function __construct(AccountInterface $current_user, CurrentPathStack $current_path, OabSIUConnexionService $SIUConnexionService, SessionConfigurationInterface $session_configuration) {
-    $this->currentUser = $current_user;
+  public function __construct(protected AccountInterface $currentUser,
+                              protected CurrentPathStack $currentPath,
+                              protected OabSIUConnexionService $SIUConnexionService,
+                              protected SessionConfigurationInterface $sessionConfiguration) {
+    /*$this->currentUser = $current_user;
     $this->currentPath = $current_path;
-    $this->SIUConnexionService = $SIUConnexionService;
+    $thi $SIUConnexionService = $siu_connexion_service;
     $this->sessionConfiguration = $session_configuration;
-
+*/
   }
 
   /**
@@ -59,14 +38,10 @@ class SIUAuthenticationProvider implements AuthenticationProviderInterface {
   public function applies(Request $request) {
     //on récupère les URL protégées par SIU (conf)
     $hasSession = $request->hasSession() && $this->sessionConfiguration->hasSession($request);
-
-    \Drupal::logger('oab_siu_connexion')->notice('SIUAuthenticationProvider -> applies , hasSession : %hassession ', ['%hassession' => $hasSession]);
     $restrictedUrls = $this->SIUConnexionService->getSIURestrictedURL();
-    if( in_array($this->currentPath->getPath(), $restrictedUrls) && !$this->currentUser->isAuthenticated() && !$hasSession){
-      \Drupal::logger('oab_siu_connexion')->notice('SIUAuthenticationProvider -> applies TRUE');
+    if( in_array($this->currentPath->getPath($request), $restrictedUrls) && !$this->currentUser->isAuthenticated() && !$hasSession){
       return TRUE;
     }
-    \Drupal::logger('oab_siu_connexion')->notice('SIUAuthenticationProvider -> applies FALSE');
     return FALSE;
   }
 

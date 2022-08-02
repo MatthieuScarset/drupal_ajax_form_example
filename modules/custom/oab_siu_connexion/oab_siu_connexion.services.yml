@@ -5,6 +5,13 @@ services:
     tags:
       - { name: authentication_provider, provider_id: 'siu_authentication_provider', priority: 101 }
 
+  oab_siu_connexion.page_cache_request_policy.disallow_siu_authentication_requests:
+    class: Drupal\oab_siu_connexion\PageCache\DisallowSIUAuthenticationRequests
+    arguments: ['@current_user', '@path.current', '@oab_siu_connexion.settings', '@session_configuration']
+    public: false
+    tags:
+      - { name: page_cache_request_policy }
+
   oab_siu_connexion.conf_settings:
     class: \Drupal\Core\Config\ImmutableConfig
     factory: config.factory:get
