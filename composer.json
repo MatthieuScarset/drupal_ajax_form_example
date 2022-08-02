@@ -53,6 +53,7 @@
         "drupal/replicate_ui": "^1.0",
         "drupal/robotstxt": "^1.4",
         "drupal/roleassign": "1.0-beta1",
+        "drupal/saml_sp": "^4.1",
         "drupal/scheduled_updates": "1.x-dev",
         "drupal/seckit": "^2.0",
         "drupal/simplify": "^1.2",

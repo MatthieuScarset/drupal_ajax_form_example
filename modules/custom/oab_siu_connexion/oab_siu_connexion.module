@@ -1,0 +1,139 @@
+<?php
+use \OneLogin\Saml2\Response;
+use \Drupal\saml_sp\Entity\Idp;
+use \Drupal\user\UserInterface;
+
+use Drupal\Core\Render\Element;
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+use Drupal\user\Entity\User;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function oab_siu_connexion_preprocess_html(&$variables) {
+//  dd($variables);
+//  $variables['#cache']['contexts'] = ['url.path', 'user'];
+  $variables['#cache']['contexts'] = ['session', 'url.path', 'user'];
+
+}
+
+function oab_siu_connexion_theme() {
+  return [
+    'siu_hello_user_block' => [
+      'variables' => [
+        'displayName' => '',
+      ],
+      'template' => 'siu-hello-user-block'
+    ]
+  ];
+}
+
+function oab_siu_connexion_page_attachments(array &$attachments) {
+    $attachments['#attached']['library'][] = 'oab_siu_connexion/oab_siu_connexion.library';
+}
+
+/**
+ * SAML authentication callback.
+ */
+function oab_siu_connexion__saml_authenticate($is_valid, Response $saml_response, Idp $idp) {
+
+  $redirect_url = $_POST['RelayState'] ?: Url::fromRoute('<front>')->toString();
+  //Authentification échouée
+  if (!$is_valid) {
+    \Drupal::messenger()->addError(t('Could not authenticate via %idp_label', ['%idp_label' => $idp->label()]));
+    \Drupal::logger('saml_sp')->warning('Could not authenticate via %idp_label', ['%idp_label' => $idp->label()]);
+    return new RedirectResponse($redirect_url);
+  }
+
+  //récupération des attributes de la réponse
+  try {
+    $attributes = $saml_response->getAttributes();
+  }
+  catch (Exception $e) {
+    \Drupal::messenger()->addError(t('An error occurred when parsing the response from %idp_label', ['%idp_label' => $idp->label()]));
+    \Drupal::logger('saml_sp')->error('An error occurred when parsing the response from %idp_label: %exception', ['%idp_label' => $idp->label(), '%exception' => $e->__toString()]);
+    return new RedirectResponse($redirect_url);
+  }
+
+  $email = '';
+  $success = FALSE;
+  // Try to get email from SAML response attributes.
+  if (!empty($attributes['Mail']) && !empty($attributes['Mail'][0])) {
+    $email = $attributes['Mail'][0];
+    $users = \Drupal::entityTypeManager()->getStorage('user')
+      ->loadByProperties(['mail' => $email]);
+    /** @var User $user */
+    $user = $users ? reset($users) : FALSE;
+    if(!$user) {
+      //le user n'existe pas, on le crée
+
+      //on récupère les infos de SAML
+      $lastname = (!empty($attributes['Lastname']) && !empty($attributes['Lastname'][0])) ? $attributes['Lastname'][0] : '';
+      $firstname = (!empty($attributes['Firstname']) && !empty($attributes['Firstname'][0])) ? $attributes['Firstname'][0] : '';
+
+      //l'utilisateur n'est pas trouvé, on le crée
+      $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+      $user = User::create();
+      // Mandatory:
+      $user->setPassword(random_bytes(64));
+      $user->enforceIsNew();
+      $user->setEmail($email);
+      $user->setUsername($firstname . ' ' . $lastname); // a changer
+
+      // Optional:
+      $user->set('init', $email);
+      $user->set('langcode', $language);
+      $user->set('field_access_language', [$language]);
+      $user->set('preferred_langcode', $language);
+      $user->set('preferred_admin_langcode', $language);
+
+      //on rajoute le rôle SIU User
+      $user->addRole('siu_user');
+
+      $user->activate();
+      $result = $user->save();
+      \Drupal::logger('oab_siu_connexion')->notice('New SSO user account for %mail with UID %uid.', ['%mail' => $email, '%uid' => $user->id()]);
+    }
+    else {
+      if(!$user->hasRole('siu_user')) {
+        //si l'utilisateur est trouvé et qu'il n'a pas le rôle SIU, on lui ajoute le rôle
+        $user->addRole('siu_user');
+        $user->save();
+      }
+    }
+    $success = TRUE;
+  }
+  else{
+    // pas de mail
+    \Drupal::logger('oab_siu_connexion')->warning('No mail attribute available; please check IdP %idp_label configuration.', ['%idp_label' => $idp->label()]);
+  }
+
+
+  if ($success) {
+    // @see user_login_name_validate().
+    if ($user->isBlocked() || !$user->isActive()) {
+      \Drupal::messenger()->addError(t('The username %name has not been activated or is blocked.', ['%name' => $user->getAccountName()]));
+    }
+    else {
+      // anything right now anyway.
+      saml_sp_drupal_login_update_user_attributes($user, $email, $attributes);
+      \Drupal::logger('oab_siu_connexion')->notice(
+        'User %name logging in through SAML via %idp_name. with NameID %mail and attributes %attributes',
+        [
+          '%name' => $user->getAccountName(),
+          '%idp_name' => $idp->label(),
+          '%mail' => $email,
+          '%attributes' => print_r($attributes, TRUE),
+        ]);
+
+      // Store the fact that the user logged in via the SAML SP module.
+      $_SESSION['authenticated_via_saml_sp'] = TRUE;
+
+      user_login_finalize($user);
+    }
+  }
+  return new RedirectResponse($redirect_url);
+}

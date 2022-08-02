@@ -1,0 +1,6 @@
+oab_siu_connexion.settings:
+  title: SIU Connexion settings
+  route_name: oab_siu_connexion.settings
+  parent: oab.settings
+  description: 'Configure SIU Connexion settings'
+  weight: -20

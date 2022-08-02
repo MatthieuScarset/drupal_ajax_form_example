@@ -1,0 +1,15 @@
+services:
+  oab_siu_connexion.authentication.siu_authentication_provider:
+    class: Drupal\oab_siu_connexion\Authentication\SIUAuthenticationProvider
+    arguments: ['@current_user', '@path.current', '@oab_siu_connexion.settings', '@session_configuration']
+    tags:
+      - { name: authentication_provider, provider_id: 'siu_authentication_provider', priority: 101 }
+
+  oab_siu_connexion.conf_settings:
+    class: \Drupal\Core\Config\ImmutableConfig
+    factory: config.factory:get
+    arguments: ['oab_siu_connexion.settings']
+
+  oab_siu_connexion.settings:
+    class: \Drupal\oab_siu_connexion\Services\OabSIUConnexionService
+    arguments: ['@oab_siu_connexion.conf_settings']

@@ -1,0 +1,8 @@
+name: OAB SIU Connexion
+description: 'module pour la connexion SIU'
+type: module
+package: OAB
+version: VERSION
+core_version_requirement: ^8.8.0 || ^9.0
+project: 'oab_siu_connexion'
+datestamp: 1642426286
