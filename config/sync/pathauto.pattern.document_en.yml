@@ -12,20 +12,20 @@ pattern: 'library/[node:field_document_type:entity:name]/[node:title]'
 selection_criteria:
   e99882a4-f9a8-41d5-a14b-7b55e4b90de6:
     id: node_type
-    bundles:
-      document: document
     negate: false
+    uuid: e99882a4-f9a8-41d5-a14b-7b55e4b90de6
     context_mapping:
       node: node
-    uuid: e99882a4-f9a8-41d5-a14b-7b55e4b90de6
+    bundles:
+      document: document
   be5887e1-fb29-4776-903a-713e7fbe6364:
     id: language
-    langcodes:
-      en: en
     negate: false
+    uuid: be5887e1-fb29-4776-903a-713e7fbe6364
     context_mapping:
       language: 'node:langcode:language'
-    uuid: be5887e1-fb29-4776-903a-713e7fbe6364
+    langcodes:
+      en: en
 selection_logic: and
 weight: -10
 relationships:

@@ -18,14 +18,14 @@ plugin: 'block_content:5fd49f9f-4404-453d-bf12-a09d01df0b98'
 settings:
   id: 'block_content:5fd49f9f-4404-453d-bf12-a09d01df0b98'
   label: 'IoT Sidebar EN'
-  provider: block_content
   label_display: '0'
+  provider: block_content
   status: true
   info: ''
   view_mode: full
 visibility:
   request_path:
     id: request_path
-    pages: "/solutions/iot/products\r\n/solutions/iot/customer-stories"
     negate: false
     context_mapping: {  }
+    pages: "/solutions/iot/products\r\n/solutions/iot/customer-stories"

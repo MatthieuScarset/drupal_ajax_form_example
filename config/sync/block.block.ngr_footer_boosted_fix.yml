@@ -17,8 +17,8 @@ plugin: 'block_content:b523cf6a-1b1d-4571-9add-d05b53735dd3'
 settings:
   id: 'block_content:b523cf6a-1b1d-4571-9add-d05b53735dd3'
   label: '[NGR] Footer Boosted fix'
-  provider: block_content
   label_display: '0'
+  provider: block_content
   status: true
   info: ''
   view_mode: full

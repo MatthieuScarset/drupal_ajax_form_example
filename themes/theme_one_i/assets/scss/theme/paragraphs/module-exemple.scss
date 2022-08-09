@@ -1,0 +1,48 @@
+.example-items {
+  .img-module-exemple {
+    img {
+      @include media-breakpoint-down(md) {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  .example-title {
+    cursor: pointer;
+    a {
+      color: $white;
+
+      &.active {
+        font-weight: bold;
+      }
+
+      &:hover {
+        color: $gray4;
+      }
+    }
+  }
+
+  .example-content {
+    flex-wrap: initial;
+    overflow-x: scroll;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .o-link-arrow {
+      &:hover{
+        color: $gray4 !important;
+      }
+    }
+  }
+
+  .progress-indicator {
+    height: 6px;
+    .ob1-progress-bar-determined-inner {
+      animation-delay: initial;
+    }
+  }
+}

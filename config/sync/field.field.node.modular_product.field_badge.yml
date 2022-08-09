@@ -1,0 +1,29 @@
+uuid: a1e8fe65-0511-480c-ae05-03843aef811b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_badge
+    - node.type.modular_product
+    - taxonomy.vocabulary.product_badge
+id: node.modular_product.field_badge
+field_name: field_badge
+entity_type: node
+bundle: modular_product
+label: Badge
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      product_badge: product_badge
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

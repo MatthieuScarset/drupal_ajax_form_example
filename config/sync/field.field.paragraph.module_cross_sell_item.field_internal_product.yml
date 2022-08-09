@@ -1,0 +1,31 @@
+uuid: aefcd82f-78ac-47d0-bd8a-d52950ba407f
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_internal_product
+    - node.type.modular_product
+    - node.type.product
+    - paragraphs.paragraphs_type.module_cross_sell_item
+id: paragraph.module_cross_sell_item.field_internal_product
+field_name: field_internal_product
+entity_type: paragraph
+bundle: module_cross_sell_item
+label: 'Internal product'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      modular_product: modular_product
+      product: product
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: modular_product
+field_type: entity_reference

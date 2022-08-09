@@ -32,31 +32,31 @@ bundle: news
 mode: default
 content:
   field_content:
-    weight: 2
+    type: text_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 2
     region: content
   field_file:
-    weight: 3
+    type: entity_reference_entity_view
     label: hidden
     settings:
-      link: true
       view_mode: default
+      link: true
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 3
     region: content
   links:
+    settings: {  }
+    third_party_settings: {  }
     weight: 1
     region: content
+  workbench_moderation_control:
     settings: {  }
     third_party_settings: {  }
-  workbench_moderation_control:
     weight: 0
     region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   field_city: true
   field_country: true

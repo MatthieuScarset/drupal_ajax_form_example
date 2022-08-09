@@ -20,13 +20,13 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    negate: 0
     target_bundles:
       default_button: default_button
+    negate: 0
     target_bundles_drag_drop:
       default_button:
-        enabled: true
         weight: 15
+        enabled: true
       home_banner:
         weight: 16
         enabled: false

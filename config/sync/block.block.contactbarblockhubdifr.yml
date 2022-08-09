@@ -16,8 +16,10 @@ plugin: contact_bar_block_hub
 settings:
   id: contact_bar_block_hub
   label: 'Contact bar Hub Digital Workspace fr'
-  provider: oab_hub
   label_display: '0'
+  provider: oab_hub
+  context_mapping:
+    node: '@node.node_route_context:node'
   level: 1
   depth: 0
   link_assistance: ''
@@ -28,16 +30,14 @@ settings:
   link_ecrire: /fr/digitalworkspace/contact
   link_ecrire_text: Contactez-nous
   ecrire_icon: icon-email
-  context_mapping:
-    node: '@node.node_route_context:node'
 visibility:
   language:
     id: language
-    langcodes:
-      fr: fr
     negate: false
     context_mapping:
       language: '@language.current_language_context:language_interface'
+    langcodes:
+      fr: fr
   hub_condition:
     id: hub_condition
     hub_id: '1048'

@@ -11,17 +11,17 @@ bundle: mega-menu-main-navigation-fr
 mode: default
 content:
   children:
-    weight: 0
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
   field_teaser:
-    weight: 1
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 1
     region: content
 hidden:
   langcode: true

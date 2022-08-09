@@ -1,0 +1,10 @@
+uuid: 6ff0b6e2-7245-4f54-97da-9c634081ae87
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.teaser_paragraph_module_blog
+label: 'Teaser Module Blog (Modular Product)'
+targetEntityType: node
+cache: true

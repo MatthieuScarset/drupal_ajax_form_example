@@ -15,13 +15,13 @@ bundle: mega-menu-main-navigation-fr
 mode: default
 content:
   field_teaser:
+    type: string_textfield
     weight: 3
+    region: content
     settings:
       size: 100
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   langcode:
     type: language_select
     weight: 2

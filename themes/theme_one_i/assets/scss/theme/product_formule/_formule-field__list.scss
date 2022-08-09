@@ -1,0 +1,39 @@
+.formule-field.field--list {
+  ul.items-list {
+    li {
+      padding: 0.25rem 0;
+
+      .items-list-item {
+        background-color: white;
+
+        .item-container {
+          border-bottom: 1px solid #ccc;
+          padding: 0;
+          cursor: pointer;
+
+          label.item-text {
+            padding: 1rem;
+          }
+
+          .custom-radio label::before {
+            padding-left: 1rem
+          }
+        }
+
+
+      }
+
+
+      &.active {
+        .items-list-item .item-container {
+          border: 1px solid $orange1;
+        }
+      }
+    }
+
+  }
+
+  .formule-submit {
+    margin-top: 2rem;
+  }
+}

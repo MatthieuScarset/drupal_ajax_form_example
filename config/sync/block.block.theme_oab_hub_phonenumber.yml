@@ -16,18 +16,18 @@ plugin: phone_number_block
 settings:
   id: phone_number_block
   label: 'Phone Number'
-  provider: oab_frontoffice
   label_display: visible
-  content: ''
-  content_format: full_html
+  provider: oab_frontoffice
   context_mapping:
     node: '@node.node_route_context:node'
   block_title: 'To contact him by phone'
+  content: ''
+  content_format: full_html
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
-    bundles:
-      distributor: distributor
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
+    bundles:
+      distributor: distributor

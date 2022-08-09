@@ -1,9 +1,9 @@
 <div class="node-axiome-detailed-content col-md-12 nopadding">
     <div>
-        {% if field_detailed_content.Attributes.intertitle|trim is not empty %}
+        {% if is_string(field_detailed_content.Attributes.intertitle) and field_detailed_content.Attributes.intertitle|trim is not empty %}
             <h2 class="titre2">{{ field_detailed_content.Attributes.intertitle }}</h2>
         {% endif %}
-        {% if field_detailed_content.Attributes.description|trim is not empty %}
+        {% if is_string(field_detailed_content.Attributes.description) and field_detailed_content.Attributes.description|trim is not empty %}
             <p class="axiomedescription">{{ field_detailed_content.Attributes.description|raw|nl2br }}</p>
         {% endif %}
     </div>
@@ -30,13 +30,13 @@
                         </div>
                     {% endif %}
                     <div class="col col-md-10 col-xs-10">
-                        {% if field.Attributes.title|trim is not empty %}
+                        {% if is_string(field.Attributes.title) and field.Attributes.title|trim is not empty %}
                             <h4 class="highlight1">{{ field.Attributes.title }}</h4>
                         {% endif %}
-                        {% if field.Attributes.header|trim is not empty %}
+                        {% if is_string(field.Attributes.header) and field.Attributes.header|trim is not empty %}
                             <p><b>{{ field.Attributes.header }}</b></p>
                         {% endif %}
-                        {% if field.Attributes.description|trim is not empty %}
+                        {% if is_string(field.Attributes.description) and field.Attributes.description|trim is not empty %}
                             <p>{{ field.Attributes.description|raw|nl2br }}</p>
                         {% endif %}
                     </div>

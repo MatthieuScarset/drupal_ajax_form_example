@@ -1,0 +1,26 @@
+uuid: 284ef8f6-4ec9-4a78-be31-37d2b913cc3c
+langcode: fr
+status: true
+dependencies:
+  config:
+    - crop.type.crop_645_410
+  module:
+    - crop
+name: modular_product_image_top_zone
+label: 'Modular Product Image Top Zone'
+effects:
+  674eabc0-e5f2-4da5-844c-59f2c37e7786:
+    uuid: 674eabc0-e5f2-4da5-844c-59f2c37e7786
+    id: crop_crop
+    weight: 1
+    data:
+      crop_type: crop_645_410
+      automatic_crop_provider: null
+  1b774f14-be51-4549-ad75-4f22c7df3c8f:
+    uuid: 1b774f14-be51-4549-ad75-4f22c7df3c8f
+    id: image_scale_and_crop
+    weight: 2
+    data:
+      width: 645
+      height: 410
+      anchor: center-center

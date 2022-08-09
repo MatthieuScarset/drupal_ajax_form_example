@@ -37,73 +37,73 @@ bundle: full_html
 mode: full
 content:
   field_content:
-    weight: 101
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 101
     region: content
   field_display_title:
-    weight: 103
+    type: boolean
     label: above
     settings:
       format: default
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    type: boolean
+    weight: 103
     region: content
   field_end_date:
-    weight: 107
+    type: datetime_default
     label: above
     settings:
-      format_type: medium
       timezone_override: ''
+      format_type: medium
     third_party_settings: {  }
-    type: datetime_default
+    weight: 107
     region: content
   field_meta_description:
-    weight: 105
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 105
     region: content
   field_meta_title:
-    weight: 104
+    type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 104
     region: content
   field_metatags:
-    weight: 102
+    type: metatag_empty_formatter
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: metatag_empty_formatter
+    weight: 102
     region: content
   field_start_date:
-    weight: 106
+    type: datetime_default
     label: above
     settings:
-      format_type: medium
       timezone_override: ''
+      format_type: medium
     third_party_settings: {  }
-    type: datetime_default
+    weight: 106
     region: content
   links:
+    settings: {  }
+    third_party_settings: {  }
     weight: 100
     region: content
+  workbench_moderation_control:
     settings: {  }
     third_party_settings: {  }
-  workbench_moderation_control:
     weight: -20
     region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   field_blog_format: true
   field_blog_thematic: true

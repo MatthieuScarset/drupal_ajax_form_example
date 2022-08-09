@@ -18,14 +18,14 @@ plugin: 'block_content:700a825a-9e93-4c01-80e7-a1e8441c87d8'
 settings:
   id: 'block_content:700a825a-9e93-4c01-80e7-a1e8441c87d8'
   label: 'Banner IoT'
-  provider: block_content
   label_display: '0'
+  provider: block_content
   status: true
   info: ''
   view_mode: full
 visibility:
   request_path:
     id: request_path
-    pages: "/iot/produits\r\n/iot/temoignages-clients\r\n/iot/products\r\n/iot/customer-stories"
     negate: false
     context_mapping: {  }
+    pages: "/iot/produits\r\n/iot/temoignages-clients\r\n/iot/products\r\n/iot/customer-stories"

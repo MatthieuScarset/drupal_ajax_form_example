@@ -40,11 +40,10 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
         // Pour être sur, pour les API Marketo/Altares.
         // Gestion des exceptions dans leur module
         $route_name = \Drupal::routeMatch()->getRouteName();
-        if (strpos($route_name, 'oab_marketo.altares_api') !== false) {
+        if (str_contains($route_name, 'oab_marketo.altares_api')
+          || str_contains($route_name, 'oab_mp_product_formule_packages')) {
           return;
         }
-
-
 
         $request = $event->getRequest();
 
@@ -87,6 +86,14 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
                         if ($new_url != ''
                             && $new_url !== $current_uri
                         ) {
+
+                          \Drupal::logger('node_source_redirect')
+                              ->debug('1. Redirect from %source to %dest. Is front : %is_front', [
+                                '%source' => $current_uri,
+                                '%dest' => $new_url,
+                                '%is_front' => \Drupal::service('path.matcher')->isFrontPage() ? "oui" : "non"
+                              ]);
+
                             $response = new RedirectResponse($new_url, 301);
                             $event->setResponse($response);
                         }
@@ -134,6 +141,16 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
                       && $new_url !== $current_uri
                       && !in_array($current_uri_wo_options, $path_list)
                     ) {
+
+                      \Drupal::logger('node_source_redirect')
+                        ->debug('2. Redirect from %source to %dest. uri_wo_options: %uri_wo_options | path_list : %path_list | Is front : %is_front', [
+                          '%source' => $current_uri,
+                          '%dest' => $new_url,
+                          '%path_list' => implode(' | ', $path_list),
+                          '%uri_wo_options' => $current_uri_wo_options,
+                          '%is_front' => \Drupal::service('path.matcher')->isFrontPage() ? "oui" : "non"
+                        ]);
+
                         $response = new RedirectResponse($new_url, 301);
                         $event->setResponse($response);
                     }

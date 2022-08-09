@@ -1,0 +1,19 @@
+uuid: ea50a60b-b24a-4ecd-8d70-3e81fd25751b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_standard_text
+    - paragraphs.paragraphs_type.module_presentation
+id: paragraph.module_presentation.field_standard_text
+field_name: field_standard_text
+entity_type: paragraph
+bundle: module_presentation
+label: 'Standard text'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

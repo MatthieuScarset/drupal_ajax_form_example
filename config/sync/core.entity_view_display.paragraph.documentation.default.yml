@@ -1,0 +1,37 @@
+uuid: de7179a4-e1c7-46b9-b4ba-297fcc8a195c
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.documentation.field_call_to_action_link
+    - field.field.paragraph.documentation.field_pdf
+    - paragraphs.paragraphs_type.documentation
+  module:
+    - link
+id: paragraph.documentation.default
+targetEntityType: paragraph
+bundle: documentation
+mode: default
+content:
+  field_call_to_action_link:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: _blank
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_pdf:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: pdf_view_mode
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

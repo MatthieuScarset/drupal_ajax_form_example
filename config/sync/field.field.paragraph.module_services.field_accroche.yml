@@ -1,0 +1,19 @@
+uuid: 91148fe8-6e58-40a0-aa98-6520b2e651c0
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_accroche
+    - paragraphs.paragraphs_type.module_services
+id: paragraph.module_services.field_accroche
+field_name: field_accroche
+entity_type: paragraph
+bundle: module_services
+label: 'Description services'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

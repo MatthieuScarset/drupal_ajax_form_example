@@ -1,0 +1,30 @@
+uuid: d6ca223b-03a9-4c21-a092-0958a4b5d0aa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.product_formule_entity.field_illustration
+    - media.type.image
+  module:
+    - oab_mp_formules
+id: product_formule_entity.product_formule_entity.field_illustration
+field_name: field_illustration
+entity_type: product_formule_entity
+bundle: product_formule_entity
+label: Illustration
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

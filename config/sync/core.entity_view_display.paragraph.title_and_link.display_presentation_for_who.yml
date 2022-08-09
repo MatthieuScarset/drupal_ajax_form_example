@@ -1,0 +1,37 @@
+uuid: 0a2d820c-8a95-4be2-b1b7-82e12c4e1ccb
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.display_presentation_for_who
+    - field.field.paragraph.title_and_link.field_link_title
+    - field.field.paragraph.title_and_link.field_title
+    - paragraphs.paragraphs_type.title_and_link
+  module:
+    - link
+id: paragraph.title_and_link.display_presentation_for_who
+targetEntityType: paragraph
+bundle: title_and_link
+mode: display_presentation_for_who
+content:
+  field_link_title:
+    type: link_separate
+    label: hidden
+    settings:
+      trim_length: 250
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

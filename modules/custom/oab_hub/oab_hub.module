@@ -209,6 +209,18 @@ function oab_hub_views_query_alter(Drupal\views\ViewExecutable $view, Drupal\vie
         );
       }
     }
+
+    /*
+     * Hack pour TacLite qui ajoute une vérification dans la table node_access
+     * qui ne semble pas être à jour + on check les contenus que pour les hubs,
+     * pas pour le reste du site
+     */
+    foreach ($query->tags as $key => $tag) {
+      if ($tag === "taxonomy_term_access") {
+        unset($query->tags[$key]);
+      }
+    }
+
   }
 
 }

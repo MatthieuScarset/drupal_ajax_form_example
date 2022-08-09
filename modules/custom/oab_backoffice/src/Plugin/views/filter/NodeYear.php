@@ -10,7 +10,9 @@ namespace Drupal\oab_backoffice\Plugin\views\filter;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\views\Plugin\views\display\DisplayPluginBase;
 use Drupal\views\Plugin\views\filter\Date;
+use Drupal\views\Plugin\views\filter\NumericFilter;
 use Drupal\views\ViewExecutable;
+use Drupal\views\ViewsData;
 
 /**
  * Filters by node year.
@@ -19,27 +21,47 @@ use Drupal\views\ViewExecutable;
  *
  * @ViewsFilter("node_year")
  */
-class NodeYear extends Date {
+class NodeYear extends NumericFilter {
 
-    /**
+
+
+  /**
      * {@inheritdoc}
      */
     public function init(ViewExecutable $view, DisplayPluginBase $display, array &$options = NULL) {
-        parent::init($view, $display, $options);
+
+      parent::init($view, $display, $options);
+
         $this->valueTitle = t('Node year');
         $this->definition['options callback'] = array($this, 'generateOptions');
     }
 
-    /**
+  public function adminSummary() {
+    if ($this->isAGroup()) {
+      return $this->t('grouped');
+    }
+    if (!empty($this->options['exposed'])) {
+      return $this->t('exposed');
+    }
+    $options = $this->operatorOptions('short');
+    $output = $options[$this->operator];
+    $output .= ' ' . $this->value;
+    return $output;
+  }
+
+
+
+
+  /**
      * Add a type selector to the value form
      */
     protected function valueForm(&$form, FormStateInterface $form_state) {
-        // parent::valueForm($form, $form_state);
+
         $form['value'] = array(
             '#type' => 'select',
-            '#options' => $this->generateOptions()
+            '#options' => ['All' => t('All')] + $this->generateOptions(),
+          '#default_value' => $this->value
         );
-
     }
 
     /**

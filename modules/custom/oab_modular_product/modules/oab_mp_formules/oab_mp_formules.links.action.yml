@@ -1,0 +1,5 @@
+entity.product_formule_entity.add_form:
+  route_name: entity.product_formule_entity.add_form
+  title: 'Add Product formule entity'
+  appears_on:
+    - entity.product_formule_entity.collection

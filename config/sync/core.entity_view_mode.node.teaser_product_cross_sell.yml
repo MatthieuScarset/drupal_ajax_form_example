@@ -1,0 +1,10 @@
+uuid: ada8ac05-fc72-4fed-9eff-72130036c63e
+langcode: fr
+status: true
+dependencies:
+  module:
+    - node
+id: node.teaser_product_cross_sell
+label: 'Teaser Product Cross Sell'
+targetEntityType: node
+cache: true

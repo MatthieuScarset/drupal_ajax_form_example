@@ -1,7 +1,12 @@
 <?php
 namespace Drupal\oab_ckeditor\Plugin\CKEditorPlugin;
+use Drupal\ckeditor\Annotation\CKEditorPlugin;
 use Drupal\ckeditor\CKEditorPluginBase;
+use Drupal\Core\Extension\ExtensionPathResolver;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\editor\Entity\Editor;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 /**
  * Defines the "Font" plugin.
  *
@@ -11,8 +16,28 @@ use Drupal\editor\Entity\Editor;
  *   module = "ckeditor"
  * )
  */
-class Font extends CKEditorPluginBase
+class Font extends CKEditorPluginBase implements ContainerFactoryPluginInterface
 {
+
+  /**
+   * @var ExtensionPathResolver
+   */
+  private $pathResolver;
+
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ExtensionPathResolver $extension_path_resolver) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+
+    $this->pathResolver = $extension_path_resolver;
+  }
+
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new self(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('extension.path.resolver')
+    );
+  }
   /**
    * Implements \Drupal\ckeditor\Plugin\CKEditorPluginInterface::getDependencies().
    */
@@ -39,7 +64,7 @@ class Font extends CKEditorPluginBase
    */
   public function getFile()
   {
-    $plugin = drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/font/plugin.js';
+    $plugin = $this->pathResolver->getPath('module', 'oab_ckeditor') . '/js/plugins/font/plugin.js';
     return $plugin;
   }
   /**
@@ -59,11 +84,11 @@ class Font extends CKEditorPluginBase
     return array(
       'Font' => array(
         'label' => t('Font button'),
-        'image' => drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/font/icons/font.png',
+        'image' => $this->pathResolver->getPath('module', 'oab_ckeditor') . '/js/plugins/font/icons/font.png',
       ),
       'FontSize' => array(
         'label' => t('Font size button'),
-        'image' => drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/font/icons/fontsize.png',
+        'image' => $this->pathResolver->getPath('module', 'oab_ckeditor') . '/js/plugins/font/icons/fontsize.png',
       ),
     );
   }

@@ -25,8 +25,9 @@
 {% if content %}
 
   {{ drupal_block('page_menu_views_category_block') }}
+  {{ drupal_block('page_menu_modular_product_block') }}
 
   <div{{ attributes.addClass(classes) }}>
-    {{ elements|without('pagemenuofviewscategory') }}
+    {{ elements|without('pagemenuofviewscategory', 'page_menu_modular_product_block') }}
   </div>
 {% endif %}

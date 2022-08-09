@@ -4,11 +4,8 @@ namespace Drupal\oab_marketo\EventSubscriber;
 
 
 use Drupal\Core\Render\HtmlResponse;
-use Drupal\Core\Routing\RouteMatchInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 
@@ -32,9 +29,10 @@ class AlterHeadersEvent implements EventSubscriberInterface {
 
   /**
    * Add no-cache header if a altares token is sent
-   * @param FilterResponseEvent $event
+   *
+   * @param ResponseEvent $event
    */
-  public function onResponse(FilterResponseEvent $event) {
+  public function onResponse(ResponseEvent $event) {
 
     /** @var HtmlResponse $response */
     $response = $event->getResponse();

@@ -15,6 +15,6 @@ plugin: cookie_compliance_block
 settings:
   id: cookie_compliance_block
   label: 'Cookie compliance Block'
-  provider: oab_cookie_compliance
   label_display: '0'
+  provider: oab_cookie_compliance
 visibility: {  }

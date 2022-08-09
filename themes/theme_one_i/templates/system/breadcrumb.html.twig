@@ -10,19 +10,20 @@
  */
 #}
 {% if breadcrumb %}
-  <ol class="breadcrumb">
+<nav class="pt-1" aria-label="Fil d'Ariane">
+  <ol class="breadcrumb m-0" data-ob1-component="Breadcrumb">
     {% for item in breadcrumb %}
-      <li {{ item.attributes }}>
+      <li class="breadcrumb-item m-0 p-0">
         {% if item.url %}
-            {% if loop.first %}
-                <a href="{{ item.url }}" class="icon-home" title="{{ item.text }}"></a>
-                {% else %}
-                    <a href="{{ item.url }}">{{ item.text }}</a>
-                {% endif %}
+          <a href="{{ item.url }}"
+             onmousedown="utag_link(utag_data.titre_page,'breadcrumb','{{ item.text|escape('html') }}','{{ item.url }}')">
+            {{ item.text }}
+          </a>
         {% else %}
           {{ item.text }}
         {% endif %}
       </li>
     {% endfor %}
   </ol>
+</nav>
 {% endif %}

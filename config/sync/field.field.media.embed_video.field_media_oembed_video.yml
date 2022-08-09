@@ -1,0 +1,19 @@
+uuid: 8255ef27-3e5e-44c2-95f0-2c9179de07d3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_oembed_video
+    - media.type.embed_video
+id: media.embed_video.field_media_oembed_video
+field_name: field_media_oembed_video
+entity_type: media
+bundle: embed_video
+label: 'Media Oembed Video'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

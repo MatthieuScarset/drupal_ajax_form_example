@@ -1,0 +1,11 @@
+uuid: 9c906e17-6cc3-4956-8aeb-1188076d33c0
+langcode: en
+status: true
+dependencies:
+  module:
+    - oab_mp_formules
+id: product_formule_entity.product_formule_entity
+target_entity_type_id: product_formule_entity
+target_bundle: product_formule_entity
+default_langcode: current_interface
+language_alterable: true

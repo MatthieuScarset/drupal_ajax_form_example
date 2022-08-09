@@ -11,9 +11,9 @@ third_party_settings:
     gdpr_expiration_date: '2019-12-31'
     gdpr_business_analysts: {  }
     gdpr_form_published: 1
+weight: 0
 open: null
 close: null
-weight: 0
 uid: 86
 template: false
 archive: false
@@ -21,7 +21,104 @@ id: data_center
 title: Data-center
 description: '<p>Data-center contact</p>'
 category: HDM
-elements: "processed_text:\n  '#type': processed_text\n  '#text': |\n    <p>Complétez ce formulaire, nos experts vous contactent dans les plus brefs délais.</p>\n  '#format': full_html\ncivilite:\n  '#type': select\n  '#title': Civilité\n  '#options':\n    Madame: Mme\n    Monsieur: Mr\n  '#required': true\nnom:\n  '#type': textfield\n  '#title': Nom\n  '#required': true\nemail:\n  '#type': email\n  '#title': 'E-mail professionnel'\n  '#required': true\nprofil_metier_:\n  '#type': select\n  '#title': 'Profil métier '\n  '#options':\n    'Direction Générale ': 'Direction Générale '\n    'Direction Administrative & financière ': 'Direction Administrative & financière '\n    'Direction des Ressources Humaines': 'Direction des Ressources Humaines'\n    'Direction Marketing & Communication': 'Direction Marketing & Communication'\n    'Direction des Ventes ': 'Direction des Ventes '\n    'Direction Production & Logistique ': 'Direction Production & Logistique '\n    'Direction Informatique': 'Direction Informatique'\nraison_sociale:\n  '#type': textfield\n  '#title': 'Raison sociale'\n  '#required': true\nnumero_siret_14_chiffres_:\n  '#type': textfield\n  '#title': 'Numéro SIRET (14 chiffres)'\ntelephone_fixe:\n  '#type': tel\n  '#title': 'Téléphone fixe'\n  '#required': true\nmobile:\n  '#type': tel\n  '#title': Mobile\nje_suis_client_orange_business_services:\n  '#type': select\n  '#title': 'Je suis client Orange Business Services'\n  '#options':\n    Oui: Oui\n    Non: Non\n  '#select2': true\n  '#default_value': Choisir\nmessage:\n  '#type': textarea\n  '#title': Message\npays:\n  '#type': select\n  '#title': Pays\n  '#options': country_names\n  '#select2': true\n  '#required': true\ndonnees_personnelles:\n  '#type': checkbox\n  '#title': 'Données personnelles'\n  '#description': '<p><strong>J’accepte de recevoir des informations concernant les services d’Orange Business Services</strong></p>'\n  '#title_display': ''\n  '#states':\n    invisible:\n      - ':input[name=\"pays\"]':\n          value:\n            pattern: '/|Argentina|Chile|Estonia|Finland|France|Ireland|Japan|Latvia|Malaysia|Mexico|Morocco|Nigeria|Poland|Singapore|South Africa|Sweden|Turkey|United Kingdom|United States|/'\n      - or\n      - ':input[name=\"je_suis_client_orange_business_services\"]':\n          value: Oui\n      - or\n      - ':input[name=\"pays\"]':\n          empty: true\n  '#attributes':\n    class:\n      - check-data\n    style: 'width:auto!important;float:left;margin-right:1rem'\ncaptcha:\n  '#type': captcha\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\n  '#submit__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\n  '#update__attributes':\n    onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'\nprocessed_text_01:\n  '#type': processed_text\n  '#text': |\n    <p style=\"font-size:1rem;\"><br />\n    Nous utilisons vos données de contact professionnelles pour répondre à votre demande. Orange SA (Division Orange Business Services) est responsable de traitement, que vous pouvez contacter à obs.francedpo@orange.com. Vous disposez notamment d’un droit d’accès, de rectification, d’opposition et de suppression de vos données. Vous pourrez vous désinscrire de nos communications à tout moment. Pour plus d’informations sur le traitement de vos données et vos droits, <a href=\"https://www.orange-business.com/fr/donnees-personnelles\" target=\"_blank\">cliquer ici</a>.</p>\n  '#format': full_html"
+elements: |-
+  processed_text:
+    '#type': processed_text
+    '#text': |
+      <p>Complétez ce formulaire, nos experts vous contactent dans les plus brefs délais.</p>
+    '#format': full_html
+  civilite:
+    '#type': select
+    '#title': Civilité
+    '#options':
+      Madame: Mme
+      Monsieur: Mr
+    '#required': true
+  nom:
+    '#type': textfield
+    '#title': Nom
+    '#required': true
+  email:
+    '#type': email
+    '#title': 'E-mail professionnel'
+    '#required': true
+  profil_metier_:
+    '#type': select
+    '#title': 'Profil métier '
+    '#options':
+      'Direction Générale ': 'Direction Générale '
+      'Direction Administrative & financière ': 'Direction Administrative & financière '
+      'Direction des Ressources Humaines': 'Direction des Ressources Humaines'
+      'Direction Marketing & Communication': 'Direction Marketing & Communication'
+      'Direction des Ventes ': 'Direction des Ventes '
+      'Direction Production & Logistique ': 'Direction Production & Logistique '
+      'Direction Informatique': 'Direction Informatique'
+  raison_sociale:
+    '#type': textfield
+    '#title': 'Raison sociale'
+    '#required': true
+  numero_siret_14_chiffres_:
+    '#type': textfield
+    '#title': 'Numéro SIRET (14 chiffres)'
+  telephone_fixe:
+    '#type': tel
+    '#title': 'Téléphone fixe'
+    '#required': true
+  mobile:
+    '#type': tel
+    '#title': Mobile
+  je_suis_client_orange_business_services:
+    '#type': select
+    '#title': 'Je suis client Orange Business Services'
+    '#options':
+      Oui: Oui
+      Non: Non
+    '#select2': true
+    '#default_value': Choisir
+  message:
+    '#type': textarea
+    '#title': Message
+  pays:
+    '#type': select
+    '#title': Pays
+    '#options': country_names
+    '#select2': true
+    '#required': true
+  donnees_personnelles:
+    '#type': checkbox
+    '#title': 'Données personnelles'
+    '#description': '<p><strong>J’accepte de recevoir des informations concernant les services d’Orange Business Services</strong></p>'
+    '#title_display': ''
+    '#states':
+      invisible:
+        - ':input[name="pays"]':
+            value:
+              pattern: '/|Argentina|Chile|Estonia|Finland|France|Ireland|Japan|Latvia|Malaysia|Mexico|Morocco|Nigeria|Poland|Singapore|South Africa|Sweden|Turkey|United Kingdom|United States|/'
+        - or
+        - ':input[name="je_suis_client_orange_business_services"]':
+            value: Oui
+        - or
+        - ':input[name="pays"]':
+            empty: true
+    '#attributes':
+      class:
+        - check-data
+      style: 'width:auto!important;float:left;margin-right:1rem'
+  captcha:
+    '#type': captcha
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+    '#submit__attributes':
+      onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'
+    '#update__attributes':
+      onmousedown: 'utag_link(utag_data.titre_page, ''Formulaire'', ''Validation'', '''')'
+  processed_text_01:
+    '#type': processed_text
+    '#text': |
+      <p style="font-size:1rem;"><br />
+      Nous utilisons vos données de contact professionnelles pour répondre à votre demande. Orange SA (Division Orange Business Services) est responsable de traitement, que vous pouvez contacter à obs.francedpo@orange.com. Vous disposez notamment d’un droit d’accès, de rectification, d’opposition et de suppression de vos données. Vous pourrez vous désinscrire de nos communications à tout moment. Pour plus d’informations sur le traitement de vos données et vos droits, <a href="https://www.orange-business.com/fr/donnees-personnelles" target="_blank">cliquer ici</a>.</p>
+    '#format': full_html
 css: ''
 javascript: ''
 settings:
@@ -36,9 +133,9 @@ settings:
   page_theme_name: ''
   form_title: both
   form_submit_once: false
-  form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
+  form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
@@ -48,31 +145,36 @@ settings:
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
-  form_disable_back: false
-  form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
+  form_reset: false
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_attributes: {  }
   form_method: ''
   form_action: ''
-  form_attributes: {  }
   share: false
   share_node: false
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
   submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
   submission_user_columns: {  }
@@ -81,11 +183,6 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
-  submission_locked_message: ''
-  submission_excluded_elements: {  }
-  submission_exclude_empty: false
-  submission_exclude_empty_checkbox: false
   previous_submission_message: ''
   previous_submissions_message: ''
   autofill: false
@@ -96,13 +193,13 @@ settings:
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
@@ -125,9 +222,9 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: page
+  confirmation_url: ''
   confirmation_title: Confirmation
   confirmation_message: "<div class=\"container-fluid\">\r\n<div class=\"row obs_template two_columns\">\r\n<div class=\"col-md-6 col-sm-12\">\r\n<p><strong>Nos experts vous répondent dans les meilleurs délais</strong></p>\r\n\r\n<p>Merci de l'intérêt que vous portez aux solutions Orange Business Services.</p>\r\n\r\n<p>A bientôt !</p>\r\n</div>\r\n\r\n<div class=\"col-md-6 col-sm-12\">\r\n<drupal-entity data-embed-button=\"media_browser\" data-entity-embed-display=\"entity_reference:entity_reference_entity_view\" data-entity-embed-settings=\"{&quot;view_mode&quot;:&quot;default&quot;}\" data-entity-type=\"media\" data-entity-uuid=\"860ea89a-ea44-4fe5-b3d0-ccb75e2c8631\"></drupal-entity>\r\n</div>\r\n</div>\r\n</div>\r\n\r\n<div>&nbsp;</div>"
-  confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -206,9 +303,9 @@ access:
 handlers:
   email:
     id: email
+    handler_id: email
     label: Email
     notes: ''
-    handler_id: email
     status: true
     conditions: {  }
     weight: 0
@@ -217,13 +314,17 @@ handlers:
         - completed
       to_mail: 'sandrine.colle@orange.com,muriel.lepicard@orange.com'
       to_options: {  }
-      cc_mail: ''
-      cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
       from_mail: _default
       from_options: {  }
       from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
       subject: 'Portail orange business : vous avez un nouveau contact'
       body: "<p>Bonjour,</p>\r\n\r\n<p>Une nouvelle demande a été postée par un internaute sur le portail orange-business.com.</p>\r\n\r\n<p>Pour y accéder, merci de vous reporter à la documentation reçue avec vos accès.</p>\r\n\r\n<p>Bien à vous,</p>\r\n\r\n<p>L'équipe Digitale</p>"
       excluded_elements:
@@ -245,11 +346,7 @@ handlers:
       html: true
       attachments: false
       twig: false
-      debug: false
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
       theme_name: ''
       parameters: {  }
+      debug: false
 variants: {  }

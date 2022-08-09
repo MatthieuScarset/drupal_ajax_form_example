@@ -1,16 +1,21 @@
 const path= require('path');
-const MiniCssExtractPlugin= require("mini-css-extract-plugin");
-module.exports= {
-  mode: 'development',
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+
+module.exports = {
+  mode: 'production',
   stats: 'normal',
   entry: {
-    "one_i": './assets/scss/one_i.scss',
-    "style": './assets/scss/style.scss',
+    "css/one_i": './assets/scss/one_i.scss',
+    "css/style": './assets/scss/style.scss',
+    "js/modular_product.min": './js/modular_product/main.js',
+    "js/product_formule.min": './js/product_formule/main.js',
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'assets/css'),
-    publicPath: "/assets/css"
+    path: path.resolve(__dirname, 'assets/'),
+    publicPath: "assets/"
   },
   module: {
     rules: [
@@ -41,9 +46,24 @@ module.exports= {
       },
     ],
   },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin({test: /\.js(\?.*)?$/i})],
+  },
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].css'
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {from: './node_modules/@ob1/web/dist/js/ob1.*', to: 'js/[name][ext]'},
+        {from: './node_modules/@ob1/web/dist/js/ob1.bundle.*', to: 'js/[name][ext]'},
+        {from: './node_modules/boosted/dist/js/boosted.*', to: 'js/[name][ext]'},
+        {from: './node_modules/boosted/dist/js/boosted.bundle.*', to: 'js/[name][ext]'},
+        {from: './node_modules/@ob1/web/dist/fonts/icon-orange.json', to: 'fonts/[name][ext]'},
+        {from: './node_modules/@ob1/web/dist/fonts/icon-orange.woff*', to: '../../../modules/custom/oab_icomoon/icon_orange/fonts/[name][ext]'},
+        {from: './node_modules/@ob1/web/dist/css/orange-icons.css', to: '../../../modules/custom/oab_icomoon/icon_orange/css/[name][ext]'}
+      ]
     })
   ]
 };

@@ -1,0 +1,28 @@
+uuid: 78db5b3a-6514-4f44-bec2-91dada7f3e15
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.media.logo.field_media_svg
+    - media.type.logo
+  module:
+    - svg_image_field
+id: media.logo.default
+targetEntityType: media
+bundle: logo
+mode: default
+content:
+  field_media_svg:
+    type: svg_image_url_formatter
+    label: hidden
+    settings:
+      image_style: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

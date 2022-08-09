@@ -1,0 +1,23 @@
+uuid: d2382950-ebb8-4997-96d7-91ff38436558
+langcode: en
+status: true
+dependencies:
+  module:
+    - crop
+third_party_settings:
+  crop:
+    image_field: null
+id: embed_video
+label: 'Embed video'
+description: ''
+source: 'oembed:video'
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_oembed_video
+  thumbnails_directory: 'public://oembed_thumbnails/[date:custom:Y-m]'
+  providers:
+    - YouTube
+field_map:
+  type: field_media_oembed_video
+  title: name

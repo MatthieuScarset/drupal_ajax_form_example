@@ -5,6 +5,8 @@
  * Contains oab_subhomes.module.
  */
 
+use Drupal\Core\Extension\ExtensionPathResolver;
+use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\oab_subhomes\Entity\SubhomeEntity;
 use Drupal\Core\Entity\ContentEntityInterface;
@@ -34,18 +36,21 @@ function oab_subhomes_help($route_name, RouteMatchInterface $route_match) {
  */
 function oab_subhomes_theme($existing, $type, $theme, $path) {
 
+    /** @var ExtensionPathResolver $service_path_resolver */
+    $service_path_resolver = \Drupal::service('extension.path.resolver');
+
     $theme = [];
     $theme['subhome_entity'] = [
         'render element' => 'elements',
-        'path' => drupal_get_path('theme', 'theme_boosted') . '/templates/subhome_entity',
-        'theme path'    => drupal_get_path('theme', 'theme_boosted') ,
+        'path' => $service_path_resolver->getPath('theme', 'theme_boosted') . '/templates/subhome_entity',
+        'theme path'    => $service_path_resolver->getPath('theme', 'theme_boosted') ,
         'template' => 'subhome_entity',
         'type'  => 'module',
     ];
     $theme['paragraph'] = [
         'render element' => 'elements',
-        'path' => drupal_get_path('theme', 'theme_boosted') . '/templates/paragraphs',
-        'theme path'    => drupal_get_path('theme', 'theme_boosted') ,
+        'path' => $service_path_resolver->getPath('theme', 'theme_boosted') . '/templates/paragraphs',
+        'theme path'    => $service_path_resolver->getPath('theme', 'theme_boosted') ,
         'template' => 'paragraph',
         'type'  => 'module',
     ];
@@ -153,11 +158,13 @@ function oab_subhomes_preprocess_views_view(&$variables) {
                 $entities = \Drupal::entityTypeManager()->getStorage('node')
                     ->loadMultiple($nids);
 
+                /** @var RendererInterface $service_renderer */
+                $service_renderer = \Drupal::service('renderer');
                 $view_builder = \Drupal::entityTypeManager()->getViewBuilder('node');
                 foreach ($entities as $entity) {
                     $builded_entity = $view_builder->view($entity, 'subhome');
                     $variables[SubhomeEntity::TWIG_VAR_NAME]['press_kit'][] =
-                        render($builded_entity);
+                        $service_renderer->render($builded_entity);
                 }
             }
         }

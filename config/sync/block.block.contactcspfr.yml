@@ -19,23 +19,23 @@ plugin: 'block_content:c55c4f20-7284-46c6-9f27-9a5df2395e26'
 settings:
   id: 'block_content:c55c4f20-7284-46c6-9f27-9a5df2395e26'
   label: 'Contact CSP FR'
-  provider: block_content
   label_display: '0'
+  provider: block_content
   status: true
   info: ''
   view_mode: null
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
-    bundles:
-      cloud_service_provider: cloud_service_provider
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
+    bundles:
+      cloud_service_provider: cloud_service_provider
   language:
     id: language
-    langcodes:
-      fr: fr
     negate: false
     context_mapping:
       language: '@language.current_language_context:language_interface'
+    langcodes:
+      fr: fr

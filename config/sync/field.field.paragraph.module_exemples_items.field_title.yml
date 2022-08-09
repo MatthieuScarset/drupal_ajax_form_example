@@ -1,0 +1,19 @@
+uuid: c7d4cdfa-1b4d-4e41-81a7-eec737cd0cfd
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.module_exemples_items
+id: paragraph.module_exemples_items.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: module_exemples_items
+label: 'Titre item'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

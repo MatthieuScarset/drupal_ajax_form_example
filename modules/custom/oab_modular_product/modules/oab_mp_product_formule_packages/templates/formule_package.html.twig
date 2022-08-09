@@ -1,0 +1,72 @@
+{#
+/**
+ * @file formule_package.html.twig
+ * Default theme implementation to present Formule package data.
+ *
+ * This template is used when viewing Formule package pages.
+ *
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ * - attributes: HTML attributes for the container element.
+ *
+ * @see template_preprocess_formule_package()
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ attributes.addClass('formule_package', 'row', 'px-1', 'px-md-4') }}>
+  <div class="col-12 col-md-11 pl-0">
+    {% if content %}
+
+    <div class="d-flex align-items-center">
+      <h3 class="pb-0 mb-0">{{ "Vous êtes éligibles !"|t }}</h3>
+      <img class="pl-2" src="/themes/theme_one_i/assets/image/illustration-hands.png" alt="illustration hand">
+    </div>
+
+    <div class="row py-4">
+      <div class="col-12 standard text-gray3 font-weight-bold pb-1">{{ "Votre formule"|t }}</div>
+      <div class="col-12 col-md-6 pr-0 pr-md-2">
+        <h4 class="mb-0 mb-md-2">{{ content.name }}</h4>
+        <span class="lead">{{ content.field_teaser }}</span>
+        <h4 class="text-primary d-flex py-1 mb-0 mb-md-1">{{ content.field_price }} / {{ "mois"|t }}</h4>
+
+        {% set price = formule_package.field_price[0].getValue() ?? 0 %}
+
+        {# Encodage des données à envoyer à Marketo en Base64 #}
+        {% set query_data = {
+            mKTOPMCF1String: formule_values.taille_entreprise,
+            mKTOPMCF2String: formule_package.label(),
+            mKTOPMCF3String: price.value,
+            SMB_Customer_Request__c: "Demande de commande commerciale :" ~ formule_package.label()
+            ~ "\r\nPack Sélectionné : " ~ formule_values.taille_entreprise
+            ~ "\r\nPrix du deviseur retenu :" ~ price.value
+          }|json_encode()|base64_encode %}
+
+        <a class="btn btn-primary" href="{{ drupal_url('/fr/formulaire-contact', { query: { data: query_data }, absolute: true })
+        }}">{{ "Commander"|t }}</a>
+      </div>
+      <div class="col-12 col-md-6 pl-1 pl-md-2 pt-md-0 ml-1 ml-md-0 mt-3 lead border-left border-gray4">
+        {{ content.field_description }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 standard text-gray3 font-weight-bold">{{ "Détail"|t }}</div>
+      <div class="col-12 pr-0">
+        {{ content.field_details }}
+      </div>
+    </div>
+
+
+
+
+{#    url.searchParams.set('mKTOPMCF1String', values.taille_entreprise);
+      url.searchParams.set('mKTOPMCF2String', this.$parent.formuleName);
+      url.searchParams.set('mKTOPMCF3String', this.$parent.formulePrice);
+      url.searchParams.set('SMB_Customer_Request__c',
+        `<${this.$parent.formuleName}><${values.taille_entreprise}><${this.$parent.formulePrice}>`);
+#}
+
+  {% endif %}
+  </div>
+</div>

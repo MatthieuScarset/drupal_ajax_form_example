@@ -1,0 +1,13 @@
+services:
+
+  oab_data_import.product_categories_terms_import:
+    class: Drupal\oab_data_import\Classes\ProductCategoriesTermsImport
+    arguments:
+      - '@extension.path.resolver'
+      - '@file_system'
+      -
+  oab_data_import.product_categories_data_import:
+    class: Drupal\oab_data_import\Classes\ProductCategoriesDataImport
+    arguments:
+      - '@extension.path.resolver'
+      - '@file_system'

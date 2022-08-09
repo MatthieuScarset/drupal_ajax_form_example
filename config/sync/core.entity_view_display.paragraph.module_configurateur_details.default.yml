@@ -1,0 +1,31 @@
+uuid: deb50469-69b2-4b29-b872-be2ead62f517
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.module_configurateur_details.field_detail_description
+    - field.field.paragraph.module_configurateur_details.field_detail_title
+    - paragraphs.paragraphs_type.module_configurateur_details
+  module:
+    - text
+id: paragraph.module_configurateur_details.default
+targetEntityType: paragraph
+bundle: module_configurateur_details
+mode: default
+content:
+  field_detail_description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_detail_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

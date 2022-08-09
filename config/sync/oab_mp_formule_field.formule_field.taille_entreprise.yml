@@ -1,0 +1,40 @@
+uuid: 75f5907b-37e4-49d0-98eb-4035d145206a
+langcode: en
+status: true
+dependencies: {  }
+third_party_settings:
+  oab_mp_formule_field:
+    empty_config:
+      no_result_title: 'Vous avez indiqué vouloir équiper [formule-field:color-orange]{answer} collaborateurs[formule-field:color-end]'
+      no_result_sentence: 'Nous avons une page dédiée sur orange-pro.fr pour répondre à cette demande'
+      button_text: 'Consulter la page'
+      button_link: 'http://www.google.fr'
+    empty_configs:
+      default:
+        name: Default
+        no_result_title: 'Vous avez indiquer vouloir équiper [formule-field:color-orange]{answer} collaborateurs[formule-field:color-end]'
+        no_result_sentence: 'Cette demande spécifique doit être traitée par l''un de nos experts. Contactez-nous pour obtenir plus d''informations'
+        button_text: Contactez-nous
+        button_link: 'http://ruby.local:8000/fr/contact'
+      config_1:
+        name: 'Config 1'
+        no_result_title: 'Vous avez indiqué vouloir équiper [formule-field:color-orange]{answer} collaborateurs[formule-field:color-end]'
+        no_result_sentence: 'Notre offre Working Together Ready n''est pas disponible pour {answer} collaborateurs à ce jour. Cependant l''offre Connect Pro de la boutique Orange Pro pourrait vous convenir.'
+        button_text: 'Consulter l''offre'
+        button_link: 'https://pro.orange.fr'
+        inputs:
+          moins_15: moins_15
+id: taille_entreprise
+label: 'Taille entreprise'
+display_label: 'Combien de collaborateurs souhaitez-vous équiper ?'
+description: 'Cliquez sur la plage de collaborateurs à équiper pour la sélectionner, puis validez en cliquant sur "Suivant"'
+choices:
+  moins_15: 'moins de 15'
+  de_15_a_20: 'De 15 à 20'
+  de_20_a_35: 'De 20 à 35'
+  'de 35_a_50': 'De 35 à 50'
+  plus_de_50: 'Plus de 50'
+display_mode: list
+sentence: '{answer} collaborateurs à équiper'
+null_value: false
+null_label: trfdv

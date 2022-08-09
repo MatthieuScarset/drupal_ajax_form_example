@@ -1,0 +1,10 @@
+uuid: d44170f5-3aee-4980-b2d7-4dd317acb735
+langcode: fr
+status: true
+dependencies: {  }
+id: module_benefits
+label: '[MP] Benefits'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

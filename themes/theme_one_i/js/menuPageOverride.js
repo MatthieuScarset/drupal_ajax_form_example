@@ -22,15 +22,22 @@ class MenuPageOverride {
     if ($(nav_links.first().attr('href')).offset().top <= sticky_bottom_pos) {
       nav_links.each(function(i, elem) {
         const target = $(elem).attr('href');
-        $(elem).parent().removeClass('active');
 
         if (target.length > 1
           && $(target).length) {
-          const parent_item_list = $(target).closest('.item-list');
+          var parent_item_list = $(target).closest('.item-list');
+          if( parent_item_list.length === 0) {
+            parent_item_list = $(target);
+          }
 
           if (sticky_bottom_pos + this.$pageMenu.height() >= $(target).offset().top
             && sticky_bottom_pos + this.$pageMenu.height() < ($(target).offset().top + parent_item_list.outerHeight(true))) {
-            $(elem).parent().addClass('active');
+            if(!$(elem).parent().hasClass('active')) {
+              $(elem).parent().addClass('active');
+            }
+          }
+          else {
+            $(elem).parent().removeClass('active');
           }
         }
       }.bind(this));
@@ -55,7 +62,9 @@ class MenuPageOverride {
   _getFixedItemsHeight() {
     let init = parseInt($('body').css('padding-top').replace("px", ''));
     $('.sticky-top').each(function () {
-      init += $(this).height();
+      if(!$(this).parents().hasClass('paragraph--type--module-presentation')) {
+        init += $(this).height();
+      }
     });
     return init;
   }

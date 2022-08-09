@@ -1,0 +1,30 @@
+uuid: 78d86e59-6be1-4ba7-9c31-fab8ab0c8013
+langcode: fr
+status: true
+dependencies:
+  module:
+    - node
+    - oab_modular_product
+  theme:
+    - theme_one_i
+id: topzonemodularproduct
+theme: theme_one_i
+region: top_zone
+weight: 0
+provider: null
+plugin: top_zone_modular_product_block
+settings:
+  id: top_zone_modular_product_block
+  label: 'Top Zone Modular Product'
+  label_display: visible
+  provider: oab_modular_product
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      modular_product: modular_product

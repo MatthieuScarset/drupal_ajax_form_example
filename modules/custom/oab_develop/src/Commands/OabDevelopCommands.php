@@ -2,10 +2,10 @@
 
 namespace Drupal\oab_develop\Commands;
 
-use Drush\Drush;
-use Drush\Commands\DrushCommands;
 use Consolidation\SiteAlias\SiteAliasManagerAwareInterface;
 use Consolidation\SiteAlias\SiteAliasManagerAwareTrait;
+use Drupal\Core\Extension\ExtensionPathResolver;
+use Drush\Commands\DrushCommands;
 
 
 /**
@@ -23,13 +23,24 @@ class OabDevelopCommands extends DrushCommands implements SiteAliasManagerAwareI
 
   use SiteAliasManagerAwareTrait;
 
- /* public function install(array $profile) {
-      $selfRecord = $this->siteAliasManager()->getSelf();
-      $args = ['system.site', ...];
-      $options = ['yes' => true];
-      $process = $this->processManager()->drush($selfRecord, 'config-set', $args, $options);
-      $process->mustRun();
-  }*/
+  /**
+   * @var ExtensionPathResolver
+   */
+  private ExtensionPathResolver $pathResolver;
+
+  public function __construct(ExtensionPathResolver $extension_path_resolver) {
+    parent::__construct();
+    $this->pathResolver = $extension_path_resolver;
+  }
+
+  /* public function install(array $profile) {
+     $selfRecord = $this->siteAliasManager()->getSelf();
+     $args = ['system.site', ...];
+     $options = ['yes' => true];
+     $process = $this->processManager()->drush($selfRecord, 'config-set', $args, $options);
+     $process->mustRun();
+ }*/
+
 
   /**
    * Command description here.
@@ -41,14 +52,14 @@ class OabDevelopCommands extends DrushCommands implements SiteAliasManagerAwareI
    */
   public function commandName() {
     $this->output()->writeln('Execution oab-updb...');
-    $file_commands = drupal_get_path('module', 'oab_develop').'/drush_commands.inc';
+    $file_commands = $this->pathResolver->getPath('module', 'oab_develop').'/drush_commands.inc';
     if (file_exists($file_commands)) {
 
       $fp = fopen($file_commands, 'r');
 
       while ($row = fgets($fp)) {
         $row = trim(preg_replace('/\s+/', ' ', $row));
-        if (!empty($row) && substr($row, 0, 1) != '#'
+        if (!empty($row) && !str_starts_with($row, '#')
             && strlen($row) > 1  /* Prevent empty lines to be executed */) {
           $this->output()->writeln('- ' . $row);
 
@@ -77,14 +88,14 @@ class OabDevelopCommands extends DrushCommands implements SiteAliasManagerAwareI
     $this->output()->writeln('drush config-import');
     $this->runCmd('cim', [], true);
     $this->output()->writeln('Installation des modules devs...');
-    $file_commands = drupal_get_path('module', 'oab_develop').'/dev_modules.data';
+    $file_commands = $this->pathResolver->getPath('module', 'oab_develop').'/dev_modules.data';
     if (file_exists($file_commands)) {
 
       $fp = fopen($file_commands, 'r');
       $modules = [];
       while ($row = fgets($fp)) {
         $row = trim(preg_replace('/\s+/', ' ', $row));
-        if (!empty($row) && substr($row, 0, 1) != '#' && strlen($row) > 1/* Prevent empty lines to be executed */) {
+        if (!empty($row) && !str_starts_with($row, '#') && strlen($row) > 1/* Prevent empty lines to be executed */) {
           $modules[] = $row;
         }
       }
@@ -103,15 +114,11 @@ class OabDevelopCommands extends DrushCommands implements SiteAliasManagerAwareI
       $options['yes'] = true;
     }
 
-    $process = $this->processManager()->drush($this->siteAliasManager()->getSelf(), $cmd, $args, $options);
+    $process = $this->processManager()->drush(siteAlias: $this->siteAliasManager()->getSelf(), command: $cmd, args: $args, options: $options);
     $process->enableOutput(true);
     $process->mustRun();
-    foreach ($process as $type => $data) {
-      if ($process::OUT === $type) {
-        echo $data."\n";
-      } else {
-        echo $data."\n";
-      }
+    foreach ($process as $data) {
+      echo $data."\n";
     }
   }
 }

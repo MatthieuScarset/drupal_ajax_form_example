@@ -1,22 +1,15 @@
 <?php
 
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Menu\MenuLinkInterface;
-use Drupal\file\Entity\File;
-use Drupal\media\Entity\Media;
-use Drupal\menu_link_content\Entity\MenuLinkContent;
+use Drupal\Core\File\FileUrlGenerator;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\node\NodeInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Menu\MenuLinkInterface;
 use Drupal\Core\Url;
-use Drupal\Core\Database\Database;
-use Drupal\oab_backoffice\Form\OabSettingsPardotForm;
+use Drupal\media\Entity\Media;
+use Drupal\node\NodeInterface;
 use Drupal\oab_dvi\DviHelper;
-
-use Drupal\paragraphs\Entity\Paragraph;
-
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
 
 // Regroupement de fonctions qui n'étaient pas des hooks dans un fichier à part pour ne laisser que les hooks dans ce fichier
 module_load_include('inc', 'oab_frontoffice', 'includes/helpers');
@@ -51,50 +44,50 @@ function oab_frontoffice_preprocess_menu(&$variables) {
  */
 function oab_frontoffice_preprocess_node(&$variables) {
 
-    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-    $variables['langcode'] = $current_language;
+  $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $variables['langcode'] = $current_language;
 
-    if (isset($variables["elements"]["#contextual_links"]["node"]["route_parameters"]["node"])) {
+  if (isset($variables["elements"]["#contextual_links"]["node"]["route_parameters"]["node"])) {
 
-        ##Collecte de toutes les données nécessaires
+    ##Collecte de toutes les données nécessaires
 
-        #Je recupère le nid puis je charge le node associé
-        $nid = $variables["elements"]["#contextual_links"]["node"]["route_parameters"]["node"];
-        $node = \Drupal\node\Entity\Node::load($nid);
+    #Je recupère le nid puis je charge le node associé
+    $nid = $variables["elements"]["#contextual_links"]["node"]["route_parameters"]["node"];
+    $node = \Drupal\node\Entity\Node::load($nid);
 
-        if (is_null($node) || $node === false) {
-            return;
-        }
-
-        $meta_description = "";
-        ##Je recupère le field_meta_description s'il existe
-        if ($node->hasField('field_meta_decription')) {
-            $meta_description = $node->get('field_meta_description')->getValue();
-        }
-
-        $node_title = isset($variables["label"][0]["#context"]["value"]) ? $variables["label"][0]["#context"]["value"] : '';
-
-        $og_image = $file = "";
-        if ($node->hasField('field_visual')) {
-            $file = $node->get('field_visual')->getValue();
-            if (!empty($file[0]['target_id']) && $file[0]['target_id'] != null) {
-                $file = \Drupal\file\Entity\File::load($file[0]['target_id']);
-                if ($file instanceof \Drupal\file\Entity\File) {
-                    $og_image = $file->createFileUrl();
-                }
-            }
-        }
-
-        #J'enregistre mes urls et variables OG pour les avoir en JS
-        $variables['#attached']['drupalSettings']['shareSettings'] = getSocialBarParameters($node_title, $meta_description, $og_image);
+    if (is_null($node) || $node === false) {
+      return;
     }
+
+    $meta_description = "";
+    ##Je recupère le field_meta_description s'il existe
+    if ($node->hasField('field_meta_decription')) {
+      $meta_description = $node->get('field_meta_description')->getValue();
+    }
+
+    $node_title = isset($variables["label"][0]["#context"]["value"]) ? $variables["label"][0]["#context"]["value"] : '';
+
+    $og_image = $file = "";
+    if ($node->hasField('field_visual')) {
+      $file = $node->get('field_visual')->getValue();
+      if (!empty($file[0]['target_id']) && $file[0]['target_id'] != null) {
+        $file = \Drupal\file\Entity\File::load($file[0]['target_id']);
+        if ($file instanceof \Drupal\file\Entity\File) {
+          $og_image = $file->createFileUrl();
+        }
+      }
+    }
+
+    #J'enregistre mes urls et variables OG pour les avoir en JS
+    $variables['#attached']['drupalSettings']['shareSettings'] = getSocialBarParameters($node_title, $meta_description, $og_image);
+  }
 
 }
 
 function oab_frontoffice_load_link_entity_by_link(MenuLinkInterface $menu_link_content_plugin) {
     $entity = NULL;
     if ($menu_link_content_plugin instanceof Drupal\menu_link_content\Plugin\Menu\MenuLinkContent) {
-        list($entity_type, $uuid) = explode(':', $menu_link_content_plugin->getPluginId(), 2);
+        [$entity_type, $uuid] = explode(':', $menu_link_content_plugin->getPluginId(), 2);
 
         /** @var Drupal\Core\Entity\EntityRepository $service */
         $service = Drupal::service('entity.repository');
@@ -504,17 +497,6 @@ function oab_frontoffice_views_post_render($view) {
             }
         }
     }
-    elseif ($view->id() == 'category_page') {
-      if (\Drupal::routeMatch()->getParameters()->has('tid')) {
-        /** @var \Drupal\views\Plugin\views\argument\NumericArgument $argument */
-        $tid = \Drupal::routeMatch()->getParameters()->get('tid');
-        if (null !== ($term = \Drupal\taxonomy\Entity\Term::load($tid))) {
-          $view->setTitle($term->getName());
-          $route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT);
-          $route->setDefault('_title', $term->getName());
-        }
-      }
-    }
 }
 
 function oab_frontoffice_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadcrumb &$breadcrumb, \Drupal\Core\Routing\RouteMatchInterface $route_match, array $context) {
@@ -635,10 +617,13 @@ function oab_frontoffice_telechargement_documents_form_submit(array $form, Drupa
             $field_value = $field_file->getValue();
             $media = \Drupal\media\Entity\Media::load($field_value[0]['target_id']);
 
+            /** @var FileUrlGenerator $service_file_url_generator */
+            $service_file_url_generator = \Drupal::service('file_url_generator');
+
             ##On load le file contenu dans l'entity media
             $file_value = $media->get('field_file')->getValue();
             $file_id = $file_value[0]['target_id'];
-            $file_url = file_create_url(\Drupal\file\Entity\File::load($file_id)
+            $file_url = $service_file_url_generator->generateAbsoluteString(File::load($file_id)
                 ->getFileUri());
             ##je remplace la valeur d'url_du_fichier par l'url générée
             $form_state->setValue('url_du_fichier', $file_url);
@@ -775,6 +760,9 @@ function change_textfield_to_select($vid, $default_langcode = true) {
 
 
 function oab_frontoffice_preprocess_html(&$variables) {
+  /** @var FileUrlGenerator $service_file_url_generator */
+  $service_file_url_generator = \Drupal::service('file_url_generator');
+
 
   $node = \Drupal::routeMatch()->getParameter('node');
   if (NULL !== $node && $node instanceof NodeInterface) {
@@ -786,7 +774,7 @@ function oab_frontoffice_preprocess_html(&$variables) {
           if (isset($field_carousel->entity->field_background->target_id)) {
             $media = Media::load($field_carousel->entity->field_background->target_id);
             if ($media !== null && isset($media->field_image->entity)) {
-              $file_uri = file_url_transform_relative(file_create_url($media->field_image->entity->getFileUri()));
+              $file_uri = $service_file_url_generator->generateString($media->field_image->entity->getFileUri());
               $variables['carousel_bg'][$media->id()] = $file_uri;
             }
           }
@@ -797,5 +785,24 @@ function oab_frontoffice_preprocess_html(&$variables) {
         }
     }
   }
+  elseif(\Drupal::routeMatch()->getParameters()->has('view_id') && \Drupal::routeMatch()->getParameter('view_id') === "category_page"){
+    if (\Drupal::routeMatch()->getParameters()->has('tid')) {
+      /** @var \Drupal\views\Plugin\views\argument\NumericArgument $argument */
+      $tid = \Drupal::routeMatch()->getParameters()->get('tid');
+      if (null !== ($term = \Drupal\taxonomy\Entity\Term::load($tid))) {
+        $request = \Drupal::request();
+        if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)) {
+          $route->setDefault('_title', $term->getName());
+          $variables['head_title'] = $term->getName();
+        }
+      }
+    }
+  }
 
+  //Vérifier si le cookie drupal_oab_cookie-compliance_hide-message existe si oui le supprimer
+  $cookies_compliance = 'drupal_oab_cookie-compliance_hide-message';
+
+  if (\Drupal::request()->cookies->has($cookies_compliance)) {
+    setcookie($cookies_compliance, '', -1);
+  }
 }

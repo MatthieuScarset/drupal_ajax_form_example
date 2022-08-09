@@ -1,0 +1,6 @@
+name: '[MP] OAB Formule Field'
+type: module
+description: 'Manage choices in configurateur'
+core_version_requirement: ^8.8.0 || ^9.0
+package: 'OAB Commerce'
+project: 'oab_mp_formule_field'

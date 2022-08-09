@@ -1,0 +1,38 @@
+oab_mp_formule_field.formule_field.*:
+  type: config_entity
+  label: 'Formule field config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    uuid:
+      type: string
+    display_label:
+      type: label
+      label: 'Display Label'
+    description:
+      type: string
+      label: 'Description'
+    choices:
+      type: sequence
+      label: 'Choices'
+      sequence:
+        type: string
+        label: 'Choice label'
+    display_mode:
+      type: string
+      label: 'Display Mode'
+    sentence:
+      type: string
+      label: 'Short sentence'
+    null_value:
+      type: boolean
+      label: 'Has null value'
+    null_label:
+      type: string
+      label: "Null value label"
+
+

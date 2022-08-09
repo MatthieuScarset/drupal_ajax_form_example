@@ -1,0 +1,27 @@
+uuid: ff8c1314-c9a6-470f-8cef-72b3811131f4
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_display_mode
+field_name: field_display_mode
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: left
+      label: Left
+    -
+      value: right
+      label: Right
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -21,22 +21,22 @@ widget_selector: tabs
 widget_selector_configuration: {  }
 widgets:
   d31ba5dd-c9bd-4b46-a739-c8ec15dcb349:
+    id: view
+    uuid: d31ba5dd-c9bd-4b46-a739-c8ec15dcb349
+    label: 'Files listing'
+    weight: 1
     settings:
-      view: medias_entity_browser
-      view_display: entity_browser_file
       submit_text: Select
       auto_select: false
-    uuid: d31ba5dd-c9bd-4b46-a739-c8ec15dcb349
-    weight: 1
-    label: 'Files listing'
-    id: view
+      view: medias_entity_browser
+      view_display: entity_browser_file
   194ba10c-6784-42f2-9c3a-683391eb38ab:
+    id: entity_form
+    uuid: 194ba10c-6784-42f2-9c3a-683391eb38ab
+    label: 'Upload files'
+    weight: 2
     settings:
+      submit_text: Save
       entity_type: media
       bundle: file
       form_mode: default
-      submit_text: Save
-    uuid: 194ba10c-6784-42f2-9c3a-683391eb38ab
-    weight: 2
-    label: 'Upload files'
-    id: entity_form

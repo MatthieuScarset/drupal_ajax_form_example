@@ -1,0 +1,10 @@
+uuid: c5cb3ea1-01a3-4bfe-a54f-f1a9d29022b0
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.display_presentation_for_who
+label: 'Display Presentation For Who'
+targetEntityType: paragraph
+cache: true

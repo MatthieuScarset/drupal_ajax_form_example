@@ -1,0 +1,7 @@
+services:
+
+  oab_bvpn_import.csp_import:
+    class: Drupal\oab_bvpn_import\Classes\CSPImport
+    arguments:
+      - '@extension.path.resolver'
+      - '@file_system'

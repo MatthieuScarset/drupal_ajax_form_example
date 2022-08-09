@@ -1,0 +1,29 @@
+uuid: 474f0339-ee92-4178-a547-8368462ad96a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_video
+    - media.type.embed_video
+    - paragraphs.paragraphs_type.module_testimonial_item
+id: paragraph.module_testimonial_item.field_video
+field_name: field_video
+entity_type: paragraph
+bundle: module_testimonial_item
+label: Video
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      embed_video: embed_video
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -15,17 +15,17 @@ bundle: rebond_wysiwyg
 mode: default
 content:
   field_p_rebond_wysiwyg_contenu:
-    weight: 2
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: text_default
+    weight: 2
     region: content
   field_p_wysiwyg_rebond_color:
-    weight: 1
+    type: list_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: list_default
+    weight: 1
     region: content
 hidden: {  }

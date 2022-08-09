@@ -1,0 +1,9 @@
+name: OAB Modular Product
+description: "Gestion du type de contenu Modular Product"
+type: module
+package: OAB
+
+version: '8.x-1.0'
+core_version_requirement: ^8.8.0 || ^9.0
+project: 'oab_modular_product'
+datestamp: 1453308360

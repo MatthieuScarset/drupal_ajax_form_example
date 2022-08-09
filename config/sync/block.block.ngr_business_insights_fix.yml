@@ -18,13 +18,13 @@ plugin: 'block_content:0d5f26f6-505d-4501-8ce4-a111c066b4c0'
 settings:
   id: 'block_content:0d5f26f6-505d-4501-8ce4-a111c066b4c0'
   label: '[NGR] Business Insights - Fix'
-  provider: block_content
   label_display: '0'
+  provider: block_content
   status: true
   info: ''
   view_mode: full
 visibility:
   request_path:
     id: request_path
-    pages: "/business-insight\r\n/visions-business"
     negate: false
+    pages: "/business-insight\r\n/visions-business"

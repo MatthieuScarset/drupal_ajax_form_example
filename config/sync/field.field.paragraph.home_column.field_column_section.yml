@@ -31,6 +31,6 @@ settings:
         weight: 5
         enabled: false
       home_column_section:
-        enabled: true
         weight: 6
+        enabled: true
 field_type: entity_reference_revisions

@@ -1,0 +1,19 @@
+uuid: db60f721-4aa8-4bed-9b94-192a1ab528f6
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_price_label
+    - paragraphs.paragraphs_type.detail_gamme_items_offres
+id: paragraph.detail_gamme_items_offres.field_price_label
+field_name: field_price_label
+entity_type: paragraph
+bundle: detail_gamme_items_offres
+label: Prix
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

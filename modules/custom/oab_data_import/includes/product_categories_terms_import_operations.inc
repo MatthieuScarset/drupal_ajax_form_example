@@ -89,7 +89,7 @@ function oab_data_import_terms_product_categories_batch_finished($success, $resu
     $message = \Drupal::translation()->formatPlural(count($results['total']), 'One line', '@count lines.');
     \Drupal::messenger()->addMessage($message, 'status', TRUE);
 
-    if (count($results['warning']['message']) > 0) {
+    if ($results['warning']['message'] != null && count($results['warning']['message']) > 0) {
       Drupal::messenger()->addMessage("Errors occured in file : ", 'warning', TRUE);
       foreach ($results['warning']['message'] as $message) {
         Drupal::messenger()->addMessage($message, 'warning', TRUE);

@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityListBuilder;
 use Drupal\Core\Link;
 use Drupal\oab_subhomes\Entity\SubhomeEntityType;
 use Drupal\oab_subhomes\Entity\SubhomeEntity;
+use Drupal\taxonomy\Entity\Vocabulary;
 
 /**
  * Defines a class to build a listing of Subhome entity entities.
@@ -50,7 +51,7 @@ class SubhomeEntityListBuilder extends EntityListBuilder {
                     : $entity->bundle();
 
 
-        $voca = \Drupal\taxonomy\Entity\Vocabulary::load($entity->getSubhome()->getVocabularyId());
+        $voca = Vocabulary::load($entity->getSubhome()->bundle());
         $voca_name = "";
         if ($voca !== null) {
             $voca_name = $voca->label() . '\\' ;

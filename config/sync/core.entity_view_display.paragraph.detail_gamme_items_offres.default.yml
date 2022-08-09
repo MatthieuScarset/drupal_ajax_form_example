@@ -1,0 +1,60 @@
+uuid: c8d1109e-2f56-4426-aeff-745324277665
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.detail_gamme_items_offres.field_accroche
+    - field.field.paragraph.detail_gamme_items_offres.field_cta
+    - field.field.paragraph.detail_gamme_items_offres.field_inclus_offre_gamme
+    - field.field.paragraph.detail_gamme_items_offres.field_price_label
+    - field.field.paragraph.detail_gamme_items_offres.field_title
+    - paragraphs.paragraphs_type.detail_gamme_items_offres
+  module:
+    - entity_reference_revisions
+id: paragraph.detail_gamme_items_offres.default
+targetEntityType: paragraph
+bundle: detail_gamme_items_offres
+mode: default
+content:
+  field_accroche:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_cta:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_inclus_offre_gamme:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_price_label:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

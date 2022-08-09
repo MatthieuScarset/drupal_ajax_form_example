@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.media.subhome_image
     - field.field.media.image.field_image
+    - field.field.media.image.field_media_image
     - field.field.media.image.field_tags
     - field.field.media.image.field_thematic
     - image.style.subhome
@@ -17,16 +18,17 @@ bundle: image
 mode: subhome_image
 content:
   field_image:
-    weight: 2
+    type: image
     label: hidden
     settings:
-      image_style: subhome
       image_link: content
+      image_style: subhome
     third_party_settings: {  }
-    type: image
+    weight: 2
     region: content
 hidden:
   created: true
+  field_media_image: true
   field_tags: true
   field_thematic: true
   langcode: true

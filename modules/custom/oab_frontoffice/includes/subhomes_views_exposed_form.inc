@@ -19,25 +19,26 @@ function subhomes_views_exposed_form(&$form) {
           if ($new_select !== null) {
             $form[$key] = $new_select;
           } else {
-            $form[$key]['#access'] = false;
+            $form[$key]['#value'] = 'All';
+            $form[$key]['#type'] = "hidden";
           }
         }
         elseif (isset($value['#type']) && $value['#type'] == "select") {
-          $form[$key]['#type'] = 'subhome_select_button';
-          $properties = [
-            "vid" => $key,
-            "langcode" =>\Drupal::languageManager()->getCurrentLanguage()->getId()
-          ];
-          $form[$key]['#options'] = [];
-          $form[$key]['#title_display'] = 'invisible';
-          $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties($properties);
-          if (is_array($terms)
-            && !empty($terms)) {
-            foreach ($terms AS $term) {
-              $term_name = $term->getName();
-              $form[$key]['#options'][$term->id()] = $term_name;
-            }
-          }
+//          $form[$key]['#type'] = 'subhome_select_button';
+//          $properties = [
+//            "vid" => $key,
+//            "langcode" =>\Drupal::languageManager()->getCurrentLanguage()->getId()
+//          ];
+//          $form[$key]['#title_display'] = 'invisible';
+//          $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties($properties);
+//          if (is_array($terms)
+//            && !empty($terms)) {
+//            $form[$key]['#options'] = [];
+//            foreach ($terms AS $term) {
+//              $term_name = $term->getName();
+//              $form[$key]['#options'][$term->id()] = $term_name;
+//            }
+//          }
         }
       }
 
@@ -135,6 +136,7 @@ function subhomes_views_exposed_form(&$form) {
         if ($current_language == 'fr') {
             // on supprime "eBook"
             unset($form['field_document_type_target_id']['#options']['E-book']);
+            //devel_dump($form);
         }
         if ($current_language == 'en') {
             // on supprime "position paper"
@@ -142,7 +144,6 @@ function subhomes_views_exposed_form(&$form) {
         } else {
             unset($form['document_language']);
         }
-
     }
 
     // subhome presse
@@ -260,7 +261,7 @@ function subhomes_views_exposed_form(&$form) {
             // Années
             $form['year']['#options'] = clean_exposed_filters_by_language(
                 $form['year']['#options'],
-                t('Year')->render()
+              'Year'
             );
             // Analyst
             $form['analyst']['#options']['All'] = t('Analyst');
@@ -272,9 +273,9 @@ function subhomes_views_exposed_form(&$form) {
       || $form['#id'] == 'views-exposed-form-subhomes-archive-archive-news') {
         //$form['field_solution_target_id']['#options']['All'] = 'Solutions';
 
-        if (isset($form['field_solution_target_id'])) {
-          $form['field_solution_target_id']['#options'] = clean_exposed_filters_by_language(
-            $form['field_solution_target_id']['#options'],
+        if (isset($form['solutions'])) {
+          $form['solutions']['#options'] = clean_exposed_filters_by_language(
+            $form['solutions']['#options'],
             'Solutions');
         }
 

@@ -15,11 +15,15 @@
  * @ingroup templates
  */
 #}
-{% if primary %}
-  <h2 class="visually-hidden">{{ 'Primary tabs'|t }}</h2>
-  <ul class="tabs--primary nav nav-tabs">{{ primary }}</ul>
-{% endif %}
-{% if secondary %}
-  <h2 class="visually-hidden">{{ 'Secondary tabs'|t }}</h2>
-  <ul class="tabs--secondary pagination pagination-sm">{{ secondary }}</ul>
-{% endif %}
+
+<div class="container-fluid site-width">
+  {% if primary %}
+    <h2 class="d-none">{{ 'Primary tabs'|t }}</h2>
+    <ul class="tabs--primary nav nav-tabs"> {{ primary }} </ul>
+  {% endif %}
+
+  {% if secondary %}
+    <h2 class="d-none">{{ 'Secondary tabs'|t }}</h2>
+    <ul class="tabs--secondary nav nav-tabs">{{ secondary }}</ul>
+  {% endif %}
+</div>

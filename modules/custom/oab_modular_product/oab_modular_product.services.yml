@@ -1,0 +1,9 @@
+services:
+  oab_modular_product.conf_settings:
+    class: \Drupal\Core\Config\ImmutableConfig
+    factory: config.factory:get
+    arguments: ['oab_modular_product.settings']
+
+  oab_modular_product.settings:
+    class: \Drupal\oab_modular_product\Services\OabModularProductService
+    arguments: ['@oab_modular_product.conf_settings']

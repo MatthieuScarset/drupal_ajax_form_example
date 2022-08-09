@@ -1,0 +1,32 @@
+uuid: e8e9de34-1cac-4eab-b854-b8d59485303b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.module_step.field_key_points_step
+    - field.field.paragraph.module_step.field_title
+    - paragraphs.paragraphs_type.module_step
+id: paragraph.module_step.default
+targetEntityType: paragraph
+bundle: module_step
+mode: default
+content:
+  field_key_points_step:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

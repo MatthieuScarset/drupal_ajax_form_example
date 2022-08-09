@@ -1,0 +1,26 @@
+modular_product_titre: {  }
+mp_title:
+  top_zone:
+    title: '70'
+    description: '150'
+  module:
+    title: '70'
+    description: '250'
+  module_items:
+    title: '150'
+    description: '250'
+mp:
+  titles:
+    title_short: '70'
+    title_long: '150'
+  descriptions:
+    description_long: '250'
+modules_titles:
+  module_presentation: Presentation
+  module_detail_offre: 'Offer Detail'
+  module_detail_gamme: 'Detail of the range'
+  module_services: 'Tailor-made services'
+  module_customer_space: 'Customer space'
+  module_exemples: Examples
+  module_testimonial: Testimonials
+  to_go_further: 'To go further'

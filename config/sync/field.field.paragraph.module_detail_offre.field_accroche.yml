@@ -1,0 +1,19 @@
+uuid: 0f34ba63-da16-4ef7-9f87-5094f3853d2a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_accroche
+    - paragraphs.paragraphs_type.module_detail_offre
+id: paragraph.module_detail_offre.field_accroche
+field_name: field_accroche
+entity_type: paragraph
+bundle: module_detail_offre
+label: 'Description de l''offre'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

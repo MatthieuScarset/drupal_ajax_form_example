@@ -14,11 +14,12 @@ bundle: file
 mode: default
 content:
   field_file:
-    weight: 2
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
     type: file_default
+    label: hidden
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 2
     region: content
 hidden:
   created: true

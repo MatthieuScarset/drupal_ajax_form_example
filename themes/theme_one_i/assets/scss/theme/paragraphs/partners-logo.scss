@@ -1,0 +1,33 @@
+.custom-slider {
+  .slider-controller > [data-direction]{
+    padding: 0.8rem 1.0125rem 0.875rem;
+    max-height: 2.8125rem;
+    margin-right: 0.875rem;
+  }
+
+  .partners-container {
+    max-width: 100%;
+    height: 100%;
+    overflow-x: scroll;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    img {
+      max-height: 70px;
+      height: auto;
+      width: 7.875rem;
+    }
+
+    @include media-breakpoint-up(md) {
+
+      img {
+        max-height: 100px;
+        width: 13.125rem;
+      }
+    }
+  }
+}

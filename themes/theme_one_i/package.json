@@ -1,16 +1,19 @@
 {
-  "name": "sass_theme",
+  "name": "theme_one_i",
   "version": "1.0.0",
-  "description": "SassthemewithBootstrap",
+  "description": "Sass Theme for One-I",
   "license": "MIT",
   "scripts": {
     "build": "webpack",
     "watch": "webpack watch"
   },
   "devDependencies": {
+    "@ob1/web": "1.14.10",
     "autoprefixer": "10.2.6",
+    "copy-webpack-plugin": "9.1.0",
     "css-loader": "5.2.6",
     "mini-css-extract-plugin": "1.6.2",
+    "popper.js": "^1.16.1",
     "postcss": "8.3.5",
     "postcss-loader": "4.3.0",
     "sass": "1.35.1",
@@ -18,7 +21,9 @@
     "style-loader": "2.0.0",
     "webpack": "5.41.1",
     "webpack-cli": "4.7.2",
-    "webpack-import-glob-loader": "1.6.3",
-    "@ob1/web": "1.13.14"
+    "webpack-import-glob-loader": "1.6.3"
+  },
+  "dependencies": {
+    "seamless-scroll-polyfill": "^2.1.8"
   }
 }

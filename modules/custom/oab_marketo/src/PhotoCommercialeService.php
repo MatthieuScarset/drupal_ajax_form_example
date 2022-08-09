@@ -4,7 +4,9 @@
 namespace Drupal\oab_marketo;
 
 use Drupal\Core\Config\ImmutableConfig;
+use Drupal\Core\Entity\EntityBase;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\oab_marketo\Entity\PhotoCommercialeItem;
@@ -39,24 +41,24 @@ class PhotoCommercialeService {
   /**
    * @var EntityStorageInterface
    */
-  private $storage;
+  private EntityStorageInterface $storage;
 
   /**
    * @var ImmutableConfig
    */
-  private $photoCommercialeConfig;
+  private ImmutableConfig $photoCommercialeConfig;
 
 
   /**
    * @var EntityFieldManagerInterface
    */
-  private $entityFieldManager;
+  private EntityFieldManagerInterface $entityFieldManager;
 
 
   /**
    * @var array
    */
-  private $photoCommercialesFields = [];
+  private array $photoCommercialesFields = [];
 
   public function __construct(EntityTypeManagerInterface $entity_type_manager, EntityFieldManagerInterface $entity_field_manager,
                               ImmutableConfig $photo_commerciale_config) {
@@ -69,10 +71,12 @@ class PhotoCommercialeService {
   /**
    * Create new Photo Commerciale Item
    *
-   * @return \Drupal\Core\Entity\EntityBase|\Drupal\Core\Entity\EntityInterface
+   * @param array $photo_commerciale
+   *
+   * @return EntityBase|EntityInterface
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function createPhotoCommercialeItem(array $photo_commerciale) {
+  public function createPhotoCommercialeItem(array $photo_commerciale): EntityInterface|EntityBase {
     $photo_commerciale_item = PhotoCommercialeItem::create($photo_commerciale);
     $photo_commerciale_item->save();
 
@@ -83,7 +87,7 @@ class PhotoCommercialeService {
    * @param string $ident
    * @return PhotoCommercialeItemInterface|null
    */
-  public function getPhotoCommercialeItemByIdent(string $ident) {
+  public function getPhotoCommercialeItemByIdent(string $ident): ?PhotoCommercialeItemInterface {
     $photo_commerciale_item = $this->storage->loadByProperties(['ident' => $ident]);
     if (count($photo_commerciale_item) > 0) {
       return array_shift($photo_commerciale_item);
@@ -95,18 +99,19 @@ class PhotoCommercialeService {
    * @param string $reg_numb_type
    * @param string $reg_numb
    * @param string $raison_sociale
-   * @return PhotoCommercialeItem
+   *
+   * @return PhotoCommercialeItem|null
    */
-  public function getPhotoCommercialeItem(string $reg_numb_type, string $reg_numb, string $raison_sociale) {
+  public function getPhotoCommercialeItem(string $reg_numb_type, string $reg_numb, string $raison_sociale): ?PhotoCommercialeItem {
 
     $siren = '';
     $photo_commerciale = [];
 
-    if (strpos($reg_numb_type, 'SIREN') !== false) {
+    if (str_contains($reg_numb_type, 'SIREN')) {
       $siren = $reg_numb;
-    } elseif (strpos($reg_numb_type, "SIRET") !== false) {
+    } elseif (str_contains($reg_numb_type, "SIRET")) {
       $siren = substr($reg_numb, 0, 9);
-    } elseif (strpos($reg_numb_type, "Value Added Tax Number") !== false) {
+    } elseif (str_contains($reg_numb_type, "Value Added Tax Number")) {
       $siren = substr($reg_numb, 6, 9);
     }
 
@@ -123,7 +128,7 @@ class PhotoCommercialeService {
    * @param string $raison_sociale
    * @return PhotoCommercialeItem|null
    */
-  public function getPhotoCommercialeItemByRS(string $raison_sociale) {
+  public function getPhotoCommercialeItemByRS(string $raison_sociale): ?PhotoCommercialeItem {
     $photo_commerciale_item = $this->storage->loadByProperties(['raison_sociale' => $raison_sociale]);
     if (count($photo_commerciale_item) > 0) {
       return array_shift($photo_commerciale_item);
@@ -135,7 +140,7 @@ class PhotoCommercialeService {
    * @param string $siren
    * @return PhotoCommercialeItem|null
    */
-  public function getPhotoCommercialeBySiren(string $siren) {
+  public function getPhotoCommercialeBySiren(string $siren): ?PhotoCommercialeItem {
     $photo_commerciale_item = $this->storage->loadByProperties(['siren' => $siren]);
     if (count($photo_commerciale_item) > 0) {
       return array_shift($photo_commerciale_item);
@@ -157,7 +162,7 @@ class PhotoCommercialeService {
     return $ret;
   }
 
-  public function import($row) {
+  public function import($row): bool {
 
 //    $constants = (new \ReflectionClass(self::class))->getConstants();
 //    $values = [];
@@ -190,6 +195,9 @@ class PhotoCommercialeService {
   }
 
 
+  /**
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
   public function clearPhotoCommercialeItem() {
     $photo_commerciale_item = $this->getAllPhotoCommercialeItem();
 
@@ -197,7 +205,7 @@ class PhotoCommercialeService {
   }
 
 
-  private function getValueFromRow($row, $col, $field_name) {
+  private function getValueFromRow($row, $col, $field_name): bool|int|string {
     if (isset($row[$col])) {
       return utf8_encode($row[$col]);
     }

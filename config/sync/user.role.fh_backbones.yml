@@ -1,7 +1,12 @@
 uuid: b6bdc89f-6b3a-4f9f-8245-f7e9a8a83f86
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - oab_backbones
+    - shortcut
+    - system
+    - toolbar
 id: fh_backbones
 label: 'FH Backbones'
 weight: 7

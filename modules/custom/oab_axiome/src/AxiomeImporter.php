@@ -6,17 +6,10 @@ namespace Drupal\oab_axiome;
 use DOMDocument;
 use DOMXPath;
 use Drupal\Core\Database\Database;
-use Drupal\Core\Entity\Entity;
-use Drupal\Core\File\FileSystem;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\core\Messenger\MessengerInterface;
 use Drupal\node\Entity\Node;
 use Drupal\oab_axiome\Form\OabAxiomeSettingsForm;
-use Drupal\core\Messenger\MessengerInterface;
-use Drupal\taxonomy\Entity\Term;
-use Exception;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use function PHPSTORM_META\type;
-use stdClass;
 
 class AxiomeImporter
 {

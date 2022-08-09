@@ -3,12 +3,16 @@
 namespace Drupal\oab_frontoffice\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Extension\ExtensionPathResolver;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Render\RendererInterface;
 use Drupal\node\Entity\Node;
 use Drupal\Core\Entity;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
 use Drupal\image\Entity\ImageStyle;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  *
@@ -27,7 +31,26 @@ use Drupal\image\Entity\ImageStyle;
  *
  */
 
-class RelatedContentBlock extends BlockBase {
+class RelatedContentBlock extends BlockBase implements ContainerFactoryPluginInterface {
+
+  /**
+   * @var RendererInterface
+   */
+  private $renderer;
+
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, RendererInterface $renderer_interface) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->renderer = $renderer_interface;
+  }
+
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new self(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('renderer')
+    );
+  }
 
   public function build() {
     $content = "";
@@ -40,7 +63,7 @@ class RelatedContentBlock extends BlockBase {
     $node = Node::load($nid);
     if ($node->hasField('field_related_content')) {
       $related_content = $node->get('field_related_content')->view('full');
-      $content .= render($related_content);
+      $content .= $this->renderer->render($related_content);
       //kint($related_content);
     }
 

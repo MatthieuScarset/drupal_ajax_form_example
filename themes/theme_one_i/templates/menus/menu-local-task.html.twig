@@ -14,11 +14,9 @@
  * @see template_preprocess_menu_local_task()
  */
 #}
-{% set classes = [
-  is_active ? 'active',
-  link['#title'] == "Workflow" ? 'visually-hidden',
-  link['#title'] == "Processus" ? 'visually-hidden',
-] %}
+{% set classes = is_active ? 'active' %}
+{% set link = link|merge({ '#attributes': { 'class': ['nav-link', classes ] } }) %}
 
-
-<li{{ attributes.addClass(classes) }}>{{ link }}</li>
+<li class="nav-item") }}>
+  {{ link }}
+</li>

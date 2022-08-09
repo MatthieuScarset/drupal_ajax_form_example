@@ -11,20 +11,20 @@ pattern: 'ventes-indirectes/distributeurs/[node:title]'
 selection_criteria:
   8f6971cf-160f-40ad-83c0-199c4a53e362:
     id: node_type
-    bundles:
-      distributor: distributor
     negate: false
+    uuid: 8f6971cf-160f-40ad-83c0-199c4a53e362
     context_mapping:
       node: node
-    uuid: 8f6971cf-160f-40ad-83c0-199c4a53e362
+    bundles:
+      distributor: distributor
   421aace3-8a89-4b53-b663-74f8b20b5ddd:
     id: language
-    langcodes:
-      fr: fr
     negate: false
+    uuid: 421aace3-8a89-4b53-b663-74f8b20b5ddd
     context_mapping:
       language: 'node:langcode:language'
-    uuid: 421aace3-8a89-4b53-b663-74f8b20b5ddd
+    langcodes:
+      fr: fr
 selection_logic: and
 weight: -10
 relationships:
