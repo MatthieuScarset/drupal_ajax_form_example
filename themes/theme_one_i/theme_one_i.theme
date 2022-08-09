@@ -34,18 +34,6 @@ function theme_one_i_preprocess_html(&$variables) {
 
   $variables['header_env'] = $config['header_env'];
   $variables['oab_version'] = ' - '.$version;
-
-  //RUBYPORTAILOBS-3317
-  //gestion des canonical url pour les contenu hub
-  $node = Drupal::routeMatch()->getParameter('node');
-  if(isset($node) && $node<>"" && is_object($node)){
-
-    $nid = $node->id();
-    $language = Drupal::languageManager()->getCurrentLanguage()->getId();
-    //$variables['page']['content']['system_main']['#attached']['html_head_link'][0][0]['href'] = "/".$language."/node/".$nid;
-    $current_path_alias = Drupal::service('path_alias.manager')->getAliasByPath(Drupal::service('path.current')->getPath());
-    $variables['page']['content']['system_main']['#attached']['html_head_link'][0][0]['href'] = "/".$language.$current_path_alias;
-  }
 }
 
 function theme_one_i_preprocess_region(&$variables) {
@@ -66,7 +54,7 @@ function theme_one_i_preprocess_page(&$variables)
   $node = $route_match->getParameter('node');
 
   //On cache le block Page Title
-  if (preg_match('/^view.category_page/', $route_name) || $node->bundle() === 'modular_product') {
+  if (preg_match('/^view.category_page/', $route_name) || $node ?->bundle() === 'modular_product') {
     $variables['page']['content']['theme_one_i_page_title']['#access'] = FALSE;
   }
 }
@@ -176,7 +164,7 @@ function theme_one_i_preprocess_paragraph__module_detail_offre_items(&$variables
   /** @var Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
 
-  $variables['formule_package'] = ProductFormuleEntity::load($paragraph->field_formule->target_id);
+  $variables['formule_package'] = ProductFormuleEntity::load($paragraph->field_formule->target_id ?? 0);
 }
 
 /*****************************************/

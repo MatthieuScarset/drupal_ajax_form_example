@@ -1,9 +1,9 @@
 {% for item in items %}
   {% if 1 == items|length %}
-    {{ item }}
+    {{ item.content }}
   {% else %}
     <div class="cta-two-{{loop.index}}">
-      {{ item }}
+      {{ item.content }}
     </div>
   {% endif %}
 {% endfor %}

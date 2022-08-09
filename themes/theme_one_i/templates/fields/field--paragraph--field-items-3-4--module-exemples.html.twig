@@ -1,7 +1,9 @@
 {% set defaultDelay = 10 %}
 <div class="example-items row" data-delay="{{ defaultDelay }}">
   {% if 1 == items|length %}
-    <div{{ item.attributes.addClass() }}>{{ items }}</div>
+    {% for item in items %}
+      <div{{ item.attributes.addClass() }}>{{ item.content }}</div>
+    {% endfor %}
 
   {% else %}
     <div class="col-12 col-md-10">
@@ -32,7 +34,7 @@
     <div class="col-12 px-0">
       <div class="row example-content mx-0 mt-1 mt-md-4">
         {% for key, item in items %}
-          <div class="col-12 px-0" data-index="{{ key }}"> {{ item }} </div>
+          <div class="col-12 px-0" data-index="{{ key }}"> {{ item.content }} </div>
         {% endfor %}
       </div>
     </div>
