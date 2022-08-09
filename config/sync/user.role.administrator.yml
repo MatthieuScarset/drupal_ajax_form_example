@@ -69,6 +69,7 @@ dependencies:
     - taxonomy
     - toolbar
     - tour
+    - update
     - views_ui
     - webform
     - webform_node
@@ -396,6 +397,7 @@ permissions:
   - 'view simple_page revisions'
   - 'view solution revisions'
   - 'view the administration theme'
+  - 'view update notifications'
   - 'view webform revisions'
   - 'view webform submissions any node'
   - 'view webform submissions own node'

@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
@@ -77,5 +78,6 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_link: true
   status: true
   uid: true

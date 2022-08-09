@@ -36,6 +36,8 @@ content:
     region: content
 hidden:
   body: true
+  field_hub: true
+  field_hub_portal: true
   field_metatags: true
   field_social_account: true
   field_visual: true

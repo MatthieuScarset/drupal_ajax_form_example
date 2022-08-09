@@ -64,6 +64,7 @@ module:
   migrate: 0
   migrate_drupal: 0
   multiple_fields_remove_button: 0
+  mysql: 0
   node: 0
   oab_adrien: 0
   oab_akamai: 0

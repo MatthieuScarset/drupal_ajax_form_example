@@ -1,16 +1,17 @@
 label: Archiver
 display:
   default:
+    display_title: Master
     display_options:
-      exposed_form:
-        options:
-          submit_button: Appliquer
-          reset_button_label: 'Remise à zéro'
-          exposed_sorts_label: 'Filtrer par'
       pager:
         options:
           expose:
             items_per_page_label: 'Éléments par page'
             items_per_page_options_all_label: '- Tous -'
+      exposed_form:
+        options:
+          submit_button: Appliquer
+          reset_button_label: 'Remise à zéro'
+          exposed_sorts_label: 'Filtrer par'
   block_1:
     display_title: Bloc

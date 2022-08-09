@@ -1,3 +1,4 @@
+uuid: null
 langcode: fr
 status: true
 dependencies:
@@ -10,7 +11,7 @@ type: 'canonical_entities:node'
 pattern: 'solucoes/[node:title]'
 selection_criteria:
   a60fb63f-75f7-4ba5-a42a-cc136d09b71a:
-    id: node_type
+    id: 'entity_bundle:node'
     negate: false
     uuid: a60fb63f-75f7-4ba5-a42a-cc136d09b71a
     context_mapping:

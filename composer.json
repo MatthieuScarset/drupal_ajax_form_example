@@ -25,10 +25,10 @@
         "drupal/config_filter": "^2.2",
         "drupal/config_ignore": "^2.3",
         "drupal/config_split": "2.0.0-beta5",
-        "drupal/core": "9.3.6",
+        "drupal/core": "9.4.3",
         "drupal/core-composer-scaffold": "~9.1.0",
         "drupal/core-project-message": "~9.1.0",
-        "drupal/core-recommended": "9.3.6",
+        "drupal/core-recommended": "9.4.3",
         "drupal/ctools": "^3.4",
         "drupal/embed": "^1.4",
         "drupal/entity": "^1.2",
@@ -160,12 +160,8 @@
 			"drupal/scheduled_updates": {
 			  "Fix D9 compatibility": "https://www.drupal.org/files/issues/2021-03-08/3172330-24.patch"
 			},
-            "drupal/tac_lite": {
-                "Fix D9 compatibility": "patches/tac_lite/tac_lite_compatibility_d9.patch",
-                "Fix getVocabularyId deprecated": "patches/tac_lite/rectif_deprecated_vocabularyId.patch"
-            },
             "drupal/core": {
-                "Fix LatestRevisionCheck": "https://www.drupal.org/files/issues/2019-10-21/LatestRevisionCheck-13092187-24.patch"
+                "Fix LatestRevisionCheck": "https://www.drupal.org/files/issues/2021-12-28/3035113-33.patch"
             }
 		}
 	}

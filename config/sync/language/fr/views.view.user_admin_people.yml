@@ -1,21 +1,7 @@
 display:
   default:
+    display_title: Master
     display_options:
-      exposed_form:
-        options:
-          submit_button: Filtre
-          reset_button_label: 'Remise à zéro'
-          exposed_sorts_label: 'Filtrer par'
-      pager:
-        options:
-          tags:
-            previous: '‹ Précédent'
-            next: 'Suivant ›'
-            first: '« Premier'
-            last: 'Dernier »'
-          expose:
-            items_per_page_label: 'Éléments par page'
-            items_per_page_options_all_label: '- Tous -'
       fields:
         name:
           label: 'Nom d''utilisateur'
@@ -27,6 +13,21 @@ display:
           label: Rôles
         operations:
           label: Actions
+      pager:
+        options:
+          tags:
+            next: 'Suivant ›'
+            previous: '‹ Précédent'
+            first: '« Premier'
+            last: 'Dernier »'
+          expose:
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options_all_label: '- Tous -'
+      exposed_form:
+        options:
+          submit_button: Filtre
+          reset_button_label: 'Remise à zéro'
+          exposed_sorts_label: 'Filtrer par'
       filters:
         status:
           group_info:
