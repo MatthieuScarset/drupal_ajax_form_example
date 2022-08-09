@@ -12,23 +12,23 @@ pattern: 'industries/[node:title]'
 selection_criteria:
   7bb18959-0eba-4682-8cd9-922ebdf2e056:
     id: node_type
-    bundles:
-      industry: industry
     negate: false
+    uuid: 7bb18959-0eba-4682-8cd9-922ebdf2e056
     context_mapping:
       node: node
-    uuid: 7bb18959-0eba-4682-8cd9-922ebdf2e056
+    bundles:
+      industry: industry
   7cfba12d-0e5e-4968-b3bd-b0022de127c2:
     id: language
+    negate: false
+    uuid: 7cfba12d-0e5e-4968-b3bd-b0022de127c2
+    context_mapping:
+      language: 'node:langcode:language'
     langcodes:
       en: en
       fr: fr
       ru: ru
       ru-en: ru-en
-    negate: false
-    context_mapping:
-      language: 'node:langcode:language'
-    uuid: 7cfba12d-0e5e-4968-b3bd-b0022de127c2
 selection_logic: and
 weight: -10
 relationships:

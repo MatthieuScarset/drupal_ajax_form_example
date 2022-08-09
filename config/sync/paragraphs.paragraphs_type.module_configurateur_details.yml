@@ -1,0 +1,10 @@
+uuid: 4fceb0cc-1c53-4ffe-81b0-439b3ec68ea2
+langcode: fr
+status: true
+dependencies: {  }
+id: module_configurateur_details
+label: '[MP] [Configurateur] details'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

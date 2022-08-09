@@ -1,0 +1,9 @@
+name: '[MP] OAB Product Formule Package'
+type: module
+description: 'Manage the packages of Product Formules'
+core_version_requirement: ^8.8.0 || ^9.0
+package: 'OAB Commerce'
+
+dependencies:
+  - oab_mp_formules
+  - oab_mp_formule_field

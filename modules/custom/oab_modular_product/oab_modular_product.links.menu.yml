@@ -1,0 +1,6 @@
+oab_modular_product.settings:
+  title: Modular Product settings
+  route_name: oab_modular_product.settings
+  parent: oab.settings
+  description: 'Configure modular product settings'
+  weight: -20

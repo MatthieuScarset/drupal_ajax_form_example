@@ -1,0 +1,42 @@
+uuid: b2dec3d4-8deb-4fbf-9a52-38e9d5343a79
+langcode: fr
+status: true
+dependencies:
+  config:
+    - views.view.medias_entity_browser
+  module:
+    - entity_browser_entity_form
+    - views
+name: browse_logo_modal
+label: 'Browser modal for logos'
+display: modal
+display_configuration:
+  width: ''
+  height: '700'
+  link_text: 'Select logos'
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  6e43f5d6-9c0b-4931-9fad-49c6ddd1f007:
+    id: view
+    uuid: 6e43f5d6-9c0b-4931-9fad-49c6ddd1f007
+    label: 'Logo Listing'
+    weight: 1
+    settings:
+      submit_text: 'Select Logos'
+      auto_select: false
+      view: medias_entity_browser
+      view_display: entity_browser_logo
+  3039678e-7eab-408b-9f0d-b308e11027eb:
+    id: entity_form
+    uuid: 3039678e-7eab-408b-9f0d-b308e11027eb
+    label: 'Upload logo svg'
+    weight: 2
+    settings:
+      submit_text: Save
+      entity_type: media
+      bundle: logo
+      form_mode: default

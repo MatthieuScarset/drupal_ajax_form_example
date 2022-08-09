@@ -1,3 +1,5 @@
+_core:
+  default_config_hash: GcMSgi6uAfG5R_FGEsWUVCvRPkNIzPUH2bNVcx6H0JA
 enabled_entity_types:
   - user
 punctuation:
@@ -42,8 +44,6 @@ reduce_ascii: false
 case: true
 ignore_words: 'a, an, as, at, before, but, by, for, from, is, in, into, like, of, off, on, onto, per, since, than, the, this, that, to, up, via, with, ''s, un, une, des, le, la, les, l'', d'', m'', n'', s'', t'', c'', du, de la, au, aux, des, mon, ma, ta, sa, mes, tes, ses, mon, vos, leur, notre, votre, nos, vos, leurs, ce, cet, cette, ces, quel, quels, quelles, quelle, ce, cette, ces, je, tu, il, elle, nous, vous, ils, elles, '''
 update_action: 0
-_core:
-  default_config_hash: GcMSgi6uAfG5R_FGEsWUVCvRPkNIzPUH2bNVcx6H0JA
 safe_tokens:
   - alias
   - alias

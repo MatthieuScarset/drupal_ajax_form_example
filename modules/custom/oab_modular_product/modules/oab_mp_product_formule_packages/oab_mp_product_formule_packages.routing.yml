@@ -1,0 +1,24 @@
+
+oab_mp_product_formule_packages.formule_package_exists:
+  path: /api/formule_package/exists/{product_formule}
+  defaults:
+    _controller: \Drupal\oab_mp_product_formule_packages\Controller\FormulePackageApiController::packageExistsAction
+  methods: GET
+  requirements:
+    _permission: 'access content'
+  options:
+    parameters:
+      product_formule:
+        type: entity:product_formule_entity
+
+oab_mp_product_formule_packages.formule_package_render:
+  path: /api/formule_package/{product_formule}
+  defaults:
+    _controller: \Drupal\oab_mp_product_formule_packages\Controller\FormulePackageApiController::getPackageAction
+  methods: GET
+  requirements:
+    _permission: 'access content'
+  options:
+    parameters:
+      product_formule:
+        type: entity:product_formule_entity

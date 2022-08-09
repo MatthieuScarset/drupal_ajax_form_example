@@ -4,9 +4,5 @@ status: true
 dependencies: {  }
 id: g3XYqcXbSKPVBDODwnT6pq7oqhCFkPryj4vVqrl_Kfc
 label: 'https://ruby-prp.multimediabs.com/en/sitemap.xml'
-chunks: 1
-links: 235
-max_filesize: 42367
 context:
   language: en
-updated: 1630326047

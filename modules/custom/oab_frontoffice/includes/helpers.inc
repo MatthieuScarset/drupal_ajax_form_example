@@ -7,16 +7,21 @@
 
 
 use Drupal\Core\Database\Database;
+use Drupal\taxonomy\Entity\Term;
 
 /**
- * cleane les options du menu déroulant des filtres exposés
- * @param $options du tableau
+ * clean les options du menu déroulant des filtres exposés
+ *
+ * @param $options
+ * @param $txt_all
+ *
+ * @return array
  */
-function clean_exposed_filters_by_language($options = array(), $txt_all) {
+function clean_exposed_filters_by_language(array $options, ?string $txt_all = null): array {
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
     foreach ($options as $key => $value) {
         if ($key != 'All') {
-            $term = \Drupal\taxonomy\Entity\Term::load($key);
+            $term = Term::load($key);
             if (isset($term) && $term != null) {
                 $lang = $term->language();
                 if ($lang->getId() != $current_language) {
@@ -24,7 +29,9 @@ function clean_exposed_filters_by_language($options = array(), $txt_all) {
                 }
             }
         } else {
+          if ($txt_all !== null) {
             $options['All'] = t($txt_all);
+          }
         }
     }
     return $options;
@@ -134,10 +141,13 @@ function getSocialBarParameters($page_title, $meta_description, $og_image) {
 
 /**
  * Pour retrouver tous les Alias d'un node
+ *
  * @param $nid
+ * @param $langcode|null
+ *
  * @return array
  */
-function oab_getAllPathFromNID($nid, $langcode = null) {
+function oab_getAllPathFromNID($nid, $langcode): array {
     $query = Database::getConnection()->select('path_alias', 'u');
 
     $query->fields('u', ['alias']);

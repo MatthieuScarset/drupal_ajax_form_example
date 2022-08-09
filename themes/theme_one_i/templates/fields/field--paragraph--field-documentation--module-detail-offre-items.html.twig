@@ -1,0 +1,22 @@
+{% if (is_single) %}
+  <div class="liste-offres mt-1">
+    {% for item in items %}
+      <div class="d-flex align-items-center">
+        {{ item.content }}
+      </div>
+    {% endfor %}
+  </div>
+
+{% else %}
+
+  <div class="font-weight-bold mt-1 mt-md-2">{{ label }}</div>
+  <div class="liste-offres mt-1 pl-1">
+    {% for item in items %}
+      <div class="d-flex align-items-center">
+        {{ item.content }}
+      </div>
+    {% endfor %}
+  </div>
+
+{% endif %}
+

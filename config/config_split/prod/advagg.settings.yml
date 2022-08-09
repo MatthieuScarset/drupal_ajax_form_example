@@ -1,21 +1,21 @@
 css:
   brotli: false
-  fix_type: true
   combine_media: false
+  fix_type: true
   preserve_external: false
+dns_prefetch: false
 path:
   convert:
-    force_https: false
-    absolute: false
     absolute_to_protocol_relative: false
-enabled: true
-dns_prefetch: false
+    absolute: false
+    force_https: false
 cache_level: 2
 cron_frequency: 900
+enabled: false
+immutable: false
 js:
   brotli: false
   fix_type: true
   preserve_external: false
-immutable: false
 symlinks: false
 symlinksifownermatch: false

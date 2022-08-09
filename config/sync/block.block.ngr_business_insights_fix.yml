@@ -1,0 +1,30 @@
+uuid: 62fa8c8c-46ba-492e-8dbc-9abddd186b46
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:0d5f26f6-505d-4501-8ce4-a111c066b4c0'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_boosted
+id: ngr_business_insights_fix
+theme: theme_boosted
+region: prefooter
+weight: 0
+provider: null
+plugin: 'block_content:0d5f26f6-505d-4501-8ce4-a111c066b4c0'
+settings:
+  id: 'block_content:0d5f26f6-505d-4501-8ce4-a111c066b4c0'
+  label: '[NGR] Business Insights - Fix'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/business-insight\r\n/visions-business"

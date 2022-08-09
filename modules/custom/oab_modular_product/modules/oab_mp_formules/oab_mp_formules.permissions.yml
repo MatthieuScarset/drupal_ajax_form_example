@@ -1,0 +1,31 @@
+add product formule entity entities:
+  title: 'Create new Product formule entity entities'
+
+administer product formule entity entities:
+  title: 'Administer Product formule entity entities'
+  description: 'Allow to access the administration form to configure Product formule entity entities.'
+  restrict access: true
+
+delete product formule entity entities:
+  title: 'Delete Product formule entity entities'
+
+edit product formule entity entities:
+  title: 'Edit Product formule entity entities'
+
+view published product formule entity entities:
+  title: 'View published Product formule entity entities'
+
+view unpublished product formule entity entities:
+  title: 'View unpublished Product formule entity entities'
+
+view all product formule entity revisions:
+  title: 'View all Product formule entity revisions'
+
+revert all product formule entity revisions:
+  title: 'Revert all Product formule entity revisions'
+  description: 'Role requires permission <em>view Product formule entity revisions</em> and <em>edit rights</em> for product formule entity entities in question or <em>administer product formule entity entities</em>.'
+
+delete all product formule entity revisions:
+  title: 'Delete all revisions'
+  description: 'Role requires permission to <em>view Product formule entity revisions</em> and <em>delete rights</em> for product formule entity entities in question or <em>administer product formule entity entities</em>.'
+

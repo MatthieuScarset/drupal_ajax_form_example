@@ -11,12 +11,12 @@ pattern: '[node:title]'
 selection_criteria:
   0a3c0803-1812-416e-9cf7-7605132a85bb:
     id: node_type
-    bundles:
-      webform: webform
     negate: false
+    uuid: 0a3c0803-1812-416e-9cf7-7605132a85bb
     context_mapping:
       node: node
-    uuid: 0a3c0803-1812-416e-9cf7-7605132a85bb
+    bundles:
+      webform: webform
 selection_logic: and
 weight: -5
 relationships: {  }

@@ -1,0 +1,70 @@
+uuid: dd9a436d-8ad7-407b-950b-e59d7135452e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.browse_media_modal
+    - field.field.paragraph.module_exemples_items.field_exemple_key_points
+    - field.field.paragraph.module_exemples_items.field_highlight
+    - field.field.paragraph.module_exemples_items.field_redirection_url
+    - field.field.paragraph.module_exemples_items.field_title
+    - field.field.paragraph.module_exemples_items.field_visual
+    - paragraphs.paragraphs_type.module_exemples_items
+  module:
+    - entity_browser
+    - link
+id: paragraph.module_exemples_items.default
+targetEntityType: paragraph
+bundle: module_exemples_items
+mode: default
+content:
+  field_exemple_key_points:
+    type: string_textfield
+    weight: 4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_highlight:
+    type: string_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 2
+      placeholder: ''
+    third_party_settings: {  }
+  field_redirection_url:
+    type: link_default
+    weight: 3
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_visual:
+    type: entity_browser_entity_reference
+    weight: 2
+    region: content
+    settings:
+      entity_browser: browse_media_modal
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      field_widget_replace: false
+      open: false
+      field_widget_display_settings:
+        view_mode: image_max_630x630
+      selection_mode: selection_append
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

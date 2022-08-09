@@ -1,0 +1,91 @@
+<?php
+
+/**
+ * @file
+ * Contains oab_mp_product_formule_packages.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Render\Element;
+
+/**
+ * Implements hook_help().
+ */
+function oab_mp_product_formule_packages_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the oab_mp_product_formule_packages module.
+    case 'help.page.oab_mp_product_formule_packages':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Manage the packages of Product Formules') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function oab_mp_product_formule_packages_theme() {
+  $theme = [];
+  $theme['formule_package'] = [
+    'render element' => 'elements',
+    'file' => 'formule_package.page.inc',
+    'template' => 'formule_package',
+  ];
+  $theme['formule_package_content_add_list'] = [
+    'render element' => 'content',
+    'variables' => ['content' => NULL],
+  ];
+  $theme['field__formule_package__field_details'] = [
+    'render element' => 'elements',
+  ];
+  $theme['paragraph__module_configurateur_details'] = [
+    'render element' => 'elements',
+  ];
+  return $theme;
+}
+
+/**
+ * Prepares variables for Formule package templates.
+ *
+ * Default template: formule_package.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing the user information and any
+ *   - attributes: HTML attributes for the containing element.
+ */
+function oab_mp_product_formule_packages_preprocess_formule_package(array &$variables) {
+  // Fetch FormulePackage Entity Object.
+  $formule_package = $variables['elements']['#formule_package'];
+
+  // Helpful $content variable for templates.
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+
+  /** @var \Drupal\oab_mp_product_formule_packages\Entity\FormulePackage $formule_package */
+  $formule_package = $variables['elements']['#formule_package'];
+
+  $variables['formule_package'] = $formule_package;
+  $variables['formule_values'] = $formule_package->getFormuleValues();
+
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function oab_mp_product_formule_packages_theme_suggestions_formule_package(array $variables) {
+  $suggestions = [];
+  $entity = $variables['elements']['#formule_package'];
+  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+
+  $suggestions[] = 'formule_package__' . $sanitized_view_mode;
+  $suggestions[] = 'formule_package__' . $entity->bundle();
+  $suggestions[] = 'formule_package__' . $entity->bundle() . '__' . $sanitized_view_mode;
+  $suggestions[] = 'formule_package__' . $entity->id();
+  $suggestions[] = 'formule_package__' . $entity->id() . '__' . $sanitized_view_mode;
+  return $suggestions;
+}

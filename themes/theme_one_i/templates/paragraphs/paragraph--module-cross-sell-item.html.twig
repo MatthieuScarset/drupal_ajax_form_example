@@ -1,0 +1,20 @@
+{% if content.field_external_product.0["#markup"] == 1 %}
+  <div class="row flex-column mx-1 my-0 p-1 bg-white teaser-product">
+    <div class="col-12 pl-0 pl-md-1 lead font-weight-bold">
+      {{ content.field_name }}
+    </div>
+    <h4 class="col-12 px-0 px-md-1 mb-2 text-break">
+      {{ content.field_highlight }}
+    </h4>
+    <div class="col-12 d-none d-md-block">
+      {{ content.field_key_points }}
+    </div>
+    <div class="col-12 col-md-6 mb-1 mt-auto mb-md-2 px-0 px-md-1">
+      <a href="{{ content.field_redirection_url.0["#url"].uri }}" class="btn btn-primary px-1 w-100">
+        {% trans %}See offer{% endtrans %}
+      </a>
+    </div>
+  </div>
+{% else %}
+    {{ content|without('field_external_product', 'field_name', 'field_highlight', 'field_key_points', 'field_redirection_url')}}
+{% endif %}

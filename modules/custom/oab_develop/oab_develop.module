@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\Core\Extension\ExtensionPathResolver;
 use Drupal\Core\Messenger\MessengerInterface;
 use Symfony\Component\Yaml\Yaml;
 use Drupal\locale\SourceString;
@@ -203,7 +204,11 @@ function createFieldReference($field_name, $bundle, $label, $target, $type = 'te
 }
 
 function loadConfigField($folder, $key) {
-    $config_path = drupal_get_path('module', 'oab_backoffice') . '/config/'.$folder.'/'.$key.'.yml';
+
+    /** @var ExtensionPathResolver $service_path_resolver */
+    $service_path_resolver = \Drupal::service('extension.path.resolver');
+
+    $config_path = $service_path_resolver->getPath('module', 'oab_backoffice') . '/config/'.$folder.'/'.$key.'.yml';
     $data = Yaml::parse($config_path);
     \Drupal::configFactory()->getEditable($key)->setData($data)->save(TRUE);
 }
@@ -261,7 +266,10 @@ function oabt_YmlImport($file_name, $dir_name="/", $module_name="oab_backoffice"
     $dir_name .= $tab_file_name_lessext[1]."/";
   }
 
-  $config_path = drupal_get_path('module', $module_name) . '/config' . $dir_name . $file_name;
+  /** @var ExtensionPathResolver $service_path_resolver */
+  $service_path_resolver = \Drupal::service('extension.path.resolver');
+
+  $config_path = $service_path_resolver->getPath('module', $module_name) . '/config' . $dir_name . $file_name;
   $data = Yaml::parse(file_get_contents($config_path));
   \Drupal::configFactory()->getEditable($file_name_lessext)->setData($data)->save(TRUE);
 

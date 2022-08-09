@@ -1,0 +1,37 @@
+uuid: e630b312-1e31-40dd-89e6-ea44c539ee46
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.modular_product_image_faq
+    - field.field.media.image.field_image
+    - field.field.media.image.field_media_image
+    - field.field.media.image.field_tags
+    - field.field.media.image.field_thematic
+    - image.style.modular_product_image_faq
+    - media.type.image
+  module:
+    - image
+id: media.image.modular_product_image_faq
+targetEntityType: media
+bundle: image
+mode: modular_product_image_faq
+content:
+  field_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: modular_product_image_faq
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  created: true
+  field_media_image: true
+  field_tags: true
+  field_thematic: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

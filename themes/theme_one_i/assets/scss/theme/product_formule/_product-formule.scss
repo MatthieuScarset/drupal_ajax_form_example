@@ -1,0 +1,271 @@
+@mixin step($step, $inverse: false) {
+  &[data-show="#{$step}"] {
+    [data-step]:not([data-step="#{$step}"]) {
+      display: none
+    }
+
+    @if $inverse {
+      .left-zone {
+        height: 100%;
+
+        @include media-breakpoint-up(md) {
+          padding-right: 25%;
+          width: 60%;
+        }
+
+        .content {
+          .product-formule-label {
+            margin-bottom: 45px;
+          }
+        }
+      }
+
+      .right-zone {
+        height: 40%;
+        @include media-breakpoint-up(md) {
+          height: 100%;
+          width: 40%;
+          min-width: 400px;
+        }
+      }
+    } @else {
+      .left-zone {
+        align-items: start;
+        @include media-breakpoint-up(md) {
+          min-width: 400px;
+        }
+
+        .content {
+          margin-top: revert;
+          @include media-breakpoint-up(md) {
+            margin-top: 13.5rem;
+          }
+
+          .product-formule-label {
+            margin-bottom: 15px;
+          }
+
+          .progressbar {
+            margin-top: 0;
+            @include media-breakpoint-up(md) {
+              margin-top: 30px;
+            }
+          }
+        }
+      }
+
+      .right-zone {
+        height: 100%;
+      }
+    }
+  }
+}
+
+
+.modal.modal-product-formule {
+  z-index: 3000;
+
+  .modal-dialog {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    max-width: initial;
+    margin: 0;
+
+    .modal-content {
+      height: 100%;
+      padding: 0;
+      flex-direction: column;
+      @include media-breakpoint-up(md) {
+        flex-direction: row;
+      }
+
+      @include step('reception', true);
+      @include step('process');
+      @include step('contact-form');
+      @include step('result');
+
+      & > div {
+        padding: 2rem;
+      }
+
+      .header-logo {
+        position: absolute;
+        top: 1.5rem;
+        padding: 0 1rem 0 0;
+        right: 0;
+        @include media-breakpoint-up(md) {
+          top: 3rem;
+          left: 0;
+          right: revert;
+          padding: 0 0 0 4rem;
+        }
+
+        .site-logo {
+          width: 110px;
+          height: auto;
+          @include media-breakpoint-up(md) {
+            width: 140px;
+            height: auto;
+          }
+        }
+      }
+
+      .header-btn-close {
+        z-index: 9000;
+        position: absolute;
+        top: 1.5rem;
+        padding: 0 0 0 1rem;
+        @include media-breakpoint-up(md) {
+          top: 3rem;
+          right: 0;
+          padding: 0 2rem 0 0;
+        }
+
+        button.close {
+          float: left;
+          @include media-breakpoint-up(md) {
+            float: right;
+            padding: 8px 0;
+          }
+
+          .button-text {
+            font-size: 14px;
+            padding: 3px 0 3px 3px;
+            font-weight: bold;
+          }
+
+          .close-cross {
+            font-size: 18px;
+          }
+
+          &.o-link-arrow {
+            padding-top: 0;
+            padding-bottom: 0;
+
+            &::before {
+              top: 0.3rem;
+            }
+          }
+        }
+      }
+
+      .left-zone {
+          margin-top: 5rem;
+        @include media-breakpoint-up(md) {
+          margin-top: revert;
+        }
+
+        .content {
+          width: 100%;
+          max-width: 532px;
+
+          p, span {
+            &.h1 {
+              padding: 0;
+            }
+
+            &.accroche {
+              padding: 0;
+              margin-bottom: 45px;
+              margin-top: 20px;
+            }
+          }
+        }
+      }
+
+      .left-zone, .right-zone {
+        padding: 0 1rem;
+        display: flex;
+        transition: width .5s;
+        align-items: center;
+        @include media-breakpoint-up(md) {
+          padding: 0 4rem;
+        }
+      }
+
+      .left-zone {
+        @include media-breakpoint-down(sm) {
+          align-items: start;
+        }
+      }
+
+      .right-zone {
+        flex: 1;
+        background-color: #f4f4f4;
+        overflow-y: scroll;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        @include media-breakpoint-down(sm) {
+          padding-top: 3rem;
+        }
+
+
+        & > div {
+          //margin-top: 13.75rem;
+          padding-top: 2rem;
+          padding-bottom: 2rem;
+          //opacity: 0;
+          transition: opacity .5s ease-in;
+        }
+
+        .illustration {
+          position: absolute;
+          bottom: 6rem;
+          left: 1rem;
+          right: 1rem;
+          @include media-breakpoint-up(md) {
+            margin-left: -15rem;
+            top: 16rem;
+            bottom: revert;
+            left: revert;
+            right: revert;
+          }
+
+          img {
+            width: 100%;
+            height: auto;
+            max-width: 530px;
+            max-height: 405px;
+
+            @include media-breakpoint-up(md) {
+              width: revert;
+              height: revert;
+            }
+          }
+        }
+
+      }
+
+      .product-label {
+        color: $gray3;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      .formule-label {
+        padding-top: 0;
+      }
+
+      .stack-mobile {
+        margin-left: -1rem;
+        margin-right: -1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        border-top: 1px solid $gray4;
+
+       /* button {
+          padding-top: 13px;
+          padding-bottom: 13px;
+        }*/
+      }
+
+    }
+  }
+}

@@ -10,24 +10,24 @@ dependencies:
 id: theme_one_i_relatedcontent
 theme: theme_one_i
 region: prefooter
-weight: -50
+weight: -64
 provider: null
 plugin: related_content_block
 settings:
   id: related_content_block
   label: 'Related content'
-  provider: oab_frontoffice
   label_display: '0'
+  provider: oab_frontoffice
   context_mapping:
     node: '@node.node_route_context:node'
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
     bundles:
       country: country
       industry: industry
       region: region
       solution: solution
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'

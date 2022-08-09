@@ -1,0 +1,10 @@
+uuid: 68612564-d76d-4172-b23d-fc5a1b7a4690
+langcode: en
+status: true
+dependencies: {  }
+id: paragraph_wysiwyg
+label: 'Paragraph WYSIWYG'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

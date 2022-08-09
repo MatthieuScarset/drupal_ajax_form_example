@@ -3,4 +3,5 @@ icomoon:
   css:
     base:
       icomoon/style.css: {}
+      icon_orange/css/orange-icons.css: {}
       css/style.css: {}

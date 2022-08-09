@@ -18,16 +18,16 @@ plugin: 'system_menu_block:top-right-navbar-footer-es'
 settings:
   id: 'system_menu_block:top-right-navbar-footer-es'
   label: 'Top right navbar Footer ES'
-  provider: system
   label_display: '0'
+  provider: system
   level: 1
   depth: 0
   expand_all_items: false
 visibility:
   language:
     id: language
-    langcodes:
-      es: es
     negate: false
     context_mapping:
       language: '@language.current_language_context:language_interface'
+    langcodes:
+      es: es

@@ -12,20 +12,20 @@ pattern: 'case-study/[node:title]'
 selection_criteria:
   e8fff86b-663c-4bb9-b917-a73cb86b69b4:
     id: node_type
-    bundles:
-      customer_story: customer_story
     negate: false
+    uuid: e8fff86b-663c-4bb9-b917-a73cb86b69b4
     context_mapping:
       node: node
-    uuid: e8fff86b-663c-4bb9-b917-a73cb86b69b4
+    bundles:
+      customer_story: customer_story
   8fd73fdd-b0a5-43ea-9004-6f2cf53cef77:
     id: language
-    langcodes:
-      en: en
     negate: false
+    uuid: 8fd73fdd-b0a5-43ea-9004-6f2cf53cef77
     context_mapping:
       language: 'node:langcode:language'
-    uuid: 8fd73fdd-b0a5-43ea-9004-6f2cf53cef77
+    langcodes:
+      en: en
 selection_logic: and
 weight: -10
 relationships:

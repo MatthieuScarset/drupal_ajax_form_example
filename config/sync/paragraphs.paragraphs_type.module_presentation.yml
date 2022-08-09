@@ -1,0 +1,10 @@
+uuid: f56c0fd8-24f0-48ac-9b50-51e281b5bda1
+langcode: en
+status: true
+dependencies: {  }
+id: module_presentation
+label: '[MP] Module Présentation'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

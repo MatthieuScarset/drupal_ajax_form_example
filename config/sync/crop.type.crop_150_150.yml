@@ -1,0 +1,12 @@
+uuid: c51be946-27be-47db-b08d-cd5cdf49fd5a
+langcode: fr
+status: true
+dependencies: {  }
+label: 'Crop 150:150'
+id: crop_150_150
+description: 'Use for mobile faq image'
+aspect_ratio: '180:180'
+soft_limit_width: 150
+soft_limit_height: 150
+hard_limit_width: 200
+hard_limit_height: 180

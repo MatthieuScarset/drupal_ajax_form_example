@@ -11,25 +11,28 @@ dependencies:
 id: theme_one_i_contactbaresstandard
 theme: theme_one_i
 region: prefooter
-weight: -45
+weight: -60
 provider: null
 plugin: contact_bar_es_standard_block
 settings:
   id: contact_bar_es_standard_block
   label: 'Contact Bar ES Standard'
-  provider: oab_frontoffice
   label_display: '0'
+  provider: oab_frontoffice
+  context_mapping:
+    node: '@node.node_route_context:node'
   link_offices: 'http://www.orange-business.com/en/where-we-are'
   link_offices_text: 'Nuestras oficinas locales'
   link_help: 'https://www.orange-business.com/en/contact-us'
   link_help_text: Ayuda
   link_contact: 'https://www.orange-business.com/en/any-request'
   link_contact_text: Contáctenos
-  context_mapping:
-    node: '@node.node_route_context:node'
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
     bundles:
       blog_post: blog_post
       country: country
@@ -46,13 +49,10 @@ visibility:
       region: region
       simple_page: simple_page
       solution: solution
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
   language:
     id: language
-    langcodes:
-      es: es
     negate: false
     context_mapping:
       language: '@language.current_language_context:language_interface'
+    langcodes:
+      es: es

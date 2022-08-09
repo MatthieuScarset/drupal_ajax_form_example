@@ -160,7 +160,7 @@ function oab_marketo_preprocess_node(&$variables) {
   if ($node->bundle() === 'document') {
 
       if (null !== ($media = Media::load($node->field_file->target_id))) {
-        if (null !== ($file = File::load($media->field_file->target_id))) {
+        if (null !== ($file = File::load($media->field_file->target_id ?? 0))) {
           $variables['document_file_absolute_url'] = $file->createFileUrl();
         }
       }

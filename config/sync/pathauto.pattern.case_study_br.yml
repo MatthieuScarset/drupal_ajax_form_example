@@ -11,20 +11,20 @@ pattern: 'nossos-clientes/[node:title]'
 selection_criteria:
   ec1244e2-d518-477d-85f7-97e81016f16c:
     id: node_type
-    bundles:
-      customer_story: customer_story
     negate: false
+    uuid: ec1244e2-d518-477d-85f7-97e81016f16c
     context_mapping:
       node: node
-    uuid: ec1244e2-d518-477d-85f7-97e81016f16c
+    bundles:
+      customer_story: customer_story
   258738ae-9947-45fb-8f6d-7444fda11959:
     id: language
-    langcodes:
-      pt-br: pt-br
     negate: false
+    uuid: 258738ae-9947-45fb-8f6d-7444fda11959
     context_mapping:
       language: 'node:langcode:language'
-    uuid: 258738ae-9947-45fb-8f6d-7444fda11959
+    langcodes:
+      pt-br: pt-br
 selection_logic: and
 weight: -10
 relationships:

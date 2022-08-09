@@ -1,0 +1,23 @@
+uuid: 26788604-a85b-4edc-8d4f-fb28745c38c5
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_call_to_action_type
+    - paragraphs.paragraphs_type.call_to_action
+  module:
+    - options
+id: paragraph.call_to_action.field_call_to_action_type
+field_name: field_call_to_action_type
+entity_type: paragraph
+bundle: call_to_action
+label: 'Call to action type'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: bouton
+default_value_callback: ''
+settings: {  }
+field_type: list_string

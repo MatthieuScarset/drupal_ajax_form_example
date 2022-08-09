@@ -5,7 +5,7 @@ display:
     display_options:
       exposed_form:
         options:
-          submit_button: Appliquer
+          submit_button: Filtre
           reset_button_label: 'Remise à zéro'
           exposed_sorts_label: 'Filtrer par'
       pager:

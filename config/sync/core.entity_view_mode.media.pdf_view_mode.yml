@@ -1,0 +1,10 @@
+uuid: 30606ecc-c463-401a-9226-1026ffb1d412
+langcode: fr
+status: true
+dependencies:
+  module:
+    - media
+id: media.pdf_view_mode
+label: 'PDF View mode'
+targetEntityType: media
+cache: true

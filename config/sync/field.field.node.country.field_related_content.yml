@@ -25,6 +25,6 @@ settings:
       related_content: related_content
     target_bundles_drag_drop:
       related_content:
-        enabled: true
         weight: 2
+        enabled: true
 field_type: entity_reference_revisions

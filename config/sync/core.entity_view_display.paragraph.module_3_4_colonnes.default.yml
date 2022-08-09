@@ -1,0 +1,41 @@
+uuid: 98c21649-c824-4f3b-87d5-f8440c3b5cd6
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.module_3_4_colonnes.field_accroche
+    - field.field.paragraph.module_3_4_colonnes.field_items_3_4
+    - field.field.paragraph.module_3_4_colonnes.field_title
+    - paragraphs.paragraphs_type.module_3_4_colonnes
+  module:
+    - entity_reference_revisions
+id: paragraph.module_3_4_colonnes.default
+targetEntityType: paragraph
+bundle: module_3_4_colonnes
+mode: default
+content:
+  field_accroche:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_items_3_4:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

@@ -6,7 +6,11 @@ use Drupal\ckeditor\CKEditorPluginButtonsInterface;
 use Drupal\Component\Plugin\PluginBase;
 use Drupal\ckeditor\Annotation\CKEditorPlugin;
 use Drupal\Core\Annotation\Translation;
+use Drupal\Core\Extension\ExtensionPathResolver;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\editor\Entity\Editor;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 /**
  * Defines the "layout manager" plugin.
  *
@@ -16,8 +20,28 @@ use Drupal\editor\Entity\Editor;
  *   module = "ckeditor"
  * )
  */
-class LayoutManager extends PluginBase implements CKEditorPluginInterface, CKEditorPluginButtonsInterface
+class LayoutManager extends PluginBase implements CKEditorPluginInterface, CKEditorPluginButtonsInterface, ContainerFactoryPluginInterface
 {
+
+  /**
+   * @var ExtensionPathResolver
+   */
+  private $pathResolver;
+
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ExtensionPathResolver $extension_path_resolver) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+
+    $this->pathResolver = $extension_path_resolver;
+  }
+
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new self(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('extension.path.resolver')
+    );
+  }
   /**
    * Implements \Drupal\ckeditor\Plugin\CKEditorPluginInterface::getDependencies().
    */
@@ -44,7 +68,7 @@ class LayoutManager extends PluginBase implements CKEditorPluginInterface, CKEdi
    */
   public function getFile()
   {
-    $plugin = drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/layoutmanager/plugin.js';
+    $plugin = $this->pathResolver->getPath('module', 'oab_ckeditor') . '/js/plugins/layoutmanager/plugin.js';
     return $plugin;
   }
   /**
@@ -63,7 +87,7 @@ class LayoutManager extends PluginBase implements CKEditorPluginInterface, CKEdi
     return array(
       'LayoutManager' => array(
         'label' => t('Add Layout'),
-        'image' => drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/layoutmanager/icons/addlayout.png',
+        'image' => $this->pathResolver->getPath('module', 'oab_ckeditor') . '/js/plugins/layoutmanager/icons/addlayout.png',
       ),
     );
   }

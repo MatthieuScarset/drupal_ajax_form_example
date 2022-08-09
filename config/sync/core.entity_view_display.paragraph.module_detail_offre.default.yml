@@ -1,0 +1,67 @@
+uuid: 923af502-f515-466e-88df-3b38eafd56cd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.module_detail_offre.field_accroche
+    - field.field.paragraph.module_detail_offre.field_highlight
+    - field.field.paragraph.module_detail_offre.field_items
+    - field.field.paragraph.module_detail_offre.field_key_points
+    - field.field.paragraph.module_detail_offre.field_tab_title
+    - field.field.paragraph.module_detail_offre.field_title
+    - paragraphs.paragraphs_type.module_detail_offre
+  module:
+    - entity_reference_revisions
+id: paragraph.module_detail_offre.default
+targetEntityType: paragraph
+bundle: module_detail_offre
+mode: default
+content:
+  field_accroche:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_highlight:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_items:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_key_points:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_tab_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden: {  }

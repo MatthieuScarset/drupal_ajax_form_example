@@ -16,21 +16,21 @@ plugin: find_distributor_block
 settings:
   id: find_distributor_block
   label: 'Find Distributor Block'
-  provider: oab_dvi
   label_display: visible
+  provider: oab_dvi
   context_mapping:
     node: '@node.node_route_context:node'
-  find_distributor_title: 'Find a distributor near you'
-  find_distributor_description: 'Voici ma description'
-  find_distributor_button: 'Find Dist'
   title: 'Trouver un revendeur à proximité'
   description: 'description to find distributor'
   button_label: Find
+  find_distributor_title: 'Find a distributor near you'
+  find_distributor_description: 'Voici ma description'
+  find_distributor_button: 'Find Dist'
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
-    bundles:
-      product: product
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
+    bundles:
+      product: product

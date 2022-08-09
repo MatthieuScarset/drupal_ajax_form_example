@@ -1,0 +1,19 @@
+oab_mp_formules.entities:
+  title: Product Formules
+  route_name: oab_mp_formules.structures
+  parent: system.admin_structure
+  description: 'Configure Products Formules'
+
+
+entity.product_formule_entity.collection:
+  title: Product Formules
+  route_name: entity.product_formule_entity.collection
+  parent: oab_mp_formules.entities
+  description: 'Products Formules'
+
+
+product_formule_entity.admin.structure.settings:
+  title: 'Product formule entity settings'
+  description: 'Configure Product formule entities'
+  route_name: product_formule_entity.settings
+  parent: entity.product_formule_entity.collection

@@ -1,3 +1,5 @@
+_core:
+  default_config_hash: 1QSPl6Lx4K-hAcSOsRUFyntOnghLfpsDzjY6tbhnAVY
 seckit_xss:
   csp:
     checkbox: false
@@ -5,6 +7,7 @@ seckit_xss:
     default-src: ''
     script-src: ''
     object-src: ''
+    style-src: ''
     img-src: ''
     media-src: ''
     frame-src: ''
@@ -13,15 +16,12 @@ seckit_xss:
     connect-src: ''
     report-uri: report-csp-violation
     policy-uri: ''
-    style-src: ''
   x_xss:
     seckit_x_xss_option_disable: Disabled
     seckit_x_xss_option_0: '0'
     seckit_x_xss_option_1: 1;
     seckit_x_xss_option_1_block: '1; mode=block'
     select: 0
-  x_content_type:
-    checkbox: false
 seckit_csrf:
   origin: false
   origin_whitelist: ''
@@ -39,5 +39,3 @@ seckit_various:
   from_origin: false
   from_origin_destination: same
   disable_autocomplete: false
-_core:
-  default_config_hash: 1QSPl6Lx4K-hAcSOsRUFyntOnghLfpsDzjY6tbhnAVY

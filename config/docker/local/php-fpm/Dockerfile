@@ -1,4 +1,4 @@
-FROM php:7.3-fpm
+FROM php:8.0-fpm
 
 WORKDIR "/application"
 
@@ -9,23 +9,27 @@ ARG GID
 
 ADD php-ini-overrides.ini /usr/local/etc/php/conf.d/99-overrides.ini
 
+# Get APT Updates
+RUN apt-get update
+
 # Install selected extensions and other stuff
-RUN apt-get update \
-    && apt-get -y --no-install-recommends install \
+RUN apt-get -y --no-install-recommends install \
     vim \
+    libzip-dev \
     zip \
     unzip \
     wget \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+    git
 
 # PHP iMagick
-RUN apt-get update && apt-get install -y --no-install-recommends libmagickwand-dev imagemagick \
+RUN apt-get install -y --no-install-recommends libmagickwand-dev imagemagick \
 	&& pecl install imagick \
-	&& docker-php-ext-enable imagick \
-	&& apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+	&& docker-php-ext-enable imagick
+
+RUN docker-php-ext-install zip
 
 # GD & MySql
-RUN docker-php-ext-configure gd --with-gd --with-jpeg-dir --with-freetype-dir \
+RUN docker-php-ext-configure gd --prefix=/usr --with-jpeg --with-freetype \
   && docker-php-ext-install gd pdo_mysql \
   && docker-php-ext-enable gd
 
@@ -33,13 +37,6 @@ RUN docker-php-ext-configure gd --with-gd --with-jpeg-dir --with-freetype-dir \
 # ADD SOME CACHE
 RUN docker-php-ext-enable opcache
 RUN pecl install apcu && docker-php-ext-enable apcu
-
-
-# Install git
-RUN apt-get update \
-    && apt-get -y install git \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
-
 
 ## Mise en place Mailhog
 RUN wget https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendmail_linux_amd64 -O /usr/local/bin/mhsendmail
@@ -50,17 +47,21 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin -
 
 
 # Install npm
-RUN apt-get update && apt-get install -y nodejs npm
+RUN apt-get install -y nodejs npm
 
 # Install yarn
 RUN npm install -g yarn
+
+# REMOVE APT CACHES
+RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+
+# Verifie si le groupe oab_web existe et la crée s'il n'existe pas
+RUN [ ! $(getent group oab_web) ] && groupadd -o --gid $GID oab_web || true
 
 # User
 RUN adduser --uid $UID --gid $GID oab_web
 USER oab_web
 
-#Install drush
-RUN composer global require drush/drush:9.7.3
 
-# Export
-ENV PATH="$PATH:/home/oab_web/.config/composer/vendor/bin"
+# Export vendor bin to get Drush
+ENV PATH="$PATH:/application/vendor/bin"

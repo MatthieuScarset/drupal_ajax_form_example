@@ -15,8 +15,8 @@ plugin: footer_social_block
 settings:
   id: footer_social_block
   label: 'Footer Social Block'
-  provider: oab_frontoffice
   label_display: '0'
+  provider: oab_frontoffice
   footer_social_custom_text:
     value: '<div class="followbar"></div>'
     format: full_html

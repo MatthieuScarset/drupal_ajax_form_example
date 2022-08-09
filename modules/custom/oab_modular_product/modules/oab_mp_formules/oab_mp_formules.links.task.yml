@@ -1,0 +1,26 @@
+# Product formule entity routing definition
+product_formule_entity.settings_tab:
+  route_name: product_formule_entity.settings
+  title: 'Settings'
+  base_route: product_formule_entity.settings
+
+entity.product_formule_entity.canonical:
+  route_name: entity.product_formule_entity.canonical
+  base_route: entity.product_formule_entity.canonical
+  title: 'View'
+
+entity.product_formule_entity.edit_form:
+  route_name: entity.product_formule_entity.edit_form
+  base_route: entity.product_formule_entity.canonical
+  title: 'Edit'
+
+entity.product_formule_entity.version_history:
+  route_name: entity.product_formule_entity.version_history
+  base_route: entity.product_formule_entity.canonical
+  title: 'Revisions'
+
+entity.product_formule_entity.delete_form:
+  route_name:  entity.product_formule_entity.delete_form
+  base_route:  entity.product_formule_entity.canonical
+  title: Delete
+  weight: 10

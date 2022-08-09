@@ -1,0 +1,19 @@
+uuid: 6579ed4e-dcdf-43e7-a4bd-423951adc2ad
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_for_who_title
+    - paragraphs.paragraphs_type.module_presentation
+id: paragraph.module_presentation.field_for_who_title
+field_name: field_for_who_title
+entity_type: paragraph
+bundle: module_presentation
+label: 'For Who Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

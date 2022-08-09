@@ -4,5 +4,12 @@ display:
       exposed_form:
         options:
           submit_button: Applicar
+      fields:
+        type:
+          label: Type
+      filters:
+        type:
+          expose:
+            label: Type
   block_1:
     display_title: Block

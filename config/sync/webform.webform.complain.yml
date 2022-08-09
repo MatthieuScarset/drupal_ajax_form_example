@@ -2,9 +2,9 @@ uuid: 4378e362-b4c9-4817-8d83-07ff6d283ee9
 langcode: en
 status: open
 dependencies: {  }
+weight: 0
 open: null
 close: null
-weight: 0
 uid: 35
 template: false
 archive: false
@@ -12,7 +12,31 @@ id: complain
 title: 'Служба контроля качества'
 description: форма
 category: ''
-elements: "intro:\n  '#type': processed_text\n  '#text': \"<style type=\\\"text/css\\\">\\r\\n.g-recaptcha { margin-left:39px;}\\r\\n</style>\\r\\n\\r\\n<p><strong>Чтобы обратиться к нам, используйте один из следующих вариантов:</strong></p>\\r\\n\\r\\n<ul>\\r\\n\\t<li><strong>позвоните по телефону&nbsp;8(495)6209594,</strong></li>\\r\\n\\t<li><strong>напишите на наш адрес rus-complaint@list2.orange.com,</strong></li>\\r\\n\\t<li><strong><strong style=\\\"\\\">пришлите письмо на адрес 123100, Москва, 1-й Красногвардейский пр-д, д. 15, Меркурий Сити Тауэр,</strong></strong></li>\\r\\n\\t<li><strong>заполните форму ниже.</strong></li>\\r\\n</ul>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\\r\\n<p><strong><a href=\\\"/ru/pravila-priema-obraschenii\\\" target=\\\"_blank\\\" title=\\\"Правила приема и обработки обращений\\\">Правила приема и обработки обращений</a></strong></p>\\r\\n\\r\\n<p>&nbsp;</p>\\r\\n\"\n  '#format': full_html\nima_i_familia:\n  '#type': textfield\n  '#title': 'Имя и фамилия'\nkompania:\n  '#type': textfield\n  '#title': Компания\nnomer_dogovora:\n  '#type': textfield\n  '#title': 'Номер договора'\ncto_slucilos_:\n  '#type': textarea\n  '#title': 'Что случилось?'\n  '#required': true\nvasi_kontakty_nomer_telefona_ili_emeil:\n  '#type': textfield\n  '#title': 'Ваши контакты: номер телефона или емейл'\n  '#required': true\ncaptcha:\n  '#type': captcha\n  '#captcha_title': 'Я не робот'\n"
+elements: |
+  intro:
+    '#type': processed_text
+    '#text': "<style type=\"text/css\">\r\n.g-recaptcha { margin-left:39px;}\r\n</style>\r\n\r\n<p><strong>Чтобы обратиться к нам, используйте один из следующих вариантов:</strong></p>\r\n\r\n<ul>\r\n\t<li><strong>позвоните по телефону&nbsp;8(495)6209594,</strong></li>\r\n\t<li><strong>напишите на наш адрес rus-complaint@list2.orange.com,</strong></li>\r\n\t<li><strong><strong style=\"\">пришлите письмо на адрес 123100, Москва, 1-й Красногвардейский пр-д, д. 15, Меркурий Сити Тауэр,</strong></strong></li>\r\n\t<li><strong>заполните форму ниже.</strong></li>\r\n</ul>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong><a href=\"/ru/pravila-priema-obraschenii\" target=\"_blank\" title=\"Правила приема и обработки обращений\">Правила приема и обработки обращений</a></strong></p>\r\n\r\n<p>&nbsp;</p>\r\n"
+    '#format': full_html
+  ima_i_familia:
+    '#type': textfield
+    '#title': 'Имя и фамилия'
+  kompania:
+    '#type': textfield
+    '#title': Компания
+  nomer_dogovora:
+    '#type': textfield
+    '#title': 'Номер договора'
+  cto_slucilos_:
+    '#type': textarea
+    '#title': 'Что случилось?'
+    '#required': true
+  vasi_kontakty_nomer_telefona_ili_emeil:
+    '#type': textfield
+    '#title': 'Ваши контакты: номер телефона или емейл'
+    '#required': true
+  captcha:
+    '#type': captcha
+    '#captcha_title': 'Я не робот'
 css: ''
 javascript: ''
 settings:
@@ -27,40 +51,48 @@ settings:
   page_theme_name: ''
   form_title: both
   form_submit_once: false
-  form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
+  form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: false
+  form_unsaved: true
+  form_disable_back: false
+  form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: true
-  form_disable_back: false
-  form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
+  form_reset: false
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
   share: false
   share_node: false
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
   submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace:
     webform_routes: {  }
@@ -71,11 +103,6 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
-  submission_locked_message: ''
-  submission_excluded_elements: {  }
-  submission_exclude_empty: false
-  submission_exclude_empty_checkbox: false
   previous_submission_message: ''
   previous_submissions_message: ''
   autofill: false
@@ -86,13 +113,13 @@ settings:
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
@@ -115,9 +142,9 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: inline
+  confirmation_url: ''
   confirmation_title: Спасибо!
   confirmation_message: "Спасибо!<br />\r\n<br />\r\nМы получили ваше сообщение и скоро свяжемся с вами."
-  confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -144,6 +171,7 @@ settings:
   results_customize: false
   token_view: false
   token_update: false
+  token_delete: false
   serial_disabled: false
 access:
   create:
@@ -195,9 +223,9 @@ access:
 handlers:
   email_sasha:
     id: email
+    handler_id: email_sasha
     label: 'Email Sasha'
     notes: ''
-    handler_id: email_sasha
     status: true
     conditions: {  }
     weight: 0
@@ -206,13 +234,17 @@ handlers:
         - completed
       to_mail: rus-complaint@list2.orange.com
       to_options: {  }
-      cc_mail: alexandra.tolokonnikova@orange.com
-      cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
+      cc_mail: alexandra.tolokonnikova@orange.com
+      cc_options: {  }
       from_mail: _default
       from_options: {  }
       from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
       subject: _default
       body: _default
       excluded_elements: {  }
@@ -223,11 +255,7 @@ handlers:
       html: true
       attachments: false
       twig: false
-      debug: false
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
       theme_name: ''
       parameters: {  }
+      debug: false
 variants: {  }

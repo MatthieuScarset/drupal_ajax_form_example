@@ -1,0 +1,30 @@
+uuid: deca54f3-4ab3-4b4c-82dd-e6d2da5c2cad
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:8f775d46-c029-463f-b0bd-3338b696e8b2'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_one_i
+id: ngr_regional_presence_topzone
+theme: theme_one_i
+region: top_zone
+weight: 0
+provider: null
+plugin: 'block_content:8f775d46-c029-463f-b0bd-3338b696e8b2'
+settings:
+  id: 'block_content:8f775d46-c029-463f-b0bd-3338b696e8b2'
+  label: '[NGR] Regional Presence - Top zone'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /where-we-are

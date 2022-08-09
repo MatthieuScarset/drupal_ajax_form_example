@@ -5,6 +5,11 @@ library_term_tid: '218'
 blog_term_tid: '405'
 magazine_term_tid: '220'
 product_term_tid: '407'
+product_dvi_term_tid: '858'
+analysts_term_tid: '901'
+news_term_tid: '1053'
+achievement_term_tid: '1145'
+iot_product_term_tid: '1146'
 press_meta: Press
 partner_meta: Partners
 customer_meta: 'Customer stories'
@@ -12,12 +17,7 @@ library_meta: Documents
 blog_meta: Blogs
 magazine_meta: Magazine
 product_meta: Products
-distributor_term_tid: '849'
-product_dvi_term_tid: '858'
-analysts_term_tid: '901'
 analysts_meta: Analysts
-news_term_tid: '1053'
-achievement_term_tid: '1145'
-iot_product_term_tid: '1146'
-iot_achievement_meta: 'IoT Achievements'
+distributor_term_tid: '849'
 iot_product_meta: 'IoT Products'
+iot_achievement_meta: 'IoT Achievements'

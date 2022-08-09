@@ -39,21 +39,21 @@ mode: subhome
 content:
   field_solution:
     type: entity_reference_entity_view
-    weight: 1
     label: hidden
     settings:
       view_mode: default
       link: false
     third_party_settings: {  }
+    weight: 1
     region: content
   field_visual:
     type: entity_reference_entity_view
-    weight: 0
     label: hidden
     settings:
       view_mode: subhome_image
       link: false
     third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   field_content: true

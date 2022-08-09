@@ -1,0 +1,8 @@
+
+# Formule field menu items definition
+entity.formule_field.collection:
+  title: 'Formule field'
+  route_name: entity.formule_field.collection
+  description: 'List Formule field'
+  parent: oab_mp_formules.entities
+  weight: 99

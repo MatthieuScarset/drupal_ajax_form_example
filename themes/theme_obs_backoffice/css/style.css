@@ -60,3 +60,8 @@
 #edit-field-hub-portal-wrapper{
     clear:left;
 }
+
+/* Paragraph admin css pour afficher le nom des modules en entier en BO*/
+.js .paragraph-type-top .paragraph-type-title {
+  overflow: initial;
+}

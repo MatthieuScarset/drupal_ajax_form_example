@@ -1,0 +1,18 @@
+<article{{ attributes }}>
+  <div{{ content_attributes }}>
+    {{ content|without('field_faq', 'field_cross_sell', 'field_blogs') }}
+  </div>
+
+  <div id="to_go_further" class="py-2 py-md-5">
+    <div class="container-fluid site-width mb-3 ">
+      <span class="small text-gray3 font-weight-bold">
+            {{ to_go_further_title|t }}
+      </span>
+    </div>
+    <div>
+      {{ content.field_faq }}
+      {{ content.field_cross_sell }}
+      {{ content.field_blogs }}
+    </div>
+  </div>
+</article>

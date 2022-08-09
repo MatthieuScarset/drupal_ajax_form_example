@@ -42,7 +42,7 @@ class ProductBreadcrumbBuilder implements BreadcrumbBuilderInterface
 
       #on appliquera ce breadcrumb uniquement aux contenus de type Product qui ont le champs product category
       if ($node instanceof NodeInterface
-        && $node->bundle() == "product"
+        && in_array($node->bundle(), ['product', 'modular_product'])
         && $node->hasField('field_product_category')) {
         return TRUE;
       }

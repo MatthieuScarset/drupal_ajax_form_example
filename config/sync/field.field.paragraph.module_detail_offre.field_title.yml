@@ -1,0 +1,19 @@
+uuid: 6d50400d-deb1-47cf-b29d-104ce4388be1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.module_detail_offre
+id: paragraph.module_detail_offre.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: module_detail_offre
+label: 'Titre de l''offre'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

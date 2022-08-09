@@ -10,6 +10,7 @@ namespace Drupal\oab_backoffice\Plugin\views\filter;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\views\Plugin\views\display\DisplayPluginBase;
 use Drupal\views\Plugin\views\filter\Date;
+use Drupal\views\Plugin\views\filter\NumericFilter;
 use Drupal\views\ViewExecutable;
 
 /**
@@ -19,7 +20,7 @@ use Drupal\views\ViewExecutable;
  *
  * @ViewsFilter("node_month")
  */
-class NodeMonth extends Date  {
+class NodeMonth extends NumericFilter  {
 
     /**
      * {@inheritdoc}
@@ -29,6 +30,18 @@ class NodeMonth extends Date  {
         $this->valueTitle = t('Node month');
         $this->definition['options callback'] = array($this, 'generateOptions');
     }
+  public function adminSummary() {
+    if ($this->isAGroup()) {
+      return $this->t('grouped');
+    }
+    if (!empty($this->options['exposed'])) {
+      return $this->t('exposed');
+    }
+    $options = $this->operatorOptions('short');
+    return $options[$this->operator];
+  }
+
+  //    public function
 
     /**
      * Add a type selector to the value form
@@ -37,9 +50,9 @@ class NodeMonth extends Date  {
        // parent::valueForm($form, $form_state);
         $form['value'] = array(
             '#type' => 'select',
-            '#options' => $this->generateOptions()
+            '#options' => ['All' => t('All')] + $this->generateOptions(),
+            '#default_value' => $this->value
         );
-
     }
 
     /**

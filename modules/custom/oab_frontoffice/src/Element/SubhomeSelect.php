@@ -54,7 +54,7 @@ class SubhomeSelect extends Checkbox implements FormElementInterface {
     if (!empty($element['#checked'])) {
       $element['#attributes']['checked'] = 'checked';
     }
-    
+
     static::setAttributes($element, ['form-subhome-select']);
 
     return $element;

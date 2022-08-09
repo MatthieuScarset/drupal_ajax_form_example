@@ -20,11 +20,11 @@ resourceFields:
     enhancer:
       id: ''
   uuid:
+    disabled: false
     fieldName: uuid
     publicName: uuid
     enhancer:
       id: ''
-    disabled: false
   langcode:
     disabled: true
     fieldName: langcode
@@ -38,31 +38,31 @@ resourceFields:
     enhancer:
       id: ''
   filename:
+    disabled: false
     fieldName: filename
     publicName: filename
     enhancer:
       id: ''
-    disabled: false
   uri:
+    disabled: false
     fieldName: uri
     publicName: uri
     enhancer:
       id: url_link
       settings:
         absolute_url: '1'
-    disabled: false
   filemime:
+    disabled: false
     fieldName: filemime
     publicName: filemime
     enhancer:
       id: ''
-    disabled: false
   filesize:
+    disabled: false
     fieldName: filesize
     publicName: filesize
     enhancer:
       id: ''
-    disabled: false
   status:
     disabled: true
     fieldName: status

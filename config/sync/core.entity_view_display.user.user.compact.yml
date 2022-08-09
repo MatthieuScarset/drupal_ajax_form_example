@@ -7,7 +7,7 @@ dependencies:
     - field.field.user.user.field_access_language
     - field.field.user.user.field_last_password_reset
     - field.field.user.user.field_password_expiration
-    - field.field.user.user.field_workbench_access
+    - field.field.user.user.field_pending_expire_sent
   module:
     - user
 id: user.user.compact
@@ -17,17 +17,18 @@ mode: compact
 content:
   user_picture:
     type: image
-    weight: 0
-    settings:
-      image_style: thumbnail
-      image_link: content
-    third_party_settings: {  }
     label: hidden
+    settings:
+      image_link: content
+      image_style: thumbnail
+    third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   field_access_language: true
   field_last_password_reset: true
   field_password_expiration: true
+  field_pending_expire_sent: true
   field_workbench_access: true
   langcode: true
   member_for: true

@@ -1,0 +1,161 @@
+.items-module-detail-offre {
+
+  .detail-offre-item {
+    @include media-breakpoint-down(md) {
+      position: relative;
+    }
+
+    button.see-more {
+      position: absolute;
+      bottom: 0;
+      padding-right: 3rem;
+      @include media-breakpoint-up(md) {
+        max-width: 82%;
+        padding-right: 1rem;
+        position: absolute;
+        bottom: 0;
+      }
+
+    }
+
+    &.item-close {
+      max-height: 19rem;
+      overflow: hidden;
+      @include media-breakpoint-up(md) {
+        max-height: 33.125rem;
+      }
+
+      button.see-more {
+        background: $white;
+        max-width: 100%;
+        padding-top: 0.7rem;
+        @include media-breakpoint-up(md) {
+          max-width: 88%;
+          padding-right: 2rem;
+          padding-top: 8.125rem;
+          background: linear-gradient(rgba(255, 255, 255, 0) 20%, white, white);
+        }
+
+        span.text-voir-tout {
+          @media (max-width: 735px) {
+            display: none;
+          }
+        }
+      }
+    }
+
+    &.item-open {
+      button.see-more {
+        position: initial;
+        max-width: 100%;
+        padding-right: 2rem;
+        @include media-breakpoint-up(md) {
+          position: absolute;
+          max-width: 88%;
+          padding-right: 2rem;
+        }
+
+        span.text-voir-tout {
+          @media (max-width: 735px) {
+            display: none;
+          }
+        }
+      }
+    }
+
+    .detail-offre-content-header {
+      min-height: revert;
+      @include media-breakpoint-up(md) {
+        min-height: 12.5rem;
+      }
+
+      .accroche {
+          min-height: 2.75rem;
+      }
+    }
+  }
+
+  .field-items-modules {
+    @include media-breakpoint-up(md) {
+      overflow-x: scroll;
+      overflow-y: hidden;
+      flex-wrap: unset;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    .custom-link {
+      &.icon-Redo {
+        display: block;
+        padding: 0.8125rem 0;
+        @include media-breakpoint-up(md) {
+          padding: 0.8125rem 0;
+        }
+
+        &::before {
+          color: $orange2;
+        }
+      }
+
+      &.o-link-arrow {
+        padding: 0.8125rem 0;
+        @include media-breakpoint-up(md) {
+          padding: 0.8125rem 0;
+        }
+      }
+
+      &.btn {
+        width: 100%;
+        @include media-breakpoint-up(md) {
+          width: auto;
+        }
+      }
+    }
+
+    .call-to-action {
+      .field > div {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+
+  .liste-offres {
+    .collapsed-header {
+      display: flex;
+      padding-top: 0;
+      padding-bottom: 0;
+      margin-right: auto;
+
+      &.o-link-arrow {
+        &::after {
+          color: black;
+          right: 0;
+          padding-left: 0;
+        }
+        &:active {
+          color: black;
+        }
+      }
+      & > div {
+        padding-right: 1rem;
+      }
+    }
+
+    .exclus-icon {
+      li::before {
+        content: "";
+        color: $red;
+        font-size: 0.6875rem;
+      }
+    }
+
+    .offres-sans-description {
+      margin-right: auto;
+      font-size: 1rem;
+      max-width: 18.75rem;
+    }
+  }
+}

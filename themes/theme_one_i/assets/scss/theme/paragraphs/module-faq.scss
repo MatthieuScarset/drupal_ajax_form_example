@@ -1,0 +1,74 @@
+.faq-visual {
+  img {
+    max-width: 580px;
+    width: 100%;
+  }
+}
+
+.modal-faq.modal {
+
+  .modal-dialog {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 100% !important;
+    height: 100% !important;
+
+    h2#faqModalTitle{
+      span {
+        font-size: 3.5rem;
+      }
+    }
+  }
+
+  .modal-content {
+    .modal-body {
+      .question-answer {
+        overflow-y: scroll;
+        scrollbar-width: none ;
+        position: absolute;
+        top: 6.5rem;
+        bottom: 0;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+    }
+  }
+
+
+  @include media-breakpoint-up(md) {
+    &.fade {
+      .modal-dialog {
+        transition: transform .5s ease-out !important;
+        transform: translate(100%, 0) !important;
+      }
+    }
+
+    &.show {
+      .modal-dialog {
+        transform: none !important;
+      }
+    }
+
+    .modal-dialog {
+
+      .modal-content {
+        min-height: 100%;
+        height: fit-content;
+
+
+        span.icon {
+          font-size: 3rem;
+        }
+
+        #faqAccordion {
+          .card:last-child {
+            border: none !important;
+          }
+        }
+      }
+    }
+  }
+}

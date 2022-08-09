@@ -6,9 +6,12 @@ global-styling:
       assets/css/style.css: {weight: 50}
 
   js:
-    js/hack.js: { }
-    assets/js/ob1.js: { }
-    assets/js/ob1.bundle.js: { }
+    js/hack.js: {}
+    https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js: { type: external }
+    assets/js/ob1.min.js: {}
+    assets/js/ob1.bundle.min.js: {}
+    assets/js/boosted.min.js: {}
+    assets/js/boosted.bundle.min.js: {}
     js/bsSlider.jquery.js: {}
     js/header.js: {}
     js/headerSticky.js: {}
@@ -23,11 +26,6 @@ global-styling:
 
   dependencies:
 #  Jquery core drupal mis en commentaire car c'est une version ligth et qu'il manque des éléments nécessaire a ob1
-#    - core/jquery
-#    - core/jquery.once
-#    - core/jquery.ui
-#    - core/jquery.ui.effects.slide
-    - core/popperjs
     - core/drupal
 #    - theme_one_i/socialbar      # Currently provided by theme_boosted
     - oab_icomoon/icomoon
@@ -46,3 +44,10 @@ contact-button:
   version: VERSION
   js:
     js/contact_button.js: {}
+
+modular_product:
+  version: VERSION
+  js:
+    assets/js/modular_product.min.js: {attributes: { type: module }}
+    js/tealium_modular_product.js: {}
+    assets/js/product_formule.min.js: {attributes: { type: module }}

@@ -1,0 +1,10 @@
+uuid: 745d70ca-e223-46c4-b2e8-ffa8e84a503c
+langcode: fr
+status: true
+dependencies: {  }
+id: module_detail_gamme_items
+label: '[MP] Module detail gamme items'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

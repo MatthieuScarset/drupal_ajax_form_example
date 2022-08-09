@@ -1,6 +1,8 @@
 <?php
 
 use Drupal\Core\Database\Database;
+use Drupal\Core\File\FileUrlGenerator;
+use Drupal\file\FileRepositoryInterface;
 use Drupal\media\Entity\Media;
 
 
@@ -92,8 +94,8 @@ function migrate_file_in_string($chaine_a_remplacer, $nidd7, &$error) {
             }
 
             //Récupération des informations du file D7
-            \Drupal\Core\Database\Database::setActiveConnection('drupal7');
-            $dbd7 = \Drupal\Core\Database\Database::getConnection();
+            Database::setActiveConnection('drupal7');
+            $dbd7 = Database::getConnection();
 
             //requete sur le fichier D7
             $file_query = $dbd7->select('file_managed', 'f');
@@ -102,8 +104,14 @@ function migrate_file_in_string($chaine_a_remplacer, $nidd7, &$error) {
             $file_results = $file_query->execute()->fetchObject();
 
             //on remet la connexion D8
-            \Drupal\Core\Database\Database::setActiveConnection();
-            $dbd8 = \Drupal\Core\Database\Database::getConnection();
+            Database::setActiveConnection();
+            $dbd8 = Database::getConnection();
+
+            /** @var FileUrlGenerator $service_file_url_generator */
+            $service_file_url_generator = \Drupal::service('file_url_generator');
+
+            /** @var FileRepositoryInterface $service_file_repository */
+            $service_file_repository = Drupal::service('file.repository');
 
             if (is_object($file_results)) {
                 if (isset($file_results->uri)) {
@@ -111,8 +119,8 @@ function migrate_file_in_string($chaine_a_remplacer, $nidd7, &$error) {
 
                     if (file_exists($saved_path)) {
 
-                        $data = file_get_contents(file_create_url($saved_path));
-                        $file = file_save_data($data, $file_results->uri, FILE_EXISTS_REPLACE);
+                        $data = file_get_contents($service_file_url_generator->generateAbsoluteString($saved_path));
+                        $file = $service_file_repository->writeData($data, $file_results->uri, FILE_EXISTS_REPLACE);
 
                         //on recherche si le media existe déjà
                         $media_query = $dbd8->select('media', 'm');
@@ -181,8 +189,8 @@ function migrate_file_in_string($chaine_a_remplacer, $nidd7, &$error) {
 
 
 function get_correspondance_tid_D7_tid_D8($name_tab_state, $table_d7, $field_d7, $nid_d7, $bundle_d7){
-    \Drupal\Core\Database\Database::setActiveConnection('drupal7');
-    $dbd7 = \Drupal\Core\Database\Database::getConnection();
+    Database::setActiveConnection('drupal7');
+    $dbd7 = Database::getConnection();
     $new_values = array();
     $tableau_correspondance = \Drupal::state()->get($name_tab_state);
     if (count($tableau_correspondance) > 0) {
@@ -214,14 +222,14 @@ function get_correspondance_tid_D7_tid_D8($name_tab_state, $table_d7, $field_d7,
         }
     }
     $new_values = array_unique($new_values);
-    \Drupal\Core\Database\Database::setActiveConnection();
+    Database::setActiveConnection();
     return $new_values;
 }
 
 function get_country_term($code, $name) {
     //on remet la connexion D8
-    \Drupal\Core\Database\Database::setActiveConnection();
-    $dbd8 = \Drupal\Core\Database\Database::getConnection();
+    Database::setActiveConnection();
+    $dbd8 = Database::getConnection();
 
     //vérification de l'existance du terme et création
     $query = $dbd8->select('taxonomy_term_field_data', 't');
@@ -249,5 +257,5 @@ function get_country_term($code, $name) {
     }
 
     //on remet la connexion D7
-    \Drupal\Core\Database\Database::setActiveConnection('drupal7');
+    Database::setActiveConnection('drupal7');
 }

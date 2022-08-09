@@ -2,8 +2,12 @@
 
 namespace Drupal\oab_axiome\Form;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\oab_orange_business_lounge\Form\OabOblForm;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
@@ -11,6 +15,26 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
  * Configure example settings for this site.
  */
 class OabAxiomeSettingsForm extends ConfigFormBase {
+
+  /**
+   * @var MessengerInterface
+   */
+  private MessengerInterface $messengerService;
+
+  public function __construct(ConfigFactoryInterface $config_factory, MessengerInterface $messenger_service) {
+    parent::__construct($config_factory);
+    $this->messengerService = $messenger_service;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container): OabOblForm|ConfigFormBase|static {
+    return new static(
+      $container->get('config.factory'),
+      $container->get('messenger'),
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -156,15 +180,15 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
 
       // Si le fichier n'existe pas, je met une erreur (mais Drupal devrait avoir coupé avant si le fichier n'existe pas)
       if (!file_exists($archive_path)) {
-          drupal_set_message($this->t("Selected archive doesn't exist."), 'error');
+          $this->messengerService->addMessage($this->t("Selected archive doesn't exist."), 'error');
           return;
       }
 
       //Je déplace le fichier et j'affiche un message de succès ou d'erreur
       if (!rename($archive_path, $new_path)) {
-          drupal_set_message($this->t("Moving archive failed."), 'error');
+        $this->messengerService->addMessage($this->t("Moving archive failed."), 'error');
       } else {
-          drupal_set_message($this->t("Moving archive succeed. Archive will be reimport at next cron (max 15min)."), 'success');
+        $this->messengerService->addMessage($this->t("Moving archive succeed. Archive will be reimport at next cron (max 15min)."), 'success');
       }
 
   }
@@ -183,7 +207,7 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
 
         //Petit check si le fichier existe
         if (!file_exists($archive_path)) {
-            drupal_set_message($this->t("Selected archive doesn't exist."), 'error');
+          $this->messengerService->addMessage($this->t("Selected archive doesn't exist."), 'error');
             return;
         }
 

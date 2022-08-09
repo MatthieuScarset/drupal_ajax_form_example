@@ -1,0 +1,10 @@
+uuid: b3574a54-5c89-4be7-8fe1-35a9ea757b20
+langcode: fr
+status: true
+dependencies: {  }
+id: module_detail_gamme
+label: '[MP] Module detail de la gamme'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

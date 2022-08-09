@@ -1,0 +1,25 @@
+uuid: 94d4b03c-71a9-4b69-a01a-bf86822b6121
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:3b1ecc36-575f-4f26-9f46-95aa5804ef6d'
+  module:
+    - block_content
+  theme:
+    - theme_boosted
+id: ngr_fix_boosted_megamenu
+theme: theme_boosted
+region: prefooter
+weight: 0
+provider: null
+plugin: 'block_content:3b1ecc36-575f-4f26-9f46-95aa5804ef6d'
+settings:
+  id: 'block_content:3b1ecc36-575f-4f26-9f46-95aa5804ef6d'
+  label: '[NGR] Fix Boosted Megamenu'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

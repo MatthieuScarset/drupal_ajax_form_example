@@ -1,0 +1,26 @@
+uuid: 8abe9cf9-b153-4b38-9054-82aa85dd428e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - crop.type.crop_554_277
+  module:
+    - crop
+name: modular_product_image_faq
+label: 'Modular Product Image Faq'
+effects:
+  b9ba77d9-6d9a-4eea-b68c-2505111027ca:
+    uuid: b9ba77d9-6d9a-4eea-b68c-2505111027ca
+    id: crop_crop
+    weight: 1
+    data:
+      crop_type: crop_554_277
+      automatic_crop_provider: null
+  cefaf668-9c2a-4103-9e62-f0182b67263a:
+    uuid: cefaf668-9c2a-4103-9e62-f0182b67263a
+    id: image_scale_and_crop
+    weight: 2
+    data:
+      width: 538
+      height: 277
+      anchor: center-center

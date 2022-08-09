@@ -11,20 +11,20 @@ pattern: 'solucoes/[node:title]'
 selection_criteria:
   a60fb63f-75f7-4ba5-a42a-cc136d09b71a:
     id: node_type
-    bundles:
-      solution: solution
     negate: false
+    uuid: a60fb63f-75f7-4ba5-a42a-cc136d09b71a
     context_mapping:
       node: node
-    uuid: a60fb63f-75f7-4ba5-a42a-cc136d09b71a
+    bundles:
+      solution: solution
   6326a5ba-0e42-4c0f-bbab-eb59d0173b75:
     id: language
-    langcodes:
-      pt-br: pt-br
     negate: false
+    uuid: 6326a5ba-0e42-4c0f-bbab-eb59d0173b75
     context_mapping:
       language: 'node:langcode:language'
-    uuid: 6326a5ba-0e42-4c0f-bbab-eb59d0173b75
+    langcodes:
+      pt-br: pt-br
 selection_logic: and
 weight: -10
 relationships:

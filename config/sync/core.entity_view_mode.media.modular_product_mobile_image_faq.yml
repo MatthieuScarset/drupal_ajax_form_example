@@ -1,0 +1,10 @@
+uuid: d8b2997a-872a-4bf5-aab6-8e8f01e45d30
+langcode: fr
+status: true
+dependencies:
+  module:
+    - media
+id: media.modular_product_mobile_image_faq
+label: 'Modular Product Mobile Image FAQ'
+targetEntityType: media
+cache: true

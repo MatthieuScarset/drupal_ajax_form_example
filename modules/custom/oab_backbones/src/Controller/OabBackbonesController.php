@@ -11,17 +11,43 @@ namespace Drupal\oab_backbones\Controller;
 
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Extension\ExtensionPathResolver;
+use Drupal\Core\File\FileUrlGenerator;
 use Drupal\Core\Url;
 use Drupal\oab_backbones\Classes\BackbonesImport;
 use Drupal\oab_backbones\Classes\BackbonesImportData;
 use Drupal\oab_backbones\Form\FilterPerformanceDataForm;
 use Drupal\oab_backbones\Form\GlobalSettingsForm;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OabBackbonesController extends ControllerBase
 {
-    /** Méthode appelée quand on va voir le détail d'un import en BO
+
+  /**
+   * @var FileUrlGenerator
+   */
+  private $fileUrlGenerator;
+
+  /**
+   * @var ExtensionPathResolver
+   */
+  private $pathResolver;
+
+  public function __construct(FileUrlGenerator $file_url_generator, ExtensionPathResolver $extension_path_resolver) {
+    $this->fileUrlGenerator = $file_url_generator;
+    $this->pathResolver = $extension_path_resolver;
+  }
+
+  public static function create(ContainerInterface $container) {
+    return new self(
+      $container->get('file_url_generator'),
+      $container->get('extension.path.resolver')
+    );
+  }
+
+  /** Méthode appelée quand on va voir le détail d'un import en BO
      */
     public function viewDataImportAdmin(Request $request, $date_import, $site_sid) {
 
@@ -121,7 +147,7 @@ class OabBackbonesController extends ControllerBase
         $imports = $bi_obj->getBackbonesImportTable()->fetchAll();
 
         //documentation
-        $path_doc = file_create_url(drupal_get_path('module', 'oab_backbones') . '/BackbonesNotice.pdf');
+        $path_doc = $this->fileUrlGenerator->generateAbsoluteString($this->pathResolver->getPath('module', 'oab_backbones') . '/BackbonesNotice.pdf');
         //Récupération du formulaire
         $form = \Drupal::formBuilder()->getForm(GlobalSettingsForm::class);
 

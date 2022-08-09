@@ -55,10 +55,10 @@ bundle: homepage
 mode: default
 content:
   links:
-    weight: 0
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   field_banner_expertise: true
   field_banner_left_zone_title: true

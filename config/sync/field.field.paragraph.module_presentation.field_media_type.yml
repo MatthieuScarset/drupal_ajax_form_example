@@ -1,0 +1,21 @@
+uuid: 2372197e-9c50-45f5-b4e1-d3e8a1739180
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_media_type
+    - paragraphs.paragraphs_type.module_presentation
+  module:
+    - options
+id: paragraph.module_presentation.field_media_type
+field_name: field_media_type
+entity_type: paragraph
+bundle: module_presentation
+label: 'Media type'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

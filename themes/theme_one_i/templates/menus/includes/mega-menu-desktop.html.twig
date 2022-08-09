@@ -140,11 +140,11 @@ We call a macro which calls itself to render the full tree.
               <div class="tab-pane {% if loop.index == 1 %}active{% endif %}" id="item-{{ loop.index }}"
                    role="tabpanel">
                 <div class="row mb-1">
-                  <div class="col-6 en_ce_moment">{{ "At the moment"|t }}</div>
+                  <div class="col-6 en_ce_moment">{{ "Key solutions"|t }}</div>
                   <div class="col-6">
                     <a class="o-link-arrow all_product_link" href="{{ item.url }}"
-                       onmousedown="utag_link(utag_data.titre_page,'Menu','{{ title }}_{{ item.title }}',{{ "See all products"|t }});">
-                      {{ "See all products"|t }}
+                       onmousedown="utag_link({'track_page':utag_data.titre_page,'track_zone':'Menu','track_nom':'{{ item.title }}','track_cible':'See all solutions','track_type_evt':'clic'});">
+                      {{ "See all solutions"|t }}
                     </a>
                   </div>
                 </div>

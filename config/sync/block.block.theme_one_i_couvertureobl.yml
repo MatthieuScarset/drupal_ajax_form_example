@@ -15,8 +15,8 @@ plugin: obl_couverture_block
 settings:
   id: obl_couverture_block
   label: 'Couverture OBL'
-  provider: oab_frontoffice
   label_display: visible
+  provider: oab_frontoffice
   content: 'Découvrez le réseau Orange'
   content_format: D
   block_title: 'Couverture mobile d''Orange Business Services'

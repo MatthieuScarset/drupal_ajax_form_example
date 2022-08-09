@@ -21,11 +21,11 @@ resourceFields:
     enhancer:
       id: ''
   uuid:
+    disabled: false
     fieldName: uuid
     publicName: uuid
     enhancer:
       id: ''
-    disabled: false
   vid:
     disabled: true
     fieldName: vid
@@ -39,11 +39,11 @@ resourceFields:
     enhancer:
       id: ''
   bundle:
+    disabled: false
     fieldName: bundle
     publicName: bundle
     enhancer:
       id: ''
-    disabled: false
   revision_created:
     disabled: true
     fieldName: revision_created
@@ -69,17 +69,17 @@ resourceFields:
     enhancer:
       id: ''
   uid:
+    disabled: false
     fieldName: uid
     publicName: uid
     enhancer:
       id: ''
-    disabled: false
   name:
+    disabled: false
     fieldName: name
     publicName: name
     enhancer:
       id: ''
-    disabled: false
   thumbnail:
     disabled: true
     fieldName: thumbnail
@@ -87,17 +87,17 @@ resourceFields:
     enhancer:
       id: ''
   created:
+    disabled: false
     fieldName: created
     publicName: created
     enhancer:
       id: ''
-    disabled: false
   changed:
+    disabled: false
     fieldName: changed
     publicName: changed
     enhancer:
       id: ''
-    disabled: false
   default_langcode:
     disabled: true
     fieldName: default_langcode
@@ -123,11 +123,11 @@ resourceFields:
     enhancer:
       id: ''
   path:
+    disabled: false
     fieldName: path
     publicName: path
     enhancer:
       id: ''
-    disabled: false
   moderation_state:
     disabled: true
     fieldName: moderation_state
@@ -135,13 +135,13 @@ resourceFields:
     enhancer:
       id: ''
   field_file:
+    disabled: false
     fieldName: field_file
     publicName: field_file
     enhancer:
       id: url_link
       settings:
         absolute_url: 0
-    disabled: false
   field_media_generic:
     disabled: true
     fieldName: field_media_generic

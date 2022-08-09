@@ -1,27 +1,3 @@
-scheme: taxonomy
-parents:
-  blogs: blogs
-  subhomes: subhomes
-label: Section
-plural_label: Sections
-fields:
-  node:
-    blog_post: ''
-    country: ''
-    customer_story: ''
-    document: ''
-    industry: ''
-    magazine: ''
-    office: ''
-    partner: ''
-    press_kit: ''
-    press_release: ''
-    product: ''
-    profile: ''
-    region: ''
-    simple_page: ''
-    solution: ''
-    webform: ''
 _core:
   default_config_hash: delTKALrhPWSM78GuDlZP2HmxNAJjxCvv4fQezJ7Dak
-deny_on_empty: 0
+deny_on_empty: false

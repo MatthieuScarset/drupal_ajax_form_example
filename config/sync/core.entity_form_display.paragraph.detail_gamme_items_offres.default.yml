@@ -1,0 +1,83 @@
+uuid: 4edc56e2-454f-4c06-ab56-9a3fe8d7b753
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.detail_gamme_items_offres.field_accroche
+    - field.field.paragraph.detail_gamme_items_offres.field_cta
+    - field.field.paragraph.detail_gamme_items_offres.field_inclus_offre_gamme
+    - field.field.paragraph.detail_gamme_items_offres.field_price_label
+    - field.field.paragraph.detail_gamme_items_offres.field_title
+    - paragraphs.paragraphs_type.detail_gamme_items_offres
+  module:
+    - paragraphs
+id: paragraph.detail_gamme_items_offres.default
+targetEntityType: paragraph
+bundle: detail_gamme_items_offres
+mode: default
+content:
+  field_accroche:
+    type: string_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 2
+      placeholder: ''
+    third_party_settings: {  }
+  field_cta:
+    type: paragraphs
+    weight: 3
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
+    third_party_settings: {  }
+  field_inclus_offre_gamme:
+    type: paragraphs
+    weight: 6
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: titre_and_description
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
+    third_party_settings: {  }
+  field_price_label:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

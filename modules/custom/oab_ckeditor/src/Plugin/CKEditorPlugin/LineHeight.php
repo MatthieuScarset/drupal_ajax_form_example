@@ -1,7 +1,11 @@
 <?php
 namespace Drupal\oab_ckeditor\Plugin\CKEditorPlugin;
 use Drupal\ckeditor\CKEditorPluginBase;
+use Drupal\Core\Extension\ExtensionPathResolver;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\editor\Entity\Editor;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 /**
  * Defines the "LineHeight" plugin.
  *
@@ -11,8 +15,28 @@ use Drupal\editor\Entity\Editor;
  *   module = "ckeditor"
  * )
  */
-class LineHeight extends CKEditorPluginBase
+class LineHeight extends CKEditorPluginBase implements ContainerFactoryPluginInterface
 {
+
+  /**
+   * @var ExtensionPathResolver
+   */
+  private $pathResolver;
+
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ExtensionPathResolver $extension_path_resolver) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+
+    $this->pathResolver = $extension_path_resolver;
+  }
+
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new self(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('extension.path.resolver')
+    );
+  }
   /**
    * Implements \Drupal\ckeditor\Plugin\CKEditorPluginInterface::getDependencies().
    */
@@ -39,7 +63,7 @@ class LineHeight extends CKEditorPluginBase
    */
   public function getFile()
   {
-    $plugin = drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/lineheight/plugin.js';
+    $plugin = $this->pathResolver->getPath('module', 'oab_ckeditor') . '/js/plugins/lineheight/plugin.js';
     return $plugin;
   }
   /**
@@ -59,7 +83,7 @@ class LineHeight extends CKEditorPluginBase
     return array(
       'lineheight' => array(
         'label' => t('LineHeight button'),
-        'image' => drupal_get_path('module', 'oab_ckeditor') . '/js/plugins/lineheight/icons/icon.png',
+        'image' => $this->pathResolver->getPath('module', 'oab_ckeditor') . '/js/plugins/lineheight/icons/icon.png',
       ),
     );
   }

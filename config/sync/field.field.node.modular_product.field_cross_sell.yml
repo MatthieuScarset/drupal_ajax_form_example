@@ -1,0 +1,136 @@
+uuid: 4f858308-d0b5-48f4-a48e-ce902eb2d9d0
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_cross_sell
+    - node.type.modular_product
+    - paragraphs.paragraphs_type.module_cross_sell
+  module:
+    - entity_reference_revisions
+id: node.modular_product.field_cross_sell
+field_name: field_cross_sell
+entity_type: node
+bundle: modular_product
+label: 'Cross Sell'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      module_cross_sell: module_cross_sell
+    negate: 0
+    target_bundles_drag_drop:
+      contact_button_item:
+        weight: 37
+        enabled: false
+      default_button:
+        weight: 38
+        enabled: false
+      documentation:
+        weight: 39
+        enabled: false
+      home_banner:
+        weight: 43
+        enabled: false
+      home_caroussel:
+        weight: 44
+        enabled: false
+      home_column:
+        weight: 45
+        enabled: false
+      home_column_section:
+        weight: 46
+        enabled: false
+      home_playlist:
+        weight: 47
+        enabled: false
+      home_thematic_columns:
+        weight: 48
+        enabled: false
+      homepage_banner_experience:
+        weight: 40
+        enabled: false
+      homepage_banner_item:
+        weight: 41
+        enabled: false
+      homepage_news:
+        weight: 42
+        enabled: false
+      infography_partner:
+        weight: 49
+        enabled: false
+      marketo:
+        weight: 50
+        enabled: false
+      module_3_4_colonnes:
+        weight: 51
+        enabled: false
+      module_3_4_colonnes_items:
+        weight: 52
+        enabled: false
+      module_benefits:
+        weight: 53
+        enabled: false
+      module_benefits_item:
+        weight: 54
+        enabled: false
+      module_cross_sell:
+        weight: 55
+        enabled: true
+      module_detail_offre:
+        weight: 56
+        enabled: false
+      module_detail_offre_items:
+        weight: 57
+        enabled: false
+      module_faq:
+        weight: 58
+        enabled: false
+      module_faq_quesions:
+        weight: 59
+        enabled: false
+      module_partner:
+        weight: 60
+        enabled: false
+      module_services:
+        weight: 61
+        enabled: false
+      module_step:
+        weight: 62
+        enabled: false
+      module_steps:
+        weight: 63
+        enabled: false
+      module_text_video_image:
+        weight: 64
+        enabled: false
+      paragraph_block_rebond:
+        weight: 65
+        enabled: false
+      paragraph_product_call_to_action:
+        weight: 66
+        enabled: false
+      paragraph_wysiwyg:
+        weight: 67
+        enabled: false
+      rebond_wysiwyg:
+        weight: 68
+        enabled: false
+      related_content:
+        weight: 69
+        enabled: false
+      subhome_presse_carrousel:
+        weight: 70
+        enabled: false
+      titre_and_description:
+        weight: 71
+        enabled: false
+      titre_and_description_and_link:
+        weight: 72
+        enabled: false
+field_type: entity_reference_revisions

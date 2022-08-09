@@ -14,9 +14,9 @@ third_party_settings:
       1943: '1943'
       1407: '1407'
     gdpr_form_published: 1
+weight: 0
 open: null
 close: null
-weight: 0
 uid: 24
 template: false
 archive: false
@@ -24,7 +24,85 @@ id: vous_avez_un_projet_nous_vous_re
 title: 'Vous avez un projet ? Nous vous répondrons sous 72 heures'
 description: ''
 category: OCB
-elements: "processed_text:\n  '#type': processed_text\n  '#text': \"<h3 class=\\\"titre4\\\">Vous avez un projet ?<span> Nous vous répondrons sous 72 heures</span></h3>\\r\\n\"\n  '#format': full_html\ncivilite:\n  '#type': select\n  '#title': Civilité\n  '#options':\n    Madame: Madame\n    Monsieur: Monsieur\nnom:\n  '#type': textfield\n  '#title': Nom\n  '#required': true\nprenom:\n  '#type': textfield\n  '#title': Prénom\n  '#required': true\nadresse_e_mail:\n  '#type': email\n  '#title': 'Adresse e-mail'\n  '#required': true\nnumero_de_telephone:\n  '#type': tel\n  '#title': 'Numéro de téléphone'\n  '#required': true\ncode_postal:\n  '#type': textfield\n  '#title': 'Code postal'\n  '#required': true\nville:\n  '#type': textfield\n  '#title': Ville\n  '#required': true\nsiren:\n  '#type': textfield\n  '#title': SIREN\nnom_de_la_societe:\n  '#type': textfield\n  '#title': 'Nom de la société'\n  '#required': true\nvotre_message:\n  '#type': textarea\n  '#title': 'Votre message'\npays:\n  '#type': select\n  '#title': Pays\n  '#options': country_names\n  '#select2': true\n  '#required': true\ndonnees_personnelles:\n  '#type': checkbox\n  '#title': 'Données personnelles'\n  '#description': '<p><strong>J’accepte de recevoir des informations concernant les services d’Orange Business Services</strong></p>'\n  '#title_display': ''\n  '#required': true\n  '#states':\n    checked:\n      ':input[name=\"pays\"]':\n        value:\n          pattern: '/|Finland|France|Ireland|Latvia|Poland|Sweden|United Kingdom|China|Argentina|Chile|United States|Mexico|/'\n  '#attributes':\n    class:\n      - check-data\n    style: 'width:auto!important;float:left;margin-right:1rem'\ncaptcha:\n  '#type': captcha\nprovenance:\n  '#type': hidden\n  '#title': Provenance\n  '#default_value': '[current-page:query:product]'\nactions:\n  '#type': webform_actions\n  '#title': 'Submit button(s)'\nmentions_legales:\n  '#type': processed_text\n  '#text': \"<p style=\\\"font-size:1rem;\\\"><br />\\r\\nNous utilisons vos données de contact professionnelles pour répondre à votre demande. Orange S.A. (Orange Business Services division) 1 Place des Droits de l'Homme, 93450 La Plaine Saint-Denis, est responsable de traitement, que vous pouvez contacter à <a href=\\\"mailto:obs.francedpo@orange.com\\\">obs.francedpo@orange.com</a>. Vous disposez notamment d’un droit d’accès, de rectification, d’opposition et de suppression de vos données. Vous pourrez vous désinscrire de nos communications à tout moment. Pour plus d’informations sur le traitement de vos données et vos droits, <a href=\\\"https://www.orange-business.com/fr/donnees-personnelles\\\">cliquer ici</a>.</p>\\r\\n\"\n  '#format': full_html"
+elements: |-
+  processed_text:
+    '#type': processed_text
+    '#text': "<h3 class=\"titre4\">Vous avez un projet ?<span> Nous vous répondrons sous 72 heures</span></h3>\r\n"
+    '#format': full_html
+  civilite:
+    '#type': select
+    '#title': Civilité
+    '#options':
+      Madame: Madame
+      Monsieur: Monsieur
+  nom:
+    '#type': textfield
+    '#title': Nom
+    '#required': true
+  prenom:
+    '#type': textfield
+    '#title': Prénom
+    '#required': true
+  adresse_e_mail:
+    '#type': email
+    '#title': 'Adresse e-mail'
+    '#required': true
+  numero_de_telephone:
+    '#type': tel
+    '#title': 'Numéro de téléphone'
+    '#required': true
+  code_postal:
+    '#type': textfield
+    '#title': 'Code postal'
+    '#required': true
+  ville:
+    '#type': textfield
+    '#title': Ville
+    '#required': true
+  siren:
+    '#type': textfield
+    '#title': SIREN
+  nom_de_la_societe:
+    '#type': textfield
+    '#title': 'Nom de la société'
+    '#required': true
+  votre_message:
+    '#type': textarea
+    '#title': 'Votre message'
+  pays:
+    '#type': select
+    '#title': Pays
+    '#options': country_names
+    '#select2': true
+    '#required': true
+  donnees_personnelles:
+    '#type': checkbox
+    '#title': 'Données personnelles'
+    '#description': '<p><strong>J’accepte de recevoir des informations concernant les services d’Orange Business Services</strong></p>'
+    '#title_display': ''
+    '#required': true
+    '#states':
+      checked:
+        ':input[name="pays"]':
+          value:
+            pattern: '/|Finland|France|Ireland|Latvia|Poland|Sweden|United Kingdom|China|Argentina|Chile|United States|Mexico|/'
+    '#attributes':
+      class:
+        - check-data
+      style: 'width:auto!important;float:left;margin-right:1rem'
+  captcha:
+    '#type': captcha
+  provenance:
+    '#type': hidden
+    '#title': Provenance
+    '#default_value': '[current-page:query:product]'
+  actions:
+    '#type': webform_actions
+    '#title': 'Submit button(s)'
+  mentions_legales:
+    '#type': processed_text
+    '#text': "<p style=\"font-size:1rem;\"><br />\r\nNous utilisons vos données de contact professionnelles pour répondre à votre demande. Orange S.A. (Orange Business Services division) 1 Place des Droits de l'Homme, 93450 La Plaine Saint-Denis, est responsable de traitement, que vous pouvez contacter à <a href=\"mailto:obs.francedpo@orange.com\">obs.francedpo@orange.com</a>. Vous disposez notamment d’un droit d’accès, de rectification, d’opposition et de suppression de vos données. Vous pourrez vous désinscrire de nos communications à tout moment. Pour plus d’informations sur le traitement de vos données et vos droits, <a href=\"https://www.orange-business.com/fr/donnees-personnelles\">cliquer ici</a>.</p>\r\n"
+    '#format': full_html
 css: ''
 javascript: ''
 settings:
@@ -39,40 +117,48 @@ settings:
   page_theme_name: ''
   form_title: both
   form_submit_once: false
-  form_exception_message: ''
   form_open_message: ''
   form_close_message: ''
+  form_exception_message: ''
   form_previous_submissions: true
   form_confidential: false
   form_confidential_message: ''
-  form_remote_addr: true
+  form_disable_remote_addr: false
   form_convert_anonymous: false
   form_prepopulate: false
   form_prepopulate_source_entity: false
   form_prepopulate_source_entity_required: false
   form_prepopulate_source_entity_type: ''
-  form_reset: false
+  form_unsaved: false
+  form_disable_back: false
+  form_submit_back: false
   form_disable_autocomplete: false
   form_novalidate: false
   form_disable_inline_errors: false
   form_required: false
-  form_unsaved: false
-  form_disable_back: false
-  form_submit_back: false
   form_autofocus: false
   form_details_toggle: false
+  form_reset: false
   form_access_denied: default
   form_access_denied_title: ''
   form_access_denied_message: ''
   form_access_denied_attributes: {  }
   form_file_limit: ''
+  form_attributes: {  }
+  form_method: ''
+  form_action: ''
   share: false
   share_node: false
   share_theme_name: ''
   share_title: true
   share_page_body_attributes: {  }
   submission_label: ''
+  submission_exception_message: ''
+  submission_locked_message: ''
   submission_log: false
+  submission_excluded_elements: {  }
+  submission_exclude_empty: false
+  submission_exclude_empty_checkbox: false
   submission_views: {  }
   submission_views_replace: {  }
   submission_user_columns: {  }
@@ -81,11 +167,6 @@ settings:
   submission_access_denied_title: ''
   submission_access_denied_message: ''
   submission_access_denied_attributes: {  }
-  submission_exception_message: ''
-  submission_locked_message: ''
-  submission_excluded_elements: {  }
-  submission_exclude_empty: false
-  submission_exclude_empty_checkbox: false
   previous_submission_message: ''
   previous_submissions_message: ''
   autofill: false
@@ -96,13 +177,13 @@ settings:
   wizard_progress_percentage: false
   wizard_progress_link: false
   wizard_progress_states: false
-  wizard_auto_forward: true
-  wizard_auto_forward_hide_next_button: false
-  wizard_keyboard: true
   wizard_start_label: ''
   wizard_preview_link: false
   wizard_confirmation: true
   wizard_confirmation_label: ''
+  wizard_auto_forward: true
+  wizard_auto_forward_hide_next_button: false
+  wizard_keyboard: true
   wizard_track: ''
   wizard_prev_button_label: ''
   wizard_next_button_label: ''
@@ -125,9 +206,9 @@ settings:
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
   confirmation_type: inline
+  confirmation_url: ''
   confirmation_title: ''
   confirmation_message: "<p>Merci, votre demande a bien été prise en compte.</p>\r\n"
-  confirmation_url: ''
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -154,6 +235,7 @@ settings:
   results_customize: false
   token_view: false
   token_update: false
+  token_delete: false
   serial_disabled: false
 access:
   create:
@@ -205,9 +287,9 @@ access:
 handlers:
   email:
     id: email
+    handler_id: email
     label: Email
     notes: ''
-    handler_id: email
     status: true
     conditions: {  }
     weight: 0
@@ -216,13 +298,17 @@ handlers:
         - completed
       to_mail: violaine.auge@orange.com
       to_options: {  }
-      cc_mail: ''
-      cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
       from_mail: no-reply@orange-business.com
       from_options: {  }
       from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
       subject: 'Portail orange business : vous avez un nouveau contact'
       body: "<p>Bonjour,</p>\r\n\r\n<p>Une nouvelle demande de contact a été saisie sur le portail orange-business.com.</p>\r\n\r\n<p>Bien cordialement,</p>\r\n\r\n<p>L'équipe Digitale</p>"
       excluded_elements:
@@ -244,18 +330,14 @@ handlers:
       html: true
       attachments: false
       twig: false
-      debug: false
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
       theme_name: ''
       parameters: {  }
+      debug: false
   email_1:
     id: email
+    handler_id: email_1
     label: Email
     notes: ''
-    handler_id: email_1
     status: true
     conditions: {  }
     weight: 0
@@ -264,13 +346,17 @@ handlers:
         - completed
       to_mail: cyrielle.ramage@orange.com
       to_options: {  }
-      cc_mail: ''
-      cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
       from_mail: no-reply@orange-business.com
       from_options: {  }
       from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
       subject: 'Portail orange business : vous avez un nouveau contact'
       body: "<p>Bonjour,</p>\r\n\r\n<p>Une nouvelle demande de contact a été saisie sur le portail orange-business.com.</p>\r\n\r\n<p>Bien cordialement,</p>\r\n\r\n<p>L'équipe Digitale</p>"
       excluded_elements:
@@ -292,18 +378,14 @@ handlers:
       html: true
       attachments: false
       twig: false
-      debug: false
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
       theme_name: ''
       parameters: {  }
+      debug: false
   email_2:
     id: email
+    handler_id: email_2
     label: Email
     notes: ''
-    handler_id: email_2
     status: true
     conditions: {  }
     weight: 2
@@ -312,13 +394,17 @@ handlers:
         - completed
       to_mail: pauline.demaleville@orange.com
       to_options: {  }
-      cc_mail: ''
-      cc_options: {  }
       bcc_mail: ''
       bcc_options: {  }
+      cc_mail: ''
+      cc_options: {  }
       from_mail: no-reply@orange-business.com
       from_options: {  }
       from_name: _default
+      reply_to: ''
+      return_path: ''
+      sender_mail: ''
+      sender_name: ''
       subject: 'Portail orange business : vous avez un nouveau contact'
       body: "<p>Bonjour,</p>\r\n\r\n<p>Une nouvelle demande de contact a été saisie sur le portail orange-business.com.</p>\r\n\r\n<p>Bien cordialement,</p>\r\n\r\n<p>L'équipe Digitale</p>"
       excluded_elements:
@@ -340,11 +426,7 @@ handlers:
       html: true
       attachments: false
       twig: false
-      debug: false
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
       theme_name: ''
       parameters: {  }
+      debug: false
 variants: {  }

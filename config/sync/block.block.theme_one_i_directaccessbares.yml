@@ -12,22 +12,22 @@ dependencies:
 id: theme_one_i_directaccessbares
 theme: theme_one_i
 region: prefooter
-weight: -38
+weight: -54
 provider: null
 plugin: 'system_menu_block:direct-access-bar-es'
 settings:
   id: 'system_menu_block:direct-access-bar-es'
   label: 'Direct Access Bar ES'
-  provider: system
   label_display: '0'
+  provider: system
   level: 1
   depth: 0
   expand_all_items: false
 visibility:
   language:
     id: language
-    langcodes:
-      es: es
     negate: false
     context_mapping:
       language: '@language.current_language_context:language_interface'
+    langcodes:
+      es: es

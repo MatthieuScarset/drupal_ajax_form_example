@@ -49,8 +49,7 @@ function gdpr_is_webform_authorized(Drupal\webform\Entity\Webform $entity, $oper
         ##Je recupère la liste des business analysts du formulaire pour checker que les utilisateurs en font partis
         $business_analaysts_list = $entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_business_analysts');
 
-        if (array_key_exists($account->id(), $business_analaysts_list)) {
-
+        if (is_array($business_analaysts_list) && array_key_exists($account->id(), $business_analaysts_list)) {
             return Drupal\Core\Access\AccessResult::allowed();
         }
 
@@ -516,7 +515,6 @@ function gdpr_hook_form_alter(&$form, $form_state, $form_id) {
             array_slice($old_submit, count($old_submit) - 1, count($old_submit) - 1, true);
 
         $form['actions']['submit']['#submit'] = array_values($submit);
-        $form['#validate'][] = '_oab_webform_gdpr_validate';
     }
 }
 

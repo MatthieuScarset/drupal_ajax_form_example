@@ -1,0 +1,32 @@
+uuid: dea8da4c-bf31-4f1c-9030-21c373c1ae4f
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.titre_and_description.field_accroche
+    - field.field.paragraph.titre_and_description.field_title
+    - paragraphs.paragraphs_type.titre_and_description
+id: paragraph.titre_and_description.default
+targetEntityType: paragraph
+bundle: titre_and_description
+mode: default
+content:
+  field_accroche:
+    type: string_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 2
+      placeholder: ''
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
