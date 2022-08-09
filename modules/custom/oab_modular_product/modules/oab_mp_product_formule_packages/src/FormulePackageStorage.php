@@ -74,7 +74,7 @@ class FormulePackageStorage extends SqlContentEntityStorage implements FormulePa
    * @param string|null $bundle
    */
   public function getFromFieldValue(array $values, string $bundle = null): array {
-    return $this->getBaseQuery($values, $bundle)->execute()->fetchAllKeyed();
+    return $this->getBaseQuery($values, $bundle)->execute()->fetchAllAssoc('id');
   }
 
 }

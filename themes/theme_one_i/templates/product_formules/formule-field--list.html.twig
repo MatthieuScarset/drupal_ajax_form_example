@@ -1,12 +1,19 @@
 
-{% set input_name = "radio-" ~ id %}
+{% set randomized_id = id ~ "_" ~ random() %}
+{% set input_name = "radio-" ~ randomized_id %}
 
-<div class="formule-field field--list" id="{{ "formule-field-list-" ~ id }}" data-type="list" data-target="{{ id }}" data-input-name="{{ input_name }}">
+<div class="formule-field field--list" id="{{ "formule-field-list-" ~ randomized_id }}" data-type="list" data-target="{{ id }}" data-input-name="{{ input_name }}">
 
-  <span class="h1">{{ display_label }}</span>
-  <p>{{ description }}</p>
+  <div class="container">
+    <div class="row">
+      <div class="col-8 p-0">
+        <span class="h3">{{ display_label }}</span>
+        <p>{{ description }}</p>
+      </div>
+    </div>
+  </div>
 
-  <ul class="items-list" data-ob1-component="FilterChipsBar" aria-label="{{ "List of choices for @label"|t({'@label': id}) }}">
+  <ul class="items-list" aria-label="{{ "List of choices for @label"|t({'@label': id}) }}">
     {% for choice, choice_label in choices %}
       {{ _self.input(choice, choice_label, input_name) }}
     {% endfor %}
@@ -19,8 +26,10 @@
 
 
 {% macro input(value, label, name) %}
-  {% set input_id = "formule-field-chips-" ~ value %}
-  {% set input_label_id = "formule-field-chips-label-" ~ value %}
+
+  {% set randomized_input = "-" ~ random() %}
+  {% set input_id = "formule-field-chips-" ~ value ~ randomized_input  %}
+  {% set input_label_id = "formule-field-chips-label-" ~ value ~ randomized_input %}
 
   <li>
     <div class="items-list-item">
