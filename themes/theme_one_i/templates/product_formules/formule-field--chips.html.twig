@@ -1,8 +1,15 @@
 
 <div class="formule_field" data-formule-field="{{ id }}">
 
-  <span class="h1">{{ display_label }}</span>
-  <p>{{ description }}</p>
+  <div class="container">
+    <div class="row">
+      <div class="col-8 p-0">
+        <span class="h3">{{ display_label }}</span>
+        <p>{{ description }}</p>
+      </div>
+    </div>
+  </div>
+
 
   <ul class="ob1-filter-chips-bar" data-ob1-component="FilterChipsBar" aria-label="Liste des filtres pour restreindre la liste de résultats">
     {% for choice, choice_label in choices %}

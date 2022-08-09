@@ -13,27 +13,11 @@ function oab_ckeditor_editor_js_settings_alter(array &$settings) {
     /** @var ExtensionPathResolver $service_path_resolver */
     $service_path_resolver = \Drupal::service('extension.path.resolver');
 
-    $config = base_path() . $service_path_resolver->getPath('module', 'oab_ckeditor') . '/js/custom_config.js';
 
-    $current_path = \Drupal::service('path.current')->getPath();
-    $args = explode('/', $current_path);
+
     if (\Drupal::service('router.admin_context')->isAdminRoute()) {
-      if ($args['2'] == "add") {
-        $nodetype = $args['3'];
-      }
-      else {
-        if ($noeud = Node::load($args['2'])) {
-          $nodetype = $noeud->getType();
-        }
-      }
-      if (isset($nodetype) && !empty($nodetype)) {
-        if ($nodetype == 'region') {
-          $config = base_path() . $service_path_resolver->getPath('module', 'oab_ckeditor') . '/js/custom_config_region.js';
-        }
-        elseif ($nodetype == 'country') {
-          $config = base_path() . $service_path_resolver->getPath('module', 'oab_ckeditor') . '/js/custom_config_country.js';
-        }
-      }
+      $config = base_path() . $service_path_resolver->getPath('module', 'oab_ckeditor') . '/js/custom_config.js';
+
       $settings['editor']['formats']['full_html']['editorSettings']['customConfig'] = $config;
       $settings['editor']['formats']['full_html']['editorSettings']['drupalExternalPlugins']['basewidget'] =
         base_path() . $service_path_resolver->getPath('module', 'oab_ckeditor') . '/js/plugins/basewidget/plugin.js';

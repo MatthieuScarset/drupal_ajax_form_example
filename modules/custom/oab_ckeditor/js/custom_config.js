@@ -13,6 +13,5 @@ CKEDITOR.editorConfig = function(config) {
     delete CKEDITOR.config.coreStyles_italic;
 
     CKEDITOR.config.embed_provider = '//iframe.ly/api/oembed?url={url}&callback={callback}&api_key=999d16e5ad074182bbe882';
-    CKEDITOR.config.removePlugins = 'offices_map';
     /*CKEDITOR.config.removePlugins = 'drupallink';*/
 };

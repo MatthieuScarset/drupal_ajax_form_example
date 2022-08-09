@@ -1,5 +1,7 @@
 {% if 1 == items|length %}
-  <div class="field-items-modules">{{ items }}</div>
+  {% for item in items %}
+    <div class="field-items-modules">{{ item.content }}</div>
+  {% endfor %}
 {% else %}
   <div class="field-items-modules slider-container row">
     {% for item in items %}
