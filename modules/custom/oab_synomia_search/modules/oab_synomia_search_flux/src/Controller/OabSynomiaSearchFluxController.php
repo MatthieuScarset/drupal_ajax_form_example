@@ -21,7 +21,7 @@ class OabSynomiaSearchFluxController extends ControllerBase
 {
 
   /** Méthode appelée pour l'onglet Global Settings de la partie BO */
-  public function viewFlux($type_flux = 'default', Request $request) {
+  public function viewFlux(Request $request, $type_flux = 'default') {
 
         $response = new Response();
         $parameters = UrlHelper::filterQueryParameters(\Drupal::request()->query->all());
@@ -143,7 +143,7 @@ class OabSynomiaSearchFluxController extends ControllerBase
       //on récupère la configuration oab_synomia_search.synomia.contentTypes
       $config = $config_factory->get('oab_synomia_search.synomia.contentTypes');
       //on charge la liste des types de contenus
-      $content_types = \Drupal::service('entity.manager')->getStorage('node_type')->loadMultiple();
+      $content_types = \Drupal::service('entity_type.manager')->getStorage('node_type')->loadMultiple();
       foreach ($content_types as $content_type) {
         $value = $config->get($content_type->id());
         if (isset($value) && $value == "1") {
