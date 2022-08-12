@@ -5,3 +5,5 @@ order_content_types_ru: 'product, solution, industry, customer_story, partner, p
 order_content_types_ru-en: 'product, solution, industry, customer_story, partner, press_release, press_kit, document, blog_post, magazine, full_html'
 order_content_types_pt-br: 'product, region, country, solution, industry, customer_story, partner, press_release, press_kit, document, blog_post, magazine, full_html'
 order_content_types_es: 'product, region, country, solution, industry, customer_story, partner, press_release, press_kit, document, blog_post, magazine, full_html'
+order_content_types_ja: ''
+order_typology_mss_assistance: 'article, video, support_topics'
