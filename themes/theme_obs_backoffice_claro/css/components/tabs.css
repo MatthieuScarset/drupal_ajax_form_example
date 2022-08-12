@@ -1,0 +1,50 @@
+.tabs__link:focus {
+  border: 3px solid #f16e00;
+}
+
+.tabs__link.is-active {
+  color: #f16e00;
+}
+
+[dir="rtl"] .tabs__link.is-active:focus {
+  border-left: 3px solid #f16e00;
+}
+
+.tabs__tab.is-active::before {
+  border-left: 3px solid #f16e00; /* LTR */
+}
+
+[dir="rtl"] .tabs__tab.is-active::before {
+  border-right: 3px solid #f16e00;
+}
+
+.tabs__trigger:focus {
+  border: 3px solid #f16e00;
+  border-radius: 2px;
+  box-shadow: none;
+}
+
+@media screen and (min-width: 48em) {
+
+  .is-horizontal .tabs__link:focus {
+    color: #232429;
+    border: none;
+    border-radius: 2px 2px 0 0;
+    outline: 2px dotted transparent;
+    box-shadow: 0 0 0 2px #fff, 0 0 0 5px #f16e00;
+  }
+  [dir="rtl"] .is-horizontal .tabs__link:focus {
+    border: none;
+  }
+  .is-horizontal .tabs--primary .tabs__link:focus {
+    box-shadow: 0 0 0 2px #f3f4f9, 0 0 0 5px #f16e00;
+  }
+
+  .is-horizontal .tabs__link:hover {
+    color: #f16e00;
+  }
+
+  .is-horizontal .tabs__link.is-active::before {
+    border-bottom: 3px solid #f16e00;
+  }
+}

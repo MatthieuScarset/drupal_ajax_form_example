@@ -3,10 +3,21 @@ global-styling:
   css:
     base:
       css/base/style.css: {}
+      css/base/elements.css: {}
     component:
       css/components/details.css: {}
       css/components/vertical-tabs.css: {weight: 50}
       css/components/form.css: {}
+      css/components/dropbutton.css: {}
+      css/components/tabs.css: {}
+      css/components/button.css: {}
+      css/components/pager.css: {}
+      css/components/tables.css: {}
+      css/components/form--text.css: {}
+      css/components/form--checkbox-radio.css: {}
+      css/components/dialog.css: {}
+    theme:
+      css/theme/toolbar.theme.css: {}
   dependencies:
     - claro/global-styling
     - system/admin
@@ -23,12 +34,10 @@ node-form:
   version: VERSION
   css:
     layout:
-      css/layout/node-add.css: { }
+      css/layout/node-add.css: {}
 
 neon:
   version: VERSION
   css:
     base:
       css/base/neon.css: {}
-
-

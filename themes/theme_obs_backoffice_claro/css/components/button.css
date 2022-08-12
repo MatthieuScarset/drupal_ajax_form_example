@@ -1,0 +1,13 @@
+.button--primary {
+  color: #fff;
+  background-color: #000;
+}
+
+.button--primary:hover {
+  color: #fff;
+  background-color: #555;
+}
+
+.button--primary:active {
+  background-color: #f16e00;
+}

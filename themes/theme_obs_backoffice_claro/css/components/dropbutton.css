@@ -1,0 +1,7 @@
+.js .dropbutton-wrapper.open .dropbutton-widget ul li {
+  max-width: none;
+}
+
+.dropbutton__item:first-of-type > :focus:hover, .dropbutton__item:first-of-type > .button:focus:hover {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 5px #f16000;
+}

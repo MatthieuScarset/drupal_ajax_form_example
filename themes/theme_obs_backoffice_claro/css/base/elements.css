@@ -1,0 +1,19 @@
+a,
+.link {
+  color: #f16e00;
+}
+
+a:hover,
+.link:hover {
+  color: #f16e00;
+}
+
+a:active,
+.link:active {
+  color: #f16e00;
+}
+
+.page-wrapper *:focus,
+.ui-dialog *:focus {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 5px transparent;
+}

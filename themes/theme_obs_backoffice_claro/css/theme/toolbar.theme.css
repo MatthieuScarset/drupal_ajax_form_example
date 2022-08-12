@@ -1,0 +1,71 @@
+.toolbar {
+  font-family: "Helvetica Neue", "HelvNeueOrange", Arial, Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI",
+  Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+  "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.toolbar .toolbar-tray,
+.toolbar-tray-horizontal .menu-item--expanded,
+.toolbar .toolbar-menu {
+  background-color: white;
+}
+
+.toolbar-tray a {
+  color: black;
+}
+
+.toolbar-tray-horizontal .menu-item a:focus {
+  background-color: transparent;
+  color: #f16e00;
+}
+
+.toolbar-tray-horizontal .menu-item {
+  background-color: transparent;
+  color: #f16e00;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.toolbar-tray-horizontal .menu-item li.hover-intent > a {
+  color: #f16e00;
+  border-bottom: none;
+}
+
+.toolbar-tray-horizontal .menu-item li {
+  padding-right: revert;
+  padding-left: revert;
+  border-left: 1px solid #ddd !important;
+  border-right: 1px solid #ddd !important;
+}
+
+.toolbar-tray-horizontal li.hover-intent > a {
+  color: #f16e00;
+  border-bottom: 4px solid #f16e00;
+}
+
+.toolbar-tray a:hover,
+.toolbar .toolbar-tray a.is-active {
+  color: #f16e00;
+  border-bottom: 4px solid #f16e00;
+  text-decoration: none;
+
+}
+
+.toolbar .toolbar-menu .toolbar-menu a:hover {
+  color: #f16e00;
+  border-bottom: none;
+  text-decoration: none;
+  box-shadow: 2px 4px 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.toolbar .toolbar-menu .toolbar-menu a:focus {
+  color: #f16e00;
+}
+
+.toolbar .toolbar-menu .toolbar-menu a.is-active {
+  border-bottom: none;
+}
+
+
