@@ -74,7 +74,7 @@ services:
       volumes:
         - .:/application
         - ./config/docker/local/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
-        - ${DRUPAL_SITES_DIR:-./sites}:/application/sites
+        - ${DRUPAL_SITES_FILES_DIR:-./sites/default/files}:/application/sites/default/files
       networks:
         - proxy
         - database
