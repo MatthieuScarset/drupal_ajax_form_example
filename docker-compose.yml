@@ -6,6 +6,8 @@ services:
     memcached:
       image: memcached:alpine
       container_name: $CONTAINER_MEMCACHED
+      networks:
+        - memcached
 
     mailhog:
       image: mailhog/mailhog:latest
@@ -77,8 +79,10 @@ services:
         - proxy
         - database
         - mailhog
+        - memcached
 
 networks:
     proxy:
     database:
     mailhog:
+    memcached:
