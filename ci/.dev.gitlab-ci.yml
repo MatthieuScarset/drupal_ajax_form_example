@@ -10,7 +10,7 @@ variables:
   DOCKER_COMPOSE_FILE: "$CI_PROJECT_PATH/docker-compose.yml"
   SSH_COMMAND: "ssh -o StrictHostKeyChecking=no $SSH_USER@$SERVER_IP"
   EXEC_PHP_FPM: "$SSH_COMMAND docker exec ruby_php-fpm"
-  ENV_FILE: "$CI_PROJECT_PATH/../shared/.env-dev"
+  SHARED_DIR: "$CI_PROJECT_PATH/../shared/"
   SERVER_IP: $SSH_DEV_IP
 
 
@@ -48,8 +48,8 @@ Deploy dev:
 Build drupal:
   stage: build
   script:
-    - $SSH_COMMAND cp $ENV_FILE $CI_PROJECT_PATH/.env
-    - $SSH_COMMAND cp settings.local.php $CI_PROJECT_PATH/sites/default/
+    - $SSH_COMMAND cp $SHARED_DIR/.env-dev $CI_PROJECT_PATH/.env
+    - $SSH_COMMAND cp $SHARED_DIR/settings.local.php $CI_PROJECT_PATH/sites/default/
     - $SSH_COMMAND docker-compose -f $DOCKER_COMPOSE_FILE --env-file $CI_PROJECT_PATH/.env up -d
     - $EXEC_PHP_FPM composer install
   rules:
