@@ -60,19 +60,22 @@ function oab_siu_connexion__saml_authenticate($is_valid, Response $saml_response
 
   $email = '';
   $success = FALSE;
+
   // Try to get email from SAML response attributes.
-  if (!empty($attributes['Mail']) && !empty($attributes['Mail'][0])) {
-    $email = $attributes['Mail'][0];
+  if (!empty($attributes['mail']) && !empty($attributes['mail'][0])) {
+    $email = $attributes['mail'][0];
     $users = \Drupal::entityTypeManager()->getStorage('user')
       ->loadByProperties(['mail' => $email]);
+
     /** @var User $user */
     $user = $users ? reset($users) : FALSE;
+
     if(!$user) {
       //le user n'existe pas, on le crée
 
       //on récupère les infos de SAML
-      $lastname = (!empty($attributes['Lastname']) && !empty($attributes['Lastname'][0])) ? $attributes['Lastname'][0] : '';
-      $firstname = (!empty($attributes['Firstname']) && !empty($attributes['Firstname'][0])) ? $attributes['Firstname'][0] : '';
+      $lastname = (!empty($attributes['LastName']) && !empty($attributes['LastName'][0])) ? $attributes['LastName'][0] : '';
+      $firstname = (!empty($attributes['FirstName']) && !empty($attributes['FirstName'][0])) ? $attributes['FirstName'][0] : '';
 
       //l'utilisateur n'est pas trouvé, on le crée
       $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
