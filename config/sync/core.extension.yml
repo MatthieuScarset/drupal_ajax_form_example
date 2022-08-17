@@ -160,7 +160,6 @@ module:
   xmlsitemap_engines: 0
   oab_password_policy_alter: 5
   content_translation: 10
-  externalauth: 10
   password_policy: 10
   paragraphs: 11
   oab_eddy: 30
