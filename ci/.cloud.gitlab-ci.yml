@@ -18,7 +18,7 @@ include:
 variables:
   DOCKER_COMPOSE_PATH: "$CI_PROJECT_PATH/$DOCKER_COMPOSE_FILE"
   SSH_COMMAND: "ssh -o StrictHostKeyChecking=no $SSH_USER@$SERVER_IP"
-  EXEC_PHP_FPM: "$SSH_COMMAND docker exec ruby_php-fpm"
+  EXEC_PHP_FPM: "$SSH_COMMAND docker exec ${CONTAINER_FPM:-ruby_php-fpm}"
   ENV_FILE: "$CI_PROJECT_PATH/../shared/.env-dev"
 
 
