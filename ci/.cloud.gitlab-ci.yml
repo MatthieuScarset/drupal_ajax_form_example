@@ -46,7 +46,7 @@ Deploy dev:
   script:
     - |
       $SSH_COMMAND "
-        [ -f DOCKER_COMPOSE_PATH ] && docker compose -f DOCKER_COMPOSE_PATH down;
+        [ -f $DOCKER_COMPOSE_PATH ] && docker compose -f $DOCKER_COMPOSE_PATH down;
         [ -d $CI_PROJECT_PATH ] && rm -r $CI_PROJECT_PATH;
         mkdir -p $CI_PROJECT_PATH"
     - scp -r $(pwd)/* $SSH_USER@$SERVER_IP:$CI_PROJECT_PATH
@@ -56,7 +56,7 @@ Build drupal:
   stage: build
   script:
     - $SSH_COMMAND cp $ENV_FILE $CI_PROJECT_PATH/.env
-    - $SSH_COMMAND docker compose -f DOCKER_COMPOSE_PATH --env-file $CI_PROJECT_PATH/.env up -d
+    - $SSH_COMMAND docker compose -f $DOCKER_COMPOSE_PATH --env-file $CI_PROJECT_PATH/.env up -d
     - $EXEC_PHP_FPM composer install
 
 
