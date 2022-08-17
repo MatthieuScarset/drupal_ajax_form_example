@@ -1,11 +1,14 @@
 contact:
-technical:
-name: ''
-email: ''
-support:
+  technical:
+    name: ''
+    email: ''
+  support:
+    name: ''
+    email: ''
 organization:
-display_name: ''
-url: ''
+  name: ''
+  display_name: ''
+  url: ''
 strict: true
 security:
 nameIdEncrypted: false
