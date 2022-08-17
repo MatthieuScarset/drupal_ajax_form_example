@@ -19,7 +19,7 @@ variables:
   DOCKER_COMPOSE_PATH: "$CI_PROJECT_PATH/$DOCKER_COMPOSE_FILE"
   SSH_COMMAND: "ssh -o StrictHostKeyChecking=no $SSH_USER@$SERVER_IP"
   EXEC_PHP_FPM: "$SSH_COMMAND docker exec ${CONTAINER_FPM}"
-  ENV_FILE: "$CI_PROJECT_PATH/../shared/.env-dev"
+  SHARED_DIR: "$CI_PROJECT_PATH/../shared"
 
 
 before_script:
@@ -55,7 +55,7 @@ Deploy dev:
 Build drupal:
   stage: build
   script:
-    - $SSH_COMMAND cp $ENV_FILE $CI_PROJECT_PATH/.env
+    - $SSH_COMMAND cp $SHARED_DIR/.env-dev $CI_PROJECT_PATH/.env
     - $SSH_COMMAND cp $SHARED_DIR/settings.local.php $CI_PROJECT_PATH/sites/default/
     - $SSH_COMMAND docker compose -f $DOCKER_COMPOSE_PATH --env-file $CI_PROJECT_PATH/.env up -d
     - $EXEC_PHP_FPM composer install
