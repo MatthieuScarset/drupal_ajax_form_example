@@ -1,5 +1,5 @@
 .toolbar {
-  font-family: "Helvetica Neue", "HelvNeueOrange", Arial, Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI",
+  font-family: "HelvNeueOrange", "Helvetica Neue", Arial, Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI",
   Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
   "Segoe UI Symbol", "Noto Color Emoji";
 }
@@ -12,6 +12,7 @@
 
 .toolbar-tray a {
   color: black;
+  border-bottom: 4px solid transparent;
 }
 
 .toolbar-tray-horizontal .menu-item a:focus {
@@ -22,8 +23,8 @@
 .toolbar-tray-horizontal .menu-item {
   background-color: transparent;
   color: #f16e00;
-  padding-right: 1rem;
-  padding-left: 1rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
   border-left: none !important;
   border-right: none !important;
 }
@@ -34,8 +35,8 @@
 }
 
 .toolbar-tray-horizontal .menu-item li {
-  padding-right: revert;
-  padding-left: revert;
+  margin-right: revert;
+  margin-left: revert;
   border-left: 1px solid #ddd !important;
   border-right: 1px solid #ddd !important;
 }

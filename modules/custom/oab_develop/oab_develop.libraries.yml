@@ -7,3 +7,9 @@ oab_develop.global:
     - core/jquery.once
     - core/drupal
     - core/drupalSettings
+
+admin_toolbar_extends:
+  version: VERSION
+  css:
+    theme:
+      css/admin-toolbar-extends.css: {weight: 1000}
