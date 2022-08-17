@@ -1,13 +1,13 @@
 services:
   oab_siu_connexion.authentication.siu_authentication_provider:
     class: Drupal\oab_siu_connexion\Authentication\SIUAuthenticationProvider
-    arguments: ['@current_user', '@path.current', '@oab_siu_connexion.settings', '@session_configuration']
+    arguments: ['@current_user', '@path.current', '@oab_siu_connexion.service', '@session_configuration']
     tags:
       - { name: authentication_provider, provider_id: 'siu_authentication_provider', priority: 101 }
 
   oab_siu_connexion.page_cache_request_policy.disallow_siu_authentication_requests:
     class: Drupal\oab_siu_connexion\PageCache\DisallowSIUAuthenticationRequests
-    arguments: ['@current_user', '@path.current', '@oab_siu_connexion.settings', '@session_configuration']
+    arguments: ['@current_user', '@path.current', '@oab_siu_connexion.service', '@session_configuration']
     public: false
     tags:
       - { name: page_cache_request_policy }
@@ -17,6 +17,6 @@ services:
     factory: config.factory:get
     arguments: ['oab_siu_connexion.settings']
 
-  oab_siu_connexion.settings:
+  oab_siu_connexion.service:
     class: \Drupal\oab_siu_connexion\Services\OabSIUConnexionService
-    arguments: ['@oab_siu_connexion.conf_settings']
+    arguments: ['@oab_siu_connexion.conf_settings', '@plugin.manager.condition']

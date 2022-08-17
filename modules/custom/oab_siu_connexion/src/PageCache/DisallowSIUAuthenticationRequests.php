@@ -2,6 +2,7 @@
 
 namespace Drupal\oab_siu_connexion\PageCache;
 
+use Drupal\Core\Condition\ConditionManager;
 use Drupal\Core\PageCache\RequestPolicyInterface;
 use Drupal\Core\Path\CurrentPathStack;
 use Drupal\Core\Session\AccountInterface;
@@ -21,13 +22,14 @@ class DisallowSIUAuthenticationRequests implements RequestPolicyInterface {
   /**
    * @param \Drupal\Core\Session\AccountInterface $currentUser
    * @param \Drupal\Core\Path\CurrentPathStack $currentPath
-   * @param \Drupal\oab_siu_connexion\Services\OabSIUConnexionService $SIUConnexionService
+   * @param \Drupal\oab_siu_connexion\Services\OabSIUConnexionService $siuConnexionService
    * @param \Drupal\Core\Session\SessionConfigurationInterface $sessionConfiguration
    */
   public function __construct(protected AccountInterface              $currentUser,
                               protected CurrentPathStack              $currentPath,
-                              protected OabSIUConnexionService        $SIUConnexionService,
-                              protected SessionConfigurationInterface $sessionConfiguration) {
+                              protected OabSIUConnexionService        $siuConnexionService,
+                              protected SessionConfigurationInterface $sessionConfiguration
+  ) {
 
   }
 
@@ -36,8 +38,9 @@ class DisallowSIUAuthenticationRequests implements RequestPolicyInterface {
    */
   public function check(Request $request) {
     $hasSession = $request->hasSession() && $this->sessionConfiguration->hasSession($request);
-    $restrictedUrls = $this->SIUConnexionService->getSIURestrictedURL();
-    if( in_array($this->currentPath?->getPath($request), $restrictedUrls) && !$this->currentUser?->isAuthenticated() && !$hasSession){
+
+
+    if($this->siuConnexionService->isCurrentPageAllowed() && !$this->currentUser?->isAuthenticated() && !$hasSession){
       return self::DENY;
     }
   }

@@ -3,6 +3,7 @@
 namespace Drupal\oab_siu_connexion\Authentication;
 
 use Drupal\Core\Authentication\AuthenticationProviderInterface;
+use Drupal\Core\Condition\ConditionManager;
 use Drupal\Core\Path\CurrentPathStack;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
@@ -15,41 +16,33 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SIUAuthenticationProvider implements AuthenticationProviderInterface {
 
- /**
+  /**
    * @param \Drupal\Core\Session\AccountInterface $currentUser
    * @param \Drupal\Core\Path\CurrentPathStack $currentPath
-   * @param \Drupal\oab_siu_connexion\Services\OabSIUConnexionService $SIUConnexionService
+   * @param \Drupal\oab_siu_connexion\Services\OabSIUConnexionService $siuConnexionService
    * @param \Drupal\Core\Session\SessionConfigurationInterface $sessionConfiguration
    */
-  public function __construct(protected AccountInterface $currentUser,
-                              protected CurrentPathStack $currentPath,
-                              protected OabSIUConnexionService $SIUConnexionService,
-                              protected SessionConfigurationInterface $sessionConfiguration) {
-    /*$this->currentUser = $current_user;
-    $this->currentPath = $current_path;
-    $thi $SIUConnexionService = $siu_connexion_service;
-    $this->sessionConfiguration = $session_configuration;
-*/
+  public function __construct(protected AccountInterface              $currentUser,
+                              protected CurrentPathStack              $currentPath,
+                              protected OabSIUConnexionService        $siuConnexionService,
+                              protected SessionConfigurationInterface $sessionConfiguration,) {
   }
 
   /**
    * {@inheritdoc}
    */
   public function applies(Request $request) {
-    //on récupère les URL protégées par SIU (conf)
+
     $hasSession = $request->hasSession() && $this->sessionConfiguration->hasSession($request);
-    $restrictedUrls = $this->SIUConnexionService->getSIURestrictedURL();
-    if( in_array($this->currentPath->getPath($request), $restrictedUrls) && !$this->currentUser->isAuthenticated() && !$hasSession){
-      return TRUE;
-    }
-    return FALSE;
+
+    return $this->siuConnexionService->isCurrentPageAllowed() && !$this->currentUser->isAuthenticated() && !$hasSession;
   }
 
   /**
    * {@inheritdoc}et
    */
   public function authenticate(Request $request) {
-      $idp = $this->SIUConnexionService->getIDPConnexion();
+      $idp = $this->siuConnexionService->getIDPConnexion();
       if(!empty($idp)) {
         $url = Url::fromRoute('oab_siu_connexion.login', ['idp' => $idp, 'returnTo' => $request->getRequestUri()]);
         $redirect = new RedirectResponse($url->toString(), 302);

@@ -44,8 +44,8 @@ class SIUConnexionSettingsForm extends ConfigFormBase {
     $form['siu_restricted_urls'] = [
       '#type' => 'textarea',
       '#title' => t('List URLs to block with SIU Access'),
-      '#description' => t('Specify pages by using their paths. Enter one path per line.'),
-      '#default_value' => implode(PHP_EOL, $conf->get('siu_restricted_urls') ?? []) ?? ''
+      '#description' => t("Specify pages by using their paths. Enter one path per line. The '*' character is a wildcard. An example path is /user/* for every user page. <front> is the front page."),
+      '#default_value' => $conf->get('siu_restricted_urls') ?? ''
     ];
 
     return parent::buildForm($form, $form_state);
@@ -53,16 +53,9 @@ class SIUConnexionSettingsForm extends ConfigFormBase {
 
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
-
-    $access_siu_urls = $form_state->getValue('siu_restricted_urls');
-    $url_to_save = [];
-    $url_elems = array_filter(array_map('trim', explode("\n", $access_siu_urls)));
-    foreach ($url_elems as $url) {
-      $url_to_save[] = $url;
-    }
     $config = $this->config($this->getConfigName());
     $config->set('idp', $form_state->getValue('idp'));
-    $config->set('siu_restricted_urls', $url_to_save);
+    $config->set('siu_restricted_urls', $form_state->getValue('siu_restricted_urls'));
     $config->save();
     parent::submitForm($form, $form_state);
   }
