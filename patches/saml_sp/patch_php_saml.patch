@@ -1,0 +1,15 @@
+diff --git a/src/Saml2/Utils.php b/src/Saml2/Utils.php
+--- a/src/Saml2/Utils.php
++++ b/src/Saml2/Utils.php
+@@ -599,7 +599,10 @@
+      */
+     public static function isHTTPS()
+     {
+-        return self::getSelfProtocol() == 'https';
++//        return self::getSelfProtocol() == 'https';
++
++      // Force it as https
++      return true;
+     }
+ 
+     /**

@@ -167,6 +167,12 @@
             },
             "drupal/core": {
                 "Fix LatestRevisionCheck": "https://www.drupal.org/files/issues/2019-10-21/LatestRevisionCheck-13092187-24.patch"
+            },
+            "drupal/saml_sp": {
+                "Adapt contrib module to our needs": "patches/saml_sp/patch_saml_sp.patch"
+            },
+            "onelogin/php-saml": {
+                "Force https when recreating URL": "patches/saml_sp/patch_php_saml.patch"
             }
 		}
 	}
