@@ -166,7 +166,8 @@
                 "Fix getVocabularyId deprecated": "patches/tac_lite/rectif_deprecated_vocabularyId.patch"
             },
             "drupal/core": {
-                "Fix LatestRevisionCheck": "https://www.drupal.org/files/issues/2019-10-21/LatestRevisionCheck-13092187-24.patch"
+                "Fix LatestRevisionCheck": "https://www.drupal.org/files/issues/2019-10-21/LatestRevisionCheck-13092187-24.patch",
+                "Give current request to RequestPath Condition when it call too soon": "patches/saml_sp/patch_core_system_requestpath.patch"
             },
             "drupal/saml_sp": {
                 "Adapt contrib module to our needs": "patches/saml_sp/patch_saml_sp.patch"

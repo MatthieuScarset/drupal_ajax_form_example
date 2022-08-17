@@ -40,7 +40,7 @@ class DisallowSIUAuthenticationRequests implements RequestPolicyInterface {
     $hasSession = $request->hasSession() && $this->sessionConfiguration->hasSession($request);
 
 
-    if($this->siuConnexionService->isCurrentPageAllowed() && !$this->currentUser?->isAuthenticated() && !$hasSession){
+    if($this->siuConnexionService->isCurrentPageAllowed($this->currentPath->getPath($request)) && !$this->currentUser?->isAuthenticated() && !$hasSession){
       return self::DENY;
     }
   }

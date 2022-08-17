@@ -20,10 +20,14 @@ class OabSIUConnexionService {
     return $this->get("siu_restricted_urls");
   }
 
-  public function isCurrentPageAllowed(): bool {
+  public function isCurrentPageAllowed(string $path = null): bool {
     $plugin_conf = [
       'pages' => $this->getSIURestrictedURL() ?? ''
     ];
+
+    if ($path) {
+      $plugin_conf['current_path'] = $path;
+    }
 
     /** @var \Drupal\system\Plugin\Condition\RequestPath $path_condition */
     $path_condition = $this->conditionManager->createInstance('request_path', $plugin_conf);
