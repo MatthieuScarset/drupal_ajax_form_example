@@ -9,8 +9,8 @@ id: paragraph.module_detail_offre_items.field_formule
 field_name: field_formule
 entity_type: paragraph
 bundle: module_detail_offre_items
-label: Formule
-description: ''
+label: 'Offre du configurateur'
+description: 'Entrez le nom de l''offre / formule  associée au configurateur d''offres'
 required: true
 translatable: false
 default_value: {  }

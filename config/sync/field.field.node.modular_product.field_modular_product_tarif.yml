@@ -9,8 +9,8 @@ id: node.modular_product.field_modular_product_tarif
 field_name: field_modular_product_tarif
 entity_type: node
 bundle: modular_product
-label: 'Product Tarif'
-description: ''
+label: Prix
+description: Optionnel
 required: false
 translatable: false
 default_value: {  }

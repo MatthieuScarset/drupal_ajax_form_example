@@ -9,7 +9,7 @@ id: paragraph.module_detail_offre_items.field_accroche
 field_name: field_accroche
 entity_type: paragraph
 bundle: module_detail_offre_items
-label: 'Description formule'
+label: 'Description de l''offre'
 description: ''
 required: true
 translatable: true

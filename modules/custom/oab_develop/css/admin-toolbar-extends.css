@@ -15,6 +15,18 @@
   border-bottom: 4px solid transparent;
 }
 
+.toolbar-tray a:hover,
+.toolbar .toolbar-tray a.is-active {
+  color: #f16e00;
+  border-bottom: 4px solid #f16e00;
+  text-decoration: none;
+}
+
+.toolbar-tray-horizontal li.hover-intent > a {
+  color: #f16e00;
+  border-bottom: 4px solid #f16e00;
+}
+
 .toolbar-tray-horizontal .menu-item a:focus {
   background-color: transparent;
   color: #f16e00;
@@ -29,11 +41,6 @@
   border-right: none !important;
 }
 
-.toolbar-tray-horizontal .menu-item li.hover-intent > a {
-  color: #f16e00;
-  border-bottom: none;
-}
-
 .toolbar-tray-horizontal .menu-item li {
   margin-right: revert;
   margin-left: revert;
@@ -41,32 +48,19 @@
   border-right: 1px solid #ddd !important;
 }
 
-.toolbar-tray-horizontal li.hover-intent > a {
-  color: #f16e00;
-  border-bottom: 4px solid #f16e00;
+.toolbar-tray-horizontal .menu-item li a {
+  border-bottom: none;
 }
 
-.toolbar-tray a:hover,
-.toolbar .toolbar-tray a.is-active {
-  color: #f16e00;
-  border-bottom: 4px solid #f16e00;
-  text-decoration: none;
-
-}
-
-.toolbar .toolbar-menu .toolbar-menu a:hover {
+.toolbar-tray-horizontal .menu-item li a:hover,
+.toolbar-tray-horizontal .menu-item li a.is-active {
   color: #f16e00;
   border-bottom: none;
   text-decoration: none;
   box-shadow: 2px 4px 10px 0 rgba(0, 0, 0, 0.1);
 }
 
-.toolbar .toolbar-menu .toolbar-menu a:focus {
+.toolbar-tray-horizontal .menu-item li.hover-intent > a {
   color: #f16e00;
 }
-
-.toolbar .toolbar-menu .toolbar-menu a.is-active {
-  border-bottom: none;
-}
-
 

@@ -11,7 +11,7 @@ id: paragraph.call_to_action.field_call_to_action_type
 field_name: field_call_to_action_type
 entity_type: paragraph
 bundle: call_to_action
-label: 'Call to action type'
+label: 'Bouton / Lien'
 description: ''
 required: false
 translatable: true

@@ -9,8 +9,8 @@ id: paragraph.module_detail_offre.field_accroche
 field_name: field_accroche
 entity_type: paragraph
 bundle: module_detail_offre
-label: 'Description de l''offre'
-description: ''
+label: 'Global offers description'
+description: 'Use only with multi-offers products'
 required: false
 translatable: true
 default_value: {  }

@@ -11,8 +11,8 @@ id: node.modular_product.field_call_to_action_link
 field_name: field_call_to_action_link
 entity_type: node
 bundle: modular_product
-label: 'Product CTA link'
-description: ''
+label: 'CTA secondaire'
+description: 'URL optionnelle. Peut-être de type externe.'
 required: false
 translatable: false
 default_value: {  }
