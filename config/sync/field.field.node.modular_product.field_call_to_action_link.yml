@@ -1,5 +1,5 @@
 uuid: 7677fc02-0a68-429f-a79a-466c4fb78431
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -11,8 +11,8 @@ id: node.modular_product.field_call_to_action_link
 field_name: field_call_to_action_link
 entity_type: node
 bundle: modular_product
-label: 'CTA secondaire'
-description: 'URL optionnelle. Peut-être de type externe.'
+label: 'Secondary CTA'
+description: 'Optional field. Can be an external URL'
 required: false
 translatable: false
 default_value: {  }

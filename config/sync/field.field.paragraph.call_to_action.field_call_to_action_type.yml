@@ -1,5 +1,5 @@
 uuid: 26788604-a85b-4edc-8d4f-fb28745c38c5
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -11,7 +11,7 @@ id: paragraph.call_to_action.field_call_to_action_type
 field_name: field_call_to_action_type
 entity_type: paragraph
 bundle: call_to_action
-label: 'Bouton / Lien'
+label: 'Button / Link'
 description: ''
 required: false
 translatable: true

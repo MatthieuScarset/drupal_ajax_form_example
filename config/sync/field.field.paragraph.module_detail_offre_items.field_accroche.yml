@@ -1,5 +1,5 @@
 uuid: 48e2f996-f333-49e6-9dcf-9fd650710d39
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -9,7 +9,7 @@ id: paragraph.module_detail_offre_items.field_accroche
 field_name: field_accroche
 entity_type: paragraph
 bundle: module_detail_offre_items
-label: 'Description de l''offre'
+label: 'Offer description'
 description: ''
 required: true
 translatable: true

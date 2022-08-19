@@ -1,9 +1,9 @@
 uuid: ce7f9914-0fae-4463-9497-a472801a260a
-langcode: fr
+langcode: en
 status: true
 dependencies: {  }
 id: titre_and_description
-label: '[MP] [Détail de l''offre] Inclusion / exclusion'
+label: '[MP] [Offer details] Inclusion / exclusion'
 icon_uuid: null
 icon_default: null
 description: ''
