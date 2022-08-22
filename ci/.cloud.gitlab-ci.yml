@@ -14,15 +14,27 @@ include:
   - local: /ci/.cloud.d/.int.gitlab-ci.yml
     rules:
       - if: $CI_COMMIT_BRANCH == "integration"
+  - local: /ci/.cloud.d/.commerce.gitlab-ci.yml
+    rules:
+      - if: $CI_COMMIT_BRANCH == "commerce/RUBYPORTAILOBS-3841"
+  - local: /ci/.cloud.d/.commerce-dev.gitlab-ci.yml
+    rules:
+      - if: $CI_COMMIT_BRANCH == "commerce/dev"
 
 variables:
-  DOCKER_COMPOSE_PATH: "$CI_PROJECT_PATH/$DOCKER_COMPOSE_FILE"
+  CONTAINER_FPM: "${CONTAINER_FPM:-ruby_php-fpm}"
+  CUSTOM_PROJECT_PATH: "${CUSTOM_PROJECT_PATH:-$CI_PROJECT_PATH}"
+  DOCKER_COMPOSE_PATH: "$CUSTOM_PROJECT_PATH/${DOCKER_COMPOSE_FILE:-docker-compose.yml}"
   SSH_COMMAND: "ssh -o StrictHostKeyChecking=no $SSH_USER@$SERVER_IP"
   EXEC_PHP_FPM: "$SSH_COMMAND docker exec ${CONTAINER_FPM}"
-  SHARED_DIR: "$CI_PROJECT_PATH/../shared"
+  SHARED_DIR: "${SHARED_DIR:-$CUSTOM_PROJECT_PATH/../shared}"
 
 
 before_script:
+  - echo $CONTAINER_FPM
+  - echo CUSTOM_PROJECT_PATH
+  - echo DOCKER_COMPOSE_PATH
+  - echo SHARED_DIR
   - 'command -v ssh-agent >/dev/null || ( apk update && apk add openssh-client )'
   - eval $(ssh-agent -s)
   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
@@ -47,17 +59,17 @@ Deploy dev:
     - |
       $SSH_COMMAND "
         [ -f $DOCKER_COMPOSE_PATH ] && docker compose -f $DOCKER_COMPOSE_PATH down;
-        [ -d $CI_PROJECT_PATH ] && rm -r $CI_PROJECT_PATH;
-        mkdir -p $CI_PROJECT_PATH"
-    - scp -r $(pwd)/* $SSH_USER@$SERVER_IP:$CI_PROJECT_PATH
+        [ -d $CUSTOM_PROJECT_PATH ] && rm -r $CUSTOM_PROJECT_PATH;
+        mkdir -p $CUSTOM_PROJECT_PATH"
+    - scp -r $(pwd)/* $SSH_USER@$SERVER_IP:$CUSTOM_PROJECT_PATH
 
 
 Build drupal:
   stage: build
   script:
-    - $SSH_COMMAND cp $SHARED_DIR/.env-dev $CI_PROJECT_PATH/.env
-    - $SSH_COMMAND cp $SHARED_DIR/settings.local.php $CI_PROJECT_PATH/sites/default/
-    - $SSH_COMMAND docker compose -f $DOCKER_COMPOSE_PATH --env-file $CI_PROJECT_PATH/.env up -d
+    - $SSH_COMMAND cp $SHARED_DIR/.env-dev $CUSTOM_PROJECT_PATH/.env
+    - $SSH_COMMAND cp $SHARED_DIR/settings.local.php $CUSTOM_PROJECT_PATH/sites/default/
+    - $SSH_COMMAND docker compose -f $DOCKER_COMPOSE_PATH --env-file $CUSTOM_PROJECT_PATH/.env up -d
     - $EXEC_PHP_FPM composer install
 
 
