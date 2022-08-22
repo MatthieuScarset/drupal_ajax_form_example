@@ -32,9 +32,9 @@ variables:
 
 before_script:
   - echo $CONTAINER_FPM
-  - echo CUSTOM_PROJECT_PATH
-  - echo DOCKER_COMPOSE_PATH
-  - echo SHARED_DIR
+  - echo $CUSTOM_PROJECT_PATH
+  - echo $DOCKER_COMPOSE_PATH
+  - echo $SHARED_DIR
   - 'command -v ssh-agent >/dev/null || ( apk update && apk add openssh-client )'
   - eval $(ssh-agent -s)
   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
