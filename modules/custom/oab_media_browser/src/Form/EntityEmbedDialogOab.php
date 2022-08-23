@@ -237,16 +237,17 @@ class EntityEmbedDialogOab extends EntityEmbedDialog {
         $response = new AjaxResponse();
 
         // default attributes
+
         $new_entity_element = $form_state->getValue('attributes');
         $new_entity_element['data-entity-embed-display'] = 'entity_reference:entity_reference_entity_view';
         $new_entity_element['data-entity-embed-settings'] =  array('view_mode' => 'default');
         $new_entity_element['data-embed-button'] = 'media_browser';
         $new_entity_element['data-align'] = '';
         $new_entity_element['data-caption'] = '';
+        $new_entity_element['data-entity-embed-display-settings']['alt'] = '';
         $form_state->setValue('attributes', $new_entity_element);
 
-
-        // Submit configuration form the selected Entity Embed Display plugin.
+      // Submit configuration form the selected Entity Embed Display plugin.
         $entity_element = $form_state->getValue('attributes');
         $entities = $this->entityTypeManager->getStorage($entity_element['data-entity-type'])
             ->loadByProperties(['uuid' => $entity_element['data-entity-uuid']]);
@@ -276,7 +277,7 @@ class EntityEmbedDialogOab extends EntityEmbedDialog {
 
             // Filter out empty attributes.
             $values['attributes'] = array_filter($values['attributes'], function($value) {
-                return (bool) mb_strlen((string) $value);
+                return !empty($value);
             });
 
             // Allow other modules to alter the values before getting submitted to the WYSIWYG.
