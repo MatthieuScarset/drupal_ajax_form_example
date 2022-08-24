@@ -45,3 +45,4 @@ networks:
     external: true
   master_proxy:
     external: true
+  memcached:
