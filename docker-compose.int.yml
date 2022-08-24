@@ -11,8 +11,9 @@ services:
       - php-fpm
     volumes:
       - .:/application
+      - ${DRUPAL_SITES_FILES_DIR:-./sites/default/files}:/application/sites/default/files
     networks:
-      - master_default
+      - master_proxy
       - default
 
   php-fpm:
@@ -26,11 +27,13 @@ services:
     volumes:
       - .:/application
       - ./config/docker/local/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
-      - ${DRUPAL_SITES_DIR:-./sites}:/application/sites
+      - ${DRUPAL_SITES_FILES_DIR:-./sites/default/files}:/application/sites/default/files
     networks:
-      - master_default
+      - master_db
       - default
 
 networks:
-  master_default:
+  master_db:
+    external: true
+  master_proxy:
     external: true
