@@ -19,7 +19,7 @@ include:
       - if: $CI_COMMIT_BRANCH == "commerce/main"
   - local: /ci/.cloud.d/.commerce-dev.gitlab-ci.yml
     rules:
-      - if: $CI_COMMIT_BRANCH == "commerce/RUBYPORTAILOBS-3841"
+      - if: $CI_COMMIT_BRANCH == "commerce/dev"
 
 variables:
   SSH_COMMAND: "ssh -o StrictHostKeyChecking=no $SSH_USER@$SERVER_IP"
