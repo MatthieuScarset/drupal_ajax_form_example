@@ -36,6 +36,16 @@ function oabt($elem, $lock=false, $message="") {
   }
 }
 
+/**
+ * Implements hook_library_info_alter().
+ */
+function oab_develop_library_info_alter(&$libraries, $extension) {
+ if ($extension === 'admin_toolbar') {
+   $libraries['toolbar.tree']['dependencies'][] = 'oab_develop/admin_toolbar_extends';
+ }
+}
+
+
 function taxonomy_rename_taxo($old, $new, $vid, $lang) {
     $query = \Drupal::entityQuery('taxonomy_term');
     $query->condition('vid', $vid);

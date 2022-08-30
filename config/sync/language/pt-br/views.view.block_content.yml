@@ -1,6 +1,10 @@
 display:
   default:
+    display_title: Master
     display_options:
       fields:
         operations:
           label: Operações
+      empty:
+        area_text_custom:
+          content: 'There are no custom blocks available. '

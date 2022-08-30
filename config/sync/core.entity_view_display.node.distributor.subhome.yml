@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
@@ -65,11 +66,13 @@ hidden:
   field_additionnal: true
   field_certification_obs: true
   field_city: true
+  field_content: true
   field_departments: true
   field_display_title: true
   field_email_address: true
   field_header_title: true
   field_market_segment: true
+  field_market_segment_dvi: true
   field_meta_description: true
   field_meta_title: true
   field_navigation_link: true

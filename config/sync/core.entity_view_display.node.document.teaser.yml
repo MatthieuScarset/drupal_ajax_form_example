@@ -65,6 +65,7 @@ hidden:
   field_content: true
   field_content_owner: true
   field_display_title: true
+  field_document_language: true
   field_document_thematic: true
   field_document_type: true
   field_email_owner: true
@@ -75,6 +76,7 @@ hidden:
   field_hub_portal: true
   field_industry: true
   field_insight: true
+  field_insight_type: true
   field_job_profile: true
   field_market_segment: true
   field_meta_description: true
@@ -88,5 +90,6 @@ hidden:
   field_solution: true
   field_start_date: true
   field_subhome: true
+  field_visual_tile: true
   langcode: true
   moderation_state_update: true

@@ -1,0 +1,30 @@
+uuid: 23b30dc8-da38-4be7-9ced-fc01dcae4283
+langcode: fr
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:dd2a5ff2-94ac-4f67-896f-56e3af200ed5'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_one_i
+id: ngr_wottableaucomparatif
+theme: theme_one_i
+region: prefooter
+weight: -63
+provider: null
+plugin: 'block_content:dd2a5ff2-94ac-4f67-896f-56e3af200ed5'
+settings:
+  id: 'block_content:dd2a5ff2-94ac-4f67-896f-56e3af200ed5'
+  label: '[NGR] WoT - Tableau comparatif'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /product/new-working-together

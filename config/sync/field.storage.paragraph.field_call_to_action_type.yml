@@ -1,5 +1,5 @@
 uuid: d5aac5dd-0358-431d-a161-799c72a6c153
-langcode: fr
+langcode: en
 status: true
 dependencies:
   module:
@@ -13,10 +13,10 @@ settings:
   allowed_values:
     -
       value: bouton
-      label: Bouton
+      label: Button
     -
       value: lien
-      label: Lien
+      label: Link
   allowed_values_function: ''
 module: options
 locked: false

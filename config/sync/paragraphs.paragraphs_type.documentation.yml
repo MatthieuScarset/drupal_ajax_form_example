@@ -1,9 +1,9 @@
 uuid: 883d9a20-fb17-4ccb-8483-dd5b46651e1f
-langcode: fr
+langcode: en
 status: true
 dependencies: {  }
 id: documentation
-label: '[MP][Détail de l''offre items] Documentation'
+label: '[MP] [Offer details] [Item] Documentation'
 icon_uuid: null
 icon_default: null
 description: ''

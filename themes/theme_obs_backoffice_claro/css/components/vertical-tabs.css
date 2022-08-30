@@ -1,0 +1,31 @@
+.vertical-tabs__menu-link:hover {
+  color: #f16e00;
+}
+
+.vertical-tabs__menu-link:focus::after {
+  border: 3px solid #f16e00;
+}
+
+.vertical-tabs__menu-item.is-selected .vertical-tabs__menu-link {
+  color: #f16e00;
+}
+
+.vertical-tabs__menu-item.is-selected .vertical-tabs__menu-link:hover {
+  color: #f16e00;
+}
+
+.vertical-tabs__menu-item .vertical-tabs__menu-link:hover {
+  color: #f16e00;
+}
+
+.vertical-tabs__menu-item.is-selected .vertical-tabs__menu-link::before {
+  border-left-color: #f16e00; /* LTR */
+}
+
+[dir=rtl] .vertical-tabs__menu-item.is-selected .vertical-tabs__menu-link::before {
+  border-right-color: #f16e00;
+}
+
+.js .vertical-tabs .vertical-tabs__item {
+  overflow: visible;
+}

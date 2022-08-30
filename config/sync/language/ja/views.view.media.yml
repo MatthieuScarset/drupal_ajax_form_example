@@ -1,0 +1,29 @@
+display:
+  default:
+    display_title: Default
+    display_options:
+      fields:
+        media_bulk_form:
+          action_title: Action
+        bundle:
+          label: Provider
+        status:
+          label: Status
+        operations:
+          label: Operations
+      exposed_form:
+        options:
+          submit_button: Filter
+      empty:
+        area_text_custom:
+          content: 'No content available.'
+      filters:
+        bundle:
+          expose:
+            label: Provider
+        status:
+          group_info:
+            label: 'Publishing status'
+        langcode:
+          expose:
+            label: Language

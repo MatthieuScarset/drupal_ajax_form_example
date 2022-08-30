@@ -1,3 +1,4 @@
+uuid: null
 langcode: fr
 status: true
 dependencies:
@@ -10,7 +11,7 @@ type: 'canonical_entities:node'
 pattern: 'prensa/[node:title]'
 selection_criteria:
   e13aefb7-f4ad-4214-9388-b9eee4fc27a7:
-    id: node_type
+    id: 'entity_bundle:node'
     negate: false
     uuid: e13aefb7-f4ad-4214-9388-b9eee4fc27a7
     context_mapping:
