@@ -1,8 +1,0 @@
-
-.ui-dialog:focus {
-  box-shadow: none !important;
-}
-
-.ui-dialog .ui-dialog-titlebar-close:focus {
-  border-color: #f16e00;
-}

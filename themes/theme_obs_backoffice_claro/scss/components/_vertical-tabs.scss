@@ -1,0 +1,37 @@
+.vertical-tabs__menu-link {
+  &:hover {
+    color: $orange;
+  }
+  &:focus::after {
+    border: 3px solid $orange;
+  }
+}
+
+
+
+.vertical-tabs__menu-item.is-selected {
+  .vertical-tabs__menu-link {
+    color: $orange;
+
+    &:hover {
+      color: $orange;
+    }
+  }
+}
+
+
+.vertical-tabs__menu-item .vertical-tabs__menu-link:hover {
+  color: $orange;
+}
+
+.vertical-tabs__menu-item.is-selected .vertical-tabs__menu-link::before {
+  border-left-color: $orange; /* LTR */
+}
+
+[dir=rtl] .vertical-tabs__menu-item.is-selected .vertical-tabs__menu-link::before {
+  border-right-color: $orange;
+}
+
+.js .vertical-tabs .vertical-tabs__item {
+  overflow: visible;
+}

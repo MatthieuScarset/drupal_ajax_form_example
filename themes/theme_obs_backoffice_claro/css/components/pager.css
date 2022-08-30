@@ -1,9 +1,0 @@
-/* Active number link. */
-
-.pager__link.is-active,
-.pager__link:hover,
-.pager__link.is-active:hover,
-.pager__item--current {
-  color: #fff;
-  background: #f16e00;
-}
