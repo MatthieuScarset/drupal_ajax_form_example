@@ -109,14 +109,6 @@ function oab_background_image_preprocess_html(&$variables) {
 }
 
 
-/**
- * Implements hook_rebuild().
- */
-function oab_background_image_rebuild() {
-    \Drupal::service('oab_background_image.bg_image_management')->rebuild();
-}
-
-
 
 function _oab_background_image_get_urls($field_value) {
     $ret = [];
