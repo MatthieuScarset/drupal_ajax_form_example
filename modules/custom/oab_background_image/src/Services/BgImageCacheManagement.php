@@ -3,7 +3,7 @@ namespace Drupal\oab_background_image\Services;
 
 use Drupal\media\Entity\Media;
 
-class BgImageManagement {
+class BgImageCacheManagement implements BgImageManagementInterface {
 
     /** @var \Drupal\Core\Cache\CacheBackendInterface  */
     private $cache;
