@@ -22,7 +22,13 @@ node-form:
   version: VERSION
   css:
     layout:
-      css/layout/node-add.css: {}
+      assets/css/node-add.css: {}
+
+vertical-tabs:
+  version: VERSION
+  css:
+    component:
+      assets/css/vertical-tabs.css: {}
 
 neon:
   version: VERSION

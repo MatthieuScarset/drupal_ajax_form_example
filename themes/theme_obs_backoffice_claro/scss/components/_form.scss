@@ -2,11 +2,8 @@
 .fieldset__label.form-required::after,
 .horizontal-tabs .form-required::after,
 .vertical-tabs .form-required::after {
-  display: inline-block;
-  margin-right: 0.15em;
-  margin-left: 0.15em;
+  margin-left: 0.3em;
   content: "*";
-  color: #fd7901;
-  font-size: 0.875rem;
+  color: $orange;
 }
 

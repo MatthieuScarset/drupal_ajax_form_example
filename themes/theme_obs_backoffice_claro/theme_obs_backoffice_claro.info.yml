@@ -13,6 +13,8 @@ libraries:
 libraries-extend:
   claro/node-form:
     - theme_obs_backoffice_claro/node-form
+  claro/vertical-tabs:
+    - theme_obs_backoffice_claro/vertical-tabs
 
 
 regions:

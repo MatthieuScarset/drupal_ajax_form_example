@@ -1,50 +1,53 @@
-.tabs__link:focus {
-  border: 3px solid $orange;
-}
+.tabs {
+  &__link {
+    &:focus {
+      border: 3px solid $orange;
+    }
 
-.tabs__link.is-active {
-  color: $orange;
-}
+    &.is-active {
+      color: $orange;
+      &:focus {
+        border-left: 3px solid $orange;
+      }
+    }
+  }
 
-[dir="rtl"] .tabs__link.is-active:focus {
-  border-left: 3px solid $orange;
-}
+  &__tab.is-active::before {
+    border-right: 3px solid $orange;
+  }
 
-.tabs__tab.is-active::before {
-  border-left: 3px solid $orange; /* LTR */
-}
-
-[dir="rtl"] .tabs__tab.is-active::before {
-  border-right: 3px solid $orange;
-}
-
-.tabs__trigger:focus {
-  border: 3px solid $orange;
-  border-radius: 2px;
-  box-shadow: none;
+  &__trigger:focus {
+     border: 3px solid $orange;
+     border-radius: 2px;
+     box-shadow: none;
+   }
 }
 
 @media screen and (min-width: 48em) {
 
-  .is-horizontal .tabs__link:focus {
-    color: #232429;
-    border: none;
-    border-radius: 2px 2px 0 0;
-    outline: 2px dotted transparent;
-    box-shadow: 0 0 0 2px $white, 0 0 0 5px $orange;
-  }
-  [dir="rtl"] .is-horizontal .tabs__link:focus {
-    border: none;
-  }
-  .is-horizontal .tabs--primary .tabs__link:focus {
-    box-shadow: 0 0 0 2px #f3f4f9, 0 0 0 5px $orange;
-  }
+  .is-horizontal {
+    .tabs__link {
+      &:focus {
+        color: #232429;
+        border: none;
+        border-radius: 2px 2px 0 0;
+        outline: 2px dotted transparent;
+        box-shadow: 0 0 0 2px $white, 0 0 0 5px $orange;
+      }
 
-  .is-horizontal .tabs__link:hover {
-    color: $orange;
-  }
+      &:hover {
+        color: $orange;
+      }
 
-  .is-horizontal .tabs__link.is-active::before {
-    border-bottom: 3px solid $orange;
+      &.is-active::before {
+        border-bottom: 3px solid $orange;
+      }
+    }
+
+    .tabs--primary {
+      .tabs__link:focus {
+        box-shadow: 0 0 0 2px #f3f4f9, 0 0 0 5px $orange;
+      }
+    }
   }
 }

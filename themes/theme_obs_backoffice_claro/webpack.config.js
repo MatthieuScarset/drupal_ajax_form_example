@@ -8,6 +8,8 @@ module.exports = {
   entry: {
     "css/style": './scss/style.scss',
     "css/components": './scss/components.scss',
+    "css/vertical-tabs": './scss/claro-libraries-extends/vertical-tabs.scss',
+    "css/node-add": './scss/claro-libraries-extends/node-add.scss',
   },
   output: {
     filename: '[name].js',

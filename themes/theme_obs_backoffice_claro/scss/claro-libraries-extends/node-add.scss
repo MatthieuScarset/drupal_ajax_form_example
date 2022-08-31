@@ -1,3 +1,5 @@
+@import "../variables/*.scss";
+
 @media screen and (min-width: 61rem) {
   .layout-region--node-main .layout-region__content,
   .layout-region--node-footer .layout-region__content {
@@ -11,7 +13,6 @@
     width: initial;
     padding-right: 0;
   }
-
 }
 
 #edit-actions > .dropbutton-multiple {

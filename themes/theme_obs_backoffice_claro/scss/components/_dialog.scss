@@ -1,8 +1,14 @@
+.ui-dialog {
+  &:focus {
+    box-shadow: none !important;
+  }
 
-.ui-dialog:focus {
-  box-shadow: none !important;
+  .ui-dialog-titlebar-close {
+    &:focus,
+    &:hover {
+      border-color: $orange !important;
+    }
+  }
 }
 
-.ui-dialog .ui-dialog-titlebar-close:focus {
-  border-color: $orange;
-}
+
