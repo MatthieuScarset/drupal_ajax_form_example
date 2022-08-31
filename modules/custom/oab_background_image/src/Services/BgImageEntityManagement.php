@@ -16,7 +16,10 @@ class BgImageEntityManagement implements BgImageManagementInterface {
       private EntityTypeManagerInterface $entity_type_manager,
       private MessengerInterface $messenger
     ) {
+      if (\Drupal::database()->schema()->tableExists('background_image')) {
         $this->storage = $entity_type_manager->getStorage('background_image');
+      }
+
     }
 
     /**
@@ -26,6 +29,11 @@ class BgImageEntityManagement implements BgImageManagementInterface {
      * @throws \Exception
      */
     public function add($url, $mid) {
+
+      if (!\Drupal::database()->schema()->tableExists('background_image')) {
+        return;
+      }
+
         $url_machine_name = BackgroundImage::getUrlMachineName($url);
 
         if ($mid instanceof Media) {
@@ -66,6 +74,9 @@ class BgImageEntityManagement implements BgImageManagementInterface {
      * @return \Drupal\Core\Entity\EntityInterface|Media|null
      */
     public function get($url) {
+      if (!\Drupal::database()->schema()->tableExists('background_image')) {
+        return null;
+      }
         $ret = null;
 
         $bg = $this->loadByMachineName(BackgroundImage::getUrlMachineName($url));
@@ -78,6 +89,10 @@ class BgImageEntityManagement implements BgImageManagementInterface {
     }
 
     public function remove($url) {
+      if (!\Drupal::database()->schema()->tableExists('background_image')) {
+        return;
+      }
+
       $bg = $this->loadByMachineName(BackgroundImage::getUrlMachineName($url));
       $bg?->delete();
       \Drupal::messenger()->addStatus(t('The background has been removed for %url', ['%url' => $url]));
@@ -88,7 +103,10 @@ class BgImageEntityManagement implements BgImageManagementInterface {
      * @throws \Exception
      */
     public function rebuild() {
-
+      if (!\Drupal::database()->schema()->tableExists('background_image')) {
+        return;
+      }
+      
       // First we delete everything
       foreach ($this->storage->loadByProperties([]) as $bg_image) {
         $bg_image->delete();
