@@ -8,6 +8,11 @@ oab_develop.global:
     - core/drupal
     - core/drupalSettings
 
+oab_develop.version_bar_block:
+  css:
+    base:
+      css/version-block.css: {}
+
 admin_toolbar_extends:
   version: VERSION
   css:
