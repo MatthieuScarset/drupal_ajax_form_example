@@ -50,7 +50,7 @@ Build drupal:
   script:
     - $SSH_COMMAND cp $SHARED_DIR/.env-dev $CI_PROJECT_PATH/.env
     - $SSH_COMMAND cp $SHARED_DIR/settings.local.php $CI_PROJECT_PATH/sites/default/
-    - $SSH_COMMAND docker-compose -f $DOCKER_COMPOSE_FILE --env-file $CI_PROJECT_PATH/.env up -d
+    - $SSH_COMMAND docker-compose -f $DOCKER_COMPOSE_FILE --env-file $CI_PROJECT_PATH/.env up -d --build --remove-orphans
     - $EXEC_PHP_FPM composer install
   rules:
     - if: $CI_COMMIT_BRANCH == "dev"
