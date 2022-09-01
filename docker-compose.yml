@@ -70,7 +70,7 @@ services:
       working_dir: /application
       entrypoint: ./entrypoint.php-fpm.sh
       depends_on:
-        - mariadb
+        - mysql
       volumes:
         - .:/application
         - ./config/docker/local/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
