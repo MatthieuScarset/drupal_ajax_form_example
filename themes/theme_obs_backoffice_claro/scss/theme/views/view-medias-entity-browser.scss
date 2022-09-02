@@ -1,0 +1,40 @@
+.view-medias-entity-browser {
+  .views-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+
+    .views-col {
+      text-align: center;
+      border: 1px solid #ccc;
+      padding:  10px;
+      margin: 0 10px 10px 0;
+      width: 20%;
+
+      .views-field-name{
+        font-weight: bold;
+        padding-bottom: 20px;
+      }
+
+      .views-field-filename, .views-field-filesize{
+        padding-top: 20px;
+        font-size: 0.8rem;
+        color: #353535;
+      }
+
+      .views-field-entity-browser-select {
+        display: none;
+      }
+      &.checked{
+
+        background-size: 54px 54px;
+        border: 2px solid green;
+        background: transparent url("../images/checkmark.svg") no-repeat center center;
+        .views-field-field-image img{
+          opacity: 0.3;
+        }
+      }
+    }
+  }
+}
