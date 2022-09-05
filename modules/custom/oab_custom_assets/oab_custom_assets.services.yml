@@ -1,0 +1,4 @@
+services:
+  oab_custom_assets.service:
+    class: Drupal\oab_custom_assets\CustomAssetsService
+    arguments: ['@plugin.manager.condition', '@entity_type.manager']

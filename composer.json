@@ -166,7 +166,8 @@
                 "Fix getVocabularyId deprecated": "patches/tac_lite/rectif_deprecated_vocabularyId.patch"
             },
             "drupal/core": {
-                "Fix LatestRevisionCheck": "https://www.drupal.org/files/issues/2019-10-21/LatestRevisionCheck-13092187-24.patch"
+                "Fix LatestRevisionCheck": "https://www.drupal.org/files/issues/2019-10-21/LatestRevisionCheck-13092187-24.patch",
+                "useless exception": "https://www.drupal.org/files/issues/2020-05-26/drupal-3016131-23-useless-exception.patch"
             },
             "drupal/memcache" : {
                 "https://www.drupal.org/project/memcache/issues/3302086": "https://www.drupal.org/files/issues/2022-08-10/3302086-18.patch"

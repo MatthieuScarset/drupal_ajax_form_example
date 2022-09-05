@@ -1,0 +1,6 @@
+name: 'OAB Custom assets'
+type: module
+description: 'Module to manage custom assets in BO and injects them in html'
+
+core_version_requirement: ^8.8.0 || ^9.0
+package: 'OAB'

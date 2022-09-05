@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * @file
+ * Contains oab_custom_assets.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function oab_custom_assets_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the oab_custom_assets module.
+    case 'help.page.oab_custom_assets':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Module to manage custom assets in BO and injects them in html') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function oab_custom_assets_css_alter(array &$attachments) {
+dd($attachments);
+}
+
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function oab_custom_assets_js_alter(array &$attachments) {
+//dd($attachments);
+}
+
+
+/**
+ * Implements hook_page_attachments().
+ */
+function oab_custom_assets_page_attachments(array &$attachments) {
+
+}
