@@ -103,7 +103,7 @@ class ProductBreadcrumbBuilder implements BreadcrumbBuilderInterface
         ##On recupère la valeur contenue dans le field_subhome (subhome de rattachement)
 //        $subhomes = $node->get('field_subhome')->getValue();
 
-        $term = Term::load($node->field_subhome->target_id);
+        $term = Term::load($node->field_subhome->target_id ?? 0);
 
         ##Si le terme a le field "field_related_view_path'
         #(contient le nom machine de la display view correspondante)
