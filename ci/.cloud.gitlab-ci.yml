@@ -53,6 +53,8 @@ Deploy dev:
     - echo "CI_PIPELINE_URL=$CI_PIPELINE_URL" >> ci-data
     - echo "CI_COMMIT_TIMESTAMP=$CI_COMMIT_TIMESTAMP" >> ci-data
     - echo "CI_COMMIT_MESSAGE=$CI_COMMIT_MESSAGE" >> ci-data
+    - echo "CI_PROJECT_URL=$CI_PROJECT_URL" >> ci-data
+    - echo "CI_COMMIT_SHA=$CI_COMMIT_SHA" >> ci-data
     - |
       $SSH_COMMAND "
         [ -f $DOCKER_COMPOSE_PATH ] && docker compose -f $DOCKER_COMPOSE_PATH down;

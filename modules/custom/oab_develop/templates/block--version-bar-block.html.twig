@@ -72,11 +72,20 @@
           <div class="version-bar-cell version-bar-text-bold">{{ elements.content.ci_datas['CI_PIPELINE_ID'] }}</div>
         {% endif %}
         {% if elements.content.ci_datas['CI_COMMIT_TIMESTAMP'] != '' %}
-          <div> | Dernier commit : </div>
-          <div class="version-bar-cell version-bar-text-bold">{{ elements.content.ci_datas['CI_COMMIT_TIMESTAMP'] }}</div>
+          {% if elements.content.ci_datas['CI_PROJECT_URL'] != '' and elements.content.ci_datas['CI_COMMIT_SHA'] != '' %}
+            <div> | Dernier commit : </div>
+            <div class="version-bar-cell version-bar-text-bold">
+              <a href="{{ elements.content.ci_datas['CI_PROJECT_URL'] ~ '/-/commit/' ~ elements.content.ci_datas['CI_COMMIT_SHA']}}" target="_blank">
+                {{ elements.content.ci_datas['CI_COMMIT_TIMESTAMP'] }}
+              </a>
+            </div>
+          {% else %}
+              <div> | Dernier commit : </div>
+              <div class="version-bar-cell version-bar-text-bold">{{ elements.content.ci_datas['CI_COMMIT_TIMESTAMP'] }}</div>
+          {% endif %}
         {% endif %}
         {% if elements.content.ci_datas['CI_COMMIT_MESSAGE'] != '' %}
-          <div> | Commentaire : </div>
+          <div> | Commit msg : </div>
           <div class="version-bar-cell version-effet-glow">{{ elements.content.ci_datas['CI_COMMIT_MESSAGE'] }}</div>
         {% endif %}
 
