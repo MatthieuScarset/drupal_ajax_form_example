@@ -107,7 +107,7 @@ class VersionBarBlock extends BlockBase implements ContainerFactoryPluginInterfa
         $tmp = explode("=", $data);
         if(count($tmp) == 2) {
           if($tmp[0] == "CI_COMMIT_TIMESTAMP" && !empty($tmp[1])) {
-            $ci_datas[$tmp[0]] = date_format(new \DateTime($tmp[1]), "d/m/Y H:i:s");
+            $ci_datas[$tmp[0]] = date_format(new \DateTime($tmp[1]), "d/m/Y H:i");
           }
           else {
             $ci_datas[$tmp[0]] = $tmp[1];

@@ -33,6 +33,10 @@
   display: flex;
   padding: 0.5rem;
 }
+.version-bar-table a{
+  color: #000000;
+  text-decoration: underline;
+}
 
 .version-bar-cell {
   margin-left: 0.5rem;
@@ -43,4 +47,29 @@
 .version-bar-text-bold {
   text-transform: uppercase;
   font-weight: bold;
+}
+
+.version-bar-table .fun_icon{
+  top: 0;
+  position: absolute;
+  -webkit-animation: linear infinite;
+  -webkit-animation-name: run;
+  -webkit-animation-duration: 40s;
+}
+.version-bar-table .fun_icon img{
+  width: 32px;
+  height: 32px;
+}
+
+
+@-webkit-keyframes run {
+  0% {
+    right: 0;
+  }
+  50% {
+    right: 100%;
+  }
+  100% {
+    right: 0;
+  }
 }

@@ -71,25 +71,36 @@
           <div> | Pipeline Id</div>
           <div class="version-bar-cell version-bar-text-bold">{{ elements.content.ci_datas['CI_PIPELINE_ID'] }}</div>
         {% endif %}
-        {% if elements.content.ci_datas['CI_COMMIT_TIMESTAMP'] != '' %}
-          {% if elements.content.ci_datas['CI_PROJECT_URL'] != '' and elements.content.ci_datas['CI_COMMIT_SHA'] != '' %}
-            <div> | Dernier commit : </div>
-            <div class="version-bar-cell version-bar-text-bold">
-              <a href="{{ elements.content.ci_datas['CI_PROJECT_URL'] ~ '/-/commit/' ~ elements.content.ci_datas['CI_COMMIT_SHA']}}" target="_blank">
+
+        {% if elements.content.ci_datas['CI_PROJECT_URL'] != '' and elements.content.ci_datas['CI_COMMIT_SHA'] != '' %}
+          <div> | Commit : </div>
+          <div class="version-bar-cell ">
+            <a href="{{ elements.content.ci_datas['CI_PROJECT_URL'] ~ '/-/commit/' ~ elements.content.ci_datas['CI_COMMIT_SHA']}}" target="_blank">
+              {% if elements.content.ci_datas['CI_COMMIT_MESSAGE'] != '' %}
+                {{ elements.content.ci_datas['CI_COMMIT_MESSAGE'] ~ ' - ' }}
+              {% endif %}
+              {% if elements.content.ci_datas['CI_COMMIT_TIMESTAMP'] != '' %}
                 {{ elements.content.ci_datas['CI_COMMIT_TIMESTAMP'] }}
-              </a>
-            </div>
-          {% else %}
-              <div> | Dernier commit : </div>
-              <div class="version-bar-cell version-bar-text-bold">{{ elements.content.ci_datas['CI_COMMIT_TIMESTAMP'] }}</div>
-          {% endif %}
-        {% endif %}
-        {% if elements.content.ci_datas['CI_COMMIT_MESSAGE'] != '' %}
-          <div> | Commit msg : </div>
-          <div class="version-bar-cell version-effet-glow">{{ elements.content.ci_datas['CI_COMMIT_MESSAGE'] }}</div>
+              {% endif %}
+            </a>
+          </div>
+        {% else %}
+          <div> | Commit : </div>
+          <div class="version-bar-cell ">
+            {% if elements.content.ci_datas['CI_COMMIT_MESSAGE'] != '' %}
+              {{ elements.content.ci_datas['CI_COMMIT_MESSAGE'] ~ ' - ' }}
+            {% endif %}
+            {% if elements.content.ci_datas['CI_COMMIT_TIMESTAMP'] != '' %}
+              {{ elements.content.ci_datas['CI_COMMIT_TIMESTAMP'] }}
+            {% endif %}
+          </div>
         {% endif %}
 
       {% endif %}
+
+      <div class="fun_icon">
+        <img src="/modules/custom/oab_develop/images/unicorn.png" alt="{{ 'Home'|t }}" />
+      </div>
     </div>
   {% endblock %}
 </section>
