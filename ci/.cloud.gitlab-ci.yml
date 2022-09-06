@@ -48,12 +48,11 @@ before_script:
 
 Deploy dev:
   stage: deploy
-  before_script:
-    - echo "CI_PIPELINE_ID=$CI_PIPELINE_ID" >> .ci-data
-    - echo "CI_PIPELINE_URL=$CI_PIPELINE_URL" >> .ci-data
-    - echo "CI_COMMIT_TIMESTAMP=$CI_COMMIT_TIMESTAMP" >> .ci-data
-    - echo "CI_COMMIT_MESSAGE=$CI_COMMIT_MESSAGE" >> .ci-data
   script:
+    - echo "CI_PIPELINE_ID=$CI_PIPELINE_ID" >> $(pwd)/.ci-data
+    - echo "CI_PIPELINE_URL=$CI_PIPELINE_URL" >> $(pwd)/.ci-data
+    - echo "CI_COMMIT_TIMESTAMP=$CI_COMMIT_TIMESTAMP" >> $(pwd)/.ci-data
+    - echo "CI_COMMIT_MESSAGE=$CI_COMMIT_MESSAGE" >> $(pwd)/.ci-data
     - |
       $SSH_COMMAND "
         [ -f $DOCKER_COMPOSE_PATH ] && docker compose -f $DOCKER_COMPOSE_PATH down;
@@ -79,19 +78,3 @@ Update drupal:
     - $EXEC_PHP_FPM drush cim --yes
     - $EXEC_PHP_FPM drush updb --yes
     - $EXEC_PHP_FPM drush cr
-
-Get CI infos:
-  before_script:
-    - 'command -v ssh-agent >/dev/null || ( apk update && apk add openssh-client )'
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-  stage: update
-  script:
-    - echo "CI_PIPELINE_ID=$CI_PIPELINE_ID" >> .ci-data
-    - echo "CI_PIPELINE_URL=$CI_PIPELINE_URL" >> .ci-data
-    - echo "CI_COMMIT_TIMESTAMP=$CI_COMMIT_TIMESTAMP" >> .ci-data
-    - echo "CI_COMMIT_MESSAGE=$CI_COMMIT_MESSAGE" >> .ci-data
-    - scp .ci-data $SSH_USER@$SERVER_IP:$CUSTOM_PROJECT_PATH
-
