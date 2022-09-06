@@ -49,10 +49,10 @@ before_script:
 Deploy dev:
   stage: deploy
   script:
-    - echo "CI_PIPELINE_ID=$CI_PIPELINE_ID" >> $(pwd)/.ci-data
-    - echo "CI_PIPELINE_URL=$CI_PIPELINE_URL" >> $(pwd)/.ci-data
-    - echo "CI_COMMIT_TIMESTAMP=$CI_COMMIT_TIMESTAMP" >> $(pwd)/.ci-data
-    - echo "CI_COMMIT_MESSAGE=$CI_COMMIT_MESSAGE" >> $(pwd)/.ci-data
+    - echo "CI_PIPELINE_ID=$CI_PIPELINE_ID" >> ci-data
+    - echo "CI_PIPELINE_URL=$CI_PIPELINE_URL" >> ci-data
+    - echo "CI_COMMIT_TIMESTAMP=$CI_COMMIT_TIMESTAMP" >> ci-data
+    - echo "CI_COMMIT_MESSAGE=$CI_COMMIT_MESSAGE" >> ci-data
     - |
       $SSH_COMMAND "
         [ -f $DOCKER_COMPOSE_PATH ] && docker compose -f $DOCKER_COMPOSE_PATH down;

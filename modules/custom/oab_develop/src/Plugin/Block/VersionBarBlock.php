@@ -97,7 +97,7 @@ class VersionBarBlock extends BlockBase implements ContainerFactoryPluginInterfa
     $message = $config['message'] ?? '';
 
     //Infos de la CI
-    $file_ci_data = ".ci-data";
+    $file_ci_data = "ci-data";
     $ci_datas = [];
     if (file_exists($file_ci_data)) {
       // find the version written by the CI/CD -> remove the special chars
