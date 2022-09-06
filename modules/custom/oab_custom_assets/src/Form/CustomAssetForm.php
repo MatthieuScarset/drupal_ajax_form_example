@@ -4,12 +4,21 @@ namespace Drupal\oab_custom_assets\Form;
 
 use Drupal\Core\Entity\EntityForm;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\oab_custom_assets\Entity\CustomAssetInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class CustomAssetForm.
  */
 class CustomAssetForm extends EntityForm {
+
+  public function __construct(private LanguageManagerInterface $languageManager) {
+  }
+
+  public static function create(ContainerInterface $container) {
+    return new static($container->get('language_manager'));
+  }
 
   /**
    * {@inheritdoc}
@@ -19,7 +28,6 @@ class CustomAssetForm extends EntityForm {
 
     /** @var CustomAssetInterface $custom_asset */
     $custom_asset = $this->entity;
-
 
     $form['label'] = [
       '#type' => 'textfield',
@@ -39,16 +47,44 @@ class CustomAssetForm extends EntityForm {
       '#disabled' => !$custom_asset->isNew(),
     ];
 
-    $form['paths'] = [
+    $form['tabs'] = [
+      '#type' => 'vertical_tabs',
+      '#default_tab' => 'assets',
+    ];
+
+    $form['visibility'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Visibility'),
+      '#group' => 'tabs',
+      '#tree' => true
+    ];
+
+    $form['visibility']['paths'] = [
       '#type' => 'textarea',
       '#default_value' => $custom_asset->getPaths(),
       '#title' => $this->t("Paths"),
-      '#description' => $this->t("Enter one path per line. You can use wildcard")
+      '#description' => $this->t("Enter one path per line. You can use wildcard"),
+      '#required' => true
+    ];
+
+    $languages = [];
+    foreach ($this->languageManager->getLanguages() as $language) {
+      $languages[$language->getId()] = $language->getName();
+    }
+
+    $form['visibility']['languages'] = [
+      '#type' => 'checkboxes',
+      '#default_value' => $custom_asset->getLanguages(),
+      '#options' => $languages,
+      '#title' => $this->t("Languages"),
+      '#description' => $this->t("Select languages to enforce. If none are selected, all languages will be allowed.")
     ];
 
     $form['assets'] = [
-      '#type' => 'fieldset',
-      '#title' => 'Assets'
+      '#type' => 'details',
+      '#title' => $this->t('Assets'),
+      '#group' => 'tabs',
+      '#tree' => true
     ];
 
     $form['assets']['css'] = [
@@ -79,6 +115,9 @@ class CustomAssetForm extends EntityForm {
    * {@inheritdoc}
    */
   public function save(array $form, FormStateInterface $form_state) {
+
+//    dd($form_state->getValues());
+
     $custom_asset = $this->entity;
     $status = $custom_asset->save();
 

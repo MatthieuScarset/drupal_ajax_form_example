@@ -12,6 +12,7 @@ interface CustomAssetInterface extends ConfigEntityInterface {
   // Add get/set methods for your configuration properties here.
 
   public function getPaths(): ?string;
+  public function getLanguages(): array;
   public function getPathsAsArray(): array;
   public function getCSS(): ?string;
   public function getJs(): ?string;

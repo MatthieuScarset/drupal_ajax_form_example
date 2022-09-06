@@ -10,16 +10,29 @@ oab_custom_assets.custom_asset.*:
       label: 'Label'
     uuid:
       type: string
-    paths:
-      type: string
-      label: 'Paths'
-    css:
-      type: string
-      label: 'CSS'
-    js:
-      type: string
-      label: 'JS'
-    bottom_js:
-      type: string
-      label: 'Bottom JS'
-
+    visibility:
+      type: mapping
+      label: 'Visibility'
+      mapping:
+        paths:
+          type: string
+          label: 'Paths'
+        languages:
+          type: sequence
+          label: 'ids of selected languages'
+          sequence:
+            type: string
+            label: 'Language'
+    assets:
+      type: mapping
+      label: 'Assets'
+      mapping:
+        css:
+          type: string
+          label: 'CSS'
+        js:
+          type: string
+          label: 'JS'
+        bottom_js:
+          type: string
+          label: 'Bottom JS'

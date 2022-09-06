@@ -33,10 +33,8 @@ use Drupal\Core\Config\Entity\ConfigEntityBase;
  *      "id",
  *      "label",
  *      "uuid",
- *      "paths",
- *      "css",
- *      "js",
- *      "bottom_js"
+ *      "visibility",
+ *      "assets"
  *   },
  *   links = {
  *     "canonical" = "/admin/structure/oab/custom_asset/{custom_asset}",
@@ -63,24 +61,41 @@ class CustomAsset extends ConfigEntityBase implements CustomAssetInterface {
    */
   protected $label;
 
+  public function getAssets(): array {
+    return $this->get('assets') ?? ["css" => "", "js" => "", "bottom_js" => ""];
+  }
+
+  public function getVisibility(): array {
+    return $this->get('visibility') ?? ["paths" => "", "languages" => []];
+  }
+
   public function getPaths(): ?string {
-    return $this->get("paths");
+    return $this->visibility['paths'] ?? null;
   }
 
   public function getPathsAsArray(): array {
-    return explode('\r\n', $this->getPaths()) ?? [];
+    return explode("\r\n", $this->getPaths()) ?? [];
+  }
+
+  public function getLanguages(): array {
+
+    if (!empty($this->visibility['languages'])) {
+      return array_filter($this->visibility['languages']);
+    }
+
+    return [];
   }
 
   public function getCSS(): ?string {
-    return $this->get("css");
+    return $this->assets['css'] ?? null;
   }
 
   public function getJs(): ?string {
-    return $this->get("js");
+    return $this->assets['js'] ?? null;
   }
 
   public function getBottomJs(): ?string {
-    return $this->get("bottom_js");
+    return $this->assets['bottom_js'] ?? null;
   }
 
 }
