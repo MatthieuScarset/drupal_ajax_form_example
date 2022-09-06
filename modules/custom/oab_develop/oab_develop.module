@@ -26,6 +26,19 @@ class OabTrace {
 
 
 /**
+ * Implements hook_theme().
+ */
+function oab_develop_theme($existing, $type, $theme, $path) {
+
+  return [
+    'block__version_bar_block' => [
+      'template'  => 'block--version-bar-block',
+      'variables' => []
+    ]
+  ];
+}
+
+/**
  * fonction de raccourci oabt
  */
 function oabt($elem, $lock=false, $message="") {
@@ -35,6 +48,16 @@ function oabt($elem, $lock=false, $message="") {
     OabTrace::debug($elem, $message);
   }
 }
+
+/**
+ * Implements hook_library_info_alter().
+ */
+function oab_develop_library_info_alter(&$libraries, $extension) {
+ if ($extension === 'admin_toolbar') {
+   $libraries['toolbar.tree']['dependencies'][] = 'oab_develop/admin_toolbar_extends';
+ }
+}
+
 
 function taxonomy_rename_taxo($old, $new, $vid, $lang) {
     $query = \Drupal::entityQuery('taxonomy_term');

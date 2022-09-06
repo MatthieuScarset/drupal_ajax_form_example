@@ -394,7 +394,7 @@ display:
           exposed: true
           expose:
             operator_id: node_year_op
-            label: 'Year'
+            label: Year
             description: ''
             use_operator: false
             operator: node_year_op

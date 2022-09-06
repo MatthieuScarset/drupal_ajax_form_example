@@ -1,0 +1,27 @@
+/**
+ * States.
+ */
+
+.form-element {
+  &:active {
+    border-color: $orange;
+  }
+
+  &:hover {
+    border-color: $orange;
+    box-shadow: inset 0 0 0 1px $orange;
+
+    &:focus {
+      box-shadow: 0 0 0 2px $white, 0 0 0 5px $orange, inset 0 0 0 1px transparent;
+    }
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 2px $white, 0 0 0 5px $orange;
+  }
+
+  &.error:hover:focus {
+    box-shadow: 0 0 0 2px $white, 0 0 0 5px $orange;
+  }
+}
+

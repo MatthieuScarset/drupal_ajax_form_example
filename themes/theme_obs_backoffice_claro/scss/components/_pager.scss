@@ -1,0 +1,11 @@
+/* Active number link. */
+
+.pager__link {
+  &.is-active,
+  &.is-active:hover,
+  &:hover,
+  .pager__item--current {
+    color: $white;
+    background: $orange;
+  }
+}

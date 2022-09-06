@@ -4,8 +4,8 @@ status: true
 dependencies: {  }
 _core:
   default_config_hash: Y58gHugZdNLPhl3op16shbI_n-3G6fNfoeiwF7wWYUM
-id: crop_16_9
 label: 'Crop 16:9'
+id: crop_16_9
 description: ''
 aspect_ratio: '16:9'
 soft_limit_width: null

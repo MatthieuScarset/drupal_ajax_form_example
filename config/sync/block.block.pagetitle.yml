@@ -1,0 +1,18 @@
+uuid: 5767483a-0829-428e-82c2-a8c8eb562467
+langcode: en
+status: true
+dependencies:
+  theme:
+    - theme_obs_backoffice_claro
+id: pagetitle
+theme: theme_obs_backoffice_claro
+region: header
+weight: -1
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }

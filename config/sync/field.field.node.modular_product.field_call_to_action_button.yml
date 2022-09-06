@@ -1,5 +1,5 @@
 uuid: 4a92297a-1c64-4dfa-be36-2fdd77f8cf74
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -11,8 +11,8 @@ id: node.modular_product.field_call_to_action_button
 field_name: field_call_to_action_button
 entity_type: node
 bundle: modular_product
-label: 'Product CTA button'
-description: ''
+label: 'Main call to action (CTA)'
+description: 'URL of contact form. Default: /en/contact'
 required: true
 translatable: false
 default_value: {  }

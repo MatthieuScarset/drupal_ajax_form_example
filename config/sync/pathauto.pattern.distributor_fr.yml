@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
@@ -10,7 +11,7 @@ type: 'canonical_entities:node'
 pattern: 'ventes-indirectes/distributeurs/[node:title]'
 selection_criteria:
   8f6971cf-160f-40ad-83c0-199c4a53e362:
-    id: node_type
+    id: 'entity_bundle:node'
     negate: false
     uuid: 8f6971cf-160f-40ad-83c0-199c4a53e362
     context_mapping:

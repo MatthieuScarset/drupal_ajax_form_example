@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
@@ -77,6 +78,7 @@ hidden:
   field_content: true
   field_content_owner: true
   field_display_title: true
+  field_document_language: true
   field_document_thematic: true
   field_document_type: true
   field_email_owner: true

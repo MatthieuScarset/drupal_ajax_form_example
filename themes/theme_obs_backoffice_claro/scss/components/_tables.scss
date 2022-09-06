@@ -1,0 +1,15 @@
+/* Sortable cell's active state. */
+
+.sortable-heading {
+  &.is-active {
+    & > a {
+      color: $orange;
+
+      &::before {
+        border-bottom: 0.1875rem solid $orange;
+      }
+    }
+  }
+}
+
+
