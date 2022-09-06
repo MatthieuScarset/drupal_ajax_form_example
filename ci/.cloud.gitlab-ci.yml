@@ -48,12 +48,14 @@ before_script:
 
 Deploy dev:
   stage: deploy
-  before_script:
+  script:
+    # on récupère les infos de la CI dans un fichier qui sera transféré sur le serveur
+    # les données sont réutilisées dans la barre de version (hors prod)
+    # ces commandes sont executées ici, ça ne fonctionne pas dans un autre job, il perd la connexion scp
     - echo "CI_PIPELINE_ID=$CI_PIPELINE_ID" >> .ci-data
     - echo "CI_PIPELINE_URL=$CI_PIPELINE_URL" >> .ci-data
     - echo "CI_COMMIT_TIMESTAMP=$CI_COMMIT_TIMESTAMP" >> .ci-data
     - echo "CI_COMMIT_MESSAGE=$CI_COMMIT_MESSAGE" >> .ci-data
-  script:
     - |
       $SSH_COMMAND "
         [ -f $DOCKER_COMPOSE_PATH ] && docker compose -f $DOCKER_COMPOSE_PATH down;
