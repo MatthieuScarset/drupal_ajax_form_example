@@ -48,6 +48,11 @@ before_script:
 
 Deploy dev:
   stage: deploy
+  before_script:
+    - echo "CI_PIPELINE_ID=$CI_PIPELINE_ID" >> .ci-data
+    - echo "CI_PIPELINE_URL=$CI_PIPELINE_URL" >> .ci-data
+    - echo "CI_COMMIT_TIMESTAMP=$CI_COMMIT_TIMESTAMP" >> .ci-data
+    - echo "CI_COMMIT_MESSAGE=$CI_COMMIT_MESSAGE" >> .ci-data
   script:
     - |
       $SSH_COMMAND "
@@ -74,13 +79,3 @@ Update drupal:
     - $EXEC_PHP_FPM drush cim --yes
     - $EXEC_PHP_FPM drush updb --yes
     - $EXEC_PHP_FPM drush cr
-
-Get CI infos:
-  stage: update
-  script:
-    - echo "CI_PIPELINE_ID=$CI_PIPELINE_ID" >> .ci-data
-    - echo "CI_PIPELINE_URL=$CI_PIPELINE_URL" >> .ci-data
-    - echo "CI_COMMIT_TIMESTAMP=$CI_COMMIT_TIMESTAMP" >> .ci-data
-    - echo "CI_COMMIT_MESSAGE=$CI_COMMIT_MESSAGE" >> .ci-data
-    - scp -r .ci-data $SSH_USER@$SERVER_IP:$CUSTOM_PROJECT_PATH
-
