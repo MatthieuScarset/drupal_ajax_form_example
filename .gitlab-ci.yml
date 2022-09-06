@@ -7,21 +7,6 @@ include:
     rules:
       - if: $CI_COMMIT_TAG
 
-
-stages:
-  - test
-
-test:
-  stage: test
-  script:
-    - echo "CI_PIPELINE_ID=$CI_PIPELINE_ID" >> .ci-data
-    - echo "CI_PIPELINE_URL=$CI_PIPELINE_URL" >> .ci-data
-    - echo "CI_COMMIT_TIMESTAMP=$CI_COMMIT_TIMESTAMP" >> .ci-data
-    - echo "CI_COMMIT_MESSAGE=$CI_COMMIT_MESSAGE" >> .ci-data
-  after_script:
-    - cat .ci-data
-
-
 # Hack to get a "visible job" if none of the files is included
 dummy_job:
   stage: .pre

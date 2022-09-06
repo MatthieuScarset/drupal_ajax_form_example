@@ -96,12 +96,33 @@ class VersionBarBlock extends BlockBase implements ContainerFactoryPluginInterfa
     $config = $this->getConfiguration();
     $message = $config['message'] ?? '';
 
+    //Infos de la CI
+    $file_ci_data = ".ci-data";
+    $ci_datas = [];
+    if (file_exists($file_ci_data)) {
+      // find the version written by the CI/CD -> remove the special chars
+      $file_data = str_replace(["\r", "\n"], ';', file_get_contents($file_ci_data));
+      $datas = explode(";", $file_data);
+      foreach ($datas as $data) {
+        $tmp = explode("=", $data);
+        if(count($tmp) == 2) {
+          if($tmp[0] == "CI_COMMIT_TIMESTAMP" && !empty($tmp[1])) {
+            $ci_datas[$tmp[0]] = date_format(new \DateTime($tmp[1]), "d/m/Y H:i:s");
+          }
+          else {
+            $ci_datas[$tmp[0]] = $tmp[1];
+          }
+        }
+      }
+    }
+
     return [
       "version" => $version,
       "env" => $env,
       "envLabel" => $env_label,
       "theme" => $theme_name,
       "message" => $message,
+      "ci_datas" => $ci_datas
     ];
   }
 

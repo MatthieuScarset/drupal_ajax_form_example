@@ -5,6 +5,7 @@ stages:          # List of stages for jobs, and their order of execution
   - deploy
   - build
   - update
+  - get_ci_infos
 
 # Include files to overrides specifics variables
 include:
@@ -78,4 +79,14 @@ Update drupal:
     - $EXEC_PHP_FPM drush cim --yes
     - $EXEC_PHP_FPM drush updb --yes
     - $EXEC_PHP_FPM drush cr
+
+Get CI infos:
+  stage: get_ci_infos
+  script:
+    - echo "CI_PIPELINE_ID=$CI_PIPELINE_ID" >> .ci-data
+    - echo "CI_PIPELINE_URL=$CI_PIPELINE_URL" >> .ci-data
+    - echo "CI_COMMIT_TIMESTAMP=$CI_COMMIT_TIMESTAMP" >> .ci-data
+    - echo "CI_COMMIT_MESSAGE=$CI_COMMIT_MESSAGE" >> .ci-data
+  after_script:
+    - scp -r .ci-data $SSH_USER@$SERVER_IP:$CUSTOM_PROJECT_PATH
 

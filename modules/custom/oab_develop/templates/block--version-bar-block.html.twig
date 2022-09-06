@@ -59,6 +59,28 @@
         <div> | </div>
         <div class="version-bar-cell version-effet-glow">{{ elements.content.message }}</div>
       {% endif %}
+      {% if elements.content.ci_datas != '' %}
+        {% if elements.content.ci_datas['CI_PIPELINE_ID'] != '' and elements.content.ci_datas['CI_PIPELINE_URL'] != '' %}
+          <div> | Pipeline Id</div>
+          <div class="version-bar-cell version-bar-text-bold">
+            <a href="{{ elements.content.ci_datas['CI_PIPELINE_URL'] }}" target="_blank">
+            {{ elements.content.ci_datas['CI_PIPELINE_ID'] }}
+            </a>
+          </div>
+        {% elseif elements.content.ci_datas['CI_PIPELINE_ID'] != ''%}
+          <div> | Pipeline Id</div>
+          <div class="version-bar-cell version-bar-text-bold">{{ elements.content.ci_datas['CI_PIPELINE_ID'] }}</div>
+        {% endif %}
+        {% if elements.content.ci_datas['CI_COMMIT_TIMESTAMP'] != '' %}
+          <div> | Dernier commit : </div>
+          <div class="version-bar-cell version-bar-text-bold">{{ elements.content.ci_datas['CI_COMMIT_TIMESTAMP'] }}</div>
+        {% endif %}
+        {% if elements.content.ci_datas['CI_COMMIT_MESSAGE'] != '' %}
+          <div> | Commentaire : </div>
+          <div class="version-bar-cell version-effet-glow">{{ elements.content.ci_datas['CI_COMMIT_MESSAGE'] }}</div>
+        {% endif %}
+
+      {% endif %}
     </div>
   {% endblock %}
 </section>
