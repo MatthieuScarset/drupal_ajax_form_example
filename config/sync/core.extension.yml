@@ -163,6 +163,7 @@ module:
   paragraphs: 11
   oab_eddy: 30
   oab_will: 30
+  oab_custom_assets: 500
   tac_lite: 100
   minimal: 1000
 theme:
