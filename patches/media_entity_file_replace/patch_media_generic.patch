@@ -1,0 +1,43 @@
+diff --git a/modules/custom/oab_develop/media_entity_file_replace.module b/modules/custom/oab_develop/media_entity_file_replace.module
+--- a/src/media_entity_file_replace.module	(revision f5e584e95111f1b5be58a13404311d5a830d09c7)
++++ b/src/media_entity_file_replace.module	(date 1662564308680)
+@@ -9,6 +9,7 @@
+ use Drupal\Core\Form\FormStateInterface;
+ use Drupal\Core\Routing\RouteMatchInterface;
+ use Drupal\media\Plugin\media\Source\File;
++use Drupal\media_entity_generic\Plugin\media\Source\Generic;
+
+ /**
+  * Implements hook_help().
+@@ -70,12 +71,16 @@
+     // Only run for media entity types that use a file based source field.
+     /** @var \Drupal\media\Entity\MediaType $mediaType */
+     $mediaType = \Drupal::entityTypeManager()->getStorage('media_type')->load($media->bundle());
+-    if (!$mediaType->getSource() instanceof File) {
++    if (!$mediaType->getSource() instanceof File
++      && !$mediaType->getSource() instanceof Generic) {
+       return;
+     }
+
+     $sourceFieldDefinition = $mediaType->getSource()->getSourceFieldDefinition($mediaType);
+-    $sourceFieldName = $sourceFieldDefinition->getName();
++
++    // OBS > Réadaptation pour l'entity File qui est basé sur le Generic (worum ? ich weiss es nicht)
++    $sourceFieldName = $mediaType->getSource() instanceof Generic ? 'field_file' : $sourceFieldDefinition->getName();
++
+     // Make sure we have a file field item and that the file entity exists.
+     // It's possible the file field item still exists (the reference to it)
+     // but that the file entity was deleted.
+@@ -240,6 +245,12 @@
+
+   if ($formState->getValue('keep_original_filename')) {
+     $fid = $media->getSource()->getSourceFieldValue($media);
++
++    // OBS > Réadaptation pour l'entity File qui est basé sur le Generic (worum ? ich weiss es nicht)
++    if (!$fid && $media->getSource() instanceof Generic) {
++      $fid = $media->field_file->target_id;
++    }
++
+     $originalFile = \Drupal::entityTypeManager()->getStorage('file')->load($fid);
+
+     // Copy the uploaded file (which is in temporary storage) to the existing

@@ -41,6 +41,7 @@
         "drupal/inline_entity_form": "1.0-rc9",
         "drupal/jsonapi_extras": "^3.20",
         "drupal/linkit": "5.0-beta13",
+        "drupal/media_entity_file_replace": "^1.0",
         "drupal/media_entity_generic": "^1.1",
         "drupal/memcache": "^2.4",
         "drupal/menu_item_extras": "^2",
@@ -166,6 +167,9 @@
             },
             "drupal/memcache" : {
                 "https://www.drupal.org/project/memcache/issues/3302086": "https://www.drupal.org/files/issues/2022-08-10/3302086-18.patch"
+            },
+            "drupal/media_entity_file_replace": {
+                "Add specification for old media Generic": "patches/media_entity_file_replace/patch_media_generic.patch"
             }
 		}
 	}
