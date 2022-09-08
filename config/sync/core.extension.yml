@@ -53,6 +53,7 @@ module:
   linkit: 0
   locale: 0
   media: 0
+  media_entity_file_replace: 0
   media_entity_generic: 0
   memcache: 0
   memcache_admin: 0
