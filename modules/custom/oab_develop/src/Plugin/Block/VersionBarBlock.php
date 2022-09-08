@@ -78,7 +78,7 @@ class VersionBarBlock extends BlockBase implements ContainerFactoryPluginInterfa
   }
 
   public function blockAccess(AccountInterface $account) {
-    return AccessResult::forbiddenIf(str_starts_with($this->routeMatch->getRouteName(), 'entity_browser.'));
+    return AccessResult::allowedIf(!str_starts_with($this->routeMatch->getRouteName(), 'entity_browser.'));
   }
 
   /**
