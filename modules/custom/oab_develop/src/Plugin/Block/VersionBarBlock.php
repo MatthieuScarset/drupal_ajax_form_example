@@ -3,6 +3,7 @@
 namespace Drupal\oab_develop\Plugin\Block;
 
 use Composer\InstalledVersions;
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Composer\Composer;
@@ -10,6 +11,8 @@ use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Theme\ThemeManagerInterface;
 use Symfony\Component\Config\Resource\ComposerResource;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -41,6 +44,11 @@ class VersionBarBlock extends BlockBase implements ContainerFactoryPluginInterfa
    */
   private ThemeManagerInterface $themeManager;
 
+  /**
+   * @var \Drupal\Core\Routing\RouteMatchInterface
+   */
+  private RouteMatchInterface $routeMatch;
+
 
   /**
    * Constructs a \Drupal\Component\Plugin\PluginBase object.
@@ -52,9 +60,11 @@ class VersionBarBlock extends BlockBase implements ContainerFactoryPluginInterfa
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, ThemeManagerInterface $theme_manager) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition,
+                              ThemeManagerInterface $theme_manager, RouteMatchInterface $routeMatch) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->themeManager = $theme_manager;
+    $this->routeMatch = $routeMatch;
   }
 
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
@@ -62,8 +72,13 @@ class VersionBarBlock extends BlockBase implements ContainerFactoryPluginInterfa
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $container->get('theme.manager')
+      $container->get('theme.manager'),
+      $container->get('current_route_match')
     );
+  }
+
+  public function blockAccess(AccountInterface $account) {
+    return AccessResult::forbiddenIf(str_starts_with($this->routeMatch->getRouteName(), 'entity_browser.'));
   }
 
   /**
