@@ -1,6 +1,9 @@
 services:
   oab_background_image.bg_image_management:
-    class: Drupal\oab_background_image\Services\BgImageManagement
+    class: Drupal\oab_background_image\Services\BgImageEntityManagement
+    arguments: ['@entity_type.manager', '@messenger']
+  oab_background_image.bg_image_cache_management:
+    class: Drupal\oab_background_image\Services\BgImageCacheManagement
   oab_background_image.entity_get_field:
     class: Drupal\oab_background_image\Services\EntityGetField
   cache.oab_background_image:
