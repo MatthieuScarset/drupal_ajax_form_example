@@ -12,16 +12,16 @@ use Drupal\oab_dvi\DviHelper;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 // Regroupement de fonctions qui n'étaient pas des hooks dans un fichier à part pour ne laisser que les hooks dans ce fichier
-module_load_include('inc', 'oab_frontoffice', 'includes/helpers');
+\Drupal::moduleHandler()->loadInclude('oab_frontoffice', 'inc', 'includes/helpers');
 
 // Regroupement des METHODES POUR LES CARTES D'OFFICES QUI DOIVENT ETRE ACCESSIBLES PARTOUT (multi-JIRA)
-module_load_include('inc', 'oab_frontoffice', 'includes/office_map');
+\Drupal::moduleHandler()->loadInclude( 'oab_frontoffice', 'inc', 'includes/office_map');
 
 // Mise dans un fichier a part des filtres des subhomes
-module_load_include('inc', 'oab_frontoffice', 'includes/subhomes_views_exposed_form');
+\Drupal::moduleHandler()->loadInclude( 'oab_frontoffice', 'inc', 'includes/subhomes_views_exposed_form');
 
 // Mise dans un fichier a part des filtres de la view business-insight
-module_load_include('inc', 'oab_frontoffice', 'includes/vb_views_exposed_form');
+\Drupal::moduleHandler()->loadInclude( 'oab_frontoffice', 'inc', 'includes/vb_views_exposed_form');
 
 function oab_frontoffice_preprocess_menu(&$variables) {
     if (isset($variables['items'])
