@@ -50,7 +50,7 @@ span.icon-footer {
     text-decoration: underline;
 }
 
-.o-footer-top .nopadding:not(:last-child) {
+.o-footer-top .nopadding:not(:first-child):not(:last-child) {
   padding-right: 2rem !important;
 }
 
