@@ -7,7 +7,6 @@ global-styling:
     component:
       assets/css/components.css: {}
   js:
-    js/hack.js: { }
     js/oab_media_browser.view.js: {}
   dependencies:
     - claro/global-styling
