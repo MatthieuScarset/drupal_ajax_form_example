@@ -27,7 +27,7 @@ Prepare Drupal:
     - cp -r sites build/
     - cp composer.* build/
     - cp load.environment.php build/
-    - echo $CI_COMMIT_TAG >> build/modules/contrib/oab_develop/.version
+    - echo $CI_COMMIT_TAG >> build/modules/custom/oab_develop/.version
   artifacts:
     paths:
       - build
