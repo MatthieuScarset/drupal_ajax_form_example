@@ -52,11 +52,11 @@ We call a macro which calls itself to render the full tree.
           </div>
         {% elseif item.content.field_style_template['#items'].value == 'wysiwyg' %}
           <div class="item_mega_menu mega-menu-panel collapse" id="mega-level-{{ loop.index }}-collapse">
-            {{ menus.wysiwyg_template_mega_menu_items(item.content, item.below) }}
+            {{ menus.wysiwyg_template_mega_menu_items(item.content, item.below, item.title) }}
           </div>
         {% else %}
           <div class="item_mega_menu mega-menu-panel collapse" id="mega-level-{{ loop.index }}-collapse">
-            {{ menus.mega_menu_items(item.content, item.below) }}
+            {{ menus.mega_menu_items(item, item.below) }}
           </div>
         {% endif %}
       {% endif %}
@@ -65,21 +65,25 @@ We call a macro which calls itself to render the full tree.
   {% endif %}
 {% endmacro %}
 
-{% macro mega_menu_items(content, items) %}
+{% macro mega_menu_items(parent, items) %}
   <div class="container-fluid site-width mega-menu-container">
     <div class="row justify-content-between pb-1 pr-2 mt-2">
-      <span class="col-3 text-dark title_megamenu">{{ content.field_subtitle }}</span>
-      <a class="col-auto o-link-arrow mega-menu-global-link pt-0" href="{{ content.field_global_link.0['#url'] }}">{{ content.field_global_link.0['#title'] }}</a>
+      <span class="col-3 text-dark title_megamenu">{{ parent.content.field_subtitle }}</span>
+      <a class="col-auto o-link-arrow mega-menu-global-link pt-0"
+         href="{{ parent.content.field_global_link.0['#url'] }}"
+         onmousedown="utag_link(utag_data.titre_page,'Menu','{{ parent.title }}','{{ parent.content.field_global_link.0['#title'] }}')"
+      >
+        {{ parent.content.field_global_link.0['#title'] }}</a>
     </div>
     <div class="row mb-2">
       {% for item in items %}
         <div class="col-4">
           <a class="mb-1 nav-link sous_items" href="{{ item.url }}"
-             onmousedown="utag_link(utag_data.titre_page,'Menu','{{ title }}','{{ item.title }}')">{{ item.title }}</a>
+             onmousedown="utag_link(utag_data.titre_page,'Menu','{{ parent.title }}','{{ item.title }}')">{{ item.title }}</a>
           {% if item.below %}
             {% for sous_item in item.below %}
               <a class="mb-1 nav-link sous_items" href="{{ sous_item.url }}"
-                 onmousedown="utag_link(utag_data.titre_page,'Menu','{{ title }}','{{ sous_item.title }}')">{{ sous_item.title }}</a>
+                 onmousedown="utag_link(utag_data.titre_page,'Menu','{{ parent.title }}','{{ sous_item.title }}')">{{ sous_item.title }}</a>
             {% endfor %}
           {% endif %}
         </div>
@@ -88,7 +92,7 @@ We call a macro which calls itself to render the full tree.
   </div>
 {% endmacro %}
 
-{% macro wysiwyg_template_mega_menu_items(content, items) %}
+{% macro wysiwyg_template_mega_menu_items(content, items, parent_title) %}
   <div class="container-fluid site-width ml-0 pl-0">
     <div class="row">
     {%  if content.field_highlight.0 is defined and content.field_highlight.0['#text'] is not null %}
@@ -108,7 +112,7 @@ We call a macro which calls itself to render the full tree.
               {% if item.below %}
                 {% for sous_item in item.below %}
                   <a class="mb-1 nav-link sous_items" href="{{ sous_item.url }}"
-                     onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ title }}','track_cible':'{{ sous_item.title }}','track_type_evt':'clic'})">{{ sous_item.title }}</a>
+                     onmousedown="utag_link(utag_data.titre_page,'Menu','{{ parent_title }}','{{ sous_item.title }}')">{{ sous_item.title }}</a>
                 {% endfor %}
               {% endif %}
             </div>
@@ -143,7 +147,7 @@ We call a macro which calls itself to render the full tree.
                   <div class="col-6 en_ce_moment">{{ "Key solutions"|t }}</div>
                   <div class="col-6">
                     <a class="o-link-arrow all_product_link" href="{{ item.url }}"
-                       onmousedown="utag_link({'track_page':utag_data.titre_page,'track_zone':'Menu','track_nom':'{{ item.title }}','track_cible':'See all solutions','track_type_evt':'clic'});">
+                       onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item.title }}','{{ "See all solutions"|t }}')">
                       {{ "See all solutions"|t }}
                     </a>
                   </div>
