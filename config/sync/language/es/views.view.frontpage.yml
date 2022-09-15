@@ -1,6 +1,12 @@
 display:
   default:
+    display_title: Master
     display_options:
       exposed_form:
         options:
           submit_button: Applicar
+      empty:
+        area_text_custom:
+          content: 'No front page content has been created yet.'
+        title:
+          title: 'Welcome to [site:name]'

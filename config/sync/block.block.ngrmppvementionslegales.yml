@@ -1,0 +1,30 @@
+uuid: ab23194a-d5f3-42d3-acea-f6b3ac9cafae
+langcode: fr
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:5ba96437-7bbc-48b5-b3cc-bffc3047f8c2'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_one_i
+id: ngrmppvementionslegales
+theme: theme_one_i
+region: prefooter
+weight: -64
+provider: null
+plugin: 'block_content:5ba96437-7bbc-48b5-b3cc-bffc3047f8c2'
+settings:
+  id: 'block_content:5ba96437-7bbc-48b5-b3cc-bffc3047f8c2'
+  label: '[NGR][MP] PVE - Mentions légales'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /product/new-pve

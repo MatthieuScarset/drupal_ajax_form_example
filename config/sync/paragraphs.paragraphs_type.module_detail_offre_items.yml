@@ -3,8 +3,8 @@ langcode: en
 status: true
 dependencies: {  }
 id: module_detail_offre_items
-label: '[MP] Module detail offre items'
+label: '[MP] [Offer details] Item'
 icon_uuid: null
 icon_default: null
-description: 'Les items du module détail de l''offre'
+description: ''
 behavior_plugins: {  }

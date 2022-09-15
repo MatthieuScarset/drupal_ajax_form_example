@@ -1,3 +1,4 @@
+uuid: null
 langcode: fr
 status: true
 dependencies:
@@ -10,7 +11,7 @@ type: 'canonical_entities:node'
 pattern: 'revista/[node:title]'
 selection_criteria:
   8ab52243-bd65-4df2-aa34-7656b27fa88f:
-    id: node_type
+    id: 'entity_bundle:node'
     negate: false
     uuid: 8ab52243-bd65-4df2-aa34-7656b27fa88f
     context_mapping:

@@ -1,5 +1,5 @@
 uuid: 61812386-9ab0-4832-a349-00b9b00d8350
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -9,8 +9,8 @@ id: node.modular_product.field_teaser
 field_name: field_teaser
 entity_type: node
 bundle: modular_product
-label: Teaser
-description: ''
+label: Title
+description: 'In a few words, the user should be able to understand the goal, the purpose of the presented product.'
 required: true
 translatable: true
 default_value: {  }

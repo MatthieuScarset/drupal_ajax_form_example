@@ -6,7 +6,6 @@ dependencies:
     - 'block_content:basic:ff968ee2-caea-4184-ad51-be7589ae8b06'
   module:
     - block_content
-    - system
   theme:
     - theme_one_i
 id: ngrrepairpopper
@@ -23,8 +22,4 @@ settings:
   status: true
   info: ''
   view_mode: full
-visibility:
-  request_path:
-    id: request_path
-    negate: true
-    pages: /node/14560
+visibility: {  }

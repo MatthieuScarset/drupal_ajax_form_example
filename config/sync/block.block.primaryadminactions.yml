@@ -1,0 +1,18 @@
+uuid: 08ca7cfc-bf0e-42ff-8e2b-ddf43ea66870
+langcode: en
+status: true
+dependencies:
+  theme:
+    - theme_obs_backoffice_claro
+id: primaryadminactions
+theme: theme_obs_backoffice_claro
+region: content
+weight: -3
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

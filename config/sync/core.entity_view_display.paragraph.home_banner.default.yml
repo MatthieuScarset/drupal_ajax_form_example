@@ -7,6 +7,7 @@ dependencies:
     - field.field.paragraph.home_banner.field_date
     - field.field.paragraph.home_banner.field_function
     - field.field.paragraph.home_banner.field_image_mobile
+    - field.field.paragraph.home_banner.field_link
     - field.field.paragraph.home_banner.field_link_title
     - field.field.paragraph.home_banner.field_little_image_desktop
     - field.field.paragraph.home_banner.field_name
@@ -29,6 +30,8 @@ content:
     settings:
       image_link: ''
       image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
     weight: 5
     region: content
@@ -55,6 +58,8 @@ content:
     settings:
       image_link: ''
       image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
     weight: 7
     region: content
@@ -76,6 +81,8 @@ content:
     settings:
       image_link: ''
       image_style: ''
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
     weight: 6
     region: content

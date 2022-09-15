@@ -1,0 +1,20 @@
+@import "../variables/*.scss";
+
+@media screen and (min-width: 61rem) {
+  .layout-region--node-main .layout-region__content,
+  .layout-region--node-footer .layout-region__content {
+    max-width: 100%;
+  }
+
+  .layout-region--node-main,
+  .layout-region--node-footer,
+  .layout-region--node-secondary {
+    float: initial;
+    width: initial;
+    padding-right: 0;
+  }
+}
+
+#edit-actions > .dropbutton-multiple {
+  margin: 1rem 0.5rem 1rem 0;
+}

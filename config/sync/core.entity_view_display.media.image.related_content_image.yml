@@ -23,6 +23,8 @@ content:
     settings:
       image_link: content
       image_style: related_contents
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
     weight: 2
     region: content

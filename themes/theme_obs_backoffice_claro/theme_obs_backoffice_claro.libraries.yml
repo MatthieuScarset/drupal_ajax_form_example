@@ -1,0 +1,39 @@
+global-styling:
+  version: VERSION
+  css:
+    base:
+      assets/css/style.css: {}
+      css/base/elements.css: {}
+    component:
+      assets/css/components.css: {}
+  js:
+    js/oab_media_browser.view.js: {}
+  dependencies:
+    - claro/global-styling
+    - system/admin
+    - oab_icomoon/icomoon
+
+global-scripts:
+  version: VERSION
+  js:
+    js/script.js: {}
+  dependencies:
+    - core/jquery
+
+node-form:
+  version: VERSION
+  css:
+    layout:
+      assets/css/node-add.css: {}
+
+vertical-tabs:
+  version: VERSION
+  css:
+    component:
+      assets/css/vertical-tabs.css: {}
+
+neon:
+  version: VERSION
+  css:
+    base:
+      css/base/neon.css: {}

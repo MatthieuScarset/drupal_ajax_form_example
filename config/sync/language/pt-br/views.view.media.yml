@@ -1,10 +1,9 @@
 label: Media
 display:
   default:
+    display_title: Master
     display_options:
-      exposed_form:
-        options:
-          submit_button: Filtrar
+      title: Media
       fields:
         media_bulk_form:
           action_title: Ação
@@ -14,6 +13,12 @@ display:
           label: Status
         operations:
           label: Operações
+      exposed_form:
+        options:
+          submit_button: Filtrar
+      empty:
+        area_text_custom:
+          content: 'No content available.'
       filters:
         bundle:
           expose:
@@ -21,10 +26,9 @@ display:
         status:
           group_info:
             label: 'Publishing status'
-      title: Media
-      empty:
-        area_text_custom:
-          content: 'No content available.'
+        langcode:
+          expose:
+            label: Language
   media_page_list:
     display_title: Media
     display_options:

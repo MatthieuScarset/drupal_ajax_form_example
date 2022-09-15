@@ -1,0 +1,89 @@
+/* Partie Classify - add part */
+@media screen and (min-width: 85em) {
+  #edit-group-classify {
+    .claro-details__content--vertical-tabs-item {
+      margin: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .claro-details__content {
+      >.field--type-entity-reference {
+        width: 33%;
+        .form-element--type-select-multiple {
+          width: 85%;
+        }
+      }
+    }
+    #edit-field-country-wrapper {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 85em) {
+  #edit-group-classify {
+    .claro-details__content {
+      >.field--type-entity-reference {
+        .form-element--type-select-multiple {
+          width: 95%;
+        }
+      }
+    }
+  }
+}
+
+.claro-details__wrapper--vertical-tabs-item {
+  &::before {
+    display: initial;
+  }
+}
+
+.claro-details__summary {
+  &:hover {
+    color: $orange;
+  }
+  &::after {
+    box-shadow: inset 0 0 0 3px $orange;
+  }
+}
+
+[open] > .claro-details__summary {
+  &--accordion,
+  &--accordion-item,
+  &--vertical-tabs-item {
+    color: $orange;
+    &:not(:focus) {
+      &:not(:active) {
+        &::after {
+          border-left: 3px solid $orange;
+        }
+      }
+    }
+  }
+}
+
+.claro-details[open] {
+  >.claro-details__summary {
+    &:focus {
+      color: $orange;
+    }
+  }
+}
+
+.collapse-processed[open] {
+  >.claro-details__summary
+  {
+    &--accordion,
+    &--accordion-item,
+    &--vertical-tabs-item {
+      .details-title {
+        &:not(:focus) {
+          &::after {
+            border-left: 3px solid $orange;
+          }
+        }
+      }
+    }
+  }
+}

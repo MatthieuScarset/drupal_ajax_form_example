@@ -1,0 +1,20 @@
+uuid: f12d7255-8bdd-4eb3-9aa6-ae18fbd08716
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - theme_obs_backoffice_claro
+id: messages
+theme: theme_obs_backoffice_claro
+region: highlighted
+weight: 0
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: Messages
+  label_display: '0'
+  provider: system
+visibility: {  }

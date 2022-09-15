@@ -18,13 +18,15 @@ bundle: image
 mode: modular_product_image_top_zone
 content:
   field_image:
-    weight: 2
+    type: image
     label: hidden
     settings:
-      image_style: modular_product_image_top_zone
       image_link: ''
+      image_style: modular_product_image_top_zone
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
-    type: image
+    weight: 2
     region: content
 hidden:
   created: true

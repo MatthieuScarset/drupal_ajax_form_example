@@ -6,6 +6,7 @@ id: prod
 label: Prod
 description: ''
 weight: 0
+stackable: false
 storage: folder
 folder: config/config_split/prod
 module: {  }
