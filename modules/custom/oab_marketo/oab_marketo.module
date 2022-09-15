@@ -216,9 +216,12 @@ function _oab_get_labels_from_term($field) {
   $field_values = $field->getValue();
   if (is_array($field_values)) {
     foreach ($field_values as $value) {
+      //var_dump($value['target_id']);
       if (isset($value['target_id'])) {
         $term = Term::load($value['target_id']);
-        $ret[] = strtolower($term->label());
+        if(isset($term)) {
+          $ret[] = strtolower($term->label());
+        }
       }
     }
   }
