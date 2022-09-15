@@ -28,10 +28,6 @@ variables:
 
 
 before_script:
-  - echo $CONTAINER_FPM
-  - echo $CUSTOM_PROJECT_PATH
-  - echo $DOCKER_COMPOSE_PATH
-  - echo $SHARED_DIR
   - 'command -v ssh-agent >/dev/null || ( apk update && apk add openssh-client )'
   - eval $(ssh-agent -s)
   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
@@ -53,6 +49,12 @@ before_script:
 Deploy dev:
   stage: deploy
   script:
+    - echo "CI_PIPELINE_ID=$CI_PIPELINE_ID" >> ci-data
+    - echo "CI_PIPELINE_URL=$CI_PIPELINE_URL" >> ci-data
+    - echo "CI_COMMIT_TIMESTAMP=$CI_COMMIT_TIMESTAMP" >> ci-data
+    - echo "CI_COMMIT_MESSAGE=$CI_COMMIT_MESSAGE" >> ci-data
+    - echo "CI_PROJECT_URL=$CI_PROJECT_URL" >> ci-data
+    - echo "CI_COMMIT_SHA=$CI_COMMIT_SHA" >> ci-data
     - |
       $SSH_COMMAND "
         [ -f $DOCKER_COMPOSE_PATH ] && docker compose -f $DOCKER_COMPOSE_PATH down;
@@ -78,4 +80,3 @@ Update drupal:
     - $EXEC_PHP_FPM drush cim --yes
     - $EXEC_PHP_FPM drush updb --yes
     - $EXEC_PHP_FPM drush cr
-

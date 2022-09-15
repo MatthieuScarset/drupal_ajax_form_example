@@ -33,6 +33,10 @@
   display: flex;
   padding: 0.5rem;
 }
+.version-bar-table a{
+  color: #000000;
+  text-decoration: underline;
+}
 
 .version-bar-cell {
   margin-left: 0.5rem;
@@ -44,3 +48,4 @@
   text-transform: uppercase;
   font-weight: bold;
 }
+
