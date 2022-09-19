@@ -7,6 +7,13 @@ oab_synomia_search_flux.flux_xml:
   requirements:
     _access: 'TRUE'
 
+oab_synomia_search_flux.deleted_content_flux_xml:
+  path: '/synomia_deleted_content.xml'
+  defaults:
+    _controller: '\Drupal\oab_synomia_search_flux\Controller\OabSynomiaSearchFluxController::viewDeletedContentFlux'
+    _title: 'Synomia Deleted Content XML'
+  requirements:
+    _access: 'TRUE'
 
 oab.settings_synomia_contentTypes:
   path: '/admin/structure/oab/settings/synomiaContentTypes'
