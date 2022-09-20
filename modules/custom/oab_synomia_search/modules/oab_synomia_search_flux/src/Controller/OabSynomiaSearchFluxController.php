@@ -14,6 +14,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Database\Database;
 use Drupal\oab_synomia_search_flux\Classes\SynomiaDeletedContent;
 use Drupal\oab_synomia_search_flux\Classes\SynomiaFluxService;
+use Drupal\oab_synomia_search_flux\Classes\SynomiaMSSFluxService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,14 +26,20 @@ class OabSynomiaSearchFluxController extends ControllerBase {
    * @var SynomiaFluxService
    */
   private SynomiaFluxService $synomiaFluxService;
+  /**
+   * @var SynomiaMSSFluxService
+   */
+  private SynomiaMSSFluxService $synomiaMSSFluxService;
 
-  public function __construct(SynomiaFluxService $synomiaFluxService) {
+  public function __construct(SynomiaFluxService $synomiaFluxService, SynomiaMSSFluxService $synomiaMSSFluxService) {
     $this->synomiaFluxService = $synomiaFluxService;
+    $this->synomiaMSSFluxService = $synomiaMSSFluxService;
   }
 
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('oab_synomia_search_flux.flux_service')
+      $container->get('oab_synomia_search_flux.flux_service'),
+      $container->get('oab_synomia_search_flux.mss_flux_service')
     );
   }
 
@@ -62,6 +69,26 @@ class OabSynomiaSearchFluxController extends ControllerBase {
     $dates = $this->getDates($request);
     if(count($dates) > 0) {
       $xml_feed = $this->synomiaFluxService->getSitemapToDeleteBySynomia($dates['start'], $dates['end']);
+      $response->setContent($xml_feed);
+    }
+    else {
+      throw new NotFoundHttpException();
+    }
+    $response->headers->set('Content-Type', 'text/xml');
+    return $response;
+  }
+
+  /** Méthode appelée lorsqu'on va sur le flux XML Synomia POUR MSS
+   *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *
+   * @return \Symfony\Component\HttpFoundation\Response
+   */
+  public function viewMSSContentFlux(Request $request) {
+    $response = new Response();
+    $dates = $this->getDates($request);
+    if(count($dates) > 0) {
+      $xml_feed = $this->synomiaMSSFluxService->getMSSSitemapToIndexBySynomia($dates['start'], $dates['end']);
       $response->setContent($xml_feed);
     }
     else {

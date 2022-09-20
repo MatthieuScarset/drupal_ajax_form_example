@@ -3,7 +3,6 @@ oab_synomia_search_flux.flux_xml:
   path: '/synomia_search_sitemap.xml'
   defaults:
     _controller: '\Drupal\oab_synomia_search_flux\Controller\OabSynomiaSearchFluxController::viewFlux'
-    type_flux: 'default'
     _title: 'Synomia XML sitemap'
   requirements:
     _access: 'TRUE'
@@ -27,8 +26,7 @@ oab.settings_synomia_contentTypes:
 oab_synomia_search_flux.mss_flux_xml:
   path: '/mss_synomia_search_sitemap.xml'
   defaults:
-    _controller: '\Drupal\oab_synomia_search_flux\Controller\OabSynomiaSearchFluxController::viewFlux'
-    type_flux: 'mss'
+    _controller: '\Drupal\oab_synomia_search_flux\Controller\OabSynomiaSearchFluxController::viewMSSContentFlux'
     _title: 'MSS Synomia XML sitemap'
   requirements:
     _access: 'TRUE'
