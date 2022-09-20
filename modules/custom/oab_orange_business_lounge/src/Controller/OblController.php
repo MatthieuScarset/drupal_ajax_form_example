@@ -51,7 +51,8 @@ class OblController extends ControllerBase {
         $countries = $obl_service->getCountriesWithoutOperator();
 
         $technologies = $obl_service->getTechnologies();
-        $items = $technologies['items'];
+        $items = $technologies['items'] ?? [];
+
         uasort($items, [$this, "sortById"]);
 
 
@@ -126,7 +127,7 @@ class OblController extends ControllerBase {
     return $ret;
   }
 
-  private function getTechnoByName($technologies, $techno_name): mixed {
+  private function getTechnoByName(array $technologies, $techno_name): mixed {
     $ret = false;
     foreach ($technologies as $techno) {
       if (isset($techno['name']) && $techno['name'] === $techno_name) {

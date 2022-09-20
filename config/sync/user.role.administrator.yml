@@ -49,6 +49,7 @@ dependencies:
     - linkit
     - locale
     - media
+    - memcache_admin
     - metatag
     - node
     - oab_marketo
@@ -89,6 +90,7 @@ permissions:
   - 'access files overview'
   - 'access in-place editing'
   - 'access media overview'
+  - 'access memcache statistics'
   - 'access shortcuts'
   - 'access site in maintenance mode'
   - 'access site reports'

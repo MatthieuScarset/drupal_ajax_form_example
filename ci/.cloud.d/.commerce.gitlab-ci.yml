@@ -1,0 +1,7 @@
+
+variables:
+  SERVER_IP: $SSH_COMMERCE_IP
+  DOCKER_COMPOSE_FILE: "docker-compose.int.yml"
+  CONTAINER_FPM: "ruby-commerce_php-fpm"
+  CUSTOM_PROJECT_PATH : "$CI_PROJECT_PATH/main"
+  SHARED_DIR: "$CI_PROJECT_PATH/shared/main"

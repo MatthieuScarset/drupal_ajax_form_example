@@ -69,7 +69,7 @@ class MapRegionsCountriesForm extends FormBase {
         $form['submit'] = [
             '#type' => 'submit',
             '#value' => $this->t('Apply'),
-            '#name' => $this->t('Apply'),
+            '#name' => 'apply',
             '#attributes' => [
               'class' => ['btn', 'btn-secondary']
             ]
@@ -99,7 +99,7 @@ class MapRegionsCountriesForm extends FormBase {
           $form["buttons"]['clear'] = [
             '#type' => 'submit',
             '#value' => $this->t('Clear'),
-            '#name' => $this->t('Clear'),
+            '#name' => 'clear',
             '#attributes' => [
               'class' => ['btn', 'btn-secondary', 'align-self-md-end', 'mb-1', 'mb-sm-0']
             ],

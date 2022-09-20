@@ -1,0 +1,20 @@
+add background image entities:
+  title: 'Create new Background image entities'
+
+administer background image entities:
+  title: 'Administer Background image entities'
+  description: 'Allow to access the administration form to configure Background image entities.'
+  restrict access: true
+
+delete background image entities:
+  title: 'Delete Background image entities'
+
+edit background image entities:
+  title: 'Edit Background image entities'
+
+view published background image entities:
+  title: 'View published Background image entities'
+
+view unpublished background image entities:
+  title: 'View unpublished Background image entities'
+

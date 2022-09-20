@@ -9,11 +9,8 @@ ARG GID
 
 ADD php-ini-overrides.ini /usr/local/etc/php/conf.d/99-overrides.ini
 
-# Get APT Updates
-RUN apt-get update
-
 # Install selected extensions and other stuff
-RUN apt-get -y --no-install-recommends install \
+RUN apt-get update && apt-get -y --no-install-recommends install \
     vim \
     libzip-dev \
     zip \
@@ -21,20 +18,26 @@ RUN apt-get -y --no-install-recommends install \
     wget \
     git
 
+RUN docker-php-ext-install zip
+
 # PHP iMagick
 RUN apt-get install -y --no-install-recommends libmagickwand-dev imagemagick \
 	&& pecl install imagick \
 	&& docker-php-ext-enable imagick
 
-RUN docker-php-ext-install zip
 
 # GD & MySql
 RUN docker-php-ext-configure gd --prefix=/usr --with-jpeg --with-freetype \
   && docker-php-ext-install gd pdo_mysql \
   && docker-php-ext-enable gd
 
+# ADD Memached
+RUN apt-get install	-y libmemcached-dev \
+  && pecl install memcached \
+	&& docker-php-ext-enable memcached
 
-# ADD SOME CACHE
+
+# ADD OpCache
 RUN docker-php-ext-enable opcache
 RUN pecl install apcu && docker-php-ext-enable apcu
 
