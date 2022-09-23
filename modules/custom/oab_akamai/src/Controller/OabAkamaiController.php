@@ -137,6 +137,10 @@ class OabAkamaiController extends ControllerBase
 
     public function flushVarnish($origin_url, $host) {
 
+      if(!isset($this->varnishIp) || empty($this->varnishIp)) {
+        return true;
+      }
+      else {
         #Je supprime le prefixe "back." et "backoffice" pour vider le cache en prod
         $host = str_replace("back.", '', $host);
         $host = str_replace("backoffice.", '', $host);
@@ -145,11 +149,11 @@ class OabAkamaiController extends ControllerBase
 
         $url = "https://" . $this->varnishIp . $origin_path;
 
-       // $cmd = "curl -X BAN -LIk '$url' -H 'Host: www.orange-business.com' -H 'via: akamai'";
-        $headers = array(
-            'Host: www.orange-business.com',
-            'via: akamai',
-        );
+        // $cmd = "curl -X BAN -LIk '$url' -H 'Host: www.orange-business.com' -H 'via: akamai'";
+        $headers = [
+          'Host: www.orange-business.com',
+          'via: akamai',
+        ];
 
         $ch = curl_init();
 
@@ -158,8 +162,8 @@ class OabAkamaiController extends ControllerBase
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'BAN');
         curl_setopt($ch, CURLOPT_SSLVERSION, 0);
-        curl_setopt($ch, CURLOPT_SSLVERSION, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSLVERSION, FALSE);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         //curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
@@ -168,21 +172,26 @@ class OabAkamaiController extends ControllerBase
         $ret_value = curl_exec($ch);
 
 
-        $ret = false;
-        if ($ret_value === false && curl_errno($ch) !== 0) {
-            $err = curl_error($ch);
-            $err .= ' (' . curl_errno($ch) . " : " . curl_strerror(curl_errno($ch)) . ")";
-            $this->messenger()->addError(t("Erreur lors de l'appel à Varnish pour la page $url. Voir en log pour plus d'infos"), true);
-            \Drupal::logger('oab_akamai')->notice("Erreur lors du flush Varnish pour la page $url avec le retour : $err");
-        } else {
-            $ret = true;
-            $this->messenger()->addMessage(t('Cache Varnish vidé pour la page $url'), 'status', true);
+        $ret = FALSE;
+        if ($ret_value === FALSE && curl_errno($ch) !== 0) {
+          $err = curl_error($ch);
+          $err .= ' (' . curl_errno($ch) . " : " . curl_strerror(curl_errno($ch)) . ")";
+          $this->messenger()
+            ->addError(t("Erreur lors de l'appel à Varnish pour la page $url. Voir en log pour plus d'infos"), TRUE);
+          \Drupal::logger('oab_akamai')
+            ->notice("Erreur lors du flush Varnish pour la page $url avec le retour : $err");
+        }
+        else {
+          $ret = TRUE;
+          $this->messenger()
+            ->addMessage(t('Cache Varnish vidé pour la page $url'), 'status', TRUE);
 
         }
 
         curl_close($ch);
 
         return $ret;
+      }
     }
 
     public function flushDrupalCache($url) {
