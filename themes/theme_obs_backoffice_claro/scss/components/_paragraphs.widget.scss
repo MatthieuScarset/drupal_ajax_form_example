@@ -1,5 +1,8 @@
 .js{
   .paragraph-top{
-    grid-template-columns: 370px auto 1fr auto;
+    grid-template-columns: 300px auto 1fr auto;
+    .paragraph-type {
+      grid-column: 1 / 3;
+    }
   }
 }
