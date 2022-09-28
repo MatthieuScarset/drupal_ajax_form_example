@@ -482,6 +482,7 @@ function theme_boosted_preprocess_region(&$variables) {
     $variables['language'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
 }
 
+
 function theme_boosted_preprocess_menu(&$variables, $hook) {
   if (strpos($hook, 'menu__main') !== false) {
 
@@ -525,6 +526,7 @@ function theme_boosted_preprocess_menu(&$variables, $hook) {
     }
   }
 }
+
 
 function theme_boosted_preprocess_views_view(&$variables) {
 

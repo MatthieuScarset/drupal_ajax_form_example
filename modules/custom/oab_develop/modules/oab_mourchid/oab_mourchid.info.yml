@@ -1,11 +1,13 @@
-name: OAB Mourchid
-description: 'Oab module for Mourchid updates'
+name: OAB module for Mourchid
+description: ''
 type: module
 package: OAB
+# core: 8.x
+dependencies:
+  - oab_develop
 
-
-# Information added by Drupal.org packaging script on 2017-02-21
+# Information added by Drupal.org packaging script on 2021-05-17
 version: '8.x-1.0'
 core_version_requirement: ^8.8.0 || ^9.0
 project: 'oab_mourchid'
-datestamp: 1487688273
+datestamp: 1621234388

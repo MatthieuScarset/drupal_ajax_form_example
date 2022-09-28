@@ -1,0 +1,30 @@
+uuid: 09752f5d-52ef-4efe-8508-4809c1708bd1
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_typology
+field_name: field_typology
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: article
+      label: article
+    -
+      value: support_topics
+      label: 'support topics'
+    -
+      value: video
+      label: video
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

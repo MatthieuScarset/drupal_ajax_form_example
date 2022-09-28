@@ -1,4 +1,5 @@
-.path-content-search .container .region-content #block-theme-boosted-page-title{
+.path-content-search .container .region-content #block-theme-boosted-page-title,
+.path-mss-assistance-search .container .region-content #block-theme-boosted-page-title{
     display: none !important;
 }
 
@@ -18,7 +19,8 @@ article.page-synomia-search-results{
 }
 
 
-.search_form form#oab-synomia-search-engine-form label {
+.search_form form#oab-synomia-search-engine-form label,
+.search_form form#oab-synomia-mss-assistance-search-engine-form label {
     width: 100%;
     color: #ff7900;
     font-size: 3.5rem;
@@ -233,4 +235,10 @@ article.page-synomia-search-results{
 .page-synomia-search-results .block_principal_results .block-facetapi .filters_title span.icon_nav.glyphicon-minus,
 .page-synomia-search-results .block_principal_results .block-facetapi .filters_title span.icon_nav.glyphicon-plus{
     display: none;
+}
+
+
+.search_form form#oab-synomia-search-engine-form .form-submit,
+.search_form form#oab-synomia-mss-assistance-search-engine-form .form-submit {
+  vertical-align: text-top;
 }

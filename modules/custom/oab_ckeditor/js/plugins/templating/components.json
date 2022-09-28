@@ -6,13 +6,11 @@
     "label": "Top Zone produit",
     "file": "files/banner/top-zone.html.twig",
     "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/top-zone.jpg"
-  },
-    {
+  },{
       "label": "Top Zone Solution/Industrie",
       "file": "files/banner/top-zone-pwp.html.twig",
       "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/top-zone-pwp.jpg"
-    },
-    {
+    },{
       "label": "Top Zone Region/Pays",
       "file": "files/banner/top-zone-region.html.twig",
       "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/banner/top-zone-region.jpg"
@@ -34,13 +32,11 @@
   "id": "partner",
   "label": "Partner",
   "title": "Partner",
-  "items": [
-    {
+  "items": [{
       "label": "Repères cas client/partenaire",
       "file": "files/partner/reperes.html.twig",
       "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/partner/reperes.png"
-    }
-  ]
+    }]
 },{
   "id": "tools",
   "label": "Tools",
@@ -112,6 +108,19 @@
     "label": "Highligth",
     "file": "files/megamenu/highlight.html.twig",
     "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/megamenu/highlight.jpg"
+  }]
+},{
+  "id": "mss_assistance",
+  "label": "MSS Assistance",
+  "title": "MSS Assistance",
+  "items": [{
+    "label": "One-i Article Tile",
+    "file": "files/mss_assistance/one-i-article-tile.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/mss_assistance/one-i-article-tile.png"
+  },{
+    "label": "One-i Topic Card",
+    "file": "files/mss_assistance/one-i-topic-card.html.twig",
+    "image": "/modules/custom/oab_ckeditor/js/plugins/templating/images/mss_assistance/one-i-topic-card.png"
   }]
 }
 ]
