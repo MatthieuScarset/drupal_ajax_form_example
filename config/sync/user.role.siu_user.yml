@@ -1,0 +1,10 @@
+uuid: c7469551-1772-4530-8f63-d3dc8c669a27
+langcode: en
+status: true
+dependencies: {  }
+id: siu_user
+label: 'SIU User'
+weight: 11
+is_admin: null
+permissions:
+  - access-mss-assistance

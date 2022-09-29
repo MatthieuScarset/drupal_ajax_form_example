@@ -1,0 +1,26 @@
+uuid: 1884ce49-b561-4abd-89eb-193cfc532d28
+langcode: fr
+status: true
+dependencies:
+  module:
+    - oab_hub
+    - oab_siu_connexion
+  theme:
+    - theme_oab_hub
+id: oab_hub_siuhellouserblock
+theme: theme_oab_hub
+region: header
+weight: -54
+provider: null
+plugin: siu_hello_user_block
+settings:
+  id: siu_hello_user_block
+  label: 'SIU Hello User Block'
+  label_display: '0'
+  provider: oab_siu_connexion
+visibility:
+  hub_condition:
+    id: hub_condition
+    hub_id:
+      1121: '1121'
+    negate: false

@@ -14,8 +14,8 @@ use Drupal\node\Entity\Node;
 use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
 
-module_load_include('inc', 'oab_data_import', 'includes/product_categories_data_import_operations');
-module_load_include('inc', 'oab_data_import', 'includes/product_categories_terms_import_operations');
+\Drupal::moduleHandler()->loadInclude('oab_data_import', 'inc','includes/product_categories_data_import_operations');
+\Drupal::moduleHandler()->loadInclude('oab_data_import', 'inc', 'includes/product_categories_terms_import_operations');
 
 
 /** Retourne l'objet Term à partir du vocab, de son libellé et de la langue

@@ -14,3 +14,5 @@ use Dotenv\Exception\InvalidPathException;
  */
 $dotenv = Dotenv::createUnsafeImmutable(__DIR__);
 $dotenv->safeLoad();
+
+$_SERVER['SERVER_PORT']='8000';

@@ -1,0 +1,29 @@
+contact:
+  technical:
+    name: ''
+    email: ''
+  support:
+    name: ''
+    email: ''
+organization:
+  name: ''
+  display_name: ''
+  url: ''
+strict: true
+security:
+nameIdEncrypted: false
+authnRequestsSigned: false
+logoutRequestSigned: false
+logoutResponseSigned: false
+wantMessagesSigned: false
+wantAssertionsSigned: false
+wantNameIdEncrypted: false
+signMetaData: false
+signatureAlgorithm: 'http://www.w3.org/2000/09/xmldsig#rsa-sha1'
+lowercaseUrlencoding: false
+cert_location: ''
+key_location: ''
+new_cert_location: ''
+entity_id: 'https://int.www.orange-business.com/'
+debug: false
+assertion_urls: 'http://int.www.orange-business.com/fr/saml/consume'
