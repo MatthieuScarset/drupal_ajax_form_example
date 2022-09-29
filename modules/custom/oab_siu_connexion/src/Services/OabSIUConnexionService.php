@@ -13,7 +13,7 @@ class OabSIUConnexionService {
   ) { }
 
   public function getIDPConnexion(): mixed {
-    return $this->get("idp");
+    return $this->get("idp") ?? [];
   }
 
   public function getSIURestrictedURL(): ?string {
