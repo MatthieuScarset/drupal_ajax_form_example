@@ -1,0 +1,30 @@
+uuid: f1bc29a7-973c-47a3-890b-76a7855eab75
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:c50302dd-9ace-4f1f-bc6a-7f34e9eda366'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_boosted
+id: ngr_hidepressform
+theme: theme_boosted
+region: prefooter
+weight: -35
+provider: null
+plugin: 'block_content:c50302dd-9ace-4f1f-bc6a-7f34e9eda366'
+settings:
+  id: 'block_content:c50302dd-9ace-4f1f-bc6a-7f34e9eda366'
+  label: '[NGR] Hide Press Form'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /subhome_press
