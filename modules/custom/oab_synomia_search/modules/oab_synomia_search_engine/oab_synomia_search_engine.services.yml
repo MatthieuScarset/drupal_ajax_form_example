@@ -1,0 +1,13 @@
+services:
+  synomia.logger:
+    class: Drupal\Core\Logger\LoggerChannel
+    factory: ['@logger.factory', 'get']
+    arguments: [ 'oab_synomia' ]
+
+  synomia.search_response.default:
+    class: Drupal\oab_synomia_search_engine\Classes\SynomiaSearchResponse
+    arguments: ['@pager.manager', '@entity_field.manager']
+
+  synomia.search_response.mss:
+    class: Drupal\oab_synomia_search_engine\Classes\SynomiaSearchResponse
+    arguments: ['@pager.manager', '@entity_field.manager', 'mss']

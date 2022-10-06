@@ -30,16 +30,6 @@ function theme_boosted_preprocess_html(&$variables) {
   $variables['header_env'] = $config['header_env'];
   $variables['oab_version'] = ' - '.$version;
 
-    //RUBYPORTAILOBS-3317
-    //gestion des canonical url pour les contenu hub
-    $node = \Drupal::routeMatch()->getParameter('node');
-    if(isset($node) && $node<>"" && is_object($node)){
-        $nid = $node->id();
-        $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-        //$variables['page']['content']['system_main']['#attached']['html_head_link'][0][0]['href'] = "/".$language."/node/".$nid;
-        $current_path_alias = \Drupal::service('path_alias.manager')->getAliasByPath(\Drupal::service('path.current')->getPath());
-        $variables['page']['content']['system_main']['#attached']['html_head_link'][0][0]['href'] = "/".$language.$current_path_alias;
-    }
 }
 
 function theme_boosted_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
@@ -492,6 +482,7 @@ function theme_boosted_preprocess_region(&$variables) {
     $variables['language'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
 }
 
+
 function theme_boosted_preprocess_menu(&$variables, $hook) {
   if (strpos($hook, 'menu__main') !== false) {
 
@@ -529,6 +520,7 @@ function theme_boosted_preprocess_menu(&$variables, $hook) {
     }
   }
 }
+
 
 function theme_boosted_preprocess_views_view(&$variables) {
 

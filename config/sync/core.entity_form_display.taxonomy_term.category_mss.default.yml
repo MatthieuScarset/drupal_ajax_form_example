@@ -1,0 +1,61 @@
+uuid: eed26c32-9552-4bfc-82ea-55680b81072d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.category_mss.field_category_mss_url
+    - taxonomy.vocabulary.category_mss
+  module:
+    - path
+    - text
+    - workbench_moderation
+id: taxonomy_term.category_mss.default
+targetEntityType: taxonomy_term
+bundle: category_mss
+mode: default
+content:
+  description:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      placeholder: ''
+      rows: 5
+    third_party_settings: {  }
+  field_category_mss_url:
+    weight: 8
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 5
+    region: content
+    third_party_settings: {  }
+hidden: {  }

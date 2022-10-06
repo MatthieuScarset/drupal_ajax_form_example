@@ -6,6 +6,8 @@ services:
     memcached:
       image: memcached:alpine
       container_name: $CONTAINER_MEMCACHED
+      networks:
+        - memcached
 
     mailhog:
       image: mailhog/mailhog:latest
@@ -15,9 +17,9 @@ services:
       networks:
         - mailhog
 
-    mariadb:
-      image: mariadb:10.3
-      container_name: $CONTAINER_MARIADB
+    mysql:
+      image: mysql:8
+      container_name: $CONTAINER_MYSQL
       volumes:
         - ${DB_DUMPS_DIR:-./data/db_dumps}:/tmp/db_dumps
         - ${MYSQL_DIR:-/var/lib/mysql}:/var/lib/mysql
@@ -34,12 +36,11 @@ services:
     phpmyadmin:
       image: phpmyadmin/phpmyadmin
       depends_on:
-        - mariadb
-      container_name: $CONTAINER_PHPMYADMIN
+        - mysql
       ports :
         - "${PHPMYADMIN_PORT:-8080}:80"
       environment:
-        PMA_HOST: 'mariadb'
+        PMA_HOST: "$CONTAINER_MYSQL"
       networks:
         - database
 
@@ -69,15 +70,16 @@ services:
       working_dir: /application
       entrypoint: ./entrypoint.php-fpm.sh
       depends_on:
-        - mariadb
+        - mysql
       volumes:
         - .:/application
         - ./config/docker/local/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
-        - ${DRUPAL_SITES_DIR:-./sites}:/application/sites
+        - ${DRUPAL_SITES_FILES_DIR:-./sites/default/files}:/application/sites/default/files
       networks:
         - proxy
         - database
         - mailhog
+        - memcached
 
     testsamlidp_idp:
       image: kristophjunge/test-saml-idp
@@ -96,3 +98,4 @@ networks:
     proxy:
     database:
     mailhog:
+    memcached:

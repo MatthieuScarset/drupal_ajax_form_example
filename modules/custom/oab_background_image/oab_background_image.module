@@ -10,7 +10,7 @@ function oab_background_image_media_insert(Media $entity) {
         return;
     }
 
-    /** @var Drupal\oab_background_image\Services\BgImageManagement $bg_cache_service */
+    /** @var Drupal\oab_background_image\Services\BgImageManagementInterface $bg_cache_service */
     $bg_cache_service = \Drupal::service('oab_background_image.bg_image_management');
 
 
@@ -29,27 +29,11 @@ function oab_background_image_media_update(Media $entity) {
         return;
     }
 
-    /** @var Drupal\oab_background_image\Services\BgImageManagement $bg_cache_service */
+    /** @var Drupal\oab_background_image\Services\BgImageManagementInterface $bg_cache_service */
     $bg_cache_service = \Drupal::service('oab_background_image.bg_image_management');
 
     if ($entity->isPublished()) {
 
-        // First on delete toutes les anciennes URLs pour le cas d'une modif
-        if (isset($entity->original)) {
-
-            $field_value = Drupal::service('oab_background_image.entity_get_field')->getFirst($entity->original, BACKGROUND_FIELD_VISIBILITY);
-
-            if (isset($field_value['value'])) {
-                $value = $field_value['value'];
-                $urls = explode("\r\n", $value);
-
-                foreach ($urls as $url) {
-                    $bg_cache_service->remove($url);
-                }
-            }
-        }
-
-        // Then on remet toutes les URLs
         /** @var Drupal\Core\Field\FieldItemList $field_visibility */
         $field_value = Drupal::service('oab_background_image.entity_get_field')->getFirst($entity, BACKGROUND_FIELD_VISIBILITY);
 
@@ -83,7 +67,7 @@ function oab_background_image_media_delete(Media $entity) {
         return;
     }
 
-    /** @var Drupal\oab_background_image\Services\BgImageManagement $bg_cache_service */
+    /** @var Drupal\oab_background_image\Services\BgImageManagementInterface $bg_cache_service */
     $bg_cache_service = \Drupal::service('oab_background_image.bg_image_management');
 
     /** @var Media $original */
@@ -122,14 +106,6 @@ function oab_background_image_preprocess_html(&$variables) {
 
         }
     }
-}
-
-
-/**
- * Implements hook_rebuild().
- */
-function oab_background_image_rebuild() {
-    \Drupal::service('oab_background_image.bg_image_management')->rebuild();
 }
 
 

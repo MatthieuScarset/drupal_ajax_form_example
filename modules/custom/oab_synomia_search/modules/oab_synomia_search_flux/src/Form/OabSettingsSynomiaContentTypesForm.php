@@ -78,7 +78,7 @@ class OabSettingsSynomiaContentTypesForm extends ConfigFormBase
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Retrieve the configuration
     $config = $this->config('oab_synomia_search.synomia.contentTypes');
-        $content_types = \Drupal::service('entity.manager')->getStorage('node_type')->loadMultiple();
+        $content_types = \Drupal::service('entity_type.manager')->getStorage('node_type')->loadMultiple();
         foreach ($content_types as $contentType) {
             $config->set($contentType->id(), $form_state->getValue($contentType->id()));
         }

@@ -1,0 +1,11 @@
+services:
+  oab_synomia_search.content_types_settings:
+    class: \Drupal\Core\Config\ImmutableConfig
+    factory: config.factory:get
+    arguments: ['oab_synomia_search.synomia.contentTypes']
+  oab_synomia_search_flux.flux_service:
+    class: Drupal\oab_synomia_search_flux\Classes\SynomiaFluxService
+    arguments: ['@oab_synomia_search.content_types_settings', '@entity_type.manager', '@path_alias.manager']
+  oab_synomia_search_flux.mss_flux_service:
+    class: Drupal\oab_synomia_search_flux\Classes\SynomiaMSSFluxService
+    arguments: ['@entity_type.manager', '@path_alias.manager']

@@ -101,9 +101,10 @@ view_mode ? view_mode|clean_class,
     {% set fieldOwner %}
         {{ content.field_content_owner }}
     {% endset %} {# Variable utilisée pour les microdonnées JSON+LD #}
-    {% set imageUrl %}
-        {{ http_host ~ file_url(node.field_visual.0.entity.field_image.0.entity.uri.value) }}
-    {% endset %}
+    {% set imageUrl = "" %}
+    {% if node.field_visual.0.entity.field_image.0.entity.uri.value is not null %}
+      {% set imageUrl = http_host ~ file_url(node.field_visual.0.entity.field_image.0.entity.uri.value) %}
+    {% endif %}
     {% set logoUrl %}
         {{ http_host ~ "/themes/theme_boosted/logo-fond-blanc.png" }}
     {% endset %}

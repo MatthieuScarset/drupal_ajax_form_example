@@ -54,6 +54,8 @@ module:
   locale: 0
   media: 0
   media_entity_generic: 0
+  memcache: 0
+  memcache_admin: 0
   menu_item_extras: 0
   menu_link_content: 0
   menu_ui: 0
@@ -91,6 +93,7 @@ module:
   oab_mp_formule_field: 0
   oab_mp_formules: 0
   oab_mp_product_formule_packages: 0
+  oab_mourchid: 0
   oab_ob1_adapter: 0
   oab_offices_map: 0
   oab_orange_business_lounge: 0

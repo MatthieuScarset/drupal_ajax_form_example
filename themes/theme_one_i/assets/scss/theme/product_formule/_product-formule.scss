@@ -32,7 +32,7 @@
       .left-zone {
         align-items: start;
         @include media-breakpoint-up(md) {
-          min-width: 400px;
+          min-width: 500px;
         }
 
         .content {
@@ -241,6 +241,11 @@
           }
         }
 
+        .contact-form img {
+          height: 224px;
+          width: auto;
+        }
+
       }
 
       .product-label {
@@ -267,5 +272,10 @@
       }
 
     }
+  }
+
+
+  .right-zone .accordion .accordion-card-body {
+    max-width: initial;
   }
 }

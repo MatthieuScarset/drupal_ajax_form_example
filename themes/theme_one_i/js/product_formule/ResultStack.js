@@ -10,7 +10,7 @@ class ResultStack {
 
     this.$defaultTemplate = `<div class="stack-item" data-item="" >` +
         `<div class="stack-item-result"></div>` +
-        `<a class="o-link" data->${this.$drupal.t('edit')}</a>` +
+        `<a class="o-link py-0" data->${this.$drupal.t('edit')}</a>` +
       `</div>`;
 
     this.$results = {};

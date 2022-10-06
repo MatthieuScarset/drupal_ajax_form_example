@@ -8,10 +8,11 @@
 use Dotenv\Dotenv;
 use Dotenv\Exception\InvalidPathException;
 
+
 /**
  * Load any .env file. See /.env.example.
  */
-$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv = Dotenv::createUnsafeImmutable(__DIR__);
 $dotenv->safeLoad();
 
 $_SERVER['SERVER_PORT']='8000';
