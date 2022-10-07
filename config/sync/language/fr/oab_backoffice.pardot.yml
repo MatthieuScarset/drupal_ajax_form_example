@@ -1,6 +1,3 @@
 marketo:
   document:
-    mkto_form_id: '1606'
-    mkto_form_follow_up_message:
-      value: "<p>Le lien du document vous a été transmis par email.</p>\r\n\r\n<p>Merci de votre visite sur orange-business.com.</p>\r\n"
-      format: full_html
+    paragraph_id: '8844'

@@ -94,6 +94,7 @@ function oab_marketo_preprocess_paragraph(&$variables) {
   if (!isset($variables['paragraph'])) {
     return;
   }
+  $formName = 'contact';
 
   $marketo_conf = \Drupal::config(OabSettingsPardotForm::getConfigName());
 
@@ -111,6 +112,28 @@ function oab_marketo_preprocess_paragraph(&$variables) {
       $list_field = array_filter(array_map('trim', explode("\n", $fields)));
     }
 
+    if($variables['elements']['#view_mode'] === 'marketo_document_form') {
+      $node = \Drupal::routeMatch()->getParameter('node');
+      if(!empty($node)) {
+        if (null !== ($media = Media::load($node->field_file->target_id))) {
+          if (null !== ($file = File::load($media->field_file->target_id ?? 0))) {
+            $variables['document_file_absolute_url'] = $file->createFileUrl();
+          }
+        }
+      }
+
+      $formName = $paragraph->field_title->value;
+      $variables['mkto_form_id'] = $paragraph->field_form_id->value;;
+      $variables['mkto_follow_up_message'] = $paragraph->field_message_of_thanks->value;
+      if(!in_array("submitButton", $list_field)) {
+        array_push($list_field, "submitButton");
+      }
+      if(!in_array("LegalInfos", $list_field)) {
+        array_push($list_field, "LegalInfos");
+      }
+    }
+
+
     // Si le field "require altares" est activé
     if (isset($paragraph->field_requires_altares->value) && $paragraph->field_requires_altares->value) {
       /** @var AltaresTokenService $altares_token_service */
@@ -126,13 +149,11 @@ function oab_marketo_preprocess_paragraph(&$variables) {
       'mktoDomain' => $marketo_conf->get('marketo.general.mkto_domain'),
       'mktoMunchkinID' => $marketo_conf->get('marketo.general.mkto_munchkin_id'),
       'mktoFormID' => (int) $paragraph->field_form_id->value,
-//      'formName' => $paragraph->field_title->value,
-      'formName' => 'contact',
+      'formName' => $formName,
       'useAltares' => true,
       'customFollowUpUrl' => isset($redirection_url) ? $redirection_url : "",
       'followUpMsgDiv' => "FormFollowUpMessage_" . (int) $paragraph->field_form_id->value,
       'mktoFieldOrder' => isset($list_field) ? $list_field : ["submitButton","LegalInfos"]
-      // mktoFrom key added in JS to get the referrer
     ];
 
     $variables['#attached']['drupalSettings']['marketo_data_for_tealium'] = [
@@ -165,25 +186,8 @@ function oab_marketo_preprocess_node(&$variables) {
         }
       }
 
-      $mkto_config = \Drupal::config(OabSettingsPardotForm::getConfigName());
-      $paragraphId = $mkto_config->get('marketo.document.paragraph_id');
-      if(!empty($paragraphId)) {
-        $paragraphConfig = Paragraph::load($paragraphId);
-        // Variables pour le template
-        $mktoFormId = $paragraphConfig->field_form_id->value;
-        $mktoFollowUpMessage = $paragraphConfig->field_message_of_thanks->value;
-        $mktoFormName = $paragraphConfig->field_title->value;
-        $mktoFollowUpUrl = $paragraphConfig->field_redirection_url->value;
-
-        $variables['mkto_form_id'] = $mktoFormId;
-        $variables['mkto_follow_up_message'] = $mktoFollowUpMessage;
-
-        if (isset($paragraphConfig->field_order) && $paragraphConfig->field_order->count() > 0) {
-          $fields = $paragraphConfig->field_order->value;
-          $list_field = array_filter(array_map('trim', explode("\n", $fields)));
-        }
-
-      }
+    $mkto_config = \Drupal::config(OabSettingsPardotForm::getConfigName());
+    $variables['marketo_config_pid'] = $mkto_config->get('marketo.document.paragraph_id');;
 
       // Ajout de la librairie marketo
       $variables['#attached']['library'][] = 'oab_marketo/marketo';
@@ -192,10 +196,6 @@ function oab_marketo_preprocess_node(&$variables) {
       $variables['#attached']['drupalSettings']['marketo_data'] = [
         'mktoDomain' => $mkto_config->get('marketo.general.mkto_domain'),
         'mktoMunchkinID' => $mkto_config->get('marketo.general.mkto_munchkin_id'),
-        'mktoFormID' => (int)$mktoFormId,
-        'customFollowUpUrl' => $mktoFollowUpUrl,
-        'followUpMsgDiv' => "FormFollowUpMessage_" . (int)$mktoFormId,
-        'formName' => $mktoFormName,
         'useAltares' => false,
         'mktoPdfName' => $node->label(),
         'mktoPdfLink' => isset($file) ? $file->createFileUrl() : null,
@@ -207,8 +207,7 @@ function oab_marketo_preprocess_node(&$variables) {
         'mktoPdfSegment' => null,
         'mktoPdfCustomerjourney' => null,
         'mktoPdfIndustrie' => _oab_get_labels_from_term($node->get('field_industry')),
-        'mktoFieldOrder' => isset($list_field) ? $list_field : ["submitButton","LegalInfos"]
-      ];//dd($variables['#attached']['drupalSettings']['marketo_data']);
+      ];
 
       $variables['#attached']['drupalSettings']['marketo_data_for_tealium'] = [
         'version' => $mkto_config->get('marketo.general.mkto_version'),

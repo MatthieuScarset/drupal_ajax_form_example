@@ -1,0 +1,19 @@
+.requiredField .mktoAsterix { display: block; }
+.mktoAsterix { display:none; }
+.mktoForm {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.mktoForm .mktoFormRow {
+  width: 100%;
+}
+.mktoFormRow[data-wrapper-for="LegalInfos"] { margin-top:3rem;}
+.mktoFormRow[data-wrapper-for="SMB_Email_Opted_In__c"] {margin:3rem 0;}
+.mktoFieldDescriptor[data-wrapper-for="SMB_Email_Opted_In__c"] .mktoFieldWrap {
+  display: flex;
+  flex-flow: row-reverse;
+}

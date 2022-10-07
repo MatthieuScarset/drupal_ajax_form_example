@@ -1,18 +1,18 @@
 uuid: 7805fc11-177c-46e3-8e3a-4db139836a14
 langcode: fr
-status: true
+status: false
 dependencies:
   content:
     - 'block_content:basic:593d3cce-82f8-45a2-8b8e-598161fa2722'
   module:
     - block_content
-    - ctools
+    - node
   theme:
     - theme_boosted
 id: ngr_marketo_download_form
 theme: theme_boosted
 region: prefooter
-weight: 0
+weight: -50
 provider: null
 plugin: 'block_content:593d3cce-82f8-45a2-8b8e-598161fa2722'
 settings:

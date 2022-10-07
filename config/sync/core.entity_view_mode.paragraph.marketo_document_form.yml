@@ -1,0 +1,10 @@
+uuid: 45d58c1e-c24b-4336-bb9e-3fd71df542dd
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.marketo_document_form
+label: 'Marketo document form'
+targetEntityType: paragraph
+cache: true
