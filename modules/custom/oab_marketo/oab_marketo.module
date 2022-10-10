@@ -114,9 +114,9 @@ function oab_marketo_preprocess_paragraph(&$variables) {
 
     if($variables['elements']['#view_mode'] === 'marketo_document_form') {
       $node = \Drupal::routeMatch()->getParameter('node');
-      if(!empty($node)) {
-        if (null !== ($media = Media::load($node->field_file->target_id))) {
-          if (null !== ($file = File::load($media->field_file->target_id ?? 0))) {
+      if (!empty($node)) {
+        if (NULL !== ($media = Media::load($node->field_file->target_id))) {
+          if (NULL !== ($file = File::load($media->field_file->target_id ?? 0))) {
             $variables['document_file_absolute_url'] = $file->createFileUrl();
           }
         }
@@ -125,11 +125,13 @@ function oab_marketo_preprocess_paragraph(&$variables) {
       $formName = $paragraph->field_title->value;
       $variables['mkto_form_id'] = $paragraph->field_form_id->value;;
       $variables['mkto_follow_up_message'] = $paragraph->field_message_of_thanks->value;
-      if(!in_array("submitButton", $list_field)) {
-        array_push($list_field, "submitButton");
-      }
-      if(!in_array("LegalInfos", $list_field)) {
-        array_push($list_field, "LegalInfos");
+      if (isset($list_field)) {
+        if (!in_array("submitButton", $list_field)) {
+          array_push($list_field, "submitButton");
+        }
+        if (!in_array("LegalInfos", $list_field)) {
+          array_push($list_field, "LegalInfos");
+        }
       }
     }
 
