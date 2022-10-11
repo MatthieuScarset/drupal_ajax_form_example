@@ -34,15 +34,17 @@ class SynomiaMSSFluxService {
     // Création du flux XML
     $xml_feed .= '<?xml version=\'1.0\' encoding=\'iso-8859-1\'?><CORPUS>';
 
+    $node_storage = $this->entityTypeManager->getStorage('node');
+
     //Noeuds qui ont été ajoutés ou modifiés
-    $nids = \Drupal::entityTypeManager()->getStorage('node')->getQuery()
+    $nids = $node_storage->getQuery()
       ->condition('type', 'mss_article', 'IN')
       ->condition('langcode', array( $current_language, 'und' ), 'IN')
       ->condition('changed', array( $time_debut, $time_fin ), 'BETWEEN')
+      ->addTag('mss')
       ->execute();
     if ($nids) {
-      $nodes = \Drupal::entityTypeManager()
-        ->getStorage('node')
+      $nodes = $node_storage
         ->loadMultiple($nids);
 
       /** @var \Drupal\node\Entity\Node $node */

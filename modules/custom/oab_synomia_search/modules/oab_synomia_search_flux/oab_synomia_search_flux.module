@@ -1,4 +1,5 @@
 <?php
+use Drupal\Core\Database\Query\AlterableInterface;
 
 /**
  * Implements hook_node_predelete().
@@ -45,5 +46,20 @@ function oab_synomia_search_flux_page_attachments(array &$attachments) {
       ],
     ];
     $attachments['#attached']['html_head'][] = [$synomia_rubrique, 'rubrique'];
+  }
+}
+
+/**
+ * Implements hook_query_TAG_alter().
+ */
+function oab_synomia_search_flux_query_mss_alter(AlterableInterface $query) {
+  $conditions = &$query->conditions();
+  foreach ($conditions as $i => $condition) {
+    if (isset($condition['value']) && $condition['value'] instanceof  \Drupal\Core\Database\Query\Select) {
+      $tables = $condition['value']->getTables();
+      if (isset($tables['na']['table']) && $tables['na']['table'] === "node_access") {
+        unset($conditions[$i]);
+      }
+    }
   }
 }
