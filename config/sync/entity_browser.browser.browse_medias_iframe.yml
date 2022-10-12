@@ -59,3 +59,23 @@ widgets:
       auto_select: false
       view: medias_entity_browser
       view_display: entity_browser_file
+  072ec4c4-1757-478b-903d-c81c7b99573c:
+    id: view
+    uuid: 072ec4c4-1757-478b-903d-c81c7b99573c
+    label: 'MSS Media listing'
+    weight: 5
+    settings:
+      submit_text: Select
+      auto_select: false
+      view: medias_entity_browser
+      view_display: entity_browser_mss_image
+  ad0f577f-8e46-49a1-813f-6efaa6359c03:
+    id: entity_form
+    uuid: ad0f577f-8e46-49a1-813f-6efaa6359c03
+    label: 'Upload MSS media'
+    weight: 6
+    settings:
+      submit_text: Save
+      entity_type: media
+      bundle: mss_image
+      form_mode: default

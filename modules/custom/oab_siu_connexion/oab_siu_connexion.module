@@ -1,4 +1,8 @@
 <?php
+
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Session\AccountInterface;
 use \OneLogin\Saml2\Response;
 use \Drupal\saml_sp\Entity\Idp;
 use \Drupal\user\UserInterface;
@@ -29,6 +33,42 @@ function oab_siu_connexion_theme() {
       'template' => 'siu-hello-user-block'
     ]
   ];
+}
+
+/**
+ * Implements hook_file_move().
+ */
+/**
+ * Implements hook_ENTITY_TYPE_access().
+ */
+function oab_siu_connexion_media_access(EntityInterface $entity, $operation, AccountInterface $account) {
+
+
+  if ($operation !== "view" || $entity->bundle() !== "mss_image") {
+    return;
+  }
+
+  $route_admin_context = \Drupal::service('router.admin_context');
+
+  if (!in_array(\Drupal::routeMatch()->getRouteName(), ['image.style_private', 'system.files'])
+    || $route_admin_context->isAdminRoute(\Drupal::routeMatch()->getRouteObject())) {
+    return;
+  }
+
+  $request = \Drupal::request();
+
+  $is_admin_route = false;
+  if ($request->headers->has('referer')) {
+    $router = \Drupal::service('router.no_access_checks');
+    $referer_route = $router->match($request->headers->get('referer'));
+    $is_admin_route = $route_admin_context->isAdminRoute($referer_route['_route_object']) || (!$account->isAnonymous());
+  }
+
+  if ($entity->bundle() === "mss_image" && !$is_admin_route) {
+    if (!in_array('siu_user', $account->getRoles())) {
+      return AccessResult::forbidden(t("You can't access this content without the SIU role.")->render());
+    }
+  }
 }
 
 function oab_siu_connexion_page_attachments(array &$attachments) {

@@ -3,7 +3,9 @@ langcode: fr
 status: true
 dependencies:
   config:
+    - entity_browser.browser.browse_medias_iframe
     - media.type.image
+    - media.type.mss_image
   module:
     - entity_embed
     - media
@@ -14,6 +16,7 @@ type_settings:
   entity_type: media
   bundles:
     - image
+    - mss_image
   display_plugins:
     - 'entity_reference:media_thumbnail'
   entity_browser: browse_medias_iframe
