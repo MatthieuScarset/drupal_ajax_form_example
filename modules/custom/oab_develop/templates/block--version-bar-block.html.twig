@@ -84,16 +84,6 @@
               {% endif %}
             </a>
           </div>
-        {% else %}
-          <div> | Commit : </div>
-          <div class="version-bar-cell ">
-            {% if elements.content.ci_datas['CI_COMMIT_MESSAGE'] != '' %}
-              {{ elements.content.ci_datas['CI_COMMIT_MESSAGE'] ~ ' - ' }}
-            {% endif %}
-            {% if elements.content.ci_datas['CI_COMMIT_TIMESTAMP'] != '' %}
-              {{ elements.content.ci_datas['CI_COMMIT_TIMESTAMP'] }}
-            {% endif %}
-          </div>
         {% endif %}
       {% endif %}
     </div>
