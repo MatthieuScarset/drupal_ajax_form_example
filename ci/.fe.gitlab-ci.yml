@@ -53,7 +53,7 @@ Vault:
     - export SIU_CERT="$(vault kv get -field=SIU_CERT $VAULT_PATH/Devs)"
     - echo "SIU_CERT=$SIU_CERT" >> vault.env
     - export SIU_PRIVATE_KEY="$(vault kv get -field=SIU_PRIVATE_KEY $VAULT_PATH/Devs)"
-    - echo "SIU_PRIVATE_KEY=$SIU_PRIVATE_KEY" >> vault.env
+    - echo "SIU_PRIVATE_KEY=\"$SIU_PRIVATE_KEY\"" >> vault.env
   artifacts:
     reports:
       dotenv: vault.env
