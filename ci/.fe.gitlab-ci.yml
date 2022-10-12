@@ -50,13 +50,14 @@ Vault:
     - echo "LETSENCRYPT_NAME=$LETSENCRYPT_NAME" >> vault.env
     - export LETSENCRYPT_CONTENT="$(vault kv get -field=LETSENCRYPT_CONTENT $VAULT_PATH/Devs)"
     - echo "LETSENCRYPT_CONTENT=$LETSENCRYPT_CONTENT" >> vault.env
-    - export SIU_CERT="$(vault kv get -field=SIU_CERT $VAULT_PATH/Devs)"
-    - echo "SIU_CERT=$SIU_CERT" >> vault.env
-    - export SIU_PRIVATE_KEY="$(vault kv get -field=SIU_PRIVATE_KEY $VAULT_PATH/Devs)"
-    - echo "SIU_PRIVATE_KEY=\"$SIU_PRIVATE_KEY\"" >> vault.env
+    - echo "$(vault kv get -field=SIU_CERT $VAULT_PATH/Devs)" >> certificate.crt
+    - echo "$(vault kv get -field=SIU_PRIVATE_KEY $VAULT_PATH/Devs)" >> privateKey.key
   artifacts:
     reports:
       dotenv: vault.env
+    paths:
+      - privateKey.key
+      - certificate.crt
     expire_in: 10 minutes
 
 Build Drupal:
@@ -107,8 +108,9 @@ Build Image:
     #Ajout du certificat Let's Encrypt pour la PRP
     - mkdir -p build/.well-know/acme-challenge
     - echo $LETSENCRYPT_CONTENT >> build/.well-know/acme-challenge/$LETSENCRYPT_NAME
-    - echo $SIU_PRIVATE_KEY >> build/.saml_cert/privateKey.key
-    - echo $SIU_CERT >> build/.saml_cert/certificate.crt
+    - mkdir build/.saml_cert
+    - mv privateKey.key build/.saml_cert/privateKey.key
+    - mv certificate.crt build/.saml_cert/certificate.crt
     - docker build -t php_tmp -f ci/.fe.d/Dockerfile .
     - docker image tag php_tmp $ARTIFACTORY_RUBY_REGISTRY:$CI_COMMIT_TAG
     - docker images
