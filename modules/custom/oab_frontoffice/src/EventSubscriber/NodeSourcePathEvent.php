@@ -134,12 +134,17 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
                       ? substr($current_uri, 0, strpos($current_uri, '?'))
                       : $current_uri;
 
+                    $real_front_url = "/" . $node_lang_id . \Drupal::config("system.site")->get('page.front');
+
                     ## Comme un noeud peut avoir plusieurs alias, je les recupère tous
                     ## et je teste s'ils existent dans la liste
                     $path_list = oab_getAllPathFromNID($node->id(), $node_lang_id);
                     if ($new_url != ''
                       && $new_url !== $current_uri
                       && !in_array($current_uri_wo_options, $path_list)
+                      // Bug avec $isFront() qui peut répondre "non" alors que si,
+                      // et "/" n'est pas un alias du node, donc /fr/ pouvait être redirigé vers /fr/node/{nid}
+                      && $new_url !== $real_front_url
                     ) {
 
                       \Drupal::logger('node_source_redirect')
