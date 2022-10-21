@@ -8,7 +8,7 @@
 header#navbar {
   padding-top: 1px;
   background-color: $black;
-
+/*
   .navbar.supra {
     opacity: 1;
     visibility: visible;
@@ -26,6 +26,14 @@ header#navbar {
       height: 0;
       min-height: 0;
     }
+  }*/
+  transition: opacity 0.15s linear;
+  opacity: 1;
+  z-index: 3000;
+  position: sticky;
+
+  &.is-sticky{
+    opacity: 0;
   }
 
 }
@@ -35,7 +43,7 @@ header#navbar {
 }
 
 .page-menu-modular-product.sticky-top {
-  transition: top $header_transition_time linear; 
+  transition: top $header_transition_time linear;
 }
 
 
