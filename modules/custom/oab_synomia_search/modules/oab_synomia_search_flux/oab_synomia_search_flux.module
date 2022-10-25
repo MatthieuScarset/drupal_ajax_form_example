@@ -26,27 +26,26 @@ function oab_synomia_search_flux_node_predelete(\Drupal\node\Entity\Node $node) 
  * Implements hook_page_attachments().
  */
 function oab_synomia_search_flux_page_attachments(array &$attachments) {
-  $node = \Drupal::routeMatch()->getParameter('node');
-  if (!empty($node) && is_object($node)) {
-    $content_type = $node->getType();
-    $typage_synomia = $content_type;
-    if($content_type == 'mss_article'){
-      $field_typology = $node->get('field_typology');
-      if (isset($field_typology[0])) {
-        $value = $field_typology[0]->getValue();
-        $typage_synomia = $value['value'];
-      }
-    }
     //Ajout de la méta rubrique pour la catégorisation de Synomia
-    $synomia_rubrique = [
-      '#tag' => 'meta',
-      '#attributes' => [
-        'name' => 'rubrique',
-        'content' => $typage_synomia,
-      ],
-    ];
-    $attachments['#attached']['html_head'][] = [$synomia_rubrique, 'rubrique'];
-  }
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if (!empty($node) && is_object($node)) {
+      $rubrique = $node->getType();
+      if($rubrique === "modular_product") {
+        $rubrique = 'product';
+      } elseif ($content_type == 'mss_article'){
+        if (isset($node->field_typology->value)) {
+          $rubrique = $node->field_typology->value);
+        }
+      }
+        $synomia_rubrique = [
+            '#tag' => 'meta',
+            '#attributes' => [
+                'name' => 'rubrique',
+                'content' => $rubrique,
+            ],
+        ];
+        $attachments['#attached']['html_head'][] = [$synomia_rubrique, 'rubrique'];
+    }
 }
 
 /**
