@@ -170,6 +170,7 @@ module:
   oab_will: 30
   oab_synomia_search_flux: 100
   tac_lite: 100
+  oab_custom_assets: 500
   minimal: 1000
 theme:
   stark: 0
