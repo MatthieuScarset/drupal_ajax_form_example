@@ -32,9 +32,9 @@ function oab_synomia_search_flux_page_attachments(array &$attachments) {
       $rubrique = $node->getType();
       if($rubrique === "modular_product") {
         $rubrique = 'product';
-      } elseif ($content_type == 'mss_article'){
+      } elseif ($rubrique == 'mss_article'){
         if (isset($node->field_typology->value)) {
-          $rubrique = $node->field_typology->value);
+          $rubrique = $node->field_typology->value;
         }
       }
         $synomia_rubrique = [
