@@ -7,3 +7,4 @@ COPY --chown=nobody:www-data ./config/config_split /var/www/html/config/config_s
 
 # Export vendor bin to get Drush
 ENV PATH="$PATH:/var/www/html/vendor/bin"
+CMD echo "alias drush=\"php -d memory_limit=-1 /var/www/html/vendor/bin/drush \"" >> ~/.bashrc
