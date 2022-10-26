@@ -1,3 +1,4 @@
+uuid: ab2256c6-0eb5-468f-9b2a-325ca56e209a
 langcode: fr
 status: true
 dependencies:
@@ -15,20 +16,20 @@ plugin: contact_bar_block_hub
 settings:
   id: contact_bar_block_hub
   label: 'Contact bar Hub MSS Assistance fr'
-  provider: system
   label_display: '0'
+  provider: system
   level: 1
   depth: 0
 visibility:
   language:
     id: language
-    langcodes:
-      fr: fr
     negate: false
     context_mapping:
       language: '@language.current_language_context:language_interface'
+    langcodes:
+      fr: fr
   request_path:
     id: request_path
-    pages: autofill
     negate: false
     context_mapping: {  }
+    pages: autofill

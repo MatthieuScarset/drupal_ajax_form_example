@@ -17,5 +17,5 @@ settings:
   label: 'Version Bar Block'
   label_display: '0'
   provider: oab_develop
-  message: 'Ce message est configurable'
+  message: 'Backoffice du portail orange-business.com'
 visibility: {  }

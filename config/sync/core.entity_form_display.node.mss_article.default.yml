@@ -24,72 +24,72 @@ third_party_settings:
         - group_rebond
         - group_classify
         - group_publi
+      label: Onglets
       parent_name: ''
       weight: 0
       format_type: tabs
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         direction: vertical
-      label: Onglets
     group_w:
       children:
         - langcode
         - title
         - field_content
+      label: Write
       parent_name: group_o
       weight: 9
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Write
     group_classify:
       children:
         - field_categories
         - field_typology
         - field_hub
         - field_hub_portal
+      label: Classify
       parent_name: group_o
       weight: 11
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Classify
     group_rebond:
       children:
         - field_p_wysiwyg_rebond
+      label: Rebond
       parent_name: group_o
       weight: 10
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Rebond
     group_publi:
       children:
         - path
         - promote
+      label: Publish
       parent_name: group_o
       weight: 12
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Publish
 id: node.mss_article.default
 targetEntityType: node
 bundle: mss_article
@@ -102,34 +102,36 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_categories:
+    type: options_select
     weight: 32
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   field_content:
+    type: text_textarea
     weight: 4
+    region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    type: text_textarea
-    region: content
   field_hub:
+    type: options_buttons
     weight: 34
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_buttons
-    region: content
   field_hub_portal:
+    type: boolean_checkbox
     weight: 35
+    region: content
     settings:
       display_label: true
     third_party_settings: {  }
-    type: boolean_checkbox
-    region: content
   field_p_wysiwyg_rebond:
+    type: entity_reference_paragraphs
     weight: 15
+    region: content
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -138,14 +140,12 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
     third_party_settings: {  }
-    type: entity_reference_paragraphs
-    region: content
   field_typology:
+    type: options_select
     weight: 33
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: options_select
-    region: content
   langcode:
     type: language_select
     weight: 2
@@ -161,17 +161,17 @@ content:
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 5
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 6
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   title:
     type: string_textfield
@@ -184,12 +184,12 @@ content:
   uid:
     type: entity_reference_autocomplete
     weight: 1
+    region: content
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
-    region: content
     third_party_settings: {  }
   url_redirects:
     weight: 5

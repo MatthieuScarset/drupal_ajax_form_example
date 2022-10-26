@@ -17,20 +17,20 @@ plugin: msscategories_block
 settings:
   id: msscategories_block
   label: Categories
-  provider: oab_frontoffice
   label_display: visible
+  provider: oab_frontoffice
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
-    bundles:
-      mss_article: mss_article
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
+    bundles:
+      mss_article: mss_article
   node_type:
     id: node_type
-    bundles:
-      mss_article: mss_article
     negate: false
     context_mapping:
       node: '@node.node_route_context:node'
+    bundles:
+      mss_article: mss_article

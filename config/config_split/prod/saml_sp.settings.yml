@@ -24,6 +24,6 @@ security:
 cert_location: /var/www/html/.saml_cert/certificate.crt
 key_location: /var/www/html/.saml_cert/privateKey.key
 new_cert_location: ''
-entity_id: saml-poc
+entity_id: 'https://www.orange-business.com/'
 debug: false
-assertion_urls: 'http://localhost:8000/en/saml/consume'
+assertion_urls: 'https://www.orange-business.com/saml/consume'
