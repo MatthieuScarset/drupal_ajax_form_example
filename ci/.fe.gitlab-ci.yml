@@ -111,6 +111,7 @@ Build Image:
     - mkdir build/.saml_cert
     - mv privateKey.key build/.saml_cert/privateKey.key
     - mv certificate.crt build/.saml_cert/certificate.crt
+    - echo "alias drush=\"php -d memory_limit=-1 /var/www/html/vendor/bin/drush \"" >> build/.bashrc
     - docker build -t php_tmp -f ci/.fe.d/Dockerfile .
     - docker image tag php_tmp $ARTIFACTORY_RUBY_REGISTRY:$CI_COMMIT_TAG
     - docker images
