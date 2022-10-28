@@ -93,7 +93,7 @@ class TranslationsHelper {
       $string = $this->storage->createString($source_params);
     }
 
-    if ($type && !in_array($type, array_keys($string->getLocations()))) {
+    if ($type && ($string->isNew() || !in_array($type, array_keys($string->getLocations())))) {
       $string->addLocation($type, __DIR__);
     }
 
