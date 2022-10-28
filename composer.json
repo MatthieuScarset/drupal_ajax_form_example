@@ -170,7 +170,7 @@
                 "Fix LatestRevisionCheck": "https://www.drupal.org/files/issues/2019-10-21/LatestRevisionCheck-13092187-24.patch"
             },
             "drupal/memcache" : {
-                "https://www.drupal.org/project/memcache/issues/3302086": "https://www.drupal.org/files/issues/2022-08-10/3302086-18.patch"
+                "https://www.drupal.org/project/memcache/issues/3302086": "https://www.drupal.org/files/issues/2022-08-10/3302086-18.patch",
                 "Fix LatestRevisionCheck": "https://www.drupal.org/files/issues/2019-10-21/LatestRevisionCheck-13092187-24.patch",
                 "Give current request to RequestPath Condition when it call too soon": "patches/saml_sp/patch_core_system_requestpath.patch"
             },
