@@ -101,7 +101,7 @@ class VersionBarBlock extends BlockBase implements ContainerFactoryPluginInterfa
     }
 
     // get the environment by the environment variables
-    $env = getenv('ENV') ?? "Local";
+    $env = getenv('ENV') ?: "Local";
     $env_label = $this->envs[$env] ?? $env;
 
     // get the current theme name
