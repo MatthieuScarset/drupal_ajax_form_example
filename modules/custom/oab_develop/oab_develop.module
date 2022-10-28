@@ -236,43 +236,6 @@ function loadConfigField($folder, $key) {
     \Drupal::configFactory()->getEditable($key)->setData($data)->save(TRUE);
 }
 
-/** Permet de sauvegarder les chaines de traduction
- * @param $source_import
- * @param $language_import "fr"
- * @param $translation_import
- * @return bool
- */
-
-function oabt_TranslationImport($source_import, $language_import, $translation_import) {
-  // traductions
-  $translations = array(
-    array(
-      "source" => $source_import,
-      "translation" => array($language_import => $translation_import)
-    ),
-  );
-
-  $storage = \Drupal::service('locale.storage');
-
-  foreach ($translations AS $translation) {
-    $string = $storage->findString(array('source' => $translation['source']));
-    if (is_null($string)) {
-      $string = new SourceString();
-      $string->setString($translation['source']);
-      $string->setStorage($storage);
-      $string->save();
-    }
-
-    foreach ($translation['translation'] AS $language => $translated_string) {
-      // Create translation. If one already exists, it will be replaced.
-      $translation = $storage->createTranslation(array(
-        'lid' => $string->lid,
-        'language' => $language,
-        'translation' => $translated_string,
-      ))->save();
-    }
-  }
-}
 
 /** Permet de faire un import yml d'un module au format fichier
  * @param $file_name nom du fichier avec extention .yml
