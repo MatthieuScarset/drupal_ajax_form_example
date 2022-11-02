@@ -310,6 +310,7 @@ function oab_modular_product_entity_bundle_field_info_alter(&$fields, EntityType
   if ($entity_type->id() === "node" && $bundle === "modular_product") {
     if (isset($fields['field_modules'])) {
       $fields['field_modules'] -> addConstraint('ModularProductOrderModule');
+      $fields['field_modules'] -> addConstraint('ModularProductModuleRequired');
     }
   }
 }
