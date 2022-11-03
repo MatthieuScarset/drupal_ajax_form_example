@@ -1,0 +1,7 @@
+uuid: fd6a514e-5267-4298-9e3b-0ed2f539f04c
+langcode: fr
+status: true
+dependencies: {  }
+id: working_together
+label: 'WOT - Contact'
+formule: '1'

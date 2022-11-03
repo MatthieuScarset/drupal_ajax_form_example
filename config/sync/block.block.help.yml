@@ -1,0 +1,20 @@
+uuid: 73aabe9b-d0a6-48c9-b8c1-fe2ae7f2d975
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - theme_obs_backoffice_claro
+id: help
+theme: theme_obs_backoffice_claro
+region: help
+weight: 0
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

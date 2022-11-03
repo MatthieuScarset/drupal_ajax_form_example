@@ -1,19 +1,20 @@
 display:
   default:
+    display_title: Master
     display_options:
-      exposed_form:
-        options:
-          submit_button: Фильтр
-          exposed_sorts_label: Фильтр
-      pager:
-        options:
-          tags:
-            previous: Предыдущая
       fields:
         filename:
           label: Название
         status:
           label: Статус
+      pager:
+        options:
+          tags:
+            previous: Предыдущая
+      exposed_form:
+        options:
+          submit_button: Фильтр
+          exposed_sorts_label: Фильтр
       filters:
         filename:
           expose:

@@ -34,14 +34,14 @@ function oab_icomoon_token_info() {
   );
 
   $icones = getIcomoonIconsNames();
-  foreach ($icones as $icone){
+  foreach ($icones as $icone) {
     $tokens['icomoon']['icomoon-'.$icone] = array(
       'name' => $icone,
       'description' => t("<span class=\"text-primary icomoon @iconName\"></span>", array('@iconName' => 'icomoon-'.$icone))
     );
   }
-  $iconesOrange = getOrangeIconsNames();
-  foreach ($iconesOrange as $icon){
+  $icones_orange = getOrangeIconsNames();
+  foreach ($icones_orange as $icon) {
     $tokens['icomoon']['icon-'.$icon] = [
       'name' => $icon,
       'description' => t("<span class=\"text-primary icon @iconName\"></span>", ['@iconName' => 'icon-'.$icon])
@@ -69,7 +69,7 @@ function oab_icomoon_tokens($type, $tokens, array $data, array $options, \Drupal
   return $replacements;
 }
 
-function getIcomoonIconsNames(){
+function getIcomoonIconsNames() {
   /** @var ExtensionPathResolver $service_path_resolver */
   $service_path_resolver = \Drupal::service('extension.path.resolver');
 
@@ -77,23 +77,23 @@ function getIcomoonIconsNames(){
   $path_to_json_file = $service_path_resolver->getPath('module', 'oab_icomoon') . '/icomoon/selection.json';
   $datas = json_decode(file_get_contents($path_to_json_file), true);
 
-  foreach ($datas['icons'] as $data){
-    if(isset($data['properties']['name'])) {
+  foreach ($datas['icons'] as $data) {
+    if (isset($data['properties']['name'])) {
       $names[] = $data['properties']['name'];
     }
   }
   return $names;
 }
 
-function getOrangeIconsNames(){
+function getOrangeIconsNames() {
   /** @var ExtensionPathResolver $service_path_resolver */
   $service_path_resolver = \Drupal::service('extension.path.resolver');
 
   $names = [];
   $path_to_json_file = $service_path_resolver->getPath('theme', 'theme_one_i') . '/assets/fonts/icon-orange.json';
   $datas = json_decode(file_get_contents($path_to_json_file), true);
-  foreach ($datas['icons'] as $data){
-    if(isset($data['properties']['name'])) {
+  foreach ($datas['icons'] as $data) {
+    if (isset($data['properties']['name'])) {
       $names[] = $data['properties']['name'];
     }
   }

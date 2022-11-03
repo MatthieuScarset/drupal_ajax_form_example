@@ -933,6 +933,10 @@ aside.right-column > .region{
   #views-exposed-form-subhomes-page-achievements-iot.subhomes-filterbar-background {
     margin-left: -20px;
   }
+
+  #views-exposed-form-business-insight-business-insight-page.views-exposed-form.subhomes-filterbar-background {
+    background-color: transparent;
+  }
 }
 /*for Mobile */
 @media (max-width: 480px) {

@@ -1,16 +1,7 @@
 display:
   default:
+    display_title: Master
     display_options:
-      exposed_form:
-        options:
-          submit_button: Filtre
-          reset_button_label: 'Remise à zéro'
-          exposed_sorts_label: 'Filtrer par'
-      pager:
-        options:
-          expose:
-            items_per_page_label: 'Éléments par page'
-            items_per_page_options_all_label: '- Tous -'
       fields:
         nothing:
           admin_label: Icône
@@ -20,6 +11,16 @@ display:
           label: Utilisateur
         link:
           label: Actions
+      pager:
+        options:
+          expose:
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options_all_label: '- Tous -'
+      exposed_form:
+        options:
+          submit_button: Filtre
+          reset_button_label: 'Remise à zéro'
+          exposed_sorts_label: 'Filtrer par'
       filters:
         type:
           expose:

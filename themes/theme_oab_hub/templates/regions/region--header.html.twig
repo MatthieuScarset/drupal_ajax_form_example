@@ -61,6 +61,9 @@
                   {#Render the top account items on the right#}
                   {{ elements|hub_getMenu('toprightnavbar')  }}
 
+                {% if elements.oab_hub_siuhellouserblock %}
+                  {{ elements.oab_hub_siuhellouserblock }}
+                {% endif %}
               </div>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->

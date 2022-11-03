@@ -8,6 +8,7 @@ use Drupal\Core\Datetime;
 use Drupal\oab_akamai\Form\OabAkamaiForm;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\user\Entity\User;
 
 define('GDPR_THIRD_PARTY_MODULE', 'oab_backoffice');
 
@@ -36,12 +37,13 @@ function gdpr_is_webform_authorized(Drupal\webform\Entity\Webform $entity, $oper
      */
 
     if (in_array('webform_business_owner', $account->getRoles())) {
-        $form_bo = \Drupal\user\Entity\User::load($entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_business_owner'));
-        if (($operation == "submission_view_any" || $operation == "update")
-            && $form_bo !== null
-            && $form_bo->id() == $account->id()) {
-            return Drupal\Core\Access\AccessResult::allowed();
-        }
+      $gdpr_business_user = $entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_business_owner');
+      $form_bo = (isset($gdpr_business_user)) ? User::load($gdpr_business_user) : null;
+      if (($operation == "submission_view_any" || $operation == "update")
+        && $form_bo !== NULL
+        && $form_bo->id() == $account->id()) {
+        return Drupal\Core\Access\AccessResult::allowed();
+      }
     }
 
     ##Pour l'accès aux données et à leur telechargement
@@ -98,8 +100,10 @@ function gdpr_check_authorized_view($entity, $account) {
         }
 
         ## S'il est business owner, il doit être le BO du form pour le voir
+      $gdpr_business_user = $entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_business_owner');
         if (in_array('webform_business_owner', $account->getRoles())
-            && $entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_business_owner') == $account->id()
+            && isset($gdpr_business_user)
+            && $gdpr_business_user == $account->id()
         ) {
             $ret = true;
         }
@@ -235,7 +239,8 @@ function gdpr_hook_tokens(array &$replacements, $type, $tokens, array $data) {
         foreach ($tokens as $name => $original) {
             switch ($name) {
                 case 'business-owner-mail':
-                    $business_owner = \Drupal\user\Entity\User::load($webform->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_business_owner'));
+                    $gdpr_business_user = $webform->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_business_owner');
+                    $business_owner = (isset($gdpr_business_user)) ? User::load($gdpr_business_user) : null;
                     if ($business_owner !== null) {
                         $replacements[$original] = $business_owner->getEmail();
                     } else {
@@ -263,7 +268,7 @@ function gdpr_hook_tokens(array &$replacements, $type, $tokens, array $data) {
                     $replacements[$original] = $webform->id();
                     break;
                 case 'spoc-pseudo':
-                    $spoc = \Drupal\user\Entity\User::load($webform->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_spoc_security'));
+                    $spoc = User::load($webform->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_spoc_security'));
                     if ($spoc !== null) {
                         $replacements[$original] = $spoc->label();
                     } else {
@@ -271,7 +276,7 @@ function gdpr_hook_tokens(array &$replacements, $type, $tokens, array $data) {
                     }
                     break;
                 case 'spoc-mail':
-                    $spoc = \Drupal\user\Entity\User::load($webform->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_spoc_security'));
+                    $spoc = User::load($webform->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_spoc_security'));
                     if ($spoc !== null) {
                         $replacements[$original] = $spoc->getEmail();
                     } else {
@@ -296,7 +301,7 @@ function gdpr_hook_webform_insert(Drupal\webform\Entity\Webform $entity) {
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
     #mail to SPOC Security
-    $spoc_security = \Drupal\user\Entity\User::load($entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_spoc_security'));
+    $spoc_security = User::load($entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_spoc_security'));
     if ($spoc_security !== null) {
         \Drupal::service('plugin.manager.mail')
             ->mail('oab_backoffice', 'gdpr_spoc_notice', $spoc_security->getEmail(), $current_language, array('webform'=> $entity));
@@ -310,13 +315,16 @@ function gdpr_hook_webform_insert(Drupal\webform\Entity\Webform $entity) {
         ->mail('oab_backoffice', 'gdpr_creator_notice', $mail_creator, $current_language, array('webform'=> $entity));
 
     # mail au business owner
-    $business_owner = \Drupal\user\Entity\User::load($entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_business_owner'));
-    if ($business_owner !== null) {
-        $mail_business_owner = $business_owner->getEmail();
-        \Drupal::service('plugin.manager.mail')
-            ->mail('oab_backoffice', 'gdpr_business_owner_notice', $mail_business_owner, $current_language, array('webform'=> $entity));
-    } else {
-      \Drupal::messenger()->addMessage(t("L'email au Business Owner n'a pas pu être envoyé"), 'error', true);
+    $gdpr_business_user = $entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_business_owner');
+    $business_owner = (isset($gdpr_business_user)) ? User::load($gdpr_business_user) : null;
+    if ($business_owner !== NULL) {
+      $mail_business_owner = $business_owner->getEmail();
+      \Drupal::service('plugin.manager.mail')
+        ->mail('oab_backoffice', 'gdpr_business_owner_notice', $mail_business_owner, $current_language, ['webform' => $entity]);
+    }
+    else {
+      \Drupal::messenger()
+        ->addMessage(t("L'email au Business Owner n'a pas pu être envoyé"), 'error', TRUE);
     }
 
 }
@@ -415,106 +423,113 @@ function gdpr_hook_form_alter(&$form, $form_state, $form_id) {
             "#disabled" => "disabled"
         ];
 
-        $business_owner = \Drupal\user\Entity\User::load($entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_business_owner'));
+        $gdpr_business_user = $entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_business_owner');
+        $business_owner = (isset($gdpr_business_user)) ? User::load($gdpr_business_user) : null;
         $current_user = Drupal::currentUser();
         // j'affiche la checkbox si on est dans les settings du webform
         // et l'utilisateur connecté est le "business owner" du formulaire en question
         if ($form_id == 'webform_settings_form') {
 
-            ##Je n'affiche la publication que si on édite le formulaire, pas à la création
-            $form['gdpr_informations']['gdpr_form_published']['#access'] = true;
+          ##Je n'affiche la publication que si on édite le formulaire, pas à la création
+          $form['gdpr_informations']['gdpr_form_published']['#access'] = TRUE;
 
-            ## Je le rend cliquable que si l'utilisateur courant est le business_owner
-            if ($current_user->id() == 1
-                || ($business_owner !== null && (
-                        in_array('webform_admin', $current_user->getRoles())
-                        ||  (
-                            in_array('webform_business_owner', $current_user->getRoles())
-                            && $current_user->id() === $business_owner->id()
-                        )
-                    )
+          ## Je le rend cliquable que si l'utilisateur courant est le business_owner
+          if ($current_user->id() == 1
+            || ($business_owner !== NULL && (
+                in_array('webform_admin', $current_user->getRoles())
+                || (
+                  $business_owner !== NULL
+                  && in_array('webform_business_owner', $current_user->getRoles())
+                  && $current_user->id() === $business_owner->id()
                 )
-            ) {
-                $form['gdpr_informations']['gdpr_form_published']['#disabled'] = false;
-            }
+              )
+            )
+          ) {
+            $form['gdpr_informations']['gdpr_form_published']['#disabled'] = FALSE;
+          }
         }
 
 
-        $form['gdpr_informations']['gdpr_business_owner'] = [
-            '#type' => 'entity_autocomplete',
-            '#title'    => t('Business Owner'),
-            '#default_value' => \Drupal\user\Entity\User::load($entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_business_owner')),
-            '#target_type' => "user",
-            '#settings' => [
-                'match_operator'    => "CONTAINS"
-            ],
-            "#selection_settings"   => [
-                'include_anonymous' => false,
-                'filter' => [
-                    'role' => ['webform_business_owner'],
-                ],
-            ],
-            '#required' => true,
-        ];
+      $gdpr_business_user = $entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_business_owner');
+      $business_owner = (isset($gdpr_business_user)) ? User::load($gdpr_business_user) : null;
+
+      $form['gdpr_informations']['gdpr_business_owner'] = [
+          '#type' => 'entity_autocomplete',
+          '#title'    => t('Business Owner'),
+          '#default_value' => $business_owner,
+          '#target_type' => "user",
+          '#settings' => [
+              'match_operator'    => "CONTAINS"
+          ],
+          "#selection_settings"   => [
+              'include_anonymous' => false,
+              'filter' => [
+                  'role' => ['webform_business_owner'],
+              ],
+          ],
+          '#required' => true,
+      ];
 
 
-        $form['gdpr_informations']['gdpr_business_analysts'] = [
-            '#type' => 'select',
-            '#multiple' => true,
-            '#title'    => t('Business Analysts'),
-            '#options' => gdpr_business_analysts_list(),
-            '#description' => "Utilisez ctrl+click pour selectionner plusieurs utilisateurs",
-            "#default_value"  => $entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_business_analysts')
-        ];
+      $form['gdpr_informations']['gdpr_business_analysts'] = [
+          '#type' => 'select',
+          '#multiple' => true,
+          '#title'    => t('Business Analysts'),
+          '#options' => gdpr_business_analysts_list(),
+          '#description' => "Utilisez ctrl+click pour selectionner plusieurs utilisateurs",
+          "#default_value"  => $entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_business_analysts')
+      ];
 
-        # Je donne les droits à l'admin de se selectionner
-        if ($current_user->id() == 1) {
-            $form['gdpr_informations']['gdpr_business_owner']["#selection_settings"]['filter']['role'][] = "administrator";
-        }
-
-
-        $form['gdpr_informations']['gdpr_spoc_security'] = [
-            '#type' => 'entity_autocomplete',
-            '#title'    => t('SPOC Security'),
-            "#default_value"    => \Drupal\user\Entity\User::load($entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_spoc_security')),
-            '#required' => true,
-            '#target_type' => "user",
-            '#settings' => [
-                'match_operator'    => "CONTAINS"
-            ],
-            "#selection_settings"   => [
-                'include_anonymous' => false,
-                'filter' => [
-                    'role' => ['webform_spoc_securite'],
-                ],
-            ],
-        ];
-        # Je donne les droits à l'admin de se selectionner
-        if ($current_user->id() == 1) {
-            $form['gdpr_informations']['gdpr_spoc_security']["#selection_settings"]['filter']['role'][] = "administrator";
-        }
+      # Je donne les droits à l'admin de se selectionner
+      if ($current_user->id() == 1) {
+          $form['gdpr_informations']['gdpr_business_owner']["#selection_settings"]['filter']['role'][] = "administrator";
+      }
 
 
-        $form['gdpr_informations']['gdpr_expiration_date'] = [
-            '#type' => 'date',
-            '#title'    => t('Form expiration date'),
-            '#default_value'    => $entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_expiration_date')
-        ];
+      $gdpr_spoc_security = $entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_spoc_security');
+      $spoc_security_user = (isset($gdpr_spoc_security)) ? User::load($gdpr_spoc_security) : null;
+      $form['gdpr_informations']['gdpr_spoc_security'] = [
+          '#type' => 'entity_autocomplete',
+          '#title'    => t('SPOC Security'),
+          "#default_value"    => $spoc_security_user,
+          '#required' => true,
+          '#target_type' => "user",
+          '#settings' => [
+              'match_operator'    => "CONTAINS"
+          ],
+          "#selection_settings"   => [
+              'include_anonymous' => false,
+              'filter' => [
+                  'role' => ['webform_spoc_securite'],
+              ],
+          ],
+      ];
+      # Je donne les droits à l'admin de se selectionner
+      if ($current_user->id() == 1) {
+          $form['gdpr_informations']['gdpr_spoc_security']["#selection_settings"]['filter']['role'][] = "administrator";
+      }
 
-        if (in_array('webform_manager', $current_user->getRoles())) {
-            $form['gdpr_informations']['gdpr_expiration_date']['#required'] = true;
-        }
+
+      $form['gdpr_informations']['gdpr_expiration_date'] = [
+          '#type' => 'date',
+          '#title'    => t('Form expiration date'),
+          '#default_value'    => $entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_expiration_date')
+      ];
+
+      if (in_array('webform_manager', $current_user->getRoles())) {
+          $form['gdpr_informations']['gdpr_expiration_date']['#required'] = true;
+      }
 
 
-        //array_unshift($form['actions']['submit']['#submit'],'_oab_webform_gdpr_submit' );
+      //array_unshift($form['actions']['submit']['#submit'],'_oab_webform_gdpr_submit' );
 
-        ## Je place mon submit, pour éviter qu'il soit en dernière place, sinon ca crée des erreurs
-        $old_submit = $form['actions']['submit']['#submit'];
-        $submit = array_slice($old_submit, 0, count($old_submit) - 1, true) +
-            ["ne_pas_supprimer" => "gdpr_webform_submit"] +
-            array_slice($old_submit, count($old_submit) - 1, count($old_submit) - 1, true);
+      ## Je place mon submit, pour éviter qu'il soit en dernière place, sinon ca crée des erreurs
+      $old_submit = $form['actions']['submit']['#submit'];
+      $submit = array_slice($old_submit, 0, count($old_submit) - 1, true) +
+          ["ne_pas_supprimer" => "gdpr_webform_submit"] +
+          array_slice($old_submit, count($old_submit) - 1, count($old_submit) - 1, true);
 
-        $form['actions']['submit']['#submit'] = array_values($submit);
+      $form['actions']['submit']['#submit'] = array_values($submit);
     }
 }
 
@@ -540,7 +555,7 @@ function gdpr_hook_entity_update($entity) {
             && $current_user->id() != 1     #Je ne le fait pas pour l'admin)
         ) {
 
-            $spoc = \Drupal\user\Entity\User::load($entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_spoc_security'));
+            $spoc = User::load($entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_spoc_security'));
             if ($spoc !== null) {
                 $mail_spoc = $spoc->getEmail();
                 \Drupal::service('plugin.manager.mail')
@@ -551,11 +566,12 @@ function gdpr_hook_entity_update($entity) {
             \Drupal::service('plugin.manager.mail')
                 ->mail('oab_backoffice', 'gdpr_publish_notice', $mail_creator, $current_language, array('webform' => $entity));
 
-            $business_owner = \Drupal\user\Entity\User::load($entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_business_owner'));
-            if ($business_owner !== null) {
-                $mail_business_owner = $business_owner->getEmail();
-                \Drupal::service('plugin.manager.mail')
-                    ->mail('oab_backoffice', 'gdpr_publish_notice', $mail_business_owner, $current_language, array('webform' => $entity));
+            $gdpr_business_user = $entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_business_owner');
+            $business_owner = (isset($gdpr_business_user)) ? User::load($gdpr_business_user) : null;
+            if ($business_owner !== NULL) {
+              $mail_business_owner = $business_owner->getEmail();
+              \Drupal::service('plugin.manager.mail')
+                ->mail('oab_backoffice', 'gdpr_publish_notice', $mail_business_owner, $current_language, ['webform' => $entity]);
             }
 
         }

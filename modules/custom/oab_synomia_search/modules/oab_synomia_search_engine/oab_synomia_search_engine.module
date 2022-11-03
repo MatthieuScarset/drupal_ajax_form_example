@@ -14,6 +14,7 @@ function oab_synomia_search_engine_theme() {
             'pager' => array(),
             'corrections' => array(),
             'degradations' => array(),
+            'search_route_path' => array(),
             'nbResults' => array(),
         ),
         'template' => 'synomia-search-results--page'

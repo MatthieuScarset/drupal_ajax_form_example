@@ -1,9 +1,7 @@
 display:
   default:
+    display_title: Master
     display_options:
-      exposed_form:
-        options:
-          submit_button: Filtrar
       fields:
         name:
           label: Usuário
@@ -15,6 +13,9 @@ display:
           label: Papéis
         operations:
           label: Operações
+      exposed_form:
+        options:
+          submit_button: Filtrar
       filters:
         status:
           group_info:

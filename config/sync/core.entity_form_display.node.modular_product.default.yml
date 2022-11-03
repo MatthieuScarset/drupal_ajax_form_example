@@ -93,7 +93,7 @@ third_party_settings:
       children:
         - title
         - field_presentation
-      label: Présentation
+      label: Presentation
       region: content
       parent_name: group_onglets
       weight: 5
@@ -139,7 +139,7 @@ third_party_settings:
         - field_faq
         - field_cross_sell
         - field_blogs
-      label: 'to go further'
+      label: 'To go further'
       region: content
       parent_name: group_onglets
       weight: 8
@@ -154,7 +154,7 @@ third_party_settings:
     group_detail_offre:
       children:
         - field_detail_offre
-      label: 'Détail de l''offre/gamme'
+      label: 'Offer details/Gamme'
       region: content
       parent_name: group_onglets
       weight: 6
@@ -414,6 +414,11 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
+    settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete

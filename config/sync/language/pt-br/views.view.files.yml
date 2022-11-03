@@ -1,14 +1,15 @@
 display:
   default:
+    display_title: Master
     display_options:
-      exposed_form:
-        options:
-          submit_button: Filtrar
       fields:
         filename:
           label: Nome
         status:
           label: Status
+      exposed_form:
+        options:
+          submit_button: Filtrar
       filters:
         filename:
           expose:

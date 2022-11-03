@@ -4,6 +4,10 @@ type: module
 package: OAB
 # core: 8.x
 
+libraries-extend:
+  admin_toolbar/toolbar.tree:
+    - oab_develop/toolbar
+
 # Information added by Drupal.org packaging script on 2016-01-20
 version: '8.x-1.0'
 core_version_requirement: ^8.8.0 || ^9.0

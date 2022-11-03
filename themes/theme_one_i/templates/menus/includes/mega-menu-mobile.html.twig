@@ -99,7 +99,11 @@ We call a macro which calls itself to render the full tree.
 
 {# Gestion du cas "old template" ou tous les items sont à la suite, malgré 2 sous-niveaux   #}
 {% macro soft_template(items, item_parent, content) %}
-  <a class="o-link-arrow text-decoration-none py-2 px-1 global-link-mobile" href="{{ content.field_global_link.0['#url'] }}">{{ content.field_global_link.0['#title'] }}</a>
+  <a class="o-link-arrow text-decoration-none py-2 px-1 global-link-mobile"
+     href="{{ content.field_global_link.0['#url'] }}"
+     onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item_parent }}','{{ content.field_global_link.0['#title'] }}')"
+  >
+    {{ content.field_global_link.0['#title'] }}</a>
   <h4 class="text-dark px-1 mb-1 pb-0">{{ content.field_subtitle }}</h4>
   <div class="items_list_link">
   {% for item in items %}
@@ -108,7 +112,7 @@ We call a macro which calls itself to render the full tree.
     {% if item.below %}
       {% for item in item.below %}
         <a href="{{ item.url }}" class="nav-link o-link text-decoration-none p-1"
-           onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item_parent }}','track_cible':'{{ item.title }}','track_type_evt':'clic'})">{{ item.title }} </a>
+           onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item_parent }}','{{ item.title }}')">{{ item.title }} </a>
       {% endfor %}
     {% endif %}
   {% endfor %}
@@ -130,7 +134,7 @@ We call a macro which calls itself to render the full tree.
       <div class="items_list_link_container">
         <h4 class="items_list_link_title">
           <a href="{{ item.url }}" class="nav-link o-link text-decoration-none {% if loop.index == 1 %} border-0 {% endif %}"
-           onmousedown="utag_link({'track_page':utag_data.page_title,'track_zone':'Menu','track_nom':'{{ item_parent }}','track_cible':'{{ item.title }}','track_type_evt':'clic'})">{{ item.title }} </a>
+           onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item_parent }}','{{ item.title }}')">{{ item.title }} </a>
         </h4>
         {% if item.below %}
           {% for item in item.below %}

@@ -1,0 +1,15 @@
+oab_siu_connexion.settings:
+  path: '/admin/structure/oab/settings/siu_connexion/settings'
+  defaults:
+    _form: '\Drupal\oab_siu_connexion\Form\SIUConnexionSettingsForm'
+    _title: 'SIU Connexion settings'
+  requirements:
+    _permission: 'administer site configuration'
+
+oab_siu_connexion.login:
+  path: /saml/siu_login/{idp}
+  defaults:
+    _title: 'Initiate SAML SP Drupal Login'
+    _controller: \Drupal\oab_siu_connexion\Controller\SIUController::initiate
+  requirements:
+    _access: 'TRUE'

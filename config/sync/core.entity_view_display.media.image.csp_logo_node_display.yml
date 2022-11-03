@@ -23,6 +23,8 @@ content:
     settings:
       image_link: ''
       image_style: csp_logo_image_full_node
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
     weight: 2
     region: content

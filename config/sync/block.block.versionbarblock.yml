@@ -1,0 +1,21 @@
+uuid: d2188c12-2ef1-410e-8c43-29429a7059cb
+langcode: fr
+status: true
+dependencies:
+  module:
+    - oab_develop
+  theme:
+    - theme_obs_backoffice_claro
+id: versionbarblock
+theme: theme_obs_backoffice_claro
+region: content
+weight: 0
+provider: null
+plugin: version_bar_block
+settings:
+  id: version_bar_block
+  label: 'Version Bar Block'
+  label_display: visible
+  provider: oab_develop
+  message: ''
+visibility: {  }

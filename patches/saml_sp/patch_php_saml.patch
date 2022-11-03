@@ -1,0 +1,28 @@
+diff --git a/src/Saml2/Utils.php b/src/Saml2/Utils.php
+--- a/src/Saml2/Utils.php
++++ b/src/Saml2/Utils.php
+@@ -443,23 +443,7 @@
+      */
+     public static function getSelfURLhost()
+     {
+-        $currenthost = self::getSelfHost();
+-
+-        $port = '';
+-
+-        if (self::isHTTPS()) {
+-            $protocol = 'https';
+-        } else {
+-            $protocol = 'http';
+-        }
+-
+-        $portnumber = self::getSelfPort();
+-
+-        if (isset($portnumber) && ($portnumber != '80') && ($portnumber != '443')) {
+-            $port = ':' . $portnumber;
+-        }
+-
+-        return $protocol."://" . $currenthost . $port;
++        return "https://" . self::getSelfHost();
+     }
+
+     /**

@@ -1,17 +1,18 @@
 <?php
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
 use Drupal\oab_akamai\Form\OabAkamaiForm;
 
 function oab_akamai_testDrushAkamai($form, FormStateInterface &$form_state) {
-    $url_to_test = $form_state->getValue('test_url');
-    $host = $form_state->getValue('test_host');
+  $url_to_test = $form_state->getValue('test_url');
+  $host = $form_state->getValue('test_host');
 
-    $akamai_ctrl = new \Drupal\oab_akamai\Controller\OabAkamaiController();
+  $akamai_ctrl = new \Drupal\oab_akamai\Controller\OabAkamaiController();
 
-    $akamai_ctrl->flushAkamai($url_to_test);
-    $akamai_ctrl->flushVarnish($url_to_test, $host);
-    $akamai_ctrl->flushDrupalCache($url_to_test);
+  $akamai_ctrl->flushAkamai($url_to_test);
+  $akamai_ctrl->flushVarnish($url_to_test, $host);
+  $akamai_ctrl->flushDrupalCache($url_to_test);
 
 }
 
@@ -20,39 +21,51 @@ function oab_akamai_testDrushAkamai($form, FormStateInterface &$form_state) {
  *  -> Si l'option est activée dans la config, on vide tous les caches
  */
 function oab_akamai_node_update(Drupal\Core\Entity\EntityInterface $node) {
-    $config = \Drupal::config(OabAkamaiForm::getConfigName());
-    $hook_enabled = $config->get('enable_hook');
+  $config = \Drupal::config(OabAkamaiForm::getConfigName());
+  $hook_enabled = $config->get('enable_hook');
 
-    $state = \Drupal::state()->get('system.maintenance_mode');
+  $state = \Drupal::state()->get('system.maintenance_mode');
 
-    #Si la conf est activée, on vire les caches
-    if ($state != 1 && $hook_enabled) {
+  #Si la conf est activée, on vire les caches
+  if ($state != 1 && $hook_enabled) {
 
-        # On recupère l'URL du noeud et le host du site
-        $node_url = $node->toUrl()->setAbsolute()->toString();
+    # On recupère l'URL du noeud et le host du site
+    $node_url = $node->toUrl()->setAbsolute()->toString();
 
-        $host = \Drupal::request()->getSchemeAndHttpHost();
+    $host = \Drupal::request()->getSchemeAndHttpHost();
 
-        $node_url = str_replace("back.", '', $node_url);
-        $node_url = str_replace("backoffice.", '', $node_url);
+    $node_url = str_replace("back.", '', $node_url);
+    $node_url = str_replace("backoffice.", '', $node_url);
 
+    $akamai_ctrl = new \Drupal\oab_akamai\Controller\OabAkamaiController();
 
-        $akamai_ctrl = new \Drupal\oab_akamai\Controller\OabAkamaiController();
+    # Ici on gère le cas des homepages
+    if ($node->bundle() === "homepage") {
 
-        $akamai_ctrl->flushAkamai($node_url);
-        $akamai_ctrl->flushVarnish($node_url, $host);
-        $akamai_ctrl->flushDrupalCache($node_url);
+      $url = Url::fromRoute('<front>');
 
+      if ($url) {
+        $url->setOption('langcode', $node->language()->getId());
+        $hp_url = $url->toString();
+        $akamai_ctrl->flushAkamai($hp_url);
+        $akamai_ctrl->flushDrupalCache($hp_url);
+      }
     }
+
+    $akamai_ctrl->flushAkamai($node_url);
+    $akamai_ctrl->flushVarnish($node_url, $host);
+    $akamai_ctrl->flushDrupalCache($node_url);
+
+  }
 }
 
 function oab_akamai_form_alter(&$form, FormStateInterface $form_state) {
-    if ($form['#form_id'] == 'oab_akamai_manual_flush') {
-        foreach (array_keys($form['actions']) as $action) {
-            if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
-                $form['actions'][$action]['#submit'][] = 'oab_akamai_testDrushAkamai';
-            }
-        }
-        $form['actions']['submit']['#value'] = "Vider les caches";
+  if ($form['#form_id'] == 'oab_akamai_manual_flush') {
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'oab_akamai_testDrushAkamai';
+      }
     }
+    $form['actions']['submit']['#value'] = "Vider les caches";
+  }
 }

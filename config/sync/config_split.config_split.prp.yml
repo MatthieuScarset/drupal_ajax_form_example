@@ -6,6 +6,7 @@ id: prp
 label: PRP
 description: ''
 weight: 0
+stackable: false
 storage: folder
 folder: config/config_split/prp
 module: {  }

@@ -1,0 +1,14 @@
+uuid: bdb0167b-4862-40c5-9293-c4431c983036
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.siu_user
+  module:
+    - user
+id: user_remove_role_action.siu_user
+label: 'Remove the SIU User role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: siu_user

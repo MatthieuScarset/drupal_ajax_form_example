@@ -1,0 +1,27 @@
+{
+  "name": "theme_obs_backoffice_claro",
+  "version": "1.0.0",
+  "description": "Sass Theme for Backoffice Claro",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack watch"
+  },
+  "devDependencies": {
+    "autoprefixer": "10.2.6",
+    "copy-webpack-plugin": "9.1.0",
+    "css-loader": "5.2.6",
+    "mini-css-extract-plugin": "1.6.2",
+    "postcss": "8.3.5",
+    "postcss-loader": "4.3.0",
+    "sass": "1.35.1",
+    "sass-loader": "11.1.1",
+    "style-loader": "2.0.0",
+    "webpack": "5.41.1",
+    "webpack-cli": "4.7.2",
+    "webpack-import-glob-loader": "1.6.3"
+  },
+  "dependencies": {
+    "seamless-scroll-polyfill": "^2.1.8"
+  }
+}

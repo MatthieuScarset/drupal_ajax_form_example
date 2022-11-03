@@ -1,5 +1,5 @@
 uuid: 6af63cf1-3b80-4d04-bf0d-e93142ce7373
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -9,8 +9,8 @@ id: paragraph.module_detail_offre_items.field_formule
 field_name: field_formule
 entity_type: paragraph
 bundle: module_detail_offre_items
-label: Formule
-description: ''
+label: 'Configurator offre'
+description: 'Enter the name of the offer associated with the configurator'
 required: true
 translatable: false
 default_value: {  }

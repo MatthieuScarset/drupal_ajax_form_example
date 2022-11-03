@@ -1,0 +1,21 @@
+uuid: b2a31610-b5cc-450a-8a52-d3ef7dcfb9e2
+langcode: fr
+status: true
+dependencies:
+  module:
+    - oab_develop
+  theme:
+    - theme_obs_backoffice
+id: theme_obs_backoffice_versionbarblock
+theme: theme_obs_backoffice
+region: footer
+weight: 0
+provider: null
+plugin: version_bar_block
+settings:
+  id: version_bar_block
+  label: 'Version Bar Block'
+  label_display: '0'
+  provider: oab_develop
+  message: 'Backoffice du portail orange-business.com'
+visibility: {  }

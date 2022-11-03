@@ -1,0 +1,31 @@
+
+diff --git a/core/modules/system/src/Plugin/Condition/RequestPath.php b/core/modules/system/src/Plugin/Condition/RequestPath.php
+--- a/core/modules/system/src/Plugin/Condition/RequestPath.php
++++ b/core/modules/system/src/Plugin/Condition/RequestPath.php
+@@ -9,6 +9,7 @@
+ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+ use Drupal\path_alias\AliasManagerInterface;
+ use Symfony\Component\DependencyInjection\ContainerInterface;
++use Symfony\Component\HttpFoundation\Request;
+ use Symfony\Component\HttpFoundation\RequestStack;
+
+ /**
+@@ -146,9 +147,15 @@
+       return TRUE;
+     }
+
+-    $request = $this->requestStack->getCurrentRequest();
+-    // Compare the lowercase path alias (if any) and internal path.
+-    $path = $this->currentPath->getPath($request);
++    // Ajout du path via la conf', car s'il est appelé trop tot, la "currentRequest" peut être null
++    if (isset($this->configuration['current_path'])) {
++      $path = $this->configuration['current_path'];
++    } else {
++      $request = $this->requestStack->getCurrentRequest();
++      // Compare the lowercase path alias (if any) and internal path.
++      $path = $this->currentPath->getPath($request);
++    }
++
+     // Do not trim a trailing slash if that is the complete path.
+     $path = $path === '/' ? $path : rtrim($path, '/');
+     $path_alias = mb_strtolower($this->aliasManager->getAliasByPath($path));

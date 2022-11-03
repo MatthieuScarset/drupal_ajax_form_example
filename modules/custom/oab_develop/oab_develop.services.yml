@@ -4,3 +4,7 @@ services:
     arguments: ['@logger.log_message_parser']
     tags:
       - { name: logger }
+
+  oab_develop.helper.translations:
+    class: Drupal\oab_develop\Helpers\TranslationsHelper
+    arguments: ['@locale.storage']

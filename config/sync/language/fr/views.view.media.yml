@@ -1,22 +1,9 @@
 label: Médias
 display:
   default:
+    display_title: Master
     display_options:
-      exposed_form:
-        options:
-          submit_button: Filtre
-          reset_button_label: 'Remise à zéro'
-          exposed_sorts_label: 'Filtrer par'
-      pager:
-        options:
-          expose:
-            items_per_page_label: 'Éléments par page'
-            items_per_page_options_all_label: '- Tous -'
-          tags:
-            previous: '‹ Précédent'
-            next: 'Suivant ›'
-            first: '« Premier'
-            last: 'Dernier »'
+      title: Médias
       fields:
         media_bulk_form:
           action_title: Action
@@ -29,12 +16,30 @@ display:
         status:
           label: Statut
           settings:
-            format_custom_true: Publié
             format_custom_false: Dépublié
+            format_custom_true: Publié
         changed:
           label: 'Mise à jour'
         operations:
           label: Actions
+      pager:
+        options:
+          tags:
+            next: 'Suivant ›'
+            previous: '‹ Précédent'
+            first: '« Premier'
+            last: 'Dernier »'
+          expose:
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options_all_label: '- Tous -'
+      exposed_form:
+        options:
+          submit_button: Filtre
+          reset_button_label: 'Remise à zéro'
+          exposed_sorts_label: 'Filtrer par'
+      empty:
+        area_text_custom:
+          content: 'No content available.'
       filters:
         name:
           expose:
@@ -53,10 +58,6 @@ display:
         langcode:
           expose:
             label: Langue
-      title: Médias
-      empty:
-        area_text_custom:
-          content: 'No content available.'
   media_page_list:
     display_title: Médias
     display_options:

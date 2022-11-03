@@ -65,6 +65,8 @@ hidden:
   field_end_date: true
   field_file: true
   field_industry: true
+  field_insight: true
+  field_insight_type: true
   field_job_profile: true
   field_market_segment: true
   field_meta_description: true
@@ -80,5 +82,6 @@ hidden:
   field_start_date: true
   field_subhome: true
   field_visual: true
+  field_visual_tile: true
   langcode: true
   moderation_state_update: true

@@ -1,6 +1,7 @@
 url_list:
-  - consulting
-  - digitalworkspace
+  1: digitalworkspace
+  2: mss-assistance
+  3: mss-assistance
 form_removed_subhome_tids:
   - '858'
   - '857'

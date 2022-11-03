@@ -1,6 +1,6 @@
 uuid: 8a569694-6527-4478-bf94-b110168fc7f4
 langcode: fr
-status: true
+status: false
 dependencies:
   module:
     - oab_backoffice

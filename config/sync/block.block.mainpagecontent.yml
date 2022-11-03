@@ -1,0 +1,20 @@
+uuid: 74194580-5dd3-448b-9518-446e6fe27d7c
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - theme_obs_backoffice_claro
+id: mainpagecontent
+theme: theme_obs_backoffice_claro
+region: content
+weight: -2
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

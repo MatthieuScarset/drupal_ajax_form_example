@@ -8,7 +8,7 @@ id: global
 label: Global
 tags:
   robots: 'index, follow'
-  google: 0z0fMhsMtElpkNvsk-MXYPmEYShbqP-6dg6cxDvOgkk
   canonical_url: '[current-page:url:absolute]'
   title: '[current-page:title] | [site:name]'
   yandex: 8a7708dcd8ad0d99
+  google_site_verification: 0z0fMhsMtElpkNvsk-MXYPmEYShbqP-6dg6cxDvOgkk

@@ -432,7 +432,7 @@ class OabHubController extends ControllerBase {
             $url_list = [];
         }
 
-        $url = \Drupal::request()->getRequestUri();
+        $url = \Drupal::request()->getPathInfo();
 
         ##Je recupère toutes les parties de la route
         $route_parts = explode('/', $url);

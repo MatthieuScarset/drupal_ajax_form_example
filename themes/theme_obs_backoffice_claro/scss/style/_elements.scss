@@ -1,0 +1,19 @@
+a,
+.link {
+  color: $orange;
+}
+
+a:hover,
+.link:hover {
+  color: $orange;
+}
+
+a:active,
+.link:active {
+  color: $orange;
+}
+
+.page-wrapper *:focus,
+.ui-dialog *:focus {
+  box-shadow: 0 0 0 2px transparent, 0 0 0 5px transparent;
+}

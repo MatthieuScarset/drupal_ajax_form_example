@@ -1,6 +1,10 @@
 settings:
+  default_form_close_message: 'Sorry...This form is closed to new submissions.'
   default_delete_button_label: Apagar
   default_form_access_denied_message: 'Please login to access this webform.'
+  default_wizard_prev_button_label: '< Previous'
+  default_wizard_next_button_label: 'Next Page >'
+  default_preview_prev_button_label: '< Previous'
   dialog_options:
     normal:
       title: Normal
@@ -10,7 +14,6 @@ mail:
     <p>Submitted by: [webform_submission:user]</p>
     <p>Submitted values are:</p>
     [webform_submission:values]
-  default_subject: ''
 test:
   types: |
     checkbox:

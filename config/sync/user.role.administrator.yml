@@ -12,6 +12,7 @@ dependencies:
     - node.type.external_content
     - node.type.industry
     - node.type.magazine
+    - node.type.mss_article
     - node.type.office
     - node.type.partner
     - node.type.press_kit
@@ -62,6 +63,7 @@ dependencies:
     - responsive_image
     - robotstxt
     - roleassign
+    - saml_sp
     - scheduled_updates
     - seckit
     - shortcut
@@ -70,6 +72,7 @@ dependencies:
     - taxonomy
     - toolbar
     - tour
+    - update
     - views_ui
     - webform
     - webform_node
@@ -175,6 +178,7 @@ permissions:
   - 'cancel account'
   - 'change own logout threshold'
   - 'change own username'
+  - 'configure saml sp'
   - 'create blog_post content'
   - 'create cloud_service_provider content'
   - 'create content translations'
@@ -186,6 +190,7 @@ permissions:
   - 'create magazine content'
   - 'create marketo form'
   - 'create media'
+  - 'create mss_article content'
   - 'create office content'
   - 'create partner content'
   - 'create press_kit content'
@@ -210,6 +215,7 @@ permissions:
   - 'delete any industry content'
   - 'delete any magazine content'
   - 'delete any media'
+  - 'delete any mss_article content'
   - 'delete any office content'
   - 'delete any partner content'
   - 'delete any press_kit content'
@@ -232,6 +238,7 @@ permissions:
   - 'delete magazine revisions'
   - 'delete marketo form'
   - 'delete media'
+  - 'delete mss_article revisions'
   - 'delete office revisions'
   - 'delete own blog_post content'
   - 'delete own cloud_service_provider content'
@@ -241,6 +248,7 @@ permissions:
   - 'delete own external_content content'
   - 'delete own industry content'
   - 'delete own magazine content'
+  - 'delete own mss_article content'
   - 'delete own office content'
   - 'delete own partner content'
   - 'delete own press_kit content'
@@ -278,6 +286,7 @@ permissions:
   - 'edit any external_content content'
   - 'edit any industry content'
   - 'edit any magazine content'
+  - 'edit any mss_article content'
   - 'edit any office content'
   - 'edit any partner content'
   - 'edit any press_kit content'
@@ -299,6 +308,7 @@ permissions:
   - 'edit own external_content content'
   - 'edit own industry content'
   - 'edit own magazine content'
+  - 'edit own mss_article content'
   - 'edit own office content'
   - 'edit own partner content'
   - 'edit own press_kit content'
@@ -336,6 +346,7 @@ permissions:
   - 'revert external_content revisions'
   - 'revert industry revisions'
   - 'revert magazine revisions'
+  - 'revert mss_article revisions'
   - 'revert office revisions'
   - 'revert partner revisions'
   - 'revert press_kit revisions'
@@ -386,6 +397,7 @@ permissions:
   - 'view magazine revisions'
   - 'view media'
   - 'view moderation states'
+  - 'view mss_article revisions'
   - 'view office revisions'
   - 'view own unpublished content'
   - 'view partner revisions'
@@ -398,6 +410,7 @@ permissions:
   - 'view simple_page revisions'
   - 'view solution revisions'
   - 'view the administration theme'
+  - 'view update notifications'
   - 'view webform revisions'
   - 'view webform submissions any node'
   - 'view webform submissions own node'

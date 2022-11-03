@@ -60,6 +60,7 @@ hidden:
   field_hub: true
   field_hub_portal: true
   field_insight: true
+  field_insight_type: true
   field_local_nav: true
   field_meta_description: true
   field_meta_title: true
@@ -68,5 +69,6 @@ hidden:
   field_top_zone: true
   field_top_zone_background: true
   field_top_zone_bg_mobile: true
+  field_visual_tile: true
   langcode: true
   moderation_state_update: true

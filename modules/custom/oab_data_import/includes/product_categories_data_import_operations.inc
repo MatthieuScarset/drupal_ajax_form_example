@@ -43,7 +43,7 @@ function oab_data_import_data_product_categories_batch($columns, $lineNumber, &$
   // Informations de base
   $node = Node::load($product_data['nid']);
   if (!empty($node)) {
-    if($node->bundle() == 'product') {
+    if ($node->bundle() == 'product') {
       // Product name : texte
       $node->set('field_product_name', $product_data['product_name']);
 
@@ -64,8 +64,8 @@ function oab_data_import_data_product_categories_batch($columns, $lineNumber, &$
       }
       // Key points : text array
       $new_key_points = [];
-      foreach ($product_data['key_points'] as $key_point){
-        if(!empty(trim($key_point))){
+      foreach ($product_data['key_points'] as $key_point) {
+        if (!empty(trim($key_point))) {
           $new_key_points[] = $key_point;
         }
       }
@@ -88,7 +88,7 @@ function oab_data_import_data_product_categories_batch_finished($success, $resul
         $message = \Drupal::translation()->formatPlural(count($results['total']), 'One product updates.','@count products updates.');
         \Drupal::messenger()->addMessage($message, 'status', TRUE);
 
-        if($results['warning']['message'] != null && count($results['warning']['message']) > 0){
+        if ($results['warning']['message'] != null && count($results['warning']['message']) > 0) {
           Drupal::messenger()->addMessage("Errors occured in file : ", 'warning', TRUE);
           foreach ($results['warning']['message'] as $message){
             Drupal::messenger()->addMessage($message, 'warning', TRUE);
