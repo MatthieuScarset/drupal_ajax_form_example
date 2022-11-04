@@ -2,11 +2,26 @@
 
 namespace Drupal\oab_modular_product\Plugin\Validation\Constraint;
 
+use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
+use Drupal\oab_modular_product\Services\OabModularProductService;
 use Drupal\paragraphs\Entity\Paragraph;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class ModularProductOrderModuleValidator extends ConstraintValidator {
+class ModularProductOrderModuleValidator extends ConstraintValidator implements ContainerInjectionInterface {
+
+
+  public function __construct(
+    private OabModularProductService $modularProductService
+  ) {
+  }
+
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('oab_modular_product.settings')
+    );
+  }
 
   /**
    * @param \Drupal\Core\Field\FieldItemList $items
@@ -17,16 +32,7 @@ class ModularProductOrderModuleValidator extends ConstraintValidator {
   public function validate($items, Constraint $constraint) {
 
 //liste de modules optionnels de la page produit dans le bon ordre
-    $default_order = [
-      "module_services",
-      "module_customer_space",
-      "module_steps",
-      "module_exemples",
-      "module_benefits",
-      "module_partner",
-      "module_partner",
-      "module_testimonial"
-    ];
+    $default_order = $this->modularProductService->getModulesOrder();
 
 //Liste des modules supplémentaires optionnels dont on ne tiendra pas compte
     $not_in_order = [

@@ -18,4 +18,5 @@ class ModularProductModuleRequired extends Constraint{
 
   // The message that will be shown if the value is not an integer.
   public string $required = 'The module %value is required';
+  public string $required_multi = 'Modules %value are required';
 }

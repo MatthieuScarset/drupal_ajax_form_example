@@ -24,3 +24,7 @@ modules_titles:
   module_exemples: Examples
   module_testimonial: Testimonials
   to_go_further: 'To go further'
+modules_settings:
+  modules_list: ''
+  modules_order: "module_services\r\nmodule_customer_space\r\nmodule_steps\r\nmodule_exemples\r\nmodule_benefits\r\nmodule_testimonial\r\nmodule_partner\r\nmodule_partner"
+  modules_required: module_benefits

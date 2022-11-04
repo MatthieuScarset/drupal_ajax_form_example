@@ -54,6 +54,26 @@ class OabModularProductService {
     return $this->get("modules_titles.to_go_further");
   }
 
+  public function getModulesOrder(): mixed {
+    $modules = $this->config->get('modules_settings.modules_order');
+    if(empty($modules)) {
+      return [];
+    }
+    else {
+       return array_filter(array_map('trim', explode("\n", $modules)));
+    }
+  }
+
+  public function getModulesRequired(): mixed {
+    $modules = $this->config->get('modules_settings.modules_required');
+    if(empty($modules)) {
+      return [];
+    }
+    else {
+       return array_filter(array_map('trim', explode("\n", $modules)));
+    }
+  }
+
   private function get(string $item): mixed {
     return $this->config->get($item) ?? [];
   }
