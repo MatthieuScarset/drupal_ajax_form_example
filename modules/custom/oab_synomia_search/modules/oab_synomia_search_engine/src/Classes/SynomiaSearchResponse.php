@@ -148,9 +148,8 @@ class SynomiaSearchResponse {
                                     ->item(0)->nodeValue;
                             }
                             elseif ($item->getElementsByTagName("snippet")->length > 0) {
-                              $my_item['description'] = $item->getElementsByTagName("snippet")
-                                ->item(0)->nodeValue;
-                              $my_item['description'] = strip_tags($my_item['description']);
+                              $my_item['description'] = strip_tags($item->getElementsByTagName("snippet")
+                                ->item(0)->nodeValue);
                             }
                             if ($item->getElementsByTagName("rubrique")->length > 0) {
                                 $my_item['rubrique'] = $item->getElementsByTagName("rubrique")
