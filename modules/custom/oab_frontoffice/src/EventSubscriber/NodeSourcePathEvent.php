@@ -119,6 +119,9 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
                     $node_language = $node->language();
                     $node_lang_id = $node_language->getId();
 
+                    $lang_prefixes = \Drupal::config('language.negotiation')->get('url.prefixes');
+                    $node_lang_prefix = $lang_prefixes[$node_lang_id] ?? '';
+
                     // if language is undefined, we load the current language page
                     if ($node_lang_id == LanguageInterface::LANGCODE_NOT_SPECIFIED) {
                         $node_language = \Drupal::languageManager()->getCurrentLanguage();
@@ -131,7 +134,7 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
                     $new_url = $url->toString();
                     $current_uri = $request->getRequestUri();
 
-                    $real_front_url = "/" . $node_lang_id . \Drupal::config("system.site")->get('page.front');
+                    $real_front_url = "/" . $node_lang_prefix . \Drupal::config("system.site")->get('page.front');
 
                     ## Comme un noeud peut avoir plusieurs alias, je les recupère tous
                     ## et je teste s'ils existent dans la liste
