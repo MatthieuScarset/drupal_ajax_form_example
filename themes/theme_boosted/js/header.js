@@ -5,8 +5,9 @@
  });*/
 
 (function ($, Drupal, Bootstrap) {
-  var lastScrollTop = 0;
-  var navtop = $('#navtop');
+  let lastScrollTop = 0;
+  let navtop = $('#navtop');
+  let header = $('header#navbar');
     function init_fixed_navbar(){
         var offset = 0;
         var top_menu = $('#main_nav');
@@ -123,6 +124,23 @@
         });
     }
 
+  // add css class to hide header after is not visible
+  function manageStickyHeader([e]){
+    if (e.intersectionRatio < 1) {
+      header.addClass("not-visible");
+    }
+  }
+
+  // get the sticky element
+  this.$stickyHeaderObserver = new IntersectionObserver(
+    manageStickyHeader,
+    {
+      threshold: 0
+    }
+  );
+  this.$stickyHeaderObserver.observe(document.querySelector('header'))
+
+
     function moveFixedElements(top_menu_offset, offset, top_menu, menu_offset, contact_module_offset, contact_offset, contact_module, preview_bar, preview_bar_offset, init_preview_bar_offset, local_nav, localnav_offset, top_zone){
         var container_margin_top = 0;
         if (top_menu.length) {
@@ -135,31 +153,21 @@
             container_margin_top += contact_module.height() + 20;
         }
 
-        var st = window.pageYOffset || document.documentElement.scrollTop;
+      top_menu.removeClass('navbar-fixed');
+      const scrollTop = $(window).scrollTop();
 
-        if (st > lastScrollTop){
-          // downscroll code
-          /*
-          //$('.main-container').css('margin-top', 0);
-         // $('.region-pre-content .affix').css('top', $('#navbar').height() + menu_offset);
-           */
-          top_menu.css('top', 0);
-         // top_menu.css('top', $('#navtop').height());
-          navtop.css('top', 0);
-          $('header#navbar').addClass('top-band-hidden');
-          //$('.region-pre-content .affix').css('top', top_menu.outerHeight() + menu_offset);
+      if (scrollTop > lastScrollTop) {
+        // Scroll down
+        header.removeClass("is-visible");
+      } else {
+        // Scroll Up
+        header.addClass("is-visible");
+        header.css("top", $('body').hasClass('user-logged-in') ? "83px": "0px");
+        header.removeClass("not-visible");
+      }
 
-        } else {
-          // upscroll code
-          navtop.css('top', 0);
-          top_menu.css('top', menu_offset );
-          //top_menu.css('top', menu_offset + $('#navtop').height());
-          $('header#navbar').removeClass('top-band-hidden');
-         // $('.region-pre-content .affix').css('top', top_menu.outerHeight() + menu_offset);
+      lastScrollTop = scrollTop;
 
-            $('header#navbar').css('margin-bottom',top_menu.outerHeight() + navtop.outerHeight());
-        }
-        lastScrollTop = st;
 
         if (preview_bar.length) {
             if ($(window).scrollTop() > top_menu_offset.top + offset) {
@@ -207,28 +215,37 @@
                 localnav_offset += $('#toolbar-item-administration-tray').height();
             }
 
-          if (!$('header#navbar').hasClass('top-band-hidden')) {
+          if (!header.hasClass('not-visible')) {
             localnav_offset +=  top_menu.outerHeight() + navtop.outerHeight();
           }
-            /*
-            if (top_menu.length && top_menu.hasClass('navbar-fixed')) {
-                localnav_offset +=  top_menu.outerHeight();
-            }
-            if (navtop.length && navtop.hasClass('navbar-fixed')) {
-                localnav_offset +=  navtop.outerHeight();
-            }
-            */
+
+          //Position top de la social bar en connecté ou pas connecté
+          $('#block-socialshareblock').css('top', $('body').hasClass('user-logged-in') ? header.outerHeight() + 83 :
+            header.outerHeight());
+
+          // Gestion de la local nav
+          if ($(window).scrollTop() > (header.outerHeight() + top_zone_offset) ||
+            ($(window).scrollTop() > top_zone_offset - header.outerHeight() && header.hasClass('is-visible'))) {
+            local_nav.addClass('sticky-module');
+            $('#block-socialshareblock').css('top', localnav_offset + $('#local_nav').outerHeight());
+          }
+
+          if ($(window).scrollTop() < (top_zone_offset - header.outerHeight()) + 90) {
+            local_nav.removeClass('sticky-module');
+          }
+
+
+
             if ($(window).scrollTop() > (top_zone_offset - localnav_offset )) {
-                local_nav.addClass('sticky-module');
+
                 if(top_zone.length && top_zone.outerHeight() > 0) {
                     $('.main-container').css('margin-top', 0);
                 }else{
                     $('.main-container').css('margin-top', container_margin_top);
                 }
                 local_nav.css('top',  localnav_offset );
-                $('#block-socialshareblock').css('top', localnav_offset + $('#local_nav').outerHeight());
+               // $('#block-socialshareblock').css('top', localnav_offset + $('#local_nav').outerHeight());
             } else {
-                local_nav.removeClass('sticky-module');
                 if(top_zone.length && top_zone.outerHeight() > 0) {
                     $('.main-container').css('margin-top', 0);
                 }else{

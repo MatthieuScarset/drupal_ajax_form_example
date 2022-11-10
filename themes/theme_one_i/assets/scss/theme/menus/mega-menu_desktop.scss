@@ -3,13 +3,11 @@ header#navbar.sticky-top.is-sticky {
   .main_nav.navbar {
     padding-bottom: 0;
 
-    /*
     .navbar-brand img {
       width: 112px;
       height: auto;
       padding-bottom: 0.9375rem;
     }
-     */
 
     .navbar-right {
       padding-bottom: 0.9375rem;
@@ -56,7 +54,7 @@ header#navbar.sticky-top.is-sticky {
     }
 
   .mega-menu-desktop {
-   // & > nav,
+    & > nav,
     & > nav > ul.navbar-nav > li.nav-item {
       position: initial
     }

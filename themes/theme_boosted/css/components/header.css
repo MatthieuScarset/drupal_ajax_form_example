@@ -140,18 +140,22 @@
 header#navbar{
   transition: opacity 0.15s linear;
   opacity: 1;
-  z-index: 3000;
-  position: sticky;
 }
 header#navbar > div {
-  position: fixed;
   top: 0;
   width: 100%;
   z-index: 400;
 }
 
-header#navbar.top-band-hidden{
+header#navbar.not-visible{
   opacity: 0;
+  visibility: hidden;
+}
+
+header#navbar.is-visible{
+  z-index: 400;
+  opacity: 1;
+  position: sticky;
 }
 
 #main_nav.navbar-fixed .navbar-right {
