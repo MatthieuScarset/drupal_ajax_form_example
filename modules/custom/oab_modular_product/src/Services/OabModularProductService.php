@@ -6,6 +6,12 @@ use Drupal\Core\Config\ImmutableConfig;
 
 class OabModularProductService {
 
+  const MODULES_OPTIONNELS = [
+    "module_3_4_colonnes",
+    "module_text_video_image",
+    "paragraph_wysiwyg",
+  ];
+
   public function __construct(
     private ImmutableConfig $config
   ) { }
@@ -55,22 +61,30 @@ class OabModularProductService {
   }
 
   public function getModulesOrder(): mixed {
-    $modules = $this->config->get('modules_settings.modules_order');
+    $modules = $this->config->get('modules_settings.modules');
     if(empty($modules)) {
       return [];
     }
     else {
-       return array_filter(array_map('trim', explode("\n", $modules)));
+      //tri du tableau par la weight
+      uasort($modules, function($a, $b) {
+        return $a['weight'] <=> $b['weight'];
+      });
+      //on ne renvoie que les id
+      return array_keys($modules);
     }
   }
 
   public function getModulesRequired(): mixed {
-    $modules = $this->config->get('modules_settings.modules_required');
+    $modules = $this->config->get('modules_settings.modules');
     if(empty($modules)) {
       return [];
     }
     else {
-       return array_filter(array_map('trim', explode("\n", $modules)));
+      //filtre du tableau sur les required - on ne renvoie que les id
+      return array_keys(array_filter($modules, function($v, $k) {
+        return $v['required'] === "1";
+      }, ARRAY_FILTER_USE_BOTH));
     }
   }
 

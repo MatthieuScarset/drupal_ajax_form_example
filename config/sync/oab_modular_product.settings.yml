@@ -25,6 +25,25 @@ modules_titles:
   module_testimonial: Testimonials
   to_go_further: 'To go further'
 modules_settings:
-  modules_list: ''
-  modules_order: "module_services\r\nmodule_customer_space\r\nmodule_steps\r\nmodule_exemples\r\nmodule_benefits\r\nmodule_testimonial\r\nmodule_partner\r\nmodule_partner"
-  modules_required: module_benefits
+  modules:
+    module_services:
+      weight: '-10'
+      required: 0
+    module_customer_space:
+      weight: '-9'
+      required: 0
+    module_steps:
+      weight: '-8'
+      required: 0
+    module_exemples:
+      weight: '-7'
+      required: 0
+    module_benefits:
+      required: '1'
+      weight: '-6'
+    module_testimonial:
+      weight: '-5'
+      required: 0
+    module_partner:
+      weight: '-4'
+      required: 0

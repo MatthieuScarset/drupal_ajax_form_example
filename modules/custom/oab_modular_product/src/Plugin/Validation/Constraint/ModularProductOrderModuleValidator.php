@@ -34,19 +34,11 @@ class ModularProductOrderModuleValidator extends ConstraintValidator implements 
 //liste de modules optionnels de la page produit dans le bon ordre
     $default_order = $this->modularProductService->getModulesOrder();
 
-//Liste des modules supplémentaires optionnels dont on ne tiendra pas compte
-    $not_in_order = [
-      "module_3_4_colonnes",
-      "module_text_video_image",
-      "paragraph_wysiwyg",
-    ];
-
-
 //On récupère les modules ajoutés en BO en excluant les modules supplémentaires
     $paragraph_order = [];
     foreach ($items as $item) {
       if (isset($item->entity)) {
-        if (!in_array($item->entity->bundle(), $not_in_order)) {
+        if (!in_array($item->entity->bundle(), OabModularProductService::MODULES_OPTIONNELS)) {
           $paragraph_order[] = $item->entity->bundle();
         }
       }

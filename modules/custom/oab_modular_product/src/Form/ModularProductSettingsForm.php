@@ -6,6 +6,8 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\oab_modular_product\Services\OabModularProductService;
+use Drupal\paragraphs\Entity\ParagraphsType;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ModularProductSettingsForm extends ConfigFormBase {
@@ -49,60 +51,60 @@ class ModularProductSettingsForm extends ConfigFormBase {
       '#title' => t('Configure Modular Product')
     ];
 
-      $form['mp'] = [
-        '#type' => 'details',
-        '#tree' => TRUE,
-        '#open' => true,
-        '#title' => t('Max character'),
-        '#description'    => t("Config modular product title and description max character"),
-        '#group' => 'tabs'
-      ];
+    $form['mp'] = [
+      '#type' => 'details',
+      '#tree' => TRUE,
+      '#open' => TRUE,
+      '#title' => t('Max character'),
+      '#description' => t("Config modular product title and description max character"),
+      '#group' => 'tabs'
+    ];
 
-      $form['mp']['titles'] = [
-        '#type' => 'details',
-        '#open' => false ,
-        '#title' => t('Titles max character')
-      ];
+    $form['mp']['titles'] = [
+      '#type' => 'details',
+      '#open' => FALSE,
+      '#title' => t('Titles max character')
+    ];
 
-      $form['mp']['titles']['title_short'] = [
-        '#type' => 'number',
-        '#title' => t('Titles with 70 max character'),
-        '#default_value' => $conf->get('mp.title.title_short') ?? 70,
-        '#max' => 255,
-        '#min' => 50,
-        '#step' => 5
-      ];
+    $form['mp']['titles']['title_short'] = [
+      '#type' => 'number',
+      '#title' => t('Titles with 70 max character'),
+      '#default_value' => $conf->get('mp.title.title_short') ?? 70,
+      '#max' => 255,
+      '#min' => 50,
+      '#step' => 5
+    ];
 
-      $form['mp']['titles']['title_long'] = [
-        '#type' => 'number',
-        '#title' => t('Titles with 150 max character'),
-        '#default_value' => $conf->get('mp.title.title_long') ?? 150,
-        '#max' => 255,
-        '#min' => 90,
-        '#step' => 5
-      ];
+    $form['mp']['titles']['title_long'] = [
+      '#type' => 'number',
+      '#title' => t('Titles with 150 max character'),
+      '#default_value' => $conf->get('mp.title.title_long') ?? 150,
+      '#max' => 255,
+      '#min' => 90,
+      '#step' => 5
+    ];
 
-      $form['mp']['descriptions'] = [
-        '#type' => 'details',
-        '#open' => false ,
-        '#title' => t('Descriptions max character')
-      ];
+    $form['mp']['descriptions'] = [
+      '#type' => 'details',
+      '#open' => FALSE,
+      '#title' => t('Descriptions max character')
+    ];
 
-      $form['mp']['descriptions']['description_long'] = [
-        '#type' => 'number',
-        '#title' => t('Descriptions max character'),
-        '#default_value' => $conf->get('mp.descriptions.descriptions_long') ?? 250,
-        '#max' => 255,
-        '#min' => 200,
-        '#step' => 5
-      ];
+    $form['mp']['descriptions']['description_long'] = [
+      '#type' => 'number',
+      '#title' => t('Descriptions max character'),
+      '#default_value' => $conf->get('mp.descriptions.descriptions_long') ?? 250,
+      '#max' => 255,
+      '#min' => 200,
+      '#step' => 5
+    ];
 
     $form['modules_titles'] = [
       '#type' => 'details',
       '#tree' => TRUE,
-      '#open' => false,
+      '#open' => FALSE,
       '#title' => t('Modules titles'),
-      '#description'    => t("Config modules titles "),
+      '#description' => t("Config modules titles "),
       '#group' => 'tabs'
     ];
     $form['modules_titles']['module_presentation'] = [
@@ -149,7 +151,7 @@ class ModularProductSettingsForm extends ConfigFormBase {
     $form['modules_settings'] = [
       '#type' => 'details',
       '#tree' => TRUE,
-      '#open' => false,
+      '#open' => FALSE,
       '#title' => t('Modules settings'),
       '#group' => 'tabs'
     ];
@@ -157,29 +159,108 @@ class ModularProductSettingsForm extends ConfigFormBase {
     /**
      * @var \Drupal\Core\Field\FieldDefinitionInterface[]
      */
-    //On récupère la liste des modules cochés pour le champ Field_modules de Modular Product (pour avoir les id dispo pour l'ordre et le required
+    //On récupère la liste des modules cochés pour le champ Field_modules de Modular Product
     $bundle_fields = $this->entityFieldManager->getFieldDefinitions('node', 'modular_product');
     $target_settings = $bundle_fields['field_modules']?->getSetting("handler_settings");
-    if(isset($target_settings['target_bundles']) && is_array($target_settings['target_bundles'])) {
-      $list_modules = implode(", ", $target_settings['target_bundles']);
+    $modules_in_field = $target_settings['target_bundles'];
+
+    //Construction de la table pour gérer l'ordre des modules et s'ils sont obligatoires ou non
+    $group_class = 'group-order-weight';
+    // Build table.
+    $form['modules_settings']['modules'] = [
+      '#type' => 'table',
+      '#caption' => $this->t('Modules'),
+      '#header' => [
+        $this->t('Module label'),
+        $this->t('ID'),
+        $this->t('Required'),
+        $this->t('Weight'),
+      ],
+      '#empty' => $this->t('No modules.'),
+      '#tableselect' => FALSE,
+      '#tabledrag' => [
+        [
+          'action' => 'order',
+          'relationship' => 'sibling',
+          'group' => $group_class,
+        ]
+      ]
+    ];
+
+    //on gère la conf uniquement s'il y a des paragraphs cochés
+    if (is_array($modules_in_field) && count($modules_in_field) > 0 ) {
+      //on récupère la conf courante :
+      $current_conf_modules = $conf->get('modules_settings.modules');
+      $max_weight = 0;
+      //Pour chaque ligne de la conf actuelle
+      foreach ($current_conf_modules as $module_id => $module_conf) {
+        //on prend en compte le module de la conf que s'il est coché dans la conf du field_modules
+        if(in_array($module_id, $modules_in_field) && !in_array($module_id, OabModularProductService::MODULES_OPTIONNELS)) {
+          $paragraph_type = ParagraphsType::load($module_id); //chargement du paragraphType pour récupérer son label
+          $form['modules_settings']['modules'][$module_id]['#attributes']['class'][] = 'draggable';
+          $form['modules_settings']['modules'][$module_id]['#weight'] = $module_conf['weight'];
+          // on va garder la plus haute valeur de weight pour les modules qu'on ajoutera à la fin
+          if ($module_conf['weight'] > $max_weight) {
+            $max_weight = $module_conf['weight'];
+          }
+          // Label col.
+          $form['modules_settings']['modules'][$module_id]['label'] = [
+            '#plain_text' => $paragraph_type->label(),
+          ];
+          // ID col.
+          $form['modules_settings']['modules'][$module_id]['id'] = [
+            '#plain_text' => $module_id,
+          ];
+          // required col.
+          $form['modules_settings']['modules'][$module_id]['required'] = [
+            '#type' => 'checkbox',
+            '#default_value' => $module_conf['required'],
+          ];
+          // Weight col.
+          $form['modules_settings']['modules'][$module_id]['weight'] = [
+            '#type' => 'weight',
+            '#title' => $this->t('Weight for @title', ['@title' => $paragraph_type->label()]),
+            '#title_display' => 'invisible',
+            '#default_value' => $module_conf['weight'],
+            '#attributes' => ['class' => [$group_class]],
+          ];
+          //on supprime l'élément du tableau des modules puisqu'il a été traité
+          unset($modules_in_field[$module_id]);
+        }
+      }
+      // après avoir parcouru la conf, on va regarder les modules cochés (du champ field_modules) restants qui ne seraient pas encore en conf
+
+      foreach ($modules_in_field as $module_id) {
+        //s'il n'est pas encore dans le tableau de rendu
+        if (!in_array($module_id, $form['modules_settings']['modules']) && !in_array($module_id, OabModularProductService::MODULES_OPTIONNELS)) {
+          $paragraph_type = ParagraphsType::load($module_id);
+          $max_weight++; //mise a jour du weight pour ce nouvel élément
+          $form['modules_settings']['modules'][$module_id]['#attributes']['class'][] = 'draggable';
+          $form['modules_settings']['modules'][$module_id]['#weight'] = $max_weight;
+          // Label col.
+          $form['modules_settings']['modules'][$module_id]['label'] = [
+            '#plain_text' => $paragraph_type->label(),
+          ];
+          // ID col.
+          $form['modules_settings']['modules'][$module_id]['id'] = [
+            '#plain_text' => $module_id,
+          ];
+          // required col.
+          $form['modules_settings']['modules'][$module_id]['required'] = [
+            '#type' => 'checkbox',
+            '#default_value' => FALSE, //par défaut, non obligatoire
+          ];
+          // Weight col.
+          $form['modules_settings']['modules'][$module_id]['weight'] = [
+            '#type' => 'weight',
+            '#title' => $this->t('Weight for @title', ['@title' => $paragraph_type->label()]),
+            '#title_display' => 'invisible',
+            '#default_value' => $max_weight,
+            '#attributes' => ['class' => [$group_class]],
+          ];
+        }
+      }
     }
-
-    $form['modules_settings']['modules_list'] = [
-      '#type' => 'item',
-      '#title' => 'Available id modules',
-      '#description' => $list_modules ?? ''
-    ];
-    $form['modules_settings']['modules_order'] = [
-      '#type' => 'textarea',
-      '#title' => t('Modules Order'),
-      '#default_value' => $conf->get('modules_settings.modules_order') ?? ''
-    ];
-    $form['modules_settings']['modules_required'] = [
-      '#type' => 'textarea',
-      '#title' => t('Required Modules'),
-      '#default_value' => $conf->get('modules_settings.modules_required') ?? ''
-    ];
-
     return parent::buildForm($form, $form_state);
   }
 
