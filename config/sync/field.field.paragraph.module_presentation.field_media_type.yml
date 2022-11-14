@@ -11,8 +11,8 @@ id: paragraph.module_presentation.field_media_type
 field_name: field_media_type
 entity_type: paragraph
 bundle: module_presentation
-label: 'Media type'
-description: ''
+label: 'Video or image'
+description: 'The video or image must present the product'
 required: false
 translatable: true
 default_value: {  }

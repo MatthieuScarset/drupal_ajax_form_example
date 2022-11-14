@@ -1,3 +1,4 @@
+uuid: ca17f285-b2a5-4782-961b-320a4f0042bb
 langcode: fr
 status: true
 dependencies:
@@ -5,6 +6,7 @@ dependencies:
     - system.menu.main-menu-mss-assistance-fr
   module:
     - language
+    - oab_hub
     - system
   theme:
     - theme_oab_hub
@@ -17,20 +19,21 @@ plugin: 'system_menu_block:main-menu-mss-assistance-fr'
 settings:
   id: 'system_menu_block:main-menu-mss-assistance-fr'
   label: 'Main menu MSS Assistance fr'
-  provider: system
   label_display: '0'
+  provider: system
   level: 1
   depth: 0
+  expand_all_items: false
 visibility:
   language:
     id: language
-    langcodes:
-      fr: fr
     negate: false
     context_mapping:
       language: '@language.current_language_context:language_interface'
-  request_path:
-    id: request_path
-    pages: autofill
+    langcodes:
+      en: en
+  hub_condition:
+    id: hub_condition
+    hub_id:
+      1282: '1282'
     negate: false
-    context_mapping: {  }

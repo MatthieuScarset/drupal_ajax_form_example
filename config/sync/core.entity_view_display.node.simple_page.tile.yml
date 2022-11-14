@@ -1,3 +1,4 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
@@ -72,6 +73,7 @@ content:
     weight: 3
     region: content
 hidden:
+  field_analysts: true
   field_blog_format: true
   field_blog_thematic: true
   field_content: true

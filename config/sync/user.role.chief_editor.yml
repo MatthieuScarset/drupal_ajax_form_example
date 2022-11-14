@@ -11,6 +11,7 @@ dependencies:
     - node.type.document
     - node.type.industry
     - node.type.magazine
+    - node.type.mss_article
     - node.type.office
     - node.type.partner
     - node.type.press_kit

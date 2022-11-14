@@ -1,0 +1,23 @@
+.dropbutton-wrapper.open .dropbutton-widget ul li {
+  max-width: none;
+}
+
+.dropbutton__item {
+  &:first-of-type {
+    & > :focus:hover,
+    & > .button:focus:hover {
+      box-shadow: 0 0 0 2px $white, 0 0 0 5px $orange;
+    }
+
+   & ~ .dropbutton__item {
+      & > :focus {
+        border-color: $orange !important;
+        box-shadow: none;
+      }
+      & > :hover{
+        color: $white;
+        background: $orange;
+      }
+    }
+  }
+}

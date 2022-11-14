@@ -37,6 +37,7 @@ services:
       image: phpmyadmin/phpmyadmin
       depends_on:
         - mysql
+      container_name: $CONTAINER_PHPMYADMIN
       ports :
         - "${PHPMYADMIN_PORT:-8080}:80"
       environment:

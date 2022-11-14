@@ -4,6 +4,7 @@ status: true
 dependencies:
   module:
     - oab_frontoffice
+    - oab_hub
   theme:
     - theme_oab_hub
 id: theme_oab_hub_footersocialblock
@@ -18,6 +19,11 @@ settings:
   label_display: '0'
   provider: oab_frontoffice
   footer_social_custom_text:
-    value: '<div class="followbar"></div>'
+    value: ''
     format: full_html
-visibility: {  }
+visibility:
+  hub_condition:
+    id: hub_condition
+    hub_id:
+      1282: '1282'
+    negate: true

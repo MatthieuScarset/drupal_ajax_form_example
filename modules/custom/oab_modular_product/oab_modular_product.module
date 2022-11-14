@@ -64,48 +64,48 @@ function oab_modular_product_field_widget_single_element_form_alter(array &$elem
     if (isset($element['subform']['field_title'])) {
       $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = $title_short;
       $element['subform']['field_title']['widget'][0]['value']['#size'] = $size_title_short;
-      $element['subform']['field_title']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($title_short.' characters max');
+      $element['subform']['field_title']['widget'][0]['value']['#description'] .= ' '.FieldFilteredMarkup::create($title_short.' characters max');
     }
 
     if (isset($element['subform']['field_tab_title'])) {
       $element['subform']['field_tab_title']['widget'][0]['value']['#maxlength'] = $title_short;
       $element['subform']['field_tab_title']['widget'][0]['value']['#size'] = $size_title_short;
-      $element['subform']['field_tab_title']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($title_short.' characters max');
+      $element['subform']['field_tab_title']['widget'][0]['value']['#description'] .=  ' '.FieldFilteredMarkup::create($title_short.' characters max');
     }
 
     if (isset($element['subform']['field_exemple_key_points'])) {
       $element['subform']['field_exemple_key_points']['widget'][0]['value']['#maxlength'] = $description;
       $element['subform']['field_exemple_key_points']['widget'][0]['value']['#size'] = $size_description;
-      $element['subform']['field_exemple_key_points']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($description.' characters max');
+      $element['subform']['field_exemple_key_points']['widget'][0]['value']['#description'] .= ' '.FieldFilteredMarkup::create($description.' characters max');
     }
 
     if (isset($element['subform']['field_accroche'])) {
       $element['subform']['field_accroche']['widget'][0]['value']['#maxlength'] = $description;
-      $element['subform']['field_accroche']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($description.' characters max');
+      $element['subform']['field_accroche']['widget'][0]['value']['#description'] .= ' '.FieldFilteredMarkup::create($description.' characters max');
     }
 
     if (isset($element['subform']['field_highlight'])) {
       $element['subform']['field_highlight']['widget'][0]['value']['#maxlength'] = $description;
-      $element['subform']['field_highlight']['widget'][0]['value']['#description'] .= ' ' . FieldFilteredMarkup::create($description.' characters max');
+      $element['subform']['field_highlight']['widget'][0]['value']['#description'] .= ' ' .FieldFilteredMarkup::create($description.' characters max');
       $element['subform']['field_highlight']['widget'][0]['value']['#rows'] = 2;
     }
 
     if (isset($element['subform']['field_key_points'])) {
       $element['subform']['field_key_points']['widget'][0]['value']['#maxlength'] = $description;
       $element['subform']['field_key_points']['widget'][0]['value']['#size'] = $size_description;
-      $element['subform']['field_key_points']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($description.' characters max');
+      $element['subform']['field_key_points']['widget'][0]['value']['#description'] .= ' '.FieldFilteredMarkup::create($description.' characters max');
     }
 
     if (isset($element['subform']['field_key_points_step'])) {
       $element['subform']['field_key_points_step']['widget'][0]['value']['#maxlength'] = $description;
       $element['subform']['field_key_points_step']['widget'][0]['value']['#size'] = $size_description;
-      $element['subform']['field_key_points_step']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($description.' characters max');
+      $element['subform']['field_key_points_step']['widget'][0]['value']['#description'] .= ' '.FieldFilteredMarkup::create($description.' characters max');
     }
 
     if (isset($element['subform']['field_description'])) {
       $element['subform']['field_description']['widget'][0]['value']['#maxlength'] = $description;
       $element['subform']['field_description']['widget'][0]['value']['#size'] = $size_description;
-      $element['subform']['field_description']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($description.' characters max');
+      $element['subform']['field_description']['widget'][0]['value']['#description'] .= ' '.FieldFilteredMarkup::create($description.' characters max');
     }
   }
 
@@ -113,12 +113,12 @@ function oab_modular_product_field_widget_single_element_form_alter(array &$elem
     if (isset($element['subform']['field_title'])) {
       $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = $title_long;
       $element['subform']['field_title']['widget'][0]['value']['#size'] = $size_title_long;
-      $element['subform']['field_title']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($title_long.' characters max');
+      $element['subform']['field_title']['widget'][0]['value']['#description'] .= ' '.FieldFilteredMarkup::create($title_long.' characters max');
     }
 
     if (isset($element['subform']['field_accroche'])) {
       $element['subform']['field_accroche']['widget'][0]['value']['#maxlength'] = $description;
-      $element['subform']['field_accroche']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($description.' characters max');
+      $element['subform']['field_accroche']['widget'][0]['value']['#description'] .= ' '.FieldFilteredMarkup::create($description.' characters max');
     }
   }
 
@@ -137,7 +137,7 @@ function oab_modular_product_field_widget_single_element_form_alter(array &$elem
 
     foreach ($field_restricted as $field_name) {
       if (isset($element['subform'][$field_name])) {
-        if($user_is_admin) {
+        if ($user_is_admin) {
           $element['subform'][$field_name]['widget']['#access'] = true;
         }
         else {
@@ -270,12 +270,12 @@ function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, 
     if (isset($form['field_product_name'])) {
       $form['field_product_name']['widget'][0]['value']['#maxlength'] = $title_short;
       $form['field_product_name']['widget'][0]['value']['#size'] = $size_title_short;
-      $form['field_product_name']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($title_short.' characters max');
+      $form['field_product_name']['widget'][0]['value']['#description'] .= ' '.FieldFilteredMarkup::create($title_short.' characters max');
     }
 
     if (isset($form['field_teaser'])) {
       $form['field_teaser']['widget'][0]['value']['#maxlength'] = $description;
-      $form['field_teaser']['widget'][0]['value']['#description'] .= FieldFilteredMarkup::create($description.' characters max');
+      $form['field_teaser']['widget'][0]['value']['#description'] .= ' '.FieldFilteredMarkup::create($description.' characters max');
     }
 
     if (isset($form["field_enable_wysiwyg_paragraph"])) {
@@ -284,7 +284,7 @@ function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, 
         $form['field_enable_wysiwyg_paragraph']['#disabled'] = TRUE;
       }
       //on vérifie si le paragraph WYSIWYG est activé ou non => s'il ne l'est pas on le supprime des options disponibles pour les modules
-      if(isset($form["field_enable_wysiwyg_paragraph"]['widget']['value']["#default_value"]) &&
+      if (isset($form["field_enable_wysiwyg_paragraph"]['widget']['value']["#default_value"]) &&
         $form["field_enable_wysiwyg_paragraph"]['widget']['value']["#default_value"] === false &&
         isset($form["field_modules"]["widget"]["add_more"]['add_more_button_paragraph_wysiwyg'])) {
         //le paragraph WYSIWYG n'est pas actif, on le supprime des choix pour les modules
@@ -373,9 +373,9 @@ function oab_modular_product_preprocess_field(&$variables) {
   if (in_array($variables['field_name'], array("field_pdf", "field_call_to_action_link"))) {
     /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
     $paragraph = $variables['element']['#object'];
-    if($paragraph->bundle() == "documentation"){
+    if ($paragraph->bundle() == "documentation") {
       $paragraphParent = Paragraph::load($paragraph->getParentEntity()->id());
-      if($paragraphParent->bundle() == "module_detail_offre_items"){
+      if ($paragraphParent->bundle() == "module_detail_offre_items") {
         $variables['track_zone'] = 'detail offre';
         $variables['track_nom'] = $paragraphParent->get('field_title')->value;
       }
@@ -384,13 +384,13 @@ function oab_modular_product_preprocess_field(&$variables) {
   if (in_array($variables['field_name'], array("field_link_button"))) {
     /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
     $paragraph = $variables['element']['#object'];
-    if($paragraph->bundle() == "call_to_action"){
+    if ($paragraph->bundle() == "call_to_action") {
       $paragraphParent = Paragraph::load($paragraph->getParentEntity()->id());
-      if($paragraphParent->bundle() == "module_detail_offre_items"){
+      if ($paragraphParent->bundle() == "module_detail_offre_items") {
         $variables['track_zone'] = 'detail offre';
         $variables['track_nom'] = $paragraphParent->get('field_title')->value;
       }
-      if($paragraphParent->bundle() == "detail_gamme_items_offres"){
+      if ($paragraphParent->bundle() == "detail_gamme_items_offres") {
         $variables['track_zone'] = 'detail de la gamme';
         $variables['track_nom'] = $paragraphParent->get('field_title')->value;
       }
@@ -425,11 +425,11 @@ function oab_modular_product_preprocess_paragraph__module_detail_offre_items(&$v
 function oab_modular_product_preprocess_media(&$variables) {
   /** @var \Drupal\media\Entity\Media $media */
   $media = $variables['media'];
-  if($media->bundle() === "embed_video") {
-    if(isset($media->field_video_url->uri)) {
-      /** @var \Drupal\oab_frontoffice\Services\OabEmbedVideoUrlService $embedVideoService */
-      $embedVideoService = \Drupal::service('oab_frontoffice.embed_video_url');
-      $variables['embed_url_youtube'] = $embedVideoService->changeUrlToEmbedUrl($media->field_video_url->uri);
+  if ($media->bundle() === "embed_video") {
+    if (isset($media->field_video_url->uri)) {
+      /** @var \Drupal\oab_frontoffice\Services\OabEmbedVideoUrlService $embed_video_service */
+      $embed_video_service = \Drupal::service('oab_frontoffice.embed_video_url');
+      $variables['embed_url_youtube'] = $embed_video_service->changeUrlToEmbedUrl($media->field_video_url->uri);
     }
   }
 }

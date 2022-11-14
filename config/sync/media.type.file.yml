@@ -7,7 +7,7 @@ dependencies:
 id: file
 label: File
 description: 'Ajoutez un fichier PDF'
-source: generic
+source: file
 queue_thumbnail_downloads: false
 new_revision: false
 source_configuration:

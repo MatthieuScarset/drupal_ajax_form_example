@@ -18,13 +18,13 @@ settings:
   label: 'CSP Subnav'
   label_display: '0'
   provider: oab_frontoffice
-  csp_list_link: /fr/bvpn-list
+  csp_list_link: /fr/produits/business-vpn-galerie/services-cloud/liste
   csp_list_link_text: 'Liste des services Cloud'
-  csp_map_link: /fr/bvpn-map
+  csp_map_link: /fr/produits/business-vpn-galerie/services-cloud/carte
   csp_map_link_text: 'Carte des interconnexions'
 visibility:
   request_path:
     id: request_path
     negate: false
     context_mapping: {  }
-    pages: "/bvpn-list\r\n/bvpn-map"
+    pages: "/produits/business-vpn-galerie/services-cloud/liste\r\n/produits/business-vpn-galerie/services-cloud/carte\r\n/products/business-vpn-galerie/cloud-services/list\r\n/products/business-vpn-galerie/cloud-services/map"

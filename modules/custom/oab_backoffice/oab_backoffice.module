@@ -142,7 +142,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
                     ':input[name="settings[html]"]' => ['checked' => true]
                 ]
             ],
-            '#element_validate' => ['Drupal\webform\WebformTokenManager', 'validateElement'],
+            '#element_validate' => [['Drupal\webform\WebformTokenManager', 'validateElement']],
             '#token_types' => [
                 'webform',
                 'webform_submission',

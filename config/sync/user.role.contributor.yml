@@ -12,6 +12,7 @@ dependencies:
     - node.type.full_html
     - node.type.industry
     - node.type.magazine
+    - node.type.mss_article
     - node.type.office
     - node.type.partner
     - node.type.press_kit
@@ -58,21 +59,21 @@ permissions:
   - 'administer media'
   - 'administer nodes'
   - 'create cloud_service_provider content'
-  - 'create url aliases'
-  - 'delete any cloud_service_provider content'
-  - 'delete cloud_service_provider revisions'
-  - 'delete own cloud_service_provider content'
-  - 'delete own product content'
-  - 'edit any cloud_service_provider content'
   - 'create mss_article content'
   - 'create url aliases'
+  - 'create url aliases'
   - 'delete any cloud_service_provider content'
-  - 'delete cloud_service_provider revisions'
-  - 'delete own cloud_service_provider content'
+  - 'delete any cloud_service_provider content'
   - 'delete any mss_article content'
+  - 'delete cloud_service_provider revisions'
+  - 'delete cloud_service_provider revisions'
   - 'delete mss_article revisions'
+  - 'delete own cloud_service_provider content'
+  - 'delete own cloud_service_provider content'
   - 'delete own mss_article content'
   - 'delete own product content'
+  - 'delete own product content'
+  - 'edit any cloud_service_provider content'
   - 'edit any cloud_service_provider content'
   - 'edit any mss_article content'
   - 'edit own blog_post content'

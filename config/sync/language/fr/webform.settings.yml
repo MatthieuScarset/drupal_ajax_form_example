@@ -1,10 +1,12 @@
 settings:
+  default_form_close_message: 'Sorry...This form is closed to new submissions.'
   default_form_exception_message: 'Impossible d''afficher ce formulaire. Veuillez contacter l''administrateur du site'
   default_submit_button_label: Valider
   default_reset_button_label: 'Remise à zéro'
   default_delete_button_label: Supprimer
   default_form_access_denied_message: 'Please login to access this webform.'
   default_wizard_prev_button_label: '< Précédent'
+  default_wizard_next_button_label: 'Next Page >'
   default_preview_next_button_label: Prévisualisation
   default_preview_prev_button_label: '< Précédent'
   default_preview_label: Prévisualisation
@@ -21,7 +23,6 @@ mail:
     <p>Submitted by: [webform_submission:user]</p>
     <p>Submitted values are:</p>
     [webform_submission:values]
-  default_subject: ''
 test:
   types: |
     checkbox:

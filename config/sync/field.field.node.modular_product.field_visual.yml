@@ -1,5 +1,5 @@
 uuid: f461b7c8-7aa9-4233-899f-6d130944de8c
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -10,8 +10,8 @@ id: node.modular_product.field_visual
 field_name: field_visual
 entity_type: node
 bundle: modular_product
-label: 'Product Top Zone Image'
-description: ''
+label: Illustration
+description: 'Top Zone illustration - Each sub-category has a dedicated illustration'
 required: false
 translatable: true
 default_value: {  }

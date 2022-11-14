@@ -1,5 +1,5 @@
 uuid: 467dba11-fd50-42cc-863d-f9e7d4fb27cd
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -10,8 +10,8 @@ id: node.modular_product.field_product_category
 field_name: field_product_category
 entity_type: node
 bundle: modular_product
-label: 'Product category'
-description: ''
+label: 'Product''s secondary category'
+description: 'Validated sub-category of the product. Only 1 choice'
 required: true
 translatable: true
 default_value: {  }

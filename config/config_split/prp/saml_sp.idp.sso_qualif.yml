@@ -5,12 +5,13 @@ dependencies: {  }
 label: 'SSO Qualif'
 id: sso_qualif
 entity_id: 'https://qualif.federation-identite.orange-business.com'
-app_name: 'https://int.www.orange-business.com'
+app_name: 'https://uat.www.orange-business.com'
 nameid_field: 'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified'
 login_url: 'https://qualif.federation-identite.orange-business.com/affwebservices/public/saml2sso'
 logout_url: 'https://nothing'
 x509_cert:
   0: MIICVTCCAb6gAwIBAgIEVYLOJjANBgkqhkiG9w0BAQsFADBvMQswCQYDVQQGEwJGUjEPMA0GA1UEChMGT3JhbmdlMRYwFAYDVQQLEw1PcmFuZ2UgRnJhbmNlMTcwNQYDVQQDEy5xdWFsaWYuZmVkZXJhdGlvbi1pZGVudGl0ZS5vcmFuZ2UtYnVzaW5lc3MuY29tMB4XDTE1MDYxODEzNTY1NFoXDTI1MDYxNTEzNTY1NFowbzELMAkGA1UEBhMCRlIxDzANBgNVBAoTBk9yYW5nZTEWMBQGA1UECxMNT3JhbmdlIEZyYW5jZTE3MDUGA1UEAxMucXVhbGlmLmZlZGVyYXRpb24taWRlbnRpdGUub3JhbmdlLWJ1c2luZXNzLmNvbTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAo3lgerlDJNT/QkTUAjdmwLzo1zEX+JZAISEVc97RGOPTgdLN86j6ukDVHC2CIKV6oDX6X8CqnM/mN2h7sEgo0ypDT7OHsvh40iJLz6vx5p37aJ9291PQwGn+QGanUqvsnLbbtAKV6atCy+2Wz1iuVRwrp5b22xu7++9AAc5P/2ECAwEAATANBgkqhkiG9w0BAQsFAAOBgQBqYMWk8M1Tf8EYooKb0qep12ri2vxQ/JV7c4c2s0stlPed6vJHl/i1A5W1471R0SR1qu12wOaJS3XDjYdNOBPQ28IoreN/iHnNzegAmJUDuXUc9YGY6YTPZFpT6EkBFg81b2dSu5NyYBLfzd7zwexcSXWf/dSre9xJzTb0CaZkEg==
+  1: ''
   actions: {  }
 authn_context_class_ref:
   user_name_and_password: '0'

@@ -1,7 +1,7 @@
 {
     "name": "drupal/recommended-project",
     "description": "Project template for Drupal 9 projects with a relocated document root",
-    "version": "1.5.1",
+    "version": "2.1.2",
     "type": "project",
     "license": "GPL-2.0-or-later",
     "homepage": "https://www.drupal.org/project/drupal",
@@ -25,10 +25,10 @@
         "drupal/config_filter": "^2.2",
         "drupal/config_ignore": "^2.3",
         "drupal/config_split": "2.0.0-beta5",
-        "drupal/core": "9.3.6",
-        "drupal/core-composer-scaffold": "~9.1.0",
-        "drupal/core-project-message": "~9.1.0",
-        "drupal/core-recommended": "9.3.6",
+        "drupal/core": "~9.4.0",
+        "drupal/core-composer-scaffold": "~9.4.0",
+        "drupal/core-project-message": "~9.4.0",
+        "drupal/core-recommended": "~9.4.0",
         "drupal/ctools": "^3.4",
         "drupal/embed": "^1.4",
         "drupal/entity": "^1.2",
@@ -41,6 +41,7 @@
         "drupal/inline_entity_form": "1.0-rc9",
         "drupal/jsonapi_extras": "^3.20",
         "drupal/linkit": "5.0-beta13",
+        "drupal/media_entity_file_replace": "^1.0",
         "drupal/media_entity_generic": "^1.1",
         "drupal/memcache": "^2.4",
         "drupal/menu_item_extras": "^2",
@@ -162,17 +163,13 @@
 			"drupal/scheduled_updates": {
 			  "Fix D9 compatibility": "https://www.drupal.org/files/issues/2021-03-08/3172330-24.patch"
 			},
-            "drupal/tac_lite": {
-                "Fix D9 compatibility": "patches/tac_lite/tac_lite_compatibility_d9.patch",
-                "Fix getVocabularyId deprecated": "patches/tac_lite/rectif_deprecated_vocabularyId.patch"
-            },
             "drupal/core": {
-                "Fix LatestRevisionCheck": "https://www.drupal.org/files/issues/2019-10-21/LatestRevisionCheck-13092187-24.patch"
+                "Fix LatestRevisionCheck": "https://www.drupal.org/files/issues/2021-12-28/3035113-33.patch",
+                "Give current request to RequestPath Condition when it call too soon": "patches/saml_sp/patch_core_system_requestpath.patch",
+                "https://www.drupal.org/project/paragraphs/issues/3031598#comment-14296164": "https://www.drupal.org/files/issues/2022-06-21/3207813-15.patch"
             },
-            "drupal/memcache" : {
-                "https://www.drupal.org/project/memcache/issues/3302086": "https://www.drupal.org/files/issues/2022-08-10/3302086-18.patch",
-                "Fix LatestRevisionCheck": "https://www.drupal.org/files/issues/2019-10-21/LatestRevisionCheck-13092187-24.patch",
-                "Give current request to RequestPath Condition when it call too soon": "patches/saml_sp/patch_core_system_requestpath.patch"
+            "drupal/media_entity_file_replace": {
+                "Add specification for old media Generic": "patches/media_entity_file_replace/patch_media_generic.patch"
             },
             "drupal/saml_sp": {
                 "Adapt contrib module to our needs": "patches/saml_sp/patch_saml_sp.patch"

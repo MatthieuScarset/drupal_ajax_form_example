@@ -11,7 +11,7 @@ type: 'canonical_entities:node'
 pattern: 'projects/[node:title]'
 selection_criteria:
   6a7b64a9-a1d1-4ebe-bd28-746475695103:
-    id: node_type
+    id: 'entity_bundle:node'
     negate: false
     uuid: 6a7b64a9-a1d1-4ebe-bd28-746475695103
     context_mapping:

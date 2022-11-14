@@ -11,6 +11,21 @@ organization:
   url: ''
 strict: true
 security:
+  nameIdEncrypted: false
+  authnRequestsSigned: false
+  logoutRequestSigned: false
+  logoutResponseSigned: false
+  wantMessagesSigned: false
+  wantAssertionsSigned: true
+  wantNameIdEncrypted: false
+  signMetaData: false
+  signatureAlgorithm: 'http://www.w3.org/2000/09/xmldsig#rsa-sha1'
+  lowercaseUrlencoding: false
+cert_location: /var/www/html/.saml_cert/certificate.crt
+key_location: /var/www/html/.saml_cert/privateKey.key
+new_cert_location: ''
+entity_id: 'https://uat.www.orange-business.com/'
+debug: false
 nameIdEncrypted: false
 authnRequestsSigned: false
 logoutRequestSigned: false
@@ -21,9 +36,4 @@ wantNameIdEncrypted: false
 signMetaData: false
 signatureAlgorithm: 'http://www.w3.org/2000/09/xmldsig#rsa-sha1'
 lowercaseUrlencoding: false
-cert_location: ''
-key_location: ''
-new_cert_location: ''
-entity_id: 'https://int.www.orange-business.com/'
-debug: false
-assertion_urls: 'http://int.www.orange-business.com/fr/saml/consume'
+assertion_urls: 'https://uat.www.orange-business.com/saml/consume'

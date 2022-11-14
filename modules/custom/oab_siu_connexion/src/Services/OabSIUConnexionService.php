@@ -13,10 +13,10 @@ class OabSIUConnexionService {
   ) { }
 
   public function getIDPConnexion(): mixed {
-    return $this->get("idp");
+    return $this->get("idp") ?? [];
   }
 
-  public function getSIURestrictedURL(): string {
+  public function getSIURestrictedURL(): ?string {
     return $this->get("siu_restricted_urls");
   }
 
@@ -36,7 +36,7 @@ class OabSIUConnexionService {
   }
 
   private function get(string $item): mixed {
-    return $this->config->get($item) ?? [];
+    return $this->config->get($item) ?? null;
   }
 }
 

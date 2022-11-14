@@ -369,7 +369,7 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, FormStateInterfac
           "vid" => 'location',
         );
         $lancode = \Drupal::languageManager()->getCurrentLanguage()->getId();
-        if($lancode != 'fr'){
+        if ($lancode != 'fr') {
           $lancode = 'en'; //carte dispo qu'en fr ou en // si on tente en ru, on mettra les terme de en
         }
         $properties["langcode"] = $lancode;
@@ -397,7 +397,7 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, FormStateInterfac
       //si c'est une recherche d'une région on active le bouteau clear
       $input = $form_state->getUserInput();
       $currentLocation = $input['location'];
-      if($currentLocation != 'All'){
+      if ($currentLocation != 'All') {
         unset($form['actions']['reset']['#attributes']['disabled']);
       }
 */
@@ -578,7 +578,7 @@ function oab_frontoffice_form_alter(&$form, FormStateInterface $form_state, $for
         }
     }
 
-    if(isset($form['#id']) && $form['#id'] == "views-exposed-form-subhomes") {
+    if (isset($form['#id']) && $form['#id'] == "views-exposed-form-subhomes") {
       subhomes_views_exposed_form($form);
 
     }
@@ -672,7 +672,7 @@ function oab_frontoffice_page_attachments_alter(array &$attachments) {
     // on charge les infos de geolocalisation des termes de taxo Location pour pouvoir faire le zoom sur la bonne région en JS
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
     $routeName = \Drupal::routeMatch()->getRouteName();
-    if($routeName == 'view.bvpn_gallery.csp_map_page'){
+    if ($routeName == 'view.bvpn_gallery.csp_map_page') {
       $locationsArray = array();
       $query = \Drupal::entityQuery('taxonomy_term');
       $query->condition('vid', "location");
@@ -683,7 +683,7 @@ function oab_frontoffice_page_attachments_alter(array &$attachments) {
         $location = array();
         $location['tid'] = $term->tid->value;
         $location['name'] = $term->name->value;
-        if( isset($term->field_location) && !empty($term->field_location)){
+        if ( isset($term->field_location) && !empty($term->field_location)) {
           $location['lat'] = (isset($term->field_location->lat) && !empty($term->field_location->lat)) ? $term->field_location->lat : '0.0';
           $location['lng'] = (isset($term->field_location->lng) && !empty($term->field_location->lng)) ? $term->field_location->lng : '0.0';
         }
@@ -775,7 +775,7 @@ function oab_frontoffice_preprocess_html(&$variables) {
         }
     }
   }
-  elseif(\Drupal::routeMatch()->getParameters()->has('view_id') && \Drupal::routeMatch()->getParameter('view_id') === "category_page"){
+  elseif (\Drupal::routeMatch()->getParameters()->has('view_id') && \Drupal::routeMatch()->getParameter('view_id') === "category_page") {
     if (\Drupal::routeMatch()->getParameters()->has('tid')) {
       /** @var \Drupal\views\Plugin\views\argument\NumericArgument $argument */
       $tid = \Drupal::routeMatch()->getParameters()->get('tid');

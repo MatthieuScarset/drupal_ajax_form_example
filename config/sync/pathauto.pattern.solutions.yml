@@ -11,7 +11,7 @@ type: 'canonical_entities:node'
 pattern: 'solutions/[node:title]'
 selection_criteria:
   da0e3701-0c0e-46df-9e26-fce0025039f9:
-    id: node_type
+    id: 'entity_bundle:node'
     negate: false
     uuid: da0e3701-0c0e-46df-9e26-fce0025039f9
     context_mapping:

@@ -54,9 +54,9 @@ class PageMenuModularProductBlock extends BlockBase {
     $conf_modular_product = \Drupal::service('oab_modular_product.settings');
 
     // PRESENTATION
-    $paragraphEntity = Paragraph::load($node->field_presentation->target_id ?? 0);
-    if(!empty($paragraphEntity)) {
-      if ($paragraphEntity->bundle() == 'module_presentation') {
+    $paragraph_entity = Paragraph::load($node->field_presentation->target_id ?? 0);
+    if (!empty($paragraph_entity)) {
+      if ($paragraph_entity->bundle() == 'module_presentation') {
         $block['children_items'][] = [
           'id' => 'presentation',
           'label' => $this->t($conf_modular_product->getPresentationModuleTitle()),
@@ -66,15 +66,15 @@ class PageMenuModularProductBlock extends BlockBase {
 
 
     //DETAIL OFFRE/GAMME
-    $paragraphEntity = Paragraph::load($node->field_detail_offre->target_id ?? 0);
-    if(!empty($paragraphEntity)) {
-      if($paragraphEntity->bundle() == 'module_detail_offre') {
+    $paragraph_entity = Paragraph::load($node->field_detail_offre->target_id ?? 0);
+    if (!empty($paragraph_entity)) {
+      if ($paragraph_entity->bundle() == 'module_detail_offre') {
         $block['children_items'][] = [
           'id' => 'detail-offre',
           'label' => $this->t($conf_modular_product->getOfferDetailTitle()),
         ];
       }
-      if($paragraphEntity->bundle() == 'module_detail_gamme') {
+      if ($paragraph_entity->bundle() == 'module_detail_gamme') {
         $block['children_items'][] = [
           'id' => 'detail-gamme',
           'label' => $this->t($conf_modular_product->getDetailGammeModuleTitle()),
@@ -85,28 +85,28 @@ class PageMenuModularProductBlock extends BlockBase {
     $variables['module_title'] = $conf_modular_product->getCustomerSpaceModuleTitle();
     //MODULES
     /** @var \Drupal\Core\Field\FieldItemList $module */
-    foreach ( $node->field_modules as $module ) {
-      $paragraphModuleEntity = Paragraph::load($module->target_id ?? 0);
-      if(!empty($paragraphModuleEntity)) {
-        if($paragraphModuleEntity->bundle() == 'module_services') {
+    foreach ($node->field_modules as $module) {
+      $paragraph_module_entity = Paragraph::load($module->target_id ?? 0);
+      if (!empty($paragraph_module_entity)) {
+        if ($paragraph_module_entity->bundle() == 'module_services') {
           $block['children_items'][] = [
             'id' => 'services',
             'label' => $this->t($conf_modular_product->getServicesModuleTitle()),
           ];
         }
-        if($paragraphModuleEntity->bundle() == 'module_customer_space') {
+        if ($paragraph_module_entity->bundle() == 'module_customer_space') {
           $block['children_items'][] = [
             'id' => 'customer-space',
             'label' => $this->t($conf_modular_product->getCustomerSpaceModuleTitle()),
           ];
         }
-        if($paragraphModuleEntity->bundle() == 'module_exemples') {
+        if ($paragraph_module_entity->bundle() == 'module_exemples') {
           $block['children_items'][] = [
             'id' => 'exemple',
             'label' => $this->t($conf_modular_product->getExamplesModuleTitle()),
           ];
         }
-        if($paragraphModuleEntity->bundle() == 'module_testimonial') {
+        if ($paragraph_module_entity->bundle() == 'module_testimonial') {
           $block['children_items'][] = [
             'id' => 'temoignages',
             'label' => $this->t($conf_modular_product->getTestimonialModuleTitle()),

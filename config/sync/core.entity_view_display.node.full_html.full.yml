@@ -111,6 +111,7 @@ hidden:
   field_hub_portal: true
   field_industry: true
   field_insight: true
+  field_insight_type: true
   field_job_profile: true
   field_page_du_site_1: true
   field_page_du_site_2: true
@@ -118,5 +119,6 @@ hidden:
   field_region: true
   field_subhome: true
   field_visual: true
+  field_visual_tile: true
   langcode: true
   moderation_state_update: true

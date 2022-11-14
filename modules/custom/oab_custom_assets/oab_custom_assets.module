@@ -1,0 +1,108 @@
+<?php
+
+/**
+ * @file
+ * Contains oab_custom_assets.module.
+ */
+
+use Drupal\Core\Cache\Cache;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\node\Entity\Node;
+use Drupal\oab_custom_assets\Entity\CustomAsset;
+
+/**
+ * Implements hook_help().
+ */
+function oab_custom_assets_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the oab_custom_assets module.
+    case 'help.page.oab_custom_assets':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Module to manage custom assets in BO and injects them in html') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function oab_custom_assets_preprocess_html(&$variables) {
+
+  /** @var \Drupal\oab_custom_assets\CustomAssetsService $service */
+  $service = \Drupal::service('oab_custom_assets.service');
+
+  $custom_assets = $service->getCurrentPathAssets();
+
+  if (!empty($custom_assets['css'])) {
+    $variables['custom_css'] = [
+      "#type" => "html_tag",
+      "#tag" => "style",
+      "#value" => $custom_assets['css'],
+      "#attributes" => [
+        'type' => "text/css"
+      ]
+    ];
+  }
+
+  if (!empty($custom_assets['js'])) {
+    $variables['custom_js'] = [
+      "#type" => "html_tag",
+      "#tag" => "script",
+      "#value" => $custom_assets['js'],
+      "#attributes" => [
+        'type' => "text/javascript"
+      ]
+    ];
+  }
+
+  if (!empty($custom_assets['bottom_js'])) {
+    $variables['custom_bottom_js'] = [
+      "#type" => "html_tag",
+      "#tag" => "script",
+      "#value" => $custom_assets['bottom_js'],
+      "#attributes" => [
+        'type' => "text/javascript"
+      ]
+    ];
+  }
+
+  $variables['#cache']['tags'] = array_merge($variables['#cache']['tags'] ?? [], $service->getTags());
+}
+
+
+/**
+ * Implements hook_css_alter().
+ */
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function oab_custom_assets_custom_asset_insert(CustomAsset $custom_asset) {
+
+  $tags = [];
+
+  /** @var \Drupal\path_alias\AliasManagerInterface $path_alias_manager */
+  $path_alias_manager = \Drupal::service('path_alias.manager');
+
+
+  $languages = $custom_asset->getLanguages();
+  if (empty($languages)) {
+    $languages = \Drupal::languageManager()->getLanguages();
+  }
+
+  foreach (explode("\r\n", $custom_asset->getPaths() ?? "") as $path_alias) {
+    foreach ($languages as $langcode => $language) {
+      $path = $path_alias_manager->getPathByAlias($path_alias, $langcode);
+      if (preg_match('/node\/(\d+)/', $path, $matches)) {
+        $node = Node::load($matches[1]);
+        if ($node) {
+          $tags = array_merge($tags, $node->getCacheTags());
+        }
+      }
+    }
+  }
+
+  Cache::invalidateTags($tags);
+}

@@ -11,7 +11,7 @@ type: 'canonical_entities:node'
 pattern: '/presse/actualites/[node:title]'
 selection_criteria:
   c33e5e5a-52c2-454f-8e07-a10a57a83c6f:
-    id: node_type
+    id: 'entity_bundle:node'
     negate: false
     uuid: c33e5e5a-52c2-454f-8e07-a10a57a83c6f
     context_mapping:

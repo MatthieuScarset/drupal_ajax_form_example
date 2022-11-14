@@ -22,5 +22,5 @@ visibility:
   hub_condition:
     id: hub_condition
     hub_id:
-      1121: '1121'
+      1282: '1282'
     negate: false

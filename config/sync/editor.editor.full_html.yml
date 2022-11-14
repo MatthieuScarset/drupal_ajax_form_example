@@ -65,13 +65,11 @@ settings:
             - PasteFromWord
             - Maximize
   plugins:
-    stylescombo:
-      styles: "h1.titre1|Title (H1)             \r\nh2.titre2|Heading (H2)\r\ndiv.titre3|Introduction\r\nh3.titre4|Subtitle (H3)\r\np.highlight1|Paragraph\r\np.date|Date\r\np.insight_banniere|Banner insight                                                           \r\nul.orange|Orange list\r\nul.black|Black bulleted list\r\nul.white|White bulleted list\r\nul.grey|Grey bulleted list\r\nspan.downloadPDF|download PDF \r\n"
     drupallink:
       linkit_enabled: true
       linkit_profile: link
-    language:
-      language_list: un
+    stylescombo:
+      styles: "h1.titre1|Title (H1)             \r\nh2.titre2|Heading (H2)\r\ndiv.titre3|Introduction\r\nh3.titre4|Subtitle (H3)\r\np.highlight1|Paragraph\r\np.date|Date\r\np.insight_banniere|Banner insight                                                           \r\nul.orange|Orange list\r\nul.black|Black bulleted list\r\nul.white|White bulleted list\r\nul.grey|Grey bulleted list\r\nspan.downloadPDF|download PDF \r\n"
     colorbutton:
       colors: 'FF7900,000,fff'
 image_upload:
