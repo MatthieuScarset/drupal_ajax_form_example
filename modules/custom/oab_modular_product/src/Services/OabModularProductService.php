@@ -60,7 +60,7 @@ class OabModularProductService {
     return $this->get("modules_titles.to_go_further");
   }
 
-  public function getModulesOrder(): mixed {
+  public function getModulesOrder(): array {
     $modules = $this->config->get('modules_settings.modules');
     if(empty($modules)) {
       return [];
@@ -75,7 +75,7 @@ class OabModularProductService {
     }
   }
 
-  public function getModulesRequired(): mixed {
+  public function getModulesRequired(): array {
     $modules = $this->config->get('modules_settings.modules');
     if(empty($modules)) {
       return [];
