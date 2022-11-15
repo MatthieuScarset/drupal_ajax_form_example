@@ -20,16 +20,14 @@ header#navbar {
 
   transition: opacity 0.10s linear;
   opacity: 1;
-  z-index: 3000;
+  z-index: 1020;
 
   &.not-visible{
     opacity: 0;
     visibility: hidden;
   }
 
-
   &.is-visible{
-    z-index: 400;
     opacity: 1;
     position: sticky;
   }
