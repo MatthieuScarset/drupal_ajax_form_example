@@ -36,7 +36,7 @@ function oab_siu_connexion_theme() {
 }
 
 /**
- * Implements hook_file_move().
+ * Implements hook_file_move().user
  */
 /**
  * Implements hook_ENTITY_TYPE_access().
@@ -65,7 +65,7 @@ function oab_siu_connexion_media_access(EntityInterface $entity, $operation, Acc
   }
 
   if ($entity->bundle() === "mss_image" && !$is_admin_route) {
-    if (!in_array('siu_user', $account->getRoles())) {
+    if (!$account->hasPermission('view media image MSS')) {
       return AccessResult::forbidden(t("You can't access this content without the SIU role.")->render());
     }
   }
