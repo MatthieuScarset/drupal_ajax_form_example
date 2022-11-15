@@ -3609,6 +3609,9 @@ hr.reseau-mobile-accords-roaming {
   padding-bottom: 3rem;
 }
 
+.btn .btn-lg .btn-modal-video {
+  font-size: 8rem;
+}
 
 /* Video embarquee dans un modal : gestion du bouton fermer */
 .modal.ckeditor-embed-video .modal-dialog .modal-content {
@@ -3628,14 +3631,6 @@ hr.reseau-mobile-accords-roaming {
 }
 .btn .btn-lg .btn-modal-video {
   font-size: 8rem;
-}
-.modal.ckeditor-embed-video .modal-dialog {
-  max-width: 800px;
-  margin: 30px auto;
-}
-.modal.ckeditor-embed-video .modal-dialog .modal-content{
-  position:relative;
-  padding:35px;
 }
 
 /* Page temporaire (offices) */
@@ -3695,4 +3690,14 @@ input[type=checkbox].mktoField {
   padding: 2rem;
   background: #000;
   color: #FFF;
+}
+
+.mss_categories_block {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.mss_categories_selected{
+  color: #ff7900;
+  list-style-type: none;
 }

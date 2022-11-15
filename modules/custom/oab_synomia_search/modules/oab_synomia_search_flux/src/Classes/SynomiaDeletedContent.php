@@ -7,7 +7,6 @@ use Drupal\Core\Database\Database;
 
 class SynomiaDeletedContent
 {
-
     private $nid;
     private $contentType;
     private $url;

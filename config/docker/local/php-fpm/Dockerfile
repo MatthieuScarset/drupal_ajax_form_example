@@ -9,11 +9,8 @@ ARG GID
 
 ADD php-ini-overrides.ini /usr/local/etc/php/conf.d/99-overrides.ini
 
-# Get APT Updates
-RUN apt-get update
-
 # Install selected extensions and other stuff
-RUN apt-get -y --no-install-recommends install \
+RUN apt-get update && apt-get -y --no-install-recommends install \
     vim \
     libzip-dev \
     zip \

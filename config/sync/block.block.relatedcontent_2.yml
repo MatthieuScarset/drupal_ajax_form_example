@@ -1,0 +1,28 @@
+uuid: 8ddcdb03-a509-422c-a08b-4973762b7065
+langcode: en
+status: true
+dependencies:
+  module:
+    - oab_frontoffice
+    - system
+  theme:
+    - theme_boosted
+id: relatedcontent_2
+theme: theme_boosted
+region: sidebar
+weight: -31
+provider: null
+plugin: related_content_block
+settings:
+  id: related_content_block
+  label: 'Related content'
+  label_display: visible
+  provider: oab_frontoffice
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: /test-block

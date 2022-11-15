@@ -45,6 +45,9 @@ tac_lite_grants_scheme_1:
     hub: {  }
   webform_business_analyst:
     hub: {  }
+  siu_user:
+    hub:
+      1282: '1282'
 tac_lite_config_scheme_2:
   name: 'update and delete'
   perms:

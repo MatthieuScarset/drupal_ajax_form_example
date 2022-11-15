@@ -1,0 +1,9 @@
+.form-item__label.form-required::after,
+.fieldset__label.form-required::after,
+.horizontal-tabs .form-required::after,
+.vertical-tabs .form-required::after {
+  margin-left: 0.3em;
+  content: "*";
+  color: $orange;
+}
+

@@ -1,0 +1,8 @@
+uuid: c785ae93-d485-47e3-a696-78cffbdc7b04
+langcode: fr
+status: true
+dependencies: {  }
+id: top-navbar-mss-assistanc-fr
+label: 'MSS Assistance Top Navbar fr'
+description: 'MSS Assistance Top Navbar fr'
+locked: false

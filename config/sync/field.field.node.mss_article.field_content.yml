@@ -1,0 +1,21 @@
+uuid: a3b5d6ca-1a3d-4a0e-a46a-5f75e4684816
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content
+    - node.type.mss_article
+  module:
+    - text
+id: node.mss_article.field_content
+field_name: field_content
+entity_type: node
+bundle: mss_article
+label: Content
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

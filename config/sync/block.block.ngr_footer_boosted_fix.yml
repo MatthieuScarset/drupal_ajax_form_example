@@ -1,6 +1,6 @@
 uuid: f86c159b-9fbc-43e1-b807-c6bbaeb5c5a6
 langcode: en
-status: true
+status: false
 dependencies:
   content:
     - 'block_content:basic:b523cf6a-1b1d-4571-9add-d05b53735dd3'
@@ -11,7 +11,7 @@ dependencies:
 id: ngr_footer_boosted_fix
 theme: theme_boosted
 region: prefooter
-weight: 0
+weight: -56
 provider: null
 plugin: 'block_content:b523cf6a-1b1d-4571-9add-d05b53735dd3'
 settings:

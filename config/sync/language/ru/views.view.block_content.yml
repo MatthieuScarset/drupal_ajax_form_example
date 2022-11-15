@@ -1,14 +1,18 @@
 display:
   default:
+    display_title: Master
     display_options:
-      exposed_form:
-        options:
-          submit_button: Найти
-          exposed_sorts_label: Фильтр
+      fields:
+        operations:
+          label: Операции
       pager:
         options:
           tags:
             previous: Предыдущая
-      fields:
-        operations:
-          label: Операции
+      exposed_form:
+        options:
+          submit_button: Найти
+          exposed_sorts_label: Фильтр
+      empty:
+        area_text_custom:
+          content: 'There are no custom blocks available. '

@@ -1,0 +1,38 @@
+uuid: 1a02c7db-e532-4ede-a52b-5be20fdd1a79
+langcode: fr
+status: true
+dependencies:
+  config:
+    - system.menu.main-footer-mss-assistan-fr
+  module:
+    - language
+    - system
+  theme:
+    - theme_oab_hub
+id: mainfootermssassistanfr
+theme: theme_oab_hub
+region: footer
+weight: -13
+provider: null
+plugin: 'system_menu_block:main-footer-mss-assistan-fr'
+settings:
+  id: 'system_menu_block:main-footer-mss-assistan-fr'
+  label: 'Footer MSS Assistance fr'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      fr: fr
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: autofill

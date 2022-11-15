@@ -1,0 +1,19 @@
+.region-header #navtop #top_navbar .navbar-collapse .navbar-nav.navbar-right{
+  display: flex;
+}
+
+.hub_menu_top_right_navbar, #block-siuhellouserblockboosted {
+  display: inline-block;
+}
+
+.siu-hello-user-block {
+  color: #fff;
+  padding-left: 2rem;
+  font-size: 1.2rem;
+  display: inline-block;
+  padding-top: 0.8rem;
+}
+.siu-hello-user-block .text-hello {
+  position: relative;
+  top: -6px;
+}

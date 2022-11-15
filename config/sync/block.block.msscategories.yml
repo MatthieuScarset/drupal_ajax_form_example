@@ -1,0 +1,36 @@
+uuid: e8d6a2b3-01b0-4973-ba7f-b5d326fd423e
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - node
+    - oab_frontoffice
+  theme:
+    - theme_boosted
+id: msscategories
+theme: theme_boosted
+region: sidebar
+weight: -35
+provider: null
+plugin: msscategories_block
+settings:
+  id: msscategories_block
+  label: Categories
+  label_display: visible
+  provider: oab_frontoffice
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      mss_article: mss_article
+  node_type:
+    id: node_type
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      mss_article: mss_article

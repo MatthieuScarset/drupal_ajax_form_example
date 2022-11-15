@@ -16,3 +16,23 @@ function oab_background_image_update_dependencies() {
     $dependencies = array();
     return $dependencies;
 }
+
+
+/**
+ * Install new custom Entity to manage Background Images
+ */
+function oab_background_image_update_9001() {
+  if (!\Drupal::database()->schema()->tableExists('background_image')) {
+    \Drupal::entityTypeManager()->clearCachedDefinitions();
+    \Drupal::entityDefinitionUpdateManager()
+      ->installEntityType(\Drupal::entityTypeManager()->getDefinition('background_image'));
+  }
+}
+
+/**
+ * Rebuild Image with the new entity
+ */
+function oab_background_image_update_9002() {
+  \Drupal::service('oab_background_image.bg_image_management')->rebuild();
+}
+

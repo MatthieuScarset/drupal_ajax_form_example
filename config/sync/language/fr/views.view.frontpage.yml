@@ -1,18 +1,24 @@
 display:
   default:
+    display_title: Master
     display_options:
+      pager:
+        options:
+          tags:
+            next: 'Suivant ›'
+            previous: '‹ Précédent'
+            first: '« Premier'
+            last: 'Dernier »'
+          expose:
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options_all_label: '- Tous -'
       exposed_form:
         options:
           submit_button: Appliquer
           reset_button_label: 'Remise à zéro'
           exposed_sorts_label: 'Filtrer par'
-      pager:
-        options:
-          expose:
-            items_per_page_label: 'Éléments par page'
-            items_per_page_options_all_label: '- Tous -'
-          tags:
-            previous: '‹ Précédent'
-            next: 'Suivant ›'
-            first: '« Premier'
-            last: 'Dernier »'
+      empty:
+        area_text_custom:
+          content: 'No front page content has been created yet.'
+        title:
+          title: 'Welcome to [site:name]'

@@ -119,6 +119,9 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
                     $node_language = $node->language();
                     $node_lang_id = $node_language->getId();
 
+                    $lang_prefixes = \Drupal::config('language.negotiation')->get('url.prefixes');
+                    $node_lang_prefix = $lang_prefixes[$node_lang_id] ?? '';
+
                     // if language is undefined, we load the current language page
                     if ($node_lang_id == LanguageInterface::LANGCODE_NOT_SPECIFIED) {
                         $node_language = \Drupal::languageManager()->getCurrentLanguage();
@@ -130,16 +133,18 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
                     $url = Url::fromRoute('entity.node.canonical', ['node' => $node->id()], $options);
                     $new_url = $url->toString();
                     $current_uri = $request->getRequestUri();
-                    $current_uri_wo_options = strpos($current_uri, '?') !== false
-                      ? substr($current_uri, 0, strpos($current_uri, '?'))
-                      : $current_uri;
+
+                    $real_front_url = "/" . $node_lang_prefix . \Drupal::config("system.site")->get('page.front');
 
                     ## Comme un noeud peut avoir plusieurs alias, je les recupère tous
                     ## et je teste s'ils existent dans la liste
                     $path_list = oab_getAllPathFromNID($node->id(), $node_lang_id);
                     if ($new_url != ''
                       && $new_url !== $current_uri
-                      && !in_array($current_uri_wo_options, $path_list)
+                      && !in_array($this->removeOptionsFromUrl($current_uri), $path_list)
+                      // Bug avec $isFront() qui peut répondre "non" alors que si,
+                      // et "/" n'est pas un alias du node, donc /fr/ pouvait être redirigé vers /fr/node/{nid}
+                      && $real_front_url !== $this->removeOptionsFromUrl($new_url)
                     ) {
 
                       \Drupal::logger('node_source_redirect')
@@ -147,7 +152,7 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
                           '%source' => $current_uri,
                           '%dest' => $new_url,
                           '%path_list' => implode(' | ', $path_list),
-                          '%uri_wo_options' => $current_uri_wo_options,
+                          '%uri_wo_options' => $this->removeOptionsFromUrl($current_uri),
                           '%is_front' => \Drupal::service('path.matcher')->isFrontPage() ? "oui" : "non"
                         ]);
 
@@ -157,5 +162,11 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
                 }
             }
         }
+    }
+
+    private function removeOptionsFromUrl(string $url): string {
+      return str_contains($url, '?')
+        ? substr($url, 0, strpos($url, '?'))
+        : $url;
     }
 }

@@ -42,6 +42,18 @@ span.icon-footer {
     padding: 20px 0;
 }
 
+.o-footer .o-footer-top ul li {
+    margin: 1.2rem 0;
+}
+
+.o-footer .o-footer-top a:hover {
+    text-decoration: underline;
+}
+
+.o-footer-top .nopadding:not(:first-child):not(:last-child) {
+  padding-right: 2rem !important;
+}
+
 #block-contactbar,
 .block-contactbar {
     background-color: #333;
@@ -64,11 +76,11 @@ span.icon-footer {
     line-height: 1.8rem;
 }
 
-#block-footeren ul li,
+/*#block-footeren ul li,
 #block-footerfr ul li,
 #block-footerru ul li{
     margin-bottom: 5px;
-}
+}*/
 
 @media (max-width: 979px ) {
   .o-footer .footer-div-border .join-text {

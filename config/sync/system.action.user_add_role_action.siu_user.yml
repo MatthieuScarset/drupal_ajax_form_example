@@ -1,0 +1,14 @@
+uuid: 322c6092-fc38-4b54-9da4-ae7100b61872
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.siu_user
+  module:
+    - user
+id: user_add_role_action.siu_user
+label: 'Add the SIU User role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: siu_user

@@ -31,6 +31,8 @@ content:
     settings:
       image_link: ''
       image_style: homepage_expertise
+      image_loading:
+        attribute: lazy
     third_party_settings: {  }
     weight: 3
     region: content

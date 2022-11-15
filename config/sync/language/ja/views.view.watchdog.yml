@@ -1,0 +1,20 @@
+display:
+  default:
+    display_title: Default
+    display_options:
+      fields:
+        nothing:
+          admin_label: Icon
+        type:
+          label: Provider
+        name:
+          label: User
+        link:
+          label: Operations
+      exposed_form:
+        options:
+          submit_button: Filter
+      filters:
+        type:
+          expose:
+            label: Provider

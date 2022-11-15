@@ -27,13 +27,13 @@
                     <ul class="facetapi">
                         {% for type, facet in facets %}
                             {% if facet.nbresults > 0 %}
-                            <li class='leaf'><a href="{{ path('oab_synomia_search_engine.engine_url', {'rubrique': type, 'mot': currentSearch }) }}">{{ facet.facetName|t }} ({{ facet.nbresults }})</a> </li>
+                            <li class='leaf'><a href="{{ path(search_route_path, {'rubrique': type, 'mot': currentSearch }) }}">{{ facet.facetName|t }} ({{ facet.nbresults }})</a> </li>
                             {% endif %}
                         {% endfor %}
                     </ul>
 
                     {% if searchMode == 'rubrique' %}
-                        <div class="all_results"><a href="{{ path('oab_synomia_search_engine.engine_url', { 'mot': currentSearch }) }}">{{ 'See all results'|t }}</a></div>
+                        <div class="all_results"><a href="{{ path(search_route_path, { 'mot': currentSearch }) }}">{{ 'See all results'|t }}</a></div>
                     {% endif %}
                 </div>
             </div>
@@ -64,7 +64,7 @@
                             </ul>
                             {% if searchMode == 'global' and cluster.nbResults > 3 %}
                                 <div class="cluster_link_more">
-                                    <a href="{{ path('oab_synomia_search_engine.engine_url', {'rubrique': cluster.typeId , 'mot': currentSearch }) }}">{{ 'More'|t }}</a>
+                                    <a href="{{ path(search_route_path, {'rubrique': cluster.typeId , 'mot': currentSearch }) }}">{{ 'More'|t }}</a>
                                 </div>
                             {% endif %}
                         </div>
@@ -81,7 +81,7 @@
                         <span class="title_corrections">{{ 'Spelling suggestions'|t }}:</span>
                         <ul>
                         {% for correction in corrections %}
-                            <li> <a href="{{ path('oab_synomia_search_engine.engine_url', {'mot': correction }) }}">{{ correction }}</a> </li>
+                            <li> <a href="{{ path(search_route_path, {'mot': correction }) }}">{{ correction }}</a> </li>
                         {% endfor %}
                         </ul>
                     </div>
@@ -92,7 +92,7 @@
                         <span class="title_degradations">{{ 'Some terms of your search contain results'|t }}:</span>
                         <ul>
                             {% for terme, nbResult in degradations %}
-                                <li> <a href="{{ path('oab_synomia_search_engine.engine_url', {'mot': terme }) }}">{{ terme }}</a> : {{ nbResult }} {{ 'results'|t }}</li>
+                                <li> <a href="{{ path(search_route_path, {'mot': terme }) }}">{{ terme }}</a> : {{ nbResult }} {{ 'results'|t }}</li>
                             {% endfor %}
                         </ul>
                     </div>

@@ -4,3 +4,4 @@ ignored_config_entities:
   - 'webform.webform.*'
   - 'block.block.ngr*'
   - oab_ob1_adapter.theme_settings
+  - 'oab_custom_assets.*'

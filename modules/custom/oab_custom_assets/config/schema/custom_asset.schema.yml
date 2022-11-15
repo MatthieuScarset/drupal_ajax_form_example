@@ -1,0 +1,38 @@
+oab_custom_assets.custom_asset.*:
+  type: config_entity
+  label: 'Custom asset config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    uuid:
+      type: string
+    visibility:
+      type: mapping
+      label: 'Visibility'
+      mapping:
+        paths:
+          type: string
+          label: 'Paths'
+        languages:
+          type: sequence
+          label: 'ids of selected languages'
+          sequence:
+            type: string
+            label: 'Language'
+    assets:
+      type: mapping
+      label: 'Assets'
+      mapping:
+        css:
+          type: string
+          label: 'CSS'
+        js:
+          type: string
+          label: 'JS'
+        bottom_js:
+          type: string
+          label: 'Bottom JS'

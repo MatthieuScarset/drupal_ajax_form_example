@@ -2,25 +2,30 @@ label: Fichiers
 description: 'Trouver et gérer des fichiers.'
 display:
   default:
+    display_title: Master
     display_options:
-      exposed_form:
-        options:
-          submit_button: Filtre
-          reset_button_label: 'Remise à zéro'
-          exposed_sorts_label: 'Filtrer par'
-      pager:
-        options:
-          tags:
-            previous: '‹ Précédent'
-            next: 'Suivant ›'
-          expose:
-            items_per_page_label: 'Éléments par page'
-            items_per_page_options_all_label: '- Tous -'
+      title: Fichiers
       fields:
         filename:
           label: Nom
         status:
           label: Statut
+      pager:
+        options:
+          tags:
+            next: 'Suivant ›'
+            previous: '‹ Précédent'
+          expose:
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options_all_label: '- Tous -'
+      exposed_form:
+        options:
+          submit_button: Filtre
+          reset_button_label: 'Remise à zéro'
+          exposed_sorts_label: 'Filtrer par'
+      empty:
+        area_text_custom:
+          content: 'Pas de fichier disponible.'
       filters:
         filename:
           expose:
@@ -28,10 +33,6 @@ display:
         status:
           expose:
             label: Statut
-      title: Fichiers
-      empty:
-        area_text_custom:
-          content: 'Pas de fichier disponible.'
   page_1:
     display_title: 'Aperçu des fichiers'
     display_options:
@@ -40,17 +41,17 @@ display:
   page_2:
     display_title: 'Utilisation du fichier'
     display_options:
-      pager:
-        options:
-          tags:
-            previous: '‹ Précédent'
-            next: 'Suivant ›'
-          expose:
-            items_per_page_label: 'Éléments par page'
-            items_per_page_options_all_label: '- Tous -'
+      title: 'Utilisation du fichier'
       fields:
         entity_label:
           label: Entité
         type:
           label: 'Type d''entité'
-      title: 'Utilisation du fichier'
+      pager:
+        options:
+          tags:
+            next: 'Suivant ›'
+            previous: '‹ Précédent'
+          expose:
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options_all_label: '- Tous -'

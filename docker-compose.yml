@@ -17,9 +17,9 @@ services:
       networks:
         - mailhog
 
-    mariadb:
-      image: mariadb:10.3
-      container_name: $CONTAINER_MARIADB
+    mysql:
+      image: mysql:8
+      container_name: $CONTAINER_MYSQL
       volumes:
         - ${DB_DUMPS_DIR:-./data/db_dumps}:/tmp/db_dumps
         - ${MYSQL_DIR:-/var/lib/mysql}:/var/lib/mysql
@@ -36,11 +36,12 @@ services:
     phpmyadmin:
       image: phpmyadmin/phpmyadmin
       depends_on:
-        - mariadb
+        - mysql
+      container_name: $CONTAINER_PHPMYADMIN
       ports :
         - "${PHPMYADMIN_PORT:-8080}:80"
       environment:
-        PMA_HOST: 'mariadb'
+        PMA_HOST: "$CONTAINER_MYSQL"
       networks:
         - database
 
@@ -70,7 +71,7 @@ services:
       working_dir: /application
       entrypoint: ./entrypoint.php-fpm.sh
       depends_on:
-        - mariadb
+        - mysql
       volumes:
         - .:/application
         - ./config/docker/local/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
@@ -80,6 +81,19 @@ services:
         - database
         - mailhog
         - memcached
+
+    testsamlidp_idp:
+      image: kristophjunge/test-saml-idp
+      container_name: $CONTAINER_SAMLTEST
+      environment:
+        SIMPLESAMLPHP_SP_ENTITY_ID: saml-poc
+        SIMPLESAMLPHP_SP_ASSERTION_CONSUMER_SERVICE: http://localhost:8000/en/saml/consume
+       # SIMPLESAMLPHP_SP_ASSERTION_CONSUMER_SERVICE: http://localhost:8000/en/return-siu-authentication
+      volumes:
+        - ./config/docker/local/saml/users.php:/var/www/simplesamlphp/config/authsources.php
+      ports:
+        - "8081:8080"
+        - "8443:8443"
 
 networks:
     proxy:

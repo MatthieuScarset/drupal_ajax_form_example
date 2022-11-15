@@ -1,0 +1,200 @@
+uuid: 3b26bbf5-18f2-4e1b-b67a-4333ac13b398
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.mss_article.field_categories
+    - field.field.node.mss_article.field_content
+    - field.field.node.mss_article.field_hub
+    - field.field.node.mss_article.field_hub_portal
+    - field.field.node.mss_article.field_p_wysiwyg_rebond
+    - field.field.node.mss_article.field_typology
+    - node.type.mss_article
+  module:
+    - field_group
+    - paragraphs
+    - path
+    - text
+    - workbench_moderation
+third_party_settings:
+  field_group:
+    group_o:
+      children:
+        - group_w
+        - group_rebond
+        - group_classify
+        - group_publi
+      label: Onglets
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      format_settings:
+        classes: ''
+        id: ''
+        direction: vertical
+    group_w:
+      children:
+        - langcode
+        - title
+        - field_content
+      label: Write
+      parent_name: group_o
+      weight: 9
+      format_type: tab
+      format_settings:
+        classes: ''
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_classify:
+      children:
+        - field_categories
+        - field_typology
+        - field_hub
+        - field_hub_portal
+      label: Classify
+      parent_name: group_o
+      weight: 11
+      format_type: tab
+      format_settings:
+        classes: ''
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_rebond:
+      children:
+        - field_p_wysiwyg_rebond
+      label: Rebond
+      parent_name: group_o
+      weight: 10
+      format_type: tab
+      format_settings:
+        classes: ''
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_publi:
+      children:
+        - path
+        - promote
+      label: Publish
+      parent_name: group_o
+      weight: 12
+      format_type: tab
+      format_settings:
+        classes: ''
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+id: node.mss_article.default
+targetEntityType: node
+bundle: mss_article
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_categories:
+    type: options_select
+    weight: 32
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_content:
+    type: text_textarea
+    weight: 4
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_hub:
+    type: options_buttons
+    weight: 34
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_hub_portal:
+    type: boolean_checkbox
+    weight: 35
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_p_wysiwyg_rebond:
+    type: entity_reference_paragraphs
+    weight: 15
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+  field_typology:
+    type: options_select
+    weight: 33
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 6
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 3
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  sticky: true

@@ -26,13 +26,13 @@ define('CONTENT_TAXO_FIELDS', serialize(array('field_region',
 
 // Regroupement de toutes les fonctions spécifiques à GDPR pour éviter de surcharger le fichier
 //include_once 'includes/gdpr.inc';
-module_load_include('inc', 'oab_backoffice', 'includes/gdpr');
+\Drupal::moduleHandler()->loadInclude( 'oab_backoffice', 'inc','includes/gdpr');
 
 // Fichier pour le hook_form_alter qui commencait à prendre trop de place
-module_load_include('inc', 'oab_backoffice', 'includes/form_alter');
+\Drupal::moduleHandler()->loadInclude( 'oab_backoffice', 'inc','includes/form_alter');
 
 // Mise dans un fichier a part les variables dynamique pour la construction du formulaire Marketo
-module_load_include('inc', 'oab_backoffice', 'includes/marketo');
+\Drupal::moduleHandler()->loadInclude('oab_backoffice', 'inc',  'includes/marketo');
 
 
 function oab_backoffice_mail($key, &$message, $params) {
@@ -142,7 +142,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
                     ':input[name="settings[html]"]' => ['checked' => true]
                 ]
             ],
-            '#element_validate' => ['Drupal\webform\WebformTokenManager', 'validateElement'],
+            '#element_validate' => [['Drupal\webform\WebformTokenManager', 'validateElement']],
             '#token_types' => [
                 'webform',
                 'webform_submission',

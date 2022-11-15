@@ -1,0 +1,49 @@
+uuid: 7525aaf8-ff6b-497a-b8cc-483a5f764167
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.mss_article.field_categories
+    - field.field.node.mss_article.field_content
+    - field.field.node.mss_article.field_hub
+    - field.field.node.mss_article.field_hub_portal
+    - field.field.node.mss_article.field_p_wysiwyg_rebond
+    - field.field.node.mss_article.field_typology
+    - node.type.mss_article
+  module:
+    - entity_reference_revisions
+    - text
+    - user
+id: node.mss_article.default
+targetEntityType: node
+bundle: mss_article
+mode: default
+content:
+  field_content:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_p_wysiwyg_rebond:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_categories: true
+  field_hub: true
+  field_hub_portal: true
+  field_typology: true
+  langcode: true
+  workbench_moderation_control: true

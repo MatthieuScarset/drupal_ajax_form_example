@@ -30,7 +30,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'BVPN Map'
+      title: 'Interconnection map'
       fields:
         field_logo:
           id: field_logo
@@ -1718,7 +1718,7 @@ display:
     display_plugin: page
     position: 3
     display_options:
-      title: 'BVPN List'
+      title: 'List of Cloud Services'
       exposed_form:
         type: basic
         options:
@@ -2181,7 +2181,7 @@ display:
       display_description: ''
       rendering_language: '***LANGUAGE_entity_translation***'
       display_extenders: {  }
-      path: bvpn-list
+      path: products/business-vpn-galerie/cloud-services/list
     cache_metadata:
       max-age: -1
       contexts:
@@ -2197,7 +2197,7 @@ display:
         - 'config:field.storage.node.field_logo'
   csp_map_page:
     id: csp_map_page
-    display_title: 'CSP Map page'
+    display_title: 'Interconnection map'
     display_plugin: page
     position: 2
     display_options:
@@ -2574,7 +2574,7 @@ display:
       display_description: ''
       rendering_language: '***LANGUAGE_language_interface***'
       display_extenders: {  }
-      path: bvpn-map
+      path: products/business-vpn-galerie/cloud-services/map
     cache_metadata:
       max-age: -1
       contexts:

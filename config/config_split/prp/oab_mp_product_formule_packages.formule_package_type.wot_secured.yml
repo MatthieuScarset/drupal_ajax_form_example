@@ -1,0 +1,7 @@
+uuid: f05c9702-692a-4e0b-8728-ede1bf3d16de
+langcode: en
+status: true
+dependencies: {  }
+id: wot_secured
+label: 'WOT - Secured'
+formule: '5'

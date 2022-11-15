@@ -1,0 +1,20 @@
+uuid: ee1b398a-5d69-4b9c-a44e-bd93d578d58c
+langcode: en
+status: false
+dependencies:
+  module:
+    - oab_siu_connexion
+  theme:
+    - theme_one_i
+id: siuhellouserblockonei
+theme: theme_one_i
+region: header
+weight: 0
+provider: null
+plugin: siu_hello_user_block
+settings:
+  id: siu_hello_user_block
+  label: 'SIU Hello User Block OneI'
+  label_display: '0'
+  provider: oab_siu_connexion
+visibility: {  }
