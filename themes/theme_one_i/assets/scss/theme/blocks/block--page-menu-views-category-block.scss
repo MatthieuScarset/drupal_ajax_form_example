@@ -1,8 +1,9 @@
-.block.page-menu-category-block.sticky {
-  z-index: 300;
-  position: sticky;
-}
 .page-menu-category-block {
+  &.sticky {
+    z-index: 300;
+    position: sticky;
+  }
+
   @include media-breakpoint-up(lg) {
     margin-top: 25px;
 

@@ -5,9 +5,10 @@
  });*/
 
 (function ($, Drupal, Bootstrap) {
-  let lastScrollTop = 0;
-  let navtop = $('#navtop');
-  let header = $('header#navbar');
+    let lastScrollTop = 0;
+    const navtop = $('#navtop');
+    const header = $('header#navbar');
+
     function init_fixed_navbar(){
         var offset = 0;
         var top_menu = $('#main_nav');
@@ -122,27 +123,22 @@
             }, 1000);
 
         });
-    }
 
-  // add css class to hide header after is not visible
-  function manageStickyHeader([e]){
-    if (e.intersectionRatio < 1) {
-      header.addClass("not-visible");
+        // get the sticky element
+        this.$stickyHeaderObserver = new IntersectionObserver(
+          function ([e]) {
+            if (e.intersectionRatio < 1) {
+              header.addClass("not-visible");
+            }
+          },
+          {threshold: 0}
+        );
+        this.$stickyHeaderObserver.observe(document.querySelector('header#navbar'));
     }
-  }
-
-  // get the sticky element
-  this.$stickyHeaderObserver = new IntersectionObserver(
-    manageStickyHeader,
-    {
-      threshold: 0
-    }
-  );
-  this.$stickyHeaderObserver.observe(document.querySelector('header'))
-
 
     function moveFixedElements(top_menu_offset, offset, top_menu, menu_offset, contact_module_offset, contact_offset, contact_module, preview_bar, preview_bar_offset, init_preview_bar_offset, local_nav, localnav_offset, top_zone){
         var container_margin_top = 0;
+        const admin_toolbar_height = $('#toolbar-bar').height() + $('#toolbar-item-administration-tray').height();
         if (top_menu.length) {
             container_margin_top += top_menu.height() + 20;
         }
@@ -153,20 +149,20 @@
             container_margin_top += contact_module.height() + 20;
         }
 
-      top_menu.removeClass('navbar-fixed');
-      const scrollTop = $(window).scrollTop();
+        top_menu.removeClass('navbar-fixed');
+        const scrollTop = $(window).scrollTop();
 
-      if (scrollTop > lastScrollTop) {
-        // Scroll down
-        header.removeClass("is-visible");
-      } else {
-        // Scroll Up
-        header.addClass("is-visible");
-        header.css("top", $('body').hasClass('user-logged-in') ? "83px": "0px");
-        header.removeClass("not-visible");
-      }
+        if (scrollTop > lastScrollTop) {
+          // Scroll down
+          header.removeClass("is-visible");
+        } else {
+          // Scroll Up
+          header.addClass("is-visible");
+          header.css("top", $('body').hasClass('user-logged-in') ? admin_toolbar_height : "0px");
+          header.removeClass("not-visible");
+        }
 
-      lastScrollTop = scrollTop;
+        lastScrollTop = scrollTop;
 
 
         if (preview_bar.length) {
@@ -220,7 +216,7 @@
           }
 
           //Position top de la social bar en connecté ou pas connecté
-          $('#block-socialshareblock').css('top', $('body').hasClass('user-logged-in') ? header.outerHeight() + 83 :
+          $('#block-socialshareblock').css('top', $('body').hasClass('user-logged-in') ? header.outerHeight() + admin_toolbar_height :
             header.outerHeight());
 
           // Gestion de la local nav
