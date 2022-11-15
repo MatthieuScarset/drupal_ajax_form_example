@@ -224,14 +224,13 @@
 .mega-menu.navbar .nav > li.open > a {
   color: white;
   border: none;
-  border-bottom: 5px solid #f16e00 !important;
-  padding-bottom: 11px;
+  border-bottom: 5px solid #f16e00;
 }
 
 .mega-menu.navbar.navbar-fixed .nav > li.open > a {
   color: white;
   border: none;
-  border-bottom: 5px solid #f16e00 !important;
+  border-bottom: 5px solid #f16e00;
   padding-bottom: 14px;
 }
 
@@ -651,6 +650,10 @@
     border-bottom: none;
   }
 
+  #items_megamenu a:hover {
+    color: black;
+    font-weight: bold;
+  }
 
   .mega-menu .nav, .mega-menu .collapse {
     margin-left: 0;
@@ -665,6 +668,16 @@
     padding: 10px 10px;
     color: black;
     margin-top: 0;
+    border: none;
+  }
+
+  .mega-menu.navbar .nav > li > a:focus {
+    color: black;
+  }
+
+  .mega-menu.navbar .nav > li > a:hover {
+    color: black;
+    border-bottom: none;
   }
 
   .mega-menu.navbar.navbar-fixed .nav > li > a {
@@ -706,6 +719,11 @@
     float: right;
     margin-top: 0;
     margin-right: 10px;
+  }
+
+  .mega-menu.navbar .nav > li.open > a {
+    color: black;
+    border-bottom: none;
   }
 
   .iconblock .icon-email {
