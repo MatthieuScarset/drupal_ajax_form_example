@@ -156,13 +156,23 @@ class ModularProductSettingsForm extends ConfigFormBase {
       '#group' => 'tabs'
     ];
 
+    $this->constructModulesTable($form, $conf);
+
+    return parent::buildForm($form, $form_state);
+  }
+
+  /** Construit la partie des modules (ordre et requis) sous forme de table (drag & drop)
+   * @param $form
+   * @param $conf
+   */
+  private function constructModulesTable(&$form, $conf) {
     /**
      * @var \Drupal\Core\Field\FieldDefinitionInterface[]
      */
     //On récupère la liste des modules cochés pour le champ Field_modules de Modular Product
     $bundle_fields = $this->entityFieldManager->getFieldDefinitions('node', 'modular_product');
     $target_settings = $bundle_fields['field_modules']?->getSetting("handler_settings");
-    $modules_in_field = $target_settings['target_bundles'];
+    $modules_in_field = $target_settings['target_bundles'] ?? [];
 
     //Construction de la table pour gérer l'ordre des modules et s'ils sont obligatoires ou non
     $group_class = 'group-order-weight';
@@ -200,9 +210,7 @@ class ModularProductSettingsForm extends ConfigFormBase {
           $form['modules_settings']['modules'][$module_id]['#attributes']['class'][] = 'draggable';
           $form['modules_settings']['modules'][$module_id]['#weight'] = $module_conf['weight'];
           // on va garder la plus haute valeur de weight pour les modules qu'on ajoutera à la fin
-          if ($module_conf['weight'] > $max_weight) {
-            $max_weight = $module_conf['weight'];
-          }
+          $max_weight = max($module_conf['weight'], $max_weight);
           // Label col.
           $form['modules_settings']['modules'][$module_id]['label'] = [
             '#plain_text' => $paragraph_type->label(),
@@ -234,34 +242,35 @@ class ModularProductSettingsForm extends ConfigFormBase {
         //s'il n'est pas encore dans le tableau de rendu
         if (!in_array($module_id, $form['modules_settings']['modules']) && !in_array($module_id, OabModularProductService::MODULES_OPTIONNELS)) {
           $paragraph_type = ParagraphsType::load($module_id);
-          $max_weight++; //mise a jour du weight pour ce nouvel élément
-          $form['modules_settings']['modules'][$module_id]['#attributes']['class'][] = 'draggable';
-          $form['modules_settings']['modules'][$module_id]['#weight'] = $max_weight;
-          // Label col.
-          $form['modules_settings']['modules'][$module_id]['label'] = [
-            '#plain_text' => $paragraph_type->label(),
-          ];
-          // ID col.
-          $form['modules_settings']['modules'][$module_id]['id'] = [
-            '#plain_text' => $module_id,
-          ];
-          // required col.
-          $form['modules_settings']['modules'][$module_id]['required'] = [
-            '#type' => 'checkbox',
-            '#default_value' => FALSE, //par défaut, non obligatoire
-          ];
-          // Weight col.
-          $form['modules_settings']['modules'][$module_id]['weight'] = [
-            '#type' => 'weight',
-            '#title' => $this->t('Weight for @title', ['@title' => $paragraph_type->label()]),
-            '#title_display' => 'invisible',
-            '#default_value' => $max_weight,
-            '#attributes' => ['class' => [$group_class]],
-          ];
+          if (isset($paragraph_type)) {
+            $max_weight++; //mise a jour du weight pour ce nouvel élément
+            $form['modules_settings']['modules'][$module_id]['#attributes']['class'][] = 'draggable';
+            $form['modules_settings']['modules'][$module_id]['#weight'] = $max_weight;
+            // Label col.
+            $form['modules_settings']['modules'][$module_id]['label'] = [
+              '#plain_text' => $paragraph_type->label(),
+            ];
+            // ID col.
+            $form['modules_settings']['modules'][$module_id]['id'] = [
+              '#plain_text' => $module_id,
+            ];
+            // required col.
+            $form['modules_settings']['modules'][$module_id]['required'] = [
+              '#type' => 'checkbox',
+              '#default_value' => FALSE, //par défaut, non obligatoire
+            ];
+            // Weight col.
+            $form['modules_settings']['modules'][$module_id]['weight'] = [
+              '#type' => 'weight',
+              '#title' => $this->t('Weight for @title', ['@title' => $paragraph_type->label()]),
+              '#title_display' => 'invisible',
+              '#default_value' => $max_weight,
+              '#attributes' => ['class' => [$group_class]],
+            ];
+          }
         }
       }
     }
-    return parent::buildForm($form, $form_state);
   }
 
   public function submitForm(array &$form, FormStateInterface $form_state) {
