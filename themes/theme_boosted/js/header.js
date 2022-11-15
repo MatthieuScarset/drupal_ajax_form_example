@@ -138,7 +138,9 @@
 
     function moveFixedElements(top_menu_offset, offset, top_menu, menu_offset, contact_module_offset, contact_offset, contact_module, preview_bar, preview_bar_offset, init_preview_bar_offset, local_nav, localnav_offset, top_zone){
         var container_margin_top = 0;
-        const admin_toolbar_height = $('#toolbar-bar').height() + $('#toolbar-item-administration-tray').height();
+        const admin_toolbar_height = $('body.toolbar-fixed .toolbar-oriented #toolbar-bar').length ? $('#toolbar-bar').height() : 0 +
+              $('#toolbar-item-administration-tray.toolbar-tray-horizontal').length ? $('#toolbar-item-administration-tray.toolbar-tray-horizontal').height() : 0;
+
         if (top_menu.length) {
             container_margin_top += top_menu.height() + 20;
         }
@@ -158,7 +160,7 @@
         } else {
           // Scroll Up
           header.addClass("is-visible");
-          header.css("top", $('body').hasClass('user-logged-in') ? admin_toolbar_height : "0px");
+          header.css("top", admin_toolbar_height);
           header.removeClass("not-visible");
         }
 
@@ -216,8 +218,7 @@
           }
 
           //Position top de la social bar en connecté ou pas connecté
-          $('#block-socialshareblock').css('top', $('body').hasClass('user-logged-in') ? header.outerHeight() + admin_toolbar_height :
-            header.outerHeight());
+          $('#block-socialshareblock').css('top', header.outerHeight() + admin_toolbar_height);
 
           // Gestion de la local nav
           if ($(window).scrollTop() > (header.outerHeight() + top_zone_offset) ||

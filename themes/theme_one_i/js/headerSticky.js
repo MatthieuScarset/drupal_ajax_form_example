@@ -2,6 +2,7 @@ class ManageStickyTop {
   constructor() {
     this._defineCssTop();
     this.$header = $("header");
+    this.$adminToolbarHeight = $('body').hasClass('user-logged-in') ? $('#toolbar-bar').length ? $('#toolbar-bar').height() : 0 : 0;
 
     $(window).resize(() => {
       this._defineCssTop()
@@ -22,10 +23,24 @@ class ManageStickyTop {
 
     // get the sticky element
     this.$stickyHeaderObserver = new IntersectionObserver(
-      this._manageStickyHeader,
-      {
-        threshold: 0
-      }
+      ([e]) => {
+        const supra_navbar = $('header .navbar.supra');
+        const supra_navbar_height = supra_navbar.height();
+        //const header = $('header');
+
+        e.target.classList.toggle('is-sticky', e.intersectionRatio < 1);
+
+        if (e.intersectionRatio < 1) {
+          this.$header.addClass("not-visible");
+          $('#block-theme-one-i-socialshareblock').css('top',
+            this.$header.height() - supra_navbar_height);
+        }
+        else {
+          $('#block-theme-one-i-socialshareblock').css('top',
+            this.$header.height());
+        }
+      },
+      {threshold: 0}
     );
     this.$stickyHeaderObserver.observe(document.querySelector('header'))
 
@@ -40,32 +55,13 @@ class ManageStickyTop {
       } else {
         // Scroll Up
         this.$header.addClass("is-visible");
-        this.$header.css("top", $('body').hasClass('user-logged-in') ? "83px": "0px");
+        this.$header.css("top", this.$adminToolbarHeight);
         this.$header.removeClass("not-visible");
 
       }
       this.$lastScrollTop = scrollTop;
     });
   }
-
-  _manageStickyHeader([e]) {
-    const supra_navbar = $('header .navbar.supra');
-    const supra_navbar_height = supra_navbar.height();
-    const header = $('header');
-
-    e.target.classList.toggle('is-sticky', e.intersectionRatio < 1);
-
-    if (e.intersectionRatio < 1) {
-      header.addClass("not-visible");
-      $('#block-theme-one-i-socialshareblock').css('top',
-       this.$header.height() - supra_navbar_height);
-    }
-    else {
-      $('#block-theme-one-i-socialshareblock').css('top',
-      this.$header.height());
-    }
-  }
-
 
   _defineCssTop() {
     let init = this._getBodyPaddingTop();
