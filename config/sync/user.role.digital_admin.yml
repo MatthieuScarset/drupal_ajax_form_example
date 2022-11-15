@@ -5,6 +5,7 @@ dependencies:
   config:
     - filter.format.full_html
     - node.type.cloud_service_provider
+    - node.type.mss_article
     - node.type.office
     - node.type.product
     - node.type.profile
@@ -70,24 +71,35 @@ permissions:
   - 'assign workbench access'
   - 'create cloud_service_provider content'
   - 'create content translations'
+  - 'create mss_article content'
   - 'create office content'
   - 'create product content'
   - 'create url aliases'
   - 'delete all revisions'
   - 'delete any cloud_service_provider content'
+  - 'delete any cloud_service_provider content'
+  - 'delete any mss_article content'
   - 'delete any office content'
   - 'delete any product content'
   - 'delete cloud_service_provider revisions'
   - 'delete content translations'
+  - 'delete mss_article revisions'
   - 'delete office revisions'
   - 'delete own cloud_service_provider content'
+  - 'delete own mss_article content'
   - 'delete own office content'
   - 'delete own product content'
   - 'delete product revisions'
   - 'edit any cloud_service_provider content'
+  - 'edit any cloud_service_provider content'
+  - 'edit any mss_article content'
+  - 'edit any office content'
   - 'edit any office content'
   - 'edit any product content'
+  - 'edit any product content'
   - 'edit own cloud_service_provider content'
+  - 'edit own cloud_service_provider content'
+  - 'edit own mss_article content'
   - 'edit own office content'
   - 'edit own product content'
   - oab_offices_map_administer
@@ -95,6 +107,7 @@ permissions:
   - 'replicate entities'
   - 'revert all revisions'
   - 'revert cloud_service_provider revisions'
+  - 'revert mss_article revisions'
   - 'revert office revisions'
   - 'revert product revisions'
   - 'translate any entity'
@@ -120,6 +133,7 @@ permissions:
   - 'view cloud_service_provider revisions'
   - 'view latest version'
   - 'view moderation states'
+  - 'view mss_article revisions'
   - 'view office revisions'
   - 'view own unpublished content'
   - 'view product revisions'

@@ -60,6 +60,12 @@
     <title>{{ head_title|safe_join(' | ') }}</title>
     <css-placeholder token="{{ placeholder_token|raw }}">
     <js-placeholder token="{{ placeholder_token|raw }}">
+      {% if custom_css is defined %}
+        {{ custom_css }}
+      {% endif %}
+      {% if custom_js is defined %}
+        {{ custom_js }}
+      {% endif %}
   </head>
   <body{{ attributes.addClass(body_classes) }}>
 
@@ -70,5 +76,8 @@
     {{ page }}
     {{ page_bottom }}
     <js-bottom-placeholder token="{{ placeholder_token|raw }}">
+      {% if custom_bottom_js is defined %}
+        {{ custom_bottom_js }}
+      {% endif %}
   </body>
 </html>

@@ -1,0 +1,9 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function oab_custom_assets_install($is_syncing) {
+  \Drupal::service('update.update_hook_registry')->setInstalledVersion('oab_custom_assets', '9000');
+  module_set_weight("oab_custom_assets", 500);
+}

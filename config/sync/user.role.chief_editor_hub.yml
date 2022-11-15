@@ -13,6 +13,7 @@ dependencies:
     - node.type.homepage
     - node.type.industry
     - node.type.magazine
+    - node.type.mss_article
     - node.type.product
     - node.type.simple_page
     - node.type.solution
@@ -52,16 +53,23 @@ permissions:
   - 'create industry content'
   - 'create magazine content'
   - 'create media'
+  - 'create mss_article content'
   - 'create product content'
   - 'create simple_page content'
   - 'create solution content'
   - 'create url aliases'
   - 'delete any cloud_service_provider content'
+  - 'delete any mss_article content'
   - 'delete cloud_service_provider revisions'
+  - 'delete mss_article revisions'
   - 'delete own cloud_service_provider content'
+  - 'delete own mss_article content'
   - 'edit any cloud_service_provider content'
+  - 'edit any mss_article content'
   - 'edit own cloud_service_provider content'
+  - 'edit own mss_article content'
   - 'revert cloud_service_provider revisions'
+  - 'revert mss_article revisions'
   - 'use archived_published transition'
   - 'use draft_draft transition'
   - 'use draft_needs_review transition'
@@ -79,5 +87,6 @@ permissions:
   - 'view latest version'
   - 'view media'
   - 'view moderation states'
+  - 'view mss_article revisions'
   - 'view own unpublished content'
   - 'view the administration theme'

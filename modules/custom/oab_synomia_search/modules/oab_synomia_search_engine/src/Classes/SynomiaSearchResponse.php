@@ -7,6 +7,8 @@
  */
 namespace Drupal\oab_synomia_search_engine\Classes;
 
+use Drupal\Core\Entity\EntityFieldManager;
+use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Pager\PagerManagerInterface;
 use Drupal\node\Entity\NodeType;
 use Drupal\oab_synomia_search_engine\Form\OabSynomiaSearchSettingsForm;
@@ -23,14 +25,18 @@ class SynomiaSearchResponse {
     PUBLIC $pager = null;
     public $searchMode = '';
 
-    /**
-     * @var PagerManagerInterface
-     */
-    private $pageManager;
 
-    public function __construct() {
-      $this->pageManager = \Drupal::service('pager.manager');
-    }
+  public function __construct(
+    private PagerManagerInterface $pagerManager,
+    private EntityFieldManagerInterface $entityFieldManager,
+    private $typeSearch = 'default'
+  ) {
+
+  }
+
+  public function getTypeSearch() {
+    return $this->typeSearch;
+  }
 
     public function readXML($flux_xml, $rubrique) {
         if (!empty($flux_xml)) {
@@ -74,7 +80,7 @@ class SynomiaSearchResponse {
                     $nb_results_per_page = 10; // 10 par défaut si aucune configuration
                 }
 
-                $this->current_page = $this->pageManager->createPager($xml_result->estimatedTotalResultsCount, $nb_results_per_page);
+                $this->current_page = $this->pagerManager->createPager((int) $xml_result->estimatedTotalResultsCount, $nb_results_per_page);
                 $this->current_page->getCurrentPage();
                 //$this->pager = theme('pager');
             }
@@ -151,7 +157,6 @@ class SynomiaSearchResponse {
                     }
                 }
             }
-            //oabt($this->results, true);
         }
     }
 
@@ -160,7 +165,6 @@ class SynomiaSearchResponse {
      * @param unknown $flux
      */
     private function getFacetsFromXml($dom) {
-        //oabt($dom, true);
         $facets_tag = $dom->getElementsByTagName("facets");
         if (isset($facets_tag)) {
             $facets_tag = $facets_tag->item(0);
@@ -197,22 +201,100 @@ class SynomiaSearchResponse {
      * @param $type_id
      */
     private function getTypeLabel($type_id) {
-        $type_name = "";
-        switch ($type_id) {
+        $type_name = $type_id;
+        if($this->typeSearch === 'mss') {
+          /**
+           * @var \Drupal\Core\Field\FieldDefinitionInterface[]
+           */
+          $bundle_fields = $this->entityFieldManager->getFieldDefinitions('node', 'mss_article');
+          $types_mss = $bundle_fields['field_typology']?->getSetting("allowed_values");
+          if(isset($types_mss[$type_id]) && is_string($types_mss[$type_id])) {
+            return ucfirst($types_mss[$type_id]);
+          }
+        }
+        else {
+          switch ($type_id) {
             case 'full_html':
-                $type_name = 'Content';
-                break;
+              $type_name = 'Content';
+              break;
             case 'simple_page':
-                $type_name = 'Article';
-                break;
+              $type_name = 'Article';
+              break;
             default:
-                $type_object = NodeType::load($type_id);
-                if (isset($type_object) && !empty($type_object)) {
-                    $type_name = $type_object->label();
-                }
+              $type_object = NodeType::load($type_id);
+              if (isset($type_object) && !empty($type_object)) {
+                $type_name = $type_object->label();
+              }
 
+          }
         }
         return $type_name;
     }
+
+
+  /** Permet de trier l'ordre des filtres par rapport à ce qui est configuré dans le BO. Si pas de config, pas de tri
+   * @param $old_facets_array
+   * @return array
+   */
+  public function getOrderedFacetsArray() {
+    $old_facets_array = $this->facets;
+    $new_facets_array_ordered = array();
+    $content_types = $this->getOrderContentTypesArray();
+    if (!empty($content_types)) {
+      foreach ($content_types as $contentType) {
+        if( isset($old_results_array[$contentType])) {
+          $new_facets_array_ordered[$contentType] = $old_facets_array[$contentType];
+          unset($old_facets_array[$contentType]);
+        }
+      }
+      return array_merge($new_facets_array_ordered, $old_facets_array);
+    }
+    return $old_facets_array;
+  }
+
+  /** Permet de trier l'ordre des filtres par rapport à ce qui est configuré dans le BO. Si pas de config, pas de tri
+   * @param $old_facets_array
+   * @return array
+   */
+  public function getOrderedResultsArray() {
+    $old_results_array = $this->results;
+    $new_results_array_ordered = array();
+    $content_types = $this->getOrderContentTypesArray();
+    if (!empty($content_types)) {
+      foreach ($content_types as $contentType) {
+        if( isset($old_results_array[$contentType])) {
+          $new_results_array_ordered[$contentType] = $old_results_array[$contentType];
+          unset($old_results_array[$contentType]);
+        }
+      }
+      return array_merge($new_results_array_ordered, $old_results_array);
+    }
+    return $old_results_array;
+  }
+
+  private function getOrderContentTypesArray() {
+    $content_types = array();
+    $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    //on récupère le nb de résultats par page
+    $config_factory = \Drupal::configFactory();
+    $config = $config_factory->get(OabSynomiaSearchSettingsForm::getConfigName());
+    if (!empty($config) && !empty($config->get('order_content_types_'.$current_language))) {
+      $order_string = "";
+      if ($this->typeSearch == 'mss'){
+        $order_string = $config->get('order_typology_mss_assistance');
+      }
+      else {
+        $order_string = $config->get('order_content_types_' . $current_language);
+      }
+      if (!empty($order_string)) {
+        $tmp_content_types = explode(',', $order_string);
+        foreach ($tmp_content_types as $tmp) {
+          $content_types[$tmp] = trim($tmp);
+        }
+      }
+    }
+    return $content_types;
+  }
+
 }
 

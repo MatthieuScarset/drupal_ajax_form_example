@@ -1,0 +1,8 @@
+
+# Custom asset menu items definition
+entity.custom_asset.collection:
+  title: 'Custom asset'
+  route_name: entity.custom_asset.collection
+  description: 'List Custom asset'
+  parent: system.admin_structure
+  weight: 99

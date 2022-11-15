@@ -1,0 +1,23 @@
+uuid: 6f5d0bf2-da39-4c4f-8981-4ea6e5f3cb22
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.formule_package.field_price
+    - oab_mp_product_formule_packages.formule_package_type.wot_secured
+id: formule_package.wot_secured.field_price
+field_name: field_price
+entity_type: formule_package
+bundle: wot_secured
+label: Price
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: €
+field_type: decimal

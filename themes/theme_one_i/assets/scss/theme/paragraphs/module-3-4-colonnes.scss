@@ -8,9 +8,8 @@
       display: none;
     }
     @include media-breakpoint-up(md) {
-      overflow-x: revert;
-      flex-wrap: revert;
-      max-width: revert;
+      overflow-x: hidden;
+      flex-wrap: wrap;
     }
   }
 }

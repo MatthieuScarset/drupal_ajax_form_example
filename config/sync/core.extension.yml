@@ -43,6 +43,7 @@ module:
   help: 0
   history: 0
   image: 0
+  image_captcha: 0
   image_widget_crop: 0
   inline_entity_form: 0
   jsonapi: 0
@@ -91,6 +92,7 @@ module:
   oab_icomoon: 0
   oab_marketo: 0
   oab_modular_product: 0
+  oab_mourchid: 0
   oab_mp_formule_field: 0
   oab_mp_formules: 0
   oab_mp_product_formule_packages: 0
@@ -98,11 +100,11 @@ module:
   oab_offices_map: 0
   oab_orange_business_lounge: 0
   oab_riad: 0
+  oab_siu_connexion: 0
   oab_stephanie: 0
   oab_subhomes: 0
   oab_synomia_search: 0
   oab_synomia_search_engine: 0
-  oab_synomia_search_flux: 0
   oab_tealium: 0
   oab_tibo: 0
   oab_transliteration_filename: 0
@@ -128,6 +130,8 @@ module:
   responsive_image: 0
   robotstxt: 0
   roleassign: 0
+  saml_sp: 0
+  saml_sp_drupal_login: 0
   scheduled_updates: 0
   seckit: 0
   serialization: 0
@@ -164,11 +168,15 @@ module:
   paragraphs: 11
   oab_eddy: 30
   oab_will: 30
+  oab_synomia_search_flux: 100
   tac_lite: 100
+  oab_custom_assets: 500
   minimal: 1000
 theme:
   stark: 0
   seven: 0
+  stable: 0
+  classy: 0
   theme_obs_backoffice: 0
   theme_boosted: 0
   theme_oab_hub: 0

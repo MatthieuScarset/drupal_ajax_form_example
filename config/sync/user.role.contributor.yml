@@ -12,6 +12,7 @@ dependencies:
     - node.type.full_html
     - node.type.industry
     - node.type.magazine
+    - node.type.mss_article
     - node.type.office
     - node.type.partner
     - node.type.press_kit
@@ -58,12 +59,23 @@ permissions:
   - 'administer media'
   - 'administer nodes'
   - 'create cloud_service_provider content'
+  - 'create mss_article content'
+  - 'create url aliases'
   - 'create url aliases'
   - 'delete any cloud_service_provider content'
+  - 'delete any cloud_service_provider content'
+  - 'delete any mss_article content'
   - 'delete cloud_service_provider revisions'
+  - 'delete cloud_service_provider revisions'
+  - 'delete mss_article revisions'
   - 'delete own cloud_service_provider content'
+  - 'delete own cloud_service_provider content'
+  - 'delete own mss_article content'
+  - 'delete own product content'
   - 'delete own product content'
   - 'edit any cloud_service_provider content'
+  - 'edit any cloud_service_provider content'
+  - 'edit any mss_article content'
   - 'edit own blog_post content'
   - 'edit own cloud_service_provider content'
   - 'edit own country content'
@@ -72,6 +84,7 @@ permissions:
   - 'edit own full_html content'
   - 'edit own industry content'
   - 'edit own magazine content'
+  - 'edit own mss_article content'
   - 'edit own office content'
   - 'edit own partner content'
   - 'edit own press_kit content'
@@ -82,6 +95,7 @@ permissions:
   - 'edit own solution content'
   - 'edit own webform content'
   - 'revert cloud_service_provider revisions'
+  - 'revert mss_article revisions'
   - 'use draft_draft transition'
   - 'use draft_needs_review transition'
   - 'use needs_review_draft transition'
@@ -92,5 +106,6 @@ permissions:
   - 'view cloud_service_provider revisions'
   - 'view full_html revisions'
   - 'view moderation states'
+  - 'view mss_article revisions'
   - 'view own unpublished content'
   - 'view the administration theme'

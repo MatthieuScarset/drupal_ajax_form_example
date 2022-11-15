@@ -18,3 +18,10 @@ display:
         name:
           expose:
             placeholder: Localisation
+      title: 'Liste des Services Cloud'
+    display_title: 'Liste des Services Cloud'
+  default:
+    display_options:
+      title: 'Carte des interconnexions'
+  csp_map_page:
+    display_title: 'Carte des interconnexions'

@@ -9,6 +9,7 @@ global-styling:
       css/swiper.min.css: {}
       boosted/css/bootstrap-orange2015.min.css: {}
       boosted/css/boosted2015.min.css: {}
+      css/siu_hello_user_block.css: {}
 
     component:
       css/components/header.css: {}
