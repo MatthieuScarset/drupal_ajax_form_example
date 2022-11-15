@@ -227,6 +227,11 @@
   border-bottom: 5px solid #f16e00;
 }
 
+.mega-menu.navbar .nav .nav-item.dropdown.open > a.dropdown-toggle {
+  border-color: #f16e00;
+  padding-bottom: 11px;
+}
+
 .mega-menu.navbar.navbar-fixed .nav > li.open > a {
   color: white;
   border: none;
