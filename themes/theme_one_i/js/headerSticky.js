@@ -2,7 +2,7 @@ class ManageStickyTop {
   constructor() {
     this._defineCssTop();
     this.$header = $("header");
-    this.$adminToolbarHeight = $('body').hasClass('user-logged-in') ? $('#toolbar-bar').length ? $('#toolbar-bar').height() : 0 : 0;
+    this.$adminToolbarHeight =  $('#toolbar-bar').length ? $('#toolbar-bar').height() : 0;
 
     $(window).resize(() => {
       this._defineCssTop()
