@@ -2,7 +2,12 @@ class ManageStickyTop {
   constructor() {
     this._defineCssTop();
     this.$header = $("header");
-    this.$adminToolbarHeight =  $('#toolbar-bar').length ? $('#toolbar-bar').height() : 0;
+    this.$adminToolbarHeight = 0;
+
+    $(document).ready(() => {
+      this.$adminToolbarHeight += ($('#toolbar-bar').length ? $('#toolbar-bar').height() : 0) +
+        ($('#toolbar-item-administration-tray.toolbar-tray-horizontal').length ? $('#toolbar-item-administration-tray.toolbar-tray-horizontal').height() : 0);
+    })
 
     $(window).resize(() => {
       this._defineCssTop()
