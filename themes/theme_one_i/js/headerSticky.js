@@ -5,8 +5,9 @@ class ManageStickyTop {
     this.$adminToolbarHeight = 0;
 
     $(document).ready(() => {
-      this.$adminToolbarHeight += ($('#toolbar-bar').length ? $('#toolbar-bar').height() : 0) +
-        ($('#toolbar-item-administration-tray.toolbar-tray-horizontal').length ? $('#toolbar-item-administration-tray.toolbar-tray-horizontal').height() : 0);
+      const toolbar = $('#toolbar-bar');
+      const toolbarTrayHorizontal = $('#toolbar-item-administration-tray.toolbar-tray-horizontal');
+      this.$adminToolbarHeight = (toolbar.length ? toolbar.height() : 0) + (toolbarTrayHorizontal.length ? toolbarTrayHorizontal.height() : 0);
     })
 
     $(window).resize(() => {
