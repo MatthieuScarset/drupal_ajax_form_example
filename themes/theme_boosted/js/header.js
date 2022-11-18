@@ -138,10 +138,11 @@
 
     function moveFixedElements(top_menu_offset, offset, top_menu, menu_offset, contact_module_offset, contact_offset, contact_module, preview_bar, preview_bar_offset, init_preview_bar_offset, local_nav, localnav_offset, top_zone){
         var container_margin_top = 0;
-        const toolbar = $('#toolbar-bar');
-        const toolbar_tray_horizontal = $('#toolbar-item-administration-tray.toolbar-tray-horizontal');
+        let toolbar_height = $('#toolbar-bar').length ? $('#toolbar-bar').height() : 0;
+        let toolbar_tray_horizontal_height = $('#toolbar-item-administration-tray.toolbar-tray-horizontal').length ?
+          $('#toolbar-item-administration-tray.toolbar-tray-horizontal').height() : 0;
 
-        const admin_toolbar_height = (toolbar.length ? toolbar.height() : 0) + (toolbar_tray_horizontal.length ? toolbar_tray_horizontal.height() : 0);
+        const admin_toolbar_height = toolbar_height + toolbar_tray_horizontal_height;
 
         if (top_menu.length) {
             container_margin_top += top_menu.height() + 20;
