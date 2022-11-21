@@ -1,20 +1,25 @@
 /*-- Different background --*/
-.local {
+.block-versionbar.local {
   background: #67b2e0;
   color: #000000;
 }
 
-.dev {
+.block-versionbar.dev {
   background: #fdb3e5;
   color: #000000;
 }
 
-.prp {
+.block-versionbar.int {
+  background: #ffd200;
+  color: #000000;
+}
+
+.block-versionbar.prp {
   background: #32c732;
   color: #000000;
 }
 
-.prod {
+.block-versionbar.prod {
   background: #ff7900;
   color: #000000;
 }
