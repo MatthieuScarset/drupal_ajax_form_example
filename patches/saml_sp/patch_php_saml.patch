@@ -22,7 +22,7 @@ diff --git a/src/Saml2/Utils.php b/src/Saml2/Utils.php
 -        }
 -
 -        return $protocol."://" . $currenthost . $port;
-+        return "https://" . self::getSelfHost();
++        return (getenv('ENV') === "DEV" ? "http://" : "https://") . self::getSelfHost();
      }
 
      /**
