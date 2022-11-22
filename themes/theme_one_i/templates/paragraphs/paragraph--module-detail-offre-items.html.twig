@@ -49,7 +49,7 @@
     {% if (is_single) %}
       <div class="row justify-content-between mx-0" data-paragraph="{{ paragraph.bundle }}" data-track-nom="{{ paragraph.field_title.getValue[0]['value'] }}">
         <div class="col-12 col-md-4 pt-md-1 px-0">
-          <h4 class="pb-0 mb-1 mb-md-2">{{ content.field_title }}</h4>
+          <h3 class="h4 pb-0 mb-1 mb-md-2">{{ content.field_title }}</h3>
           <span class="lead">{{ content.field_accroche }}</span>
           {{ content.field_documentation }}
           <h4 class="text-primary py-0 mt-1 mb-2">{{ content.field_price_label }}</h4>
@@ -69,7 +69,7 @@
       <div class="detail-offre-item bg-white h-100 py-1 px-1 py-md-3 px-md-2 item-close">
         <div class="detail-offre-content">
           <div class="detail-offre-content-header">
-            <h4 class="pb-0 mb-1">{{ content.field_title }}</h4>
+            <h3 class="h4 pb-0 mb-1">{{ content.field_title }}</h3>
             <div class="accroche">{{ content.field_accroche }}</div>
             <h4 class="text-primary py-0 my-1">{{ content.field_price_label }}</h4>
             <div class="call-to-action">
