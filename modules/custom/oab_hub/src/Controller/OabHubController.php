@@ -425,9 +425,19 @@ class OabHubController extends ControllerBase {
     return $term;
   }
 
-    //TODO faire une fonction pour recuperer le hub en fonction de l'URL
+
+  /**
+   * Return prefixes of hub that are stored in Config
+   * @return array
+   */
+  public static function getAllHubPrefixes(): array {
+    return \Drupal::config(self::CONFIG_ID)->get(self::CONFIG_URL_LIST) ?? [];
+  }
+
+
+  //TODO faire une fonction pour recuperer le hub en fonction de l'URL
     public static function getHubPartOfUrl() {
-        $url_list = \Drupal::config(self::CONFIG_ID)->get(self::CONFIG_URL_LIST);
+        $url_list = self::getAllHubPrefixes();
         if (is_null($url_list) || empty($url_list) || !isset($url_list)) {
             $url_list = [];
         }
