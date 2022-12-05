@@ -572,7 +572,10 @@ function oab_frontoffice_form_alter(&$form, FormStateInterface $form_state, $for
 
         foreach (array_keys($form['actions']) as $action) {
 
-            if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+            if ($action != 'preview' && isset($form['actions'][$action]['#type']) 
+                && $form['actions'][$action]['#type'] === 'submit'
+                && $form['actions'][$action]['#submit'] !== NULL
+                ) {
                 array_unshift($form['actions'][$action]['#submit'], 'oab_frontoffice_dvi_contact_distributor_form_submit');
             }
         }
