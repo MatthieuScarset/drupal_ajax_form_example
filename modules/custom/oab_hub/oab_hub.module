@@ -511,15 +511,7 @@ function oab_hub_preprocess_block(&$variables) {
 
 }
 
-/**
- * Hook_form_views_exposed_form_alter pour modifier les formulaire exposer
- */
 
-function oab_hub_form_views_exposed_form_alter(&$form, &$form_state) {
-  if (strpos($form['#id'], 'views-exposed-form-subhomes') !== false) {
-    $form["#action"] = OabHubController::getHubSubhomeUrl($form["#action"]);
-  }
-}
 
 /**
  * Si on est dans le theme Oab Hub, j'ajoute au cache du logo le contexte de l'url pour qu'il mette bien la bonne URL

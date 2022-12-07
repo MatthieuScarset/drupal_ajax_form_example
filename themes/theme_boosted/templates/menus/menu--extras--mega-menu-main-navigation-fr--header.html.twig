@@ -40,9 +40,9 @@ We call a macro which calls itself to render the full tree.
       {% if item.below %}
       <li{{ item.attributes.addClass('nav-item', 'dropdown') }}>
         {% set link_text %}{{ item.title }} {% endset %}
-        {{ link(link_text, hub_getHubSubhomeUrl(item.url), {'class':'dropdown-toggle','data-toggle':'dropdown' ,'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ item.title ~ '\');'}) }}
+        {{ link(link_text, item.url, {'class':'dropdown-toggle','data-toggle':'dropdown' ,'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ item.title ~ '\');'}) }}
       {% else %}
-        <li>{{ link(item.title, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ item.title ~ '\', \'\');'}) }}
+        <li>{{ link(item.title, item.url, {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ item.title ~ '\', \'\');'}) }}
       {% endif %}
 
       {% if item.below %}

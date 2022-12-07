@@ -504,6 +504,9 @@ class OabHubController extends ControllerBase {
       return $ret;
   }
 
+  /**
+   * @deprecated Do not use it anymore
+   */
     public static function getNodeUrl($nid) {
         $url = \Drupal::request()->getRequestUri();
 
@@ -574,6 +577,9 @@ class OabHubController extends ControllerBase {
 
     }
 
+  /**
+   * @deprecated Do not use it anymore. Change have been done in AliasRepository
+   */
     public static function getHubSubhomeUrl($url_cible, $add_internal = true) {
 
         $url_to_test = $url_cible;
