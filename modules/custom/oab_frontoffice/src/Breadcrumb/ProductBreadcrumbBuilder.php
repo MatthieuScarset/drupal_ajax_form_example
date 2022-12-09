@@ -7,8 +7,9 @@ use Drupal\Core\Breadcrumb\BreadcrumbBuilderInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Link;
+use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
-use Drupal\oab_hub\Controller\OabHubController;
+use Drupal\oab_hub\HubFrontUrlTrait;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\views\Views;
 
@@ -16,6 +17,7 @@ use Drupal\views\Views;
 class ProductBreadcrumbBuilder implements BreadcrumbBuilderInterface
 {
 
+  use HubFrontUrlTrait;
 
   /**
    * @var \Drupal\taxonomy\TermStorageInterface
@@ -90,7 +92,7 @@ class ProductBreadcrumbBuilder implements BreadcrumbBuilderInterface
       $url = $display_obj->getUrl();
 
       ##On ajoute au fil d'ariane le home et le lien de la page categ du produit
-      $breadcrumb->addLink(Link::createFromRoute(t('Home'), '<front>'));
+      $breadcrumb->addLink(Link::fromTextAndUrl(t('Home'), $this->getHubFrontUrl()));
       $breadcrumb->addLink(Link::fromTextAndUrl($term->getName(), $url));
     }
     else{
@@ -127,7 +129,7 @@ class ProductBreadcrumbBuilder implements BreadcrumbBuilderInterface
             $display_route_name = $display_obj->getRouteName();
 
             ##On ajoute au fil d'ariane le home et le lien de la subhome de rattachement
-            $breadcrumb->addLink(Link::createFromRoute(t('Home'), '<front>'));
+            $breadcrumb->addLink(Link::fromTextAndUrl(t('Home'), $this->getHubFrontUrl()));
             $breadcrumb->addLink(Link::createFromRoute($display_name, $display_route_name));
           }
         }

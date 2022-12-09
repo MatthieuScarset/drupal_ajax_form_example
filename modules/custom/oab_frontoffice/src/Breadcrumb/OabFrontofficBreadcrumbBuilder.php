@@ -5,14 +5,17 @@ namespace Drupal\oab_frontoffice\Breadcrumb;
 use Drupal;
 use Drupal\Core\Breadcrumb\Breadcrumb;
 use Drupal\Core\Breadcrumb\BreadcrumbBuilderInterface;
-use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Link;
-use Drupal\Core\Routing\AdminContext;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
 use Drupal\oab_hub\Controller\OabHubController;
 use Drupal\views\Views;
+use Drupal\oab_hub\HubFrontUrlTrait;
 
 
 class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
+
+    use HubFrontUrlTrait;
     /**
      * @inheritdoc
      */
@@ -73,7 +76,7 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
         if (preg_match('/^view.subhomes/', $route_name) && isset($parameters['view_id']) && isset($parameters['display_id'])) {
 
             ##On commence par afficher la racine du fil d'ariane
-            $breadcrumb->addLink(Link::createFromRoute(t('Home'), '<front>'));
+            $breadcrumb->addLink(Link::fromTextAndUrl(t('Home'), $this->getHubFrontUrl()));
 
             $subhome_display = str_replace('archive_', 'page_', $parameters['display_id']);
 
@@ -168,7 +171,7 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
                             $display_route_name = $display_obj->getRouteName();
 
                             ##On ajoute au fil d'ariane le home et le lien de la subhome de rattachement
-                            $breadcrumb->addLink(Link::createFromRoute(t('Home'), '<front>'));
+                            $breadcrumb->addLink(Link::fromTextAndUrl(t('Home'), $this->getHubFrontUrl()));
                             $breadcrumb->addLink(Link::createFromRoute($display_name, $display_route_name));
                         }
                     }
@@ -178,7 +181,7 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
               && method_exists(get_class($parameters['node']), 'getType')
               && $parameters['node']->getType() == 'cloud_service_provider'){
               //ajout du fil d'ariane pour les CSP de BVPN
-              $breadcrumb->addLink(Link::createFromRoute(t('Home'), '<front>'));
+              $breadcrumb->addLink(Link::fromTextAndUrl(t('Home'), $this->getHubFrontUrl()));
               $breadcrumb->addLink(Link::createFromRoute(t('BVPN Galerie - List of Cloud Services'), 'view.bvpn_gallery.csp_list_page'));
             }
         }
