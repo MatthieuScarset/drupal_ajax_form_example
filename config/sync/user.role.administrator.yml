@@ -54,6 +54,7 @@ dependencies:
     - memcache_admin
     - metatag
     - node
+    - oab_backoffice
     - oab_marketo
     - path
     - pathauto
@@ -415,6 +416,7 @@ permissions:
   - 'view press_release revisions'
   - 'view product revisions'
   - 'view profile revisions'
+  - 'view published poc test module'
   - 'view region revisions'
   - 'view scheduled update entities'
   - 'view simple_page revisions'

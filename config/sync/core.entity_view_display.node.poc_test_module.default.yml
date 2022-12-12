@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.poc_test_module.body
     - field.field.node.poc_test_module.field_modules
     - node.type.poc_test_module
   module:
@@ -29,5 +28,4 @@ content:
     weight: 0
     region: content
 hidden:
-  body: true
   langcode: true

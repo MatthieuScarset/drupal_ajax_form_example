@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Access\AccessResultForbidden;
 use Drupal\Core\Database\Database;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityInterface;
@@ -41,8 +43,12 @@ function oab_backoffice_mail($key, &$message, $params) {
 
 
 function oab_backoffice_node_access(Drupal\node\Entity\Node $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
-    $ret = gdpr_hook_node_acces($entity, $operation, $account);
-    return $ret;
+  if ($entity->bundle() === "poc_test_module" && ($operation === 'view all revisions' || $operation === 'view')) {
+      return AccessResult::forbiddenIf(!$account->hasPermission('view published poc test module'));
+  }
+
+  $ret = gdpr_hook_node_acces($entity, $operation, $account);
+  return $ret;
 }
 
 /**
