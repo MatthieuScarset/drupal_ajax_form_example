@@ -184,6 +184,7 @@ class ModularProductSettingsForm extends ConfigFormBase {
         $this->t('Module label'),
         $this->t('ID'),
         $this->t('Required'),
+        $this->t('Optional second position'),
         $this->t('Weight'),
       ],
       '#empty' => $this->t('No modules.'),
@@ -225,6 +226,11 @@ class ModularProductSettingsForm extends ConfigFormBase {
               '#type' => 'checkbox',
               '#default_value' => $module_conf['required'],
             ];
+            // optional second position col.
+            $form['modules_settings']['modules'][$module_id]['second_position'] = [
+              '#type' => 'checkbox',
+              '#default_value' => $module_conf['second_position'],
+            ];
             // Weight col.
             $form['modules_settings']['modules'][$module_id]['weight'] = [
               '#type' => 'weight',
@@ -258,6 +264,11 @@ class ModularProductSettingsForm extends ConfigFormBase {
             ];
             // required col.
             $form['modules_settings']['modules'][$module_id]['required'] = [
+              '#type' => 'checkbox',
+              '#default_value' => FALSE, //par défaut, non obligatoire
+            ];
+            // optional second position col.
+            $form['modules_settings']['modules'][$module_id]['second_position'] = [
               '#type' => 'checkbox',
               '#default_value' => FALSE, //par défaut, non obligatoire
             ];

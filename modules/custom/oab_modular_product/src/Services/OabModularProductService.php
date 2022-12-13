@@ -88,6 +88,19 @@ class OabModularProductService {
     }
   }
 
+  public function getModulesOptionalSecondaryPosition(): array {
+    $modules = $this->config->get('modules_settings.modules');
+    if(empty($modules)) {
+      return [];
+    }
+    else {
+      //filtre du tableau sur les second_position - on ne renvoie que les id
+      return array_keys(array_filter($modules, function($v, $k) {
+        return $v['second_position'] === "1";
+      }, ARRAY_FILTER_USE_BOTH));
+    }
+  }
+
   private function get(string $item): mixed {
     return $this->config->get($item) ?? [];
   }
