@@ -1,0 +1,26 @@
+uuid: 50655475-f605-4f02-a7f2-4366ce13375b
+langcode: en
+status: true
+dependencies:
+  config:
+    - crop.type.crop_420_420
+  module:
+    - crop
+name: 420x420
+label: 420x420
+effects:
+  b90f812c-c31e-4592-a89a-4a7ec23856d4:
+    uuid: b90f812c-c31e-4592-a89a-4a7ec23856d4
+    id: crop_crop
+    weight: 1
+    data:
+      crop_type: crop_420_420
+      automatic_crop_provider: null
+  c96d2385-3d92-4d64-b491-bb99f7a8c4fc:
+    uuid: c96d2385-3d92-4d64-b491-bb99f7a8c4fc
+    id: image_scale
+    weight: 2
+    data:
+      width: 420
+      height: 420
+      upscale: false

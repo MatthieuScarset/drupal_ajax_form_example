@@ -1,0 +1,10 @@
+uuid: 818487c3-290b-4eaf-9adf-393d294a798e
+langcode: en
+status: true
+dependencies: {  }
+id: module_header_default
+label: '[Module][Header] default'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

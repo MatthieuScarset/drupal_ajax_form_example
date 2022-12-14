@@ -1,0 +1,21 @@
+uuid: 7d68a7a0-16e6-4d0a-a92f-c1d0803d5a14
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_image_full
+    - paragraphs.paragraphs_type.module_header_default
+id: paragraph.module_header_default.field_image_full
+field_name: field_image_full
+entity_type: paragraph
+bundle: module_header_default
+label: 'Image full'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
