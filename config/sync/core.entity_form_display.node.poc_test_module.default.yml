@@ -1,0 +1,111 @@
+uuid: e963fa85-9ef0-40ea-b31d-986eaf63664f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.poc_test_module.field_modules
+    - node.type.poc_test_module
+  module:
+    - field_group
+    - inline_entity_form
+    - workbench_moderation
+third_party_settings:
+  field_group:
+    group_onglets:
+      children:
+        - group_write
+        - group_modules
+      label: Onglets
+      region: content
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        direction: vertical
+        width_breakpoint: 640
+    group_modules:
+      children:
+        - field_modules
+      label: Modules
+      region: content
+      parent_name: group_onglets
+      weight: 6
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_write:
+      children:
+        - langcode
+        - title
+      label: Write
+      region: content
+      parent_name: group_onglets
+      weight: 2
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: open
+        description: ''
+        required_fields: true
+id: node.poc_test_module.default
+targetEntityType: node
+bundle: poc_test_module
+mode: default
+content:
+  field_modules:
+    type: inline_entity_form_complex
+    weight: 6
+    region: content
+    settings:
+      form_mode: default
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: false
+      match_operator: CONTAINS
+      allow_duplicate: false
+      collapsible: false
+      collapsed: false
+      revision: false
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 1
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 1
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 3
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  path: true
+  promote: true
+  sticky: true
+  translation: true
+  uid: true
+  url_redirects: true
