@@ -23,5 +23,20 @@
   &.error:hover:focus {
     box-shadow: 0 0 0 2px $white, 0 0 0 5px $orange;
   }
+
+  &.form-element--type-text{
+    &.form-element--api-textfield{
+      width: 70%;
+    }
+    &.form-element--api-entity-autocomplete{
+      &.ui-autocomplete-input{
+      }
+    }
+  }
+  &.form-element--type-textarea{
+    &.form-element--api-textarea {
+      width: 70%
+    }
+  }
 }
 
