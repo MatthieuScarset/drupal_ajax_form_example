@@ -23,9 +23,10 @@ class ModularProductOrderModuleValidator extends ConstraintValidator {
       "module_steps",
       "module_exemples",
       "module_benefits",
+      "module_testimonial",
       "module_partner",
-      "module_partner",
-      "module_testimonial"
+      "module_partner"
+
     ];
 
 //Liste des modules supplémentaires optionnels dont on ne tiendra pas compte
