@@ -71,7 +71,7 @@
     {% if content.product.field_call_to_action_link[0].url|length > 0 and content.product.field_call_to_action_link[0].title |length > 0 %}
       {% set link_arrow = "o-link-arrow" %}
     {% endif %}
-    <h3 class="{{ teaser_class }}">{{ content.product.field_teaser[0].value }}</h3>
+    <h2 class="{{ teaser_class }} no-signature">{{ content.product.field_teaser[0].value }}</h2>
     {% if content.product.field_modular_product_tarif[0].value is not null %}
       <p class="product-tarif lead font-weight-bold">{{ content.product.field_modular_product_tarif[0].value }}</p>
     {% endif %}
