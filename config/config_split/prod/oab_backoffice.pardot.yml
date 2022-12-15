@@ -8,11 +8,11 @@ marketo:
     mkto_sous_domaine: 'market automation'
     mkto_univers_affichage: mar
     libraries:
-      awe: TestOBSExternalEmbedCode.js
-      simple_dto: Testsimpledto-multi-domain.js
+      awe: OBSExternalEmbedCode.js
+      simple_dto: SimpleDTO.js
       enhanced_form: enhancedFormFunctions-v2.js
       forms2: forms2.min.js
-      photoclient: TestAltares_PhotoClient_for_forms.js
+      photoclient: Altares_PhotoClient_for_forms.js
   document:
     mkto_form_name: 'Formulaire de téléchargement'
     mkto_form_id: '1608'
