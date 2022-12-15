@@ -115,17 +115,7 @@ view_mode ? view_mode|clean_class,
 
       {% if langcode == 'fr' or pardot_iframe|length == 0 %}
 
-        <div class="document_form_part col-md-6 col-xs-12">
-          <form id="mktoForm_{{ mkto_form_id }}"></form>
-          <div id="FormFollowUpMessage_{{ mkto_form_id }}" class="mktoFormFUMsg" style="display:none;visibility:hidden;">
-            <div class="custum-fum-div">
-              <div class="custom-fum">
-                {{ mkto_follow_up_message.value|raw }}
-              </div>
-              <a class="btn btn-primary" href="{{ document_file_absolute_url }}">Télécharger le document</a>
-            </div>
-          </div>
-
+        {{ drupal_entity('paragraph', marketo_config_pid, 'marketo_document_form')}}
 
         {% else %}
           {% set filename = "" %}

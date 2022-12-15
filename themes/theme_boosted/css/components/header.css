@@ -224,14 +224,18 @@
 .mega-menu.navbar .nav > li.open > a {
   color: white;
   border: none;
-  border-bottom: 5px solid #f16e00 !important;
+  border-bottom: 5px solid #f16e00;
+}
+
+.mega-menu.navbar .nav .nav-item.dropdown.open > a.dropdown-toggle {
+  border-color: #f16e00;
   padding-bottom: 11px;
 }
 
 .mega-menu.navbar.navbar-fixed .nav > li.open > a {
   color: white;
   border: none;
-  border-bottom: 5px solid #f16e00 !important;
+  border-bottom: 5px solid #f16e00;
   padding-bottom: 14px;
 }
 
@@ -651,6 +655,10 @@
     border-bottom: none;
   }
 
+  #items_megamenu a:hover {
+    color: black;
+    font-weight: bold;
+  }
 
   .mega-menu .nav, .mega-menu .collapse {
     margin-left: 0;
@@ -661,8 +669,66 @@
   }
 
   .mega-menu.navbar .nav > li > a {
-    font-size: 1.6rem;
+    font-size: 16px;
     padding: 10px 10px;
+    color: black;
+    margin-top: 0;
+    border: none;
+  }
+
+  .mega-menu.navbar .nav > li > a:focus {
+    color: black;
+  }
+
+  .mega-menu.navbar .nav > li > a:hover {
+    color: black;
+    border-bottom: none;
+  }
+
+  .mega-menu.navbar.navbar-fixed .nav > li > a {
+    margin-top: 0;
+  }
+
+  .mega-menu.navbar .other-top-navbar-mobile .nav > li > a {
+    font-size: 16px;
+    padding: 10px 10px;
+    color: white;
+    margin-top: 0;
+  }
+
+  .mega-menu.navbar .other-top-navbar-mobile .nav > li > a:after {
+    padding: 0 10px;
+    font-family: boosted;
+    font-size: 14px;
+    color: #f16e00;
+    content: "\e902";
+    float: right;
+    margin-top: 0;
+    margin-right: 10px;
+  }
+
+  .mega-menu.navbar .other-top-navbar-mobile .nav > li {
+    border: none !important;
+  }
+
+  .mega-menu.navbar .other-top-navbar-mobile ul {
+    margin-top: 30px !important;
+  }
+
+  .mega-menu.navbar .nav > li > a:after {
+    padding: 0 10px;
+    font-family: boosted;
+    font-size: 14px;
+    color: #000;
+    content: "\e902";
+    float: right;
+    margin-top: 0;
+    margin-right: 10px;
+  }
+
+  .mega-menu.navbar .nav > li.open > a {
+    color: black;
+    border-bottom: none;
   }
 
   .iconblock .icon-email {
@@ -734,8 +800,19 @@
 
   .mega-menu.navbar #navbar-collapse-mega .top-navbar-mobile {
     background-color: black;
-    padding: 10px 0 0px 0;
+    padding: 10px 0 0 0;
     flex: 1;
+  }
+
+  .mega-menu.navbar #navbar-collapse-mega .other-top-navbar-mobile {
+    background-color: black;
+    padding: 10px 0 0 0;
+    flex: 1;
+  }
+  .mega-menu.navbar #navbar-collapse-mega .other-top-navbar-mobile .items-top-navbar-mobile > a {
+    color: white;
+    font-size: 14px;
+    padding: 5px 0;
   }
 
   .mega-menu.navbar #navbar-collapse-mega .top-navbar-mobile > nav > ul{
