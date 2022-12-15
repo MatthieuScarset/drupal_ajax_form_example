@@ -6,6 +6,36 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\oab_modular_product\Services\OabModularProductService;
 use Drupal\paragraphs\Entity\Paragraph;
 
+
+function oab_modular_product_inline_entity_form_entity_form_alter( array &$entity_form, FormStateInterface &$form_state) {
+
+  if(!isset($entity_form['#bundle'])) {
+    return;
+  }
+
+  /** @var OabModularProductService $conf_modular_product */
+  $conf_modular_product = \Drupal::service('oab_modular_product.settings');
+
+  $title_short = $conf_modular_product->getShortTitleMaxCharacter();
+  $size_title_short = min(150, $conf_modular_product->getShortTitleMaxCharacter()+10);
+
+
+  // gestion nombres characters Module Header Default
+  if($entity_form['#bundle'] === 'module_header_default') {
+    if (isset($entity_form['field_title'])) {
+      $entity_form['field_title']['widget'][0]['value']['#maxlength'] = $title_short;
+      $entity_form['field_title']['widget'][0]['value']['#size'] = $size_title_short;
+      $entity_form['field_title']['widget'][0]['value']['#description'] .= ' '.FieldFilteredMarkup::create($title_short.' characters max');
+    }
+
+    if (isset($entity_form['field_highlight'])) {
+      $entity_form['field_highlight']['widget'][0]['value']['#maxlength'] = 350;
+      $entity_form['field_highlight']['widget'][0]['value']['#description'] .= ' ' .FieldFilteredMarkup::create('350 characters max');
+      $entity_form['field_highlight']['widget'][0]['value']['#rows'] = 4;
+    }
+  }
+}
+
 /**
  * Implements hook_field_widget_single_element_form_alter().
  */
