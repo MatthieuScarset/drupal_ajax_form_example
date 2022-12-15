@@ -76,29 +76,22 @@ class OabModularProductService {
   }
 
   public function getModulesRequired(): array {
-    $modules = $this->config->get('modules_settings.modules');
-    if(empty($modules)) {
-      return [];
-    }
-    else {
-      //filtre du tableau sur les required - on ne renvoie que les id
-      return array_keys(array_filter($modules, function($v, $k) {
-        return $v['required'] === "1";
-      }, ARRAY_FILTER_USE_BOTH));
-    }
+    $modules = $this->get('modules_settings.modules');
+    //filtre du tableau sur les required - on ne renvoie que les id
+    return array_keys(array_filter($modules, function($v) {
+      return $v['required'] === "1";
+    }));
+
   }
 
   public function getModulesOptionalSecondaryPosition(): array {
-    $modules = $this->config->get('modules_settings.modules');
-    if(empty($modules)) {
-      return [];
-    }
-    else {
-      //filtre du tableau sur les second_position - on ne renvoie que les id
-      return array_keys(array_filter($modules, function($v, $k) {
-        return $v['second_position'] === "1";
-      }, ARRAY_FILTER_USE_BOTH));
-    }
+    $modules = $this->get('modules_settings.modules');
+
+    //filtre du tableau sur les second_position - on ne renvoie que les id
+    return array_keys(array_filter($modules, function($v) {
+      return $v['second_position'] === "1";
+    }));
+
   }
 
   private function get(string $item): mixed {
