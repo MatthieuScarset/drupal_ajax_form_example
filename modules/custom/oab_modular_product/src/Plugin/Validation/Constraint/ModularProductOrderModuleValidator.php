@@ -82,7 +82,12 @@ class ModularProductOrderModuleValidator extends ConstraintValidator implements 
           }
           else {
             // il ne lui reste qu'une seule occurence donc il devrait être au bon endroit => soucis
-            $everything_is_ok = FALSE;
+            //SAUF est-ce que l'attendu est obligatoire ? si non, peut être que ce module secondaire est à la bonne place => on passe à l'attendu suivant
+            if(!in_array($current_waited_module, $modules_required)) {
+              $current_waited_module = array_shift($default_order_modules);
+            } else {
+              $everything_is_ok = FALSE;
+            }
           }
         }
         else {
