@@ -10,3 +10,10 @@ function oab_modular_product_install() {
 function oab_modular_product_update_9001() {
   include_once("updates/update_9001.inc");
 }
+
+/**
+ * Ajout du type "POC Test Module" dans le ob1 adapter theme settings
+ */
+function oab_modular_product_update_9002() {
+  include_once("updates/update_9002.inc");
+}
