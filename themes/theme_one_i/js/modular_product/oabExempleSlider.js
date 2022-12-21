@@ -19,7 +19,33 @@ class OabExempleSlider {
       }
     });
 
-    this.$root.addEventListener('touchmove', (e) => {console.log(e);});
+    this.$contentSlider.addEventListener('touchstart', (e) => {
+      console.log(e);
+      if (e.changedTouches.length === 1) {
+        this.$touchStart = e.changedTouches[0];
+      }
+    });
+
+    this.$contentSlider.addEventListener('touchend', (e) => {
+
+      if (typeof this.$touchStart !== "undefined" && e.changedTouches.length) {
+        const currentTouch = e.changedTouches[0];
+
+        const deltaX = currentTouch.clientX - this.$touchStart.clientX;
+        const deltaY = currentTouch.clientY - this.$touchStart.clientY;
+
+        // Je considère que l'utilisateur va à droite si son mouvement est de plus de 45° par rapport à Y,
+        // ie. si le déplacement X est supérieur à Y
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+          if (deltaX > 0) {
+            this._slide(this.$current - 1);
+          } else {
+            this._slide(this.$current + 1);
+          }
+        }
+        delete this.$touchStart;
+      }
+    });
 
     if (typeof this.$root.dataset.startAtLaunch !== 'undefined') {
       this._start();
@@ -38,9 +64,7 @@ class OabExempleSlider {
         title.classList.remove("active");
       });
       event.currentTarget.classList.add("active");
-      clearInterval(this.$intervalId);
       this._slide(parseInt(event.currentTarget.dataset.index));
-      this.$intervalId = setInterval(() => {this._nextExample();}, this.$delay);
     }
   }
 
@@ -51,7 +75,6 @@ class OabExempleSlider {
   _start() {
     this.$current = 0;
     this._slide(0); // Launch 1st step
-    this.$intervalId = setInterval(() => {this._nextExample();}, this.$delay);
   }
 
   /**
@@ -89,7 +112,9 @@ class OabExempleSlider {
   }
 
   _slide(slide) {
-    this.$current = slide >= this.$exampleTitles.length ? 0 : slide;
+    // Number.mod()
+    this.$current = this._mod(slide, this.$exampleTitles.length ?? 1);
+    console.log({slide : slide, current: this.$current});
     this._scrollToSlide(this.$current);
 
     //Gestion de la progress bar en mobile
@@ -107,6 +132,9 @@ class OabExempleSlider {
       }
     });
 
+    clearInterval(this.$intervalId);
+    this.$intervalId = setInterval(() => {this._nextExample();}, this.$delay);
+
   }
 
 
@@ -115,6 +143,10 @@ class OabExempleSlider {
     $(this.$contentSlider).animate({scrollLeft: (width * slide)}, 800);
   }
 
+
+  _mod(n, m) {
+    return ((n % m) + m) % m;
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
