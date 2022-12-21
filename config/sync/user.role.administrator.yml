@@ -15,7 +15,6 @@ dependencies:
     - node.type.mss_article
     - node.type.office
     - node.type.partner
-    - node.type.poc_test_module
     - node.type.press_kit
     - node.type.press_release
     - node.type.product
@@ -54,7 +53,6 @@ dependencies:
     - memcache_admin
     - metatag
     - node
-    - oab_backoffice
     - oab_marketo
     - path
     - pathauto
@@ -195,7 +193,6 @@ permissions:
   - 'create mss_article content'
   - 'create office content'
   - 'create partner content'
-  - 'create poc_test_module content'
   - 'create press_kit content'
   - 'create press_release content'
   - 'create product content'
@@ -221,7 +218,6 @@ permissions:
   - 'delete any mss_article content'
   - 'delete any office content'
   - 'delete any partner content'
-  - 'delete any poc_test_module content'
   - 'delete any press_kit content'
   - 'delete any press_release content'
   - 'delete any product content'
@@ -255,7 +251,6 @@ permissions:
   - 'delete own mss_article content'
   - 'delete own office content'
   - 'delete own partner content'
-  - 'delete own poc_test_module content'
   - 'delete own press_kit content'
   - 'delete own press_release content'
   - 'delete own product content'
@@ -266,7 +261,6 @@ permissions:
   - 'delete own webform'
   - 'delete own webform content'
   - 'delete partner revisions'
-  - 'delete poc_test_module revisions'
   - 'delete press_kit revisions'
   - 'delete press_release revisions'
   - 'delete product revisions'
@@ -295,7 +289,6 @@ permissions:
   - 'edit any mss_article content'
   - 'edit any office content'
   - 'edit any partner content'
-  - 'edit any poc_test_module content'
   - 'edit any press_kit content'
   - 'edit any press_release content'
   - 'edit any product content'
@@ -318,7 +311,6 @@ permissions:
   - 'edit own mss_article content'
   - 'edit own office content'
   - 'edit own partner content'
-  - 'edit own poc_test_module content'
   - 'edit own press_kit content'
   - 'edit own press_release content'
   - 'edit own product content'
@@ -357,7 +349,6 @@ permissions:
   - 'revert mss_article revisions'
   - 'revert office revisions'
   - 'revert partner revisions'
-  - 'revert poc_test_module revisions'
   - 'revert press_kit revisions'
   - 'revert press_release revisions'
   - 'revert product revisions'
@@ -411,14 +402,12 @@ permissions:
   - 'view office revisions'
   - 'view own unpublished content'
   - 'view partner revisions'
-  - 'view poc_test_module revisions'
   - 'view press_kit revisions'
   - 'view press_release revisions'
   - 'view product revisions'
   - 'view profile revisions'
   - 'view published poc test module'
   - 'view region revisions'
-  - 'view scheduled update entities'
   - 'view simple_page revisions'
   - 'view solution revisions'
   - 'view the administration theme'

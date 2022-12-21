@@ -8,6 +8,7 @@ dependencies:
   module:
     - field_group
     - inline_entity_form
+    - path
     - workbench_moderation
 third_party_settings:
   field_group:
@@ -86,9 +87,15 @@ content:
     settings:
       include_locked: true
     third_party_settings: {  }
+  path:
+    type: path
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 1
+    weight: 2
     region: content
     settings:
       display_label: true
@@ -103,7 +110,6 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
-  path: true
   promote: true
   sticky: true
   translation: true

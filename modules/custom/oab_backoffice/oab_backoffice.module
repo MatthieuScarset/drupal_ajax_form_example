@@ -43,9 +43,9 @@ function oab_backoffice_mail($key, &$message, $params) {
 
 
 function oab_backoffice_node_access(Drupal\node\Entity\Node $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
-  if ($entity->bundle() === "poc_test_module" && ($operation === 'view all revisions' || $operation === 'view')) {
+/*  if ($entity->bundle() === "poc_test_module" && ($operation === 'view all revisions' || $operation === 'view')) {
       return AccessResult::forbiddenIf(!$account->hasPermission('view published poc test module'));
-  }
+  }*/
 
   $ret = gdpr_hook_node_acces($entity, $operation, $account);
   return $ret;
