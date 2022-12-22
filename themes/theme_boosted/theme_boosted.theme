@@ -391,8 +391,8 @@ function theme_boosted_preprocess_page(&$variables) {
 	if (\Drupal::routeMatch()->getParameter('node_preview')) {
 		$node = \Drupal::routeMatch()->getParameter('node_preview');
 	}
-	if ($revision = \Drupal::routeMatch()->getParameter('node_revision')) {
-		$node = node_revision_load($revision);
+	if (\Drupal::routeMatch()->getParameter('node_revision')) {
+		$node = \Drupal::routeMatch()->getParameter('node_revision');
 	}
 	$variables['page']['containerClass'] = 'container';
 	if (isset($node) && is_object($node)
