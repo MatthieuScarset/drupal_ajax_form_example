@@ -48,9 +48,7 @@ class OabExempleMobileSlider {
   }
 
   _onScroll(e) {
-    if (!this.$parent.isSliderAnimating && this.$parent.currentSliderPositionX !== this.$root.scrollLeft
-    ) {
-      console.log([e, this.$parent.currentSliderPositionX, this.$root.scrollLeft]);
+    if (!this.$parent.isSliderAnimating && this.$parent.currentSliderPositionX !== this.$root.scrollLeft) {
       if (this.$parent.currentSliderPositionX < this.$root.scrollLeft) {
         this.$parent.nextExample();
       } else {
