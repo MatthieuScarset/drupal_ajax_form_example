@@ -52,25 +52,23 @@
     {% block content %}
       <div class="container-fluid mt-1 mb-3 mb-md-5">
         <div class="row">
-          <div class="{{ content.field_image_full['#items'].value ? 'col-md-9' : 'col-md-7'}} col-12">
+          <div class="{{ content.field_image_full['#items'].value ? 'col-md-9' : 'col-md-7'}} col-12 d-flex flex-column justify-content-between">
             <h2 class="h1 mb-2 mb-md-3 ">{{ content.field_title }}</h2>
-            <div class="mb-3 mb-md-4 font-weight-bold">
-              {{ content.field_highlight }}
-            </div>
+            <h4 class="mw-100 mb-0">{{ content.field_highlight }}</h4>
           </div>
           {% if content.field_visual['#items'] %} {# vérification de la présence d'au moins une Image pour utiliser twig peak #}
             {% if content.field_image_full['#items'].value %} {# vérification du type d'affichage choisi (toute largueur ou non) #}
               {% if content.field_visual['#items']|length == 2 %}
-                <div class="col-12 col-md-4 mb-2 mb-md-0">
+                <div class="col-12 col-md-4 mt-3 mt-md-4">
                   {# Chargement de la première image en utilisant le style d'affichage 420x420 grâce au twig peak "drupal_image" #}
                   {{ drupal_image(content.field_visual.0['#media'].field_image.target_id, '420x420') }}
                 </div>
-                <div class="col-12 col-md-8">
+                <div class="col-12 col-md-8 mt-2 mt-md-4">
                   {# Chargement de la deuxième image en utilisant le style d'affichage 870x420 grâce au twig peak "drupal_image" #}
                   {{ drupal_image(content.field_visual.1['#media'].field_image.target_id, '870x420') }}
                 </div>
               {% else %}
-                <div class="col-12">
+                <div class="col-12 mt-3 mt-md-4">
                   {# Chargement de l'image en utilisant le style d'affichage 1320x420 grâce au twig peak "drupal_image" #}
                   {{ drupal_image(content.field_visual.0['#media'].field_image.target_id, '1320x420') }}
                 </div>
