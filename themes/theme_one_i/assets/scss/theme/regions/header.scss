@@ -8,7 +8,6 @@
 header#navbar {
   padding-top: 1px;
   background-color: $black;
-
   .navbar.supra {
     opacity: 1;
     visibility: visible;
@@ -19,15 +18,19 @@ header#navbar {
       min-height $header_transition_time linear;
   }
 
-  &.is-sticky {
-    .navbar.supra {
-      visibility: hidden;
-      opacity: 0;
-      height: 0;
-      min-height: 0;
-    }
+  transition: opacity 0.10s linear;
+  opacity: 1;
+  z-index: 1020;
+
+  &.not-visible{
+    opacity: 0;
+    visibility: hidden;
   }
 
+  &.is-visible{
+    opacity: 1;
+    position: sticky;
+  }
 }
 
 .page-menu-category-block.sticky-top {
@@ -35,7 +38,7 @@ header#navbar {
 }
 
 .page-menu-modular-product.sticky-top {
-  transition: top $header_transition_time linear; 
+  transition: top $header_transition_time linear;
 }
 
 
