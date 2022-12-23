@@ -3,4 +3,4 @@ univers_affichage: 'Orange Business'
 sous_univers: Portail
 domaine_marketing: TRANSVERSE
 code_univers: OB
-tealium_url: //tags.tiqcdn.com/utag/orange/obscare/prod/utag.js
+tealium_url: //tags.tiqcdn.com/utag/orange/obscare/qa/utag.js

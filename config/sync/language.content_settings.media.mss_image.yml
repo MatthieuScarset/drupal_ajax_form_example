@@ -1,0 +1,11 @@
+uuid: 75f7a0b6-3416-43d2-a2b1-768f4328cc19
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.mss_image
+id: media.mss_image
+target_entity_type_id: media
+target_bundle: mss_image
+default_langcode: site_default
+language_alterable: false

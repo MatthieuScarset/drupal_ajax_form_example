@@ -31,9 +31,12 @@ visibility:
     context_mapping:
       language: '@language.current_language_context:language_interface'
     langcodes:
+      en: en
+      pt-br: pt-br
+      es: es
       fr: fr
   request_path:
     id: request_path
     negate: false
     context_mapping: {  }
-    pages: "/contact\r\n/node/14239\r\n/formulaire-contact"
+    pages: "/contact\r\n/node/14239\r\n/formulaire-contact\r\n/test-altares-spanish-contact-us\r\n/working-together-ready-contact-commercial\r\n/node/14662\r\n/testmarketoaltares-english-contact-us\r\n"

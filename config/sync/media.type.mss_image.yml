@@ -1,0 +1,13 @@
+uuid: 8b858199-c07a-42d9-bf92-ab7e86c991f8
+langcode: en
+status: true
+dependencies: {  }
+id: mss_image
+label: 'MSS Image'
+description: ''
+source: image
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_image
+field_map: {  }

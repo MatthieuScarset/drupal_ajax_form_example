@@ -40,27 +40,21 @@
 #}
 {%
   set classes = [
-    'paragraph',
-    'paragraph--type--' ~ paragraph.bundle|clean_class,
-    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-    not paragraph.isPublished() ? 'paragraph--unpublished'
-  ]
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  not paragraph.isPublished() ? 'paragraph--unpublished'
+]
 %}
-{% block paragraph %}
-  <div {{ attributes.addClass(classes) }}>
-      {% block content %}
-        <div class="row justify-content-between mx-0">
-          <div class="img-module-exemple col-12 col-md-6 my-1 my-md-0">
-              {{ content.field_visual }}
-          </div>
 
-          <div class="col-12 col-md-5">
-            <h3 class="h4 mb-1">{{ content.field_title }}</h3>
-            <span class="lead">{{ content.field_highlight }}</span>
-              {{ content.field_exemple_key_points }}
-              {{ content.field_redirection_url }}
-          </div>
-        </div>
-      {% endblock %}
+<div class="document_form_part col-md-6 col-xs-12">
+  <form id="mktoForm_{{ content.field_form_id.0['#context']['value'] }}"></form>
+  <div id="FormFollowUpMessage_{{ content.field_form_id.0['#context']['value'] }}" class="mktoFormFUMsg" style="display:none;visibility:hidden;">
+    <div class="custum-fum-div">
+      <div class="custom-fum">
+        {{ content.field_message_of_thanks }}
+      </div>
+      <a class="btn btn-primary" href="{{ document_file_absolute_url }}">Télécharger le document</a>
+    </div>
   </div>
-{% endblock paragraph %}
+</div>

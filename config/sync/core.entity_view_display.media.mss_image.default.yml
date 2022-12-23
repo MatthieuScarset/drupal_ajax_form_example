@@ -1,0 +1,34 @@
+uuid: 4da4a78c-1d5b-4f30-b112-1e92864fa778
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.mss_image.field_media_image
+    - field.field.media.mss_image.field_tags
+    - field.field.media.mss_image.field_thematic
+    - image.style.mss_image
+    - media.type.mss_image
+  module:
+    - image
+id: media.mss_image.default
+targetEntityType: media
+bundle: mss_image
+mode: default
+content:
+  field_media_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: mss_image
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  field_tags: true
+  field_thematic: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true
