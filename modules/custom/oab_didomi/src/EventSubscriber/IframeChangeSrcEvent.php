@@ -5,6 +5,7 @@ namespace Drupal\oab_didomi\EventSubscriber;
 use Drupal\block_content\Entity\BlockContent;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Language\LanguageManager;
+use Drupal\Core\Render\Markup;
 use Drupal\Core\Render\Renderer;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
@@ -50,6 +51,11 @@ class IframeChangeSrcEvent implements EventSubscriberInterface {
   public function onResponse(ResponseEvent $event) {
     $html = new \DOMDocument();
     $content = $event->getResponse()?->getContent();
+
+    if ($node = \Drupal::routeMatch()->getParameter('node')) {
+      \Drupal::service('generator')->generatePdf(Markup::create($content), ['#node' => $node]);
+    }
+
     if(!empty($content)) {
       @$html->loadHTML($content);
       if (!empty($html)) {
