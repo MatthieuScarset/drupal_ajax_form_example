@@ -565,6 +565,13 @@
     $(this).trigger("focus");
   });
 
+  $(window).on("scroll", function () {
+    $('#navbar-collapse-mega .nav-menu .nav-item').each(function (key,elem) {
+      if ($(elem).hasClass('open')) {
+        $(elem).removeClass('open');
+      }
+    });
+  });
 
 // Gestion slide mega menu mobile
 
@@ -599,8 +606,6 @@
     }
 
   });
-
-
 
   // Fonction à éxécuter quand une mutation est observée pour réinitialiser le menu mobile
 
