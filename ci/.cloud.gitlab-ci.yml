@@ -76,9 +76,10 @@ Build assets:
   stage: build
   image: node
   script:
-    - yarn --cwd themes/theme_one_i install
-    - yarn --cwd themes/theme_one_i build
-    - scp -r $(pwd)/themes/theme_one_i/dist/* $SSH_USER@$SERVER_IP:$CUSTOM_PROJECT_PATH/themes/theme_one_i/dist/*
+    - cd themes/theme_one_i
+    - yarn install
+    - yarn build
+    - scp -r $(pwd)/dist/* $SSH_USER@$SERVER_IP:$CUSTOM_PROJECT_PATH/themes/theme_one_i/dist/*
 
 
 Update drupal:
