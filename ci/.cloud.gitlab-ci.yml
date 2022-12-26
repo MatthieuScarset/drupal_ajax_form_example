@@ -72,6 +72,15 @@ Build drupal:
     - $EXEC_PHP_FPM composer install
 
 
+Build assets:
+  stage: build
+  image: yarn
+  script:
+    - yarn --cwd themes/theme_one_i install
+    - yarn --cwd themes/theme_one_i build
+    - scp -r $(pwd)/themes/theme_one_i/dist/* $SSH_USER@$SERVER_IP:$CUSTOM_PROJECT_PATH/themes/theme_one_i/dist/*
+
+
 Update drupal:
   stage: update
   script:
