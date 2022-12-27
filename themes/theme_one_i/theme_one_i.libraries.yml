@@ -23,8 +23,8 @@ socialbar:
     base:
       css/orange_socialbar.css: {}
   js:
-    js/social_bar/orange_socialbar_settings.js: {}
-    js/social_bar/orange_socialbar.js: {}
+    assets/legacy_js/social_bar/orange_socialbar_settings.js: {}
+    assets/legacy_js/social_bar/orange_socialbar.js: {}
 
 contact-button:
   version: VERSION
