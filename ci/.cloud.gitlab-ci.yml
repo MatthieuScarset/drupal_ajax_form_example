@@ -77,6 +77,7 @@ Build assets:
   image: node
   script:
     - cd themes/theme_one_i
+    - yarn config set @ob1:registry https://artifactory.si.francetelecom.fr/api/npm/dfy-styleguide-npm/
     - yarn install
     - yarn build
     - scp -r $(pwd)/dist/* $SSH_USER@$SERVER_IP:$CUSTOM_PROJECT_PATH/themes/theme_one_i/dist/*
