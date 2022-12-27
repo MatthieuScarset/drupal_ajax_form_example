@@ -79,12 +79,18 @@ Build assets:
     - cd themes/theme_one_i
     - yarn install
     - yarn build
-    - scp -r $(pwd)/dist/* $SSH_USER@$SERVER_IP:$CUSTOM_PROJECT_PATH/themes/theme_one_i/dist/*
+  artifacts:
+    paths:
+      - themes/theme_one_i/dist
+    expire_in: 1 hour
 
 
 Update drupal:
   stage: update
+  dependencies:
+    - Build assets
   script:
+    - scp -r $(pwd)themes/theme_one_i/dist $SSH_USER@$SERVER_IP:$CUSTOM_PROJECT_PATH/themes/theme_one_i
     # drush cr needed for Drupal to discover new modules
     - $EXEC_PHP_FPM drush cr
     - $EXEC_PHP_FPM drush cim --yes
