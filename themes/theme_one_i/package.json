@@ -4,9 +4,9 @@
   "description": "Sass Theme for One-I",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --config webpack.dev.config.js",
-    "build-prod": "webpack --config webpack.prod.config.js",
-    "watch": "webpack --config webpack.dev.config.js watch"
+    "build": "NODE_OPTIONS=\"--openssl-legacy-provider\" webpack --config webpack.dev.config.js",
+    "build-prod": "NODE_OPTIONS=\"--openssl-legacy-provider\" webpack --config webpack.prod.config.js",
+    "watch": "NODE_OPTIONS=\"--openssl-legacy-provider\" webpack watch --config webpack.dev.config.js"
   },
   "devDependencies": {
     "@ob1/web": "1.14.10",
