@@ -29,6 +29,7 @@ dependencies:
     - filter
     - media
     - node
+    - oab_siu_connexion
     - oab_subhomes
     - path
     - quickedit
@@ -227,6 +228,7 @@ permissions:
   - 'view latest version'
   - 'view magazine revisions'
   - 'view media'
+  - 'view media image MSS'
   - 'view moderation states'
   - 'view mss_article revisions'
   - 'view office revisions'

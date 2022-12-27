@@ -1,6 +1,6 @@
 uuid: c7f8c884-7927-413e-852a-0e14ef41a516
 langcode: fr
-status: true
+status: false
 dependencies:
   config:
     - system.menu.direct-access-bar-fr

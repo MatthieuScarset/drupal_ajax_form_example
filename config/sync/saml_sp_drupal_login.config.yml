@@ -1,5 +1,5 @@
 idp:
-  localhost_saml: localhost_saml
+  dev: dev
 logout: false
 logged_in_redirect: ''
 update_email: false

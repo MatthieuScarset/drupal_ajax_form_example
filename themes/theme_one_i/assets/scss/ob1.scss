@@ -1,0 +1,63 @@
+// Custom import for OB1 to avoid sosh
+// Identical to the ob1/web/scss/style.scss, but without sosh imports
+
+@import "~boosted/scss/boosted";
+
+// Edit icon font path to get it duplicates in our dist directory by webpack plugin
+$icon-font-path: "../dist/fonts/";
+@import "~boosted/scss/orangeHelvetica";
+
+
+@import "~@ob1/web/scss/common";
+@import "~@ob1/web/scss/bubble-message";
+@import "~@ob1/web/scss/buttons";
+@import "~@ob1/web/scss/links";
+@import "~@ob1/web/scss/checkboxs";
+@import "~@ob1/web/scss/color-chips";
+@import "~@ob1/web/scss/radio";
+@import "~@ob1/web/scss/box-radio-list";
+@import "~@ob1/web/scss/items-list";
+@import "~@ob1/web/scss/typography";
+@import "~@ob1/web/scss/custom";
+@import "~@ob1/web/scss/text";
+@import "~@ob1/web/scss/accordion";
+@import "~@ob1/web/scss/alert";
+@import "~@ob1/web/scss/switch";
+@import "~@ob1/web/scss/attachments";
+@import "~@ob1/web/scss/popin";
+@import "~@ob1/web/scss/text-field";
+@import "~@ob1/web/scss/tooltip";
+@import "~@ob1/web/scss/tables";
+@import "~@ob1/web/scss/stepbar";
+@import "~@ob1/web/scss/feedback";
+@import "~@ob1/web/scss/separator";
+@import "~@ob1/web/scss/breadcrumb";
+@import "~@ob1/web/scss/list";
+@import "~@ob1/web/scss/price";
+@import "~@ob1/web/scss/tag";
+@import "~@ob1/web/scss/offer-tile";
+@import "~@ob1/web/scss/filter-chips";
+@import "~@ob1/web/scss/filter-chips-bar";
+@import "~@ob1/web/scss/date-time-picker";
+@import "~@ob1/web/scss/date-picker";
+@import "~@ob1/web/scss/push";
+@import "~@ob1/web/scss/capsule";
+@import "~@ob1/web/scss/progressbar";
+@import "~@ob1/web/scss/progress-indicators";
+@import "~@ob1/web/scss/page-menu";
+@import "~@ob1/web/scss/page-sub-menu";
+@import "~@ob1/web/scss/promotional-code";
+@import "~@ob1/web/scss/snack-bar";
+@import "~@ob1/web/scss/timeline";
+@import "~@ob1/web/scss/search-field";
+@import "~@ob1/web/scss/item-card";
+@import "~@ob1/web/scss/dropdown";
+@import "~@ob1/web/scss/page-indicator";
+@import "~@ob1/web/scss/carrousel";
+@import "~@ob1/web/scss/cards";
+@import "~@ob1/web/scss/pagination";
+@import "~@ob1/web/scss/logo";
+@import "~@ob1/web/scss/switch-view";
+@import "~@ob1/web/scss/social-share-bar";
+@import "~@ob1/web/scss/skeleton";
+@import "~@ob1/web/scss/rating";

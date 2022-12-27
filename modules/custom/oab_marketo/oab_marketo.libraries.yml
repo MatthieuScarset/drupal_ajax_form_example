@@ -1,4 +1,7 @@
 marketo:
   version: 8.x
+  css:
+    theme:
+      css/marketo.css: {}
   js:
     js/marketo.js: {}

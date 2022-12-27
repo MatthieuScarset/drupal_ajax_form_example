@@ -16,7 +16,9 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
     zip \
     unzip \
     wget \
-    git
+    git \
+    nodejs \
+    npm
 
 RUN docker-php-ext-install zip
 
@@ -47,10 +49,6 @@ RUN chmod +x /usr/local/bin/mhsendmail
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
-
-
-# Install npm
-RUN apt-get install -y nodejs npm
 
 # Install yarn
 RUN npm install -g yarn

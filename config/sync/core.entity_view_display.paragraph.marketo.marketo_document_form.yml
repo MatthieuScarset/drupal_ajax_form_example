@@ -1,0 +1,74 @@
+uuid: b06d17a8-a14a-4114-891f-aa69b071fe74
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.marketo_document_form
+    - field.field.paragraph.marketo.field_form_id
+    - field.field.paragraph.marketo.field_message_of_thanks
+    - field.field.paragraph.marketo.field_order
+    - field.field.paragraph.marketo.field_redirection_url
+    - field.field.paragraph.marketo.field_requires_altares
+    - field.field.paragraph.marketo.field_title
+    - paragraphs.paragraphs_type.marketo
+  module:
+    - link
+    - text
+id: paragraph.marketo.marketo_document_form
+targetEntityType: paragraph
+bundle: marketo
+mode: marketo_document_form
+content:
+  field_form_id:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_message_of_thanks:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_order:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_redirection_url:
+    type: link_separate
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_requires_altares:
+    type: boolean
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

@@ -2,6 +2,6 @@
 variables:
   SERVER_IP: $SSH_INTEGRATION_IP
   DOCKER_COMPOSE_FILE: "docker-compose.int.yml"
-  CONTAINER_FPM: "ruby_siu_php-fpm"
+  CONTAINER_FPM: "ruby-int_php-fpm"
   CUSTOM_PROJECT_PATH: "$CI_PROJECT_PATH"
   SHARED_DIR: "$CI_PROJECT_PATH/../shared"

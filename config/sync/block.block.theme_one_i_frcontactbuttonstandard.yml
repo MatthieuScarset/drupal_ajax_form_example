@@ -36,4 +36,4 @@ visibility:
     id: request_path
     negate: false
     context_mapping: {  }
-    pages: "/produits/categories/*\r\n/secteurs-activites"
+    pages: "/produits/categories/*\r\n/secteurs-activites\r\n/produits/*"
