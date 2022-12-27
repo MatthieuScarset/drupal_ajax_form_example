@@ -2,6 +2,7 @@
 # DEFINE DEV SPECIFIC VARIABLES AND JBS
 stages:          # List of stages for jobs, and their order of execution
   #  - test
+  - build_assets
   - deploy
   - build
   - update
@@ -46,8 +47,23 @@ before_script:
 #  rules:
 #  - if: $CI_COMMIT_BRANCH == "dev"
 
+Build assets:
+  stage: build_assets
+  image: node
+  script:
+    - cd themes/theme_one_i
+    - yarn install
+    - yarn build
+  artifacts:
+    paths:
+      - themes/theme_one_i/dist
+    expire_in: 1 hour
+
+
 Deploy dev:
   stage: deploy
+  dependencies:
+    - Build assets
   script:
     - echo "CI_PIPELINE_ID=$CI_PIPELINE_ID" >> ci-data
     - echo "CI_PIPELINE_URL=$CI_PIPELINE_URL" >> ci-data
@@ -72,25 +88,9 @@ Build drupal:
     - $EXEC_PHP_FPM composer install
 
 
-Build assets:
-  stage: build
-  image: node
-  script:
-    - cd themes/theme_one_i
-    - yarn install
-    - yarn build
-  artifacts:
-    paths:
-      - themes/theme_one_i/dist
-    expire_in: 1 hour
-
-
 Update drupal:
   stage: update
-  dependencies:
-    - Build assets
   script:
-    - scp -r $(pwd)themes/theme_one_i/dist $SSH_USER@$SERVER_IP:$CUSTOM_PROJECT_PATH/themes/theme_one_i
     # drush cr needed for Drupal to discover new modules
     - $EXEC_PHP_FPM drush cr
     - $EXEC_PHP_FPM drush cim --yes
