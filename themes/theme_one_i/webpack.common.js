@@ -8,7 +8,6 @@ module.exports = {
   stats: 'normal',
   entry: {
     "css/style": './assets/scss/style.scss',
-    "js/script": "./assets/js/_mainScript.js",
     "js/script.min": "./assets/js/_mainScript.js",
     "js/modularProduct.min": './assets/js/modular_product/main.js',
     "js/productFormule.min": './assets/js/product_formule/main.js',
@@ -93,5 +92,9 @@ module.exports = {
     alias: {
       vue: 'vue/dist/vue.esm-browser'
     }
+  },
+  watchOptions: {
+    poll: true,
+    ignored: /node_modules/
   }
 };

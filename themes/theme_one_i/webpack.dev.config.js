@@ -17,9 +17,4 @@ webpackConfig.plugins.push(
   })
 );
 
-webpackConfig.watchOptions = {
-  poll: true,
-  ignored: /node_modules/
-};
-
 module.exports = webpackConfig;
