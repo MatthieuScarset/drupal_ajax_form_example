@@ -265,7 +265,7 @@
 
 "@ob1/web@1.14.10":
   version "1.14.10"
-  resolved "https://artifactory-iva.si.francetelecom.fr/artifactory/api/npm/npm-proxy-orange-project-styleguide/@ob1/web/-/@ob1/web-1.14.10.tgz#8ed99d67283c62cd8baa99cab7b3835dbc239e50"
+  resolved "https://artifactory.si.francetelecom.fr/api/npm/dfy-styleguide-npm/@ob1/web/-/@ob1/web-1.14.10.tgz#8ed99d67283c62cd8baa99cab7b3835dbc239e50"
   integrity sha1-jtmdZyg8Ys2LqpnKt7ODXbwjnlA=
   dependencies:
     array-from-polyfill "^1.0.1"
