@@ -169,6 +169,14 @@
 
         lastScrollTop = scrollTop;
 
+      $(window).on("scroll", function () {
+        $('#navbar-collapse-mega .nav-menu .nav-item').each(function (key,elem) {
+          if ($(elem).hasClass('open')) {
+            $(elem).removeClass('open');
+          }
+        });
+      });
+
 
         if (preview_bar.length) {
             if ($(window).scrollTop() > top_menu_offset.top + offset) {
@@ -565,13 +573,6 @@
     $(this).trigger("focus");
   });
 
-  $(window).on("scroll", function () {
-    $('#navbar-collapse-mega .nav-menu .nav-item').each(function (key,elem) {
-      if ($(elem).hasClass('open')) {
-        $(elem).removeClass('open');
-      }
-    });
-  });
 
 // Gestion slide mega menu mobile
 
