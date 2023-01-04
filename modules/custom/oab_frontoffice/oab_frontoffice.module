@@ -590,67 +590,22 @@ function oab_frontoffice_mail_alter(&$message) {
     }
 }
 
-function oab_frontoffice_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-    if (isset($form['#webform_id']) && $form['#webform_id'] == "telechargement_documents") {
-
-        foreach (array_keys($form['actions']) as $action) {
-            if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
-                array_unshift($form['actions'][$action]['#submit'], 'oab_frontoffice_telechargement_documents_form_submit');
-            }
-        }
-    } elseif (isset($form['#webform_id']) && $form['#webform_id'] == "dvi_contact_distributor") {
-
-        foreach (array_keys($form['actions']) as $action) {
-
-            if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
-                array_unshift($form['actions'][$action]['#submit'], 'oab_frontoffice_dvi_contact_distributor_form_submit');
-            }
-        }
+function oab_frontoffice_form_webform_submission_dvi_contact_distributor_add_form_alter($form, $form_state) {
+  foreach (array_keys($form['actions']) as $action) {
+    if ($action != 'preview' && isset($form['actions'][$action]['#type'])
+      && $form['actions'][$action]['#type'] === 'submit'
+      && is_array($form['actions'][$action]['#submit'])
+    ) {
+      array_unshift($form['actions'][$action]['#submit'], 'oab_frontoffice_dvi_contact_distributor_form_submit');
     }
+  }
+}
 
+function oab_frontoffice_form_alter(&$form, FormStateInterface $form_state, $form_id) {
     if (isset($form['#id']) && $form['#id'] == "views-exposed-form-subhomes") {
       subhomes_views_exposed_form($form);
 
     }
-}
-
-/**
- * Fonction pour générer l'URL du fichier demandé
- *
- * Comme le fichier ne peut etre télécharger qu'après soumission du formulaire,
- * je ne passe que le nid dans le formulaire et je génère l'url du fichier lors de la soumission
- *
- * L'URL du fichier est nécessaire pour générer les mails et messages dans lesquels l'utilisateur peuvent dl les fichiers
- *
- * @param array $form
- * @param \Drupal\Core\Form\FormState $form_state
- */
-function oab_frontoffice_telechargement_documents_form_submit(array $form, Drupal\Core\Form\FormState &$form_state) {
-
-    $node = \Drupal::routeMatch()->getParameter('node');
-    if (NULL !== $node && $node instanceof NodeInterface) {
-
-        ##Je tente de récuper le field_file du node d'origine
-        if (NULL !== $field_file = $node->get('field_file')) {
-
-            ##On load l'entity media contenant le fichier (c'est lui qui est dans le field du contenu de type document)
-            $field_value = $field_file->getValue();
-            $media = \Drupal\media\Entity\Media::load($field_value[0]['target_id']);
-
-            /** @var FileUrlGenerator $service_file_url_generator */
-            $service_file_url_generator = \Drupal::service('file_url_generator');
-
-            ##On load le file contenu dans l'entity media
-            $file_value = $media->get('field_file')->getValue();
-            $file_id = $file_value[0]['target_id'];
-            $file_url = $service_file_url_generator->generateAbsoluteString(File::load($file_id)
-                ->getFileUri());
-            ##je remplace la valeur d'url_du_fichier par l'url générée
-            $form_state->setValue('url_du_fichier', $file_url);
-        }
-    }
-
-
 }
 
 function oab_frontoffice_dvi_contact_distributor_form_submit(array $form, Drupal\Core\Form\FormState &$form_state) {

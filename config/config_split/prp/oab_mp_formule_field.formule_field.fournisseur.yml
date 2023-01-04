@@ -7,8 +7,8 @@ third_party_settings:
     empty_configs:
       default:
         name: Default
-        no_result_title: 'Vous avez indiqué travailler avec [formule-field:color-orange]{answer}[formule-field:color-end]'
-        no_result_sentence: 'Cette demande spécifique doit être traitée par l''un de nos experts. Contactez-nous pour obtenir plus d''informations'
+        no_result_title: 'Vous avez indiqué vouloir travailler en environnement [formule-field:color-orange]{answer}[formule-field:color-end]'
+        no_result_sentence: 'Cette demande spécifique doit être traitée par l''un de nos experts. Contactez-nous pour obtenir plus d''informations.'
         button_text: Contactez-nous
         button_link: 'https://uat.www.orange-business.com/fr/contact'
       config_1:

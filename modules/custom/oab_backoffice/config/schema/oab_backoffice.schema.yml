@@ -110,19 +110,9 @@ oab_backoffice.pardot:
           label: 'Document'
           type: mapping
           mapping:
-            mkto_form_name:
+            paragraph_id:
               type: label
-              label: 'Form name'
-            mkto_form_id:
-              type: label
-              label: 'Form Id'
-            mkto_custom_follow_up_url:
-              type: label
-              label: 'Custom follow up url'
-            mkto_form_follow_up_message:
-              type: text_format
-              label: 'Form follow up message'
-
+              label: 'Paragraph id'
 
 action.configuration.oab_backoffice_node_workbench_publish:
   type: action_configuration_default

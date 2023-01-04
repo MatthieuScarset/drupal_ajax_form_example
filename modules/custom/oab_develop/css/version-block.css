@@ -1,28 +1,48 @@
 /*-- Different background --*/
-.local {
+.block-versionbar {
+  background: #fff;
+  color: #000000;
+}
+
+.block-versionbar.local {
   background: #67b2e0;
   color: #000000;
 }
 
-.dev {
+.block-versionbar.dev {
   background: #fdb3e5;
   color: #000000;
 }
 
-.prp {
+.block-versionbar.int {
+  background: #ffd200;
+  color: #000000;
+}
+
+.block-versionbar.prp {
   background: #32c732;
   color: #000000;
 }
 
-.prod {
+.block-versionbar.prod {
   background: #ff7900;
+  color: #000000;
+}
+
+.block-versionbar.commerce-dev {
+  background: #907fd5;
+  color: #000000;
+}
+
+.block-versionbar.commerce {
+  background: #c93d3d;
   color: #000000;
 }
 
 /*-- Div placement --*/
 .fixed-version-bar {
   position: fixed;
-  z-index: 99999;
+  z-index: 50;
   left: 0;
   bottom: 0;
   width: 100%;

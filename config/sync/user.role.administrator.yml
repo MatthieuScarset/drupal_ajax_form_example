@@ -54,6 +54,7 @@ dependencies:
     - metatag
     - node
     - oab_marketo
+    - oab_siu_connexion
     - path
     - pathauto
     - quickedit
@@ -396,6 +397,7 @@ permissions:
   - 'view latest version'
   - 'view magazine revisions'
   - 'view media'
+  - 'view media image MSS'
   - 'view moderation states'
   - 'view mss_article revisions'
   - 'view office revisions'

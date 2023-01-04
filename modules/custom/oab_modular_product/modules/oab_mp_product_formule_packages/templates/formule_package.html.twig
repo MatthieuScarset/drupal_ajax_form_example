@@ -46,8 +46,10 @@
         <a class="btn btn-primary" href="{{ drupal_url('/fr/formulaire-contact', { query: { data: query_data }, absolute: true })
         }}">{{ "Commander"|t }}</a>
       </div>
-      <div class="col-12 col-md-6 pl-1 pl-md-2 pt-md-0 ml-1 ml-md-0 mt-3 lead border-left border-gray4">
-        {{ content.field_description }}
+      <div class="col-12 col-md-6 pl-1 pl-md-2 pt-md-0 ml-md-0 mt-3 lead ">
+        <div class="pl-1 border-left border-gray4">
+          {{ content.field_description }}
+        </div>
       </div>
     </div>
     <div class="row">
