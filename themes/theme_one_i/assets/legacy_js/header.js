@@ -20,15 +20,6 @@
     // }
   });
 
-  window.addEventListener("scroll", function (event) {
-    $('#main_nav .mega-menu-desktop.mega-menu .item_mega_menu.mega-menu-panel').each(function (key,elem) {
-      if ($(elem).hasClass('show')) {
-        $(elem).collapse("toggle");
-        $(elem).parent().removeClass('active');
-      }
-    });
-  });
-
   window.onload = function() {
     document.getElementById('megamenu').onclick = function(e) {
       if ($('#main_nav .mega-menu-desktop.mega-menu .item_mega_menu.mega-menu-panel').hasClass('show') && !$(e.target).hasClass('close')) {
