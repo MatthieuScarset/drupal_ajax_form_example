@@ -1,0 +1,17 @@
+uuid: abcdb7ab-cb7a-42f3-909b-14f95de82e08
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'POC Test Module'
+type: poc_test_module
+description: ' DO NOT DELETE,  PLEASE DO NOT PUBLISH IT, THIS TYPE OF CONTENT IS USELESS GO YOUR WAY YOU HAVE SEEN NOTHING I AM NOT HERE'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

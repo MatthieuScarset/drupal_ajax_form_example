@@ -1,0 +1,16 @@
+uuid: cbc6ae9e-4e69-4260-9206-4b9402297441
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.poc_test_module
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+id: node.poc_test_module
+target_entity_type_id: node
+target_bundle: poc_test_module
+default_langcode: current_interface
+language_alterable: true
