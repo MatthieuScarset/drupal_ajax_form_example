@@ -52,9 +52,6 @@ class IframeChangeSrcEvent implements EventSubscriberInterface {
     $html = new \DOMDocument();
     $content = $event->getResponse()?->getContent();
 
-    if ($node = \Drupal::routeMatch()->getParameter('node')) {
-      \Drupal::service('generator')->generatePdf(Markup::create($content), ['#node' => $node]);
-    }
 
     if(!empty($content)) {
       @$html->loadHTML($content);

@@ -9,7 +9,8 @@ use Drupal\Core\Url;
 use Drupal\media\Entity\Media;
 use Drupal\node\NodeInterface;
 use Drupal\oab_dvi\DviHelper;
-use Drupal\oab_frontoffice\Services\NodeCallback;
+use Drupal\oab_frontoffice\NodeCallback;
+use Drupal\oab_frontoffice\Services\OabPdfGeneratorService;
 use Knp\Snappy\Pdf;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -45,13 +46,6 @@ function oab_frontoffice_preprocess_menu(&$variables) {
  * @param $variables
  */
 function oab_frontoffice_preprocess_node(&$variables) {
-
-  $node = \Drupal::routeMatch()->getParameter('node');
-  if ($node->bundle() === 'mss_article') {
-    $html = new \DOMDocument();
-    $render = \Drupal::service('renderer');
-    dd($render);
-  }
 
 
   $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
@@ -280,7 +274,8 @@ function oab_frontoffice_node_view_alter(array &$build, EntityInterface $entity,
 //    }
 //
 //  if ($entity->bundle() === 'mss_article') {
-//
+////dd($build);
+//   // $build['#post_render'][] = [NodeCallback::class, 'postRender'];
 //  }
 
 }
