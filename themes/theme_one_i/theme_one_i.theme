@@ -407,7 +407,7 @@ function theme_one_i_theme_suggestions_region_alter(array &$suggestions, array $
   if ($node = Drupal::routeMatch()->getParameter('node')) {
     if (is_object($node)) {
       $content_type = $node->bundle();
-      $suggestions = array_merge($suggestions, __suggestion_nodes($hook, $variables['elements']['#region'], $content_type === "modular_product"));
+      $suggestions = array_merge($suggestions, __suggestion_nodes($hook, $variables['elements']['#region'], in_array($content_type, ["modular_product", "poc_test_module"])));
     }
   }
 }

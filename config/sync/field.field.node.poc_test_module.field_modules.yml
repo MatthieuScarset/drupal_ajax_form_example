@@ -13,6 +13,7 @@ dependencies:
     - paragraphs.paragraphs_type.module_detail_gamme
     - paragraphs.paragraphs_type.module_exemples
     - paragraphs.paragraphs_type.module_faq
+    - paragraphs.paragraphs_type.module_list
     - paragraphs.paragraphs_type.module_partner
     - paragraphs.paragraphs_type.module_presentation
     - paragraphs.paragraphs_type.module_services
@@ -45,6 +46,7 @@ settings:
       module_exemples: module_exemples
       module_faq: module_faq
       module_partner: module_partner
+      module_list: module_list
       module_presentation: module_presentation
       module_services: module_services
       module_steps: module_steps
@@ -152,6 +154,9 @@ settings:
       module_faq_quesions:
         weight: 83
         enabled: false
+      module_list:
+        weight: 85
+        enabled: true
       module_partner:
         weight: 84
         enabled: true
