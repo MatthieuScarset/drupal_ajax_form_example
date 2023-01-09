@@ -5,6 +5,7 @@ use Drupal\Core\Field\FieldFilteredMarkup;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\oab_modular_product\Services\OabModularProductService;
 use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\Core\Entity\EntityInterface;
 
 /**
  * Implements hook_field_widget_single_element_form_alter().
@@ -515,9 +516,9 @@ function oab_modular_product_token_info() {
     'description' => t('Custom tokens')
   );
 
-  $tokens['obs']['product_title'] = array(
-    'name' => 'product_title',
-    'description' => t("The title of the Modular Product")
+  $tokens['obs']['entity_title'] = array(
+    'name' => 'entity_title',
+    'description' => t("The title of the Entity")
   );
 
   return [
@@ -532,7 +533,9 @@ function oab_modular_product_token_info() {
 function oab_modular_product_tokens($type, $tokens, array $data, array $options, \Drupal\Core\Render\BubbleableMetadata $bubbleable_metadata) {
   $replacements = array();
   if ($type == 'obs') {
-    $replacements['[obs:product_title]'] = $data['product_title'] ?? "";
+    if(isset($data['entity']) && $data['entity'] instanceof EntityInterface) {
+      $replacements['[obs:entity_title]'] = $data['entity']->label();
+    }
   }
   return $replacements;
 }
@@ -541,10 +544,8 @@ function oab_modular_product_preprocess_paragraph__module_faq(&$variables) {
   /** @var Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   $token = Drupal::token();
-  if (isset($paragraph) && isset($paragraph->field_highlight->value)) {
-    $parent = $paragraph->getParentEntity();
+  if (isset($paragraph->field_highlight->value)) {
     //on applique les changements des tokens
-    $variables['faq_description'] = $token->replace($paragraph->field_highlight->value, array('product_title' => $parent->label()));
-
+    $variables['faq_description'] = $token->replace($paragraph->field_highlight->value, array('entity' => $paragraph->getParentEntity()));
   }
 }
