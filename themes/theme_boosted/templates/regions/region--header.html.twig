@@ -211,12 +211,30 @@
                     {{ elements.righticonblock }}
                 </div>
 
-                <div class="top-navbar-mobile hidden-lg">
+                {% if (language == 'en' or language == 'fr') %}
+                  {% set class = "top-navbar-mobile" %}
+                {% else %}
+                  {% set class = "other-top-navbar-mobile" %}
+                {% endif %}
+
+                <div class="{{ class }} hidden-lg">
                   {% if elements.topnavbarfr %}
                     {{ elements.topnavbarfr }}
                   {% endif %}
                   {% if elements.topnavbaren %}
                     {{ elements.topnavbaren }}
+                  {% endif %}
+                  {% if elements.topnavbares %}
+                    {{ elements.topnavbares }}
+                  {% endif %}
+                  {% if elements.topnavbarbr %}
+                    {{ elements.topnavbarbr }}
+                  {% endif %}
+                  {% if elements.topnavbarja %}
+                    {{ elements.topnavbarja }}
+                  {% endif %}
+                  {% if elements.topnavbarru %}
+                    {{ elements.topnavbarru }}
                   {% endif %}
                 </div>
 

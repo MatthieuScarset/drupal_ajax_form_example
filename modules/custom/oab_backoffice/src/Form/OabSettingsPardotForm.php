@@ -142,35 +142,12 @@ class OabSettingsPardotForm extends ConfigFormBase {
       '#description' => $this->t("Specific config for document marketo form")
     ];
 
-    $form['marketo']['document']['mkto_form_name'] = array(
+    $form['marketo']['document']['paragraph_id'] = array(
       '#type' => 'textfield',
-      '#title' => $this->t('Form name'),
-      '#default_value' => $config->get('marketo.document.mkto_form_name'),
-      '#size'=> 80,
-    );
-
-    $form['marketo']['document']['mkto_form_id'] = array(
-      '#type' => 'textfield',
-      '#title' => $this->t('Form Id'),
-      '#default_value' => $config->get('marketo.document.mkto_form_id'),
+      '#title' => $this->t('Paragraph Id'),
+      '#default_value' => $config->get('marketo.document.paragraph_id'),
       '#size'=> 350,
     );
-
-    $form['marketo']['document']['mkto_custom_follow_up_url'] = array(
-      '#type' => 'textfield',
-      '#title' => $this->t('Custom follow up URL'),
-      '#default_value' => $config->get('marketo.document.mkto_custom_follow_up_url'),
-      '#size'=> 350,
-    );
-
-    $mkt_follow_up = $config->get('marketo.document.mkto_form_follow_up_message');
-    $form['marketo']['document']['mkto_form_follow_up_message'] = array(
-      '#type' => 'text_format',
-      '#title' => $this->t('Form follow up message'),
-      '#default_value' => $mkt_follow_up['value'] ?: "",
-      '#format'=> $mkt_follow_up['format'] ?: 'full_html',
-    );
-
 
     #############################
     ## My field for Pardot
@@ -200,10 +177,7 @@ class OabSettingsPardotForm extends ConfigFormBase {
       ->set('marketo.general.libraries.enhanced_form', $form_state->getValue('enhanced_form'))
       ->set('marketo.general.libraries.forms2', $form_state->getValue('forms2'))
       ->set('marketo.general.libraries.photoclient', $form_state->getValue('photoclient'))
-      ->set('marketo.document.mkto_form_name', $form_state->getValue('mkto_form_name'))
-      ->set('marketo.document.mkto_form_id', $form_state->getValue('mkto_form_id'))
-      ->set('marketo.document.mkto_custom_follow_up_url', $form_state->getValue('mkto_custom_follow_up_url'))
-      ->set('marketo.document.mkto_form_follow_up_message', $form_state->getValue('mkto_form_follow_up_message'))
+      ->set('marketo.document.paragraph_id', $form_state->getValue('paragraph_id'))
 
       /* for Pardot */
       ->set('pardot.iframe_url', $form_state->getValue('iframe_url'))

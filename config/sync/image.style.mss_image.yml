@@ -1,0 +1,18 @@
+uuid: 125129ca-66c2-4b16-a35b-e4d671efacea
+langcode: en
+status: true
+dependencies:
+  config:
+    - crop.type.crop_free_ratio
+  module:
+    - crop
+name: mss_image
+label: 'MSS Image'
+effects:
+  5f56154c-e560-416e-bc67-1bf3138a6763:
+    uuid: 5f56154c-e560-416e-bc67-1bf3138a6763
+    id: crop_crop
+    weight: 1
+    data:
+      crop_type: crop_free_ratio
+      automatic_crop_provider: null

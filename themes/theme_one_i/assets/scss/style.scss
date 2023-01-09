@@ -1,10 +1,18 @@
 // import variable ob1 pour pouvoir les utiliser dans nos styles scss
+@import "~@ob1/web/scss/mixins/font";
+@import "~@ob1/web/scss/mixins/push";
+@import "~@ob1/web/scss/variables";
+@import "~@ob1/web/scss/variables-orange";
+@import "~@ob1/web/scss/font-icon/variables";
+@import "~@ob1/web/scss/orange-icons";
+
+// Idem pour Boosted (même si ca devrait être dispo via ob1
 @import "~boosted/scss/functions";
 @import "~boosted/scss/variables";
-@import "~@ob1/web/scss/variables";
-@import "~@ob1/web/scss/mixins/font";
-@import "~@ob1/web/scss/variables-orange";
 @import "~boosted/scss/mixins";
+
+// Import des Styles Ob1
+@import "ob1";
 
 // Variables
 @import "./variables/*.scss";

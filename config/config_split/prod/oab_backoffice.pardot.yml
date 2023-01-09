@@ -1,0 +1,22 @@
+pardot:
+  iframe_url: ''
+marketo:
+  general:
+    mkto_domain: //marketing-news.orange-business.com
+    mkto_munchkin_id: 759-QCL-211
+    mkto_version: '1'
+    mkto_sous_domaine: 'market automation'
+    mkto_univers_affichage: mar
+    libraries:
+      awe: OBSExternalEmbedCode.js
+      simple_dto: SimpleDTO.js
+      enhanced_form: enhancedFormFunctions-v2.js
+      forms2: forms2.min.js
+      photoclient: Altares_PhotoClient_for_forms.js
+  document:
+    mkto_form_name: 'Formulaire de téléchargement'
+    mkto_form_id: '1608'
+    mkto_custom_follow_up_url: ''
+    mkto_form_follow_up_message:
+      value: "<p>The document link has been successfully sent by email<br />\r\nHere's the link to download the document that you have just selected.</p>\r\n\r\n<p>Thank you for visiting our website www.orange-business.com and happy reading!</p>\r\n"
+      format: full_html

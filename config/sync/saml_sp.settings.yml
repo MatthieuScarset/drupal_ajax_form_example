@@ -16,14 +16,14 @@ security:
   logoutRequestSigned: false
   logoutResponseSigned: false
   wantMessagesSigned: false
-  wantAssertionsSigned: true
+  wantAssertionsSigned: false
   wantNameIdEncrypted: false
   signMetaData: false
   signatureAlgorithm: 'http://www.w3.org/2000/09/xmldsig#rsa-sha1'
   lowercaseUrlencoding: false
-cert_location: /var/www/html/.saml_cert/certificate.crt
-key_location: /var/www/html/.saml_cert/privateKey.key
+cert_location: ''
+key_location: ''
 new_cert_location: ''
 entity_id: saml-poc
 debug: false
-assertion_urls: 'http://localhost:8000/en/saml/consume'
+assertion_urls: 'http://dev.obs-ruby.build.620nm.net/en/saml/consume'

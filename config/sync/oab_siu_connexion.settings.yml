@@ -1,2 +1,2 @@
-idp: federation_identite_orange_bus
+idp: dev
 siu_restricted_urls: "/en/mss-assistance\r\n/en/mss-assistance/*"

@@ -2,6 +2,7 @@
 # DEFINE DEV SPECIFIC VARIABLES AND JBS
 stages:          # List of stages for jobs, and their order of execution
   #  - test
+  - build_assets
   - deploy
   - build
   - update
@@ -46,8 +47,23 @@ before_script:
 #  rules:
 #  - if: $CI_COMMIT_BRANCH == "dev"
 
+Build assets:
+  stage: build_assets
+  image: node
+  script:
+    - cd themes/theme_one_i
+    - yarn install
+    - yarn build
+  artifacts:
+    paths:
+      - themes/theme_one_i/dist
+    expire_in: 1 hour
+
+
 Deploy dev:
   stage: deploy
+  dependencies:
+    - Build assets
   script:
     - echo "CI_PIPELINE_ID=$CI_PIPELINE_ID" >> ci-data
     - echo "CI_PIPELINE_URL=$CI_PIPELINE_URL" >> ci-data

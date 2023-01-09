@@ -16,6 +16,9 @@ class ParagraphDeleteForm extends ContentEntityDeleteForm {
     if (\Drupal::request()->headers->has('referer')) {
       $referer = \Drupal::request()->headers->get('referer');
       $base_url = \Drupal::request()->getSchemeAndHttpHost();
+      if(str_starts_with($referer, 'https')) {
+        $base_url = str_replace('http', 'https', $base_url);
+      }
       return Url::fromUserInput(substr($referer, strlen($base_url)));
     } else {
 
