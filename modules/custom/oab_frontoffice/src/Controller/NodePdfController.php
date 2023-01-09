@@ -19,10 +19,10 @@ class NodePdfController extends ControllerBase {
 
     /** @var \Drupal\Core\Render\Renderer $renderer */
     $renderer = \Drupal::service('renderer');
-    $build = $this->entityTypeManager()->getViewBuilder($node->getEntityTypeId())->view($node, 'pdf');
+    $build = $this->entityTypeManager()->getViewBuilder($node->getEntityTypeId())->view($node);
 
 
-    $response = new Response($pdf_generator->getOutput($renderer->renderRoot($build)));
+    $response = new Response($pdf_generator->getOutput($renderer->renderRoot($build), $node->label()));
     $response->headers->set('Content-Type', 'application/pdf');
 
     return $response;

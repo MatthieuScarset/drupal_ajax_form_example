@@ -40,8 +40,34 @@ class OabPdfGeneratorService {
   /**
    * @throws \Exception
    */
-  public function getOutput(MarkupInterface|String $markup): string {
-    return $this->getSnappy()->getOutputFromHtml($this->correctHtml($markup));
+  public function getOutput(MarkupInterface|String $markup, $title): string {
+    $snappy = $this->getSnappy();
+
+    $header = <<<HTML
+<!DOCTYPE html>
+<html>
+  <head><style>body{ text-align: center }</style></head>
+  <body>My Service Space</body>
+</html>
+HTML;
+
+    $footer = <<<HTML
+<!DOCTYPE html>
+<html>
+    <head><style>body {text-align: center}</style></head>
+    <body>[title] - Generated at [date]</body>
+</html>
+HTML;
+
+    $pager = "[title] - [page]/[topage]";
+
+    return $snappy->getOutputFromHtml($this->correctHtml($markup, $title), [
+      'header-html' => $header,
+      'footer-html' => str_replace(['[title]', '[date]'], [$title, date('d/m/Y')], $footer),
+      'footer-right' => $pager,
+      'header-line' => true,
+      'footer-line' => true
+    ]);
   }
 
   public function generatePdfFile(MarkupInterface|String $markup, $name, string $dir = null): string {
@@ -60,8 +86,25 @@ class OabPdfGeneratorService {
     throw new \Exception("There is a problem with Snappy");
   }
 
-  private function correctHtml(MarkupInterface|string $markup) {
+  private function correctHtml(MarkupInterface|string $markup, $title) {
     $html = Html::load($markup);
+
+    if (!$html->getElementsByTagName('title')->count()) {
+      $head = $html->getElementsByTagName('head');
+
+      $head->item(0)->appendChild($html->createElement('title', $title));
+    }
+
+    if ($html->getElementsByTagName('style')->count()) {
+      $style = $html->getElementsByTagName('style');
+      $style->item(0)->textContent .= "row, col-* {page-break-after: always;}";
+
+    } else {
+      $html->getElementsByTagName('head')->item(0)->appendChild(
+        $html->createElement('style', "row, col-* {page-break-after: always;}")
+      );
+    }
+
     $this->correctImgSrc($html);
     $this->correctCssLink($html);
 
@@ -73,9 +116,14 @@ class OabPdfGeneratorService {
     foreach ($html->getElementsByTagName('img') as $img) {
       $src = $img->getAttribute('src');
 
-      $src = substr($src, 0, strpos($src, '?')); // Remove token
+      $src = substr($src, 0, strpos($src, '?') ?: strlen($src)); // Remove token
       $src = str_replace('/sites/default/files', 'public://', $src); // Create file URI
-      $img->setAttribute('src', $this->fileSystem->realpath($src));
+      if (file_exists($this->fileSystem->realpath($src))) {
+        $img->setAttribute('src', $this->fileSystem->realpath($src));
+      } else {
+        $img->parentNode->removeChild($img);
+      }
+
     }
   }
 
