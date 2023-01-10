@@ -13,6 +13,7 @@ dependencies:
     - paragraphs.paragraphs_type.module_detail_gamme
     - paragraphs.paragraphs_type.module_exemples
     - paragraphs.paragraphs_type.module_faq
+    - paragraphs.paragraphs_type.module_key_figures
     - paragraphs.paragraphs_type.module_list
     - paragraphs.paragraphs_type.module_partner
     - paragraphs.paragraphs_type.module_presentation
@@ -49,6 +50,7 @@ settings:
       module_list: module_list
       module_presentation: module_presentation
       module_services: module_services
+      module_key_figures: module_key_figures
       module_steps: module_steps
       module_testimonial: module_testimonial
       module_text_video_image: module_text_video_image
@@ -154,6 +156,12 @@ settings:
       module_faq_quesions:
         weight: 83
         enabled: false
+      module_key_figures:
+        weight: 88
+        enabled: true
+      module_key_figures_items:
+        weight: 89
+        enabled: false
       module_list:
         weight: 85
         enabled: true
@@ -181,6 +189,9 @@ settings:
       module_text_video_image:
         weight: 91
         enabled: true
+      module_title_and_highlight:
+        weight: 99
+        enabled: false
       paragraph_block_rebond:
         weight: 92
         enabled: false

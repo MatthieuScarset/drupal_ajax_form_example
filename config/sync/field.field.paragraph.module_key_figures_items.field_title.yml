@@ -1,0 +1,19 @@
+uuid: bdeb77c8-bd0d-4ce6-b309-0894f8566e0a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.module_key_figures_items
+id: paragraph.module_key_figures_items.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: module_key_figures_items
+label: 'Key figures'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
