@@ -41,6 +41,7 @@
 {%
   set classes = [
   'site-width',
+  'py-2 py-md-5',
   'paragraph',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
@@ -50,7 +51,7 @@
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
-      <div class ="container-fluid py-2 py-md-5 ">
+      <div class ="container-fluid">
         <div class="row justify-content-between">
 
           <div class="col-12 col-md-5">
