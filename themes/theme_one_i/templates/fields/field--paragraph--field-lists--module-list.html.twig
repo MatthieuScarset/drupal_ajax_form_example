@@ -3,8 +3,10 @@
     <div class="list-item col-12">
       <div>
         <h4 class="py-0 mb-0">
-          <span class="text-gray3 mr-1 mr-md-2"> {{ "%02d"|format(key+1) }} </span>
-          <span> {{ item.content['#paragraph'].field_title.value }} </span>
+          <div class="row">
+            <div class="col-1 text-gray3"> {{ "%02d"|format(key+1) }} </div>
+            <div class="col-11 pr-0"> {{ item.content['#paragraph'].field_title.value }} </div>
+          </div>
         </h4>
         {% if item.content['#paragraph'].field_highlight.value is not empty %}
           <p class="lead py-0 mt-1 mb-0">{{ item.content['#paragraph'].field_highlight.value }}</p>

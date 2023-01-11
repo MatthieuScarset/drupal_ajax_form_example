@@ -4,7 +4,7 @@
     margin-bottom: 2.8125rem;
   }
 
-  & div {
+  & > div {
     margin-bottom: 1.875rem;
     @include media-breakpoint-up(md) {
       margin-bottom: 2.8125rem;
