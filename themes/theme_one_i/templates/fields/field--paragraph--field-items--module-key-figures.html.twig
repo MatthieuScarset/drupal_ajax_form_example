@@ -1,5 +1,9 @@
 {% for item in items %}
-  <div class="key-figure-items col-12 col-md">
+
+  {% set classes = loop.first ? "pb-2 pb-md-0" : loop.last ? "pt-2 pt-md-0" : "py-2 py-md-0" %}
+
+  <div class="col-12 col-md {{ classes }}">
     <div class="key-figure-item"> {{ item.content }} </div>
   </div>
+
 {% endfor %}
