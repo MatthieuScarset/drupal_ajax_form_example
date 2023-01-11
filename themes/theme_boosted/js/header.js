@@ -5,10 +5,13 @@
  });*/
 
 (function ($, Drupal, Bootstrap) {
+    let lastScrollTop = 0;
+    const navtop = $('#navtop');
+    const header = $('header#navbar');
+
     function init_fixed_navbar(){
         var offset = 0;
         var top_menu = $('#main_nav');
-        var navtop = $('#navtop');
         var local_nav = $('#local_nav');
         var contact_module = $('#contact_module');
         var preview_bar = $('.node-preview-container');
@@ -120,10 +123,27 @@
             }, 1000);
 
         });
+
+        // get the sticky element
+        this.$stickyHeaderObserver = new IntersectionObserver(
+          function ([e]) {
+            if (e.intersectionRatio < 1) {
+              header.addClass("not-visible");
+            }
+          },
+          {threshold: 0}
+        );
+        this.$stickyHeaderObserver.observe(document.querySelector('header#navbar'));
     }
 
     function moveFixedElements(top_menu_offset, offset, top_menu, menu_offset, contact_module_offset, contact_offset, contact_module, preview_bar, preview_bar_offset, init_preview_bar_offset, local_nav, localnav_offset, top_zone){
         var container_margin_top = 0;
+        let toolbar_height = $('#toolbar-bar').length ? $('#toolbar-bar').height() : 0;
+        let toolbar_tray_horizontal_height = $('#toolbar-item-administration-tray.toolbar-tray-horizontal').length ?
+          $('#toolbar-item-administration-tray.toolbar-tray-horizontal').height() : 0;
+
+        const admin_toolbar_height = toolbar_height + toolbar_tray_horizontal_height;
+
         if (top_menu.length) {
             container_margin_top += top_menu.height() + 20;
         }
@@ -134,19 +154,21 @@
             container_margin_top += contact_module.height() + 20;
         }
 
-        if (top_menu.length) {
-            if ($(window).scrollTop() > top_menu_offset.top + offset) {
-                top_menu.addClass('navbar-fixed');
-                //$('.main-container').css('margin-top', container_margin_top);
-                top_menu.css('top', menu_offset);
-                $('.region-pre-content .affix').css('top', top_menu.outerHeight() + menu_offset);
-            } else {
-                top_menu.removeClass('navbar-fixed');
-                $('.main-container').css('margin-top', 0);
-                top_menu.css('top', 0);
-                $('.region-pre-content .affix').css('top', $('#navbar').height() + menu_offset);
-            }
+        top_menu.removeClass('navbar-fixed');
+        const scrollTop = $(window).scrollTop();
+
+        if (scrollTop > lastScrollTop) {
+          // Scroll down
+          header.removeClass("is-visible");
+        } else {
+          // Scroll Up
+          header.addClass("is-visible");
+          header.css("top", admin_toolbar_height);
+          header.removeClass("not-visible");
         }
+
+        lastScrollTop = scrollTop;
+
 
         if (preview_bar.length) {
             if ($(window).scrollTop() > top_menu_offset.top + offset) {
@@ -193,20 +215,37 @@
             if ($('#toolbar-item-administration-tray.toolbar-tray-horizontal').length) {
                 localnav_offset += $('#toolbar-item-administration-tray').height();
             }
-            if (top_menu.length) {
-                localnav_offset +=  top_menu.outerHeight();
-            }
+
+          if (!header.hasClass('not-visible')) {
+            localnav_offset +=  top_menu.outerHeight() + navtop.outerHeight();
+          }
+
+          //Position top de la social bar en connecté ou pas connecté
+          $('#block-socialshareblock').css('top', header.outerHeight() + admin_toolbar_height);
+
+          // Gestion de la local nav
+          if ($(window).scrollTop() > (header.outerHeight() + top_zone_offset) ||
+            ($(window).scrollTop() > top_zone_offset - header.outerHeight() && header.hasClass('is-visible'))) {
+            local_nav.addClass('sticky-module');
+            $('#block-socialshareblock').css('top', localnav_offset + $('#local_nav').outerHeight());
+          }
+
+          if ($(window).scrollTop() < (top_zone_offset - header.outerHeight()) + 90) {
+            local_nav.removeClass('sticky-module');
+          }
+
+
+
             if ($(window).scrollTop() > (top_zone_offset - localnav_offset )) {
-                local_nav.addClass('sticky-module');
+
                 if(top_zone.length && top_zone.outerHeight() > 0) {
                     $('.main-container').css('margin-top', 0);
                 }else{
                     $('.main-container').css('margin-top', container_margin_top);
                 }
                 local_nav.css('top',  localnav_offset );
-                $('#block-socialshareblock').css('top', localnav_offset + $('#local_nav').outerHeight());
+               // $('#block-socialshareblock').css('top', localnav_offset + $('#local_nav').outerHeight());
             } else {
-                local_nav.removeClass('sticky-module');
                 if(top_zone.length && top_zone.outerHeight() > 0) {
                     $('.main-container').css('margin-top', 0);
                 }else{
@@ -594,9 +633,4 @@
 
  }
 
-
-
-
-
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
-
