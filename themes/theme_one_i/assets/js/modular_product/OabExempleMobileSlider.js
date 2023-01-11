@@ -4,20 +4,26 @@ class OabExempleMobileSlider {
 
     this.$root = root;
     this.$parent = parent;
+    /*
+     On ne garde que la version sur le "touch" et pas celle au scroll.
+     Je garde le code pour historique et exemple.
 
-    const params = new Proxy(new URLSearchParams(window.location.search), {
-      get: (searchParams, prop) => searchParams.get(prop),
-      has: (searchParams, prop) => searchParams.has(prop)
-    });
+        const params = new Proxy(new URLSearchParams(window.location.search), {
+          get: (searchParams, prop) => searchParams.get(prop),
+          has: (searchParams, prop) => searchParams.has(prop)
+        });
 
-    // Set the exemple as slider
-    if ('scroll-mobile' in params) {
-      this.$root.classList.add("scroll-mobile");
-      this.$root.addEventListener('scroll', (e) => { this._onScroll(e);});
-    } else {
+        // Set the exemple as slider
+
+        if ('scroll-mobile' in params) {
+          this.$root.classList.add("scroll-mobile");
+          this.$root.addEventListener('scroll', (e) => { this._onScroll(e);});
+        } else {
       // Block slider and use only Touch events
       this.$root.addEventListener('touchstart', (e) => { this._onTouchStart(e); });
-    }
+    } */
+
+    this.$root.addEventListener('touchstart', (e) => { this._onTouchStart(e); });
 
   }
 
@@ -47,6 +53,7 @@ class OabExempleMobileSlider {
     }
   }
 
+  /*
   _onScroll(e) {
     if (!this.$parent.isSliderAnimating && this.$parent.currentSliderPositionX !== this.$root.scrollLeft) {
       if (this.$parent.currentSliderPositionX < this.$root.scrollLeft) {
@@ -55,7 +62,7 @@ class OabExempleMobileSlider {
         this.$parent.previousExample();
       }
     }
-  }
+  }*/
 }
 
 

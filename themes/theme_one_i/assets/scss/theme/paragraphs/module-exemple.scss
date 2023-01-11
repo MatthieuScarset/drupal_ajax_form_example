@@ -42,19 +42,7 @@
   .example-content {
     flex-wrap: initial;
     overflow-x: hidden;
-
-    &.scroll-mobile {
-      @include media-breakpoint-down(md) {
-        overflow-x: scroll;
-        scrollbar-width: none;
-
-        &::-webkit-scrollbar {
-          display: none;
-        }
-      }
-    }
-
-
+    
     .o-link-arrow {
       &:hover{
         color: $gray4 !important;
