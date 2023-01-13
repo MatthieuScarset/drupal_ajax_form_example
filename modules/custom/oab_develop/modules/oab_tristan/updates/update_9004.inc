@@ -1,14 +1,15 @@
 <?php
 
 use Drupal\content_moderation\Entity\ContentModerationState;
+use Drupal\workflows\Entity\Workflow;
 
 const UPDATE_LOGGER = "oab_updates";
 
 function _processUpdateWithSandbox_9004(&$sandbox) {
 
   $logger = \Drupal::logger(UPDATE_LOGGER);
-
   $database = \Drupal::database();
+
   $base_query = $database->select('node_field_data', 'nfd');
   $base_query->condition('moderation_state', "published", '!=');
   if (!isset($sandbox['total'])) {
@@ -44,6 +45,8 @@ function _processUpdateWithSandbox_9004(&$sandbox) {
     $sandbox['#finished'] = 1;
     $logger->notice("Update is finished");
   } else {
+    // Create transaction to do only one DB query at the end;
+    $transaction = $database->startTransaction();
     foreach ($rows as $row) {
       ContentModerationState::create([
         'uid' => $row['uid'],
@@ -60,16 +63,17 @@ function _processUpdateWithSandbox_9004(&$sandbox) {
       $sandbox['nodes'][$row['nid']] = $row['changed'];
     }
 
+    unset($transaction);
+
     $sandbox['current'] += count($rows);
 
-    \Drupal::messenger()->addMessage("Finish " . $sandbox['current'] . " out of " . $sandbox['total'], "notice");
     $logger->notice("Finish %current out of %total", ['%current' => $sandbox['current'], '%total' => $sandbox['total']]);
     $sandbox['#finished'] = min(1, $sandbox['current'] / $sandbox['total']);
   }
 
 
   if ($sandbox['#finished'] === 1) {
-    $logger->log('success', 'Création des nouveaux états fini :)');
+    $logger->notice('Création des nouveaux états fini :)');
   }
 
 }
@@ -81,7 +85,7 @@ function _reset_changed_date_to_initial($sandbox) {
   $logger = \Drupal::logger(UPDATE_LOGGER);
 
   if (is_array($sandbox['nodes'])) {
-    $logger->notice("Remise en place du changed des %nb_nodes mis à jour", ['%nb_nodes' => count($sandbox['nodes'])]);
+    $logger->notice("Remise en place du changed des %nb_nodesn nodes mis à jour", ['%nb_nodes' => count($sandbox['nodes'])]);
     $database = \Drupal::database();
     $transaction = $database->startTransaction('update_nodes');
     foreach ($sandbox['nodes'] as $nid => $changed) {

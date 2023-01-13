@@ -471,9 +471,11 @@ function oab_backoffice_views_pre_render(Drupal\views\ViewExecutable $view) {
     if ($view->id() == 'content') {
       foreach ($view->result as $i => $result) {
             # On recupère les données nécessaires
-         $node_type = $result->_entity->get('type')->entity->id();
-          if ($node_type == 'product') {
-            $node_label =  $result->_entity->getTitle();
+        /** @var \Drupal\node\NodeInterface $node */
+         $node = $result->_entity;
+
+          if ($node->bundle() == 'product') {
+            $node_label =  $node->getTitle();
             $node_axiome_data =  $result->_entity->get('field_axiome_data')->getValue();
             if (isset($node_axiome_data[0]['value'])) {
               $data = unserialize($node_axiome_data[0]['value']);
@@ -485,20 +487,13 @@ function oab_backoffice_views_pre_render(Drupal\views\ViewExecutable $view) {
             }
           }
 
-//          if (isset($result->workbench_revision_tracker_revision_id)
-//            && $result->workbench_revision_tracker_revision_id != 0
-//            && $result->workbench_revision_tracker_revision_id !== null) {
-//
-//            #kint($result->workbench_revision_tracker_revision_id);
-//
-//            $ma_revision = node_revision_load($result->workbench_revision_tracker_revision_id);
-//            if ($ma_revision !== null) {
-//                $moderation_state = $ma_revision->get('moderation_state')->getValue();
-//                #Obligé de load le ModerationState complet, il n'y est pas dans l'objet de la revision.....
-//                $moderation_state_object = ModerationState::load($moderation_state[0]['target_id']);
-//                $result->workbench_revision_tracker_revision_id = $moderation_state_object->get('label');
-//            }
-//          }
+          // Lors de la migration Worbench Access -> Content Moderation, on n'a migré que les contenus
+          // aux états "draft" et "archived", Content Moderation arrivant à mettre l'état "Published"
+          // par défaut aux nodes publiés n'ayant pas d'état. Cependant, ils n'ont pas d'état en BDD tant
+          // qu'ils ont pas été mis à jour et ca ne s'affiche donc pas dans la views
+          if (is_null($result->content_moderation_state_moderation_state)) {
+            $view->result[$i]->content_moderation_state_moderation_state = $node->isPublished() ? "published" : "draft";
+          }
       }
     }
 }
