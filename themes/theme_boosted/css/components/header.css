@@ -137,25 +137,37 @@
   border-color: black;
   padding: 20px 0 0;
 }
+
+#local_nav.transition{
+  transition: top 2s, transform 2s;
+}
+
 header#navbar{
-  transition: opacity 0.15s linear;
   opacity: 1;
 }
+
+header#navbar.transition{
+  transition: top 2s, transform 2s;
+}
+
 header#navbar > div {
   top: 0;
   width: 100%;
   z-index: 400;
 }
 
-header#navbar.not-visible{
+header#navbar.not-visible {
   opacity: 0;
   visibility: hidden;
 }
 
-header#navbar.is-visible{
+header#navbar.is-visible {
   z-index: 400;
   opacity: 1;
-  position: sticky;
+  transform: translateY(100%);
+  position: fixed;
+  left: 0;
+  right: 0;
 }
 
 #main_nav.navbar-fixed .navbar-right {

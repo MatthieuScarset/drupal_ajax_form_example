@@ -2,6 +2,7 @@ class ManageStickyTop {
   constructor() {
     this._defineCssTop();
     this.$header = $("header");
+    this.$localNav = $(".sticky.local-nav");
     this.$adminToolbarHeight = 0;
 
     $(document).ready(() => {
@@ -33,7 +34,6 @@ class ManageStickyTop {
       ([e]) => {
         const supra_navbar = $('header .navbar.supra');
         const supra_navbar_height = supra_navbar.height();
-        //const header = $('header');
 
         e.target.classList.toggle('is-sticky', e.intersectionRatio < 1);
 
@@ -56,17 +56,34 @@ class ManageStickyTop {
     $(window).scroll(() => {
       this._defineCssTop();
       const scrollTop = $(window).scrollTop();
-      if (scrollTop > this.$lastScrollTop) {
+      this.$headerTop = this.$adminToolbarHeight - this.$header.outerHeight();
+      this.$localNavTop =this.$adminToolbarHeight + this.$header.outerHeight();
+
+      if (scrollTop >= this.$lastScrollTop) {
         // Scroll down
         this.$header.removeClass("is-visible");
+
       } else {
         // Scroll Up
+        this.$header.css("top", this.$headerTop);
         this.$header.addClass("is-visible");
-        this.$header.css("top", this.$adminToolbarHeight);
+        this.$localNav.css("top", this.$localNavTop);
         this.$header.removeClass("not-visible");
-
+        this.$localNav.removeClass("transition");
+        this.$header.addClass("transition");
       }
       this.$lastScrollTop = scrollTop;
+
+      if ( this.$lastScrollTop === 0) {
+        this.$header.removeClass("is-visible");
+        this.$header.removeClass("transition");
+      }
+
+      if (!this.$header.hasClass('is-visible')) {
+        this.$localNav.removeClass("transition");
+      } else {
+        this.$localNav.addClass("transition");
+      }
     });
   }
 

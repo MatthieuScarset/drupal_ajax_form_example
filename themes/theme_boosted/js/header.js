@@ -156,19 +156,27 @@
 
         top_menu.removeClass('navbar-fixed');
         const scrollTop = $(window).scrollTop();
+        const headerTop = admin_toolbar_height - header.height();
 
         if (scrollTop > lastScrollTop) {
           // Scroll down
           header.removeClass("is-visible");
-        } else {
+        }
+        else {
           // Scroll Up
+          header.css("top", headerTop);
+          header.removeClass('not-visible');
           header.addClass("is-visible");
-          header.css("top", admin_toolbar_height);
-          header.removeClass("not-visible");
+          header.addClass("transition");
+          local_nav.removeClass("transition");
         }
 
         lastScrollTop = scrollTop;
 
+        if ( lastScrollTop === 0) {
+          header.removeClass("is-visible");
+          header.removeClass("transition");
+        }
 
         if (preview_bar.length) {
             if ($(window).scrollTop() > top_menu_offset.top + offset) {
@@ -232,6 +240,12 @@
 
           if ($(window).scrollTop() < (top_zone_offset - header.outerHeight()) + 90) {
             local_nav.removeClass('sticky-module');
+          }
+
+          if (!header.hasClass('is-visible')) {
+            local_nav.removeClass("transition");
+          } else {
+            local_nav.addClass("transition");
           }
 
 
