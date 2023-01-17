@@ -1,0 +1,95 @@
+<?php
+
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\NodeForm;
+use Drupal\oab_tokens\Entity\NodeToken;
+use \Drupal\node\Entity\Node;
+use \Drupal\oab_tokens\Services\NodeTokenService;
+/**
+ * Implements hook_form_alter().
+ */
+function oab_tokens_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_state->getFormObject() instanceof NodeForm) {
+    /** @var Node $node */
+    $node = $form_state->getFormObject()->getEntity();
+    // si le node est en draft (nouveau ou état actuel draft)
+    if ((isset($node->moderation_state->target_id) && $node->moderation_state->target_id == "draft")
+      || $node->status->value === 0) {
+
+      /** @var NodeTokenService $node_token_service */
+      $node_token_service =  Drupal::service('oab_tokens.node_token_service');
+      $token = $node_token_service->getToken($node);
+      if (isset($token->token->value)) {
+        $url_node_token = \Drupal::service('path_alias.manager')->getAliasByPath('/node/' . $node->id(), $node->language()->getId()) . '?token=' . $token->token->value;
+      }
+      //ajout de la case à cocher pour la génération du token
+      $form['generate_token_url'] = [
+        '#title' => t('Generate token URL'),
+        '#type' => 'checkbox',
+        "#group" => "footer",
+        '#disabled' => !empty($token),
+        '#default_value' => !empty($token),
+        '#description' => $url_node_token ?? "",
+      ];
+      $form['actions']['submit']['#submit'][] = '_oab_tokens_node_form_submit';
+      if (isset($token)) {
+        $form['token_url'] = [
+          '#title' => t('Token URL  :'),
+          '#type' => 'item',
+          '#description' => $url_node_token ?? "",
+          '#weight' => 0
+        ];
+      }
+    }
+  }
+}
+function _oab_tokens_node_form_submit(&$form, FormStateInterface $form_state) {
+  if (isset($form['generate_token_url']) && $form['generate_token_url']['#value'] === 1) {
+    /** @var NodeTokenService $node_token_service */
+    $node_token_service =  Drupal::service('oab_tokens.node_token_service');
+    /** @var Node $node */
+    $node = $form_state->getFormObject()->getEntity();
+    $token = $node_token_service->getToken($node);
+    if (!isset($token)) {
+      $token = $node_token_service->createNodeToken($node);
+    }
+  }
+}
+
+function oab_tokens_node_access(\Drupal\Core\Entity\EntityInterface $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
+  if ($operation === 'view') {
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if (isset($node) &&
+      ((isset($node->moderation_state->target_id) && $node->moderation_state->target_id == "draft")
+      || $node->status->value === 0)) {
+      $token = \Drupal::request()->query->get('token');
+      if (isset($token)) {
+        if (\Drupal::service('oab_tokens.node_token_service')->isValidToken($node->id(), $node->vid->value, $token)) {
+          return AccessResult::allowed();
+        }
+        else {
+          return AccessResult::forbidden();
+        }
+      }
+    }
+  }
+  return AccessResult::neutral();
+}
+
+function oab_tokens_node_predelete(\Drupal\node\NodeInterface $node) {
+  //on supprime les token liés à ce node avant sa suppression
+  /** @var NodeTokenService $node_token_service */
+  $node_token_service =  Drupal::service('oab_tokens.node_token_service');
+  $node_token_service->deleteNodeTokenForNode($node);
+}
+
+function oab_tokens_node_presave(\Drupal\node\NodeInterface $node) {
+  if ((isset($node->moderation_state->target_id) && $node->moderation_state->target_id !== "draft")
+    || $node->status->value === 1) {
+    //si le contenu n'est plus draft, on supprime ses tokens
+    /** @var NodeTokenService $node_token_service */
+    $node_token_service =  Drupal::service('oab_tokens.node_token_service');
+    $node_token_service->deleteNodeTokenForNode($node);
+  }
+}
