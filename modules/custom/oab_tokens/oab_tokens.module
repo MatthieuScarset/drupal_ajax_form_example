@@ -14,7 +14,7 @@ function oab_tokens_form_alter(&$form, FormStateInterface $form_state, $form_id)
     /** @var Node $node */
     $node = $form_state->getFormObject()->getEntity();
     // si le node est en draft (nouveau ou état actuel draft)
-    if ((isset($node->moderation_state->target_id) && $node->moderation_state->target_id == "draft")
+    if ((isset($node->moderation_state->value) && $node->moderation_state->value == "draft")
       || $node->status->value === 0) {
 
       /** @var NodeTokenService $node_token_service */
@@ -61,7 +61,7 @@ function oab_tokens_node_access(\Drupal\Core\Entity\EntityInterface $entity, $op
   if ($operation === 'view') {
     $node = \Drupal::routeMatch()->getParameter('node');
     if (isset($node) &&
-      ((isset($node->moderation_state->target_id) && $node->moderation_state->target_id == "draft")
+      ((isset($node->moderation_state->value) && $node->moderation_state->value == "draft")
       || $node->status->value === 0)) {
       $token = \Drupal::request()->query->get('token');
       if (isset($token)) {
@@ -84,12 +84,15 @@ function oab_tokens_node_predelete(\Drupal\node\NodeInterface $node) {
   $node_token_service->deleteNodeTokenForNode($node);
 }
 
-function oab_tokens_node_presave(\Drupal\node\NodeInterface $node) {
-  if ((isset($node->moderation_state->target_id) && $node->moderation_state->target_id !== "draft")
-    || $node->status->value === 1) {
-    //si le contenu n'est plus draft, on supprime ses tokens
-    /** @var NodeTokenService $node_token_service */
-    $node_token_service =  Drupal::service('oab_tokens.node_token_service');
-    $node_token_service->deleteNodeTokenForNode($node);
+function oab_tokens_node_update(\Drupal\node\NodeInterface $node) {
+  /** @var NodeTokenService $node_token_service */
+  $node_token_service =  Drupal::service('oab_tokens.node_token_service');
+  if ((isset($node->moderation_state->value) && $node->moderation_state->value == "draft")
+    || $node->status->value === 0) {
+    //si le node est toujours Draft, on met à jour le numéro de version sur le node token (la révision est créée a chaque enregistrement
+    $node_token_service->updateRevisionForNodeToken($node);
+  } else {
+    //le node n'est plus draft, on supprime ses tokens
+    $node_token_service->deleteAllNodeTokenForNode($node);
   }
 }

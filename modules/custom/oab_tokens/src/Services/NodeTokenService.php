@@ -15,26 +15,76 @@ class NodeTokenService {
    */
   private $storage;
 
+  /**
+   */
   public function __construct(EntityTypeManagerInterface $entity_type_manager) {
     $this->storage = $entity_type_manager->getStorage('node_token');
   }
 
+  /** Crée un NodeToken pour ce Node (nid+vid)
+   * @param \Drupal\node\Entity\Node $node
+   *
+   * @return int
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
   public function createNodeToken(Node $node): int {
     $token = NodeToken::create([
       "nid" => $node->id(),
-      "vid" => $node->vid->value
+      "vid" => $node->vid->value,
     ]);
     return $token->save();
   }
 
+  /** Supprime un NodeToken pour ce Node (nid, vid)
+   * @param \Drupal\node\Entity\Node $node
+   *
+   * @return void
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
   public function deleteNodeTokenForNode(Node $node) {
     if ($node->id() !== NULL && isset($node->vid->value)) {
       $tokens = $this->storage->loadByProperties([
         "nid" => $node->id(),
-        "vid" => $node->vid->value
+        "vid" => $node->vid->value,
       ]);
       foreach ($tokens as $token) {
         $token->delete();
+      }
+    }
+  }
+
+  /** Supprime tous les NodeToken pour ce Node (nid)
+   * @param \Drupal\node\Entity\Node $node
+   *
+   * @return void
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function deleteAllNodeTokenForNode(Node $node) {
+    if ($node->id() !== NULL) {
+      $tokens = $this->storage->loadByProperties([
+        "nid" => $node->id(),
+      ]);
+      foreach ($tokens as $token) {
+        $token->delete();
+      }
+    }
+  }
+
+  /** Met a jour le NodeToken ayant cet nid avec le vid du node passé en paramètre
+   * @param \Drupal\node\Entity\Node $node
+   *
+   * @return void
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function updateRevisionForNodeToken(Node $node) {
+    if ($node->id() !== NULL && isset($node->vid->value)) {
+      $tokens = $this->storage->loadByProperties([
+        "nid" => $node->id(),
+      ]);
+      /** @var NodeToken $token */
+      foreach ($tokens as $token) {
+        $token->set('vid', $node->vid->value);
+        $token->save();
       }
     }
   }
@@ -50,7 +100,7 @@ class NodeTokenService {
     if ($node->id() !== null && isset($node->vid->value)) {
       $tokens = $this->storage->loadByProperties([
         "nid" => $node->id(),
-        "vid" => $node->vid->value
+        "vid" => $node->vid->value,
       ]);
       if (count($tokens) > 0) {
         return array_shift($tokens);
@@ -70,7 +120,7 @@ class NodeTokenService {
     $tokens = $this->storage->loadByProperties([
       'nid' => $nid,
       'vid' => $vid,
-      'token' => $token
+      'token' => $token,
       ]);
     if (count($tokens) > 0) {
       return true;
