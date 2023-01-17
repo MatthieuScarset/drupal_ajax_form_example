@@ -21,15 +21,16 @@ dependencies:
     - node.type.region
     - node.type.simple_page
     - node.type.solution
+    - workflows.workflow.content
   module:
     - comment
+    - content_moderation
     - entity_browser
     - field_ui
     - file
     - filter
     - media
     - node
-    - oab_siu_connexion
     - oab_subhomes
     - path
     - quickedit
@@ -40,8 +41,6 @@ dependencies:
     - system
     - toolbar
     - tour
-    - workbench
-    - workbench_moderation
 id: chief_editor
 label: 'Chief editor'
 weight: 3
@@ -50,6 +49,7 @@ permissions:
   - 'access administration pages'
   - 'access browse_media_modal entity browser pages'
   - 'access browse_medias_iframe entity browser pages'
+  - 'access browser_embed_video_modal entity browser pages'
   - 'access browser_file_modal entity browser pages'
   - 'access comments'
   - 'access content overview'
@@ -61,7 +61,6 @@ permissions:
   - 'access toolbar'
   - 'access tour'
   - 'access user profiles'
-  - 'access workbench'
   - 'add subhome entity entities'
   - 'administer media'
   - 'administer menu'
@@ -206,16 +205,9 @@ permissions:
   - 'skip comment approval'
   - 'update any media'
   - 'update media'
-  - 'use archived_published transition'
-  - 'use draft_draft transition'
-  - 'use draft_needs_review transition'
-  - 'use draft_published transition'
-  - 'use needs_review_draft transition'
-  - 'use needs_review_needs_review transition'
-  - 'use needs_review_published transition'
-  - 'use published_archived transition'
-  - 'use published_draft transition'
-  - 'use published_published transition'
+  - 'use content transition archived'
+  - 'use content transition create_new_draft'
+  - 'use content transition publish'
   - 'use text format full_html'
   - 'view all revisions'
   - 'view any unpublished content'

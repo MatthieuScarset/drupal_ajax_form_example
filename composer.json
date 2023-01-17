@@ -65,8 +65,6 @@
         "drupal/ultimate_cron": "2.0-alpha5",
         "drupal/views_infinite_scroll": "^1.8",
         "drupal/webform": "^6.0",
-        "drupal/workbench": "^1.3",
-        "drupal/workbench_access": "1.0-beta4",
         "drupal/workbench_moderation": "^1.6",
         "drupal/xmlsitemap": "^1.0",
         "drush/drush": "^11.0",
@@ -166,7 +164,8 @@
             "drupal/core": {
                 "Fix LatestRevisionCheck": "https://www.drupal.org/files/issues/2021-12-28/3035113-33.patch",
                 "Give current request to RequestPath Condition when it call too soon": "patches/saml_sp/patch_core_system_requestpath.patch",
-                "https://www.drupal.org/project/paragraphs/issues/3031598#comment-14296164": "https://www.drupal.org/files/issues/2022-06-21/3207813-15.patch"
+                "https://www.drupal.org/project/paragraphs/issues/3031598#comment-14296164": "https://www.drupal.org/files/issues/2022-06-21/3207813-15.patch",
+                "https://www.drupal.org/project/drupal/issues/3135409": "https://www.drupal.org/files/issues/2022-10-17/3135409-17.patch"
             },
             "drupal/media_entity_file_replace": {
                 "Add specification for old media Generic": "patches/media_entity_file_replace/patch_media_generic.patch"

@@ -1,0 +1,102 @@
+uuid: a404f91f-1784-4677-a764-d8f6397fa45b
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.blog_post
+    - node.type.cloud_service_provider
+    - node.type.country
+    - node.type.custom_page
+    - node.type.customer_story
+    - node.type.distributor
+    - node.type.document
+    - node.type.external_content
+    - node.type.full_html
+    - node.type.homepage
+    - node.type.industry
+    - node.type.magazine
+    - node.type.modular_product
+    - node.type.mss_article
+    - node.type.news
+    - node.type.office
+    - node.type.partner
+    - node.type.press_kit
+    - node.type.press_release
+    - node.type.product
+    - node.type.profile
+    - node.type.region
+    - node.type.simple_page
+    - node.type.solution
+    - node.type.webform
+  module:
+    - content_moderation
+id: content
+label: Content
+type: content_moderation
+type_settings:
+  states:
+    archived:
+      label: Archived
+      weight: 2
+      published: false
+      default_revision: true
+    draft:
+      label: Draft
+      weight: 0
+      published: false
+      default_revision: false
+    published:
+      label: Published
+      weight: 1
+      published: true
+      default_revision: true
+  transitions:
+    archived:
+      label: Archived
+      from:
+        - draft
+        - published
+      to: archived
+      weight: 2
+    create_new_draft:
+      label: 'Create New Draft'
+      from:
+        - draft
+        - published
+      to: draft
+      weight: 0
+    publish:
+      label: Publish
+      from:
+        - draft
+        - published
+      to: published
+      weight: 1
+  entity_types:
+    node:
+      - blog_post
+      - cloud_service_provider
+      - country
+      - custom_page
+      - customer_story
+      - distributor
+      - document
+      - external_content
+      - full_html
+      - homepage
+      - industry
+      - magazine
+      - modular_product
+      - mss_article
+      - news
+      - office
+      - partner
+      - press_kit
+      - press_release
+      - product
+      - profile
+      - region
+      - simple_page
+      - solution
+      - webform
+  default_moderation_state: draft
