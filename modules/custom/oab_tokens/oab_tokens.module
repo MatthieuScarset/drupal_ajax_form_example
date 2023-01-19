@@ -2,6 +2,7 @@
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
 use Drupal\node\NodeForm;
 use Drupal\oab_tokens\Entity\NodeToken;
 use \Drupal\node\Entity\Node;
@@ -21,7 +22,8 @@ function oab_tokens_form_alter(&$form, FormStateInterface $form_state, $form_id)
       $node_token_service =  Drupal::service('oab_tokens.node_token_service');
       $token = $node_token_service->getToken($node);
       if (isset($token->token->value)) {
-        $url_node_token = \Drupal::service('path_alias.manager')->getAliasByPath('/node/' . $node->id(), $node->language()->getId()) . '?token=' . $token->token->value;
+        $url = Url::fromRoute('entity.node.revision', ['node' => $node->id(), 'node_revision' => $node->getRevisionId()]);
+        $url_node_token = \Drupal::service('path_alias.manager')->getAliasByPath($url->toString()). '?token=' . $token->token->value;
       }
       //ajout de la case à cocher pour la génération du token
       $form['generate_token_url'] = [
@@ -57,8 +59,9 @@ function _oab_tokens_node_form_submit(&$form, FormStateInterface $form_state) {
   }
 }
 
+
 function oab_tokens_node_access(\Drupal\Core\Entity\EntityInterface $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
-  if ($operation === 'view') {
+  if (in_array($operation, ['view', 'view revision'])) {
     $node = \Drupal::routeMatch()->getParameter('node');
     if (isset($node) &&
       ((isset($node->moderation_state->value) && $node->moderation_state->value == "draft")
