@@ -54,14 +54,16 @@ class ManageStickyTop {
     this.$lastScrollTop = 0;
 
     $(window).scroll(() => {
-      this._defineCssTop();
       const scrollTop = $(window).scrollTop();
       this.$headerTop = this.$adminToolbarHeight - this.$header.outerHeight();
-      this.$localNavTop =this.$adminToolbarHeight + this.$header.outerHeight();
+      this.$localNavTop = this.$adminToolbarHeight + this.$header.outerHeight();
+
 
       if (scrollTop >= this.$lastScrollTop) {
         // Scroll down
         this.$header.removeClass("is-visible");
+        this.$localNav.css("top", this.$adminToolbarHeight);
+        this.$header.addClass("no-transition");
 
       } else {
         // Scroll Up
@@ -71,6 +73,7 @@ class ManageStickyTop {
         this.$header.removeClass("not-visible");
         this.$localNav.removeClass("transition");
         this.$header.addClass("transition");
+        this.$header.removeClass("no-transition");
       }
       this.$lastScrollTop = scrollTop;
 

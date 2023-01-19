@@ -138,16 +138,20 @@
   padding: 20px 0 0;
 }
 
-#local_nav.transition{
-  transition: top 2s, transform 2s;
+div#local_nav {
+  transition: top 1s, transform 1s;
 }
 
-header#navbar{
+div#local_nav.no-transition {
+  transition: none;
+}
+
+header#navbar {
   opacity: 1;
 }
 
-header#navbar.transition{
-  transition: top 2s, transform 2s;
+header#navbar.transition {
+  transition: top 1s, transform 1s;
 }
 
 header#navbar > div {
@@ -159,6 +163,10 @@ header#navbar > div {
 header#navbar.not-visible {
   opacity: 0;
   visibility: hidden;
+}
+
+header#navbar.not-visible.no-transition {
+  transition: none;
 }
 
 header#navbar.is-visible {

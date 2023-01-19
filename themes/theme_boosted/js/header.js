@@ -161,6 +161,7 @@
         if (scrollTop > lastScrollTop) {
           // Scroll down
           header.removeClass("is-visible");
+          header.addClass("no-transition");
         }
         else {
           // Scroll Up
@@ -168,7 +169,7 @@
           header.removeClass('not-visible');
           header.addClass("is-visible");
           header.addClass("transition");
-          local_nav.removeClass("transition");
+          header.removeClass("no-transition");
         }
 
         lastScrollTop = scrollTop;
@@ -243,9 +244,9 @@
           }
 
           if (!header.hasClass('is-visible')) {
-            local_nav.removeClass("transition");
+            local_nav.addClass("no-transition");
           } else {
-            local_nav.addClass("transition");
+            local_nav.removeClass("no-transition");
           }
 
 
