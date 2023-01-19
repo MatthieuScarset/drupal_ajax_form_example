@@ -45,7 +45,7 @@ function oab_tokens_form_alter(&$form, FormStateInterface $form_state, $form_id)
   }
 }
 function _oab_tokens_node_form_submit(&$form, FormStateInterface $form_state) {
-  if (isset($form['generate_token_url']) && $form['generate_token_url']['#value'] === 1) {
+  if ($form_state->getValue('generate_token_url') !== NULL && $form_state->getValue('generate_token_url') === 1) {
     /** @var NodeTokenService $node_token_service */
     $node_token_service =  Drupal::service('oab_tokens.node_token_service');
     /** @var Node $node */

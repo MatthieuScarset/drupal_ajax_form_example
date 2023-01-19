@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\node\Entity\Node;
 use Drupal\oab_tokens\Entity\NodeToken;
+use Drupal\oab_tokens\Entity\NodeTokenInterface;
 
 class NodeTokenService {
 
@@ -30,7 +31,7 @@ class NodeTokenService {
   public function createNodeToken(Node $node): int {
     $token = NodeToken::create([
       "nid" => $node->id(),
-      "vid" => $node->vid->value,
+      "vid" => $node->getRevisionId(),
     ]);
     return $token->save();
   }
@@ -42,10 +43,10 @@ class NodeTokenService {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function deleteNodeTokenForNode(Node $node) {
-    if ($node->id() !== NULL && isset($node->vid->value)) {
+    if ($node->id() !== NULL && $node->getRevisionId() !== NULL) {
       $tokens = $this->storage->loadByProperties([
         "nid" => $node->id(),
-        "vid" => $node->vid->value,
+        "vid" => $node->getRevisionId(),
       ]);
       foreach ($tokens as $token) {
         $token->delete();
@@ -77,13 +78,13 @@ class NodeTokenService {
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function updateRevisionForNodeToken(Node $node) {
-    if ($node->id() !== NULL && isset($node->vid->value)) {
+    if ($node->id() !== NULL && $node->getRevisionId() !== NULL) {
       $tokens = $this->storage->loadByProperties([
         "nid" => $node->id(),
       ]);
       /** @var NodeToken $token */
       foreach ($tokens as $token) {
-        $token->set('vid', $node->vid->value);
+        $token->set('vid', $node->getRevisionId());
         $token->save();
       }
     }
@@ -92,15 +93,14 @@ class NodeTokenService {
   /**
    * Get NodeToken from nid, vid
    *
-   * @param int $nid
-   * @param int $vid
+   * @param \Drupal\node\Entity\Node $node
    * @return null|NodeTokenInterface
    */
-  public function getToken(Node $node): mixed {
-    if ($node->id() !== null && isset($node->vid->value)) {
+  public function getToken(Node $node): ?NodeTokenInterface {
+    if ($node->id() !== null && $node->getRevisionId() !== NULL) {
       $tokens = $this->storage->loadByProperties([
         "nid" => $node->id(),
-        "vid" => $node->vid->value,
+        "vid" => $node->getRevisionId(),
       ]);
       if (count($tokens) > 0) {
         return array_shift($tokens);
@@ -116,7 +116,7 @@ class NodeTokenService {
    * @param string $token
    * @return boolean
    */
-  public function isValidToken($nid, $vid, $token): bool {
+  public function isValidToken(int $nid, int $vid, string $token): bool {
     $tokens = $this->storage->loadByProperties([
       'nid' => $nid,
       'vid' => $vid,
