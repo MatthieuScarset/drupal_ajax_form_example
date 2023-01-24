@@ -2,7 +2,9 @@
 
   {% set classes = loop.first ? "pb-2 pb-md-0" : loop.last ? "pt-2 pt-md-0" : "py-2 py-md-0" %}
 
-  <div class="col-12 col-md {{ classes }}">
+  {% set col= loop.length > 4 ? "col-12 col-md-4 col-lg" : "col-12 col-md" %}
+
+  <div class="{{ col }} {{ classes }}">
     <div class="key-figure-item"> {{ item.content }} </div>
   </div>
 

@@ -6,7 +6,7 @@
     border-left: none ;
   }
 
-  .key-figure {
-    font-size: 60px;
+  @include media-breakpoint-between(md, md) {
+    margin-bottom: 45px;
   }
 }
