@@ -1,12 +1,17 @@
 <?php
 
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Markup;
 use Drupal\Core\Url;
 use Drupal\node\NodeForm;
+use Drupal\node\NodeInterface;
 use Drupal\oab_tokens\Entity\NodeToken;
 use \Drupal\node\Entity\Node;
 use \Drupal\oab_tokens\Services\NodeTokenService;
+use \Drupal\Core\Session\AccountInterface;
 /**
  * Implements hook_form_alter().
  */
@@ -27,22 +32,13 @@ function oab_tokens_form_alter(&$form, FormStateInterface $form_state, $form_id)
       }
       //ajout de la case à cocher pour la génération du token
       $form['generate_token_url'] = [
-        '#title' => t('Generate token URL'),
+        '#title' => t('Generate shared URL'),
         '#type' => 'checkbox',
         "#group" => "footer",
         '#disabled' => !empty($token),
-        '#default_value' => !empty($token),
-        '#description' => $url_node_token ?? "",
+        '#default_value' => !empty($token)
       ];
       $form['actions']['submit']['#submit'][] = '_oab_tokens_node_form_submit';
-      if (isset($token)) {
-        $form['token_url'] = [
-          '#title' => t('Token URL  :'),
-          '#type' => 'item',
-          '#description' => $url_node_token ?? "",
-          '#weight' => 0
-        ];
-      }
     }
   }
 }
@@ -60,9 +56,14 @@ function _oab_tokens_node_form_submit(&$form, FormStateInterface $form_state) {
 }
 
 
-function oab_tokens_node_access(\Drupal\Core\Entity\EntityInterface $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
+function oab_tokens_node_access(EntityInterface $entity, $operation, AccountInterface $account) {
   if (in_array($operation, ['view', 'view revision'])) {
-    $node = \Drupal::routeMatch()->getParameter('node');
+    /** @var Node $node */
+    if (\Drupal::routeMatch()->getParameter('node_revision') !== NULL) {
+      $node = \Drupal::routeMatch()->getParameter('node_revision');
+    } else {
+      $node = \Drupal::routeMatch()->getParameter('node');
+    }
     if (isset($node) &&
       ((isset($node->moderation_state->value) && $node->moderation_state->value == "draft")
       || $node->status->value === 0)) {
@@ -80,14 +81,14 @@ function oab_tokens_node_access(\Drupal\Core\Entity\EntityInterface $entity, $op
   return AccessResult::neutral();
 }
 
-function oab_tokens_node_predelete(\Drupal\node\NodeInterface $node) {
+function oab_tokens_node_predelete(NodeInterface $node) {
   //on supprime les token liés à ce node avant sa suppression
   /** @var NodeTokenService $node_token_service */
   $node_token_service =  Drupal::service('oab_tokens.node_token_service');
   $node_token_service->deleteNodeTokenForNode($node);
 }
 
-function oab_tokens_node_update(\Drupal\node\NodeInterface $node) {
+function oab_tokens_node_update(NodeInterface $node) {
   /** @var NodeTokenService $node_token_service */
   $node_token_service =  Drupal::service('oab_tokens.node_token_service');
   if ((isset($node->moderation_state->value) && $node->moderation_state->value == "draft")
@@ -97,5 +98,28 @@ function oab_tokens_node_update(\Drupal\node\NodeInterface $node) {
   } else {
     //le node n'est plus draft, on supprime ses tokens
     $node_token_service->deleteAllNodeTokenForNode($node);
+  }
+}
+
+
+function oab_tokens_node_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display) {
+  if($build['#view_mode'] === "full" && $entity instanceof NodeInterface) {
+    /** @var NodeTokenService $node_token_service */
+    $node_token_service =  Drupal::service('oab_tokens.node_token_service');
+    $token = $node_token_service->getToken($entity);
+    if (isset($token->token->value)) {
+      $domain = \Drupal::request()->getSchemeAndHttpHost();
+      // on supprime le backoffice. au cas où il soit présent
+      if (str_contains($domain, 'backoffice.')) {
+        $domain = str_replace('backoffice.', '', $domain);
+      }
+      //l'url de la révision
+      $url = Url::fromRoute('entity.node.revision', ['node' => $entity->id(), 'node_revision' => $entity->getRevisionId()]);
+      //l'url avec le token
+      $url_node_token = $domain . \Drupal::service('path_alias.manager')->getAliasByPath($url->toString()). '?token=' . $token->token->value;
+      //on fait un message d'information qui contient l'url prête à être copiée
+      \Drupal::messenger()->addMessage(Markup::create(t("Shared URL"). " : $url_node_token  <a class='btn-sm btn-icon' data-href='$url_node_token' onclick='copyToClipboard(this)'><span class='sr-only'>Icon</span> <span class='icon icon-copy' aria-hidden='true'></span></a>"));
+      $build['#attached']['library'][]  = 'oab_tokens/tokens';
+    }
   }
 }
