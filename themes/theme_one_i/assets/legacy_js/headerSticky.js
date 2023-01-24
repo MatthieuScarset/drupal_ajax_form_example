@@ -57,15 +57,19 @@ class ManageStickyTop {
       const scrollTop = $(window).scrollTop();
       this.$headerTop = this.$adminToolbarHeight - this.$header.outerHeight();
       this.$localNavTop = this.$adminToolbarHeight + this.$header.outerHeight();
+      // Safari iOS + Mac specific hook - pour calculer le scrollDown. Safari fait du scrollDown négatif
+      this.$scrollDown = $(document).height() - $(window).height() - $(window).scrollTop();
 
 
-      if (scrollTop >= this.$lastScrollTop) {
+      if (scrollTop >= this.$lastScrollTop && this.$lastScrollTop >= 0 && this.$scrollDown > 0) {
         // Scroll down
         this.$header.removeClass("is-visible");
         this.$localNav.css("top", this.$adminToolbarHeight);
         this.$header.addClass("no-transition");
 
-      } else {
+      }
+      // Je rajoute le > 0 car Safari fait du scrollUp négatif
+      else if (this.$lastScrollTop > 0 && this.$scrollDown > 0){
         // Scroll Up
         this.$header.css("top", this.$headerTop);
         this.$header.addClass("is-visible");
@@ -75,6 +79,11 @@ class ManageStickyTop {
         this.$header.addClass("transition");
         this.$header.removeClass("no-transition");
       }
+      else {
+        this.$header.addClass("no-transition");
+        this.$header.removeClass("transition");
+      }
+
       this.$lastScrollTop = scrollTop;
 
       if ( this.$lastScrollTop === 0) {

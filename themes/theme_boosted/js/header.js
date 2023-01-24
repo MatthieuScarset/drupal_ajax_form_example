@@ -158,18 +158,26 @@
         const scrollTop = $(window).scrollTop();
         const headerTop = admin_toolbar_height - header.height();
 
-        if (scrollTop > lastScrollTop) {
+        // Safari iOS + Mac specific hook - pour calculer le scrollDown. Safari fait du scrollDown négatif
+        const scrollDown = $(document).height() - $(window).height() - $(window).scrollTop();
+
+        if (scrollTop >= lastScrollTop && lastScrollTop >= 0 && scrollDown > 0) {
           // Scroll down
           header.removeClass("is-visible");
           header.addClass("no-transition");
         }
-        else {
+        // Je rajoute le > 0 car Safari fait du scrollUp négatif
+        else if (lastScrollTop > 0 && scrollDown > 0) {
           // Scroll Up
           header.css("top", headerTop);
           header.removeClass('not-visible');
           header.addClass("is-visible");
           header.addClass("transition");
           header.removeClass("no-transition");
+        }
+        else {
+          header.addClass("no-transition");
+          header.removeClass("transition");
         }
 
         lastScrollTop = scrollTop;
