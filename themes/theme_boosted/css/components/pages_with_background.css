@@ -12,7 +12,6 @@ Specific HP with background in carrousel
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  background-position-y: 50px;
 
   -webkit-transition: opacity .4s ease-in-out;
   -moz-transition: opacity .4s ease-in-out;
@@ -191,14 +190,6 @@ Specific HP with background in carrousel
     .oab_background_image .view-business-insight .view-content .views-row .tile {
         margin-bottom: 20px;
     }
-}
-
-
-@media(min-width: 976px) {
-  /* Correctif Mep correctif mega-menu RUBYPORTAILOBS-3874 */
-  .hp-background-carousel {
-    background-position-y: 85px;
-  }
 }
 
 .oab_background_image .new-btn-see-all-business-insight {
