@@ -9,9 +9,9 @@ use Drupal\Core\Url;
 use Drupal\node\NodeForm;
 use Drupal\node\NodeInterface;
 use Drupal\oab_tokens\Entity\NodeToken;
-use \Drupal\node\Entity\Node;
-use \Drupal\oab_tokens\Services\NodeTokenService;
-use \Drupal\Core\Session\AccountInterface;
+use Drupal\node\Entity\Node;
+use Drupal\oab_tokens\Services\NodeTokenService;
+use Drupal\Core\Session\AccountInterface;
 /**
  * Implements hook_form_alter().
  */
@@ -59,10 +59,10 @@ function _oab_tokens_node_form_submit(&$form, FormStateInterface $form_state) {
 function oab_tokens_node_access(EntityInterface $entity, $operation, AccountInterface $account) {
   if (in_array($operation, ['view', 'view revision'])) {
     /** @var Node $node */
-    if (\Drupal::routeMatch()->getParameter('node_revision') !== NULL) {
-      $node = \Drupal::routeMatch()->getParameter('node_revision');
+    if (Drupal::routeMatch()->getParameter('node_revision') !== NULL) {
+      $node = Drupal::routeMatch()->getParameter('node_revision');
     } else {
-      $node = \Drupal::routeMatch()->getParameter('node');
+      $node = Drupal::routeMatch()->getParameter('node');
     }
     if (isset($node) &&
       ((isset($node->moderation_state->value) && $node->moderation_state->value == "draft")
@@ -108,17 +108,16 @@ function oab_tokens_node_view_alter(array &$build, EntityInterface $entity, Enti
     $node_token_service =  Drupal::service('oab_tokens.node_token_service');
     $token = $node_token_service->getToken($entity);
     if (isset($token->token->value)) {
-      $domain = \Drupal::request()->getSchemeAndHttpHost();
-      // on supprime le backoffice. au cas où il soit présent
-      if (str_contains($domain, 'backoffice.')) {
-        $domain = str_replace('backoffice.', '', $domain);
-      }
       //l'url de la révision
-      $url = Url::fromRoute('entity.node.revision', ['node' => $entity->id(), 'node_revision' => $entity->getRevisionId()]);
-      //l'url avec le token
-      $url_node_token = $domain . \Drupal::service('path_alias.manager')->getAliasByPath($url->toString()). '?token=' . $token->token->value;
+      $url = Url::fromRoute('entity.node.revision', ['node' => $entity->id(), 'node_revision' => $entity->getRevisionId(), 'token' => $token->token->value])
+        ->setAbsolute()
+        ->toString();
+      // on supprime le backoffice. au cas où il soit présent
+      if (str_contains($url, 'backoffice.')) {
+        $url = str_replace('backoffice.', '', $url);
+      }
       //on fait un message d'information qui contient l'url prête à être copiée
-      \Drupal::messenger()->addMessage(Markup::create(t("Shared URL"). " : $url_node_token  <a class='btn-sm btn-icon' data-href='$url_node_token' onclick='copyToClipboard(this)'><span class='sr-only'>Icon</span> <span class='icon icon-copy' aria-hidden='true'></span></a>"));
+      \Drupal::messenger()->addMessage(Markup::create(t("Shared URL"). " : $url  <a class='btn-sm btn-icon' data-href='$url' onclick='copyToClipboard(this)'><span class='sr-only'>Icon</span> <span class='icon icon-copy' aria-hidden='true'></span></a>"));
       $build['#attached']['library'][]  = 'oab_tokens/tokens';
     }
   }
