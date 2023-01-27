@@ -1,0 +1,36 @@
+.liste-offres {
+  .collapsed-header {
+    display: flex;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-right: auto;
+
+    &.o-link-arrow {
+      &::after {
+        color: black;
+        right: 0;
+        padding-left: 0;
+      }
+      &:active {
+        color: black;
+      }
+    }
+    & > div {
+      padding-right: 1rem;
+    }
+  }
+
+  .exclus-icon {
+    li::before {
+      content: "";
+      color: $red;
+      font-size: 0.6875rem;
+    }
+  }
+
+  .offres-sans-description {
+    margin-right: auto;
+    font-size: 1rem;
+    max-width: 18.75rem;
+  }
+}
