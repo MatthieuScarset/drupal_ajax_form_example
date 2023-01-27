@@ -5,6 +5,9 @@ use Drupal\workflows\Entity\Workflow;
 
 const UPDATE_LOGGER = "oab_updates";
 
+
+
+
 function _processUpdateWithSandbox_9004(&$sandbox) {
 
   $logger = \Drupal::logger(UPDATE_LOGGER);
@@ -40,19 +43,34 @@ function _processUpdateWithSandbox_9004(&$sandbox) {
   $base_query->range(0, 100);
   $rows = $base_query->execute()->fetchAll(\PDO::FETCH_ASSOC);
 
+
   // Pour éviter des boucles infinies sur current !== total et qu'il n'y a plus de résultat
   if (count($rows) == 0) {
     $sandbox['#finished'] = 1;
     $logger->notice("Update is finished");
   } else {
+
+
+    $mapping = [
+      "unpublished" => "archived",
+      "needs_review" => "draft"
+    ];
+
     // Create transaction to do only one DB query at the end;
     $transaction = $database->startTransaction();
     foreach ($rows as $row) {
+
+      // Mapping for old states
+      $state = $row['moderation_state'];
+      if (isset($mapping[$state])) {
+        $state = $mapping[$state];
+      }
+
       ContentModerationState::create([
         'uid' => $row['uid'],
         'langcode' => $row['langcode'],
         'workflow' => 'content',
-        'moderation_state' => $row['moderation_state'],
+        'moderation_state' => $state,
         'content_entity_type_id' => 'node',
         'content_entity_id' => $row['nid'],
         'content_entity_revision_id' => $row['vid']
