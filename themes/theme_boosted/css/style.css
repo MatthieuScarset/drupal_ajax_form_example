@@ -2422,22 +2422,68 @@ body.page-node-type-custom-page{
   }
 }
 
+.page-subhome-press {
+  background-color: white;
+  margin-bottom: 20px;
+}
+
+.page-subhome-press aside.right-column {
+  padding-right: 3rem;
+  padding-left: 0;
+}
+
+.page-subhome-press aside.right-column > .region {
+  margin-top: 0;
+}
+
+.page-subhome-press aside.right-column > .region section:not(:last-child),
+.page-subhome-press .block-subhome-team {
+  margin-bottom: 3rem;
+}
+
+.breadcrumb-page-press ol.breadcrumb {
+  padding-left: 30px;
+  padding-bottom: 10px;
+}
+
+.block-subhome-presse {
+  background: white;
+  padding-left: 30px;
+}
+
 .subhome-header {
   display: table-cell;
   margin-bottom: 2rem;
 }
 
-.subhome-header div {
+.presse {
+  background-color: white;
+}
+
+.block-subhome-press-header {
+  display: table-cell;
+  padding-bottom: 2rem;
+  background: white;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.subhome-header div,
+.block-subhome-press-header div {
   display: table-cell;
   vertical-align: middle;
 }
 
-.subhome-header div.subhome-title {
+.subhome-header div.subhome-title,
+.block-subhome-press-header div.subhome-press-title {
   height: 100%;
   padding: 1rem 0;
 }
 
-.subhome-header div.subhome-title h1 {
+
+
+.subhome-header div.subhome-title h1,
+.block-subhome-press-header div.subhome-title h1 {
   font-size: 3.4rem;
   padding: 0;
   margin: 0;
@@ -2446,16 +2492,29 @@ body.page-node-type-custom-page{
 }
 
 @media (max-width: 760px) {
-  .subhome-header div.subhome-title h1 {
+  .page-subhome-press aside.right-column {
+    padding-right: 3rem;
+    padding-left: 2rem;
+  }
+
+  .page-subhome-press aside.right-column > .region section:not(:last-child),
+  .page-subhome-press .block-subhome-team {
+    margin-bottom: 2rem !important;
+  }
+
+  .subhome-header div.subhome-title h1,
+  .block-subhome-press-header div.subhome-title h1 {
     border-right: none;
   }
 
-  .subhome-header div {
+  .subhome-header div,
+  .block-subhome-press-header div {
     display: block;
   }
 }
 
-.subhome-header div.subhome-description {
+.subhome-header div.subhome-description,
+.block-subhome-press-header div.subhome-description {
   font-size: 1.6rem;
   padding-left: 1rem;
 }
@@ -2531,12 +2590,6 @@ body.page-node-type-custom-page{
 .block-team h3 {
   font-size: 2rem;
   margin: 0;
-}
-
-.block-webform {
-  border: 3px solid #DDDDDD;
-  padding: 1rem;
-  margin-bottom: 2rem;
 }
 
 .block-webform input {
@@ -2705,13 +2758,6 @@ body.page-node-type-custom-page{
   height: auto;
 }
 
-.block-team .block-team-info {
-  position: absolute;
-  height: 100%;
-  top: 0;
-  padding: 2rem;
-}
-
 .block-team .paragraph--default-button {
   position: absolute;
   bottom: 10px;
@@ -2725,7 +2771,6 @@ body.page-node-type-custom-page{
 .block-webform {
   border: 3px solid #DDDDDD;
   padding: 1rem;
-  margin-bottom: 2rem;
 }
 
 .block-webform input {
@@ -3101,6 +3146,12 @@ div.new-btn-see-all-business-insight {
   .page-business-insight section.left-column > .region {
     padding-left: 10px;
   }
+
+  .page-subhome-press .block-subhome-team > div {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
 }
 
 @media(max-width: 767px) and (min-width: 481px) {

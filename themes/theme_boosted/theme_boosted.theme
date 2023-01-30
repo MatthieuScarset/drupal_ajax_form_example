@@ -262,6 +262,17 @@ function theme_boosted_theme_suggestions_input_alter(&$suggestions, array $varia
  * Implements hook_theme_suggestions_HOOK_alter() for page templates.
  * @param array $suggestions
  */
+function theme_boosted_theme_suggestions_breadcrumb_alter(array &$suggestions, $variables, $hook) {
+  if (\Drupal::routeMatch()->getRouteName() === "view.subhomes.page_press") {
+    $breadcrumb_page = \Drupal::routeMatch()->getParameters()->get('display_id');
+    $suggestions[] = 'breadcrumb__' . $breadcrumb_page;
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for page templates.
+ * @param array $suggestions
+ */
 function theme_boosted_theme_suggestions_block_alter(array &$suggestions, $variables) {
   if ($variables['elements']['#base_plugin_id'] === 'block_content' && isset($variables['elements']['content']['#block_content'])) {
     /** @var BlockContent $block */

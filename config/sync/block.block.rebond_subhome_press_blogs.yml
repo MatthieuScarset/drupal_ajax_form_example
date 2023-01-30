@@ -1,0 +1,38 @@
+uuid: e7838ac0-5e55-41df-b98d-0b6a5901a42b
+langcode: en
+status: true
+dependencies:
+  module:
+    - language
+    - oab_frontoffice
+    - system
+  theme:
+    - theme_boosted
+id: rebond_subhome_press_blogs
+theme: theme_boosted
+region: sidebar
+weight: -51
+provider: null
+plugin: rebond_subhome_block
+settings:
+  id: rebond_subhome_block
+  label: Blogs
+  label_display: visible
+  provider: oab_frontoffice
+  block_text: 'View more Blogs'
+  block_link: /en/blogs
+  block_link_text: 'Click here'
+  block_image_src: '37718'
+visibility:
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      en: en
+      fr: fr
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/press\r\n/presse"

@@ -1,0 +1,24 @@
+uuid: 55cb3789-1016-454d-bfea-91edf0dfca41
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - theme_boosted
+id: breadcrumbs_subhome_press
+theme: theme_boosted
+region: top_zone
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: 'Breadcrumbs Subhome Press'
+  label_display: '0'
+  provider: system
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/presse\r\n/press"

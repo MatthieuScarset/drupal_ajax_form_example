@@ -1,0 +1,39 @@
+uuid: 86dfeff6-b4b6-4fb0-a110-9d6000fa8595
+langcode: en
+status: false
+dependencies:
+  config:
+    - webform.webform.formulaire_de_contact_presse
+  module:
+    - language
+    - system
+    - webform
+  theme:
+    - theme_boosted
+id: webform
+theme: theme_boosted
+region: sidebar
+weight: 0
+provider: null
+plugin: webform_block
+settings:
+  id: webform_block
+  label: 'Webform subhome press'
+  label_display: '0'
+  provider: webform
+  webform_id: formulaire_de_contact_presse
+  default_data: ''
+  redirect: false
+visibility:
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      en: en
+      fr: fr
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/press\r\n/presse"
