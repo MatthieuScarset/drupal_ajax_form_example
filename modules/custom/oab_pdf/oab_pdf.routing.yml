@@ -1,0 +1,10 @@
+oab_backoffice.node_pdf:
+  path: '/node/{node}/pdf'
+  defaults:
+    _controller: '\Drupal\oab_pdf\Controller\NodePdfController::getNodePdf'
+  requirements:
+    _permission: 'mss permission access'
+  options:
+    parameters:
+      node:
+        type: entity:node
