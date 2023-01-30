@@ -73,7 +73,6 @@ permissions:
   - 'administer subhome entity entities'
   - 'administer url aliases'
   - 'assign roles'
-  - 'bypass node access'
   - 'create blog_post content'
   - 'create cloud_service_provider content'
   - 'create country content'
