@@ -378,22 +378,17 @@ function theme_boosted_preprocess_page(&$variables) {
 		$url .= "://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 		$variables['#attached']['drupalSettings']['tealium']['url_appelee'] = $url;
 
-		if(isset($request->server) && isset($request->server)) {
+		if(isset($request->server)) {
 			$headers = $request->server->getHeaders();
 			$referer_url = isset($headers['REFERER']) ? $headers['REFERER'] : '';
 			$variables['#attached']['drupalSettings']['tealium']['url_referente'] = htmlspecialchars($referer_url);
 		}
 	}
 
-	if (\Drupal::routeMatch()->getParameter('node')) {
-		$node = \Drupal::routeMatch()->getParameter('node');
-	}
-	if (\Drupal::routeMatch()->getParameter('node_preview')) {
-		$node = \Drupal::routeMatch()->getParameter('node_preview');
-	}
-	if ($revision = \Drupal::routeMatch()->getParameter('node_revision')) {
-		$node = node_revision_load($revision);
-	}
+  $node = $route_match->getParameter('node_revision') ??
+    $route_match->getParameter('node_preview') ??
+    $route_match->getParameter('node');
+
 	$variables['page']['containerClass'] = 'container';
 	if (isset($node) && is_object($node)
 		&& get_class($node) == 'Drupal\node\Entity\Node') {
