@@ -425,34 +425,55 @@ class OabHubController extends ControllerBase {
     return $term;
   }
 
-    //TODO faire une fonction pour recuperer le hub en fonction de l'URL
+
+  /**
+   * Return prefixes of hub that are stored in Config
+   * @return array
+   */
+  public static function getAllHubPrefixes(): array {
+    return \Drupal::config(self::CONFIG_ID)->get(self::CONFIG_URL_LIST) ?? [];
+  }
+
+
+  //TODO faire une fonction pour recuperer le hub en fonction de l'URL
     public static function getHubPartOfUrl() {
-        $url_list = \Drupal::config(self::CONFIG_ID)->get(self::CONFIG_URL_LIST);
+        $url_list = self::getAllHubPrefixes();
         if (is_null($url_list) || empty($url_list) || !isset($url_list)) {
             $url_list = [];
         }
 
-        $url = \Drupal::request()->getPathInfo();
+        $actif_hub = false;
+
+        /*
+         * Sometimes, the Request is not yet instantiate
+         */
+        if ($request = \Drupal::request()) {
+          $url = $request->getPathInfo();
+        } else {
+          $url = str_replace("?" . $_SERVER["QUERY_STRING"], "", $_SERVER['REQUEST_URI']);
+        }
 
         ##Je recupère toutes les parties de la route
         $route_parts = explode('/', $url);
 
         #Je supprime le 1er element qui est vide
         if (isset($route_parts[0]) && strlen($route_parts[0]) == 0) {
-            array_shift($route_parts);
+          array_shift($route_parts);
         }
 
-        $actif_hub = false;
+
 
         if (isset($route_parts[1])) {
-            $hub_part = $route_parts[1];
+          $hub_part = $route_parts[1];
 
-            foreach ($url_list as $hub => $url) {
-                if ($url == $hub_part) {
-                    $actif_hub = $url;
-                }
+          foreach ($url_list as $hub => $url) {
+            if ($url == $hub_part) {
+              $actif_hub = $url;
             }
+          }
         }
+
+
 
         return $actif_hub;
     }
@@ -483,6 +504,9 @@ class OabHubController extends ControllerBase {
       return $ret;
   }
 
+  /**
+   * @deprecated Do not use it anymore
+   */
     public static function getNodeUrl($nid) {
         $url = \Drupal::request()->getRequestUri();
 
@@ -553,6 +577,9 @@ class OabHubController extends ControllerBase {
 
     }
 
+  /**
+   * @deprecated Do not use it anymore. Change have been done in AliasRepository
+   */
     public static function getHubSubhomeUrl($url_cible, $add_internal = true) {
 
         $url_to_test = $url_cible;

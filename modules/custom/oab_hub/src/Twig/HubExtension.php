@@ -23,9 +23,9 @@ class HubExtension extends AbstractExtension
 
     public function getFunctions() {
         return [
-            new TwigFunction('hub_getNodeHubUrl', [$this, 'getNodeHubUrl']),
+//            new TwigFunction('hub_getNodeHubUrl', [$this, 'getNodeHubUrl']),
             new TwigFunction('hub_getBaseUrl', [$this, 'getBaseUrl']),
-            new TwigFunction('hub_getHubSubhomeUrl', [$this, 'getHubSubhomeUrl']),
+//            new TwigFunction('hub_getHubSubhomeUrl', [$this, 'getHubSubhomeUrl']),
         ];
     }
 
@@ -35,11 +35,6 @@ class HubExtension extends AbstractExtension
         ];
 
         return $filters;
-    }
-
-
-    public function getNodeHubUrl(\Drupal\node\Entity\Node $node) {
-        return OabHubController::getNodeUrl($node->id());
     }
 
     public function getMenu($elements, $menu_name) {
@@ -54,9 +49,5 @@ class HubExtension extends AbstractExtension
 
     public function getBaseUrl() {
         return OabHubController::getHubBaseUrl();
-    }
-
-    public function getHubSubhomeUrl($url) {
-        return OabHubController::getHubSubhomeUrl($url);
     }
 }
