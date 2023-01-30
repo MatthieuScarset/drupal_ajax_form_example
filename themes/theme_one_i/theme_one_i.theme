@@ -100,19 +100,6 @@ function theme_one_i_preprocess_paragraph__module_benefits_item(&$variables) {
   }
 }
 
-function theme_one_i_preprocess_paragraph__module_faq(&$variables) {
-
-  /** @var Paragraph $paragraph */
-  $paragraph = $variables['paragraph'];
-
-  if (isset($paragraph)) {
-    $parent = $paragraph->getParentEntity();
-    if (isset($paragraph->field_highlight->value)) {
-      $variables['faq_description'] = t($paragraph->field_highlight->value, ['@title' =>$parent->label()]);
-    }
-  }
-}
-
 function theme_one_i_preprocess_paragraph__module_testimonial_item(&$variables) {
 
   /** @var Paragraph $paragraph */
