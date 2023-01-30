@@ -10,8 +10,6 @@ use Drupal\media\Entity\Media;
 use Drupal\node\NodeInterface;
 use Drupal\oab_dvi\DviHelper;
 use Drupal\oab_frontoffice\NodeCallback;
-use Drupal\oab_frontoffice\Services\OabPdfGeneratorService;
-use Knp\Snappy\Pdf;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 // Regroupement de fonctions qui n'étaient pas des hooks dans un fichier à part pour ne laisser que les hooks dans ce fichier
@@ -256,28 +254,6 @@ function oab_frontoffice_node_view_alter(array &$build, EntityInterface $entity,
     if($entity->bundle() =='press_release' && $build['#view_mode'] == 'subhome'){
       $build['#cache']['contexts'][] = 'url';
     }
-
-//    if ($entity->bundle() === 'mss_article') {
-//      /** @var \Drupal\Core\File\FileSystemInterface $file_system */
-//      $file_system = Drupal::service('file_system');
-//      if (file_exists(DRUPAL_ROOT . '/vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64')) {
-//
-//      /** @var  $file_url_generator FileUrlGenerator */
-//     $file_url_generator = \Drupal::service('file_url_generator');
-//      $render_array = Drupal::entityTypeManager()->getViewBuilder($entity->getEntityTypeId())->view($entity);
-//      $snappy = new Pdf(DRUPAL_ROOT . '/vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64');
-//      /** @var \Drupal\Core\Render\Renderer $renderer */
-//      $renderer = Drupal::service('renderer');
-//
-//      $snappy->generateFromHtml($renderer->renderPlain($render_array), $file_system->realpath('public://pdf_export'));
-//      }
-//    }
-//
-//  if ($entity->bundle() === 'mss_article') {
-////dd($build);
-//   // $build['#post_render'][] = [NodeCallback::class, 'postRender'];
-//  }
-
 }
 
 

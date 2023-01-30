@@ -41,6 +41,3 @@ services:
     parent: default_plugin_manager
   oab_frontoffice.embed_video_url:
     class: Drupal\oab_frontoffice\Services\OabEmbedVideoUrlService
-      
-  oab_frontoffice.pdf_generator:
-    class: Drupal\oab_frontoffice\Services\OabPdfGeneratorService
