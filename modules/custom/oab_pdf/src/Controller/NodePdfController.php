@@ -30,10 +30,9 @@ class NodePdfController extends ControllerBase implements ContainerInjectionInte
     $build = $this->entityTypeManager()->getViewBuilder($node->getEntityTypeId())->view($node, 'pdf');
     $markup = $this->renderer->renderRoot($build);
     $content_response = $this->oabPdfGeneratorService->getOutput($markup, $node->label());
-    dd([$build, $markup, $content_response]);
+   // dd($markup);
     $response = new Response($content_response);
     $response->headers->set('Content-Type', 'application/pdf');
     return $response;
   }
-
 }

@@ -1,0 +1,11 @@
+<?php
+
+function oab_pdf_theme() {
+  return [
+    'node__mss_article__pdf' => [
+    'template' => 'node--mss-article--pdf',
+    'base hook' => 'node'
+    ]
+  ];
+}
+
