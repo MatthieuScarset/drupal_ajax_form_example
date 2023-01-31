@@ -16,7 +16,7 @@ use Drupal\Core\Session\AccountInterface;
  * Implements hook_form_alter().
  */
 function oab_tokens_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  if ($form_state->getFormObject() instanceof NodeForm) {
+  if ($form_state->getFormObject() instanceof NodeForm && isset($form['actions']['transition_create_new_draft'])) {
     /** @var Node $node */
     $node = $form_state->getFormObject()->getEntity();
     // si le node est en draft (nouveau ou état actuel draft)
@@ -38,7 +38,7 @@ function oab_tokens_form_alter(&$form, FormStateInterface $form_state, $form_id)
         '#disabled' => !empty($token),
         '#default_value' => !empty($token)
       ];
-      $form['actions']['submit']['#submit'][] = '_oab_tokens_node_form_submit';
+      $form['actions']['transition_create_new_draft']['#submit'][] = '_oab_tokens_node_form_submit';
     }
   }
 }
