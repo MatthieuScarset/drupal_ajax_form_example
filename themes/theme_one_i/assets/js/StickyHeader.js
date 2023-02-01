@@ -1,4 +1,4 @@
-class ManageStickyTop {
+class StickyHeader {
   constructor() {
     this._defineCssTop();
 
@@ -88,7 +88,7 @@ class ManageStickyTop {
   _defineCssTop() {
     let init = this._getBodyPaddingTop();
     init = init === 0 ? -1 : init;
-    $('.sticky-top').each(function () {
+    $('header.sticky-top').each(function () {
       $(this).css('top', init);
       init += $(this).height();
     });
@@ -100,4 +100,4 @@ class ManageStickyTop {
 
 }
 
-new ManageStickyTop();
+new StickyHeader();

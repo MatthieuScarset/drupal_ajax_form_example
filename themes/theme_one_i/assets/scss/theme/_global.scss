@@ -1,0 +1,6 @@
+.region.region-content .sticky-top {
+  z-index: 1000;
+  @include media-breakpoint-down(md){
+    position: initial;
+  }
+}
