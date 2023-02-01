@@ -11,7 +11,6 @@ class StickyContent {
     this.header = document.querySelector('header');
     if (document.querySelector('.ob1-menu-page')) {
      this.pageMenu = document.querySelector('.ob1-menu-page').parentElement;
-     console.log(this.pageMenu)
     }
 
     new ResizeObserver(() => {
