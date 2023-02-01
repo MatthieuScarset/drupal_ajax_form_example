@@ -11,18 +11,17 @@ class StickyContent {
     this.header = document.querySelector('header');
     if (document.querySelector('.ob1-menu-page')) {
      this.pageMenu = document.querySelector('.ob1-menu-page').parentElement;
+     console.log(this.pageMenu)
     }
 
     new ResizeObserver(() => {
       this.setTop();
     }).observe(this.header);
 
-    const body = document.querySelector('body');
-
-    if (body.classList.contains('user-logged-in')) {
+    if (this.isConnected()) {
       new MutationObserver((mutations) => {
           this.setTop();
-      }).observe(body, {attributes: true, attributeFilter: ['style']});
+      }).observe(document.querySelector('body'), {attributes: true, attributeFilter: ['style']});
     }
 
     this.setTop();
@@ -30,6 +29,10 @@ class StickyContent {
 
   private setTop() {
     let top = this.header.offsetHeight + this.getBodyPaddingTop();
+
+    if (!this.isConnected()) {
+      top--;    //Bug sur le header qui est en "top -1px"
+    }
 
     if (this.pageMenu) {
       this.pageMenu.style.top = `${top}px`;
@@ -42,7 +45,14 @@ class StickyContent {
   }
 
   private getBodyPaddingTop(): number {
-    return parseInt(((document.querySelector('body') as HTMLElement).style.paddingTop).replace("px", ''));
+    if ((document.querySelector('body') as HTMLElement).style.paddingTop.length) {
+      return parseInt(((document.querySelector('body') as HTMLElement).style.paddingTop).replace("px", ''));
+    }
+    return 0;
+  }
+
+  private isConnected(): boolean {
+    return document.querySelector('body').classList.contains('user-logged-in');
   }
 }
 
