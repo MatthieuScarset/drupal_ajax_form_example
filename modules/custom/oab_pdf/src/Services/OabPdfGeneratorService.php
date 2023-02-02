@@ -4,6 +4,7 @@ namespace Drupal\oab_pdf\Services;
 
 use Drupal\Component\Render\MarkupInterface;
 use Drupal\Component\Utility\Html;
+use Drupal\Core\Extension\ExtensionPathResolver;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\Security\TrustedCallbackInterface;
@@ -13,10 +14,10 @@ use Knp\Snappy\Pdf;
 
 class OabPdfGeneratorService {
 
-  private FileSystemInterface $fileSystem;
-
-  public function __construct() {
-    $this->fileSystem = \Drupal::service('file_system');
+  public function __construct(
+    protected FileSystemInterface $fileSystem,
+    protected ExtensionPathResolver $pathResolver
+  ) {
   }
 
   /**
@@ -42,6 +43,13 @@ class OabPdfGeneratorService {
    */
   public function getOutput(MarkupInterface|String $markup, $title): string {
     $snappy = $this->getSnappy();
+/*
+    $path_to_folder = $this->fileSystem->realpath($this->pathResolver->getPath('module', 'oab_pdf') . '/templates/');
+    $header_file_path = $path_to_folder . "/header.html";
+
+    if (file_exists($header_file_path) && filesize($header_file_path) > 0) {
+      $header = readfile($header_file_path);
+    }*/
 
     $header = <<<HTML
 <!DOCTYPE html>
@@ -63,6 +71,7 @@ HTML;
 
     return $snappy->getOutputFromHtml($this->correctHtml($markup, $title), [
       'header-html' => $header,
+    //  'header-html' => $header_file_path,
       'footer-html' => str_replace(['[title]', '[date]'], [$title, date('d/m/Y')], $footer),
       'footer-right' => $pager,
       'header-line' => true,

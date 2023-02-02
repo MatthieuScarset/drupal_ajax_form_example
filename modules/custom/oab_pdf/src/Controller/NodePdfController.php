@@ -9,6 +9,7 @@ use Drupal\node\NodeInterface;
 use Drupal\oab_pdf\Services\OabPdfGeneratorService;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class NodePdfController extends ControllerBase implements ContainerInjectionInterface {
 
@@ -27,6 +28,10 @@ class NodePdfController extends ControllerBase implements ContainerInjectionInte
    * @throws \Exception
    */
   public function getNodePdf(NodeInterface $node): Response {
+    if($node->bundle() !== "mss_article") {
+      // Si ce n'est pas un article MSS => 404 Not Found
+      throw new NotFoundHttpException($this->t("Page not found"));
+    }
     $build = $this->entityTypeManager()->getViewBuilder($node->getEntityTypeId())->view($node, 'pdf');
     $markup = $this->renderer->renderRoot($build);
     $content_response = $this->oabPdfGeneratorService->getOutput($markup, $node->label());

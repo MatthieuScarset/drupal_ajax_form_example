@@ -1,3 +1,4 @@
 services:
   oab_pdf.pdf_generator:
     class: Drupal\oab_pdf\Services\OabPdfGeneratorService
+    arguments: ['@file_system', '@extension.path.resolver']
