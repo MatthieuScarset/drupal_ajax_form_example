@@ -1,4 +1,4 @@
-oab_backoffice.node_pdf:
+oab_pdf.node_pdf:
   path: '/node/{node}/pdf'
   defaults:
     _controller: '\Drupal\oab_pdf\Controller\NodePdfController::getNodePdf'
