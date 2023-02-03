@@ -8,42 +8,58 @@
     body{
       font-family: HelvNeueOrange,helvetica,arial,sans-serif;
       line-height: 1.42857143;
-      color: #000;
+      color: #000;  font-size: 10px;
     }
-
+    h1 {
+      letter-spacing: -.068rem;
+      font-size: 34px;
+      margin: 4px 0 2px;
+      margin-top: 30px;
+      line-height: 34px;
+      padding-bottom: 0;border: 0 none;
+      margin-bottom: 30px;
+      text-align: center;
+    }
     h2 {
-      font-size: 3rem;
-      letter-spacing: -.06rem;
+      font-family: HelvNeueOrange,helvetica,arial,sans-serif;
       font-weight: 700;
       line-height: 1.1;
       color: #000;
-      padding-bottom: 1rem;
-      margin-bottom: 2rem;
-      margin-top: 2rem;
-    }
+      margin-top: 20px;
+      letter-spacing: -.06rem;
+      font-size: 30px;
+      margin-bottom: 20px;
+       position: relative;
+       padding-bottom: 10px;
+     }
     h2::after {
       position: absolute;
       content: "";
-      width: 2.875rem;
-      height: 0.575rem;
+      width: 28px;
+      height: 5px;
       bottom: 0;
       left: 0;
       background: #ff7900;
     }
-
-    ul{
-      list-style: none;
-      padding-left: 2rem;
-      margin-bottom: 0px !important;
-      padding-bottom: 1rem;
-      font-size: 1.6rem;
-      line-height: 2.6rem;
-      margin-top: 0;
-      box-sizing: border-box;
-      font-weight: 400;
-      color: #000;
+    p {
+      font-size: 16px;
+      margin: 0 0 10px;
     }
-    li::before {
+    ul {
+      list-style: none;
+      padding-left: 20px;
+      margin-bottom: 0px !important;
+      padding-bottom: 10px;
+      font-size: 16px;
+      line-height: 26px;
+      margin-top: 0;
+    }
+    ul li {
+      position: relative;
+      font-size: 16px;
+      padding-left: 25px;
+    }
+    ul li::before {
       content: "";
       position: absolute;
       left: 0;
@@ -52,14 +68,20 @@
       display: block;
       height: 9px;
       width: 9px;
-      top: 1rem;
-      font-size: 1.6rem;
+      top: 10px;
+      color: #FF7900;
+    }
+    a {
+      color: #000;  text-decoration: underline;
     }
   </style>
 
 </head>
 <body>
   <div{{ content_attributes }}>
+   <div>
+     <h1>{{ node.title.value }}</h1>
+   </div>
     {{ content }}
   </div>
 </body>
