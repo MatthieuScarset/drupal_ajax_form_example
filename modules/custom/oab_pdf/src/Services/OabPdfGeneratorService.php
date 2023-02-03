@@ -15,8 +15,8 @@ use Knp\Snappy\Pdf;
 class OabPdfGeneratorService {
 
   public function __construct(
-    protected FileSystemInterface $fileSystem,
-    protected ExtensionPathResolver $pathResolver
+    protected FileSystemInterface   $file_system,
+    protected ExtensionPathResolver $path_resolver,
   ) {
   }
 
@@ -43,46 +43,27 @@ class OabPdfGeneratorService {
    */
   public function getOutput(MarkupInterface|String $markup, $title): string {
     $snappy = $this->getSnappy();
-/*
-    $path_to_folder = $this->fileSystem->realpath($this->pathResolver->getPath('module', 'oab_pdf') . '/templates/');
-    $header_file_path = $path_to_folder . "/header.html";
 
-    if (file_exists($header_file_path) && filesize($header_file_path) > 0) {
-      $header = readfile($header_file_path);
-    }*/
+    $path_to_folder = $this->file_system->realpath($this->path_resolver->getPath('module', 'oab_pdf') . '/templates/');
+    $header = $path_to_folder . "/_header.html";
+    $footer = $path_to_folder . '/_footer.html';
 
-    $header = <<<HTML
-<!DOCTYPE html>
-<html>
-  <head><style>body{ text-align: center }</style></head>
-  <body>My Service Space</body>
-</html>
-HTML;
-
-    $footer = <<<HTML
-<!DOCTYPE html>
-<html>
-    <head><style>body {text-align: center}</style></head>
-    <body>Orange and Orange Business Services are trading names of the Orange Group and are trademarks of Orange Brand Services Limited.</body>
-</html>
-HTML;
-
-    $pager = "[title] - [page]/[topage]";
+    $pager = "[page]/[topage]";
 
     return $snappy->getOutputFromHtml($this->correctHtml($markup, $title), [
       'header-html' => $header,
-    //  'header-html' => $header_file_path,
-      'footer-html' => str_replace(['[title]', '[date]'], [$title, date('d/m/Y')], $footer),
+      'header-spacing' => 10,
+      'footer-html' => $footer,
       'footer-right' => $pager,
-      'header-line' => true,
-      'footer-line' => true
+      'footer-font-size' => 7,
+      'footer-spacing' => 10
     ]);
   }
 
   public function generatePdfFile(MarkupInterface|String $markup, $name, string $dir = null): string {
-    $pdf_dir = $dir ?? $this->fileSystem->realpath('public://pdf_export');
+    $pdf_dir = $dir ?? $this->file_system->realpath('public://pdf_export');
 
-    if ($this->fileSystem->prepareDirectory($pdf_dir, FileSystemInterface::CREATE_DIRECTORY)) {
+    if ($this->file_system->prepareDirectory($pdf_dir, FileSystemInterface::CREATE_DIRECTORY)) {
       $path = $this->getFilepath($pdf_dir, $name);
       try {
         $this->getSnappy()->generateFromHtml($this->correctHtml($markup), $path);
@@ -127,8 +108,8 @@ HTML;
 
       $src = substr($src, 0, strpos($src, '?') ?: strlen($src)); // Remove token
       $src = str_replace('/sites/default/files', 'public://', $src); // Create file URI
-      if (file_exists($this->fileSystem->realpath($src))) {
-        $img->setAttribute('src', $this->fileSystem->realpath($src));
+      if (file_exists($this->file_system->realpath($src))) {
+        $img->setAttribute('src', $this->file_system->realpath($src));
       } else {
         $img->parentNode->removeChild($img);
       }
