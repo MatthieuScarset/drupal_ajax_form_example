@@ -91,10 +91,8 @@
   <div{{ content_attributes }}>
     {{ content }}
   </div>
-<div style="margin-top: 20px;">
   <a class="btn btn-default btn-pdf-mss" href="{{ path('oab_pdf.node_pdf', {'node': node.id}) }}"
      onmousedown="utag_link(utag_data.titre_page, 'Article page', 'CTA', '<Download article in PDF>');">
     {{ 'Download article in PDF' | trans }}
   </a>
-</div>
 </article>

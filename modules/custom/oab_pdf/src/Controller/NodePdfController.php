@@ -13,8 +13,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class NodePdfController extends ControllerBase implements ContainerInjectionInterface {
 
-  public function __construct( protected OabPdfGeneratorService $oabPdfGeneratorService,
-                               protected RendererInterface $renderer) {
+  public function __construct(protected OabPdfGeneratorService $oab_pdf_generator_service,
+                              protected RendererInterface $renderer) {
   }
 
   public static function create(ContainerInterface $container) {
@@ -28,13 +28,13 @@ class NodePdfController extends ControllerBase implements ContainerInjectionInte
    * @throws \Exception
    */
   public function getNodePdf(NodeInterface $node): Response {
-    if($node->bundle() !== "mss_article") {
+    if ($node->bundle() !== "mss_article") {
       // Si ce n'est pas un article MSS => 404 Not Found
       throw new NotFoundHttpException($this->t("Page not found"));
     }
     $build = $this->entityTypeManager()->getViewBuilder($node->getEntityTypeId())->view($node, 'pdf');
     $markup = $this->renderer->renderRoot($build);
-    $content_response = $this->oabPdfGeneratorService->getOutput($markup, $node->label());
+    $content_response = $this->oab_pdf_generator_service->getOutput($markup, $node->label());
    // dd($markup);
     $response = new Response($content_response);
     $response->headers->set('Content-Type', 'application/pdf');

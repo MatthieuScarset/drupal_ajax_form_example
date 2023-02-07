@@ -97,6 +97,7 @@ class OabPdfGeneratorService {
 
     $this->correctImgSrc($html);
     $this->correctCssLink($html);
+    $this->replaceVideoByLink($html);
 
     return $html->saveHTML();
   }
@@ -107,7 +108,8 @@ class OabPdfGeneratorService {
       $src = $img->getAttribute('src');
 
       $src = substr($src, 0, strpos($src, '?') ?: strlen($src)); // Remove token
-      $src = str_replace('/sites/default/files', 'public://', $src); // Create file URI
+      $src = str_replace(['/sites/default/files', '/system/files/'], ['public://', 'private://'], $src); // Create file URI
+
       if (file_exists($this->file_system->realpath($src))) {
         $img->setAttribute('src', $this->file_system->realpath($src));
       } else {
@@ -115,6 +117,30 @@ class OabPdfGeneratorService {
       }
 
     }
+  }
+
+  private function replaceVideoByLink(\DOMDocument &$html) {
+
+    /** @var \DOMElement $video */
+    foreach ($html->getElementsByTagName('iframe') as $video) {
+      $src = $video->getAttribute('src');
+
+      if (!empty($src)) {
+        $src = substr($src, 0, strpos($src, '?') ?: strlen($src));
+
+        $text_before_link = $html->createElement('span', 'To watch the video on Youtube:');
+        $text_before_link->setAttribute('class', 'video-label');
+        $video_link = $html->createElement('a', $src);
+        $video_link->setAttribute('href', $src);
+
+        $video->parentNode->appendChild($text_before_link);
+        $video->parentNode->appendChild($video_link);
+        $video->parentNode->removeChild($video);
+      } else {
+        $video->parentNode->removeChild($video);
+      }
+    }
+
   }
 
   private function correctCssLink(\DOMDocument &$html) {
