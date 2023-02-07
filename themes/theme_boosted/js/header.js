@@ -192,9 +192,6 @@
             }
 
             // Gestion du local nav en fonction du header
-        /*    if (!header.hasClass('not-visible')) {
-              localnav_offset +=  top_menu.outerHeight();
-            }*/
 
             if ($(window).scrollTop() > (header.outerHeight() + top_zone_offset) ||
               ($(window).scrollTop() > top_zone_offset - header.outerHeight() && header.hasClass('is-visible'))) {
