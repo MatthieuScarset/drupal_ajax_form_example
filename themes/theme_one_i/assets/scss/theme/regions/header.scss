@@ -9,33 +9,42 @@ header#navbar {
   padding-top: 1px;
   background-color: $black;
 
-  .navbar.supra {
-    opacity: 1;
-    visibility: visible;
-    transition:
-      visibility $header_transition_time linear,
-      opacity $header_transition_time linear,
-      height $header_transition_time linear,
-      min-height $header_transition_time linear;
+  &.transition {
+    transition: top $header_transition_time, transform $header_transition_time;
   }
 
-  &.is-sticky {
-    .navbar.supra {
-      visibility: hidden;
-      opacity: 0;
-      height: 0;
-      min-height: 0;
+  &.is-visible {
+    transform: translateY(100%);
+    z-index: 1020;
+    position: fixed;
+    left: 0;
+    right: 0;
+
+    .main_top_nav {
+      display: none;
+    }
+
+    #main_nav {
+      .navbar-brand img {
+        width: 112px;
+        height: auto;
+        padding-bottom: 0.9375rem;
+      }
     }
   }
 
+  .main_top_nav {
+    border-bottom: none;
+  }
+
 }
 
-.page-menu-category-block.sticky-top {
-  transition: top $header_transition_time linear;
+.page-menu-category-block.transition {
+  transition: top $header_transition_time, transform $header_transition_time;
 }
 
-.page-menu-modular-product.sticky-top {
-  transition: top $header_transition_time linear; 
+.page-menu-modular-product.transition {
+  transition: top $header_transition_time, transform $header_transition_time;
 }
 
 

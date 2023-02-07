@@ -107,19 +107,5 @@
     })
   });
 
-  var socialShareBlockObeserver = new MutationObserver(function (event) {
-    event.forEach((mutationRecord) => {
-      if (mutationRecord.attributeName === 'class') {
-        $('#block-theme-one-i-socialshareblock').css('top', $('header').height());
-      }
-
-    });
-  })
-document.querySelectorAll('#main_nav #block-theme-one-i-righticonblock .nav-item.share-icon .share-icon').forEach((e) => {
-    socialShareBlockObeserver.observe(e, {
-      attributes: true
-    })
-  });
-
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 

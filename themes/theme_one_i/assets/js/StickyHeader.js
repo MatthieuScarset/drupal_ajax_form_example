@@ -1,103 +1,145 @@
 class StickyHeader {
   constructor() {
-    this._defineCssTop();
+    this.$header = document.querySelector('header');
+    this.$socialShareBlock = document.getElementById('block-theme-one-i-socialshareblock');
+    this.$megaMenuMobile = document.getElementById('megamenu_mobile');
+    let lastScrollTop = 0;
+    const threshold = 5; //une marge de sécurité pour qu'un simple mouvement de souris face pas disparaitre le header
+
+    if (document.querySelector('.ob1-menu-page')) {
+      this.$pageMenu = document.querySelector('.ob1-menu-page').parentElement;
+    }
 
     $(window).resize(() => {
-      this._defineCssTop()
+      this._setHeaderTop();
+      this._setSocialShareBlockTop();
     });
 
-
-    /**
-     * Petit hack pour la partie connectée
-     * je le garde en hack car l'autre facon est plus "JS"
-     * + evite de faire des actions à chaque scroll du user (donc moins gourmand)
-     */
-    if ($('body').hasClass('user-logged-in')) {
-      $(window).scroll((elem) => {
-        if ($(window).scrollTop()) {
-          $('header').addClass('is-sticky');
-        } else {
-          $('header').removeClass('is-sticky');
-        }
-      });
-    }
-
-
-    this.$bodyCssChanged = new MutationObserver((mutations) => {
-      this._defineCssTop();
-    });
-    this.$bodyCssChanged.observe(document.querySelector('body'), { attributes : true, attributeFilter : ['style'] });
-
-
-    document.querySelector('header, header .navbar-brand img').ontransitionend = (e) => {
-      if (e.propertyName === 'height' || e.propertyName === 'width') {
-        $('#block-theme-one-i-socialshareblock').css('top', $(e.target).height());
-        this._defineCssTop();
+    new IntersectionObserver( ([e]) => {
+      this._setSocialShareBlockTop();
+      this._setMegaMenuMobileCollapseShow();
+      if (e.intersectionRatio < 1) {
+        this.$header.classList.add("not-visible");
       }
-    };
+    },
+    {threshold: 0}
+    ).observe(document.querySelector('header'));
 
-    // get the sticky element
-    this.$stickyHeaderObserver = new IntersectionObserver(
-      this._manageStickyHeader,
-      {threshold: [1]}
-    );
+    if (this._isConnected()) {
+      new MutationObserver((mutations) => {
+        mutations.forEach((mutationRecord) => {
+          if (mutationRecord.oldValue !== mutationRecord.target.style.cssText) {
+            this._setHeaderTop();
+            this._setSocialShareBlockTop();
+          }
+        });
+      }).observe(document.querySelector('body'), {attributeOldValue: true, attributeFilter: ['style']});
+    }
 
-    this.$stickyHeaderObserver.observe(document.querySelector('header'))
+    $(window).scroll(() => {
+      let scrollTop = $(window).scrollTop();
+      this._setHeaderTop();
 
+      // Safari iOS + Mac specific hook - pour calculer le scrollDown. Safari fait du scrollDown négatif
+      let scrollDown = $(document).height() - $(window).height() - scrollTop;
 
-    //
-    // var observer = new MutationObserver(function (event) {
-    //   event.forEach((mutationRecord) => {
-    //     if (mutationRecord.target.getAttribute('aria-expanded') === 'true') {
-    //       const target = $(mutationRecord.target);
-    //       const item = $(target.attr('href'));
-    //       if (item.length) {
-    //         console.log(item);
-    //         alert("coucou");
-    //         item.focus();
-    //       }
-    //     }
-    //   });
-    // })
-    //
-    // document.querySelectorAll('#main_nav ul.navbar-nav > li.nav-item > a.nav-link').forEach((e) => {
-    //   observer.observe(e, {
-    //     attributes: true,
-    //     attributeFilter: ['aria-expanded'],
-    //     childList: false,
-    //     characterData: false
-    //   })
-    // });
+      if(Math.abs(lastScrollTop - scrollTop) >= threshold) {
+        if (scrollTop > lastScrollTop && scrollDown > 0) {
+          //Scroll Down
+          this.$header.classList.remove("is-visible");
+          this.$header.classList.remove("transition");
+        }
+        else {
+          //Scroll Up
+          this.$header.classList.add("transition");
+          this.$header.classList.add("is-visible");
+          this.$header.classList.remove("not-visible");
+        }
 
+        lastScrollTop = scrollTop;
+
+        if (lastScrollTop < threshold) {
+          this.$header.classList.remove("is-visible");
+          this.$header.classList.remove("transition");
+          this._setSocialShareBlockTop();
+          this._setHeaderTop();
+          this._setMegaMenuMobileCollapseShow();
+        }
+
+        if (!this.$header.classList.contains('is-visible')) {
+          this.$pageMenu.classList.remove("transition");
+        } else {
+          this.$pageMenu.classList.add("transition");
+        }
+
+        // On ferme le megamenu descktop s'il est ouvert au scroll
+        $('#main_nav .mega-menu-desktop.mega-menu .item_mega_menu.mega-menu-panel').each(function (key,elem) {
+          if ($(elem).hasClass('show')) {
+            $(elem).collapse("toggle");
+            $(elem).parent().removeClass('active');
+          }
+        });
+
+        // On ferme le megamenu mobile s'il est ouvert au scroll
+        $('#megamenu_mobile').each((key, elem) => {
+          if ($(elem).hasClass('show')) {
+            $(elem).collapse("toggle");
+          }
+        });
+
+        // On ferme la social share block s'il est ouvert au scroll
+        $('#social-share').each((key, elem) => {
+          if ($(elem).hasClass('show')) {
+            $(elem).collapse("toggle");
+          }
+        });
+
+      }
+    });
   }
+  _setHeaderTop() {
+    let top = this._getBodyPaddingTop() - this.$header.offsetHeight;
 
-  _manageStickyHeader([e]) {
-    const supra_navbar = $('header .navbar.supra');
-    const supra_navbar_height = supra_navbar.height();
-    const header = $('header');
+    if (!this._isConnected()) {
+      top--;    //Bug sur le header qui est en "top -1px"
+    }
+    else {
+      //Connecter en mobile on tiendra pas compte du body padding
+      if (window.matchMedia("(max-width: 736px)").matches) {
+        top = -this.$header.offsetHeight;
+      }
+    }
 
-    e.target.classList.toggle('is-sticky', e.intersectionRatio < 1);
-    if (e.intersectionRatio < 1) {
-      $('#block-theme-one-i-socialshareblock').css('top', header.height() - supra_navbar_height);
-    } else {
-      $('#block-theme-one-i-socialshareblock').css('top', header.height());
+    if (this.$header.classList.contains('is-visible')) {
+      this.$header.style.top = `${top}px`;
     }
   }
 
+  _setSocialShareBlockTop() {
+    let top = this.$header.offsetHeight + this._getBodyPaddingTop();
+    this.$socialShareBlock.style.top = `${top}px`;
+  }
 
-  _defineCssTop() {
-    let init = this._getBodyPaddingTop();
-    init = init === 0 ? -1 : init;
-    $('header.sticky-top').each(function () {
-      $(this).css('top', init);
-      init += $(this).height();
-    });
+  _setMegaMenuMobileCollapseShow() {
+    let top = this.$header.classList.contains('is-visible') ? this.$header.offsetHeight
+    : this._getBodyPaddingTop() + this.$header.offsetHeight;
+
+    let bottom = this.$header.classList.contains('is-visible') ? - $(window).height() : 0;
+
+    this.$megaMenuMobile.style.top = `${top}px`;
+    this.$megaMenuMobile.style.bottom = `${bottom}px`;
   }
 
   _getBodyPaddingTop() {
-    return parseInt($('body').css('padding-top').replace("px", ''));
+    if (document.querySelector('body').style.paddingTop.length) {
+      return parseInt((document.querySelector('body').style.paddingTop).replace("px", ''));
+    }
+    return 0;
   }
 
+  _isConnected() {
+    return document.querySelector('body').classList.contains('user-logged-in');
+  }
 }
 
 new StickyHeader();

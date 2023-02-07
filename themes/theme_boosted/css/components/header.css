@@ -38,7 +38,6 @@
 }
 
 #main_nav .logo img {
-  transition: all .1s ease-in-out;
   width: 140px;
 }
 
@@ -128,7 +127,6 @@
   border-bottom: 1px solid #e1e1e1;
   padding: 25px 0 0;
   border-color: black;
-  border-top: 1px solid grey;
 }
 
 
@@ -255,7 +253,7 @@
 #block-theme-oab-hub-socialshareblock {
   width: 100%;
   padding: 0;
-  z-index: 1;
+  z-index: 10;
 }
 #block-theme-oab-hub-socialshareblock #social-share,
 #block-socialshareblock #social-share {
@@ -1363,4 +1361,47 @@ nav .menu.navbar-nav a:focus {
 
 .mega-menu .items_wysiwyg_container .mega_menu_template p > .btn {
   padding: 1.3rem 4.5rem;
+}
+
+header#navbar.transition {
+  transition: top 1s, transform 1s;
+}
+
+header#navbar.is-visible {
+  z-index: 400;
+  position: fixed;
+  left: 0;
+  right: 0;
+  transform: translateY(100%);
+}
+
+header#navbar.is-visible #navtop {
+  display: none;
+}
+
+header#navbar.is-visible #main_nav .logo img {
+  transition: none;
+  width: 112px;
+}
+
+#local_nav {
+  transition: top 1s, transform 1s;
+}
+
+#local_nav.no-transition {
+  transition: none;
+}
+
+header#navbar.is-visible .navbar-header.logo .logo.navbar-btn {
+  margin-top: 12px;
+}
+
+@media (max-width: 736px) {
+  header#navbar.is-visible .navbar-header.logo .logo.navbar-btn {
+    margin-top: 0;
+  }
+
+  #mobile_dropdown_subnav {
+    margin-top: -15px;
+  }
 }

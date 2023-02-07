@@ -19,15 +19,31 @@ class StickyContent {
 
     if (this.isConnected()) {
       new MutationObserver((mutations) => {
-          this.setTop();
-      }).observe(document.querySelector('body'), {attributes: true, attributeFilter: ['style']});
+          mutations.forEach((mutationRecord) => {
+            if (mutationRecord.oldValue !== (mutationRecord.target as HTMLElement).style.cssText) {
+              this.setTop();
+            }
+          });
+      }).observe(document.querySelector('body'), {attributeOldValue: true, attributeFilter: ['style']});
     }
+
+    new MutationObserver((mutations) => {
+      mutations.forEach((mutationRecord) => {
+        if (mutationRecord.oldValue === (mutationRecord.target as HTMLElement).classList.value) {
+          this.setTop();
+        }
+      });
+    }).observe(this.header, {attributeOldValue: true, attributeFilter:['class']});
 
     this.setTop();
   }
 
   private setTop() {
-    let top = this.header.offsetHeight + this.getBodyPaddingTop();
+    let top = this.getBodyPaddingTop();
+
+    if (!this.header.classList.contains('not-visible')) {
+      top += this.header.offsetHeight;
+    }
 
     if (!this.isConnected()) {
       top--;    //Bug sur le header qui est en "top -1px"
