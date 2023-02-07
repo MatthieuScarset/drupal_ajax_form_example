@@ -218,9 +218,6 @@
                     $('.main-container').css('margin-top', container_margin_top);
                 }
             }
-           /* if($(window).scrollTop() == 0){
-                local_nav.css('top', (localnav_offset + $('#top_navbar').outerHeight()));
-            }*/
         }
 
     }
@@ -597,7 +594,7 @@
 
  }
 
- new class stickyHeader {
+  class stickyHeader {
     constructor() {
       this.$header = document.querySelector('header');
       this.$socialShareBlock = document.getElementById('block-socialshareblock');
@@ -754,5 +751,7 @@
       return document.querySelector('body').classList.contains('user-logged-in');
     }
   }
+  new stickyHeader();
+
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 
