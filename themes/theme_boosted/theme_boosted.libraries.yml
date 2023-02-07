@@ -38,6 +38,7 @@ global-styling:
     js/vision_business.js: {}
     js/readmorelink.js: {}
     js/header.js: {}
+    js/StickyHeader.js: {}
     js/social_bar/orange_socialbar.js: {}
     js/jquery.touchSwipe.min.js: {}
     js/slick.min.js: {}
