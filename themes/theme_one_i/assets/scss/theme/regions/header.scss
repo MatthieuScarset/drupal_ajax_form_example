@@ -9,6 +9,10 @@ header#navbar {
   padding-top: 1px;
   background-color: $black;
 
+  .navbar.supra {
+    border-bottom: none;
+  }
+
   &.transition {
     transition: top $header_transition_time, transform $header_transition_time;
   }
@@ -20,7 +24,7 @@ header#navbar {
     left: 0;
     right: 0;
 
-    .main_top_nav {
+    .navbar.supra {
       display: none;
     }
 
@@ -32,11 +36,6 @@ header#navbar {
       }
     }
   }
-
-  .main_top_nav {
-    border-bottom: none;
-  }
-
 }
 
 .page-menu-category-block.transition {
