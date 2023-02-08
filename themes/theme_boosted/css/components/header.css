@@ -180,7 +180,7 @@
 
 .menu-xs {
   margin: 0;
-  padding: 5px 0 0;
+  padding:0;
 }
 
 .menu-xs .sandwich-button {
@@ -594,11 +594,6 @@
     padding-right: 0;
   }
 
-  .navbar-header {
-    padding-left: 10px;
-    padding-bottom: 20px;
-  }
-
 }
 
 
@@ -739,34 +734,26 @@
     overflow: hidden;
   }
 
-  #main_nav .logo img {
+  #main_nav .logo img, #main_nav.navbar-fixed .logo img {
     margin-top: -20px;
-    height: auto;
-    width: 112px;
+    padding: 0 15px;
+    height: 30px;
+    width: auto;
     transition: none;
-  }
-
-  #main_nav.navbar-fixed .logo img {
-    transition: none;
-    width: 112px;
-    margin-top: -12px;
   }
 
   .subnav.navbar-fixed {
     z-index: 2002;
-    height: 50px;
+    padding-top: 30px;
   }
 
   .subnav{
-    height: 50px;
+    height: 60px;
+    padding-top: 30px;
   }
 
   .menu-xs {
-   margin-top: -29px !important;
-  }
-
-  #main_nav.navbar-fixed .menu-xs {
-    margin-top: -24px !important;
+   margin-top: -24px !important;
   }
 
   #main_nav .menu-xs .sandwich-button.navbar-toggle:hover, #main_nav .menu-xs .sandwich-button.navbar-toggle:focus {
@@ -781,7 +768,7 @@
   .mega-menu.navbar #navbar-collapse-mega {
     background-color: white;
     position: fixed;
-    top: 50px;
+    top: 60px;
     bottom: 0;
     left: 0;
     right: 0;
