@@ -23,7 +23,7 @@
 
     .form-item-mot {
       padding: 0;
-      height: 45px;
+      //height: 45px;
     }
   }
 
@@ -48,8 +48,8 @@
     }
 
     .search-icon{
-      top: -2rem;
-      right: -11.4rem;
+      top: -1.5625rem;
+      right: -12rem;
       cursor: pointer;
       margin-left: 0;
     }
@@ -59,7 +59,7 @@
 .block {
   .share-icon {
     position: relative;
-    top: 0.4rem;
+    bottom: 0.125rem;
     font-size: 1.58rem;
   }
 }

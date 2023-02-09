@@ -10,6 +10,7 @@ header#navbar {
   background-color: $black;
 
   .navbar.supra {
+    border-bottom: none;
     opacity: 1;
     visibility: visible;
     transition:
@@ -35,7 +36,7 @@ header#navbar {
 }
 
 .page-menu-modular-product.sticky-top {
-  transition: top $header_transition_time linear; 
+  transition: top $header_transition_time linear;
 }
 
 
