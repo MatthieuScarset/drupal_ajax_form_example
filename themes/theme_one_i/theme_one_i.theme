@@ -167,6 +167,18 @@ function theme_one_i_preprocess_paragraph__module_detail_offre_items(&$variables
   $variables['formule_package'] = ProductFormuleEntity::load($paragraph->field_formule->target_id ?? 0);
 }
 
+/**
+ * Implements hook_preprocess().
+ */
+function theme_one_i_preprocess_menu(&$variables, $hook) {
+
+  $config = \Drupal::config('system.site');
+
+  if (str_contains($hook, 'menu__bottom_footerbar')) {
+    $variables['site_name'] = $config->get('name');
+  }
+}
+
 /*****************************************/
 /*** Theme One-i Suggestion HOOK Alter ***/
 /*****************************************/

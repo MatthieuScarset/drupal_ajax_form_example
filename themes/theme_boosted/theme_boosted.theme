@@ -484,6 +484,8 @@ function theme_boosted_preprocess_region(&$variables) {
 
 
 function theme_boosted_preprocess_menu(&$variables, $hook) {
+  $config = \Drupal::config('system.site');
+
   if (strpos($hook, 'menu__main') !== false) {
 
     $variables['#cache']['contexts'][0] = 'url';
@@ -524,6 +526,10 @@ function theme_boosted_preprocess_menu(&$variables, $hook) {
         $item['attributes']->addClass('active-trail');
       }
     }
+  }
+
+  if (str_contains($hook, 'menu__bottom_footerbar')) {
+    $variables['site_name'] = $config->get('name');
   }
 }
 
