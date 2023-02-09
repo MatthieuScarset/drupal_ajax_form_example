@@ -9,7 +9,6 @@ use Drupal\Core\Url;
 use Drupal\media\Entity\Media;
 use Drupal\node\NodeInterface;
 use Drupal\oab_dvi\DviHelper;
-use Drupal\oab_frontoffice\NodeCallback;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 // Regroupement de fonctions qui n'étaient pas des hooks dans un fichier à part pour ne laisser que les hooks dans ce fichier
