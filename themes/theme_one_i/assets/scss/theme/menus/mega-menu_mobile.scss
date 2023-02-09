@@ -10,6 +10,13 @@
 
     &.is-sticky{
       z-index: 2002;
+
+      .main_nav.navbar {
+        div.navbar-brand {
+          margin: 0;
+          height: inherit;
+        }
+      }
     }
   }
 
@@ -19,6 +26,7 @@
 
     .navbar-brand {
       margin: 0;
+      height: inherit;
 
       &.logo {
         margin: 0.9375rem;

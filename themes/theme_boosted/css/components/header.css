@@ -799,12 +799,12 @@ margin-left: 0;
 
   .subnav.navbar-fixed {
     z-index: 2002;
-    padding-top: 30px;
+    padding-top: 15px;
   }
 
   .subnav{
     height: 60px;
-    padding-top: 30px;
+    padding-top: 15px;
   }
 
   .menu-xs {
