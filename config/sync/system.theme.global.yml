@@ -11,6 +11,6 @@ features:
   favicon: true
   node_user_picture: false
 logo:
-  path: themes/theme_boosted/orange-business-services.png
+  path: themes/theme_boosted/orange_business_master_logo_text_white.svg
   url: ''
   use_default: false
