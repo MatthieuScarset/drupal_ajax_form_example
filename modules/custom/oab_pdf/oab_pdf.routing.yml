@@ -3,7 +3,7 @@ oab_pdf.node_pdf:
   defaults:
     _controller: '\Drupal\oab_pdf\Controller\NodePdfController::getNodePdf'
   requirements:
-    _permission: 'access content'
+    _oab_pdf_access: 'TRUE'
   options:
     parameters:
       node:

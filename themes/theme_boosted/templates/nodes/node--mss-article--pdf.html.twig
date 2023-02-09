@@ -68,35 +68,10 @@
  * @ingroup themeable
  */
 #}
-<article{{ attributes }}>
+<div{{ content_attributes }}>
+ <div>
+   <h1>{{ label }}</h1>
+ </div>
+  {{ content }}
+</div>
 
-  {{ title_prefix }}
-  {% if label and not page %}
-    <h2{{ title_attributes }}>
-      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-    </h2>
-  {% endif %}
-  {{ title_suffix }}
-
-  {% if display_submitted %}
-    <footer>
-      {{ author_picture }}
-      <div{{ author_attributes }}>
-        {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
-        {{ metadata }}
-      </div>
-    </footer>
-  {% endif %}
-
-  <div{{ content_attributes }}>
-    {{ content }}
-
-    {% if node.field_typology.value == "article" %}
-    <a class="btn btn-default btn-pdf-mss" href="{{ path('oab_pdf.node_pdf', {'node': node.id}) }}"
-       onmousedown="utag_link(utag_data.titre_page, 'Article page', 'CTA', 'Download article in PDF');">
-      {{ 'Download article in PDF' | trans }}
-    </a>
-    {% endif %}
-  </div>
-
-</article>

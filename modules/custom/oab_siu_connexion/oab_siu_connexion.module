@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Access\AccessResultForbidden;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
 use \OneLogin\Saml2\Response;
@@ -70,6 +71,16 @@ function oab_siu_connexion_media_access(EntityInterface $entity, $operation, Acc
     }
   }
 }
+
+/**
+ * Implements hook_ENTITY_TYPE_access().
+ */
+function oab_siu_connexion_node_access(\Drupal\Core\Entity\EntityInterface $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
+  if ($operation === "view" && $entity->bundle() == "mss_article") {
+    return AccessResultForbidden::forbiddenIf(!$account->hasPermission('access-mss-assistance'));
+  }
+}
+
 
 function oab_siu_connexion_page_attachments(array &$attachments) {
     $attachments['#attached']['library'][] = 'oab_siu_connexion/oab_siu_connexion.library';
