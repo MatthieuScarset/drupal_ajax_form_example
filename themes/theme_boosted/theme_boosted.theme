@@ -480,6 +480,10 @@ function theme_boosted_preprocess_page(&$variables) {
 function theme_boosted_preprocess_region(&$variables) {
     // Create the $content variable that templates expect.
     $variables['language'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
+  $config = \Drupal::config('system.site');
+  $variables['site_name'] = $config->get('name');
+
 }
 
 

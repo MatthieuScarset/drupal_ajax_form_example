@@ -39,6 +39,9 @@ function theme_one_i_preprocess_html(&$variables) {
 function theme_one_i_preprocess_region(&$variables) {
   // Create the $content variable that templates expect.
   $variables['language'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
+  $config = \Drupal::config('system.site');
+  $variables['site_name'] = $config->get('name');
 }
 
 function theme_one_i_preprocess_page(&$variables)
