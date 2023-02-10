@@ -72,4 +72,5 @@ content:
 hidden:
   created: true
   langcode: true
+  replace_file: true
   uid: true

@@ -42,7 +42,7 @@ max_component_length: 100
 transliterate: true
 reduce_ascii: false
 case: true
-ignore_words: 'a, an, as, at, before, but, by, for, from, is, in, into, like, of, off, on, onto, per, since, than, the, this, that, to, up, via, with, ''s, un, une, des, le, la, les, l'', d'', m'', n'', s'', t'', c'', du, de la, au, aux, des, mon, ma, ta, sa, mes, tes, ses, mon, vos, leur, notre, votre, nos, vos, leurs, ce, cet, cette, ces, quel, quels, quelles, quelle, ce, cette, ces, je, tu, il, elle, nous, vous, ils, elles, '''
+ignore_words: 'and, a, an, as, at, before, but, by, for, from, is, in, into, like, of, off, on, onto, per, since, than, the, this, that, to, up, via, with, ''s, un, une, des, le, la, les, l'', d'', m'', n'', s'', t'', c'', du, de la, au, aux, des, mon, ma, ta, sa, mes, tes, ses, mon, vos, leur, notre, votre, nos, vos, leurs, ce, cet, cette, ces, quel, quels, quelles, quelle, ce, cette, ces, je, tu, il, elle, nous, vous, ils, elles, '''
 update_action: 0
 safe_tokens:
   - alias
