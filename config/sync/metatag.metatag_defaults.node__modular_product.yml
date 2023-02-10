@@ -1,0 +1,9 @@
+uuid: a1b121a1-63a6-46c3-b130-6989bb7cbcae
+langcode: en
+status: true
+dependencies: {  }
+id: node__modular_product
+label: 'Contenu: Modular Product'
+tags:
+  description: '[node:field_teaser]'
+  title: '[node:title] | [site:name]'

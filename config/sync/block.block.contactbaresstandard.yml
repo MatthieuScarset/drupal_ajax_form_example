@@ -3,8 +3,8 @@ langcode: en
 status: true
 dependencies:
   module:
-    - ctools
     - language
+    - node
     - oab_frontoffice
   theme:
     - theme_boosted
@@ -25,7 +25,7 @@ settings:
   link_offices_text: 'Nuestras oficinas locales'
   link_help: 'https://www.orange-business.com/en/contact-us'
   link_help_text: Ayuda
-  link_contact: 'https://www.orange-business.com/en/any-request'
+  link_contact: /es/contacto
   link_contact_text: Contáctenos
 visibility:
   'entity_bundle:node':
@@ -40,8 +40,6 @@ visibility:
       document: document
       full_html: full_html
       homepage: homepage
-      homepage_eclairage: homepage_eclairage
-      hp_eclairage_thematique: hp_eclairage_thematique
       industry: industry
       magazine: magazine
       partner: partner

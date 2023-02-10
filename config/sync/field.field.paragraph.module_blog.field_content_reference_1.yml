@@ -5,10 +5,13 @@ dependencies:
   config:
     - field.storage.paragraph.field_content_reference_1
     - node.type.blog_post
+    - node.type.customer_story
     - node.type.document
     - node.type.magazine
     - node.type.press_kit
     - node.type.press_release
+    - node.type.simple_page
+    - node.type.solution
     - paragraphs.paragraphs_type.module_blog
 id: paragraph.module_blog.field_content_reference_1
 field_name: field_content_reference_1
@@ -25,10 +28,13 @@ settings:
   handler_settings:
     target_bundles:
       blog_post: blog_post
+      customer_story: customer_story
       document: document
       magazine: magazine
       press_kit: press_kit
       press_release: press_release
+      simple_page: simple_page
+      solution: solution
     sort:
       field: _none
       direction: ASC
