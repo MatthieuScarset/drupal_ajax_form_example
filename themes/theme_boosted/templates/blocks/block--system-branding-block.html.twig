@@ -19,9 +19,9 @@
   {% if site_logo %}
     <a class="logo navbar-btn pull-left" href="{{ path('<front>') }}" title="{{ site_name }}"
        onmousedown="utag_link(utag_data.titre_page, 'Menu', {{ site_name }}, '');">
-      <img class="not-sticky-logo visible-lg" src="{{ site_logo }}" alt="{{ 'Home'|t }}" />
-      <img class="sticky-logo hidden" src="/{{ base_path ~ directory }}/orange_business_small_logo_text_white.svg" alt="{{ 'Home'|t }}" />
-      <img class="hidden-lg" src="/{{ base_path ~ directory }}/orange_business_small_logo_text_white.svg" alt="{{ 'Home'|t }}" />
+      <img class="large-logo visible-lg" src="{{ site_logo }}" alt="{{ 'Home'|t }}" />
+      <img class="medium-logo hidden" src="/{{ base_path ~ directory }}/orange_business_small_logo_text_white.svg" alt="{{ 'Home'|t }}" />
+      <img class="small-logo hidden-lg" src="/{{ base_path ~ directory }}/orange_business_small_logo_text_white.svg" alt="{{ 'Home'|t }}" />
     </a>
   {% endif %}
 {#  {% if site_name %}

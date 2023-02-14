@@ -19,9 +19,9 @@
   {% if site_logo %}
     <a class="logo navbar-brand pull-left" href="{{ path('<front>') }}" title="{{ site_name }}"
        onmousedown="utag_link(utag_data.titre_page, 'Menu', {{ site_name }}, '');">
-      <img class="not-sticky-logo d-none d-lg-block" src="{{ site_logo }}" alt="{{ 'Home'|t }}" />
-      <img class="sticky-logo d-none" src="/{{ base_path ~ directory }}/orange_business_small_logo_text_white.svg" alt="{{ 'Home'|t }}" />
-      <img class="logo-mobile-one-i d-lg-none" src="/{{ base_path ~ directory }}/orange_business_small_logo_text_white.svg" alt="{{ 'Home'|t }}" />
+      <img class="large-logo d-none d-lg-block" src="{{ site_logo }}" alt="{{ 'Home'|t }}" />
+      <img class="medium-logo d-none" src="/{{ base_path ~ directory }}/orange_business_small_logo_text_white.svg" alt="{{ 'Home'|t }}" />
+      <img class="small-logo d-lg-none" src="/{{ base_path ~ directory }}/orange_business_small_logo_text_white.svg" alt="{{ 'Home'|t }}" />
     </a>
   {% endif %}
 {#  {% if site_name %}#}
