@@ -134,6 +134,23 @@
             container_margin_top += contact_module.height() + 20;
         }
 
+        const stickyLogo = $('img.sticky-logo');
+        const notStickyLogo = $('img.not-sticky-logo');
+
+        let scroll = $(window).scrollTop();
+        if (scroll > 0) {
+          stickyLogo.removeClass('hidden');
+          stickyLogo.addClass('visible-lg');
+          notStickyLogo.removeClass('visible-lg');
+          notStickyLogo.addClass('hidden');
+        }
+        else {
+          stickyLogo.removeClass('visible-lg');
+          stickyLogo.addClass('hidden');
+          notStickyLogo.removeClass('hidden');
+          notStickyLogo.addClass('visible-lg');
+        }
+
         if (top_menu.length) {
             if ($(window).scrollTop() > top_menu_offset.top + offset) {
                 top_menu.addClass('navbar-fixed');
@@ -593,10 +610,6 @@
    }
 
  }
-
-
-
-
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 

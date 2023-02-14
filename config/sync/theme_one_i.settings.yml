@@ -5,7 +5,7 @@ features:
   favicon: 1
 logo:
   use_default: 0
-  path: themes/theme_one_i/orange-business-services.png
+  path: themes/theme_one_i/orange_business_master_logo_text_white.svg
 favicon:
   use_default: 0
   path: themes/theme_one_i/favicon.ico

@@ -10,21 +10,34 @@
 
     &.is-sticky{
       z-index: 2002;
+
+      .main_nav.navbar {
+        div.navbar-brand {
+          margin: 0;
+          height: inherit;
+        }
+      }
     }
   }
 
   #main_nav_mobile.navbar {
-    height: 50px;
+    height: 60px;
     overflow: hidden;
 
     .navbar-brand {
-      margin-top: 4px;
-      margin-right: 0;
+      margin: 0;
+      height: inherit;
+
+      &.logo {
+        margin: 0.9375rem;
+      }
 
       .logo-mobile-one-i {
-        width: 112px;
-        height: auto;
-        margin-bottom: 0;
+        width: auto;
+        height: 1.875rem;
+        margin: 0;
+        padding: 0;
+        transition: none;
       }
     }
 
@@ -208,7 +221,7 @@
     &.collapsing, &.show {
       position: fixed;
       overflow-y: auto;
-      top: 50px;
+      top: 60px;
       bottom: 0;
       left: 0;
       right: 0;

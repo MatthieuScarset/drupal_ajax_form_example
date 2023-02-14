@@ -17,17 +17,18 @@
 #}
 {% block content %}
   {% if site_logo %}
-    <a class="logo navbar-btn pull-left" href="{{ url('<front>') }}" title="{{ 'Home'|t }}" rel="home"
-       onmousedown="utag_link(utag_data.titre_page, 'Menu', 'Orange Business Services ', '');">
-      <img class="visible-lg" src="{{ site_logo }}" alt="{{ 'Home'|t }}" />
-      <img class="hidden-lg" src="/{{ base_path ~ directory }}/images/logo-mobile.png" alt="{{ 'Home'|t }}" />
+    <a class="logo navbar-btn pull-left" href="{{ url('<front>') }}" title="{{ site_name }}"
+       onmousedown="utag_link(utag_data.titre_page, 'Menu', {{ site_name }}, '');">
+      <img class="not-sticky-logo visible-lg" src="{{ site_logo }}" alt="{{ 'Home'|t }}" />
+      <img class="sticky-logo hidden" src="/{{ base_path ~ directory }}/orange_business_small_logo_text_white.svg" alt="{{ 'Home'|t }}" />
+      <img class="hidden-lg" src="/{{ base_path ~ directory }}/orange_business_small_logo_text_white.svg" alt="{{ 'Home'|t }}" />
     </a>
   {% endif %}
-  {% if site_name %}
-    <a class="name navbar-brand" href="{{ url('<front>') }}" title="{{ 'Home'|t }}" rel="home"
-       onmousedown="utag_link(utag_data.titre_page, 'Menu', 'Orange Business Services ', '');">{{ site_name }}</a>
+{#  {% if site_name %}
+    <a class="name navbar-brand" href="{{ url('<front>') }}" title="{{ 'Home'|t }}" rel="{{ site_name }}"
+       onmousedown="utag_link(utag_data.titre_page, 'Menu', {{ site_name }}, '');">{{ site_name }}</a>
   {% endif %}
   {% if site_slogan %}
     <p class="navbar-text">{{ site_slogan }}</p>
-  {% endif %}
+  {% endif %}#}
 {% endblock %}

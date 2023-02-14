@@ -121,5 +121,22 @@ document.querySelectorAll('#main_nav #block-theme-one-i-righticonblock .nav-item
     })
   });
 
+  const stickyLogo = $('img.sticky-logo');
+  const notStickyLogo = $('img.not-sticky-logo');
+
+  $(window).scroll(() => {
+    let scroll = $(window).scrollTop();
+
+    if (scroll > 0) {
+      stickyLogo.addClass('d-lg-block');
+      notStickyLogo.removeClass('d-lg-block');
+    }
+    else {
+      stickyLogo.removeClass('d-lg-block');
+      notStickyLogo.addClass('d-lg-block');
+    }
+  });
+
+
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 
