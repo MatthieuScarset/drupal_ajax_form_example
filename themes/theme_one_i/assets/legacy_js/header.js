@@ -121,22 +121,20 @@ document.querySelectorAll('#main_nav #block-theme-one-i-righticonblock .nav-item
     })
   });
 
-  const mediumLogo = $('img.medium-logo');
-  const largeLogo = $('img.large-logo');
+  const smallLogo = $('#main_nav img.small-logo');
+  const largeLogo = $('#main_nav img.large-logo');
 
   $(window).scroll(() => {
-    let scroll = $(window).scrollTop();
-
-    if (scroll > 0) {
-      mediumLogo.addClass('d-lg-block');
+    if ($(window).scrollTop()) {
+      smallLogo.addClass('d-lg-block');
+      smallLogo.removeClass('d-lg-none');
       largeLogo.removeClass('d-lg-block');
-    }
-    else {
-      mediumLogo.removeClass('d-lg-block');
+    } else {
+      smallLogo.removeClass('d-lg-block');
+      smallLogo.addClass('d-lg-none');
       largeLogo.addClass('d-lg-block');
     }
   });
-
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 
