@@ -163,7 +163,6 @@
 }
 
 #main_nav .nav > li > a {
-  transition: all .1s ease-in-out;
   line-height: 1.5rem;
 }
 
@@ -173,12 +172,10 @@
 }
 
 #main_nav.navbar-fixed .navbar-right {
-  transition: all .1s ease-in-out;
   padding-top: 16px;
 }
 
 #main_nav.navbar-fixed .nav > li > a {
-  transition: all .1s ease-in-out;
   line-height: 1.5rem;
 }
 

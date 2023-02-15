@@ -125,7 +125,7 @@ document.querySelectorAll('#main_nav #block-theme-one-i-righticonblock .nav-item
   const largeLogo = $('#main_nav img.large-logo');
 
   $(window).scroll(() => {
-    if ($(window).scrollTop()) {
+    if ($(window).scrollTop() > 0) {
       smallLogo.addClass('d-lg-block');
       smallLogo.removeClass('d-lg-none');
       largeLogo.removeClass('d-lg-block');
