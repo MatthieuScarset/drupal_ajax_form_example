@@ -45,30 +45,14 @@
       }
     }
 
-    .modal-dialog {
-      .modal-content {
+    .modal-dialog .modal-content {
+      .modal-header {
+        top: 3.75rem;
+        right: 3.75rem;
+      }
 
-        .modal-header {
-          top: 3.75rem;
-          right: 3.75rem;
-        }
-
-        .modal-body {
-
-          h3 {
-            div {
-              margin: auto 0;
-            }
-          }
-
-          #faqAccordion {
-            .card {
-              .card-header > a{
-                border-bottom: none;
-              }
-            }
-          }
-        }
+      .modal-body h3 div {
+        margin: auto 0;
       }
     }
   }
