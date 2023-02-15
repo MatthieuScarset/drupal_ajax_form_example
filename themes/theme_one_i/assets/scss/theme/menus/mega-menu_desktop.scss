@@ -8,25 +8,24 @@ header#navbar.sticky-top.is-sticky {
       margin: 0.9375rem 3.75rem 0.9375rem 0;
     }
 
-    .navbar-brand img.medium-logo {
+    .navbar-brand img.small-logo {
       width: auto;
       height: 30px;
     }
-
     .navbar-right {
       margin-top: revert;
     }
 
     .mega-menu-desktop {
       .nav-link {
-        padding-bottom: 0.9375rem;
+        padding-bottom: 1.275rem;
 
         &[role="menuitem"]:hover {
-          padding-bottom: 0.625rem;
+          padding-bottom: 0.9625rem;
         }
 
         &[aria-expanded="true"] {
-          padding-bottom: 0.625rem;
+          padding-bottom: 0.9625rem;
         }
       }
       .item_mega_menu {
@@ -67,7 +66,7 @@ header#navbar.sticky-top.is-sticky {
         transition: width .2s ease-in-out;
         margin-bottom: 0;
         height: 2.5rem;
-        width: 100%;
+        width: auto;
 
         @include media-breakpoint-up(xl) {
           height: 3.125rem;
@@ -102,15 +101,19 @@ header#navbar.sticky-top.is-sticky {
       position: initial
     }
 
+    ul.navbar-nav li.nav-item a.nav-link {
+      line-height: 1rem;
+    }
+
     ul.navbar-nav > li:first-child a.nav-link {
       margin-left: 0;
     }
 
     .nav-link {
-      padding-bottom: 1.5rem;
+      padding-bottom: 1.625rem;
 
       @include media-breakpoint-up(xl) {
-        padding-bottom: 1.9375rem;
+        padding-bottom: 2.1rem;
       }
 
       &[role="menuitem"]::before {
@@ -123,21 +126,21 @@ header#navbar.sticky-top.is-sticky {
 
       &[role="menuitem"]:hover {
         color: $orange1;
-        padding-bottom: 1.1875rem;
+        padding-bottom: 1.3125rem;
         border-bottom: 5px solid $orange1;
 
         @include media-breakpoint-up(xl) {
-          padding-bottom: 1.625rem;
+          padding-bottom: 1.7875rem;
         }
       }
 
       &[aria-expanded="true"] {
         color: $white;
-        padding-bottom: 1.1875rem;
+        padding-bottom: 1.3125rem;
         border-bottom: 5px solid $orange1;
 
         @include media-breakpoint-up(xl) {
-          padding-bottom: 1.625rem;
+          padding-bottom: 1.7875rem;
         }
       }
 
