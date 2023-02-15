@@ -121,19 +121,19 @@ document.querySelectorAll('#main_nav #block-theme-one-i-righticonblock .nav-item
     })
   });
 
-  const stickyLogo = $('img.sticky-logo');
-  const notStickyLogo = $('img.not-sticky-logo');
+  const mediumLogo = $('img.medium-logo');
+  const largeLogo = $('img.large-logo');
 
   $(window).scroll(() => {
     let scroll = $(window).scrollTop();
 
     if (scroll > 0) {
-      stickyLogo.addClass('d-lg-block');
-      notStickyLogo.removeClass('d-lg-block');
+      mediumLogo.addClass('d-lg-block');
+      largeLogo.removeClass('d-lg-block');
     }
     else {
-      stickyLogo.removeClass('d-lg-block');
-      notStickyLogo.addClass('d-lg-block');
+      mediumLogo.removeClass('d-lg-block');
+      largeLogo.addClass('d-lg-block');
     }
   });
 

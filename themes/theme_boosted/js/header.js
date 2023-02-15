@@ -134,21 +134,21 @@
             container_margin_top += contact_module.height() + 20;
         }
 
-        const stickyLogo = $('img.sticky-logo');
-        const notStickyLogo = $('img.not-sticky-logo');
+        const mediumLogo = $('img.medium-logo');
+        const largeLogo = $('img.large-logo');
 
         let scroll = $(window).scrollTop();
         if (scroll > 0) {
-          stickyLogo.removeClass('hidden');
-          stickyLogo.addClass('visible-lg');
-          notStickyLogo.removeClass('visible-lg');
-          notStickyLogo.addClass('hidden');
+          mediumLogo.removeClass('hidden');
+          mediumLogo.addClass('visible-lg');
+          largeLogo.removeClass('visible-lg');
+          largeLogo.addClass('hidden');
         }
         else {
-          stickyLogo.removeClass('visible-lg');
-          stickyLogo.addClass('hidden');
-          notStickyLogo.removeClass('hidden');
-          notStickyLogo.addClass('visible-lg');
+          mediumLogo.removeClass('visible-lg');
+          mediumLogo.addClass('hidden');
+          largeLogo.removeClass('hidden');
+          largeLogo.addClass('visible-lg');
         }
 
         if (top_menu.length) {
