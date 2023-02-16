@@ -56,10 +56,6 @@ Specific HP with background in carrousel
         /*padding: 25px 0 0;*/
     }
 
-    .oab_background_image .subnav.navbar-fixed .container-fluid-navbar {
-        border: none;
-    }
-
     .oab_background_image .menu.navbar-nav .nav-item.dropdown.open > a {
         border-color: transparent;
     }
