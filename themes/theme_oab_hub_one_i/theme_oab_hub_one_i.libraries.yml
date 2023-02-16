@@ -1,0 +1,5 @@
+global-styling:
+  version: VERSION
+  css:
+    component:
+      dist/css/style.css: {}
