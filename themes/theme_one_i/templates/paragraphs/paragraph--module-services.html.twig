@@ -44,7 +44,7 @@
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
   not paragraph.isPublished() ? 'paragraph--unpublished',
-  "py-2 py-md-5"
+  "py-2 pt-md-2 pb-md-5"
 ]
 %}
 {% block paragraph %}
@@ -52,12 +52,12 @@
     <div id="services" {{ attributes.addClass(classes) }}>
       <div class="container-fluid site-width">
         <div class="row justify-content-between">
-          <div class="col-12 col-md-4">
+          <div class="sticky-top h-100 col-12 col-md-4 pt-md-3">
             <div class="small text-gray3 font-weight-bold pt-0">{{ module_title|t }}</div>
             <h2 class="h1 mb-2 pb-0">{{ content.field_title }}</h2>
             <div class="lead font-weight-bold p-0">{{ content.field_accroche }}</div>
           </div>
-         <div class="items-services col-12 col-md-7">
+         <div class="items-services col-12 col-md-7 pt-md-3">
            <hr class="separator mt-2 separator--gray4">
            {{ content.field_items_services }}
          </div>
