@@ -13,5 +13,5 @@ use Symfony\Component\Validator\Constraint;
  * )
  */
 class ModularProductOrderModule extends Constraint {
-  public string $badOrder = 'Modules are not well ordered';
+  public string $badOrder = 'Modules are not well ordered. Here is the expected order : %value';
 }

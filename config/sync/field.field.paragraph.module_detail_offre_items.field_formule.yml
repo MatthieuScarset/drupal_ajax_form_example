@@ -11,7 +11,7 @@ entity_type: paragraph
 bundle: module_detail_offre_items
 label: 'Configurator offre'
 description: 'Enter the name of the offer associated with the configurator'
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''

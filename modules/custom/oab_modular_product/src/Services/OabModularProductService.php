@@ -6,6 +6,12 @@ use Drupal\Core\Config\ImmutableConfig;
 
 class OabModularProductService {
 
+  const MODULES_OPTIONNELS = [
+    "module_3_4_colonnes",
+    "module_text_video_image",
+    "paragraph_wysiwyg",
+  ];
+
   public function __construct(
     private ImmutableConfig $config
   ) { }
@@ -52,6 +58,40 @@ class OabModularProductService {
 
   public function getToGoFurtherTitle(): mixed {
     return $this->get("modules_titles.to_go_further");
+  }
+
+  public function getModulesOrder(): array {
+    $modules = $this->config->get('modules_settings.modules');
+    if(empty($modules)) {
+      return [];
+    }
+    else {
+      //tri du tableau par la weight
+      uasort($modules, function($a, $b) {
+        return $a['weight'] <=> $b['weight'];
+      });
+      //on ne renvoie que les id
+      return array_keys($modules);
+    }
+  }
+
+  public function getModulesRequired(): array {
+    $modules = $this->get('modules_settings.modules');
+    //filtre du tableau sur les required - on ne renvoie que les id
+    return array_keys(array_filter($modules, function($v) {
+      return $v['required'] === "1";
+    }));
+
+  }
+
+  public function getModulesOptionalSecondaryPosition(): array {
+    $modules = $this->get('modules_settings.modules');
+
+    //filtre du tableau sur les second_position - on ne renvoie que les id
+    return array_keys(array_filter($modules, function($v) {
+      return $v['second_position'] === "1";
+    }));
+
   }
 
   private function get(string $item): mixed {

@@ -1,17 +1,18 @@
 .example-items {
   .img-module-exemple {
     img {
-      @include media-breakpoint-down(md) {
         width: 100%;
         height: auto;
-      }
+
     }
   }
 
-  .example-title {
-    cursor: pointer;
+  .example-titles {
     a {
+      cursor: pointer;
       color: $white;
+      display: flex;
+      flex-direction: column;
 
       &.active {
         font-weight: bold;
@@ -20,18 +21,28 @@
       &:hover {
         color: $gray4;
       }
+
+      .example-progress-bar {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        min-height: 6px;
+
+        & > * {
+          width: 100%
+        }
+
+        & > div {
+          display: inline-block;
+        }
+      }
     }
   }
 
   .example-content {
     flex-wrap: initial;
-    overflow-x: scroll;
-    scrollbar-width: none;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
-
+    overflow-x: hidden;
+    
     .o-link-arrow {
       &:hover{
         color: $gray4 !important;
@@ -40,7 +51,7 @@
   }
 
   .progress-indicator {
-    height: 6px;
+    //height: 6px;
     .ob1-progress-bar-determined-inner {
       animation-delay: initial;
     }

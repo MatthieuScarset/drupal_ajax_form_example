@@ -38,34 +38,23 @@ function oab_custom_assets_preprocess_html(&$variables) {
 
   if (!empty($custom_assets['css'])) {
     $variables['custom_css'] = [
-      "#type" => "html_tag",
-      "#tag" => "style",
-      "#value" => $custom_assets['css'],
-      "#attributes" => [
-        'type' => "text/css"
-      ]
+      "#type" => "inline_template",
+      "#template" => "<style>{$custom_assets['css']}</style>",
     ];
   }
 
+
   if (!empty($custom_assets['js'])) {
     $variables['custom_js'] = [
-      "#type" => "html_tag",
-      "#tag" => "script",
-      "#value" => $custom_assets['js'],
-      "#attributes" => [
-        'type' => "text/javascript"
-      ]
+      "#type" => "inline_template",
+      "#template" => "<script type='text/javascript'>{$custom_assets['js']}</script>",
     ];
   }
 
   if (!empty($custom_assets['bottom_js'])) {
     $variables['custom_bottom_js'] = [
-      "#type" => "html_tag",
-      "#tag" => "script",
-      "#value" => $custom_assets['bottom_js'],
-      "#attributes" => [
-        'type' => "text/javascript"
-      ]
+      "#type" => "inline_template",
+      "#template" => "<script type='text/javascript'>{$custom_assets['bottom_js']}</script>",
     ];
   }
 

@@ -262,6 +262,17 @@ function theme_boosted_theme_suggestions_input_alter(&$suggestions, array $varia
  * Implements hook_theme_suggestions_HOOK_alter() for page templates.
  * @param array $suggestions
  */
+function theme_boosted_theme_suggestions_breadcrumb_alter(array &$suggestions, $variables, $hook) {
+  if (\Drupal::routeMatch()->getRouteName() === "view.subhomes.page_press") {
+    $breadcrumb_page = \Drupal::routeMatch()->getParameters()->get('display_id');
+    $suggestions[] = 'breadcrumb__' . $breadcrumb_page;
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for page templates.
+ * @param array $suggestions
+ */
 function theme_boosted_theme_suggestions_block_alter(array &$suggestions, $variables) {
   if ($variables['elements']['#base_plugin_id'] === 'block_content' && isset($variables['elements']['content']['#block_content'])) {
     /** @var BlockContent $block */
@@ -378,22 +389,17 @@ function theme_boosted_preprocess_page(&$variables) {
 		$url .= "://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 		$variables['#attached']['drupalSettings']['tealium']['url_appelee'] = $url;
 
-		if(isset($request->server) && isset($request->server)) {
+		if(isset($request->server)) {
 			$headers = $request->server->getHeaders();
 			$referer_url = isset($headers['REFERER']) ? $headers['REFERER'] : '';
 			$variables['#attached']['drupalSettings']['tealium']['url_referente'] = htmlspecialchars($referer_url);
 		}
 	}
 
-	if (\Drupal::routeMatch()->getParameter('node')) {
-		$node = \Drupal::routeMatch()->getParameter('node');
-	}
-	if (\Drupal::routeMatch()->getParameter('node_preview')) {
-		$node = \Drupal::routeMatch()->getParameter('node_preview');
-	}
-	if ($revision = \Drupal::routeMatch()->getParameter('node_revision')) {
-		$node = node_revision_load($revision);
-	}
+  $node = $route_match->getParameter('node_revision') ??
+    $route_match->getParameter('node_preview') ??
+    $route_match->getParameter('node');
+
 	$variables['page']['containerClass'] = 'container';
 	if (isset($node) && is_object($node)
 		&& get_class($node) == 'Drupal\node\Entity\Node') {
@@ -480,10 +486,16 @@ function theme_boosted_preprocess_page(&$variables) {
 function theme_boosted_preprocess_region(&$variables) {
     // Create the $content variable that templates expect.
     $variables['language'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
+  $config = \Drupal::config('system.site');
+  $variables['site_name'] = $config->get('name');
+
 }
 
 
 function theme_boosted_preprocess_menu(&$variables, $hook) {
+  $config = \Drupal::config('system.site');
+
   if (strpos($hook, 'menu__main') !== false) {
 
     $variables['#cache']['contexts'][0] = 'url';
@@ -524,6 +536,10 @@ function theme_boosted_preprocess_menu(&$variables, $hook) {
         $item['attributes']->addClass('active-trail');
       }
     }
+  }
+
+  if (str_contains($hook, 'menu__bottom_footerbar')) {
+    $variables['site_name'] = $config->get('name');
   }
 }
 

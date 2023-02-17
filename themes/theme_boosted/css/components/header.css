@@ -20,26 +20,46 @@
   margin: 0;
 }
 
-#main_nav .navbar-right {
-  margin-left: 0 !important;
-  margin-top: 15px;
-  padding-bottom: 15px;
-}
-
 #navtop .navbar-right .navbar-nav > li > a {
   padding-left: 2rem;
   padding-right: 0;
 }
 
-.navbar-header {
-  padding-left: 0;
-  padding-bottom: 20px;
-  margin: 0 !important;
+#main_nav .navbar-header.logo {
+  padding-left: 15px;
 }
 
-#main_nav .logo img {
+
+#main_nav .logo img.large-logo {
   transition: all .1s ease-in-out;
-  width: 140px;
+  height: 40px;
+}
+
+.mega-menu .nav.nav-menu {
+  padding-top: 8px ;
+}
+
+.mega-menu.navbar .nav > li > a:hover {
+  color: #f16e00;
+  border-bottom: 5px solid #f16e00;
+  padding-bottom: 22px;
+}
+
+.mega-menu.navbar .nav .nav-item.dropdown.open > a.dropdown-toggle {
+  border-color: #f16e00;
+  padding-bottom: 23px;
+}
+
+.mega-menu .nav.navbar-right {
+  padding-top: 30px ;
+}
+
+.mega-menu.navbar.navbar-fixed .nav > li > a:hover {
+  padding-bottom: 16px;
+}
+
+.mega-menu.navbar.navbar-fixed .nav .nav-item.dropdown.open > a.dropdown-toggle {
+  padding-bottom: 16px;
 }
 
 .icon-share {
@@ -103,18 +123,18 @@
 
 #navbar-collapse-mega .glyphicon,
 .icon-share {
-  margin-right: 0px;
+  margin-right: 5px;
   margin-left: 30px;
   margin-top: 3px;
 }
 
-.navbar #navbar-collapse-mega {
+/*.navbar #navbar-collapse-mega {
   padding-top: 5px;
-}
+}*/
 
-.navbar-fixed #navbar-collapse-mega {
-  padding-top: 0px;
-}
+/*.navbar-fixed #navbar-collapse-mega .nav.namenu {
+  padding-top: 0;
+}*/
 
 .navbar {
   margin-bottom: 0;
@@ -128,7 +148,7 @@
   border-bottom: 1px solid #e1e1e1;
   padding: 25px 0 0;
   border-color: black;
-  border-top: 1px solid grey;
+  /*border-top: 1px solid grey;*/
 }
 
 
@@ -142,19 +162,21 @@
   transition-timing-function: ease-in-out;
 }
 
-#main_nav.navbar-fixed .logo img {
+#main_nav .nav > li > a {
+  line-height: 1.5rem;
+}
+
+#main_nav.navbar-fixed .logo img.medium-logo {
   transition: all .1s ease-in-out;
-  width: 112px;
+  height: 30px;
 }
 
 #main_nav.navbar-fixed .navbar-right {
-  transition: all .1s ease-in-out;
-  margin-top: 10px;
+  padding-top: 16px;
 }
 
 #main_nav.navbar-fixed .nav > li > a {
-  transition: all .1s ease-in-out;
-  padding-top: -9px;
+  line-height: 1.5rem;
 }
 
 #block-topnavbarmenu .navbar-nav > li > a {
@@ -180,29 +202,16 @@
 
 .menu-xs {
   margin: 0;
-  padding: 5px 0 0;
+  padding:0;
 }
 
 .menu-xs .sandwich-button {
   margin-bottom: 0;
 }
 
-.mega-menu.navbar .nav > li > a:hover {
-  color: #f16e00;
-  border-bottom: 5px solid #f16e00;
-  padding-bottom: 11px;
-}
-
 .mega-menu.navbar .nav > li[role="presentation"] > a:hover {
   color: #f16e00;
   border: none !important;
-}
-
-.mega-menu.navbar.navbar-fixed .nav > li > a:hover {
-  color: #f16e00;
-  border: none;
-  border-bottom: 5px solid #f16e00;
-  padding-bottom: 14px;
 }
 
 .mega-menu.navbar .nav > li > a:focus {
@@ -212,24 +221,19 @@
 .mega-menu.navbar .nav > li > a {
   font-size: 1.6rem;
   font-weight: bold;
-  margin-top: 28px;
+  margin-top: 30px;
   padding: 0;
   margin-right: 2rem;
 }
 
 .mega-menu.navbar.navbar-fixed .nav > li > a {
-  margin-top: 20px;
+  margin-top: 24px;
 }
 
 .mega-menu.navbar .nav > li.open > a {
   color: white;
   border: none;
   border-bottom: 5px solid #f16e00;
-}
-
-.mega-menu.navbar .nav .nav-item.dropdown.open > a.dropdown-toggle {
-  border-color: #f16e00;
-  padding-bottom: 11px;
 }
 
 .mega-menu.navbar.navbar-fixed .nav > li.open > a {
@@ -376,6 +380,10 @@
   overflow: hidden;
 }
 
+.mega-menu.navbar-fixed .nav-item.dropdown .dropdown-menu {
+  margin-top: -1px;
+}
+
 #main_nav .container,
 #top_navbar .container {
   padding-right: 0;
@@ -428,11 +436,23 @@
 /*guidelines p.63 pour la navigation principale */
 .mega-menu .nav, .mega-menu .collapse {
   position: static;
-  margin-left: 0px;
-  padding: 0px;
+  margin-left: 0;
+  padding: 0;
 }
-.mega-menu .nav, .mega-menu .collaps .nav-menu {
-  margin-left: 15px;
+
+.mega-menu.navbar-fixed .nav.nav-menu {
+  padding-top: 0 ;
+}
+
+@media (min-width: 768px) {
+  .mega-menu .nav.navbar-right {
+    margin-right: -10px;
+  }
+}
+
+
+.mega-menu .nav > li:first-child {
+margin-left: 0;
 }
 
 .mega-menu .navbar .nav > li {
@@ -594,11 +614,6 @@
     padding-right: 0;
   }
 
-  .navbar-header {
-    padding-left: 10px;
-    padding-bottom: 20px;
-  }
-
 }
 
 
@@ -739,34 +754,24 @@
     overflow: hidden;
   }
 
-  #main_nav .logo img {
-    margin-top: -20px;
-    height: auto;
-    width: 112px;
+  #main_nav .logo img, #main_nav.navbar-fixed .logo img {
+    height: 30px;
+    width: auto;
     transition: none;
-  }
-
-  #main_nav.navbar-fixed .logo img {
-    transition: none;
-    width: 112px;
-    margin-top: -12px;
   }
 
   .subnav.navbar-fixed {
     z-index: 2002;
-    height: 50px;
+    padding-top: 15px;
   }
 
   .subnav{
-    height: 50px;
+    height: 60px;
+    padding-top: 15px;
   }
 
   .menu-xs {
-   margin-top: -29px !important;
-  }
-
-  #main_nav.navbar-fixed .menu-xs {
-    margin-top: -24px !important;
+   margin-top: -11px !important;
   }
 
   #main_nav .menu-xs .sandwich-button.navbar-toggle:hover, #main_nav .menu-xs .sandwich-button.navbar-toggle:focus {
@@ -781,7 +786,7 @@
   .mega-menu.navbar #navbar-collapse-mega {
     background-color: white;
     position: fixed;
-    top: 50px;
+    top: 60px;
     bottom: 0;
     left: 0;
     right: 0;
@@ -1085,8 +1090,19 @@
     margin-left: auto
   }
 
-  .mega-menu.navbar .nav > li:first-child > a {
+/*  .mega-menu.navbar .nav > li:first-child > a {
     margin-left: 10px !important;
+  }*/
+
+  #main_nav .navbar-header.logo {
+    padding: 0;
+    margin: 20px 60px 20px 0;
+    width: auto;
+  }
+
+  #main_nav.navbar-fixed .navbar-header.logo {
+    margin: 15px 60px 15px 0;
+    width: auto;
   }
 
   .mega-menu .dropdown-menu .row {
@@ -1120,6 +1136,42 @@
   .mega-menu .dropdown-menu .sous_items_prod_serv .row {
     padding-bottom: 0;
   }
+
+  #main_nav .navbar-header.logo {
+    padding: 0;
+    margin: 25px 90px 25px 0;
+    width: auto;
+  }
+
+  #main_nav .logo img.large-logo {
+    transition: all .1s ease-in-out;
+    height: 50px;
+  }
+
+  .mega-menu .nav.nav-menu {
+    padding-top: 20px ;
+  }
+
+  .mega-menu .nav.navbar-right {
+    padding-top: 45px ;
+  }
+
+  .mega-menu.navbar .nav > li > a:hover {
+    padding-bottom: 29px;
+  }
+
+  .mega-menu.navbar .nav .nav-item.dropdown.open > a.dropdown-toggle {
+    padding-bottom: 29px;
+  }
+
+  .mega-menu.navbar.navbar-fixed .nav > li > a:hover {
+    padding-bottom: 15px;
+  }
+
+  .mega-menu.navbar.navbar-fixed .nav .nav-item.dropdown.open > a.dropdown-toggle {
+    padding-bottom: 16px;
+  }
+
 }
 @media (min-width: 1380px) {
   .container-fluid-navbar {

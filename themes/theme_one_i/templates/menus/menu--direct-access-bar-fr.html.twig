@@ -60,7 +60,7 @@ We call a macro which calls itself to render the full tree.
                       </i>
                     {% endif %}
                   {% endset %}
-                  {{ link(link_text, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Footer\', \'Images thèmes\', \'' ~ item.title ~ '\');'}) }}
+                  {{ link(link_text, item.url, {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Footer\', \'Images thèmes\', \'' ~ item.title ~ '\');'}) }}
                 </div>
               {% endif %}
 
@@ -77,7 +77,7 @@ We call a macro which calls itself to render the full tree.
                       </i>
                     {% endif %}
                   {% endset %}
-                  {{ link(link_text, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Footer\', \'Images thèmes\', \'' ~ item.title ~ '\');'}) }}
+                  {{ link(link_text, item.url, {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Footer\', \'Images thèmes\', \'' ~ item.title ~ '\');'}) }}
                 </div>
               {% endif %}
           {% endfor %}

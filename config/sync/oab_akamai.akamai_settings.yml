@@ -5,4 +5,4 @@ req_path: /ccu/v3/delete/url/production
 access_token: akab-zcn5oqfkvcbrs52g-mu6txykkxrrhm5im
 client_token: akab-3eq5kc5srq6rtq6n-sfxlqqrosopuhfyp
 client_secret: 9nGqXelX88v/1/J0TDo6dOLJst3u8C0qo+pkp4p4WF0=
-varnish_ip: 10.200.2.195
+varnish_ip: ''
