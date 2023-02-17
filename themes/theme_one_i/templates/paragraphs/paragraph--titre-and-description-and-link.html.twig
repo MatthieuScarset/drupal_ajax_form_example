@@ -38,9 +38,17 @@
  * @ingroup themeable
  */
 #}
-
+{%
+  set classes = [
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  not paragraph.isPublished() ? 'paragraph--unpublished'
+]
+%}
 {% block paragraph %}
-      <div class="card-header">
+  {% block content %}
+    <div {{ attributes.addClass(classes, 'card-header') }}>
         <a id="serviceTitle-{{ paragraph.id() }}"
            class="collapsed"
            data-toggle="collapse"
@@ -63,19 +71,19 @@
             <span class="accordion-icon" aria-hidden="true"></span>
           </div>
         </a>
-      </div>
-      <div id="serviceDescription-{{ paragraph.id() }}"
-           class="collapse mt-1"
-           aria-labelledby="serviceTitle-{{ paragraph.id() }}">
-        <div class="accordion-card-body standard mw-100">
-          {{ content.field_accroche }}
+    </div>
+    <div id="serviceDescription-{{ paragraph.id() }}"
+         class="collapse mt-1"
+         aria-labelledby="serviceTitle-{{ paragraph.id() }}">
+      <div class="accordion-card-body standard mw-100">
+        {{ content.field_accroche }}
 
-          {% if content.field_redirection_url[0]['#url']|length > 0 %}
-            <a href="{{ content.field_redirection_url[0]['#url'] }}"
-               onmousedown="utag_link(utag_data.titre_page,'services sur mesure' ,'{{ content.field_title.0['#context']['value']|escape('html') }}','En savoir plus')"
-               class="o-link-arrow mt-1">{{ 'More information'|t }}</a>
-          {% endif %}
-
-        </div>
+        {% if content.field_redirection_url[0]['#url']|length > 0 %}
+          <a href="{{ content.field_redirection_url[0]['#url'] }}"
+             onmousedown="utag_link(utag_data.titre_page,'services sur mesure' ,'{{ content.field_title.0['#context']['value']|escape('html') }}','En savoir plus')"
+             class="o-link-arrow mt-1">{{ 'More information'|t }}</a>
+        {% endif %}
       </div>
+    </div>
+  {% endblock content %}
 {% endblock paragraph %}
