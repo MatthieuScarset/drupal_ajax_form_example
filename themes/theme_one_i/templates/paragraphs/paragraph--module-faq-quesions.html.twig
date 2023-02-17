@@ -1,6 +1,8 @@
 {% block paragraph %}
   <div class="card-header col-12">
-    <a id="question-{{ paragraph.id() }}" class="collapsed" data-toggle="collapse" onmousedown="utag_link(utag_data.titre_page,'aller plus loin','faq','{{ content.field_question.0['#context']['value']|escape('html') }}')" data-target="collapseQuestion-{{ paragraph.id() }}" href="#collapseQuestion-{{ paragraph.id() }}" role="button" aria-expanded="false">
+    <a id="question-{{ paragraph.id() }}" class="collapsed" data-toggle="collapse"
+       onmousedown="utag_link(utag_data.titre_page,'aller plus loin','faq','{{ content.field_question.0['#context']['value']|escape('html') }}')"
+       data-target="collapseQuestion-{{ paragraph.id() }}" href="#collapseQuestion-{{ paragraph.id() }}" role="button" aria-expanded="false">
       <div class="accordion-card-title py-1">
         <div class="accordion-title text-decoration-none">
           {{ content.field_question }}
