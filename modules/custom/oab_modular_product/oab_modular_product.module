@@ -32,29 +32,22 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
     'module_customer_space'
   ];
 
-  $nb_char_title_short = $conf_modular_product->getShortTitleMaxCharacter();
-  $nb_char_description = $conf_modular_product->getLongDescriptionMaxCharacter();
+  $max_char_short_title = $conf_modular_product->getShortTitleMaxCharacter();
+  $max_char_description = $conf_modular_product->getLongDescriptionMaxCharacter();
+  $field_filtered_markup_title = FieldFilteredMarkup::create("$max_char_short_title characters max");
+  $field_filtered_markup_description = FieldFilteredMarkup::create("$max_char_description characters max");
 
   $size_title_short = min(150, $conf_modular_product->getShortTitleMaxCharacter()+10);
 
   if (in_array($entity_form['#bundle'], $mp_modules)) {
-    if (isset($entity_form['field_title'])) {
-      $entity_form['field_title']['widget'][0]['value']['#maxlength'] = $nb_char_title_short;
+    if (isset($entity_form['field_accroche']) || isset($entity_form['field_highlight']) || isset($entity_form['field_title'])) {
+      $entity_form['field_title']['widget'][0]['value']['#maxlength'] = $max_char_short_title;
       $entity_form['field_title']['widget'][0]['value']['#size'] = $size_title_short;
-      $entity_form['field_title']['widget'][0]['value']['#description'] .= ' '
-        .FieldFilteredMarkup::create("$nb_char_title_short characters max");
-    }
-
-    if (isset($entity_form['field_accroche'])) {
-      $entity_form['field_accroche']['widget'][0]['value']['#maxlength'] = $nb_char_description;
-      $entity_form['field_accroche']['widget'][0]['value']['#description'] .= ' '
-        .FieldFilteredMarkup::create($nb_char_description.' characters max');
-    }
-
-    if (isset($entity_form['field_highlight'])) {
-      $entity_form['field_highlight']['widget'][0]['value']['#maxlength'] = $nb_char_description;
-      $entity_form['field_highlight']['widget'][0]['value']['#description'] .= ' '
-        .FieldFilteredMarkup::create($nb_char_description.' characters max');
+      $entity_form['field_title']['widget'][0]['value']['#description'] .= ' '.$field_filtered_markup_title;
+      $entity_form['field_accroche']['widget'][0]['value']['#maxlength'] = $max_char_description;
+      $entity_form['field_accroche']['widget'][0]['value']['#description'] .= ' '.$field_filtered_markup_description;
+      $entity_form['field_highlight']['widget'][0]['value']['#maxlength'] = $max_char_description;
+      $entity_form['field_highlight']['widget'][0]['value']['#description'] .= ' '.$field_filtered_markup_description;
       $entity_form['field_highlight']['widget'][0]['value']['#rows'] = 2;
     }
   }
