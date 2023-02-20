@@ -1,7 +1,7 @@
 
 # DEFINE DEV SPECIFIC VARIABLES AND JBS
 stages:          # List of stages for jobs, and their order of execution
-  #  - test
+  - test
   - build_assets
   - deploy
   - build
