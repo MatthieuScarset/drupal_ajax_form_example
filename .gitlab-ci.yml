@@ -15,6 +15,8 @@ dummy_job:
   script:
     - echo 'This job should not run'
 
+
+# Test code on MR, Dev and Tags
 sonarqube-check:
   image:
     name: sonarsource/sonar-scanner-cli:latest
@@ -33,3 +35,5 @@ sonarqube-check:
   allow_failure: true
   only:
     - merge_requests
+    - dev
+    - tags
