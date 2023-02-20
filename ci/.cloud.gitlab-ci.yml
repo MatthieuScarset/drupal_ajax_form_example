@@ -1,6 +1,7 @@
 
 # DEFINE DEV SPECIFIC VARIABLES AND JBS
 stages:          # List of stages for jobs, and their order of execution
+  - test
   - build_assets
   - deploy
   - build
@@ -34,6 +35,10 @@ before_script:
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
 
+
+sonarqube-mr:
+  stage: test
+  <<: *sonar_template
 
 Build assets:
   stage: build_assets

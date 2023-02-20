@@ -1,5 +1,6 @@
 # DEFINE DEV SPECIFIC VARIABLES AND JBS
 include:
+  - local: /ci/.templates.gitlab-ci.yml
   - local: /ci/.cloud.gitlab-ci.yml
     rules:
       - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "integration" || $CI_COMMIT_BRANCH == "commerce/main" || $CI_COMMIT_BRANCH == "commerce/dev"
@@ -17,24 +18,7 @@ dummy_job:
 
 
 # Test code on MR, Dev and Tags
-sonarqube-check:
-  stage: .pre
-  image:
-    name: sonarsource/sonar-scanner-cli:latest
-    entrypoint: [""]
-  variables:
-    SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
-    GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
-    SONAR_HOST_URl: $SONAR_HOST_URL
-    SONAR_LOGIN: $SONAR_TOKEN
-  cache:
-    key: "${CI_JOB_NAME}"
-    paths:
-      - .sonar/cache
-  script:
-    - sonar-scanner -Dsonar.qualitygate.wait=true
-  allow_failure: true
+sonarqube-mr:
+  <<: *sonar_template
   only:
     - merge_requests
-    - dev
-    - tags
