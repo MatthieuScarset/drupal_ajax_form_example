@@ -34,49 +34,53 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
 
   $max_char_short_title = $conf_modular_product->getShortTitleMaxCharacter();
   $max_char_description = $conf_modular_product->getLongDescriptionMaxCharacter();
-  $field_filtered_markup_title = FieldFilteredMarkup::create("$max_char_short_title characters max");
-  $field_filtered_markup_description = FieldFilteredMarkup::create("$max_char_description characters max");
+  $field_title_markup = FieldFilteredMarkup::create("$max_char_short_title characters max");
+  $field_description_markup = FieldFilteredMarkup::create("$max_char_description characters max");
 
   $size_title_short = min(150, $conf_modular_product->getShortTitleMaxCharacter()+10);
 
   if (in_array($entity_form['#bundle'], $mp_modules)) {
-    if (isset($entity_form['field_title'])) {
-      $entity_form['field_title']['widget'][0]['value']['#maxlength'] = $max_char_short_title;
-      $entity_form['field_title']['widget'][0]['value']['#size'] = $size_title_short;
-      $entity_form['field_title']['widget'][0]['value']['#description'] .= ' '.$field_filtered_markup_title;
-    }
+    $fields = [
+      'field_accroche',
+      'field_highlight',
+      'field_title'
+      ];
 
-    if (isset($entity_form['field_accroche'])) {
-      $entity_form['field_accroche']['widget'][0]['value']['#maxlength'] = $max_char_description;
-      $entity_form['field_accroche']['widget'][0]['value']['#description'] .= ' '.$field_filtered_markup_description;
-    }
+    foreach ($fields as $field) {
+      if (isset($entity_form[$field])) {
+        $field_max_length = $field === 'field_title' ? $max_char_short_title : $max_char_description;
+        $field_description = $field === 'field_title' ? $field_title_markup : $field_description_markup;
+        $entity_form[$field]['widget'][0]['value']['#maxlength'] = $field_max_length;
+        $entity_form[$field]['widget'][0]['value']['#description'] .= ' '.$field_description;
 
-    if (isset($entity_form['field_highlight'])) {
-      $entity_form['field_highlight']['widget'][0]['value']['#maxlength'] = $max_char_description;
-      $entity_form['field_highlight']['widget'][0]['value']['#description'] .= ' '.$field_filtered_markup_description;
-      $entity_form['field_highlight']['widget'][0]['value']['#rows'] = 2;
+        if ($field === 'field_highlight') {
+          $entity_form[$field]['widget'][0]['value']['#rows'] = 2;
+        } elseif ($field === 'field_title') {
+          $entity_form[$field]['widget'][0]['value']['#size'] = $size_title_short;
+        }
+      }
     }
   }
 
   if ($entity_form['#bundle'] === 'module_text_video_image') {
     $parents = $entity_form['field_visual']['#parents'];
-    $array_slice = array_slice($parents, 1, -1);
-    $implode = implode("][", $array_slice);
-    $position = $parents[0].'['.$implode.']';
+    $parents_needed = array_slice($parents, 1, -1);
+    $parent_path = implode("][", $parents_needed);
+    $input_name = $parents[0].'['.$parent_path.'][field_media_type]';
     $entity_form['field_visual']['#states'] = [
       'visible' => [
-        ':input[name="'.$position.'[field_media_type]"]' => ['value' => 'image'],
+        ':input[name="'.$input_name.'"]' => ['value' => 'image'],
       ],
       'required' => [
-        ':input[name="'.$position.'[field_media_type]"]' => ['value' => 'image'],
+        ':input[name="'.$input_name.'"]' => ['value' => 'image'],
       ]
     ];
     $entity_form['field_video']['#states'] = [
       'visible' => [
-        ':input[name="'.$position.'[field_media_type]"]' => ['value' => 'video'],
+        ':input[name="'.$input_name.'"]' => ['value' => 'video'],
       ],
       'required' => [
-        ':input[name="'.$position.'[field_media_type]"]' => ['value' => 'video'],
+        ':input[name="'.$input_name.'"]' => ['value' => 'video'],
       ]
     ];
   }
