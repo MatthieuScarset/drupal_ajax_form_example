@@ -1,0 +1,11 @@
+uuid: 95eb6520-9adf-4ee6-9f91-593595d010d4
+langcode: en
+status: true
+dependencies:
+  module:
+    - oab_mp_product_formule_packages
+id: formule_package_type.wot_secured
+target_entity_type_id: formule_package_type
+target_bundle: wot_secured
+default_langcode: site_default
+language_alterable: false

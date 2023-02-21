@@ -94,7 +94,7 @@ Build Drupal:
     expire_in: 1 hour
 
 Build Assets:
-  stage: build
+  stage: build_drupal
   image: node
   script:
     - cd themes/theme_one_i

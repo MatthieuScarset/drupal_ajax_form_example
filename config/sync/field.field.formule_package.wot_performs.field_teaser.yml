@@ -1,0 +1,19 @@
+uuid: dd1d11ff-90f0-4395-9839-1812314e14e3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.formule_package.field_teaser
+    - oab_mp_product_formule_packages.formule_package_type.wot_performs
+id: formule_package.wot_performs.field_teaser
+field_name: field_teaser
+entity_type: formule_package
+bundle: wot_performs
+label: Teaser
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

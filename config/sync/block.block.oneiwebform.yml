@@ -39,4 +39,4 @@ visibility:
     id: request_path
     negate: false
     context_mapping: {  }
-    pages: "/contact\r\n/node/14239\r\n/formulaire-contact\r\n/test-altares-spanish-contact-us\r\n/working-together-ready-contact-commercial\r\n/node/14662\r\n/testmarketoaltares-english-contact-us\r\n"
+    pages: "/contact\r\n/node/14239\r\n/formulaire-contact\r\n/test-altares-spanish-contact-us\r\n/working-together-ready-contact-commercial\r\n/node/14662\r\n/testmarketoaltares-english-contact-us\r\n/contato\r\n/contacto\r\n/working-together-ready-precommande"

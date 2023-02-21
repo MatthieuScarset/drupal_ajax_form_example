@@ -13,7 +13,9 @@ label: 'FAQ Panel Title'
 description: ''
 required: false
 translatable: false
-default_value: {  }
+default_value:
+  -
+    value: 'Questions fréquentes'
 default_value_callback: ''
 settings: {  }
 field_type: string

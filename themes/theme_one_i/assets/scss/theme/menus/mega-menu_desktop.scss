@@ -3,42 +3,84 @@ header#navbar.sticky-top.is-sticky {
   .main_nav.navbar {
     padding-bottom: 0;
 
-    .navbar-brand img {
-      width: 112px;
-      height: auto;
-      padding-bottom: 0.9375rem;
+    div.navbar-brand {
+      height: 1.875rem;
+      margin: 0.9375rem 3.75rem 0.9375rem 0;
     }
 
+    .navbar-brand img.small-logo {
+      width: auto;
+      height: 30px;
+    }
     .navbar-right {
-      padding-bottom: 0.9375rem;
+      margin-top: revert;
     }
 
     .mega-menu-desktop {
+      .nav-link {
+        padding-bottom: 1.275rem;
+
+        &[role="menuitem"]:hover {
+          padding-bottom: 0.9625rem;
+        }
+
+        &[aria-expanded="true"] {
+          padding-bottom: 0.9625rem;
+        }
+      }
       .item_mega_menu {
-        margin: -12px auto 0;
+        margin: -40px auto 0;
       }
 
       @media (min-width: 1600px) {
         .item_mega_menu {
           max-width: 1560px;
-          margin: -12px auto 0;
+          margin: -40px auto 0;
         }
+      }
+    }
+
+    .oab-synomia-search-header-block-form .top-block-search-form {
+      input {
+        height: 30px;
       }
     }
   }
 }
 
 .main_nav.navbar {
-  padding-bottom: 0;
-  .navbar-brand img {
-    width: 140px;
-    height: auto;
-    transition: width .2s ease-in-out;
-    padding-bottom: 0.9375rem;
+  padding: 0;
+  div.navbar-brand {
+    height: 2.5rem;
+    margin: 1.25rem 3.75rem 1.25rem 0;
+
+    @include media-breakpoint-up(xl){
+      height: 3.125rem;
+      margin: 1.5625rem 5.625rem 1.5625rem 0;
+    }
+
+    a.logo {
+      margin-right: 0;
+
+      img {
+        transition: width .2s ease-in-out;
+        margin-bottom: 0;
+        height: 2.5rem;
+        width: auto;
+
+        @include media-breakpoint-up(xl) {
+          height: 3.125rem;
+        }
+      }
+    }
   }
 
   .navbar-right {
-    padding-bottom: 0.9375rem;
+    margin-top: 4px;
+
+    @include media-breakpoint-up(xl) {
+      margin-top: 14px;
+    }
   }
 
   .nav_item_dropdown {
@@ -59,8 +101,20 @@ header#navbar.sticky-top.is-sticky {
       position: initial
     }
 
+    ul.navbar-nav li.nav-item a.nav-link {
+      line-height: 1rem;
+    }
+
+    ul.navbar-nav > li:first-child a.nav-link {
+      margin-left: 0;
+    }
+
     .nav-link {
-      padding-bottom: 0.9375rem;
+      padding-bottom: 1.625rem;
+
+      @include media-breakpoint-up(xl) {
+        padding-bottom: 2.1rem;
+      }
 
       &[role="menuitem"]::before {
         color: $orange1;
@@ -72,14 +126,22 @@ header#navbar.sticky-top.is-sticky {
 
       &[role="menuitem"]:hover {
         color: $orange1;
-        padding-bottom: 0.625rem;
+        padding-bottom: 1.3125rem;
         border-bottom: 5px solid $orange1;
+
+        @include media-breakpoint-up(xl) {
+          padding-bottom: 1.7875rem;
+        }
       }
 
       &[aria-expanded="true"] {
         color: $white;
-        padding-bottom: 0.625rem;
+        padding-bottom: 1.3125rem;
         border-bottom: 5px solid $orange1;
+
+        @include media-breakpoint-up(xl) {
+          padding-bottom: 1.7875rem;
+        }
       }
 
       &.sous_items {
@@ -91,11 +153,14 @@ header#navbar.sticky-top.is-sticky {
       background-color: $white;
       box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
       padding: 0;
-      margin-top: -2px;
       border-top: $white;
       max-height: 27rem;
       overflow: hidden;
       right: 0;
+
+      @include media-breakpoint-down(xl) {
+        margin-top: -20px;
+      }
 
       li {
         margin-bottom: 1rem;
@@ -201,7 +266,7 @@ header#navbar.sticky-top.is-sticky {
 
       .item_mega_menu {
         max-width: 1560px;
-        margin: -2px auto 0;
+        margin: 0 auto;
 
         .mega-menu-container {
           padding: 0 15px;

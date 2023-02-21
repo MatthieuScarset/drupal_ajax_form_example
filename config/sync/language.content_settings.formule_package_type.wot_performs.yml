@@ -1,0 +1,11 @@
+uuid: 86be6278-ea2c-4bcb-8d3f-b5f4ca993f24
+langcode: en
+status: true
+dependencies:
+  module:
+    - oab_mp_product_formule_packages
+id: formule_package_type.wot_performs
+target_entity_type_id: formule_package_type
+target_bundle: wot_performs
+default_langcode: site_default
+language_alterable: false
