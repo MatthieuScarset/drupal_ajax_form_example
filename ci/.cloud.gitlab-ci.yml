@@ -36,7 +36,7 @@ before_script:
   - chmod 700 ~/.ssh
 
 
-sonarqube-mr:
+sonarqube-dev:
   extends: .sonarqube
   stage: .pre
 
