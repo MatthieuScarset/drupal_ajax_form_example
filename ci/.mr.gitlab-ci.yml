@@ -1,0 +1,5 @@
+include:
+  - '/ci/.templates.d/*.yml'
+
+.sonarqube:
+  extends: .sonarqube-template

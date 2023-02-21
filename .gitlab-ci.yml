@@ -1,13 +1,15 @@
 
 # DEFINE DEV SPECIFIC VARIABLES AND JBS
 include:
-  - '/ci/.templates.gitlab-ci.yml'
   - local: /ci/.cloud.gitlab-ci.yml
     rules:
       - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "integration" || $CI_COMMIT_BRANCH == "commerce/main" || $CI_COMMIT_BRANCH == "commerce/dev"
   - local: /ci/.fe.gitlab-ci.yml
     rules:
       - if: $CI_COMMIT_TAG
+  - local: /ci/.mr.gitlab-ci.yml
+    rules:
+      - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 
 
 # Hack to get a "visible job" if none of the files is included
@@ -17,10 +19,3 @@ dummy_job:
     - when: never
   script:
     - echo 'This job should not run'
-
-
-# Test code on MR
-sonarqube-mr:
-  extends: .sonarqube
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
