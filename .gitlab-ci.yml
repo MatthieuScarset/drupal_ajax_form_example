@@ -1,7 +1,7 @@
 
 # DEFINE DEV SPECIFIC VARIABLES AND JBS
 include:
-  - '/ci/template.gitlab-ci.yml'
+  - '/ci/templates.gitlab-ci.yml'
   - local: /ci/.cloud.gitlab-ci.yml
     rules:
       - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "integration" || $CI_COMMIT_BRANCH == "commerce/main" || $CI_COMMIT_BRANCH == "commerce/dev"
