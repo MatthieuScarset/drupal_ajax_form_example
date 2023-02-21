@@ -22,7 +22,7 @@ variables:
 
 # Sonarqube analyze on .pre
 sonarqube:
-  extends: .sonarqube-template
+  extends: .sonarqube_template
   stage: .pre
 
 

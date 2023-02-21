@@ -37,7 +37,7 @@ before_script:
 
 
 sonarqube-dev:
-  extends: .sonarqube
+  extends: .sonarqube_template
   stage: .pre
 
 Build assets:

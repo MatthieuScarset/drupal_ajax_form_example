@@ -1,5 +1,5 @@
 include:
-  - '/ci/.templates.d/sonarqube.yml'
+  - '/ci/.templates.d/*.yml'
 
 .sonarqube:
-  extends: .sonarqube-template
+  extends: .sonarqube_template
