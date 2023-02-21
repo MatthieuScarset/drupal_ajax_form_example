@@ -1,9 +1,9 @@
 include:
   - '/ci/.templates.d/sonarqube.yml'
 
-stages:
-  - test
+#stages:
+#  - test
 
 sonarqube-mr:
   extends: .sonarqube_template
-  stage: test
+#  stage: test
