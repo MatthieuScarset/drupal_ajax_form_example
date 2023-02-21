@@ -8,13 +8,18 @@ dependencies:
     - paragraphs.paragraphs_type.module_presentation
   module:
     - entity_reference_revisions
+    - require_on_publish
+third_party_settings:
+  require_on_publish:
+    require_on_publish: true
+    warn_on_empty: true
 id: node.modular_product.field_presentation
 field_name: field_presentation
 entity_type: node
 bundle: modular_product
 label: Presentation
 description: ''
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
@@ -25,11 +30,17 @@ settings:
       module_presentation: module_presentation
     negate: 0
     target_bundles_drag_drop:
+      call_to_action:
+        weight: 51
+        enabled: false
       contact_button_item:
         weight: 37
         enabled: false
       default_button:
         weight: 38
+        enabled: false
+      detail_gamme_items_offres:
+        weight: 54
         enabled: false
       documentation:
         weight: 39
@@ -79,11 +90,38 @@ settings:
       module_benefits_item:
         weight: 54
         enabled: false
+      module_blog:
+        weight: 71
+        enabled: false
+      module_configurateur_details:
+        weight: 72
+        enabled: false
+      module_cross_sell:
+        weight: 73
+        enabled: false
+      module_cross_sell_item:
+        weight: 74
+        enabled: false
+      module_customer_space:
+        weight: 75
+        enabled: false
+      module_detail_gamme:
+        weight: 76
+        enabled: false
+      module_detail_gamme_items:
+        weight: 77
+        enabled: false
       module_detail_offre:
         weight: 55
         enabled: false
       module_detail_offre_items:
         weight: 56
+        enabled: false
+      module_exemples:
+        weight: 80
+        enabled: false
+      module_exemples_items:
+        weight: 81
         enabled: false
       module_faq:
         weight: 57
@@ -106,6 +144,12 @@ settings:
       module_steps:
         weight: 63
         enabled: false
+      module_testimonial:
+        weight: 89
+        enabled: false
+      module_testimonial_item:
+        weight: 90
+        enabled: false
       module_text_video_image:
         weight: 64
         enabled: false
@@ -126,6 +170,9 @@ settings:
         enabled: false
       subhome_presse_carrousel:
         weight: 70
+        enabled: false
+      title_and_link:
+        weight: 98
         enabled: false
       titre_and_description:
         weight: 71

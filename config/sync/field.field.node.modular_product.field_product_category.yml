@@ -6,13 +6,19 @@ dependencies:
     - field.storage.node.field_product_category
     - node.type.modular_product
     - taxonomy.vocabulary.product_categories
+  module:
+    - require_on_publish
+third_party_settings:
+  require_on_publish:
+    require_on_publish: true
+    warn_on_empty: true
 id: node.modular_product.field_product_category
 field_name: field_product_category
 entity_type: node
 bundle: modular_product
 label: 'Product''s secondary category'
 description: 'Validated sub-category of the product. Only 1 choice'
-required: true
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
