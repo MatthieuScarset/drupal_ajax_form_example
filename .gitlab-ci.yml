@@ -19,8 +19,8 @@ dummy_job:
     - echo 'This job should not run'
 
 
-# Test code on MR, Dev and Tags
+# Test code on MR
 sonarqube-mr:
   extends: .sonarqube
-  only:
-    - merge_requests
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
