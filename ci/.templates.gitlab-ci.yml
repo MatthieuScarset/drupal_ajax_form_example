@@ -1,5 +1,5 @@
 
-sonarqube-check: &sonar_template
+.sonarqube:
   image:
     name: sonarsource/sonar-scanner-cli:latest
     entrypoint: [""]

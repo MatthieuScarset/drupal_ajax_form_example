@@ -1,7 +1,6 @@
 
 # DEFINE DEV SPECIFIC VARIABLES AND JBS
 stages:          # List of stages for jobs, and their order of execution
-  - test
   - build_assets
   - deploy
   - build
@@ -38,8 +37,8 @@ before_script:
 
 
 sonarqube-mr:
-  <<: *sonar_template
-  stage: test
+  extends: .sonarqube
+  stage: .pre
 
 Build assets:
   stage: build_assets

@@ -1,7 +1,7 @@
 
 # DEFINE DEV SPECIFIC VARIABLES AND JBS
 include:
-  - template: '/ci/template.gitlab-ci.yml'
+  - '/ci/template.gitlab-ci.yml'
   - local: /ci/.cloud.gitlab-ci.yml
     rules:
       - if: $CI_COMMIT_BRANCH == "dev" || $CI_COMMIT_BRANCH == "integration" || $CI_COMMIT_BRANCH == "commerce/main" || $CI_COMMIT_BRANCH == "commerce/dev"
@@ -21,6 +21,6 @@ dummy_job:
 
 # Test code on MR, Dev and Tags
 sonarqube-mr:
-  <<: *sonar_template
+  extends: .sonarqube
   only:
     - merge_requests
