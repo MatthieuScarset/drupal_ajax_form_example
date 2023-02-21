@@ -4,6 +4,6 @@ include:
 stages:
   - test
 
-.sonarqube-mr:
+sonarqube-mr:
   extends: .sonarqube_template
   stage: test
