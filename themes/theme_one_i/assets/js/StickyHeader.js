@@ -1,7 +1,10 @@
 class StickyHeader {
   constructor() {
     this.$header = document.querySelector('header');
+    this.$mainNav = document.getElementById('main_nav');
     this.$socialShareBlock = document.getElementById('block-theme-one-i-socialshareblock');
+    this.$mainNavMobile = document.getElementById('main_nav_mobile');
+    this.$topNavBar = document.getElementsByClassName('supra');
     this.$megaMenuMobile = document.getElementById('megamenu_mobile');
     let lastScrollTop = 0;
     const threshold = 5; //une marge de sécurité pour qu'un simple mouvement de souris face pas disparaitre le header
@@ -13,14 +16,13 @@ class StickyHeader {
     $(window).resize(() => {
       this._setHeaderTop();
       this._setSocialShareBlockTop();
+      this._setMegaMenuMobileCollapseShow();
     });
 
     new IntersectionObserver( ([e]) => {
       this._setSocialShareBlockTop();
       this._setMegaMenuMobileCollapseShow();
-      if (e.intersectionRatio < 1) {
-        this.$header.classList.add("not-visible");
-      }
+      this._setHeaderTop();
     },
     {threshold: 0}
     ).observe(document.querySelector('header'));
@@ -43,28 +45,18 @@ class StickyHeader {
       // Safari iOS + Mac specific hook - pour calculer le scrollDown. Safari fait du scrollDown négatif
       let scrollDown = $(document).height() - $(window).height() - scrollTop;
 
-      if(Math.abs(lastScrollTop - scrollTop) >= threshold) {
-        if (scrollTop > lastScrollTop && scrollDown > 0) {
-          //Scroll Down
-          this.$header.classList.remove("is-visible");
-          this.$header.classList.remove("transition");
-        }
-        else {
-          //Scroll Up
-          this.$header.classList.add("transition");
-          this.$header.classList.add("is-visible");
-          this.$header.classList.remove("not-visible");
+      if(Math.abs(lastScrollTop - scrollTop) >= threshold && this._isHidden(this.$mainNavMobile)) {
+
+        let isScrollDown = scrollTop > lastScrollTop && scrollDown > 0;
+
+        if (scrollTop >= this.$header.offsetHeight) {
+          this._changeHeaderOnScroll(isScrollDown);
         }
 
         lastScrollTop = scrollTop;
 
-        if (lastScrollTop < threshold) {
-          this.$header.classList.remove("is-visible");
-          this.$header.classList.remove("transition");
-          this._setSocialShareBlockTop();
-          this._setHeaderTop();
-          this._setMegaMenuMobileCollapseShow();
-        }
+        let isOnInitialPos = lastScrollTop < threshold;
+        this._resetHeader(isOnInitialPos);
 
         if (!this.$header.classList.contains('is-visible')) {
           this.$pageMenu.classList.remove("transition");
@@ -77,13 +69,6 @@ class StickyHeader {
           if ($(elem).hasClass('show')) {
             $(elem).collapse("toggle");
             $(elem).parent().removeClass('active');
-          }
-        });
-
-        // On ferme le megamenu mobile s'il est ouvert au scroll
-        $('#megamenu_mobile').each((key, elem) => {
-          if ($(elem).hasClass('show')) {
-            $(elem).collapse("toggle");
           }
         });
 
@@ -110,8 +95,38 @@ class StickyHeader {
       }
     }
 
-    if (this.$header.classList.contains('is-visible')) {
+    if (this.$header.classList.contains('is-visible') || !this.$mainNav.classList.contains('small-header')) {
+      this.$header.style.top = `${this._getBodyPaddingTop()}px`;
+    } else {
       this.$header.style.top = `${top}px`;
+    }
+  }
+
+  _changeHeaderOnScroll($scrollDown) {
+    if ($scrollDown) {
+      this.$header.classList.remove("transition");
+      this.$header.classList.remove("is-visible");
+      this.$header.classList.add("not-visible");
+      this.$header.style.position = 'sticky';
+      this.$mainNav.classList.add('small-header');
+      this.$topNavBar[0].classList.add("d-none");
+    } else {
+      this.$header.classList.remove("not-visible");
+      this.$header.classList.add("transition");
+      this.$header.classList.add("is-visible");
+    }
+  }
+
+  _resetHeader($isOnTop) {
+    if ($isOnTop) {
+      this.$header.classList.remove("transition");
+      this.$header.classList.remove("is-visible");
+      this.$header.style.position = 'initial';
+      this.$topNavBar[0].classList.remove("d-none");
+      this.$mainNav.classList.remove('small-header');
+      this._setSocialShareBlockTop();
+      this._setHeaderTop();
+      this._setMegaMenuMobileCollapseShow();
     }
   }
 
@@ -139,6 +154,10 @@ class StickyHeader {
 
   _isConnected() {
     return document.querySelector('body').classList.contains('user-logged-in');
+  }
+
+  _isHidden(el) {
+    return (typeof el !== 'undefined' && el.offsetParent === null)
   }
 }
 
