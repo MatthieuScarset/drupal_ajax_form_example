@@ -1,5 +1,11 @@
 include:
   - '/ci/.templates.d/sonarqube.yml'
 
+stages:
+  - test
+
 sonarqube-mr:
   extends: .sonarqube_template
+  stage: test
+  only:
+    - merge_requests
