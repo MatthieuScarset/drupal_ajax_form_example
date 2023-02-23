@@ -8,7 +8,7 @@ stages:          # List of stages for jobs, and their order of execution
 
 # Include files to overrides specifics variables
 include:
-  - '/ci/.templates.d/*.yml'
+  - '/ci/.templates.d/sonarqube.yml'
   - local: /ci/.cloud.d/.dev.gitlab-ci.yml
     rules:
       - if: $CI_COMMIT_BRANCH == "dev"
