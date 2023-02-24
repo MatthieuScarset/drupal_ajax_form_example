@@ -1,0 +1,10 @@
+uuid: b3ae360b-3adf-4dd8-874a-5583217bb4ed
+langcode: en
+status: true
+dependencies: {  }
+id: module_video
+label: '[Module] Video'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }
