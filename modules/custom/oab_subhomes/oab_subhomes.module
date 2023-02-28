@@ -188,6 +188,20 @@ function oab_subhomes_entity_access(EntityInterface $entity, $operation, Account
     return AccessResult::neutral();
 }
 
+/**
+ * Implements hook_module_implements_alter().
+ */
+function oab_subhomes_module_implements_alter(&$implementations, $hook) {
+  switch ($hook) {
+    // Field group is after oab_subhomes but we need it before oab_subhomes
+    case 'form_alter':
+      $group = $implementations['oab_subhomes'];
+      unset($implementations['oab_subhomes']);
+      $implementations['oab_subhomes'] = $group;
+      break;
+  }
+}
+
 function oab_subhomes_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
 
     if ($form_id == "subhome_entity_presse_edit_form") {
