@@ -43,13 +43,32 @@
     'paragraph',
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-    not paragraph.isPublished() ? 'paragraph--unpublished'
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+  'py-2 py-md-5'
   ]
 %}
 {% block paragraph %}
-  <div{{ attributes.addClass(classes) }}>
-    {% block content %}
-      {{ content }}
-    {% endblock %}
+<div {{ attributes.addClass(classes) }}>
+  <div class="site-width">
+    <div class="block-video container-fluid ">
+        {{ content.field_video }}
+    </div>
+    {% if paragraph.field_title.value is defined and paragraph.field_title.value is not empty %}
+    <div class="block-text">
+      <div class="row d-flex justify-content-center">
+        <div class="content-title col-md-10 content-text pl-md-4 pr-md-4">
+          <h2 class="h1 mt-1 mt-md-4 mb-1 mb-md-2">{{ content.field_title }}</h2>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-10 content-text pl-md-4 pr-md-4">
+          <div class="lead font-weight-bold highlight mb-1 mb-md-1">{{ content.field_highlight }}</div>
+          <div class="standard mb-1 mb-md-2">{{ content.field_standard_text }}</div>
+          {{ content.field_call_to_action_link_simple }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
   </div>
+</div>
 {% endblock paragraph %}

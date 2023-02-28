@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - entity_browser.browser.browser_embed_video_modal
-    - field.field.paragraph.module_video.field_call_to_action_link
+    - field.field.paragraph.module_video.field_call_to_action_link_simple
     - field.field.paragraph.module_video.field_highlight
     - field.field.paragraph.module_video.field_standard_text
     - field.field.paragraph.module_video.field_title
@@ -18,9 +18,9 @@ targetEntityType: paragraph
 bundle: module_video
 mode: default
 content:
-  field_call_to_action_link:
+  field_call_to_action_link_simple:
     type: link_default
-    weight: 3
+    weight: 6
     region: content
     settings:
       placeholder_url: ''
@@ -52,7 +52,7 @@ content:
     third_party_settings: {  }
   field_video:
     type: entity_browser_entity_reference
-    weight: 4
+    weight: 5
     region: content
     settings:
       entity_browser: browser_embed_video_modal
