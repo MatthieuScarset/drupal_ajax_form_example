@@ -8,7 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
  */
 function oab_user_access_rights_entity_access(\Drupal\Core\Entity\EntityInterface $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
   $entity_class = get_class($entity);
-  if (in_array($entity_class, array('Drupal\taxonomy\Entity\Term', 'Drupal\node\Entity\Node'))
+  if ( in_array($entity_class, array('Drupal\taxonomy\Entity\Term', 'Drupal\node\Entity\Node'))
     && in_array($operation, array('delete', 'update'))) {
     $current_user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
     if (method_exists($entity, 'language')) {
