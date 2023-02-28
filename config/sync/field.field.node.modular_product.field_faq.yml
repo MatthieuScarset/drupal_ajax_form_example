@@ -25,11 +25,17 @@ settings:
       module_faq: module_faq
     negate: 0
     target_bundles_drag_drop:
+      call_to_action:
+        weight: 51
+        enabled: false
       contact_button_item:
         weight: 36
         enabled: false
       default_button:
         weight: 37
+        enabled: false
+      detail_gamme_items_offres:
+        weight: 54
         enabled: false
       documentation:
         weight: 38
@@ -79,11 +85,38 @@ settings:
       module_benefits_item:
         weight: 53
         enabled: false
+      module_blog:
+        weight: 71
+        enabled: false
+      module_configurateur_details:
+        weight: 72
+        enabled: false
+      module_cross_sell:
+        weight: 73
+        enabled: false
+      module_cross_sell_item:
+        weight: 74
+        enabled: false
+      module_customer_space:
+        weight: 75
+        enabled: false
+      module_detail_gamme:
+        weight: 76
+        enabled: false
+      module_detail_gamme_items:
+        weight: 77
+        enabled: false
       module_detail_offre:
         weight: 54
         enabled: false
       module_detail_offre_items:
         weight: 55
+        enabled: false
+      module_exemples:
+        weight: 80
+        enabled: false
+      module_exemples_items:
+        weight: 81
         enabled: false
       module_faq:
         weight: 56
@@ -94,6 +127,9 @@ settings:
       module_partner:
         weight: 58
         enabled: false
+      module_presentation:
+        weight: 85
+        enabled: false
       module_services:
         weight: 59
         enabled: false
@@ -102,6 +138,12 @@ settings:
         enabled: false
       module_steps:
         weight: 61
+        enabled: false
+      module_testimonial:
+        weight: 89
+        enabled: false
+      module_testimonial_item:
+        weight: 90
         enabled: false
       module_text_video_image:
         weight: 62
@@ -123,6 +165,9 @@ settings:
         enabled: false
       subhome_presse_carrousel:
         weight: 68
+        enabled: false
+      title_and_link:
+        weight: 98
         enabled: false
       titre_and_description:
         weight: 69

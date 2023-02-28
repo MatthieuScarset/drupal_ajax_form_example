@@ -37,7 +37,7 @@ define('CONTENT_TAXO_FIELDS', serialize(array('field_region',
 \Drupal::moduleHandler()->loadInclude('oab_backoffice', 'inc',  'includes/marketo');
 
 
-function oab_backoffice_mail($key, &$message, $params) {
+function oab_backoffice_mail( $key , &$message , $params ) {
     gdpr_hook_mail($key, $message, $params);
 }
 

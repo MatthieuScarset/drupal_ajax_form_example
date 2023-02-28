@@ -1,5 +1,5 @@
 uuid: b559bbd0-cefd-4fb5-81f8-c407661ae218
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -13,7 +13,9 @@ label: 'Texte Button CTA'
 description: ''
 required: false
 translatable: true
-default_value: {  }
+default_value:
+  -
+    value: 'Voir les questions fréquentes'
 default_value_callback: ''
 settings: {  }
 field_type: string

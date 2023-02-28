@@ -70,7 +70,7 @@ class SubhomeEntityForm extends ContentEntityForm {
         break;
 
       default:
-        $this->messenger->addMessage(t('Saved the %label Subhome entity.', [
+        $this->messenger?->addMessage(t('Saved the %label Subhome entity.', [
           '%label' => $entity->label(),
         ]));
     }

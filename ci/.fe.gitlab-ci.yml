@@ -5,6 +5,10 @@ stages:          # List of stages for jobs, and their order of execution
   - build_image
 
 
+# Include job templates
+include:
+  - '/ci/.templates.d/*.yml'
+
 variables:
   COMPTE_PROJET_DEV: $COMPTE_PROJET_DEV
   COMPTE_PROJET_OPS: $COMPTE_PROJET_OPS
@@ -14,6 +18,12 @@ variables:
   VAULT_PATH: /prj/portail-obs/compte-projet/
   VAULT_OPTS: "-tls-skip-verify=true"
   VAULT_NAMESPACE: "namespace-portail-obs"
+
+
+# Sonarqube analyze on .pre
+sonarqube:
+  extends: .sonarqube_template
+  stage: .pre
 
 
 # Création d'un dossier spécifique et copie des fichiers nécessaires au build
@@ -94,7 +104,7 @@ Build Drupal:
     expire_in: 1 hour
 
 Build Assets:
-  stage: build
+  stage: build_drupal
   image: node
   script:
     - cd themes/theme_one_i

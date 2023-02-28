@@ -17,9 +17,9 @@
 #}
 {% import _self as menus %}
 
-{{ menus.menu_links(items, attributes, 0) }}
+{{ menus.menu_links(items, attributes, 0, site_name) }}
 
-{% macro menu_links(items, attributes, menu_level) %}
+{% macro menu_links(items, attributes, menu_level, site_name) %}
   {% import _self as menus %}
   {% if items %}
     {% if menu_level == 0 %}
@@ -43,7 +43,7 @@
           </li>
         {% endfor %}
           <li class="d-none d-lg-block nav-item">
-            <span class="px-1 py-0">© Orange Business Services {{ "now"|date("Y") }}</span>
+            <span class="px-1 py-0">© {{ site_name }} {{ "now"|date("Y") }}</span>
           </li>
       </ul>
   {% endif %}

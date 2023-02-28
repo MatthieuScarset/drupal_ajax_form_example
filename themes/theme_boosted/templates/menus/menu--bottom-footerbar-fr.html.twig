@@ -21,13 +21,13 @@
 
 
 <div class="o-footer-bottom">
-    {{ menus.menu_links(items, attributes, 0) }}
+    {{ menus.menu_links(items, attributes, 0, site_name) }}
 </div>
 
 
 
 
-{% macro menu_links(items, attributes, menu_level) %}
+{% macro menu_links(items, attributes, menu_level, site_name) %}
   {% import _self as menus %}
   {% if items %}
     {% if menu_level == 0 %}
@@ -51,7 +51,7 @@
             </li>
         {% endfor %}
         <li class="hidden-xs hidden-sm">
-            © Orange Business Services {{ "now"|date("Y") }}
+            © {{ site_name }} {{ "now"|date("Y") }}
         </li>
     </ul>
     {% endif %}

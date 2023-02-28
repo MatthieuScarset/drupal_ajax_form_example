@@ -134,19 +134,39 @@
             container_margin_top += contact_module.height() + 20;
         }
 
+      const mediumLogo = $('img.medium-logo');
+      const largeLogo = $('img.large-logo');
+
         if (top_menu.length) {
             if ($(window).scrollTop() > top_menu_offset.top + offset) {
                 top_menu.addClass('navbar-fixed');
                 //$('.main-container').css('margin-top', container_margin_top);
                 top_menu.css('top', menu_offset);
                 $('.region-pre-content .affix').css('top', top_menu.outerHeight() + menu_offset);
+                // On change de logo en sticky
+                mediumLogo.removeClass('hidden');
+                mediumLogo.addClass('visible-lg');
+                largeLogo.removeClass('visible-lg');
+                largeLogo.addClass('hidden');
             } else {
                 top_menu.removeClass('navbar-fixed');
                 $('.main-container').css('margin-top', 0);
                 top_menu.css('top', 0);
                 $('.region-pre-content .affix').css('top', $('#navbar').height() + menu_offset);
+                // Changement de logo
+                mediumLogo.removeClass('visible-lg');
+                mediumLogo.addClass('hidden');
+                largeLogo.removeClass('hidden');
+                largeLogo.addClass('visible-lg');
             }
         }
+
+
+     /*   if ($('#main_nav').hasClass('navbar-fixed')) {
+
+        } else {
+
+        }*/
 
         if (preview_bar.length) {
             if ($(window).scrollTop() > top_menu_offset.top + offset) {
@@ -593,10 +613,6 @@
    }
 
  }
-
-
-
-
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 

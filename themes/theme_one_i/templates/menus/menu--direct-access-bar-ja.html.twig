@@ -50,14 +50,14 @@
           {% if (items|length == 3) %}
             <div class="location-bar-direct-access-3-items-{{ loop.index }} {{ class }}">
               {% set link_text %}<i class="glyphicon icon {{ link_icon }} link_direct_access"><span class="text_direct_access" >{{  item.title }}</span></i>{% endset %}
-              {{ link(link_text, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Footer\', \'Images thèmes\', \'' ~ item.title ~ '\');'}) }}
+              {{ link(link_text, item.url, {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Footer\', \'Images thèmes\', \'' ~ item.title ~ '\');'}) }}
             </div>
           {% endif %}
 
           {% if (items|length == 4) %}
             <div class="location-bar-direct-access-4-items-{{ loop.index }} {{ class }}">
               {% set link_text %}<i class="glyphicon icon {{ link_icon }} link_direct_access"><span class="text_direct_access" >{{  item.title }}</span></i>{% endset %}
-              {{ link(link_text, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Footer\', \'Images thèmes\', \'' ~ item.title ~ '\');'}) }}
+              {{ link(link_text, item.url, {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Footer\', \'Images thèmes\', \'' ~ item.title ~ '\');'}) }}
             </div>
           {% endif %}
         </div>

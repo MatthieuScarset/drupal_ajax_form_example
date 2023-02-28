@@ -39,9 +39,9 @@ We call a macro which calls itself to render the full tree.
     {% if item.below %}
     <li{{ item.attributes.addClass('nav-item', 'dropdown') }}>
       {% set link_text %}{{ item.title }} <span class="caret"></span>{% endset %}
-      {{ link(link_text, hub_getHubSubhomeUrl(item.url), {'class':'dropdown-toggle','data-toggle':'dropdown' ,'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ item.title ~ '\');'}) }}
+      {{ link(link_text, item.url, {'class':'dropdown-toggle','data-toggle':'dropdown' ,'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ item.title ~ '\');'}) }}
       {% else %}
-    <li{{ item.attributes }}>{{ link(item.title, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ item.title ~ '\', \'\');'}) }}
+    <li{{ item.attributes }}>{{ link(item.title, item.url, {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ item.title ~ '\', \'\');'}) }}
       {% endif %}
 
       {% if item.below %}
@@ -80,12 +80,12 @@ We call a macro which calls itself to render the full tree.
       {% for item in items %}
         {% set link_target = item.url.options.target ? '_blank' : '_self' %}
         <div class="col-xs-12 col-lg-4 item_soft_col">
-          <span> {{ link(item.title, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ parent.title ~ '\', \'' ~ item.title ~ '\');'}) }}</span>
+          <span> {{ link(item.title, item.url, {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ parent.title ~ '\', \'' ~ item.title ~ '\');'}) }}</span>
           {% if item.below %}
             <ul class="sous-items">
               {% for sous_item in item.below %}
                 <li>
-                  {{ link(sous_item.title, hub_getHubSubhomeUrl(sous_item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ parent.title ~ '\', \'' ~ sous_item.title ~'\');'}) }}
+                  {{ link(sous_item.title, sous_item.url, {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ parent.title ~ '\', \'' ~ sous_item.title ~'\');'}) }}
                 </li>
               {% endfor %}
             </ul>
@@ -116,7 +116,7 @@ We call a macro which calls itself to render the full tree.
                 <ul class="sous-items">
                   {% for sous_item in item.below %}
                     <li>
-                      {{ link(sous_item.title, hub_getHubSubhomeUrl(sous_item.url), {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ title ~ '\', \'' ~ sous_item.title ~'\');'}) }}
+                      {{ link(sous_item.title, sous_item.url, {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Menu\', \'' ~ title ~ '\', \'' ~ sous_item.title ~'\');'}) }}
                     </li>
                   {% endfor %}
                 </ul>
