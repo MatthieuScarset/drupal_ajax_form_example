@@ -41,7 +41,9 @@ class StickyContent {
   private setTop() {
     let top = this.getBodyPaddingTop();
 
-    if (!this.header.classList.contains('not-visible')) {
+    if ((window.matchMedia("(max-width: 960px)").matches)) {
+      top = this.header.offsetHeight;
+    } else if (!this.header.classList.contains('not-visible')) {
       top += this.header.offsetHeight;
     }
 
@@ -51,7 +53,6 @@ class StickyContent {
 
     if (this.pageMenu) {
       this.pageMenu.style.top = `${top}px`;
-      top += this.pageMenu.offsetHeight;
     }
 
     this.elems.forEach((elem) => {

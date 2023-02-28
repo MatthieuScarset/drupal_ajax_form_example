@@ -7,7 +7,6 @@ header#navbar {
   padding-top: 1px;
   background-color: $black;
   z-index: 1020;
-  transition: top $header_transition_time ease;
   position: sticky;
   opacity: 1;
   left: 0;

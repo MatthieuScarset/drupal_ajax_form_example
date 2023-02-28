@@ -5,17 +5,11 @@
  });*/
 
 (function ($, Drupal, Bootstrap) {
-<<<<<<< HEAD
     const header = $('header#navbar');
-=======
-    let lastScrollTop = 0;
-    const navtop = $('#navtop');
-    const header = $('header#navbar');
-
->>>>>>> origin/RUBYPORTAILOBS-4227
     function init_fixed_navbar(){
         var offset = 0;
         var top_menu = $('#main_nav');
+        var navtop = $('#navtop');
         var local_nav = $('#local_nav');
         var contact_module = $('#contact_module');
         var preview_bar = $('.node-preview-container');
@@ -127,27 +121,10 @@
             }, 1000);
 
         });
-
-        // get the sticky element
-        this.$stickyHeaderObserver = new IntersectionObserver(
-          function ([e]) {
-            if (e.intersectionRatio < 1) {
-              header.addClass("not-visible");
-            }
-          },
-          {threshold: 0}
-        );
-        this.$stickyHeaderObserver.observe(document.querySelector('header#navbar'));
     }
 
     function moveFixedElements(top_menu_offset, offset, top_menu, menu_offset, contact_module_offset, contact_offset, contact_module, preview_bar, preview_bar_offset, init_preview_bar_offset, local_nav, localnav_offset, top_zone){
         var container_margin_top = 0;
-        let toolbar_height = $('#toolbar-bar').length ? $('#toolbar-bar').height() : 0;
-        let toolbar_tray_horizontal_height = $('#toolbar-item-administration-tray.toolbar-tray-horizontal').length ?
-          $('#toolbar-item-administration-tray.toolbar-tray-horizontal').height() : 0;
-
-        const admin_toolbar_height = toolbar_height + toolbar_tray_horizontal_height;
-
         if (top_menu.length) {
             container_margin_top += top_menu.height() + 20;
         }
@@ -158,7 +135,6 @@
             container_margin_top += contact_module.height() + 20;
         }
 
-<<<<<<< HEAD
       const mediumLogo = $('img.medium-logo');
       const largeLogo = $('img.large-logo');
 
@@ -180,47 +156,7 @@
                 largeLogo.removeClass('hidden');
                 largeLogo.addClass('visible-lg');
             }
-=======
-        top_menu.removeClass('navbar-fixed');
-        const scrollTop = $(window).scrollTop();
-        const headerTop = admin_toolbar_height - header.height();
-
-        // Safari iOS + Mac specific hook - pour calculer le scrollDown. Safari fait du scrollDown négatif
-        const scrollDown = $(document).height() - $(window).height() - $(window).scrollTop();
-
-        if (scrollTop >= lastScrollTop && lastScrollTop >= 0 && scrollDown > 0) {
-          // Scroll down
-          header.removeClass("is-visible");
-          header.addClass("no-transition");
         }
-        // Je rajoute le > 0 car Safari fait du scrollUp négatif
-        else if (lastScrollTop > 0 && scrollDown > 0) {
-          // Scroll Up
-          header.css("top", headerTop);
-          header.removeClass('not-visible');
-          header.addClass("is-visible");
-          header.addClass("transition");
-          header.removeClass("no-transition");
-        }
-        else {
-          header.addClass("no-transition");
-          header.removeClass("transition");
-        }
-
-        lastScrollTop = scrollTop;
-
-        if ( lastScrollTop === 0) {
-          header.removeClass("is-visible");
-          header.removeClass("transition");
->>>>>>> origin/RUBYPORTAILOBS-4227
-        }
-
-
-     /*   if ($('#main_nav').hasClass('navbar-fixed')) {
-
-        } else {
-
-        }*/
 
         if (preview_bar.length) {
             if ($(window).scrollTop() > top_menu_offset.top + offset) {
@@ -268,7 +204,6 @@
                 localnav_offset += $('#toolbar-item-administration-tray').height();
             }
 
-<<<<<<< HEAD
             // Gestion du local nav en fonction du header
 
             if ($(window).scrollTop() > (header.outerHeight() + top_zone_offset) ||
@@ -281,46 +216,11 @@
             }
 
             if ($(window).scrollTop() > (top_zone_offset - localnav_offset )) {
-=======
-          if (!header.hasClass('not-visible')) {
-            localnav_offset +=  top_menu.outerHeight() + navtop.outerHeight();
-          }
-
-          //Position top de la social bar en connecté ou pas connecté
-          $('#block-socialshareblock').css('top', header.outerHeight() + admin_toolbar_height);
-
-          // Gestion de la local nav
-          if ($(window).scrollTop() > (header.outerHeight() + top_zone_offset) ||
-            ($(window).scrollTop() > top_zone_offset - header.outerHeight() && header.hasClass('is-visible'))) {
-            local_nav.addClass('sticky-module');
-            $('#block-socialshareblock').css('top', localnav_offset + $('#local_nav').outerHeight());
-          }
-
-          if ($(window).scrollTop() < (top_zone_offset - header.outerHeight()) + 90) {
-            local_nav.removeClass('sticky-module');
-          }
-
-          if (!header.hasClass('is-visible')) {
-            local_nav.addClass("no-transition");
-          } else {
-            local_nav.removeClass("no-transition");
-          }
-
-
-
-            if ($(window).scrollTop() > (top_zone_offset - localnav_offset )) {
-
->>>>>>> origin/RUBYPORTAILOBS-4227
                 if(top_zone.length && top_zone.outerHeight() > 0) {
                     $('.main-container').css('margin-top', 0);
                 }else{
                     $('.main-container').css('margin-top', container_margin_top);
                 }
-<<<<<<< HEAD
-=======
-                local_nav.css('top',  localnav_offset );
-               // $('#block-socialshareblock').css('top', localnav_offset + $('#local_nav').outerHeight());
->>>>>>> origin/RUBYPORTAILOBS-4227
             } else {
                 if(top_zone.length && top_zone.outerHeight() > 0) {
                     $('.main-container').css('margin-top', 0);
