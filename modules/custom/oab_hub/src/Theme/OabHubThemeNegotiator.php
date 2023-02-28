@@ -50,6 +50,6 @@ class OabHubThemeNegotiator implements ThemeNegotiatorInterface {
      * Retourne le nom du theme à utiliser
      */
     public function determineActiveTheme(RouteMatchInterface $route_match) {
-        return 'theme_oab_hub';
+        return 'theme_oab_hub_one_i';
     }
 }

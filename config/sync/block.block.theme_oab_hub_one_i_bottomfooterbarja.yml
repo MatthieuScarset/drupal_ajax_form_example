@@ -1,0 +1,33 @@
+uuid: b0e15634-9e9f-4eef-b890-948d46d38b41
+langcode: fr
+status: false
+dependencies:
+  config:
+    - system.menu.bottom-footerbar-ja
+  module:
+    - language
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_bottomfooterbarja
+theme: theme_oab_hub_one_i
+region: footer
+weight: -73
+provider: null
+plugin: 'system_menu_block:bottom-footerbar-ja'
+settings:
+  id: 'system_menu_block:bottom-footerbar-ja'
+  label: 'Bottom Footerbar JA'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      ja: ja

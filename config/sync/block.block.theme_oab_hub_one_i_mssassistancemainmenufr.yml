@@ -1,0 +1,39 @@
+uuid: a10a1240-81d2-436d-868e-fd3ff464fd59
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main-menu-mss-assistance-fr
+  module:
+    - language
+    - oab_hub
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_mssassistancemainmenufr
+theme: theme_oab_hub_one_i
+region: header
+weight: -83
+provider: null
+plugin: 'system_menu_block:main-menu-mss-assistance-fr'
+settings:
+  id: 'system_menu_block:main-menu-mss-assistance-fr'
+  label: 'MSS Assistance Main menu fr'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      en: en
+  hub_condition:
+    id: hub_condition
+    hub_id:
+      1282: '1282'
+    negate: false

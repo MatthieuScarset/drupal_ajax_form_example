@@ -1,0 +1,30 @@
+uuid: 4b9e32f9-2103-40b1-9399-cc8e7a2132f0
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:847d77cf-07f8-4ffa-a015-0256d15b5c17'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_ngrbusinessvpngaleriebreadcrumb
+theme: theme_oab_hub_one_i
+region: pre_content
+weight: -70
+provider: null
+plugin: 'block_content:847d77cf-07f8-4ffa-a015-0256d15b5c17'
+settings:
+  id: 'block_content:847d77cf-07f8-4ffa-a015-0256d15b5c17'
+  label: '[NGR] Business VPN Galerie - Breadcrumb'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/products/business-vpn-galerie/cloud-services/map\r\n/products/business-vpn-galerie/cloud-services/list"

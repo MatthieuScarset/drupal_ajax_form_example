@@ -1,0 +1,33 @@
+uuid: ca90baf9-376f-48d6-8116-15f17e1f3549
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:c7b51b25-e6a4-40eb-a1fb-04d2402fcab7'
+  module:
+    - block_content
+    - node
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_marketodownloadlang
+theme: theme_oab_hub_one_i
+region: top_zone
+weight: 0
+provider: null
+plugin: 'block_content:c7b51b25-e6a4-40eb-a1fb-04d2402fcab7'
+settings:
+  id: 'block_content:c7b51b25-e6a4-40eb-a1fb-04d2402fcab7'
+  label: marketo-download-lang
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      document: document

@@ -1,0 +1,41 @@
+uuid: caaa7454-a7d9-4c5a-bc5a-b4add543ca20
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:7ea7f1ee-0f22-4444-b7b7-96ad9925a808'
+  module:
+    - block_content
+    - language
+    - node
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_ngrusabillablogs
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -46
+provider: null
+plugin: 'block_content:7ea7f1ee-0f22-4444-b7b7-96ad9925a808'
+settings:
+  id: 'block_content:7ea7f1ee-0f22-4444-b7b7-96ad9925a808'
+  label: '[NGR] Usabilla - blogs'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      blog_post: blog_post
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      en: en

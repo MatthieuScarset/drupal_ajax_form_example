@@ -1,0 +1,33 @@
+uuid: 12f05c31-4c09-4eb1-9608-f6c7bd8c9213
+langcode: fr
+status: false
+dependencies:
+  config:
+    - system.menu.top-navbar-ru
+  module:
+    - language
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_topnavbarru
+theme: theme_oab_hub_one_i
+region: header
+weight: -71
+provider: null
+plugin: 'system_menu_block:top-navbar-ru'
+settings:
+  id: 'system_menu_block:top-navbar-ru'
+  label: 'Top navbar RU'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      ru: ru

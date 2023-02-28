@@ -1,0 +1,20 @@
+uuid: 703d0d99-52e3-4516-8c8f-0f028ee772bd
+langcode: en
+status: false
+dependencies:
+  module:
+    - oab_siu_connexion
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_siuhellouserblockboosted
+theme: theme_oab_hub_one_i
+region: header
+weight: -48
+provider: null
+plugin: siu_hello_user_block
+settings:
+  id: siu_hello_user_block
+  label: 'SIU Hello User Block boosted'
+  label_display: '0'
+  provider: oab_siu_connexion
+visibility: {  }

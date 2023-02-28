@@ -1,0 +1,25 @@
+uuid: 75ee3ecc-3ff5-4671-9837-57e3b3114cf0
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:d4bc85cf-5a32-4f6c-8d98-3d7b5302e7db'
+  module:
+    - block_content
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_ngr_didomiconsentmanagement
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -82
+provider: null
+plugin: 'block_content:d4bc85cf-5a32-4f6c-8d98-3d7b5302e7db'
+settings:
+  id: 'block_content:d4bc85cf-5a32-4f6c-8d98-3d7b5302e7db'
+  label: '[NGR] Didomi Consent Management'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

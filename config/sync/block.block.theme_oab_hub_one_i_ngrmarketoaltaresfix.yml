@@ -1,0 +1,30 @@
+uuid: 19764981-6fc0-4b0a-8b65-96650f651f4e
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:9959e479-17c3-4cd1-a1e8-9ad9bfe43733'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_ngrmarketoaltaresfix
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -70
+provider: null
+plugin: 'block_content:9959e479-17c3-4cd1-a1e8-9ad9bfe43733'
+settings:
+  id: 'block_content:9959e479-17c3-4cd1-a1e8-9ad9bfe43733'
+  label: '[NGR] Marketo - Altares - Fix'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: /contact

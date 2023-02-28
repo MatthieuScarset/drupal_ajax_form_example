@@ -1,0 +1,33 @@
+uuid: fe4de0c9-7ed0-489a-8cb7-6e711936a653
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.footer-br
+  module:
+    - language
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_footerbr
+theme: theme_oab_hub_one_i
+region: footer
+weight: -72
+provider: null
+plugin: 'system_menu_block:footer-br'
+settings:
+  id: 'system_menu_block:footer-br'
+  label: 'Footer BR'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      pt-br: pt-br

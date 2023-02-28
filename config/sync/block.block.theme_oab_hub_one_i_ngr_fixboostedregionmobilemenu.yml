@@ -1,0 +1,36 @@
+uuid: 6c62127a-99cf-489b-b73d-0e41d637958b
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:60957837-02f8-4eb9-b243-6baf97d17927'
+  module:
+    - block_content
+    - language
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_ngr_fixboostedregionmobilemenu
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -80
+provider: null
+plugin: 'block_content:60957837-02f8-4eb9-b243-6baf97d17927'
+settings:
+  id: 'block_content:60957837-02f8-4eb9-b243-6baf97d17927'
+  label: '[NGR] Fix Boosted Region Mobile Menu'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      pt-br: pt-br
+      es: es
+      ru: ru
+      ja: ja

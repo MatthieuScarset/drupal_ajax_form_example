@@ -1,0 +1,30 @@
+uuid: 3e74774b-b4c8-413f-86e7-1e25f7040e4b
+langcode: fr
+status: false
+dependencies:
+  module:
+    - oab_frontoffice
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_cspsubnav
+theme: theme_oab_hub_one_i
+region: top_zone
+weight: 0
+provider: null
+plugin: csp_subnav_block
+settings:
+  id: csp_subnav_block
+  label: 'CSP Subnav'
+  label_display: '0'
+  provider: oab_frontoffice
+  csp_list_link: /fr/produits/business-vpn-galerie/services-cloud/liste
+  csp_list_link_text: 'Liste des services Cloud'
+  csp_map_link: /fr/produits/business-vpn-galerie/services-cloud/carte
+  csp_map_link_text: 'Carte des interconnexions'
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "/produits/business-vpn-galerie/services-cloud/liste\r\n/produits/business-vpn-galerie/services-cloud/carte\r\n/products/business-vpn-galerie/cloud-services/list\r\n/products/business-vpn-galerie/cloud-services/map"

@@ -1,0 +1,30 @@
+uuid: bc1f2331-0885-4307-b614-ff3b4b65d337
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:f470fefd-fd2e-41b9-a7f4-8a700793a9f2'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_ngr_hide_social_bar
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -64
+provider: null
+plugin: 'block_content:f470fefd-fd2e-41b9-a7f4-8a700793a9f2'
+settings:
+  id: 'block_content:f470fefd-fd2e-41b9-a7f4-8a700793a9f2'
+  label: hide_social_bar
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/cookie-policy-essential\r\n/politique-cookie-essentiel"

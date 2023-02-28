@@ -1,0 +1,33 @@
+uuid: 2a930277-3903-4b7d-b62d-99eadb042a7e
+langcode: fr
+status: false
+dependencies:
+  config:
+    - system.menu.bottom-footerbar-ru-en
+  module:
+    - language
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_bottomfooterbarruen
+theme: theme_oab_hub_one_i
+region: footer
+weight: -77
+provider: null
+plugin: 'system_menu_block:bottom-footerbar-ru-en'
+settings:
+  id: 'system_menu_block:bottom-footerbar-ru-en'
+  label: 'Bottom Footerbar RU-EN'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      ru-en: ru-en

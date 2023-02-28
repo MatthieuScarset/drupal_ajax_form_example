@@ -1,0 +1,23 @@
+uuid: c0c75e62-e2ea-493d-8d96-a74ec68364b6
+langcode: en
+status: false
+dependencies:
+  module:
+    - oab_frontoffice
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_partenairesobl
+theme: theme_oab_hub_one_i
+region: header
+weight: -56
+provider: null
+plugin: obl_partenaires_block
+settings:
+  id: obl_partenaires_block
+  label: 'Partenaires OBL'
+  label_display: visible
+  provider: oab_frontoffice
+  content: "<div class=\"container-fluid\">\r\n<div class=\"row obs_template two_columns\">\r\n<div class=\"col-md-6 col-sm-12\"><a href=\"/fr/reseau-mobile/accords-roaming?techno=5\"><strong><u>Couverture GSM</u></strong></a><br />\r\n<a href=\"/fr/reseau-mobile/accords-roaming?techno=2\"><strong><u>Couverture 3G</u></strong></a><br />\r\n<a href=\"/fr/reseau-mobile/accords-roaming?techno=3\"><strong><u>Couverture 4G</u></strong></a><br />\r\n<a href=\"/fr/reseau-mobile/accords-roaming?techno=4\"><strong><u>Couverture&nbsp;CAMEL</u></strong></a></div>\r\n\r\n<div class=\"col-md-6 col-sm-12\"><a href=\"/fr/reseau-mobile/accords-roaming?techno=1\"><strong><u>Couverture GPRS</u></strong></a><br />\r\n<a href=\"/fr/reseau-mobile/accords-roaming?techno=8\"><strong><u>Couverture MMS IW</u></strong></a></div>\r\n</div>\r\n</div>\r\n\r\n<div>&nbsp;</div>\r\n"
+  content_format: full_html
+  block_title: 'Retrouvez également nos réseaux partenaires par technologie'
+visibility: {  }

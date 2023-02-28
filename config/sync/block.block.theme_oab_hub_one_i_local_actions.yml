@@ -1,0 +1,20 @@
+uuid: 8686a35f-27cc-4d7d-b00b-3fce16f1ccc5
+langcode: en
+status: false
+dependencies:
+  theme:
+    - theme_oab_hub_one_i
+_core:
+  default_config_hash: PffmQ-ABSz5tFjWmVsR7NesunDnEivvopnJnBjl8KNE
+id: theme_oab_hub_one_i_local_actions
+theme: theme_oab_hub_one_i
+region: header
+weight: -52
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

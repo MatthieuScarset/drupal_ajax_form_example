@@ -1,0 +1,40 @@
+uuid: ee0ef177-141d-463e-95ee-5d015b0aaf5a
+langcode: en
+status: false
+dependencies:
+  config:
+    - views.view.linked_content
+  module:
+    - node
+    - views
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_views_block__linked_content_linked_content
+theme: theme_oab_hub_one_i
+region: sidebar
+weight: -34
+provider: null
+plugin: 'views_block:linked_content-linked_content'
+settings:
+  id: 'views_block:linked_content-linked_content'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+  items_per_page: none
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      blog_post: blog_post
+      customer_story: customer_story
+      document: document
+      magazine: magazine
+      partner: partner
+      press_kit: press_kit
+      press_release: press_release
+      product: product
+      simple_page: simple_page

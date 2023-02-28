@@ -1,0 +1,33 @@
+uuid: 73b889bd-20e3-4846-a74e-8ff2714f6c82
+langcode: fr
+status: false
+dependencies:
+  config:
+    - system.menu.top-right-navbar-footer-ru
+  module:
+    - language
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_toprightnavbarfooterru
+theme: theme_oab_hub_one_i
+region: footer
+weight: -57
+provider: null
+plugin: 'system_menu_block:top-right-navbar-footer-ru'
+settings:
+  id: 'system_menu_block:top-right-navbar-footer-ru'
+  label: 'Top right navbar Footer RU'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      ru: ru

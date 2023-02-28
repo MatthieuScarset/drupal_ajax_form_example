@@ -1,0 +1,30 @@
+uuid: a2711295-96e7-43f3-a23d-45fdb1334007
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:c50302dd-9ace-4f1f-bc6a-7f34e9eda366'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_ngr_hidepressform
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -52
+provider: null
+plugin: 'block_content:c50302dd-9ace-4f1f-bc6a-7f34e9eda366'
+settings:
+  id: 'block_content:c50302dd-9ace-4f1f-bc6a-7f34e9eda366'
+  label: '[NGR] Hide Press Form'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /subhome_press

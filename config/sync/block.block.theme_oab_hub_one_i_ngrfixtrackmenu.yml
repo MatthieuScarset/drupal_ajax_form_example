@@ -1,0 +1,25 @@
+uuid: ee7b1a50-0859-4cb2-b9af-60fef01de33a
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:de2b5240-da09-49e7-acfe-2ccc985146af'
+  module:
+    - block_content
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_ngrfixtrackmenu
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -77
+provider: null
+plugin: 'block_content:de2b5240-da09-49e7-acfe-2ccc985146af'
+settings:
+  id: 'block_content:de2b5240-da09-49e7-acfe-2ccc985146af'
+  label: '[NGR] Fix track Menu'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

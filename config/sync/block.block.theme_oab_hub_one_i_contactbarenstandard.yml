@@ -1,0 +1,64 @@
+uuid: 35b40708-e7cc-47d7-8b25-7d003afaeb45
+langcode: en
+status: false
+dependencies:
+  module:
+    - language
+    - node
+    - oab_frontoffice
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_contactbarenstandard
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -44
+provider: null
+plugin: contact_bar_en_standard_block
+settings:
+  id: contact_bar_en_standard_block
+  label: 'Contact Bar EN Standard'
+  label_display: '0'
+  provider: oab_frontoffice
+  context_mapping:
+    node: '@node.node_route_context:node'
+  link_offices: '/en/where-we-are '
+  link_offices_text: 'Our local offices'
+  link_help: /en/contact-us
+  link_help_text: 'Get help'
+  link_contact: '/en/any-request '
+  link_contact_text: 'Contact sales'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      blog_post: blog_post
+      country: country
+      customer_story: customer_story
+      document: document
+      full_html: full_html
+      homepage: homepage
+      homepage_eclairage: homepage_eclairage
+      hp_eclairage_thematique: hp_eclairage_thematique
+      industry: industry
+      magazine: magazine
+      partner: partner
+      product: product
+      region: region
+      simple_page: simple_page
+      solution: solution
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      en: en
+  request_path:
+    id: request_path
+    negate: true
+    context_mapping: {  }
+    pages: "/en/network-performance\r\n/ocean82-customer-experience-benchmark-apr-2016\r\n/what-analysts-are-saying\r\n/gartner-magic-quadrant-managed-m2m-services-worldwide-october-2017\r\n/gartner-magic-quadrant-contact-center-service-western-europe-october-2017\r\n/globaldata-global-enterprise-mobility-services-october-2017\r\n/globaldata-global-industrial-iot-services-oct-2017\r\n/vertical-systems-group-global-ethernet-leaderboard-september-2017\r\n/gartner-magic-quadrant-for-unified-communications-as-a-service-worldwide-sept-2017\r\n/gartner-apac-network-services-jun-2017\r\n/gartner-writes-about-how-orange-business-services-drives-digital-business\r\n/idc-marketscape-worldwide-network-consulting-services-2017-vendor-assessment-jun-2017\r\n/gartner-pan-european-network-services-mar-2017\r\n/vertical-systems-group-global-ethernet-leaderboard-mar-2017\r\n/idc-apac-marketscape-for-next-generation-telcos-telecom-services-2016-17-mar-2017\r\n/globaldata-collaboration-and-communications-global-feb-2017\r\n/frost-sullivan-europe-competitive-strategy-innovation-and-leadership-award-managed-security-services\r\n/gartner-magic-quadrant-for-network-services-global-feb-2017\r\n/frost-sullivan-iq-for-apac-hosted-telephony-and-ucc-service-providers-2016-feb-2017\r\n/gartner-magic-quadrant-for-managed-security-services-worldwide-jan-2017\r\n/orange-vendor-rating-by-gartner-jan-2017\r\n/everest-group-2016-global-hosted-private-cloud-services-market-update-and-peak-matrix-assessment-dec\r\n/current-analysis-global-industrial-iot-services-nov-2016\r\n/idc-apac-digital-service-provider-of-the-year-nov-2016\r\n/ovum-decision-matrix-for-infrastructure-cloud-services-provider-in-apac-nov-2016\r\n/ovum-apac-managed-security-service-providers-overview-nov-2016\r\n/ocean82-customer-experience-benchmark-oct-2016\r\n/gartner-magic-quadrant-for-contact-center-as-a-service-western-europe-oct-2016\r\n/idc-apac-marketscape-for-managed-security-services-oct-2016\r\n/current-analysis-global-enterprise-mobility-oct-2016\r\n/gartner-magic-quadrant-for-cloud-enabled-managed-hosting-asia-pacific-oct-2016\r\n/gartner-managed-m2m-services-worldwide-mq-oct-2016\r\n/frost-sullivan-apac-cloud-uc-growth-excellence-leadership-award-oct-2016\r\n/frost-sullivan-apac-cloud-contact-centre-service-provider-of-the-year-oct-2016\r\n/frost-sullivan-apac-iq-for-apac-hosted-cloud-contact-center-service-providers-oct-2016\r\n/current-analysis-managed-security-service-sep-2016\r\n/vertical-systems-group-global-ethernet-leaderboard-sep-2016\r\n/current-analysis-collaboration-and-communications-global-aug-2016\r\n/gartner-apac-network-services-jul-2016\r\n/gartner-digital-business-consulting-services-jul-2016\r\n/frost-sullivan-apac-data-communications-award-jun-2016\r\n/ocean82-customer-experience-benchmark-apr-2016\r\n/gartner-global-network-services-mq-jan-2016\r\n/gartner-pan-european-network-services-jan-2016\r\n/idc-asia-pacific-next-generation-telcos-dec-2015\r\n/gartner-weurope-contact-center-as-a-service-mq-oct-2015\r\n/ovum-apac-mobile-workspace-service-providers-oct-2015\r\n/frost-sullivan-apac-hosted-telephony-uc-award-jun-2015\r\n/ovum-apac-m2m-service-providers-jul-2014\r\n/forrester-apac-carrier-ethernet-services-nov-2013\r\n/ovum-apac-telco-network-services-mar-2013\r\n/current-analysis-apac-contact-center-solutions-feb-2013\r\n/products/report-sd-wan\r\n/products/profiler-sd-wan"

@@ -1,0 +1,47 @@
+uuid: a4ec54e1-f9a7-494b-bd14-3bc45d011ace
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:4b110fba-7d02-440a-a7f2-616b045c2519'
+  module:
+    - block_content
+    - language
+    - node
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_engenericproductcontact
+theme: theme_oab_hub_one_i
+region: sidebar
+weight: -61
+provider: null
+plugin: 'block_content:4b110fba-7d02-440a-a7f2-616b045c2519'
+settings:
+  id: 'block_content:4b110fba-7d02-440a-a7f2-616b045c2519'
+  label: '[EN][Generic] Product Contact'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      product: product
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      en: en
+  request_path:
+    id: request_path
+    negate: true
+    context_mapping: {  }
+    pages: "/products/business-together-microsoft\r\n/products/managed-lan\r\n/products/network-boost"

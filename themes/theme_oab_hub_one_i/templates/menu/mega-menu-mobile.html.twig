@@ -1,0 +1,145 @@
+
+
+{% import _self as mega_menu_mobile %}
+
+{#
+We call a macro which calls itself to render the full tree.
+@see http://twig.sensiolabs.org/doc/tags/macro.html
+#}
+
+{{ mega_menu_mobile.menu_links_mobile(items, attributes, 0) }}
+
+{% macro menu_links_mobile(items, attributes, menu_level) %}
+  {% if items %}
+    <div class="root-navbar-mobile navbar-nav">
+      <div class="mega-menu-panel">
+        <div class="container pt-2">
+          <ul class="navbar-nav">
+            {{ _self.menu_row(items, 0) }}
+          </ul>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endmacro %}
+
+
+{% macro menu_row(items, menu_level, item_parent = null, item_initial = null) %}
+  {% for item in items %}
+    <li class="nav-item chevron-black" data-menu-level="{{ menu_level }}">
+      {% if item.below %}
+        {% if menu_level == 0 %}
+          <a class="nav-link text-dark"
+             onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item.title }}')">
+            {{ item.title }}
+          </a>
+        {% else %}
+          <a class="nav-link text-dark"
+             onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item_parent }}','{{ item.title }}')">
+            {{ item.title }}
+          </a>
+        {% endif %}
+
+
+        <ul class="navbar-nav items-level-2">
+
+          <li class="nav-item top-back-zone mt-0">
+            <a class="nav-link back text-dark font-weight-bold py-2" role="menuitem"
+               aria-label="Go back to {{ item.title }}">
+              {{ item.title }}
+            </a>
+          </li>
+
+          {% if menu_level == 1 %}
+            <li class="nav-item">
+              <a class="o-link-arrow ob1-link-dark all-product-link-mobile" href="{{ item.url }}"
+                 onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item.parent }}_{{ item.title }}','{{ "See all products" | t }}');">
+                {{ "See all products" | t }}
+              </a>
+
+              <p class="en-ce-moment-mobile mt-2">{{ "Key solutions" | t }}</p>
+
+            </li>
+          {% endif %}
+
+          {% if menu_level == 0 %}
+            {% if item.content.field_style_template['#items'].value == 'product' %}
+              {{ _self.menu_row(item.below, menu_level + 1, item.title) }}
+            {% elseif item.content.field_style_template['#items'].value == 'wysiwyg' %}
+              {{ _self.wysiwyg_template(item.below, menu_level + 1, item.title, item.content) }}
+            {% else %}
+              {{ _self.soft_template(item.below, item.title, item.content) }}
+            {% endif %}
+          {% else %}
+            {{ _self.menu_row(item.below, menu_level + 1, item.title, item_initial) }}
+          {% endif %}
+
+        </ul>
+
+      {% else %}
+        {% if item.entity.field_teaser.value is empty %}
+          <a href="{{ item.url }}" class="nav-link text-dark" role="menuitem"
+             onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item.title }}')">{{ item.title }} </a>
+        {% else %}
+          <a href="{{ item.url }}" class="nav-link items-level-3 text-dark font-weight-bold"
+             onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item_initial }}_{{ item_parent }}','{{ item.title }}');">{{ item.title }}
+            <p class="field-teaser-mobile font-weight-normal mr-1"> {{ item.entity.field_teaser.value }} </p>
+          </a>
+          <hr class="separator separator--gray4 mr-1">
+
+        {% endif %}
+      {% endif %}
+    </li>
+  {% endfor %}
+{% endmacro %}
+
+
+{# Gestion du cas "old template" ou tous les items sont à la suite, malgré 2 sous-niveaux   #}
+{% macro soft_template(items, item_parent, content) %}
+  <a class="o-link-arrow text-decoration-none py-2 px-1 global-link-mobile"
+     href="{{ content.field_global_link.0['#url'] }}"
+     onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item_parent }}','{{ content.field_global_link.0['#title'] }}')"
+  >
+    {{ content.field_global_link.0['#title'] }}</a>
+  <h4 class="text-dark px-1 mb-1 pb-0">{{ content.field_subtitle }}</h4>
+  <div class="items_list_link">
+  {% for item in items %}
+    <a href="{{ item.url }}" class="nav-link o-link text-decoration-none px-1"
+       onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item_parent }}','{{ item.title }}')">{{ item.title }} </a>
+    {% if item.below %}
+      {% for item in item.below %}
+        <a href="{{ item.url }}" class="nav-link o-link text-decoration-none p-1"
+           onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item_parent }}','{{ item.title }}')">{{ item.title }} </a>
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+  </div>
+{% endmacro %}
+
+{% macro wysiwyg_template(items, menu_level, item_parent = null, content) %}
+  <div class="row">
+    {%  if content.field_highlight.0 is defined and content.field_highlight.0['#text'] is not null %}
+    <div class="pr-0 col-12 border-bottom border-gray4">
+      <div class="w-100 mobile-highlight">
+        {{ content.field_highlight }}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  <div class="items_list_link">
+    {% for item in items %}
+      <div class="items_list_link_container">
+        <h4 class="items_list_link_title">
+          <a href="{{ item.url }}" class="nav-link o-link text-decoration-none {% if loop.index == 1 %} border-0 {% endif %}"
+           onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item_parent }}','{{ item.title }}')">{{ item.title }} </a>
+        </h4>
+        {% if item.below %}
+          {% for item in item.below %}
+            <a href="{{ item.url }}" class="nav-link o-link text-decoration-none"
+               onmousedown="utag_link(utag_data.titre_page,'Menu','{{ item_parent }}','{{ item.title }}')">{{ item.title }} </a>
+          {% endfor %}
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+{% endmacro %}

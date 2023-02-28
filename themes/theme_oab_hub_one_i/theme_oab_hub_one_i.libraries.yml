@@ -1,5 +1,5 @@
 global-styling:
   version: VERSION
   css:
-    component:
-      dist/css/style.css: {}
+    base:
+      dist/css/style.css: {weight: 50}

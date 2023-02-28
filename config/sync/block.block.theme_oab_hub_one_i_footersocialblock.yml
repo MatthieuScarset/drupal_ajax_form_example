@@ -1,0 +1,29 @@
+uuid: 8d2f7639-d291-42f2-b446-b79ddf8d9b40
+langcode: fr
+status: false
+dependencies:
+  module:
+    - oab_frontoffice
+    - oab_hub
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_footersocialblock
+theme: theme_oab_hub_one_i
+region: footer
+weight: -87
+provider: null
+plugin: footer_social_block
+settings:
+  id: footer_social_block
+  label: 'Footer Social Block'
+  label_display: '0'
+  provider: oab_frontoffice
+  footer_social_custom_text:
+    value: ''
+    format: full_html
+visibility:
+  hub_condition:
+    id: hub_condition
+    hub_id:
+      1282: '1282'
+    negate: true

@@ -1,0 +1,33 @@
+uuid: 78ebe7b0-4b41-4985-a11f-6b72a1b0db2c
+langcode: en
+status: false
+dependencies:
+  module:
+    - node
+    - oab_frontoffice
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_relatedcontent
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -75
+provider: null
+plugin: related_content_block
+settings:
+  id: related_content_block
+  label: 'Related content'
+  label_display: '0'
+  provider: oab_frontoffice
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      country: country
+      industry: industry
+      region: region
+      solution: solution

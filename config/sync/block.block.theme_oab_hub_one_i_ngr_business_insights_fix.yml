@@ -1,0 +1,30 @@
+uuid: 65bd67d6-bf74-48df-80d8-190faec378b8
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:0d5f26f6-505d-4501-8ce4-a111c066b4c0'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_ngr_business_insights_fix
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -84
+provider: null
+plugin: 'block_content:0d5f26f6-505d-4501-8ce4-a111c066b4c0'
+settings:
+  id: 'block_content:0d5f26f6-505d-4501-8ce4-a111c066b4c0'
+  label: '[NGR] Business Insights - Fix'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/business-insight\r\n/visions-business"
