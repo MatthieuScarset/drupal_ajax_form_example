@@ -53,6 +53,7 @@ class StickyContent {
 
     if (this.pageMenu) {
       this.pageMenu.style.top = `${top}px`;
+      top += this.pageMenu.offsetHeight;
     }
 
     this.elems.forEach((elem) => {

@@ -1,6 +1,6 @@
 #navbar {
   z-index: 500;
-  transition: top 0.8s ease;
+  transition: top 1s ease;
 }
 #navtop {
   background: black;
@@ -36,7 +36,6 @@
 
 
 #main_nav .logo img.large-logo {
-  transition: all .1s ease-in-out;
   height: 40px;
 }
 
@@ -142,7 +141,6 @@
 }
 
 #main_nav .logo img.medium-logo {
-  transition: all .1s ease;
   height: 30px;
 }
 
@@ -664,7 +662,6 @@
   #main_nav .logo img, #main_nav .logo img {
     height: 30px;
     width: auto;
-    transition: none;
   }
 
   .subnav {
@@ -1067,7 +1064,6 @@
   }
 
   #main_nav .logo img.large-logo {
-    transition: all .1s ease-in-out;
     height: 50px;
   }
 
