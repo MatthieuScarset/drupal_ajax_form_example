@@ -49,11 +49,11 @@
 %}
 {% block paragraph %}
 <div {{ attributes.addClass(classes) }}>
+  <div class="block-video container-fluid">
+    {{ content.field_video }}
+  </div>
+  {% if paragraph.field_title.value is defined and paragraph.field_title.value is not empty %}
   <div class="site-width">
-    <div class="block-video container-fluid">
-        {{ content.field_video }}
-    </div>
-    {% if paragraph.field_title.value is defined and paragraph.field_title.value is not empty %}
     <div class="block-text container-fluid">
       <div class="row d-flex justify-content-center">
         <div class="content-title col-md-10 content-text pl-md-4 pr-md-4">
@@ -68,7 +68,7 @@
         </div>
       </div>
     </div>
-    {% endif %}
   </div>
+  {% endif %}
 </div>
 {% endblock paragraph %}

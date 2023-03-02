@@ -1,4 +1,7 @@
 .paragraph--type--module-video {
+  .block-video {
+    background-color: #000000;
+  }
   .block-text {
     @include media-breakpoint-up(md) {
       .content-title {
