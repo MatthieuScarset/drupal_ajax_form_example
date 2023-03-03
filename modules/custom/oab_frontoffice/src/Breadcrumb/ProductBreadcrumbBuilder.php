@@ -9,6 +9,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
+use Drupal\oab_frontoffice\Twig\OabExtension;
 use Drupal\oab_hub\HubFrontUrlTrait;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\views\Views;
@@ -79,23 +80,32 @@ class ProductBreadcrumbBuilder implements BreadcrumbBuilderInterface
       #on vérifie si c'est un terme parent ou terme enfant en récupérant la liste de ses parents
       $parents = $this->termStorage->loadAllParents($term->id());
       # si le term est un enfant, on redirige vers le term parent
+      $parent = [];
       if (count($parents) > 1) { //count($parents) = depth
-        $term = $this->termStorage->loadParents($term->id());
-        $term = reset($term);
+        $parent = $this->termStorage->loadParents($term->id());
+        $parent = reset($parent);
       }
 
       ##On charge la vue Category product
       $view = Views::getView('category_page');
       $view->execute("category_page");
-      $view->setArguments([$term->id()]);
+      $view->setArguments([$parent->id()]);
       $display_obj = $view->getDisplay();
-      $url = $display_obj->getUrl();
+      $parent_url = $display_obj->getUrl();
+
+      ##On complète # à l'url enfant pour l'atteindre directement
+      ### On récupère la fonction dans OabExtension qui fait des remplacements de caractères spéciaux
+      $oab_extension = \Drupal::service('oab_frontoffice.twig.OabExtension');
+      $replace_spe_chars_term_name = $oab_extension->replaceSpacesAndSpecialChars($term->getName());
+      $lower_term_name = strtolower($replace_spe_chars_term_name);
+      $child_url = Url::fromUserInput($parent_url->toString().'#'.$lower_term_name);
 
       ##On ajoute au fil d'ariane le home et le lien de la page categ du produit
       $breadcrumb->addLink(Link::fromTextAndUrl(t('Home'), $this->getHubFrontUrl()));
-      $breadcrumb->addLink(Link::fromTextAndUrl($term->getName(), $url));
+      $breadcrumb->addLink(Link::fromTextAndUrl($parent->getName(), $parent_url));
+      $breadcrumb->addLink(Link::fromTextAndUrl($term->getName(), $child_url));
     }
-    else{
+    else {
       // on est sur un produit sans Product Category => on reprend l'ancien fil d'ariane
       if ($node->hasField('field_subhome')) {
 
