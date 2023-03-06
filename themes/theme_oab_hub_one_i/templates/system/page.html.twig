@@ -97,9 +97,7 @@
         or page.sidebar.dvicontactdistributorblock is defined or page.sidebar.formulaire is defined) %}
 
       <div class="row">
-        {% set content_classes = [
-          hasSidebar ? 'col-md-8 col-sm-12 left-column',
-          not hasSidebar ? 'left-column no-padding' ] %}
+        {% set content_classes = hasSidebar ? 'col-md-8 col-sm-12 ' : 'col-12' %}
 
         <section{{ content_attributes.addClass(content_classes) }}>
           {% block content %}
@@ -111,7 +109,7 @@
         {# Sidebar #}
         {% if hasSidebar %}
           {% block sidebar %}
-            <aside class="col-md-4 col-sm-12 right-column sticky-top h-100" role="complementary">
+            <aside class="col-md-4 col-sm-12 sticky-top h-100" role="complementary">
               {{ page.sidebar }}
             </aside>
           {% endblock %}
