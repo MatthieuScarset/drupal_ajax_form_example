@@ -1,0 +1,10 @@
+oab_pdf.node_pdf:
+  path: '/node/{node}/pdf'
+  defaults:
+    _controller: '\Drupal\oab_pdf\Controller\NodePdfController::getNodePdf'
+  requirements:
+    _oab_pdf_access: 'TRUE'
+  options:
+    parameters:
+      node:
+        type: entity:node

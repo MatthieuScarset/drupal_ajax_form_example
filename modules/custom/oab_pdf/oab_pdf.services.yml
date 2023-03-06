@@ -1,0 +1,37 @@
+services:
+  oab_pdf.snappy_logger:
+    parent: logger.channel_base
+    arguments: ['oab_snappy']
+
+  oab_pdf.snappy_factory:
+    class: Drupal\oab_pdf\SnappyFactory
+    arguments:
+      [ '@oab_pdf.snappy_logger' ]
+
+  oab_pdf.snappy:
+    class: Knp\Snappy\Pdf
+    factory: oab_pdf.snappy_factory:get
+    arguments: ['@oab_pdf.snappy_logger']
+
+  oab_pdf.node_pdf_generator:
+    class: Drupal\oab_pdf\PdfGenerator\NodePdfGenerator
+    arguments:
+      - '@oab_pdf.snappy'
+      - '@file_system'
+      - '@renderer'
+      - '@entity_type.manager'
+      - '@extension.list.module'
+
+  oab_pdf.access:
+    class: Drupal\oab_pdf\Access\PdfAccess
+    arguments:
+      - '@current_route_match'
+    tags:
+      - { name: access_check, applies_to: _oab_pdf_access }
+
+  oab_pdf.pdf_cache:
+    class: Drupal\Core\Cache\CacheBackendInterface
+    tags:
+      - { name: cache.bin }
+    factory: cache_factory:get
+    arguments: [ oab_pdf ]
