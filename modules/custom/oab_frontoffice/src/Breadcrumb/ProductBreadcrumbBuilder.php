@@ -9,6 +9,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\node\NodeInterface;
+use Drupal\oab_develop\Helpers\StringUtilities;
 use Drupal\oab_frontoffice\Twig\OabExtension;
 use Drupal\oab_hub\HubFrontUrlTrait;
 use Drupal\taxonomy\Entity\Term;
@@ -25,9 +26,15 @@ class ProductBreadcrumbBuilder implements BreadcrumbBuilderInterface
    */
   private $termStorage;
 
-  public function __construct(EntityTypeManagerInterface $entityTypeManager) {
+  /**
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   */
+  public function __construct(
+    EntityTypeManagerInterface $entity_type_manager,
+    protected StringUtilities $stringUtilities) {
 
-    $this->termStorage = $entityTypeManager->getStorage('taxonomy_term');
+    $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
   }
 
   /**
@@ -76,34 +83,22 @@ class ProductBreadcrumbBuilder implements BreadcrumbBuilderInterface
     $term = Term::load($node->field_product_category->target_id ?? 0);
 
     ##On vérifie qu'on a bien un résultat
-    if ($term) {
-      #on vérifie si c'est un terme parent ou terme enfant en récupérant la liste de ses parents
-      $parents = $this->termStorage->loadAllParents($term->id());
-      # si le term est un enfant, on redirige vers le term parent
-      $parent = [];
-      if (count($parents) > 1) { //count($parents) = depth
-        $parent = $this->termStorage->loadParents($term->id());
-        $parent = reset($parent);
-      }
+    if ($term && count($parents = $this->termStorage->loadParents($term->id())) > 0) {
+      $parent = reset($parents);
 
-      ##On charge la vue Category product
-      $view = Views::getView('category_page');
-      $view->execute("category_page");
-      $view->setArguments([$parent->id()]);
-      $display_obj = $view->getDisplay();
-      $parent_url = $display_obj->getUrl();
+      ## On récupère l'url du parent depuis la view
+      $parent_url = Url::fromRoute('view.category_page.category_page', ['tid'=> $parent?->id()]);
 
-      ##On complète # à l'url enfant pour l'atteindre directement
-      ### On récupère la fonction dans OabExtension qui fait des remplacements de caractères spéciaux
-      $oab_extension = \Drupal::service('oab_frontoffice.twig.OabExtension');
-      $replace_spe_chars_term_name = $oab_extension->replaceSpacesAndSpecialChars($term->getName());
-      $lower_term_name = strtolower($replace_spe_chars_term_name);
-      $child_url = Url::fromUserInput($parent_url->toString().'#'.$lower_term_name);
+      ## On rajoute l'ancre à l'URL de la view
+      $ancre_term = Url::fromRoute('view.category_page.category_page',
+        ['tid'=> $parent?->id()],
+        ['fragment'=> $this->stringUtilities->getSlug($term->getName())]
+      );
 
-      ##On ajoute au fil d'ariane le home et le lien de la page categ du produit
+      ## On ajoute au fil d'ariane le home et le lien de la page categ du produit
       $breadcrumb->addLink(Link::fromTextAndUrl(t('Home'), $this->getHubFrontUrl()));
       $breadcrumb->addLink(Link::fromTextAndUrl($parent->getName(), $parent_url));
-      $breadcrumb->addLink(Link::fromTextAndUrl($term->getName(), $child_url));
+      $breadcrumb->addLink(Link::fromTextAndUrl($term->getName(), $ancre_term));
     }
     else {
       // on est sur un produit sans Product Category => on reprend l'ancien fil d'ariane

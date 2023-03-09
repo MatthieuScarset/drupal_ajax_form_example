@@ -8,3 +8,7 @@ services:
   oab_develop.helper.translations:
     class: Drupal\oab_develop\Helpers\TranslationsHelper
     arguments: ['@locale.storage']
+
+  oab_develop.helper.string_utilities:
+    class: Drupal\oab_develop\Helpers\StringUtilities
+    arguments: ['@transliteration']
