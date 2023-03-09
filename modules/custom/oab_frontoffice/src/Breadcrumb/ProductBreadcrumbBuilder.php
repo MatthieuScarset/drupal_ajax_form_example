@@ -16,8 +16,7 @@ use Drupal\taxonomy\Entity\Term;
 use Drupal\views\Views;
 
 
-class ProductBreadcrumbBuilder implements BreadcrumbBuilderInterface
-{
+class ProductBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
   use HubFrontUrlTrait;
 
@@ -40,8 +39,7 @@ class ProductBreadcrumbBuilder implements BreadcrumbBuilderInterface
   /**
    * @inheritdoc
    */
-  public function applies(RouteMatchInterface $route_match)
-  {
+  public function applies(RouteMatchInterface $route_match) {
 
     ##Je ne le gère que pour la front page
     $is_admin_route = \Drupal::service('router.admin_context')->isAdminRoute();
@@ -63,8 +61,7 @@ class ProductBreadcrumbBuilder implements BreadcrumbBuilderInterface
   /**
    * @inheritdoc
    */
-  public function build(RouteMatchInterface $route_match)
-  {
+  public function build(RouteMatchInterface $route_match) {
     #on récupère le node
     $node = $route_match->getParameter('node');
 
