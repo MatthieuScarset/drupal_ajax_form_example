@@ -29,7 +29,8 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
     'module_partner',
     'module_steps',
     'module_text_video_image',
-    'module_customer_space'
+    'module_customer_space',
+    'cross_link_items'
   ];
 
   $max_char_short_title = $conf_modular_product->getShortTitleMaxCharacter();
