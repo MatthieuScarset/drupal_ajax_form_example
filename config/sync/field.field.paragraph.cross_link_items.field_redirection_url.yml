@@ -1,5 +1,5 @@
 uuid: 57fc5237-390e-4688-b8bc-a64d637b2ad0
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -11,7 +11,7 @@ id: paragraph.cross_link_items.field_redirection_url
 field_name: field_redirection_url
 entity_type: paragraph
 bundle: cross_link_items
-label: 'URL de Redirection'
+label: 'Redirection URL'
 description: ''
 required: true
 translatable: true
