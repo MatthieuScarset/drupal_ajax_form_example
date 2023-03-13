@@ -3,7 +3,7 @@
 
 
 function oab_offices_map_install() {
-  drupal_set_installed_schema_version('oab_offices_map', 8000);
+  \Drupal::service('update.update_hook_registry')->setInstalledVersion('oab_offices_map', 8000);
 }
 
 /**

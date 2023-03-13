@@ -15,7 +15,12 @@ if ($entity_type === null) {
     $entity_type->save();
 }
 
-$terms_fr = taxonomy_term_load_multiple_by_name('Presse', 'subhomes');
+//$terms_fr = taxonomy_term_load_multiple_by_name('Presse', 'subhomes');
+$terms_fr = \Drupal::entityTypeManager()
+  ->getStorage("taxonomy_term")
+  ->loadByProperties(["name" => 'Presse', "vid" => "subhomes"]);
+
+
 if (is_array($terms_fr) && count($terms_fr) > 0 ) {
     // je recupère la 1er occurence (qui est sensée être la seule)
     // pour recuperer l'id de la subhome a setter
@@ -32,7 +37,11 @@ if (is_array($terms_fr) && count($terms_fr) > 0 ) {
     $entity->save();
 }
 
-$terms_en = taxonomy_term_load_multiple_by_name('Press', 'subhomes');
+//$terms_en = taxonomy_term_load_multiple_by_name('Press', 'subhomes');
+$terms_en = \Drupal::entityTypeManager()
+  ->getStorage("taxonomy_term")
+  ->loadByProperties(["name" => 'Press', "vid" => "subhomes"]);
+
 if (is_array($terms_en) && count($terms_en) > 0 ) {
     $sid = 0;
 

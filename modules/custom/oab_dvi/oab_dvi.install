@@ -1,7 +1,7 @@
 <?php
 
 function oab_dvi_install() {
-  drupal_set_installed_schema_version('oab_dvi', 8000);
+  \Drupal::service('update.update_hook_registry')->setInstalledVersion('oab_dvi', 8000);
 }
 
 function oab_dvi_update_dependencies() {

@@ -47,7 +47,12 @@ foreach ($vocaList as $voca => $languageList) {
   foreach ($languageList as $language => $termlist) {
     foreach ($termlist as $key => $term) {
       ##on cherche l'Objet
-      $termsArray = taxonomy_term_load_multiple_by_name($term, $voca);
+//      $termsArray = taxonomy_term_load_multiple_by_name($term, $voca);
+
+      $termsArray = \Drupal::entityTypeManager()
+        ->getStorage("taxonomy_term")
+        ->loadByProperties(["name" => $term, "vid" => $voca]);
+
       ##Je supprime les termes trouvés
       foreach ($termsArray as $termObject) {
         $termObject->delete();
@@ -59,7 +64,12 @@ foreach ($vocaList as $voca => $languageList) {
 foreach ($doublons as $voca => $termlist) {
   foreach ($termlist as $key => $term) {
     ##on cherche l'Objet
-    $termsArray = taxonomy_term_load_multiple_by_name($term, $voca);
+//    $termsArray = taxonomy_term_load_multiple_by_name($term, $voca);
+
+    $termsArray = \Drupal::entityTypeManager()
+      ->getStorage("taxonomy_term")
+      ->loadByProperties(["name" => $term, "vid" => $voca]);
+
     ##En cas de doublon à supprimer, je supprime le dernier
     if (count($termsArray) > 1) {
       $termsArray[1]->delete();
