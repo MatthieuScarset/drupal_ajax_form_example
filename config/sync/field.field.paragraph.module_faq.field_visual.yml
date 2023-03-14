@@ -1,11 +1,13 @@
 uuid: 648c9ff0-5c4a-4ac9-a333-323161cf8be8
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_visual
     - media.type.image
     - paragraphs.paragraphs_type.module_faq
+  content:
+    - 'media:image:2fc8c774-1f91-4f79-8eca-f2e5966ff2c9'
 id: paragraph.module_faq.field_visual
 field_name: field_visual
 entity_type: paragraph
@@ -14,7 +16,9 @@ label: 'Image FAQ'
 description: ''
 required: false
 translatable: false
-default_value: {  }
+default_value:
+  -
+    target_uuid: 2fc8c774-1f91-4f79-8eca-f2e5966ff2c9
 default_value_callback: ''
 settings:
   handler: 'default:media'

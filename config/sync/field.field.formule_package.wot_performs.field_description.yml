@@ -1,0 +1,19 @@
+uuid: 36ebd957-b8bd-46ea-bfff-9282eca9bc17
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.formule_package.field_description
+    - oab_mp_product_formule_packages.formule_package_type.wot_performs
+id: formule_package.wot_performs.field_description
+field_name: field_description
+entity_type: formule_package
+bundle: wot_performs
+label: description
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

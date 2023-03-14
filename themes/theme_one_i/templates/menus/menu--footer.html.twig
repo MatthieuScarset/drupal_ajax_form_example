@@ -36,7 +36,7 @@
                 {% set isDivAndUl = true %}
             {% else %}
                     <li{{ item.attributes.addClass('nav-item') }}>
-                      {{ link(item.title, hub_getHubSubhomeUrl(item.url), {'target': link_target, 'class':'nav-link px-0 pt-1 pb-0', 'onmousedown': 'utag_link(utag_data.titre_page, \'Footer\', \'Liens\', \'' ~ item.title ~ '\');'}) }}
+                      {{ link(item.title, item.url, {'target': link_target, 'class':'nav-link px-0 pt-1 pb-0', 'onmousedown': 'utag_link(utag_data.titre_page, \'Footer\', \'Liens\', \'' ~ item.title ~ '\');'}) }}
                     </li>
             {% endif %}
             {% if item.below %}

@@ -121,5 +121,20 @@ document.querySelectorAll('#main_nav #block-theme-one-i-righticonblock .nav-item
     })
   });
 
+  const smallLogo = $('#main_nav img.small-logo');
+  const largeLogo = $('#main_nav img.large-logo');
+
+  $(window).scroll(() => {
+    if ($(window).scrollTop() > 0) {
+      smallLogo.addClass('d-lg-block');
+      smallLogo.removeClass('d-lg-none');
+      largeLogo.removeClass('d-lg-block');
+    } else {
+      smallLogo.removeClass('d-lg-block');
+      smallLogo.addClass('d-lg-none');
+      largeLogo.addClass('d-lg-block');
+    }
+  });
+
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
 

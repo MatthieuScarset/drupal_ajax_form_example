@@ -3,5 +3,5 @@ langcode: fr
 status: true
 dependencies: {  }
 id: working_together
-label: 'Working Together'
+label: 'WOT - Contact'
 formule: '1'

@@ -104,11 +104,15 @@
         }
 
         .site-logo {
-          width: 110px;
-          height: auto;
+          width: auto;
+          height: 30px;
           @include media-breakpoint-up(md) {
-            width: 140px;
-            height: auto;
+            width: auto;
+            height: 40px;
+          }
+          @include media-breakpoint-up(xl) {
+            width: auto;
+            height: 50px;
           }
         }
       }

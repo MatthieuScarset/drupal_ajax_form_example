@@ -1,0 +1,34 @@
+uuid: 7302827f-129a-43f2-8247-74a9035e077b
+langcode: en
+status: true
+dependencies:
+  module:
+    - language
+    - oab_frontoffice
+    - system
+  theme:
+    - theme_boosted
+id: equipesubhomepress
+theme: theme_boosted
+region: sidebar
+weight: -52
+provider: null
+plugin: equipe_subhome_press_block
+settings:
+  id: equipe_subhome_press_block
+  label: 'Team Subhome Press'
+  label_display: '0'
+  provider: oab_frontoffice
+visibility:
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      en: en
+      fr: fr
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/presse\r\n/press"

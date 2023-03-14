@@ -7,26 +7,26 @@ third_party_settings:
     empty_configs:
       default:
         name: Default
-        no_result_title: 'Vous avez indiqué travailler avec [formule-field:color-orange]{answer}[formule-field:color-end]'
-        no_result_sentence: 'Cette demande spécifique doit être traitée par l''un de nos experts. Contactez-nous pour obtenir plus d''informations'
+        no_result_title: 'Vous avez indiqué vouloir travailler en environnement [formule-field:color-orange]{answer}[formule-field:color-end]'
+        no_result_sentence: 'Cette demande spécifique doit être traitée par l''un de nos experts. Contactez-nous pour obtenir plus d''informations.'
         button_text: Contactez-nous
-        button_link: 'http://ruby.local:8000/fr/contact'
+        button_link: 'https://www.orange-business.com/fr/contact'
       config_1:
         name: 'Config 1'
         no_result_title: 'Vous avez indiqué travailler avec [formule-field:color-orange]{answer}[formule-field:color-end]'
-        no_result_sentence: 'Cette demande spécifique doit être traitée par l''un de nos experts. Contactez-nous pour obtenir plus d''informations'
+        no_result_sentence: 'Cette demande spécifique doit être traitée par l''un de nos experts. Contactez-nous pour obtenir plus d''informations. '
         button_text: Contactez-nous
-        button_link: 'http://ruby.local:8000/fr/formulaire-contact'
+        button_link: 'https://www.orange-business.com/fr/working-together-ready-precommande'
         inputs: {  }
 id: fournisseur
 label: Fournisseur
-display_label: 'Avec quel fournisseur souhaitez-vous travailler ?'
-description: 'Cliquez sur l''un des fournisseurs pour le sélectionner, puis valider en cliquant sur "Suivant"'
+display_label: "Avec quel fournisseur \r\nsouhaitez-vous travailler ?"
+description: "Cliquez sur l'un des fournisseurs pour le sélectionner, puis valider en cliquant sur «\_Suivant »"
 choices:
   microsoft: Microsoft
   google: Google
   webex: Webex
-  Zoom: zoom
+  Zoom: Zoom
   no_pref: 'Pas de préférence'
 display_mode: list
 sentence: 'Fournisseur : {answer}'
