@@ -135,7 +135,7 @@ function theme_one_i_preprocess_node(&$variables) {
     $conf_modular_product = \Drupal::service('oab_modular_product.settings');
 
     //gestion du champ HIGHLIGHT
-    if(isset($nodeEntity->field_highlight)) {
+    if(isset($nodeEntity->field_highlight->value)) {
       $maxCharsHighlight = $conf_modular_product->getLongDescriptionMaxCharacter();
       $text_highlight = $nodeEntity->field_highlight->value;
       if(strlen($text_highlight) > $maxCharsHighlight) {
