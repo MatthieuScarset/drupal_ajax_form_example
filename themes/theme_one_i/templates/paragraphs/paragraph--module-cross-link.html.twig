@@ -44,27 +44,22 @@
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
   not paragraph.isPublished() ? 'paragraph--unpublished',
+  'double-color',
 ]
 %}
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
-      <div class="row">
-        <div class="col-12 col-md-6 bg-greige">
-          <div class="row justify-content-end site-width">
-            <div class="col-12 col-md-8 col-xxl-6 mr-xl-5 mr-md-4">
-              {{ content.field_cross_link_items[0] }}
-            </div>
+        <div class="left-panel bg-greige px-1 px-md-0">
+          <div>
+            {{ content.field_cross_link_items[0] }}
           </div>
         </div>
-        <div class="col-12 col-md-6">
-          <div class="row justify-content-start site-width">
-            <div class="col-12 col-md-8 col-xxl-6 ml-md-4 ml-xl-5">
-              {{ content.field_cross_link_items[1] }}
-            </div>
+        <div class="right-panel px-1 px-md-0">
+          <div>
+            {{ content.field_cross_link_items[1] }}
           </div>
         </div>
-      </div>
     {% endblock %}
   </div>
 {% endblock paragraph %}
