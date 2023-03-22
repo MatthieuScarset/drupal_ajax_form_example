@@ -1,0 +1,12 @@
+.key-figure-item {
+  border-left: 2px solid $gray3 ;
+
+  @include media-breakpoint-up(md) {
+    border-top: 2px solid $gray3 ;
+    border-left: none ;
+  }
+
+  @include media-breakpoint-between(md, md) {
+    margin-bottom: 45px;
+  }
+}

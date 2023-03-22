@@ -1,0 +1,34 @@
+uuid: 4c319164-559e-4b7b-9110-69f766c5c375
+langcode: en
+status: true
+dependencies:
+  module:
+    - language
+    - node
+id: poc_test_module
+label: 'POC Test Module'
+type: 'canonical_entities:node'
+pattern: 'poc_test_module/[node:title]'
+selection_criteria:
+  a13a8f6e-a98e-4f7a-8e37-b544b1a4d07a:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: a13a8f6e-a98e-4f7a-8e37-b544b1a4d07a
+    context_mapping:
+      node: node
+    bundles:
+      poc_test_module: poc_test_module
+  8ae9e8e0-0b25-4b09-bc7f-c300f25d5b9c:
+    id: language
+    negate: false
+    uuid: 8ae9e8e0-0b25-4b09-bc7f-c300f25d5b9c
+    context_mapping:
+      language: 'node:langcode:language'
+    langcodes:
+      en: en
+      fr: fr
+selection_logic: and
+weight: -10
+relationships:
+  'node:langcode:language':
+    label: Language

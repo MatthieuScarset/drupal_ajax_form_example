@@ -6,6 +6,7 @@ fr:
       - category_page
   contents:
     - modular_product
+    - poc_test_module
   routes: {  }
 en:
   url:
@@ -16,5 +17,6 @@ en:
       - category_page
   contents:
     - modular_product
+    - poc_test_module
   routes:
     - oab_offices_map.page
