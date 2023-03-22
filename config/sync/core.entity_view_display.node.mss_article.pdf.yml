@@ -1,0 +1,37 @@
+uuid: 74168a03-ed04-4ea6-a9ef-4a8f276da189
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.pdf
+    - field.field.node.mss_article.field_categories
+    - field.field.node.mss_article.field_content
+    - field.field.node.mss_article.field_hub
+    - field.field.node.mss_article.field_hub_portal
+    - field.field.node.mss_article.field_p_wysiwyg_rebond
+    - field.field.node.mss_article.field_typology
+    - node.type.mss_article
+  module:
+    - text
+    - user
+id: node.mss_article.pdf
+targetEntityType: node
+bundle: mss_article
+mode: pdf
+content:
+  field_content:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_categories: true
+  field_hub: true
+  field_hub_portal: true
+  field_p_wysiwyg_rebond: true
+  field_typology: true
+  langcode: true
+  links: true
+  workbench_moderation_control: true

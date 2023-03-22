@@ -51,3 +51,7 @@ a.btn-white-border,
     font-size: 0.875em !important;
     line-height: 1em !important;
 }
+
+.btn-pdf-mss {
+  margin: 30px 0;
+}
