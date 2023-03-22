@@ -5,13 +5,19 @@ dependencies:
   config:
     - field.storage.node.field_teaser
     - node.type.modular_product
+  module:
+    - require_on_publish
+third_party_settings:
+  require_on_publish:
+    require_on_publish: true
+    warn_on_empty: true
 id: node.modular_product.field_teaser
 field_name: field_teaser
 entity_type: node
 bundle: modular_product
 label: Title
 description: 'In a few words, the user should be able to understand the goal, the purpose of the presented product.'
-required: true
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''

@@ -35,12 +35,12 @@ dependencies:
     - node.type.region
     - node.type.simple_page
     - node.type.solution
-    - node.type.webform
     - workflows.workflow.content
+    - node.type.webform
   module:
     - comment
-    - content_translation
     - content_moderation
+    - content_translation
     - entity_browser
     - field_ui
     - file
@@ -80,6 +80,8 @@ permissions:
   - 'access tour'
   - 'access user profiles'
   - 'add background image entities'
+  - 'add subhome entity entities'
+  - 'administer media'
   - 'administer menu'
   - 'administer scheduled_update display'
   - 'administer scheduled_update fields'
