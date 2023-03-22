@@ -1,5 +1,5 @@
-<div class="row">
+<div {{ attributes.addClass("accordion") }}>
   {% for item in items %}
-      <div class="col-12">{{ item.content }}</div>
+      <div {{ item.attributes.addClass('card', 'multi') }}>{{ item.content }}</div>
   {% endfor %}
 </div>
