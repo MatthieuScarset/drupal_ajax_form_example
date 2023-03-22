@@ -108,6 +108,7 @@ module:
   oab_synomia_search_engine: 0
   oab_tealium: 0
   oab_tibo: 0
+  oab_tokens: 0
   oab_transliteration_filename: 0
   oab_tristan: 0
   oab_twitter: 0

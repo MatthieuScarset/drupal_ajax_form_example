@@ -1,0 +1,8 @@
+name: OAB Tokens
+description: 'module pour la gestion de Tokens sur OBS.com'
+type: module
+package: OAB
+version: VERSION
+core_version_requirement: ^9.0
+project: 'oab_tokens'
+datestamp: 1673280820
