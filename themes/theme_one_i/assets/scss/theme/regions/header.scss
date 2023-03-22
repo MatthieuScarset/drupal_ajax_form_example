@@ -19,19 +19,31 @@ header#navbar {
       min-height $header_transition_time linear;
   }
 
-  transition: opacity 0.10s linear;
-  opacity: 1;
   z-index: 1020;
 
+  &.transition {
+    transition: top 1s, transform 1s;
+  }
+
   &.not-visible{
-    opacity: 0;
     visibility: hidden;
+
+    &.no-transition {
+      transition: none;
+    }
   }
 
   &.is-visible{
     opacity: 1;
-    position: sticky;
+    position: fixed;
+    left: 0;
+    right: 0;
+    transform: translateY(100%);
   }
+}
+
+.sticky.local-nav.transition {
+  transition: top 1s, transform 1s;
 }
 
 .page-menu-category-block.sticky-top {

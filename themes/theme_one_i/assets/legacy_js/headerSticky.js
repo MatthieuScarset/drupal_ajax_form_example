@@ -2,6 +2,7 @@ class ManageStickyTop {
   constructor() {
     this._defineCssTop();
     this.$header = $("header");
+    this.$localNav = $(".sticky.local-nav");
     this.$adminToolbarHeight = 0;
 
     $(document).ready(() => {
@@ -33,7 +34,6 @@ class ManageStickyTop {
       ([e]) => {
         const supra_navbar = $('header .navbar.supra');
         const supra_navbar_height = supra_navbar.height();
-        //const header = $('header');
 
         e.target.classList.toggle('is-sticky', e.intersectionRatio < 1);
 
@@ -54,19 +54,48 @@ class ManageStickyTop {
     this.$lastScrollTop = 0;
 
     $(window).scroll(() => {
-      this._defineCssTop();
       const scrollTop = $(window).scrollTop();
-      if (scrollTop > this.$lastScrollTop) {
+      this.$headerTop = this.$adminToolbarHeight - this.$header.outerHeight();
+      this.$localNavTop = this.$adminToolbarHeight + this.$header.outerHeight();
+      // Safari iOS + Mac specific hook - pour calculer le scrollDown. Safari fait du scrollDown négatif
+      this.$scrollDown = $(document).height() - $(window).height() - $(window).scrollTop();
+
+
+      if (scrollTop >= this.$lastScrollTop && this.$lastScrollTop >= 0 && this.$scrollDown > 0) {
         // Scroll down
         this.$header.removeClass("is-visible");
-      } else {
-        // Scroll Up
-        this.$header.addClass("is-visible");
-        this.$header.css("top", this.$adminToolbarHeight);
-        this.$header.removeClass("not-visible");
+        this.$localNav.css("top", this.$adminToolbarHeight);
+        this.$header.addClass("no-transition");
 
       }
+      // Je rajoute le > 0 car Safari fait du scrollUp négatif
+      else if (this.$lastScrollTop > 0 && this.$scrollDown > 0){
+        // Scroll Up
+        this.$header.css("top", this.$headerTop);
+        this.$header.addClass("is-visible");
+        this.$localNav.css("top", this.$localNavTop);
+        this.$header.removeClass("not-visible");
+        this.$localNav.removeClass("transition");
+        this.$header.addClass("transition");
+        this.$header.removeClass("no-transition");
+      }
+      else {
+        this.$header.addClass("no-transition");
+        this.$header.removeClass("transition");
+      }
+
       this.$lastScrollTop = scrollTop;
+
+      if ( this.$lastScrollTop === 0) {
+        this.$header.removeClass("is-visible");
+        this.$header.removeClass("transition");
+      }
+
+      if (!this.$header.hasClass('is-visible')) {
+        this.$localNav.removeClass("transition");
+      } else {
+        this.$localNav.addClass("transition");
+      }
 
       $('#main_nav .mega-menu-desktop.mega-menu .item_mega_menu.mega-menu-panel').each(function (key,elem) {
         if ($(elem).hasClass('show')) {

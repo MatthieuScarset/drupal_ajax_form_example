@@ -156,19 +156,36 @@
 
         top_menu.removeClass('navbar-fixed');
         const scrollTop = $(window).scrollTop();
+        const headerTop = admin_toolbar_height - header.height();
 
-        if (scrollTop > lastScrollTop) {
+        // Safari iOS + Mac specific hook - pour calculer le scrollDown. Safari fait du scrollDown négatif
+        const scrollDown = $(document).height() - $(window).height() - $(window).scrollTop();
+
+        if (scrollTop >= lastScrollTop && lastScrollTop >= 0 && scrollDown > 0) {
           // Scroll down
           header.removeClass("is-visible");
-        } else {
+          header.addClass("no-transition");
+        }
+        // Je rajoute le > 0 car Safari fait du scrollUp négatif
+        else if (lastScrollTop > 0 && scrollDown > 0) {
           // Scroll Up
+          header.css("top", headerTop);
+          header.removeClass('not-visible');
           header.addClass("is-visible");
-          header.css("top", admin_toolbar_height);
-          header.removeClass("not-visible");
+          header.addClass("transition");
+          header.removeClass("no-transition");
+        }
+        else {
+          header.addClass("no-transition");
+          header.removeClass("transition");
         }
 
         lastScrollTop = scrollTop;
 
+        if ( lastScrollTop === 0) {
+          header.removeClass("is-visible");
+          header.removeClass("transition");
+        }
         $('#navbar-collapse-mega .nav-menu .nav-item').each(function (key,elem) {
           if ($(elem).hasClass('open')) {
             $(elem).removeClass('open');
@@ -237,6 +254,12 @@
 
           if ($(window).scrollTop() < (top_zone_offset - header.outerHeight()) + 90) {
             local_nav.removeClass('sticky-module');
+          }
+
+          if (!header.hasClass('is-visible')) {
+            local_nav.addClass("no-transition");
+          } else {
+            local_nav.removeClass("no-transition");
           }
 
 

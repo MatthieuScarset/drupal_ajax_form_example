@@ -157,25 +157,45 @@
   border-color: black;
   padding: 20px 0 0;
 }
-header#navbar{
-  transition: opacity 0.15s linear;
+
+div#local_nav {
+  transition: top 1s, transform 1s;
+}
+
+div#local_nav.no-transition {
+  transition: none;
+}
+
+header#navbar {
   opacity: 1;
 }
+
+header#navbar.transition {
+  transition: top 1s, transform 1s;
+}
+
 header#navbar > div {
   top: 0;
   width: 100%;
   z-index: 400;
 }
 
-header#navbar.not-visible{
+header#navbar.not-visible {
   opacity: 0;
   visibility: hidden;
+}
+
+header#navbar.not-visible.no-transition {
+  transition: none;
 }
 
 header#navbar.is-visible {
   z-index: 400;
   opacity: 1;
-  position: sticky;
+  transform: translateY(100%);
+  position: fixed;
+  left: 0;
+  right: 0;
 }
 
 #main_nav .nav > li > a {
