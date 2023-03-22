@@ -1,6 +1,15 @@
 .paragraph--type--module-video {
   .block-video {
     background-color: #000000;
+
+    .embed-responsive {
+      max-height: 640px;
+
+      iframe {
+        max-height: inherit;
+      }
+    }
+
   }
   .block-text {
     @include media-breakpoint-up(md) {
