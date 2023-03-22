@@ -153,13 +153,29 @@
 
 
 .subnav.navbar-fixed {
-  position: fixed;
+
+  border-color: black;
+  padding: 20px 0 0;
+}
+header#navbar{
+  transition: opacity 0.15s linear;
+  opacity: 1;
+}
+header#navbar > div {
   top: 0;
   width: 100%;
   z-index: 400;
-  border-color: black;
-  padding: 20px 0 0;
-  transition-timing-function: ease-in-out;
+}
+
+header#navbar.not-visible{
+  opacity: 0;
+  visibility: hidden;
+}
+
+header#navbar.is-visible {
+  z-index: 400;
+  opacity: 1;
+  position: sticky;
 }
 
 #main_nav .nav > li > a {
@@ -754,11 +770,16 @@ margin-left: 0;
     overflow: hidden;
   }
 
-  #main_nav .logo img, #main_nav.navbar-fixed .logo img {
-    height: 30px;
-    width: auto;
+  #main_nav .logo img {
+    margin-top: -20px;
+    height: auto;
+    width: 112px;
     transition: none;
   }
+/*
+  #main_nav.navbar-fixed .logo img {
+    transition: none;
+  }*/
 
   .subnav.navbar-fixed {
     z-index: 2002;

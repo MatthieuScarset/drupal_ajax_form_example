@@ -1,27 +1,19 @@
 class ManageStickyTop {
   constructor() {
     this._defineCssTop();
+    this.$header = $("header");
+    this.$adminToolbarHeight = 0;
+
+    $(document).ready(() => {
+      let toolbarHeight = $('#toolbar-bar').length ? $('#toolbar-bar').height() : 0;
+      let toolbarTrayHorizontalHeight = $('#toolbar-item-administration-tray.toolbar-tray-horizontal').length ?
+        $('#toolbar-item-administration-tray.toolbar-tray-horizontal').height() : 0;
+      this.$adminToolbarHeight = toolbarHeight + toolbarTrayHorizontalHeight;
+    })
 
     $(window).resize(() => {
       this._defineCssTop()
     });
-
-
-    /**
-     * Petit hack pour la partie connectée
-     * je le garde en hack car l'autre facon est plus "JS"
-     * + evite de faire des actions à chaque scroll du user (donc moins gourmand)
-     */
-    if ($('body').hasClass('user-logged-in')) {
-      $(window).scroll((elem) => {
-        if ($(window).scrollTop()) {
-          $('header').addClass('is-sticky');
-        } else {
-          $('header').removeClass('is-sticky');
-        }
-      });
-    }
-
 
     this.$bodyCssChanged = new MutationObserver((mutations) => {
       this._defineCssTop();
@@ -38,66 +30,67 @@ class ManageStickyTop {
 
     // get the sticky element
     this.$stickyHeaderObserver = new IntersectionObserver(
-      this._manageStickyHeader,
-      {threshold: [1]}
-    );
+      ([e]) => {
+        const supra_navbar = $('header .navbar.supra');
+        const supra_navbar_height = supra_navbar.height();
+        //const header = $('header');
 
+        e.target.classList.toggle('is-sticky', e.intersectionRatio < 1);
+
+        if (e.intersectionRatio < 1) {
+          this.$header.addClass("not-visible");
+          $('#block-theme-one-i-socialshareblock').css('top',
+            this.$header.height() - supra_navbar_height);
+        }
+        else {
+          $('#block-theme-one-i-socialshareblock').css('top',
+            this.$header.height());
+        }
+      },
+      {threshold: 0}
+    );
     this.$stickyHeaderObserver.observe(document.querySelector('header'))
 
+    this.$lastScrollTop = 0;
 
-    //
-    // var observer = new MutationObserver(function (event) {
-    //   event.forEach((mutationRecord) => {
-    //     if (mutationRecord.target.getAttribute('aria-expanded') === 'true') {
-    //       const target = $(mutationRecord.target);
-    //       const item = $(target.attr('href'));
-    //       if (item.length) {
-    //         console.log(item);
-    //         alert("coucou");
-    //         item.focus();
-    //       }
-    //     }
-    //   });
-    // })
-    //
-    // document.querySelectorAll('#main_nav ul.navbar-nav > li.nav-item > a.nav-link').forEach((e) => {
-    //   observer.observe(e, {
-    //     attributes: true,
-    //     attributeFilter: ['aria-expanded'],
-    //     childList: false,
-    //     characterData: false
-    //   })
-    // });
+    $(window).scroll(() => {
+      this._defineCssTop();
+      const scrollTop = $(window).scrollTop();
+      if (scrollTop > this.$lastScrollTop) {
+        // Scroll down
+        this.$header.removeClass("is-visible");
+      } else {
+        // Scroll Up
+        this.$header.addClass("is-visible");
+        this.$header.css("top", this.$adminToolbarHeight);
+        this.$header.removeClass("not-visible");
 
+      }
+      this.$lastScrollTop = scrollTop;
+
+      $('#main_nav .mega-menu-desktop.mega-menu .item_mega_menu.mega-menu-panel').each(function (key,elem) {
+        if ($(elem).hasClass('show')) {
+          $(elem).collapse("toggle");
+          $(elem).parent().removeClass('active');
+        }
+      });
+    });
   }
-
-  _manageStickyHeader([e]) {
-    const supra_navbar = $('header .navbar.supra');
-    const supra_navbar_height = supra_navbar.height();
-    const header = $('header');
-
-    e.target.classList.toggle('is-sticky', e.intersectionRatio < 1);
-    if (e.intersectionRatio < 1) {
-      $('#block-theme-one-i-socialshareblock').css('top', header.height() - supra_navbar_height);
-    } else {
-      $('#block-theme-one-i-socialshareblock').css('top', header.height());
-    }
-  }
-
 
   _defineCssTop() {
     let init = this._getBodyPaddingTop();
     init = init === 0 ? -1 : init;
-    $('.sticky-top').each(function () {
-      $(this).css('top', init);
-      init += $(this).height();
+    $('.sticky').each(function () {
+      if ($(this).css("visibility") === "visible") {
+        $(this).css('top', init);
+        init += $(this).height();
+      }
     });
   }
 
   _getBodyPaddingTop() {
     return parseInt($('body').css('padding-top').replace("px", ''));
   }
-
 }
 
 new ManageStickyTop();
