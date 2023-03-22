@@ -365,12 +365,7 @@ class OabExtension extends AbstractExtension {
   }
 
   public function replaceSpacesAndSpecialChars($string) {
-    $clean_string = str_replace(' ', '_', $string);
-    $clean_string = str_replace('.', '_', $clean_string);
-    $clean_string = strtolower($clean_string);
-    $clean_string = \Drupal::transliteration()->transliterate($clean_string);
-    $clean_string = preg_replace('@[^a-z0-9_.]+@', '_', $clean_string);
-    return htmlentities($clean_string);
+    return htmlentities(\Drupal::service('oab_develop.helper.string_utilities')->getSlug($string));
   }
 
 }
