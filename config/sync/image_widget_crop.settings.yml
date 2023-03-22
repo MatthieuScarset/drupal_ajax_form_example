@@ -1,3 +1,5 @@
+_core:
+  default_config_hash: UYGkeE2iH3UGp9lBPsELb3VSgHz9vkMJeaGzcYwE7Uw
 settings:
   library_url: ''
   css_url: ''
@@ -10,7 +12,6 @@ settings:
     crop_16_9: crop_16_9
   warn_multiple_usages: false
   show_default_crop: true
+  show_crop_area: false
   notify_apply: false
   notify_update: true
-_core:
-  default_config_hash: UYGkeE2iH3UGp9lBPsELb3VSgHz9vkMJeaGzcYwE7Uw

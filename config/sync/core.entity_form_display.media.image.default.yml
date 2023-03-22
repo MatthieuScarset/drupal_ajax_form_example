@@ -27,9 +27,12 @@ content:
       preview_image_style: thumbnail
       crop_preview_image_style: crop_thumbnail
       crop_list:
+        - crop_1320_420
         - crop_150_150
+        - crop_420_420
         - crop_554_277
         - crop_645_410
+        - crop_870_420
         - crop_free_ratio
       crop_types_required: {  }
       warn_multiple_usages: true
@@ -77,4 +80,5 @@ hidden:
   created: true
   field_media_image: true
   langcode: true
+  replace_file: true
   uid: true
