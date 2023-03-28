@@ -5,6 +5,7 @@ namespace Drupal\oab_ob1_adapter;
 use Drupal\Core\Config\ImmutableConfig;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\oab_ob1_adapter\Form\Ob1ThemeSettingsForm;
+use Drupal\taxonomy\Entity\Term;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -92,4 +93,18 @@ class Ob1AdapterService {
 
     return $has_content;
   }
+
+  public function hasHub(Term $hub_actif) : bool {
+    $has_hub = false;
+    $hub_allowed = $this->get('hubs');
+
+    if (isset($hub_allowed) && count($hub_allowed) !== 0) {
+      if (in_array($hub_actif->id(), $hub_allowed)) {
+        $has_hub = true;
+      }
+    }
+
+    return $has_hub;
+  }
+
 }

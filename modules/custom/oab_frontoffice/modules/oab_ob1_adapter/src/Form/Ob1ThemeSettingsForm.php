@@ -38,6 +38,11 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
   private $contentTypeStorage;
 
   /**
+   * @var \Drupal\Core\Entity\EntityStorageInterface|mixed|object
+   */
+  private mixed $taxonomyTerm;
+
+  /**
    * Constructs a \Drupal\system\ConfigFormBase object.
    *
    * @param ConfigFactoryInterface $config_factory
@@ -52,6 +57,7 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
     $this->entityTypeManager = $entity_type_manager;
     $this->viewsStorage = $entity_type_manager->getStorage('view');
     $this->contentTypeStorage = $entity_type_manager->getStorage('node_type');
+    $this->taxonomyTerm = $entity_type_manager->getStorage('taxonomy_term');
   }
 
   /**
@@ -118,6 +124,7 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
       $selected_contents = array_filter($form_state->getValue($langcode . '_selected_contents'));
       $selected_urls = $form_state->getValue($langcode . '_url');
       $selected_routes = $form_state->getValue($langcode . '_routes');
+      $selected_hubs = array_filter($form_state->getValue($langcode . '_selected_hubs'));
 
       $url_selected_to_save = [];
       $url_elems = array_filter(array_map('trim', explode("\n", $selected_urls)));
@@ -136,11 +143,17 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
         $content_selected_to_save[] = $content;
       }
 
+      $hub_selected_to_save = [];
+      foreach ($selected_hubs as $hub_select) {
+        $hub_selected_to_save[] = $hub_select;
+      }
+
       $conf = [];
       $conf['url'] = $url_selected_to_save;
       $conf['views'] = $selected_to_save;
       $conf['contents'] = $content_selected_to_save;
       $conf['routes'] = array_filter(array_map('trim', explode("\n", $selected_routes)));
+      $conf['hubs'] = $hub_selected_to_save;
       $config->set($langcode, $conf);
     }
     $config->save();
@@ -154,6 +167,7 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
     /** @var View[] $view_types */
     $view_types = $this->viewsStorage->loadMultiple();
     $content_types = $this->contentTypeStorage->loadMultiple();
+    $hubs = $this->taxonomyTerm->loadByProperties(['vid' => 'hub']);
 
 
     $tab = [
@@ -239,6 +253,26 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
       '#options' => $content_options,
       '#title' => t('select content types'),
       '#default_value' => $conf['contents'] ?? ''
+    ];
+
+    $tab['hubs'] = [
+      '#type' => 'details',
+      '#open' => false,
+      '#title' => t('Hubs conf')
+    ];
+
+    $hub_options = [];
+    foreach ($hubs as $hub) {
+      if ($hub->get('status')) {
+        $hub_options[$hub->id()] = $hub->label();
+      }
+    }
+
+    $tab['hubs'][$langcode . '_selected_hubs'] = [
+      '#type' => 'checkboxes',
+      '#options' => $hub_options,
+      '#title' => t('select hubs'),
+      '#default_value' => $conf['hubs'] ?? ''
     ];
 
     return $tab;

@@ -7,6 +7,7 @@ fr:
   contents:
     - modular_product
   routes: {  }
+  hubs: {  }
 en:
   url:
     - /where-we-are
@@ -18,3 +19,5 @@ en:
     - modular_product
   routes:
     - oab_offices_map.page
+  hubs:
+    - '1282'
