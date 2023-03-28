@@ -39,7 +39,7 @@ class Ob1AdapterService {
     return $this->ob1ThemeConfig->get($key);
   }
 
-  public function getUrl() : array {
+  public function getUrl(): array {
     $urls = $this->get('url');
 
     if (is_array($urls)) {
@@ -49,22 +49,26 @@ class Ob1AdapterService {
     return [];
   }
 
-  public function hasUrl($url) : bool {
+  public function getHubs(): array {
+    $hubs = $this->get('hubs');
+    return  is_array($hubs) ? $hubs : [];
+  }
+
+  public function hasUrl($url): bool {
     $has_url = false;
 
     //récupération de la liste des urls à One-ifiées
     $urls_allowed = $this->getUrl();
 
-      // je vérifie que l'url est bien dans la liste
-      if (in_array($url, $urls_allowed, true)) {
-        $has_url = true;
-      }
-
+    // je vérifie que l'url est bien dans la liste
+    if (in_array($url, $urls_allowed, true)) {
+      $has_url = true;
+    }
 
     return $has_url;
   }
 
-  public function hasView($view_id, $display_id) : bool {
+  public function hasView($view_id, $display_id): bool {
     $has_view = false;
 
     $views_allowed = $this->get('views');
@@ -78,7 +82,7 @@ class Ob1AdapterService {
     return $has_view;
   }
 
-  public function hasContent($content_type) : bool {
+  public function hasContent($content_type): bool {
     $has_content = false;
 
     $contents_type_allowed = $this->get('contents');
@@ -94,17 +98,8 @@ class Ob1AdapterService {
     return $has_content;
   }
 
-  public function hasHub(Term $hub_actif) : bool {
-    $has_hub = false;
-    $hub_allowed = $this->get('hubs');
-
-    if (isset($hub_allowed) && count($hub_allowed) !== 0) {
-      if (in_array($hub_actif->id(), $hub_allowed)) {
-        $has_hub = true;
-      }
-    }
-
-    return $has_hub;
+  public function hasHub(Term $hub_actif): bool {
+    return in_array($hub_actif->id(), $this->getHubs());
   }
 
 }

@@ -40,7 +40,7 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
   /**
    * @var \Drupal\Core\Entity\EntityStorageInterface|mixed|object
    */
-  private mixed $taxonomyTerm;
+  private mixed $taxonomyTermStorage;
 
   /**
    * Constructs a \Drupal\system\ConfigFormBase object.
@@ -57,7 +57,7 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
     $this->entityTypeManager = $entity_type_manager;
     $this->viewsStorage = $entity_type_manager->getStorage('view');
     $this->contentTypeStorage = $entity_type_manager->getStorage('node_type');
-    $this->taxonomyTerm = $entity_type_manager->getStorage('taxonomy_term');
+    $this->taxonomyTermStorage = $entity_type_manager->getStorage('taxonomy_term');
   }
 
   /**
@@ -143,17 +143,12 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
         $content_selected_to_save[] = $content;
       }
 
-      $hub_selected_to_save = [];
-      foreach ($selected_hubs as $hub_select) {
-        $hub_selected_to_save[] = $hub_select;
-      }
-
       $conf = [];
       $conf['url'] = $url_selected_to_save;
       $conf['views'] = $selected_to_save;
       $conf['contents'] = $content_selected_to_save;
       $conf['routes'] = array_filter(array_map('trim', explode("\n", $selected_routes)));
-      $conf['hubs'] = $hub_selected_to_save;
+      $conf['hubs'] = $selected_hubs;
       $config->set($langcode, $conf);
     }
     $config->save();
@@ -167,7 +162,7 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
     /** @var View[] $view_types */
     $view_types = $this->viewsStorage->loadMultiple();
     $content_types = $this->contentTypeStorage->loadMultiple();
-    $hubs = $this->taxonomyTerm->loadByProperties(['vid' => 'hub']);
+    $hubs = $this->taxonomyTermStorage->loadByProperties(['vid' => 'hub']);
 
 
     $tab = [
@@ -263,9 +258,7 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
 
     $hub_options = [];
     foreach ($hubs as $hub) {
-      if ($hub->get('status')) {
-        $hub_options[$hub->id()] = $hub->label();
-      }
+      $hub_options[$hub->id()] = $hub->label();
     }
 
     $tab['hubs'][$langcode . '_selected_hubs'] = [
