@@ -73,9 +73,15 @@ class VersionBarBlock extends BlockBase implements ContainerFactoryPluginInterfa
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition,
-                              ThemeManagerInterface $theme_manager, ThemeHandlerInterface $theme_handler,
-                              RouteMatchInterface   $route_match, StateInterface $state) {
+  public function __construct(
+    array $configuration,
+    $plugin_id,
+    $plugin_definition,
+    ThemeManagerInterface $theme_manager,
+    ThemeHandlerInterface $theme_handler,
+    RouteMatchInterface   $route_match,
+    StateInterface $state
+  ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->themeManager = $theme_manager;
     $this->routeMatch = $route_match;

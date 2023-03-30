@@ -38,7 +38,7 @@ class ProductCategoriesDataImport {
       while ($row = fgets($fp)) {
         $num_lines++;
         $columns = explode(";", $row);
-        if ($num_lines>1) { //on le prend pas la 1ere ligne qui sont les titres
+        if ($num_lines > 1) { //on le prend pas la 1ere ligne qui sont les titres
           $batch_op[] = array('oab_data_import_data_product_categories_batch', array($columns, $num_lines));
         }
       }

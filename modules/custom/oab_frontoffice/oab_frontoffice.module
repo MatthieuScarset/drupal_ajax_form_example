@@ -1,16 +1,28 @@
 <?php
 
 use Drupal\Core\Breadcrumb\Breadcrumb;
-use Drupal\Core\File\FileUrlGenerator;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityRepository;
+use Drupal\Core\File\FileUrlGenerator;
+use Drupal\Core\Form\FormState;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Menu\MenuLinkInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
+use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
+use Drupal\menu_link_content\Plugin\Menu\MenuLinkContent;
+use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
+use Drupal\oab_axiome\Controller\OabAxiomeController;
 use Drupal\oab_dvi\DviHelper;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\taxonomy\Entity\Vocabulary;
+use Drupal\views\Plugin\views\argument\NumericArgument;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\views\ViewExecutable;
+use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 // Regroupement de fonctions qui n'étaient pas des hooks dans un fichier à part pour ne laisser que les hooks dans ce fichier
@@ -55,7 +67,7 @@ function oab_frontoffice_preprocess_node(&$variables) {
 
     #Je recupère le nid puis je charge le node associé
     $nid = $variables["elements"]["#contextual_links"]["node"]["route_parameters"]["node"];
-    $node = \Drupal\node\Entity\Node::load($nid);
+    $node = Node::load($nid);
 
     if (is_null($node) || $node === false) {
       return;
@@ -73,8 +85,8 @@ function oab_frontoffice_preprocess_node(&$variables) {
     if ($node->hasField('field_visual')) {
       $file = $node->get('field_visual')->getValue();
       if (!empty($file[0]['target_id']) && $file[0]['target_id'] != null) {
-        $file = \Drupal\file\Entity\File::load($file[0]['target_id']);
-        if ($file instanceof \Drupal\file\Entity\File) {
+        $file = File::load($file[0]['target_id']);
+        if ($file instanceof File) {
           $og_image = $file->createFileUrl();
         }
       }
@@ -88,10 +100,10 @@ function oab_frontoffice_preprocess_node(&$variables) {
 
 function oab_frontoffice_load_link_entity_by_link(MenuLinkInterface $menu_link_content_plugin) {
     $entity = NULL;
-    if ($menu_link_content_plugin instanceof Drupal\menu_link_content\Plugin\Menu\MenuLinkContent) {
+    if ($menu_link_content_plugin instanceof MenuLinkContent) {
         [$entity_type, $uuid] = explode(':', $menu_link_content_plugin->getPluginId(), 2);
 
-        /** @var Drupal\Core\Entity\EntityRepository $service */
+        /** @var EntityRepository $service */
         $service = Drupal::service('entity.repository');
         $entity = $service->loadEntityByUuid($entity_type, $uuid);
     }
@@ -109,7 +121,7 @@ function oab_frontoffice_link_alter(&$variables) {
                 $langcode = $value->getId();
 
                 if ($uri === 'base:<front_' . $langcode . '>') {
-                    $new_url = \Drupal\Core\Url::fromRoute('<front>', array(), array());
+                    $new_url = Url::fromRoute('<front>', array(), array());
                     $variables['options']['language'] = $value;
                     $variables['url'] = $new_url;
                 }
@@ -171,7 +183,7 @@ function oab_frontoffice_node_view_alter(array &$build, EntityInterface $entity,
         $field_axiome_data = isset($entity->field_axiome_data->value) ? unserialize($entity->field_axiome_data->value) : array();
         if (is_countable($field_axiome_data) && count($field_axiome_data) > 0) {
             $build['axiome_data'] = $field_axiome_data;
-            $build['axiome_data']['sous_famille'] = \Drupal\oab_axiome\Controller\OabAxiomeController::getSousFamille($entity->id());
+            $build['axiome_data']['sous_famille'] = OabAxiomeController::getSousFamille($entity->id());
         }
     }
 
@@ -203,7 +215,7 @@ function oab_frontoffice_node_view_alter(array &$build, EntityInterface $entity,
             }
 
             if ($theme_term != '') {
-                $term = \Drupal\taxonomy\Entity\Term::load($theme_term);
+                $term = Term::load($theme_term);
                 if (isset($term)) {
                     $build['theme_term'] = array(
                         '#markup' => $term->getName(),
@@ -261,7 +273,7 @@ function oab_frontoffice_node_view_alter(array &$build, EntityInterface $entity,
 /**
  * Implements hook_views_query_alter().
  */
-function oab_frontoffice_views_query_alter(\Drupal\views\ViewExecutable $view, \Drupal\views\Plugin\views\query\QueryPluginBase $query) {
+function oab_frontoffice_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
 
     ## CARTE
     if ($view->id() == 'offices_map_view') {
@@ -365,7 +377,7 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, FormStateInterfac
     if ($form['#id'] == 'views-exposed-form-bvpn-gallery-csp-map-page') {
 
       //on filtre les termes de taxo par langue
-      $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::load('location');
+      $vocabulary = Vocabulary::load('location');
       if (is_object($vocabulary)) {
         $properties = array(
           "vid" => 'location',
@@ -459,7 +471,7 @@ function oab_frontoffice_views_post_render($view) {
     $request = \Drupal::request();
 
     if ($view->id() == 'subhomes') {
-        if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)) {
+        if ($route = $request->attributes->get(RouteObjectInterface::ROUTE_OBJECT)) {
             // on recupere les valeurs dans oab_subhomes.subhomes
             $data =\Drupal::config('oab_subhomes.subhomes');
             if ($data !== null) {
@@ -509,10 +521,10 @@ function oab_frontoffice_system_breadcrumb_alter(Breadcrumb &$breadcrumb, RouteM
  * pour pouvoir changer l'URL. Si on ne le fait pas, le changement de view_mode par
  * la fonction "theme_boosted_preprocess_views_view" ne fonctionne pas, car c'est caché
  * @param array $build
- * @param \Drupal\node\Entity\Node $entity
+ * @param Node $entity
  * @param $view_mode
  */
-function oab_frontoffice_node_build_defaults_alter(array &$build, \Drupal\node\Entity\Node $entity, $view_mode) {
+function oab_frontoffice_node_build_defaults_alter(array &$build, Node $entity, $view_mode) {
     if ($entity->bundle() == "product"
         && DviHelper::isDVIProduct($entity)
         && ($view_mode == "subhome" || $view_mode == "subhome_distributeur")) {
@@ -580,7 +592,7 @@ function oab_frontoffice_form_alter(&$form, FormStateInterface $form_state, $for
     }
 }
 
-function oab_frontoffice_dvi_contact_distributor_form_submit(array $form, Drupal\Core\Form\FormState &$form_state) {
+function oab_frontoffice_dvi_contact_distributor_form_submit(array $form, FormState &$form_state) {
 
     $node = \Drupal::routeMatch()->getParameter('node');
     if (NULL !== $node && $node instanceof NodeInterface) {
@@ -635,7 +647,7 @@ function oab_frontoffice_page_attachments_alter(array &$attachments) {
       $query->condition('vid', "location");
       $query->condition('langcode', $current_language);
       $tids = $query->execute();
-      $terms_location = \Drupal\taxonomy\Entity\Term::loadMultiple($tids);
+      $terms_location = Term::loadMultiple($tids);
       foreach ($terms_location as $term) {
         $location = array();
         $location['tid'] = $term->tid->value;
@@ -673,7 +685,7 @@ function __seek_alternate($tab) {
 function change_textfield_to_select($vid, $default_langcode = true) {
   $ret = [];
 
-  $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::load($vid);
+  $vocabulary = Vocabulary::load($vid);
   if (is_object($vocabulary)) {
 
     $properties = [
@@ -734,11 +746,11 @@ function oab_frontoffice_preprocess_html(&$variables) {
   }
   elseif (\Drupal::routeMatch()->getParameters()->has('view_id') && \Drupal::routeMatch()->getParameter('view_id') === "category_page") {
     if (\Drupal::routeMatch()->getParameters()->has('tid')) {
-      /** @var \Drupal\views\Plugin\views\argument\NumericArgument $argument */
+      /** @var NumericArgument $argument */
       $tid = \Drupal::routeMatch()->getParameters()->get('tid');
-      if (null !== ($term = \Drupal\taxonomy\Entity\Term::load($tid))) {
+      if (null !== ($term = Term::load($tid))) {
         $request = \Drupal::request();
-        if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)) {
+        if ($route = $request->attributes->get(RouteObjectInterface::ROUTE_OBJECT)) {
           $route->setDefault('_title', $term->getName());
           $variables['head_title'] = $term->getName();
         }

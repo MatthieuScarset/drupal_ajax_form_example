@@ -52,17 +52,31 @@ function oab_data_import_data_product_categories_batch($columns, $line_number, &
       //Product category : taxonomy term
       $product_category_term = getTermFromLabelAndVocabulary($product_data['category'], 'product_categories', $product_data['langcode']);
       if ($product_category_term !== false) {
-        $sub_term = getSubTermFromParentAndLabel($product_data['sub_category'], $product_category_term->id(),
-          'product_categories', $product_data['langcode']);
+        $sub_term = getSubTermFromParentAndLabel(
+          $product_data['sub_category'],
+          $product_category_term->id(),
+          'product_categories',
+          $product_data['langcode']
+        );
         if ($sub_term !== false) {
           $node->set('field_product_category', $sub_term->id());
         } else {
-          logErrorMessage($line_number, $product_data['product_name'],
-            'incorrect taxonomy term for SUB Product category (term not found) ', $product_data['sub_category'], $context);
+          logErrorMessage(
+            $line_number,
+            $product_data['product_name'],
+            'incorrect taxonomy term for SUB Product category (term not found)',
+            $product_data['sub_category'],
+            $context
+          );
         }
       } else {
-        logErrorMessage($line_number, $product_data['product_name'],
-          'incorrect taxonomy term for Product category (term not found) ', $product_data['category'], $context);
+        logErrorMessage(
+          $line_number,
+          $product_data['product_name'],
+          'incorrect taxonomy term for Product category (term not found)',
+          $product_data['category'],
+          $context
+        );
       }
       // Key points : text array
       $new_key_points = [];

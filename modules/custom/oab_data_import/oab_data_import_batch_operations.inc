@@ -41,7 +41,14 @@ function getTermFromLabelAndVocabulary($term_label, $vocabulary, $lang_code = "e
     return array_shift($entities);
   } else {
     \Drupal::logger("oab_data_import")->info(
-      'terme non trouvé - vid : '.$vocabulary.' - langcode : '.$lang_code.' - name: '. trim($term_label));
+      t('terme non trouvé - vid : @vocabulary - langcode : @langcode - name: @label',
+        [
+          '@vocabulary' => $vocabulary,
+          '@langCode' => $lang_code,
+          '@label' => trim($term_label)
+        ]
+      )
+    );
     return false;
   }
 }
@@ -68,13 +75,27 @@ function getSubTermFromParentAndLabel($term_label, $parent_tid, $vocabulary, $la
     );
     if (isset($entities) && !empty($entities)) {
       \Drupal::logger("oab_data_import")->info(
-        'terme  trouvé - vid : ' . $vocabulary . ' - langcode : ' . $lang_code .
-        ' - name: ' . trim($term_label) . ' - Parent : ' . $parent_tid);
+        t('terme  trouvé - vid : @vocabulary - langcode : @langCode - name: @label - Parent : @parentId',
+          [
+            '@vocabulary' => $vocabulary,
+            '@langCode' => $lang_code,
+            '@label' => trim($term_label),
+            '@parentId' => $parent_tid
+          ]
+        )
+      );
       return array_shift($entities);
     } else {
       \Drupal::logger("oab_data_import")->info(
-        'terme non trouvé - vid : ' . $vocabulary . ' - langcode : ' . $lang_code .
-        ' - name: ' . trim($term_label) . ' - Parent : ' . $parent_tid);
+        t('terme non trouvé - vid : @vocabulary - langcode : @langCode - name: @label - Parent : @parentId',
+          [
+            '@vocabulary' => $vocabulary,
+            '@langCode' => $lang_code,
+            '@label' => trim($term_label),
+            '@parentId' => $parent_tid
+          ]
+        )
+      );
       return false;
     }
 }

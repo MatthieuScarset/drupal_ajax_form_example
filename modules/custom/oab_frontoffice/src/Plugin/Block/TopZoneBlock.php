@@ -101,7 +101,10 @@ class TopZoneBlock extends BlockBase implements ContainerFactoryPluginInterface 
             }
             $content_desktop = check_markup(
               '<div id="topzonebg"  '.$class_hidden_xs.' style="background:url('.$url.') top center no-repeat">'.$content_top.'</div>',
-              'full_html', '', []);
+              'full_html',
+              '',
+              []
+            );
             $content = $content_desktop;
         }
         if (isset($top_zone_background_mobile[0]['target_id'])) {
@@ -116,7 +119,10 @@ class TopZoneBlock extends BlockBase implements ContainerFactoryPluginInterface 
             }
             $content_mobile = check_markup(
               '<div id="topzonebg-mobile"  class="visible-xs" style="background:url('.$url.') top center no-repeat">'.$content_top.'</div>',
-              'full_html', '', []);
+              'full_html',
+              '',
+              []
+            );
             $content = check_markup($content_desktop . $content_mobile, 'full_html', '', []) ;
         }
         $block['#markup'] = $content;

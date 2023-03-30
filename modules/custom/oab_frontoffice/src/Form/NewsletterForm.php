@@ -23,8 +23,10 @@ class NewsletterForm extends FormBase {
     $form['custom_text'] = array(
       "#prefix" => "<p>",
       "#suffix" => "</p>",
-      '#markup' => t("Le rendez-vous bimensuel des acteurs des Technologies de l'Information et de " .
-        "la Communication : actualités, analyse, tendances, décryptage, interviews d'experts, trucs et astuces, dossiers pratiques..."),
+      '#markup' => t(
+        "Le rendez-vous bimensuel des acteurs des Technologies de l'Information et de la Communication :"
+        . " actualités, analyse, tendances, décryptage, interviews d'experts, trucs et astuces, dossiers pratiques..."
+      ),
     );
 
     $form['email'] = array(

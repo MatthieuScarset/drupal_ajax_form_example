@@ -38,8 +38,7 @@ function oab_entity_embed_link_form_entity_embed_dialog_alter(&$form, FormStateI
         $form['attributes']['data-entity-embed-display-settings']['link_target'] = [
             '#title' => t('Open in new window'),
             '#type' => 'checkbox',
-            '#default_value' => isset($entity_element['data-entity-embed-display-settings']['link_target'])
-              ? $entity_element['data-entity-embed-display-settings']['link_target'] : '0',
+            '#default_value' => $entity_element['data-entity-embed-display-settings']['link_target'] ?? '0',
         ];
   }
 }

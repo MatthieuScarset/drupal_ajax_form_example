@@ -147,7 +147,8 @@ class OabBackbonesController extends ControllerBase {
 
         //documentation
         $path_doc = $this->fileUrlGenerator->generateAbsoluteString(
-          $this->pathResolver->getPath('module', 'oab_backbones') . '/BackbonesNotice.pdf');
+          $this->pathResolver->getPath('module', 'oab_backbones') . '/BackbonesNotice.pdf'
+        );
         //Récupération du formulaire
         $form = \Drupal::formBuilder()->getForm(GlobalSettingsForm::class);
 

@@ -32,7 +32,11 @@ class IframeChangeSrcEvent implements EventSubscriberInterface {
    */
   private $entityTypeManager;
 
-  public function __construct(Renderer $renderer, EntityTypeManager $entity_type_manager, LanguageManager $language_manager) {
+  public function __construct(
+    Renderer $renderer,
+    EntityTypeManager $entity_type_manager,
+    LanguageManager $language_manager
+  ) {
     $this->languageManager = $language_manager;
     $this->renderer = $renderer;
     $this->entityTypeManager = $entity_type_manager;
