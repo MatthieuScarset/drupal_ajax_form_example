@@ -15,13 +15,13 @@ class CustomAssetsService {
   private $customAssets = [];
 
   public function __construct(
-    private ConditionManager $conditionManager,
-    private EntityTypeManagerInterface $entityTypeManager,
-    private LanguageManagerInterface $languageManager
+    private ConditionManager $condition_manager,
+    private EntityTypeManagerInterface $entity_type_manager,
+    private LanguageManagerInterface $language_manager
   ) {
 
     /** @var CustomAssetInterface $custom_asset */
-    foreach ($this->entityTypeManager->getStorage('custom_asset')->loadByProperties([]) as $custom_asset) {
+    foreach ($this->entity_type_manager->getStorage('custom_asset')->loadByProperties([]) as $custom_asset) {
       if ($this->isCustomAssetAllowed($custom_asset)) {
         $this->customAssets[] = $custom_asset;
       }
@@ -99,11 +99,11 @@ class CustomAssetsService {
     ];
 
     /** @var \Drupal\system\Plugin\Condition\RequestPath $path_condition */
-    $path_condition = $this->conditionManager->createInstance('request_path', $plugin_conf);
+    $path_condition = $this->condition_manager->createInstance('request_path', $plugin_conf);
 
     /** @var \Drupal\language\Plugin\Condition\Language $language_condition */
-    $language_condition = $this->conditionManager->createInstance('language', ['langcodes' => $custom_asset->getLanguages()]);
-    $language_condition->setContextValue('language', $this->languageManager->getCurrentLanguage()->getId());
+    $language_condition = $this->condition_manager->createInstance('language', ['langcodes' => $custom_asset->getLanguages()]);
+    $language_condition->setContextValue('language', $this->language_manager->getCurrentLanguage()->getId());
 
     return $path_condition->evaluate() && $language_condition->evaluate();
   }

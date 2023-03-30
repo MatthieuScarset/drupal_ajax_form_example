@@ -22,8 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class OabBackbonesController extends ControllerBase
-{
+class OabBackbonesController extends ControllerBase {
 
   /**
    * @var FileUrlGenerator
@@ -147,7 +146,8 @@ class OabBackbonesController extends ControllerBase
         $imports = $bi_obj->getBackbonesImportTable()->fetchAll();
 
         //documentation
-        $path_doc = $this->fileUrlGenerator->generateAbsoluteString($this->pathResolver->getPath('module', 'oab_backbones') . '/BackbonesNotice.pdf');
+        $path_doc = $this->fileUrlGenerator->generateAbsoluteString(
+          $this->pathResolver->getPath('module', 'oab_backbones') . '/BackbonesNotice.pdf');
         //Récupération du formulaire
         $form = \Drupal::formBuilder()->getForm(GlobalSettingsForm::class);
 

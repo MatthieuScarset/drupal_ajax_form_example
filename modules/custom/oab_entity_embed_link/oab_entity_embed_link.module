@@ -31,13 +31,15 @@ function oab_entity_embed_link_form_entity_embed_dialog_alter(&$form, FormStateI
       '#title' => t('Link to'),
       '#description' => t('The URL you would like this item to link to.  Leave blank for none.'),
       '#type' => 'textfield',
-      '#default_value' => isset($entity_element['data-entity-embed-display-settings']['link_url']) ? Html::decodeEntities($entity_element['data-entity-embed-display-settings']['link_url']) : '',
+      '#default_value' => isset($entity_element['data-entity-embed-display-settings']['link_url'])
+        ? Html::decodeEntities($entity_element['data-entity-embed-display-settings']['link_url']) : '',
     ];
 
         $form['attributes']['data-entity-embed-display-settings']['link_target'] = [
             '#title' => t('Open in new window'),
             '#type' => 'checkbox',
-            '#default_value' => isset($entity_element['data-entity-embed-display-settings']['link_target']) ? $entity_element['data-entity-embed-display-settings']['link_target'] : '0',
+            '#default_value' => isset($entity_element['data-entity-embed-display-settings']['link_target'])
+              ? $entity_element['data-entity-embed-display-settings']['link_target'] : '0',
         ];
   }
 }
@@ -56,6 +58,8 @@ function oab_entity_embed_link_theme_registry_alter(&$theme_registry) {
  * Implemets hook_preprocess_HOOK()
  */
 function oab_entity_embed_link_preprocess_entity_embed_container(&$variables) {
-  $variables['url'] = isset($variables['element']['#context']['data-entity-embed-display-settings']['link_url']) ? UrlHelper::filterBadProtocol($variables['element']['#context']['data-entity-embed-display-settings']['link_url']) : '';
-    $variables['target'] = isset($variables['element']['#context']['data-entity-embed-display-settings']['link_target']) ? UrlHelper::filterBadProtocol($variables['element']['#context']['data-entity-embed-display-settings']['link_target']) : '';
+  $variables['url'] = isset($variables['element']['#context']['data-entity-embed-display-settings']['link_url'])
+    ? UrlHelper::filterBadProtocol($variables['element']['#context']['data-entity-embed-display-settings']['link_url']) : '';
+  $variables['target'] = isset($variables['element']['#context']['data-entity-embed-display-settings']['link_target'])
+    ? UrlHelper::filterBadProtocol($variables['element']['#context']['data-entity-embed-display-settings']['link_target']) : '';
 }

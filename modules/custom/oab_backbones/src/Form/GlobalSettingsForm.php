@@ -14,8 +14,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\oab_backbones\Classes\ImportShadowSites;
 use Drupal\oab_backbones\Classes\ShadowSites;
 
-class GlobalSettingsForm extends FormBase
-{
+class GlobalSettingsForm extends FormBase {
 
     /**
      * Returns a unique string identifying the form.

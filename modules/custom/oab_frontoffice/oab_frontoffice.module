@@ -1,10 +1,12 @@
 <?php
 
+use Drupal\Core\Breadcrumb\Breadcrumb;
 use Drupal\Core\File\FileUrlGenerator;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Menu\MenuLinkInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
 use Drupal\media\Entity\Media;
 use Drupal\node\NodeInterface;
@@ -15,13 +17,13 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 \Drupal::moduleHandler()->loadInclude('oab_frontoffice', 'inc', 'includes/helpers');
 
 // Regroupement des METHODES POUR LES CARTES D'OFFICES QUI DOIVENT ETRE ACCESSIBLES PARTOUT (multi-JIRA)
-\Drupal::moduleHandler()->loadInclude( 'oab_frontoffice', 'inc', 'includes/office_map');
+\Drupal::moduleHandler()->loadInclude('oab_frontoffice', 'inc', 'includes/office_map');
 
 // Mise dans un fichier a part des filtres des subhomes
-\Drupal::moduleHandler()->loadInclude( 'oab_frontoffice', 'inc', 'includes/subhomes_views_exposed_form');
+\Drupal::moduleHandler()->loadInclude('oab_frontoffice', 'inc', 'includes/subhomes_views_exposed_form');
 
 // Mise dans un fichier a part des filtres de la view business-insight
-\Drupal::moduleHandler()->loadInclude( 'oab_frontoffice', 'inc', 'includes/vb_views_exposed_form');
+\Drupal::moduleHandler()->loadInclude('oab_frontoffice', 'inc', 'includes/vb_views_exposed_form');
 
 function oab_frontoffice_preprocess_menu(&$variables) {
     if (isset($variables['items'])
@@ -249,7 +251,7 @@ function oab_frontoffice_node_view_alter(array &$build, EntityInterface $entity,
     }
 
     //ajout du cache context url pour les press releases en vue subhome
-    if($entity->bundle() =='press_release' && $build['#view_mode'] == 'subhome'){
+    if ($entity->bundle() =='press_release' && $build['#view_mode'] == 'subhome') {
       $build['#cache']['contexts'][] = 'url';
     }
 
@@ -343,7 +345,7 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, FormStateInterfac
       $menu_header_page_vb = clean_exposed_filters_by_language(
         $form['field_insight_type_target_id']['#options'], 'See all'
       );
-      if ( isset($menu_header_page_vb['All'])) {
+      if (isset($menu_header_page_vb['All'])) {
         $v = $menu_header_page_vb['All'];
         unset($menu_header_page_vb['All']);
         $menu_header_page_vb['All'] = $v;
@@ -421,7 +423,7 @@ function oab_frontoffice_form_views_exposed_form_alter(&$form, FormStateInterfac
         );
     }
 
-    if ($form['#id'] == 'views-exposed-form-bvpn-gallery-csp-list-page' ) {
+    if ($form['#id'] == 'views-exposed-form-bvpn-gallery-csp-list-page') {
       foreach ($form AS $key => $value) {
         if (isset($value['#type'])
           && $key !== 'title'
@@ -496,7 +498,7 @@ function oab_frontoffice_views_post_render($view) {
     }
 }
 
-function oab_frontoffice_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadcrumb &$breadcrumb, \Drupal\Core\Routing\RouteMatchInterface $route_match, array $context) {
+function oab_frontoffice_system_breadcrumb_alter(Breadcrumb &$breadcrumb, RouteMatchInterface $route_match, array $context) {
     if ($route_match && $node = $route_match->getParameter('node')) {
         $breadcrumb->addCacheableDependency($node);
     }
@@ -626,25 +628,25 @@ function oab_frontoffice_page_attachments_alter(array &$attachments) {
     // Pour BVPN gallery
     // on charge les infos de geolocalisation des termes de taxo Location pour pouvoir faire le zoom sur la bonne région en JS
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-    $routeName = \Drupal::routeMatch()->getRouteName();
-    if ($routeName == 'view.bvpn_gallery.csp_map_page') {
-      $locationsArray = array();
+    $route_name = \Drupal::routeMatch()->getRouteName();
+    if ($route_name == 'view.bvpn_gallery.csp_map_page') {
+      $locations_array = array();
       $query = \Drupal::entityQuery('taxonomy_term');
       $query->condition('vid', "location");
       $query->condition('langcode', $current_language);
       $tids = $query->execute();
-      $termsLocation = \Drupal\taxonomy\Entity\Term::loadMultiple($tids);
-      foreach ($termsLocation as $term) {
+      $terms_location = \Drupal\taxonomy\Entity\Term::loadMultiple($tids);
+      foreach ($terms_location as $term) {
         $location = array();
         $location['tid'] = $term->tid->value;
         $location['name'] = $term->name->value;
-        if ( isset($term->field_location) && !empty($term->field_location)) {
+        if (isset($term->field_location) && !empty($term->field_location)) {
           $location['lat'] = (isset($term->field_location->lat) && !empty($term->field_location->lat)) ? $term->field_location->lat : '0.0';
           $location['lng'] = (isset($term->field_location->lng) && !empty($term->field_location->lng)) ? $term->field_location->lng : '0.0';
         }
-        $locationsArray[$term->tid->value] = $location;
+        $locations_array[$term->tid->value] = $location;
       }
-      $attachments["#attached"]['drupalSettings']['listRegionMarkers'] = $locationsArray;
+      $attachments["#attached"]['drupalSettings']['listRegionMarkers'] = $locations_array;
     }
 
 }

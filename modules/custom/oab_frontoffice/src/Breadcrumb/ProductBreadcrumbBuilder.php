@@ -14,8 +14,7 @@ use Drupal\taxonomy\Entity\Term;
 use Drupal\views\Views;
 
 
-class ProductBreadcrumbBuilder implements BreadcrumbBuilderInterface
-{
+class ProductBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
   use HubFrontUrlTrait;
 
@@ -24,16 +23,15 @@ class ProductBreadcrumbBuilder implements BreadcrumbBuilderInterface
    */
   private $termStorage;
 
-  public function __construct(EntityTypeManagerInterface $entityTypeManager) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
 
-    $this->termStorage = $entityTypeManager->getStorage('taxonomy_term');
+    $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
   }
 
   /**
    * @inheritdoc
    */
-  public function applies(RouteMatchInterface $route_match)
-  {
+  public function applies(RouteMatchInterface $route_match) {
 
     ##Je ne le gère que pour la front page
     $is_admin_route = \Drupal::service('router.admin_context')->isAdminRoute();
@@ -55,8 +53,7 @@ class ProductBreadcrumbBuilder implements BreadcrumbBuilderInterface
   /**
    * @inheritdoc
    */
-  public function build(RouteMatchInterface $route_match)
-  {
+  public function build(RouteMatchInterface $route_match) {
     #on récupère le node
     $node = $route_match->getParameter('node');
 
@@ -94,8 +91,7 @@ class ProductBreadcrumbBuilder implements BreadcrumbBuilderInterface
       ##On ajoute au fil d'ariane le home et le lien de la page categ du produit
       $breadcrumb->addLink(Link::fromTextAndUrl(t('Home'), $this->getHubFrontUrl()));
       $breadcrumb->addLink(Link::fromTextAndUrl($term->getName(), $url));
-    }
-    else{
+    } else {
       // on est sur un produit sans Product Category => on reprend l'ancien fil d'ariane
       if ($node->hasField('field_subhome')) {
 

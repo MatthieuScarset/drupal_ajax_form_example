@@ -4,12 +4,21 @@ use Drupal\Core\Database\Database;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Extension\ExtensionPathResolver;
+use Drupal\Core\Form\FormState;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Image\Image;
+use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\editor\Entity\Editor;
 use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
+use Drupal\node\Entity\Node;
 use Drupal\oab_backoffice\Form\OabSettingsWebformCustomTemplateForm;
 use Drupal\oab_dvi\DviHelper;
+use Drupal\views\ViewExecutable;
+use Drupal\webform\Entity\Webform;
+use Drupal\webform\Entity\WebformSubmission;
 use Drupal\workbench_moderation\Entity\ModerationState;
 
 //include_once 'includes/mediatheque.inc';
@@ -26,21 +35,21 @@ define('CONTENT_TAXO_FIELDS', serialize(array('field_region',
 
 // Regroupement de toutes les fonctions spécifiques à GDPR pour éviter de surcharger le fichier
 //include_once 'includes/gdpr.inc';
-\Drupal::moduleHandler()->loadInclude( 'oab_backoffice', 'inc','includes/gdpr');
+\Drupal::moduleHandler()->loadInclude('oab_backoffice', 'inc', 'includes/gdpr');
 
 // Fichier pour le hook_form_alter qui commencait à prendre trop de place
-\Drupal::moduleHandler()->loadInclude( 'oab_backoffice', 'inc','includes/form_alter');
+\Drupal::moduleHandler()->loadInclude('oab_backoffice', 'inc', 'includes/form_alter');
 
 // Mise dans un fichier a part les variables dynamique pour la construction du formulaire Marketo
-\Drupal::moduleHandler()->loadInclude('oab_backoffice', 'inc',  'includes/marketo');
+\Drupal::moduleHandler()->loadInclude('oab_backoffice', 'inc', 'includes/marketo');
 
 
-function oab_backoffice_mail( $key , &$message , $params ) {
+function oab_backoffice_mail($key, &$message, $params) {
     gdpr_hook_mail($key, $message, $params);
 }
 
 
-function oab_backoffice_node_access(Drupal\node\Entity\Node $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
+function oab_backoffice_node_access(Node $entity, $operation, AccountInterface $account) {
     $ret = gdpr_hook_node_acces($entity, $operation, $account);
     return $ret;
 }
@@ -48,13 +57,13 @@ function oab_backoffice_node_access(Drupal\node\Entity\Node $entity, $operation,
 /**
  * Gestion des droits d'accès à un webform
  */
-function oab_backoffice_webform_access(Drupal\webform\Entity\Webform $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
+function oab_backoffice_webform_access(Webform $entity, $operation, AccountInterface $account) {
     $ret = gdpr_is_webform_authorized($entity, $operation, $account);
     return $ret;
 }
 
 
-function oab_backoffice_webform_submission_access(Drupal\webform\Entity\WebformSubmission $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
+function oab_backoffice_webform_submission_access(WebformSubmission $entity, $operation, AccountInterface $account) {
     $ret = gdpr_is_webform_submission_authorized($entity, $operation, $account);
     return $ret;
 }
@@ -80,7 +89,7 @@ function oab_backoffice_token_info() {
 /*
 * implement hook_token()
 */
-function oab_backoffice_tokens($type, $tokens, array $data, array $options, \Drupal\Core\Render\BubbleableMetadata $bubbleable_metadata) {
+function oab_backoffice_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
     $replacements = array();
 
     gdpr_hook_tokens($replacements, $type, $tokens, $data);
@@ -91,7 +100,7 @@ function oab_backoffice_tokens($type, $tokens, array $data, array $options, \Dru
 /*
  * implement hook_webform_insert()
  */
-function oab_backoffice_webform_insert(Drupal\webform\Entity\Webform $entity) {
+function oab_backoffice_webform_insert(Webform $entity) {
     gdpr_hook_webform_insert($entity);
 }
 
@@ -120,7 +129,8 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
         $form["settings"]['message']['body']['#options']['_html_obs_template'] = "HTML OBS template";
         $form["settings"]['message']['body']['#options']['Elements'] = $b;
 
-        $email_template = \Drupal::config(OabSettingsWebformCustomTemplateForm::getConfigName())->get(OabSettingsWebformCustomTemplateForm::CUSTOM_TEMPLATE);
+        $email_template = \Drupal::config(OabSettingsWebformCustomTemplateForm::getConfigName())
+          ->get(OabSettingsWebformCustomTemplateForm::CUSTOM_TEMPLATE);
 
         $custom_html_oab = [
             '#type' => "webform_html_editor",
@@ -159,7 +169,7 @@ function oab_backoffice_form_alter(&$form, FormStateInterface $form_state, $form
 /**
  * Implements hook_field_widget_form_alter().
  */
-function oab_backoffice_field_widget_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
+function oab_backoffice_field_widget_form_alter(&$element, FormStateInterface $form_state, $context) {
   if (isset($element['#paragraph_type']) && $element['#paragraph_type'] === 'contact_button_item') {
 
     $element['subform']['phone_number'] = [
@@ -167,7 +177,8 @@ function oab_backoffice_field_widget_form_alter(&$element, \Drupal\Core\Form\For
       '#title' => t('Phone Number'),
       '#states' =>  [
         'visible' => [
-          ':input[name="field_card[' . $element['subform']['#parents'][1]  . '][subform][field_cb_item_type][value]"]' => ['checked' => TRUE],
+          ':input[name="field_card[' . $element['subform']['#parents'][1]  . '][subform][field_cb_item_type][value]"]'
+          => ['checked' => TRUE],
         ]
       ],
       '#weight' => 500,
@@ -188,10 +199,10 @@ function oab_backoffice_entity_update(EntityInterface $entity) {
 
     gdpr_hook_entity_update($entity);
 
-    /** @var \Drupal\file\Entity\File $entity */
+    /** @var File $entity */
     if ($entity instanceof Drupal\file\Entity\File) {
         $image = \Drupal::service('image.factory')->get($entity->getFileUri());
-        /** @var \Drupal\Core\Image\Image $image */
+        /** @var Image $image */
         if ($image->isValid()) {
             $image_uri = $entity->getFileUri();
             // on vide les caches en BDD (pas trouvé mieux pour la top zone)
@@ -199,7 +210,7 @@ function oab_backoffice_entity_update(EntityInterface $entity) {
             $connection->delete('cache_render')->condition('cid', '%topzone%', 'LIKE')->execute();
             // on regénère les styles
             $styles = ImageStyle::loadMultiple();
-            /** @var \Drupal\image\Entity\ImageStyle $style */
+            /** @var ImageStyle $style */
             $tab_refresh = array(
                 'file_entity_browser_thumbnail',
                 'homepage_expertise',
@@ -377,10 +388,10 @@ function oab_backoffice_library_info_alter(&$libraries, $extension) {
 /**
  * Altération du formulairede mise en place des redirections
  * @param $form
- * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param FormStateInterface $form_state
  * @param $form_id
  */
-function oab_backoffice_form_redirect_redirect_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+function oab_backoffice_form_redirect_redirect_form_alter(&$form, FormStateInterface $form_state, $form_id) {
     //Pour ajouter le / après l'url et avant le champ source de la redirection
     // RUBYPORTAILOBS-2753 "Ajout d'un / avant le champs path dans les redirections"
     if (isset($form['redirect_source']['widget'][0]['path']['#field_prefix'])) {
@@ -433,7 +444,7 @@ function oab_backoffice_views_data_alter(array &$data) {
 /**
  * Implements hook_views_post_render().
  */
-function oab_backoffice_views_post_render(Drupal\views\ViewExecutable $view) {
+function oab_backoffice_views_post_render(ViewExecutable $view) {
 
   /**
    * Modification de l'affichage des remontées pour l'autocomplete des rebonds
@@ -466,7 +477,7 @@ function oab_backoffice_views_post_render(Drupal\views\ViewExecutable $view) {
 /**
  * Implements hook_views_pre_render().
  */
-function oab_backoffice_views_pre_render(Drupal\views\ViewExecutable $view) {
+function oab_backoffice_views_pre_render(ViewExecutable $view) {
 
     if ($view->id() == 'content') {
       foreach ($view->result as $i => $result) {
@@ -570,9 +581,9 @@ function oab_backoffice_paragraph_rebond_wysiwyg_allowed_values(
  *      - qu'il ait selectionné au moins un element dans la taxo Market Segment DVI
  *
  * @param array $form
- * @param \Drupal\Core\Form\FormState $form_state
+ * @param FormState $form_state
  */
-function oab_backoffice_check_dvi_product_form_validate(array $form, Drupal\Core\Form\FormState &$form_state) {
+function oab_backoffice_check_dvi_product_form_validate(array $form, FormState &$form_state) {
 
   ##Je commence par recupérer les valeurs rentrées par l'user
   $user_values = $form_state->getUserInput();

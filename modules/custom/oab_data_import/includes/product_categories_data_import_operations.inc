@@ -19,8 +19,7 @@ use Drupal\media\Entity\Media;
  * Méthode executée pour chaque ligne du fichier d'import des CSV
  *
  */
-function oab_data_import_data_product_categories_batch($columns, $lineNumber, &$context)
-{
+function oab_data_import_data_product_categories_batch($columns, $line_number, &$context) {
 
   $context['results']['total'][] = 1; // pour compter le nombre de lignes traitées après
 
@@ -51,16 +50,19 @@ function oab_data_import_data_product_categories_batch($columns, $lineNumber, &$
       $node->set('field_teaser', $product_data['teaser']);
 
       //Product category : taxonomy term
-      $productCategoryTerm = getTermFromLabelAndVocabulary($product_data['category'], 'product_categories', $product_data['langcode']);
-      if ($productCategoryTerm !== false) {
-        $subTerm = getSubTermFromParentAndLabel($product_data['sub_category'], $productCategoryTerm->id(), 'product_categories', $product_data['langcode']);
-        if ($subTerm !== false) {
-          $node->set('field_product_category', $subTerm->id());
+      $product_category_term = getTermFromLabelAndVocabulary($product_data['category'], 'product_categories', $product_data['langcode']);
+      if ($product_category_term !== false) {
+        $sub_term = getSubTermFromParentAndLabel($product_data['sub_category'], $product_category_term->id(),
+          'product_categories', $product_data['langcode']);
+        if ($sub_term !== false) {
+          $node->set('field_product_category', $sub_term->id());
         } else {
-          logErrorMessage($lineNumber, $product_data['product_name'], 'incorrect taxonomy term for SUB Product category (term not found) ', $product_data['sub_category'], $context);
+          logErrorMessage($line_number, $product_data['product_name'],
+            'incorrect taxonomy term for SUB Product category (term not found) ', $product_data['sub_category'], $context);
         }
       } else {
-        logErrorMessage($lineNumber, $product_data['product_name'], 'incorrect taxonomy term for Product category (term not found) ', $product_data['category'], $context);
+        logErrorMessage($line_number, $product_data['product_name'],
+          'incorrect taxonomy term for Product category (term not found) ', $product_data['category'], $context);
       }
       // Key points : text array
       $new_key_points = [];
@@ -71,12 +73,11 @@ function oab_data_import_data_product_categories_batch($columns, $lineNumber, &$
       }
       $node->set('field_key_points', $new_key_points);
       $node->save();
-    }else{
-      logErrorMessage($lineNumber, $product_data['product_name'], 'Not is not product ', $product_data['nid'], $context);
+    } else {
+      logErrorMessage($line_number, $product_data['product_name'], 'Not is not product ', $product_data['nid'], $context);
     }
-  }
-  else{
-    logErrorMessage($lineNumber, $product_data['product_name'], 'Product not found ', $product_data['nid'], $context);
+  } else {
+    logErrorMessage($line_number, $product_data['product_name'], 'Product not found ', $product_data['nid'], $context);
   }
 }
 
@@ -85,12 +86,12 @@ function oab_data_import_data_product_categories_batch($columns, $lineNumber, &$
  */
 function oab_data_import_data_product_categories_batch_finished($success, $results, $operations) {
     if ($success) {
-        $message = \Drupal::translation()->formatPlural(count($results['total']), 'One product updates.','@count products updates.');
+        $message = \Drupal::translation()->formatPlural(count($results['total']), 'One product updates.', '@count products updates.');
         \Drupal::messenger()->addMessage($message, 'status', TRUE);
 
         if ($results['warning']['message'] != null && count($results['warning']['message']) > 0) {
           Drupal::messenger()->addMessage("Errors occured in file : ", 'warning', TRUE);
-          foreach ($results['warning']['message'] as $message){
+          foreach ($results['warning']['message'] as $message) {
             Drupal::messenger()->addMessage($message, 'warning', TRUE);
           }
         }

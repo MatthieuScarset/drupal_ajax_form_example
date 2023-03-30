@@ -26,8 +26,7 @@ use Drupal\media\Entity\Media;
  * Méthode executée pour chaque ligne du fichier d'import des CSV
  *
  */
-function oab_data_import_terms_product_categories_batch($columns, $lineNumber, &$context)
-{
+function oab_data_import_terms_product_categories_batch($columns, $line_number, &$context) {
 
   $context['results']['total'][] = 1; // pour compter le nombre de lignes traitées après
 
@@ -45,46 +44,44 @@ function oab_data_import_terms_product_categories_batch($columns, $lineNumber, &
   $terms_data['icon'] = $columns[4];
 
   //PARENT
-  $parentTerm = getTermFromLabelAndVocabulary($terms_data['categ'], 'product_categories', $terms_data['langcode']);
-  $parentTid = 0;
-  if($parentTerm === false){
+  $parent_term = getTermFromLabelAndVocabulary($terms_data['categ'], 'product_categories', $terms_data['langcode']);
+  $parent_tid = 0;
+  if ($parent_term === false) {
     // Terme parent non trouvé ==> à créer
-    $newParent = \Drupal\taxonomy\Entity\Term::create(array(
+    $new_parent = \Drupal\taxonomy\Entity\Term::create(array(
         'name' => $terms_data['categ'],
         'langcode' => $terms_data['langcode'],
         'vid' => 'product_categories'
       )
     );
-    $newParent->save();
-    $parentTid = $newParent->id();
-  }
-  else{
-    $parentTid = $parentTerm->id();
+    $new_parent->save();
+    $parent_tid = $new_parent->id();
+  } else {
+    $parent_tid = $parent_term->id();
   }
 
   //SUB TERM
-  $subTerm = getSubTermFromParentAndLabel($terms_data['sub_categ'], $parentTid,'product_categories', $terms_data['langcode']);
-  if($subTerm === false){
+  $sub_term = getSubTermFromParentAndLabel($terms_data['sub_categ'], $parent_tid, 'product_categories', $terms_data['langcode']);
+  if ($sub_term === false) {
     // Sub-Term parent non trouvé ==> à créer
-    $subTerm = \Drupal\taxonomy\Entity\Term::create(array(
+    $sub_term = \Drupal\taxonomy\Entity\Term::create(array(
         'name' => $terms_data['sub_categ'],
         'langcode' => $terms_data['langcode'],
-        'parent' => $parentTid,
+        'parent' => $parent_tid,
         'vid' => 'product_categories'
       )
     );
-    $subTerm->save();
+    $sub_term->save();
   }
-  $subTerm->set('field_simple_description', trim($terms_data['sub_categ_txt']));
-  $subTerm->set('field_icon', trim($terms_data['icon']));
-  $subTerm->save();
+  $sub_term->set('field_simple_description', trim($terms_data['sub_categ_txt']));
+  $sub_term->set('field_icon', trim($terms_data['icon']));
+  $sub_term->save();
 }
 
 /**
  * Méthode appelée à la fin des batchs
  */
-function oab_data_import_terms_product_categories_batch_finished($success, $results, $operations)
-{
+function oab_data_import_terms_product_categories_batch_finished($success, $results, $operations) {
   if ($success) {
     $message = \Drupal::translation()->formatPlural(count($results['total']), 'One line', '@count lines.');
     \Drupal::messenger()->addMessage($message, 'status', TRUE);

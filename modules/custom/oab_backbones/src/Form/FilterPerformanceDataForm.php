@@ -15,8 +15,7 @@ use Drupal\Core\Url;
 use Drupal\oab_backbones\Classes\BackbonesImport;
 use Drupal\oab_backbones\Classes\ShadowSites;
 
-class FilterPerformanceDataForm extends FormBase
-{
+class FilterPerformanceDataForm extends FormBase {
 
     /**
      * Returns a unique string identifying the form.

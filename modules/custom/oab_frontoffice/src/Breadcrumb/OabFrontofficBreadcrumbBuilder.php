@@ -179,7 +179,7 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
             }
             elseif (isset($node)
               && method_exists(get_class($parameters['node']), 'getType')
-              && $parameters['node']->getType() == 'cloud_service_provider'){
+              && $parameters['node']->getType() == 'cloud_service_provider') {
               //ajout du fil d'ariane pour les CSP de BVPN
               $breadcrumb->addLink(Link::fromTextAndUrl(t('Home'), $this->getHubFrontUrl()));
               $breadcrumb->addLink(Link::createFromRoute(t('BVPN Galerie - List of Cloud Services'), 'view.bvpn_gallery.csp_list_page'));

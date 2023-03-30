@@ -159,7 +159,8 @@ function isValidDate($date, $format) {
 /**
  * Creation d'un field en bdd
  */
-function createField($field_name, $bundle, $label, $type = 'text_long', $required = FALSE, $entity_type_id = 'node', $other_config = array()) {
+function createField($field_name, $bundle, $label, $type = 'text_long', $required = FALSE,
+                     $entity_type_id = 'node', $other_config = array()) {
 
     $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName($entity_type_id, $field_name);
     if (empty($field_storage)) {
@@ -193,7 +194,8 @@ function createField($field_name, $bundle, $label, $type = 'text_long', $require
 /**
  * Creation d'un field en bdd
  */
-function createFieldReference($field_name, $bundle, $label, $target, $type = 'text_long', $required = FALSE, $entity_type_id = 'node', $other_config = array()) {
+function createFieldReference($field_name, $bundle, $label, $target, $type = 'text_long',
+                              $required = FALSE, $entity_type_id = 'node', $other_config = array()) {
 
     $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName($entity_type_id, $field_name);
     if (empty($field_storage)) {
@@ -328,7 +330,8 @@ function check_log_for_cron() {
             }
 
             $params['subject'] = "Notifications d'erreurs sur orange-business.com";
-            $params['body'] = "Veuillez trouvez en PJ les logs d'obs.com<br />" . nl2br($erreurs) . "<br />Cordialement,<br />L'equipe ruby";
+            $params['body'] = "Veuillez trouvez en PJ les logs d'obs.com<br />" . nl2br($erreurs) .
+              "<br />Cordialement,<br />L'equipe ruby";
             \Drupal::service('plugin.manager.mail')->mail('oab_develop', 'mail_log', $mails, 'fr', $params);
         }
     }

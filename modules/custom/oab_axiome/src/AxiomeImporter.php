@@ -11,8 +11,7 @@ use Drupal\core\Messenger\MessengerInterface;
 use Drupal\node\Entity\Node;
 use Drupal\oab_axiome\Form\OabAxiomeSettingsForm;
 
-class AxiomeImporter
-{
+class AxiomeImporter {
     const CONFIG_VALUE_NAME = "sous_famille_values";
 
     private $fichesJointent = array();
@@ -75,7 +74,8 @@ class AxiomeImporter
                             $this->axiomeNotification[] = "file : ".$file;
                             if ($this->axiome_unzip($folder.'/'.$file, $folder.'/import')) {
                                 $this->message .= 'Move file '.$file.' in '.$folder.'/'.AXIOME_SAVE_FOLDER."\n" ;
-                                $this->fileSystem->move($folder.'/'.$file, $folder.'/'.AXIOME_SAVE_FOLDER, $this->fileSystem::EXISTS_REPLACE);
+                                $this->fileSystem->move($folder.'/'.$file,
+                                  $folder.'/'.AXIOME_SAVE_FOLDER, $this->fileSystem::EXISTS_REPLACE);
 
                                 // Scan du dossier "import"
                                 $folder_import = $folder.'/import';
@@ -107,7 +107,8 @@ class AxiomeImporter
                                                     $this->axiome_scan_fiche_archives($folder_import);
                                                     $this->axiome_parse_referentiel($dom);
                                                     // Déplacement du référentiel dans "axiome"
-                                                  $this->fileSystem->move($folder_import.'/'.$referentiel_file, $folder, $this->fileSystem::EXISTS_REPLACE);
+                                                  $this->fileSystem->move($folder_import.'/'.$referentiel_file,
+                                                    $folder, $this->fileSystem::EXISTS_REPLACE);
                                                 }
                                             }
                                         }

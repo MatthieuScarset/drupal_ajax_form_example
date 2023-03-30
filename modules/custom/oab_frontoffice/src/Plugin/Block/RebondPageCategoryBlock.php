@@ -26,7 +26,7 @@ class RebondPageCategoryBlock extends BlockBase {
     $block = array();
     $current_route = \Drupal::routeMatch()->getRouteName();
     if ($current_route == 'view.category_page.category_page') {
-      if(\Drupal::routeMatch()->getParameters()->has('tid')){
+      if (\Drupal::routeMatch()->getParameters()->has('tid')) {
         $term_id = \Drupal::routeMatch()->getParameters()->get('tid');
         $term = Term::load($term_id);
         if ($term->hasField('field_block_rebond') && isset($term->get('field_block_rebond')->getValue()[0]['value'])) {

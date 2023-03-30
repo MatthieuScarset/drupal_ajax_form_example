@@ -20,8 +20,7 @@ use Drupal\Core\Session\AccountInterface;
 
 class PageMenuViewsCategoryBlock extends BlockBase {
 
-  public function access(AccountInterface $account, $return_as_object = FALSE)
-  {
+  public function access(AccountInterface $account, $return_as_object = FALSE) {
     $current_route = \Drupal::routeMatch()->getRouteName();
     if ($current_route == 'view.category_page.category_page') {
       if (\Drupal::routeMatch()->getParameters()->has('tid')) {
@@ -36,34 +35,34 @@ class PageMenuViewsCategoryBlock extends BlockBase {
     $block = array();
     $current_route = \Drupal::routeMatch()->getRouteName();
     if ($current_route == 'view.category_page.category_page') {
-      if(\Drupal::routeMatch()->getParameters()->has('tid')){
+      if (\Drupal::routeMatch()->getParameters()->has('tid')) {
 
         $term_id = \Drupal::routeMatch()->getParameters()->get('tid');
 
         //gestion de la sticky navigation avec les enfants
         //$childrens = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadChildren($term_id);
         // remplacé par cette query parce que loadChildren parce que loadChildren ne prend pas en compte la weight des termes
-        $queryChildren = \Drupal::entityQuery('taxonomy_term')
+        $query_children = \Drupal::entityQuery('taxonomy_term')
           ->condition('parent', $term_id)
           ->sort('weight', 'ASC');
-        $childrens = \Drupal::service('entity_type.manager')->getStorage('taxonomy_term')->loadMultiple($queryChildren->execute());
+        $childrens = \Drupal::service('entity_type.manager')->getStorage('taxonomy_term')->loadMultiple($query_children->execute());
 
-        $itemsStickyBar = [];
-        foreach ($childrens as $child){
+        $items_sticky_bar = [];
+        foreach ($childrens as $child) {
 
-          $countElements = \Drupal::entityQuery('node')
+          $count_elements = \Drupal::entityQuery('node')
             ->condition('type', 'product')
             ->condition('field_product_category', $child->id())
             ->count()->execute();
 
-          if($countElements > 0) {
-            $itemsStickyBar[] = ['tid' => $child->id(),
+          if ($count_elements > 0) {
+            $items_sticky_bar[] = ['tid' => $child->id(),
               'label' => $child->getName(),
-              'count' => $countElements];
+              'count' => $count_elements];
           }
         }
 
-        $block['children_items'] = $itemsStickyBar;
+        $block['children_items'] = $items_sticky_bar;
       }
     }
 

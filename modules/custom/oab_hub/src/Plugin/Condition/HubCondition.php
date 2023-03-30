@@ -91,7 +91,8 @@ class HubCondition extends ConditionPluginBase implements ContainerFactoryPlugin
       '#options' => $options,
       '#title' => $this->t('Hub'),
       '#default_value' => is_array($this->configuration['hub_id']) ? $this->configuration['hub_id'] : [$this->configuration['hub_id']],
-      '#description' => $this->t("Define which hub it belongs to, on which hub it should appear. Use it only on Hub Block (ie. theme Oab Hub)", []),
+      '#description' => $this->t("Define which hub it belongs to, on which hub it should appear." .
+        "Use it only on Hub Block (ie. theme Oab Hub)", []),
     ];
     return parent::buildConfigurationForm($form, $form_state);
   }

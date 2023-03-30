@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class CustomAssetForm extends EntityForm {
 
-  public function __construct(private LanguageManagerInterface $languageManager) {
+  public function __construct(private LanguageManagerInterface $language_manager) {
   }
 
   public static function create(ContainerInterface $container) {
@@ -68,7 +68,7 @@ class CustomAssetForm extends EntityForm {
     ];
 
     $languages = [];
-    foreach ($this->languageManager->getLanguages() as $language) {
+    foreach ($this->language_manager->getLanguages() as $language) {
       $languages[$language->getId()] = $language->getName();
     }
 

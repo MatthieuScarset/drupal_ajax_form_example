@@ -56,7 +56,8 @@ class ContactBarAnalystBlock extends BlockBase {
         $form['link_ecrire'] = [
             '#title' => $this->t('Lien vers Nous écrire'),
             '#type' => 'textfield',
-            '#default_value' => isset($this->configuration['link_ecrire']) ? $this->configuration['link_ecrire'] : 'http://www.orange-business.com/fr/contact-commercial',
+            '#default_value' => isset($this->configuration['link_ecrire'])
+              ? $this->configuration['link_ecrire'] : 'http://www.orange-business.com/fr/contact-commercial',
             '#required' => false,
         ];
         $form['link_ecrire_text'] = [

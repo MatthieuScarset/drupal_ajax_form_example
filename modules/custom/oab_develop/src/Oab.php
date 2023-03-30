@@ -11,7 +11,7 @@ class Oab {
    *
    * @return object|void|null
    */
-  static function getHelper(string $name) {
+  public static function getHelper(string $name) {
     $helper_name = "oab_develop.helper.$name";
 
     if (\Drupal::hasService($helper_name)) {
@@ -24,7 +24,7 @@ class Oab {
   /**
    * @return \Drupal\oab_develop\Helpers\TranslationsHelper
    */
-  static function translationsHelper() {
+  public static function translationsHelper() {
     return self::getHelper("translations");
   }
 }

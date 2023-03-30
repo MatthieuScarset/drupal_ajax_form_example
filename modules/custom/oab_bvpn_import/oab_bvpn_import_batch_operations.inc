@@ -77,10 +77,10 @@ function oab_bvpn_import_batch($columns, $line_number, &$context) {
   // CSP Location = > champs geolocation multiple
   // format dans le csv : "lat, lng","lat2, lng2",...
   $all_coordinates = array();
-  $geoloc_array = explode('","',$csp['field_csp_location']);
+  $geoloc_array = explode('","', $csp['field_csp_location']);
   if (count($geoloc_array) > 0) {
     foreach ($geoloc_array as $geoloc_item) {
-      $geoloc_item = str_replace('"','', $geoloc_item);
+      $geoloc_item = str_replace('"', '', $geoloc_item);
       $coordinates = explode(',', $geoloc_item);
       if (count($coordinates) > 1) {
         $all_coordinates[] = ['lat' => trim($coordinates[0]), 'lng' => trim($coordinates[1])];
@@ -102,7 +102,8 @@ function oab_bvpn_import_batch($columns, $line_number, &$context) {
       $tids_location[] = $term->id();
     }
     else {
-      logErrorMessage($line_number, $csp['title'], 'incorrect taxonomy term (lang:'.$csp['langcode'].') for Location (term not found) ', $label, $context);
+      logErrorMessage($line_number, $csp['title'],
+        'incorrect taxonomy term (lang:'.$csp['langcode'].') for Location (term not found) ', $label, $context);
     }
   }
   $node->set('field_location', $tids_location);
@@ -113,16 +114,18 @@ function oab_bvpn_import_batch($columns, $line_number, &$context) {
     $node->set('field_provider_type', $type_pro_term->id());
   }
   else {
-    logErrorMessage($line_number, $csp['title'], 'incorrect taxonomy term for Service providers type (term not found) ', $csp['field_provider_type'], $context);
+    logErrorMessage($line_number, $csp['title'],
+      'incorrect taxonomy term for Service providers type (term not found) ', $csp['field_provider_type'], $context);
   }
 
   // Type of Cloud Service
-  $type_CS_term = getTermFromLabelAndVocabulary($csp['field_type_of_cloud_services'], 'type_of_cloud_service', $csp['langcode']);
-  if ($type_CS_term !== false) {
-    $node->set('field_type_of_cloud_services', $type_CS_term->id());
+  $type_cs_term = getTermFromLabelAndVocabulary($csp['field_type_of_cloud_services'], 'type_of_cloud_service', $csp['langcode']);
+  if ($type_cs_term !== false) {
+    $node->set('field_type_of_cloud_services', $type_cs_term->id());
   }
   else {
-    logErrorMessage($line_number, $csp['title'], 'incorrect taxonomy term for Type of Cloud service (term not found) ', $csp['field_type_of_cloud_services'], $context);
+    logErrorMessage($line_number, $csp['title'],
+      'incorrect taxonomy term for Type of Cloud service (term not found) ', $csp['field_type_of_cloud_services'], $context);
   }
 
   //Logo
@@ -205,7 +208,8 @@ function getTermFromLabelAndVocabulary($term_label, $vocabulary, $lang_code = "e
     return array_shift($entities);
   }
   else {
-    \Drupal::logger("oab_bvpn_import")->info('terme non trouvé - vid : '.$vocabulary.' - langcode : '.$lang_code.' - name: '.trim($term_label));
+    \Drupal::logger("oab_bvpn_import")->info(
+      'terme non trouvé - vid : '.$vocabulary.' - langcode : '.$lang_code.' - name: '.trim($term_label));
     return false;
   }
 }
