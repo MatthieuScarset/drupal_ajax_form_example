@@ -274,7 +274,7 @@ function _reset_changed_date_to_initial($sandbox) {
   $logger = \Drupal::logger(UPDATE_LOGGER);
 
   if (is_array($sandbox['nodes'])) {
-    $logger->notice("Remise en place du changed des %nb_nodesn nodes mis à jour", ['%nb_nodes' => count($sandbox['nodes'])]);
+    $logger->notice("Remise en place du changed des %nb_nodes nodes mis à jour", ['%nb_nodes' => count($sandbox['nodes'])]);
     $database = \Drupal::database();
     $transaction = $database->startTransaction('update_nodes');
     foreach ($sandbox['nodes'] as $nid => $changed) {

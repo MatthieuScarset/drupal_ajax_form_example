@@ -455,3 +455,24 @@ function oab_stephanie_update_9001(&$sandbox) {
     _reset_changed_date_to_initial($sandbox);
   }
 }
+
+
+/**
+ * Renommage de OBS en OB dans les médias
+ */
+function oab_stephanie_update_9002(&$sandbox) {
+
+  $log_file_path = "private://change_naming_content";
+  //on va écrire dans un fichier les NID des pages modifiées
+  /** @var FileSystemInterface $filesystem */
+  $filesystem = \Drupal::service('file_system');
+  $log_file = fopen($filesystem->realpath($log_file_path."_".date("Ymd").".csv"), "a");
+
+  include_once("updates/update_9002.inc");
+  _processUpdateWithSandbox_9002($sandbox, $log_file);
+  // c'est fini
+  if ($sandbox['#finished'] === 1) {
+    \Drupal::messenger()->addStatus('C\'est TOUT FINI !');
+    _reset_changed_date_to_initial_medias($sandbox);
+  }
+}
