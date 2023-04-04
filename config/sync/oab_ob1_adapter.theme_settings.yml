@@ -5,6 +5,7 @@ fr:
     category_page:
       - category_page
   contents:
+    - corporate
     - modular_product
   routes: {  }
 en:
@@ -15,6 +16,7 @@ en:
     category_page:
       - category_page
   contents:
+    - corporate
     - modular_product
   routes:
     - oab_offices_map.page

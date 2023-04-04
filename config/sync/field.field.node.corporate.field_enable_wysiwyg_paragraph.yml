@@ -1,0 +1,23 @@
+uuid: ae0d69c3-9d51-4d6f-82dc-c9dbebdcb035
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_enable_wysiwyg_paragraph
+    - node.type.corporate
+id: node.corporate.field_enable_wysiwyg_paragraph
+field_name: field_enable_wysiwyg_paragraph
+entity_type: node
+bundle: corporate
+label: 'Enable WYSIWYG paragraph'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

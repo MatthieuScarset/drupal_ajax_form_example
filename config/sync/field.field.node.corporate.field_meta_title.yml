@@ -1,0 +1,19 @@
+uuid: f50770db-fb9a-4c8b-a90b-0d87d2339d3b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_meta_title
+    - node.type.corporate
+id: node.corporate.field_meta_title
+field_name: field_meta_title
+entity_type: node
+bundle: corporate
+label: 'Meta title'
+description: 'This field is limited to 56 characters (used for SEO-optimization)'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,33 @@
+uuid: 1cb08e01-426a-4efc-8325-297dabc064e6
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.corporate.field_dark_mode
+    - field.field.node.corporate.field_enable_wysiwyg_paragraph
+    - field.field.node.corporate.field_header
+    - field.field.node.corporate.field_meta_description
+    - field.field.node.corporate.field_meta_title
+    - field.field.node.corporate.field_modules
+    - node.type.corporate
+  module:
+    - user
+id: node.corporate.teaser
+targetEntityType: node
+bundle: corporate
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_dark_mode: true
+  field_enable_wysiwyg_paragraph: true
+  field_header: true
+  field_meta_description: true
+  field_meta_title: true
+  field_modules: true
+  langcode: true
