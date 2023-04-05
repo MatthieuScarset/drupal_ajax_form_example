@@ -1,0 +1,19 @@
+uuid: 4980c473-f80c-4fe6-a4cb-be1f6f5a7ac5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_description
+    - paragraphs.paragraphs_type.module_key_figures_items
+id: paragraph.module_key_figures_items.field_description
+field_name: field_description
+entity_type: paragraph
+bundle: module_key_figures_items
+label: 'Key figures description'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

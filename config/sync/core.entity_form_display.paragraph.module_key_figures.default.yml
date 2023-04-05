@@ -1,0 +1,46 @@
+uuid: dfd9c7de-e14e-48d4-9711-4ed291c22639
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.module_key_figures.field_items
+    - field.field.paragraph.module_key_figures.field_title
+    - paragraphs.paragraphs_type.module_key_figures
+  module:
+    - entity_browser_entity_form
+    - inline_entity_form
+id: paragraph.module_key_figures.default
+targetEntityType: paragraph
+bundle: module_key_figures
+mode: default
+content:
+  field_items:
+    type: inline_entity_form_complex
+    weight: 1
+    region: content
+    settings:
+      form_mode: default
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: false
+      match_operator: CONTAINS
+      allow_duplicate: true
+      collapsible: false
+      collapsed: false
+      revision: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

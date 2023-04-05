@@ -7,6 +7,7 @@ fr:
   contents:
     - corporate
     - modular_product
+    - poc_test_module
   routes: {  }
 en:
   url:
@@ -18,5 +19,6 @@ en:
   contents:
     - corporate
     - modular_product
+    - poc_test_module
   routes:
     - oab_offices_map.page
