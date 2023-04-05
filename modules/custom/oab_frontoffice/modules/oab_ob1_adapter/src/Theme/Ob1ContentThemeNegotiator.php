@@ -11,25 +11,23 @@ class Ob1ContentThemeNegotiator extends AbstractOb1ThemeNegotiator implements Th
 
   public function applies(RouteMatchInterface $route_match) {
 
-    $applies = false;
-
     /** @var NodeInterface $current_node */
     $current_node = $route_match->getParameter('node');
 
-    if (isset($current_node) && $route_match->getRouteName() === 'entity.node.canonical') {
-      if (isset($current_node->field_use_theme_ob1) && $current_node->field_use_theme_ob1->value == 1) {
-        $applies = true;
-      } else {
-        $current_content_type = $current_node->bundle();
-      }
+    // Toutes les routes ou le thème doit s'appliquer
+    // ie. le front, mais aussi les pages de prévi et revisions
+    $routes_to_apply = [
+      'entity.node.latest_version',
+      'entity.node.canonical',
+      'entity.node.revision'
+    ];
+
+    if (isset($current_node) && in_array($route_match->getRouteName(), $routes_to_apply)) {
+        return
+          (isset($current_node->field_use_theme_ob1) && $current_node->field_use_theme_ob1->value == 1)
+          || $this->ob1AdapterService->hasContent($current_node->bundle());
     }
 
-    if ($applies !== true) {
-      if (isset($current_content_type)) {
-        $applies = $this->ob1AdapterService->hasContent($current_content_type);
-      }
-    }
-
-    return $applies;
+    return false;
   }
 }
