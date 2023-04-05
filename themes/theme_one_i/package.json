@@ -9,7 +9,7 @@
     "watch": "NODE_OPTIONS=\"--openssl-legacy-provider\" webpack watch --config webpack.dev.config.js"
   },
   "devDependencies": {
-    "@ob1/web": "1.14.10",
+    "@ob1/web": "1.17.4",
     "autoprefixer": "10.2.6",
     "css-loader": "5.2.6",
     "mini-css-extract-plugin": "1.6.2",

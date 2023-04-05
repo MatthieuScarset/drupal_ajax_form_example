@@ -40,50 +40,35 @@
 #}
 {%
   set classes = [
-  'paragraph',
-  'paragraph--type--' ~ paragraph.bundle|clean_class,
-  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-  not paragraph.isPublished() ? 'paragraph--unpublished'
-]
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+  'py-2 py-md-5'
+  ]
 %}
 {% block paragraph %}
-  {% block content %}
-    <div {{ attributes.addClass(classes, 'card-header') }}>
-        <a id="serviceTitle-{{ paragraph.id() }}"
-           class="collapsed"
-           data-toggle="collapse"
-           data-target="serviceDescription-{{ paragraph.id() }}"
-           href="#collapseOne-{{ paragraph.id() }}"
-           role="button"
-           onmousedown="utag_link(utag_data.titre_page,'services sur mesure' ,'{{ content.field_title.0['#context']['value']|escape('html') }}','accordion')"
-           aria-expanded="false">
-          <div class="accordion-card-title justify-content-between w-100">
-            <div class="accordion-title text-decoration-none py-1">
-              {{content.field_title}}
-            </div>
-
-            {% if paragraph.field_option_services[0].value == 1 %}
-              <div class="pl-1 mr-md-1">
-                <span class="ob1-capsule ob1-capsule-context small mr-0">{{ 'Option'|t }}</span>
-              </div>
-            {% endif %}
-
-            <span class="accordion-icon" aria-hidden="true"></span>
-          </div>
-        </a>
-    </div>
-    <div id="serviceDescription-{{ paragraph.id() }}"
-         class="collapse mt-1"
-         aria-labelledby="serviceTitle-{{ paragraph.id() }}">
-      <div class="accordion-card-body standard mw-100">
-        {{ content.field_accroche }}
-
-        {% if content.field_redirection_url[0]['#url']|length > 0 %}
-          <a href="{{ content.field_redirection_url[0]['#url'] }}"
-             onmousedown="utag_link(utag_data.titre_page,'services sur mesure' ,'{{ content.field_title.0['#context']['value']|escape('html') }}','En savoir plus')"
-             class="o-link-arrow mt-1">{{ 'More information'|t }}</a>
-        {% endif %}
+<div {{ attributes.addClass(classes) }}>
+  <div class="block-video">
+    {{ content.field_video }}
+  </div>
+  {% if paragraph.field_title.value is defined and paragraph.field_title.value is not empty %}
+  <div class="site-width">
+    <div class="block-text container-fluid">
+      <div class="row d-flex justify-content-center">
+        <div class="content-title col-md-10 content-text pl-md-4 pr-md-4">
+          <h2 class="h1 mt-1 mt-md-4 mb-1 mb-md-2">{{ content.field_title }}</h2>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-10 content-text pl-md-4 pr-md-4">
+          <div class="lead font-weight-bold highlight mb-1 mb-md-1">{{ content.field_highlight }}</div>
+          <div class="standard mb-1 mb-md-2">{{ content.field_standard_text }}</div>
+          {{ content.field_call_to_action_link_simple }}
+        </div>
       </div>
     </div>
-  {% endblock content %}
+  </div>
+  {% endif %}
+</div>
 {% endblock paragraph %}
