@@ -37,7 +37,8 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
     'module_list',
     'module_key_figures_items',
     'module_key_figures',
-    'module_title_and_highlight'
+    'module_title_and_highlight',
+    'cross_link_items'
   ];
 
   $max_char_short_title = $conf_modular_product->getShortTitleMaxCharacter();

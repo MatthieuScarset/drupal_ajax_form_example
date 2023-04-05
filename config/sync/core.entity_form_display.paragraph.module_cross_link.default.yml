@@ -1,0 +1,37 @@
+uuid: 9eff493b-73cd-47de-a788-d6072597682f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.module_cross_link.field_cross_link_items
+    - paragraphs.paragraphs_type.module_cross_link
+  module:
+    - entity_browser_entity_form
+    - inline_entity_form
+id: paragraph.module_cross_link.default
+targetEntityType: paragraph
+bundle: module_cross_link
+mode: default
+content:
+  field_cross_link_items:
+    type: inline_entity_form_complex
+    weight: 0
+    region: content
+    settings:
+      form_mode: default
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: false
+      match_operator: CONTAINS
+      allow_duplicate: true
+      collapsible: true
+      collapsed: false
+      revision: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+hidden:
+  created: true
+  status: true

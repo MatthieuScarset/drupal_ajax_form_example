@@ -1,0 +1,29 @@
+uuid: 253246c5-676d-4739-b041-fbb1edf12300
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_visual
+    - media.type.image
+    - paragraphs.paragraphs_type.cross_link_items
+id: paragraph.cross_link_items.field_visual
+field_name: field_visual
+entity_type: paragraph
+bundle: cross_link_items
+label: Image
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: image
+field_type: entity_reference
