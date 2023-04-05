@@ -48,7 +48,7 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
   $size_title_short = min(150, $conf_modular_product->getShortTitleMaxCharacter()+10);
 
 
-  if (in_array($entity_form['#bundle'], $mp_modules) || in_array($entity_form['#bundle'], $modules)) {
+  if (in_array($entity_form['#bundle'], $mp_modules) || in_array($entity_form['#bundle'], $module)) {
     $fields = [
       'field_accroche',
       'field_highlight',
