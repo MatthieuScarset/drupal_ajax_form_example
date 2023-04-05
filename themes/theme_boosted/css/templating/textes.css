@@ -730,6 +730,7 @@ p.contenu {
     padding-top: 1rem;
     padding-bottom: 1rem;
     background-color: white;
+    transition: top 0.8s ease;
 }
 .local_nav ul{
     margin: 0;

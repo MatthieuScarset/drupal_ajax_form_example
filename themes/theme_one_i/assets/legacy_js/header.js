@@ -1,6 +1,3 @@
-
-
-
 (function ($, Drupal, Bootstrap) {
 
   // js essentiel pour le fonctionnement du mega-menu desktop one-i
@@ -15,9 +12,6 @@
         $(elem).parent().removeClass('active');
       }
     });
-    //   .hasClass('show')) {
-    //   $('#main_nav .mega-menu-desktop.mega-menu .item_mega_menu.mega-menu-panel').collapse('toggle');
-    // }
   });
 
   window.onload = function() {
@@ -52,16 +46,6 @@
       characterData: false
     })
   });
-
-
-  //Gestion fermeture du méga-menu
-
-/*  $(document).on('click', function (e){
-    $('.mega-menu-desktop .navbar-nav .item_mega_menu.mega-menu-panel').removeClass('show');
-    if (!$(e.target).is('.mega-menu-desktop .navbar-nav .nav-item.nav_item_dropdown > a')) {
-      $('.mega-menu-desktop .navbar-nav .nav-item.nav_item_dropdown > a').removeClass('active');
-    }
-  });*/
 
   // Gestion de l'ouverture du mega-menu
 
@@ -115,7 +99,8 @@
 
     });
   })
-document.querySelectorAll('#main_nav #block-theme-one-i-righticonblock .nav-item.share-icon .share-icon').forEach((e) => {
+
+  document.querySelectorAll('#main_nav #block-theme-one-i-righticonblock .nav-item.share-icon .share-icon').forEach((e) => {
     socialShareBlockObeserver.observe(e, {
       attributes: true
     })
@@ -125,7 +110,7 @@ document.querySelectorAll('#main_nav #block-theme-one-i-righticonblock .nav-item
   const largeLogo = $('#main_nav img.large-logo');
 
   $(window).scroll(() => {
-    if ($(window).scrollTop() > 0) {
+    if ($(window).scrollTop() > 0 && $('#main_nav').hasClass('small-header')) {
       smallLogo.addClass('d-lg-block');
       smallLogo.removeClass('d-lg-none');
       largeLogo.removeClass('d-lg-block');
@@ -137,4 +122,3 @@ document.querySelectorAll('#main_nav #block-theme-one-i-righticonblock .nav-item
   });
 
 })(window.jQuery, window.Drupal, window.Drupal.bootstrap);
-
