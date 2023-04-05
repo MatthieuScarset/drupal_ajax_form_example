@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: module_list
-label: '[Module]List'
+label: '[Module] List'
 icon_uuid: null
 icon_default: null
 description: ''
