@@ -13,6 +13,7 @@ dependencies:
     - paragraphs.paragraphs_type.module_detail_gamme
     - paragraphs.paragraphs_type.module_exemples
     - paragraphs.paragraphs_type.module_faq
+    - paragraphs.paragraphs_type.module_header_default
     - paragraphs.paragraphs_type.module_key_figures
     - paragraphs.paragraphs_type.module_list
     - paragraphs.paragraphs_type.module_partner
@@ -47,6 +48,7 @@ settings:
       module_exemples: module_exemples
       module_faq: module_faq
       module_partner: module_partner
+      module_header_default: module_header_default
       module_list: module_list
       module_presentation: module_presentation
       module_services: module_services
@@ -156,14 +158,17 @@ settings:
       module_faq_quesions:
         weight: 83
         enabled: false
+      module_header_default:
+        weight: 85
+        enabled: true
       module_key_figures:
         weight: 88
         enabled: true
       module_key_figures_items:
-        weight: 89
+        weight: 102
         enabled: false
       module_list:
-        weight: 85
+        weight: 101
         enabled: true
       module_partner:
         weight: 84
