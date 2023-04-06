@@ -62,6 +62,7 @@
  */
 #}
 
+{% if node.field_dark_mode.value %}<div class="dark-mode">{% endif %}
 {# Header #}
 {% if page.header %}
         <header id="navbar" class="sticky-top" role="banner">
@@ -131,3 +132,4 @@
     {% endblock %}
 {% endif %}
 {# Footer #}
+{% if node.field_dark_mode.value %}</div>{% endif %}

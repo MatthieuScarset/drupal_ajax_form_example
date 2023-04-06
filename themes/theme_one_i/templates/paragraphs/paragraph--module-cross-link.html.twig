@@ -47,10 +47,12 @@
   'double-color',
 ]
 %}
+{% set parent = paragraph._referringItem.parent.parent.entity %}
+
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
-        <div class="left-panel bg-greige px-1 px-md-0">
+        <div class="left-panel {% if not parent.field_dark_mode.value %} bg-greige {% endif %} px-1 px-md-0">
           <div>
             {{ content.field_cross_link_items[0] }}
           </div>

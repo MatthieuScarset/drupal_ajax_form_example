@@ -40,8 +40,16 @@ function theme_one_i_preprocess_region(&$variables) {
   // Create the $content variable that templates expect.
   $variables['language'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
+  $route_match = \Drupal::routeMatch();
+  /** @var Node $node */
+  $node = $route_match->getParameter('node');
   $config = \Drupal::config('system.site');
   $variables['site_name'] = $config->get('name');
+  $variables['background_color'] = 'bg-gray2';
+
+  if ($variables['region'] === 'top_zone' && $node->bundle() === 'corporate') {
+    $variables['background_color'] = 'bg-transparent';
+  }
 }
 
 function theme_one_i_preprocess_page(&$variables)

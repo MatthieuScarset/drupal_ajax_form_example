@@ -30,9 +30,11 @@ function oab_synomia_search_flux_page_attachments(array &$attachments) {
     $node = \Drupal::routeMatch()->getParameter('node');
     if (!empty($node) && is_object($node)) {
       $rubrique = $node->getType();
-      if($rubrique === "modular_product") {
+      if ($rubrique === "modular_product") {
         $rubrique = 'product';
-      } elseif ($rubrique == 'mss_article'){
+      } elseif (in_array($rubrique, ['corporate', 'full_html'])) {
+        $rubrique = 'content';
+      } elseif ($rubrique == 'mss_article') {
         if (isset($node->field_typology->value)) {
           $rubrique = $node->field_typology->value;
         }

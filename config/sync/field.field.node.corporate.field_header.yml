@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_header
     - node.type.corporate
+    - paragraphs.paragraphs_type.module_header_default
   module:
     - entity_reference_revisions
 id: node.corporate.field_header
@@ -20,7 +21,8 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    target_bundles: null
+    target_bundles:
+      module_header_default: module_header_default
     negate: 0
     target_bundles_drag_drop:
       call_to_action:
@@ -28,6 +30,9 @@ settings:
         enabled: false
       contact_button_item:
         weight: 52
+        enabled: false
+      cross_link_items:
+        weight: 61
         enabled: false
       default_button:
         weight: 53
@@ -89,6 +94,9 @@ settings:
       module_configurateur_details:
         weight: 72
         enabled: false
+      module_cross_link:
+        weight: 82
+        enabled: false
       module_cross_sell:
         weight: 73
         enabled: false
@@ -122,6 +130,18 @@ settings:
       module_faq_quesions:
         weight: 83
         enabled: false
+      module_header_default:
+        weight: 94
+        enabled: true
+      module_key_figures:
+        weight: 95
+        enabled: false
+      module_key_figures_items:
+        weight: 96
+        enabled: false
+      module_list:
+        weight: 97
+        enabled: false
       module_partner:
         weight: 84
         enabled: false
@@ -145,6 +165,12 @@ settings:
         enabled: false
       module_text_video_image:
         weight: 91
+        enabled: false
+      module_title_and_highlight:
+        weight: 106
+        enabled: false
+      module_video:
+        weight: 107
         enabled: false
       paragraph_block_rebond:
         weight: 92

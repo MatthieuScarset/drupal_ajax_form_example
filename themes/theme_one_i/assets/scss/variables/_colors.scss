@@ -1,0 +1,17 @@
+.dark-mode {
+  background-color: $black;
+
+  .main-container, .region-top-zone {
+    h1, div {
+      @extend .text-white;
+    }
+
+    a:not(.btn_accept_cookie_youtube) {
+      @extend .o-link-reverse
+    }
+
+    ol {
+      @extend .ob1-breadcrumb-inverse
+    }
+  }
+}

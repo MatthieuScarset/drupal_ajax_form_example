@@ -13,6 +13,7 @@ dependencies:
     - media.type.mss_image
     - node.type.blog_post
     - node.type.cloud_service_provider
+    - node.type.corporate
     - node.type.country
     - node.type.custom_page
     - node.type.customer_story
@@ -89,6 +90,7 @@ permissions:
   - 'create background media'
   - 'create blog_post content'
   - 'create cloud_service_provider content'
+  - 'create corporate content'
   - 'create country content'
   - 'create custom_page content'
   - 'create customer_story content'
@@ -123,6 +125,7 @@ permissions:
   - 'delete any background media'
   - 'delete any blog_post content'
   - 'delete any cloud_service_provider content'
+  - 'delete any corporate content'
   - 'delete any country content'
   - 'delete any custom_page content'
   - 'delete any customer_story content'
@@ -155,6 +158,7 @@ permissions:
   - 'delete background image entities'
   - 'delete blog_post revisions'
   - 'delete cloud_service_provider revisions'
+  - 'delete corporate revisions'
   - 'delete country revisions'
   - 'delete custom_page revisions'
   - 'delete customer_story revisions'
@@ -172,6 +176,7 @@ permissions:
   - 'delete own background media'
   - 'delete own blog_post content'
   - 'delete own cloud_service_provider content'
+  - 'delete own corporate content'
   - 'delete own country content'
   - 'delete own custom_page content'
   - 'delete own customer_story content'
@@ -212,6 +217,7 @@ permissions:
   - 'edit any background media'
   - 'edit any blog_post content'
   - 'edit any cloud_service_provider content'
+  - 'edit any corporate content'
   - 'edit any country content'
   - 'edit any custom_page content'
   - 'edit any customer_story content'
@@ -246,6 +252,7 @@ permissions:
   - 'edit own blog_post content'
   - 'edit own cloud_service_provider content'
   - 'edit own comments'
+  - 'edit own corporate content'
   - 'edit own country content'
   - 'edit own custom_page content'
   - 'edit own customer_story content'
@@ -282,6 +289,7 @@ permissions:
   - 'revert all revisions'
   - 'revert blog_post revisions'
   - 'revert cloud_service_provider revisions'
+  - 'revert corporate revisions'
   - 'revert country revisions'
   - 'revert custom_page revisions'
   - 'revert customer_story revisions'
@@ -305,6 +313,7 @@ permissions:
   - 'revert simple_page revisions'
   - 'revert solution revisions'
   - 'skip comment approval'
+  - 'translate corporate node'
   - 'translate profile node'
   - 'update any media'
   - 'update media'
@@ -327,6 +336,7 @@ permissions:
   - 'view any unpublished content'
   - 'view blog_post revisions'
   - 'view cloud_service_provider revisions'
+  - 'view corporate revisions'
   - 'view country revisions'
   - 'view custom_page revisions'
   - 'view customer_story revisions'
