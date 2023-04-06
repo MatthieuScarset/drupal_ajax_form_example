@@ -9,7 +9,6 @@ dependencies:
   module:
     - file
     - path
-    - workbench_moderation
 id: media.file.default
 targetEntityType: media
 bundle: file

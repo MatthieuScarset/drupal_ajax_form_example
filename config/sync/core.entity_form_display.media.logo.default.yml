@@ -7,7 +7,6 @@ dependencies:
     - media.type.logo
   module:
     - svg_image_field
-    - workbench_moderation
 id: media.logo.default
 targetEntityType: media
 bundle: logo
@@ -34,5 +33,6 @@ hidden:
   created: true
   langcode: true
   path: true
+  replace_file: true
   status: true
   uid: true

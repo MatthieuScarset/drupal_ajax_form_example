@@ -9,7 +9,6 @@ dependencies:
     - media.type.embed_video
   module:
     - link
-    - workbench_moderation
 id: media.embed_video.default
 targetEntityType: media
 bundle: embed_video
