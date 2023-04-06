@@ -1,0 +1,15 @@
+.sticky-top {
+  z-index: 1000;
+
+  &.page-menu-modular-product, .page-menu-category-block {
+    z-index: 1010;
+  }
+
+  @include media-breakpoint-down(md){
+    position: initial;
+
+    &.page-menu-modular-product,  .page-menu-category-block {
+      position: sticky;
+    }
+  }
+}

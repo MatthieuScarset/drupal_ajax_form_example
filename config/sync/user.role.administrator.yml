@@ -78,9 +78,6 @@ dependencies:
     - views_ui
     - webform
     - webform_node
-    - workbench
-    - workbench_access
-    - workbench_moderation
     - xmlsitemap
 id: administrator
 label: Administrateur
@@ -103,7 +100,6 @@ permissions:
   - 'access tour'
   - 'access user profiles'
   - 'access webform overview'
-  - 'access workbench'
   - 'administer CAPTCHA settings'
   - 'administer account settings'
   - 'administer autologout'
@@ -146,11 +142,6 @@ permissions:
   - 'administer redirects'
   - 'administer responsive images'
   - 'administer robots.txt'
-  - 'administer scheduled update types'
-  - 'administer scheduled updates'
-  - 'administer scheduled_update display'
-  - 'administer scheduled_update fields'
-  - 'administer scheduled_update form display'
   - 'administer seckit'
   - 'administer shortcuts'
   - 'administer simplify'
@@ -170,13 +161,9 @@ permissions:
   - 'administer webform'
   - 'administer webform element access'
   - 'administer webform submission'
-  - 'administer workbench access'
   - 'administer xmlsitemap'
   - 'assign roles'
-  - 'assign workbench access'
-  - 'batch update workbench access'
   - 'bypass node access'
-  - 'bypass workbench access'
   - 'cancel account'
   - 'change own logout threshold'
   - 'change own username'
@@ -380,18 +367,7 @@ permissions:
   - 'update any media'
   - 'update content translations'
   - 'update media'
-  - 'use archived_published transition'
-  - 'use draft_draft transition'
-  - 'use draft_needs_review transition'
-  - 'use draft_published transition'
-  - 'use needs_review_draft transition'
-  - 'use needs_review_needs_review transition'
-  - 'use needs_review_published transition'
-  - 'use published_archived transition'
-  - 'use published_draft transition'
-  - 'use published_published transition'
   - 'use text format full_html'
-  - 'use workbench access'
   - 'view all revisions'
   - 'view any unpublished content'
   - 'view any webform submission'
@@ -427,4 +403,3 @@ permissions:
   - 'view webform revisions'
   - 'view webform submissions any node'
   - 'view webform submissions own node'
-  - 'view workbench access information'

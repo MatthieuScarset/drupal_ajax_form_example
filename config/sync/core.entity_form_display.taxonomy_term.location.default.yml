@@ -9,7 +9,6 @@ dependencies:
     - geolocation_leaflet
     - path
     - text
-    - workbench_moderation
 id: taxonomy_term.location.default
 targetEntityType: taxonomy_term
 bundle: location

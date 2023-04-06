@@ -6,9 +6,11 @@
 
 
 use Drupal\Core\Database\Database;
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Form\FormStateInterface;
 use \Drupal\oab_dvi\DviHelper;
 
-function _in_hook_form_alter(&$form, $form_state, $form_id) {
+function _in_hook_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
     //\Drupal::logger('oab_backoffice')->notice('form id = '.$form_id);
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
@@ -26,6 +28,51 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
             $current_user_language = $node_langcode;
         }
         $edit_form = true;
+    }
+
+    // Transformation du "select" des états en boutons distincts
+    if (preg_match('@node_(.*)_form@', $form_id) && isset($form['moderation_state']['widget'][0]['state'])) {
+
+
+      /** @var \Drupal\content_moderation\StateTransitionValidationInterface $state_transition_validation */
+      $state_transition_validation = \Drupal::service('content_moderation.state_transition_validation');
+
+      /** @var \Drupal\node\NodeInterface $entity */
+      $entity = $form_state->getformObject()->getEntity();
+
+
+      // L'entité peut ne pas avoir d'état (la migration n'a été faite que pour les entité en draft et archived),
+      // ContentModeration sachant ressortir l'état "published" pour les états publiés
+      // Si l'entité n'a pas d'état, on en met un par défaut (published ou draft selon que le node est publié ou non)
+//      $state = $entity->moderation_state->value ?? ($entity->isPublished() ? 'published' : 'draft');
+
+      $transitions = $state_transition_validation->getValidTransitions($entity, \Drupal::currentUser());
+
+      if (!empty($transitions)) {
+        $default_button = $form['actions']['submit'];
+        $default_button['#access'] = TRUE;
+
+        foreach ($transitions as $transition) {
+          $form['actions']['transition_' . $transition->id()] = [
+            '#dropbutton' => "transitions",
+            '#workflow_state' => $transition->to()->id(),
+            '#value' => $transition->label()
+          ] + $default_button;
+        }
+
+        // Hide the default buttons, including the specialty ones added by
+        // NodeForm.
+        foreach (['publish', 'unpublish', 'submit'] as $key) {
+          if (isset($form['actions'][$key])) {
+            $form['actions'][$key]['#access'] = FALSE;
+            unset($form['actions'][$key]['#dropbutton']);
+          }
+        }
+        // Hide default moderation state widget
+        $form['moderation_state']['widget'][0]['state']["#access"] = false;
+
+        $form['#entity_builders']['update_workflow_state'] = '_oab_update_workflow_status';
+      }
     }
 
     // formulaire replicate
@@ -197,7 +244,7 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
             '#title' => t('Open in a new window'),
             '#description' => t('check to open the link in a new window'),
             '#default_value' => $link_target,
-            '#weight' => -2
+            '#weight' => -2,
         );
 
         $form['link_icon'] = array(
@@ -205,7 +252,7 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
             '#title' => t('Font Awesome Icon'),
             '#description' => t('type your icon class code'),
             '#default_value' => $link_icon,
-            '#weight' => -3
+            '#weight' => -3,
         );
 
         $form['link_classtag'] = array(
@@ -213,7 +260,7 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
             '#title' => t('Link Tag Class'),
             '#description' => t('type your link tag class'),
             '#default_value' => $link_classtag,
-            '#weight' => -4
+            '#weight' => -4,
         );
 
         $form['actions']['submit']['#submit'][] = 'oab_backoffice_menu_link_submit';
@@ -330,3 +377,11 @@ function _in_hook_form_alter(&$form, $form_state, $form_id) {
         }
     }
 }
+
+function _oab_update_workflow_status($entity_type_id, ContentEntityInterface $entity, array $form, FormStateInterface $form_state) {
+  $element = $form_state->getTriggeringElement();
+  if (isset($element['#workflow_state'])) {
+    $entity->moderation_state->value = $element['#workflow_state'];
+  }
+}
+

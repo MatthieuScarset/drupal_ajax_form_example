@@ -1,75 +1,28 @@
-header#navbar.sticky-top.is-sticky {
-
-  .main_nav.navbar {
-    padding-bottom: 0;
-
-    div.navbar-brand {
-      height: 1.875rem;
-      margin: 0.9375rem 3.75rem 0.9375rem 0;
-    }
-
-    .navbar-brand img.small-logo {
-      width: auto;
-      height: 30px;
-    }
-    .navbar-right {
-      margin-top: revert;
-    }
-
-    .mega-menu-desktop {
-      .nav-link {
-        padding-bottom: 1.275rem;
-
-        &[role="menuitem"]:hover {
-          padding-bottom: 0.9625rem;
-        }
-
-        &[aria-expanded="true"] {
-          padding-bottom: 0.9625rem;
-        }
-      }
-      .item_mega_menu {
-        margin: -40px auto 0;
-      }
-
-      @media (min-width: 1600px) {
-        .item_mega_menu {
-          max-width: 1560px;
-          margin: -40px auto 0;
-        }
-      }
-    }
-
-    .oab-synomia-search-header-block-form .top-block-search-form {
-      input {
-        height: 30px;
-      }
-    }
-  }
-}
+$height-large-header: 3.125rem;
+$height-small-header: 2.5rem;
 
 .main_nav.navbar {
   padding: 0;
-  div.navbar-brand {
-    height: 2.5rem;
-    margin: 1.25rem 3.75rem 1.25rem 0;
 
-    @include media-breakpoint-up(xl){
-      height: 3.125rem;
-      margin: 1.5625rem 5.625rem 1.5625rem 0;
-    }
+  div.navbar-brand {
+      height: $height-small-header;
+      margin: 1.25rem 3.75rem 1.25rem 0;
 
     a.logo {
       margin-right: 0;
 
       img {
-        transition: width .2s ease-in-out;
-        margin-bottom: 0;
-        height: 2.5rem;
-        width: auto;
+        &.large-logo, &.small-logo {
+          transition: width .2s ease-in-out;
+          margin-bottom: 0;
+          height: $height-small-header;
+          width: auto;
+        }
 
         @include media-breakpoint-up(xl) {
-          height: 3.125rem;
+          &.large-logo {
+            height: $height-large-header;
+          }
         }
       }
     }
@@ -79,7 +32,7 @@ header#navbar.sticky-top.is-sticky {
     margin-top: 4px;
 
     @include media-breakpoint-up(xl) {
-      margin-top: 14px;
+      margin-top: 0;
     }
   }
 
@@ -93,7 +46,7 @@ header#navbar.sticky-top.is-sticky {
         color: $orange1;
       }
     }
-    }
+  }
 
   .mega-menu-desktop {
     & > nav,
@@ -112,15 +65,11 @@ header#navbar.sticky-top.is-sticky {
     .nav-link {
       padding-bottom: 1.625rem;
 
-      @include media-breakpoint-up(xl) {
-        padding-bottom: 2.1rem;
-      }
-
       &[role="menuitem"]::before {
         color: $orange1;
 
         @include media-breakpoint-up(md) {
-              display: none;
+          display: none;
         }
       }
 
@@ -128,20 +77,12 @@ header#navbar.sticky-top.is-sticky {
         color: $orange1;
         padding-bottom: 1.3125rem;
         border-bottom: 5px solid $orange1;
-
-        @include media-breakpoint-up(xl) {
-          padding-bottom: 1.7875rem;
-        }
       }
 
       &[aria-expanded="true"] {
         color: $white;
         padding-bottom: 1.3125rem;
         border-bottom: 5px solid $orange1;
-
-        @include media-breakpoint-up(xl) {
-          padding-bottom: 1.7875rem;
-        }
       }
 
       &.sous_items {
@@ -157,6 +98,7 @@ header#navbar.sticky-top.is-sticky {
       max-height: 27rem;
       overflow: hidden;
       right: 0;
+      top: 2 * $height-small-header;
 
       @include media-breakpoint-down(xl) {
         margin-top: -20px;
@@ -277,6 +219,38 @@ header#navbar.sticky-top.is-sticky {
         .item_megamenu_list {
           padding-left: 5.625rem;
         }
+      }
+    }
+  }
+
+  @include media-breakpoint-up(xl) {
+    &:not(.small-header) {
+      div.navbar-brand {
+        height: $height-large-header;
+        margin: 1.5625rem 5.625rem 1.5625rem 0;
+      }
+
+      .mega-menu-desktop {
+        .nav-link {
+          padding-bottom: 2.1rem;
+
+          &[role="menuitem"]:hover {
+            padding-bottom: 1.7875rem;
+          }
+
+          &[aria-expanded="true"] {
+            padding-bottom: 1.7875rem;
+          }
+
+          &.sous_items {
+            padding-bottom: 0;
+          }
+        }
+
+        .item_mega_menu {
+          top: 2 * $height-large-header;
+        }
+
       }
     }
   }

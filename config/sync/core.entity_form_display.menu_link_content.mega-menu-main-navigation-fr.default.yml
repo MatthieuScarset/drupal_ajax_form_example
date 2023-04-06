@@ -8,7 +8,6 @@ dependencies:
   module:
     - link
     - menu_item_extras
-    - workbench_moderation
 id: menu_link_content.mega-menu-main-navigation-fr.default
 targetEntityType: menu_link_content
 bundle: mega-menu-main-navigation-fr

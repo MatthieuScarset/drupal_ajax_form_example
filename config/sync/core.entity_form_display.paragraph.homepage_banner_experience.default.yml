@@ -13,7 +13,6 @@ dependencies:
   module:
     - image
     - text
-    - workbench_moderation
 id: paragraph.homepage_banner_experience.default
 targetEntityType: paragraph
 bundle: homepage_banner_experience

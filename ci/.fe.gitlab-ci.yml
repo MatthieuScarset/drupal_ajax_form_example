@@ -7,7 +7,7 @@ stages:          # List of stages for jobs, and their order of execution
 
 # Include job templates
 include:
-  - '/ci/.templates.d/*.yml'
+  - '/ci/.templates.d/sonarqube.yml'
 
 variables:
   COMPTE_PROJET_DEV: $COMPTE_PROJET_DEV

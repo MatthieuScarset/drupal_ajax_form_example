@@ -29,7 +29,7 @@ socialbar:
 contact-button:
   version: VERSION
   js:
-    js/contact_button.js: {}
+    assets/legacy_js/contact_button.js: {}
 
 modular_product:
   version: VERSION

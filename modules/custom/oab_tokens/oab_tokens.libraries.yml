@@ -1,0 +1,4 @@
+tokens:
+  version: 8.x
+  js:
+    js/tokens.js: {}

@@ -36,9 +36,11 @@ dependencies:
     - node.type.region
     - node.type.simple_page
     - node.type.solution
+    - workflows.workflow.content
     - node.type.webform
   module:
     - comment
+    - content_moderation
     - content_translation
     - entity_browser
     - field_ui
@@ -56,8 +58,6 @@ dependencies:
     - system
     - toolbar
     - tour
-    - workbench
-    - workbench_moderation
 id: chief_editor
 label: 'Chief editor'
 weight: 3
@@ -80,8 +80,9 @@ permissions:
   - 'access toolbar'
   - 'access tour'
   - 'access user profiles'
-  - 'access workbench'
   - 'add background image entities'
+  - 'add subhome entity entities'
+  - 'administer media'
   - 'administer menu'
   - 'administer scheduled_update display'
   - 'administer scheduled_update fields'
@@ -317,16 +318,9 @@ permissions:
   - 'translate profile node'
   - 'update any media'
   - 'update media'
-  - 'use archived_published transition'
-  - 'use draft_draft transition'
-  - 'use draft_needs_review transition'
-  - 'use draft_published transition'
-  - 'use needs_review_draft transition'
-  - 'use needs_review_needs_review transition'
-  - 'use needs_review_published transition'
-  - 'use published_archived transition'
-  - 'use published_draft transition'
-  - 'use published_published transition'
+  - 'use content transition archived'
+  - 'use content transition create_new_draft'
+  - 'use content transition publish'
   - 'use text format full_html'
   - 'use unpublish transition'
   - 'use unpublished_to_draft transition'

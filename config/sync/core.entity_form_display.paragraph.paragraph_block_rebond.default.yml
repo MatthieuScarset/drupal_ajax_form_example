@@ -9,7 +9,6 @@ dependencies:
     - paragraphs.paragraphs_type.paragraph_block_rebond
   module:
     - link
-    - workbench_moderation
 id: paragraph.paragraph_block_rebond.default
 targetEntityType: paragraph
 bundle: paragraph_block_rebond

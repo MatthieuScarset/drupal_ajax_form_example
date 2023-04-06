@@ -47,6 +47,7 @@ class SIUController extends ControllerBase
     // Start the authentication process; invoke
     $callback = 'oab_siu_connexion__saml_authenticate';
     $forceAuthn = $config->get('force_authentication') ?? FALSE;
+
     $return = saml_sp_start($idp, $callback, $forceAuthn);
     if (!empty($return)) {
       // Something was returned, echo it to the screen.
