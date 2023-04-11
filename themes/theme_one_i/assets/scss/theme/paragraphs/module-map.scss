@@ -1,0 +1,23 @@
+.paragraph--type--module-map {
+  .map-image-title {
+    @include media-breakpoint-down(md) {
+      overflow-x: scroll;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+  .field-map {
+    .map-image {
+      position: absolute;
+      opacity: 0;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}

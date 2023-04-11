@@ -8,6 +8,7 @@ import '@ob1/web';
   Import TS scripts
  */
 // require('./ExampleTs.ts');
+require('./corporate/ModuleMap.js');
 
 /*
   Import VueJS Components
