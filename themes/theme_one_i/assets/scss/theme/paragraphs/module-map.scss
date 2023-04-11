@@ -10,9 +10,15 @@
     }
   }
   .field-map {
+    overflow: hidden;
+
     .map-image {
       position: absolute;
       opacity: 0;
+
+      &.active {
+        position: relative;
+      }
 
       img {
         width: 100%;
