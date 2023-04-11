@@ -5,6 +5,7 @@ dependencies:
   config:
     - node.type.blog_post
     - node.type.cloud_service_provider
+    - node.type.corporate
     - node.type.country
     - node.type.custom_page
     - node.type.customer_story
@@ -77,6 +78,7 @@ type_settings:
     node:
       - blog_post
       - cloud_service_provider
+      - corporate
       - country
       - custom_page
       - customer_story
