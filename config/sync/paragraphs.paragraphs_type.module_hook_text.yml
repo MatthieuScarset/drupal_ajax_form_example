@@ -1,0 +1,10 @@
+uuid: 7ca8eaa1-5e7c-4457-99a0-299ab7cdfb2f
+langcode: en
+status: true
+dependencies: {  }
+id: module_hook_text
+label: 'Module Hook Text'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }
