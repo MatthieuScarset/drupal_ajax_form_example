@@ -525,3 +525,28 @@ function theme_one_i_theme_suggestions_taxonomy_term_alter(array &$suggestions, 
   $suggestions[] = 'taxonomy_term__' . $term->bundle() . '__' . $sanitized_view_mode;
   $suggestions[] = 'taxonomy_term__' . $term->id() . '__' . $sanitized_view_mode;
 }
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function theme_one_i_preprocess_paragraph(&$variables) {
+  if (!isset($variables['paragraph'])) {
+    return;
+  }
+
+  /** @var Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+
+  if ($paragraph->bundle() === "title_and_image"
+    && NULL !== ($parent_entity = $paragraph->getParentEntity())) {
+
+    /** @var Paragraph $parent_entity */
+
+    // field_map ayant le premier id on en a besoin pour ajouter la class active
+    if ($parent_entity->getEntityTypeId() === "paragraph" && $parent_entity->bundle() === "module_map"
+      && $parent_entity->field_map->target_id === $paragraph->id()
+    ) {
+      $variables['attributes']['class'][] = 'active';
+    }
+  }
+}

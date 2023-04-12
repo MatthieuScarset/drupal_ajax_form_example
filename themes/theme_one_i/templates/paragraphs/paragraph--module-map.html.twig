@@ -40,13 +40,13 @@
 #}
 {%
   set classes = [
-  'bg-dark',
-  'text-white',
-  'py-2 py-md-5',
   'paragraph',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-  not paragraph.isPublished() ? 'paragraph--unpublished'
+  not paragraph.isPublished() ? 'paragraph--unpublished',
+  'bg-dark',
+  'text-white',
+  'py-2 py-md-5'
 ]
 %}
 {% block paragraph %}
@@ -62,7 +62,9 @@
 
               <div class="my-2 mt-md-3 mb-md-2 d-flex flex-md-wrap map-image-title">
                   {% for key in content.field_map['#items']|keys %}
-                    <a class="button-chip mr-1 mb-0 mb-md-1" data-target="{{ content.field_map[key]['#paragraph'].id() }}">
+                    <a class="{% if loop.first %} active {% endif %} button-chip mr-1 mb-0 mb-md-1"
+                       data-target="{{ content.field_map[key]['#paragraph'].id() }}"
+                    >
                       {{ content.field_map[key]['#paragraph'].field_title.value }}
                     </a>
                   {% endfor %}

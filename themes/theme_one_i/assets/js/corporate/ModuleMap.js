@@ -1,11 +1,8 @@
 class ModuleMap {
-  constructor() {
-
-    document.querySelector('a.button-chip:first-child').classList.add("active");
-    document.querySelector('.map-image:first-child').classList.add("active");
-    document.querySelector('.map-image:first-child').style.opacity = 1;
-    this.$mapImage = document.querySelectorAll('.map-image');
-    this.$mapTitle = document.querySelectorAll('.map-image-title a.button-chip');
+  constructor(elem) {
+    this.$root = elem;
+    this.$mapImage = Array.from(this.$root.querySelectorAll('.map-image'));
+    this.$mapTitle = this.$root.querySelectorAll('.map-image-title a.button-chip');
     this.$mapTitle.forEach((title)=> {
       title.addEventListener('click', (e) => {this._onClick(e);})
     });
@@ -18,20 +15,29 @@ class ModuleMap {
       });
 
       this.$mapImage.forEach((mapImage) => {
-        mapImage.style.opacity = 0;
         mapImage.classList.remove("active");
       });
     }
 
-    event.currentTarget.classList.add("active");
-    this.$mapImage.forEach((item) => {
-      if (item.dataset.paragraph === event.currentTarget.dataset.target) {
-        item.classList.add("active");
-        item.style.opacity = 1;
-        item.style.transition = "opacity 1s linear";
-      }
-    });
+
+    const item = this.$mapImage
+      .find((item) => item.dataset.paragraph === event.currentTarget.dataset.target);
+
+    if (typeof item !== "undefined") {
+      item.classList.add("active");
+      event.currentTarget.classList.add("active");
+    } else {
+      event.currentTarget.classList.add('d-none');
+    }
   }
 }
 
-const moduleMap = new ModuleMap();
+document.addEventListener("DOMContentLoaded", () => {
+  const moduleMaps = document.querySelectorAll(".paragraph--type--module-map");
+  [].forEach.call(moduleMaps, (moduleMap) => new ModuleMap(moduleMap));
+});
+
+// rattachement au contexte window pour pouvoir l'utiliser en dehors du JS
+window.ModuleMap = ModuleMap;
+
+export default ModuleMap;

@@ -9,6 +9,7 @@
       }
     }
   }
+
   .field-map {
     overflow: hidden;
 
@@ -18,6 +19,8 @@
 
       &.active {
         position: relative;
+        opacity: 1;
+        transition: opacity 1s linear;
       }
 
       img {
