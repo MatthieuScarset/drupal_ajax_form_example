@@ -14,4 +14,11 @@ CKEDITOR.editorConfig = function(config) {
 
     CKEDITOR.config.embed_provider = '//iframe.ly/api/oembed?url={url}&callback={callback}&api_key=999d16e5ad074182bbe882';
     /*CKEDITOR.config.removePlugins = 'drupallink';*/
+
+    CKEDITOR.dtd['a'] = {
+      div: 1,
+      p: 1,
+      i: 1,
+      span: 1
+    };
 };
