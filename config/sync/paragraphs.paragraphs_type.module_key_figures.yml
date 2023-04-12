@@ -1,0 +1,10 @@
+uuid: aac95f68-c185-4f1e-af7c-2d78dbf991e5
+langcode: en
+status: true
+dependencies: {  }
+id: module_key_figures
+label: '[Module] Key Figures'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

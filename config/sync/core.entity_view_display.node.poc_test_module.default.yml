@@ -1,0 +1,31 @@
+uuid: dfaaf3a5-439d-4cf3-b582-e3bf7915c973
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.poc_test_module.field_modules
+    - node.type.poc_test_module
+  module:
+    - entity_reference_revisions
+    - user
+id: node.poc_test_module.default
+targetEntityType: node
+bundle: poc_test_module
+mode: default
+content:
+  field_modules:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  langcode: true

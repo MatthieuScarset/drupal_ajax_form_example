@@ -12,7 +12,6 @@ dependencies:
   module:
     - entity_browser
     - link
-    - workbench_moderation
 id: paragraph.related_content.default
 targetEntityType: paragraph
 bundle: related_content

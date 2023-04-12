@@ -1,0 +1,12 @@
+uuid: 94a16dfe-029d-4c05-8911-900620d61722
+langcode: en
+status: true
+dependencies: {  }
+label: 'Crop 420:420'
+id: crop_420_420
+description: ''
+aspect_ratio: '420:420'
+soft_limit_width: 420
+soft_limit_height: 420
+hard_limit_width: null
+hard_limit_height: null

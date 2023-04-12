@@ -1,0 +1,10 @@
+uuid: 4eec0fe2-6da4-4fe7-8deb-c0eedcb93b47
+langcode: en
+status: true
+dependencies: {  }
+id: module_title_and_highlight
+label: '[Module] Title and Highlight'
+icon_uuid: null
+icon_default: null
+description: 'Is used in module list'
+behavior_plugins: {  }

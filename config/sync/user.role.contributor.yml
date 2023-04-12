@@ -35,8 +35,6 @@ dependencies:
     - system
     - toolbar
     - tour
-    - workbench
-    - workbench_moderation
 id: contributor
 label: contributeur
 weight: 6
@@ -55,7 +53,6 @@ permissions:
   - 'access toolbar'
   - 'access tour'
   - 'access user profiles'
-  - 'access workbench'
   - 'administer media'
   - 'administer nodes'
   - 'create cloud_service_provider content'
@@ -96,16 +93,10 @@ permissions:
   - 'edit own webform content'
   - 'revert cloud_service_provider revisions'
   - 'revert mss_article revisions'
-  - 'use draft_draft transition'
-  - 'use draft_needs_review transition'
-  - 'use needs_review_draft transition'
-  - 'use published_draft transition'
-  - 'use published_published transition'
   - 'use text format full_html'
   - 'use unpublished_to_draft transition'
   - 'view cloud_service_provider revisions'
   - 'view full_html revisions'
-  - 'view moderation states'
   - 'view mss_article revisions'
   - 'view own unpublished content'
   - 'view the administration theme'

@@ -47,50 +47,43 @@
 ]
 %}
 {% block paragraph %}
-  <div{{ attributes.addClass(classes) }}>
-      {% block content %}
-        <div class="accordion">
-          <div class="card multi custom-card">
-            <div class="card-header">
-              <a id="serviceTitle-{{ paragraph.id() }}"
-                 class="collapsed"
-                 data-toggle="collapse"
-                 data-target="serviceDescription-{{ paragraph.id() }}"
-                 href="#collapseOne-{{ paragraph.id() }}"
-                 role="button"
-                 onmousedown="utag_link(utag_data.titre_page,'services sur mesure' ,'{{ content.field_title.0['#context']['value']|escape('html') }}','accordion')"
-                 aria-expanded="false">
-                <div class="accordion-card-title justify-content-between w-100">
-                  <div class="accordion-title text-decoration-none py-1">
-                    {{content.field_title}}
-                  </div>
-
-                  {% if paragraph.field_option_services[0].value == 1 %}
-                    <div class="pl-1 mr-md-1">
-                      <span class="ob1-capsule ob1-capsule-context small mr-0">{{ 'Option'|t }}</span>
-                    </div>
-                  {% endif %}
-
-                  <span class="accordion-icon" aria-hidden="true"></span>
-                </div>
-              </a>
+  {% block content %}
+    <div {{ attributes.addClass(classes, 'card-header') }}>
+        <a id="serviceTitle-{{ paragraph.id() }}"
+           class="collapsed"
+           data-toggle="collapse"
+           data-target="serviceDescription-{{ paragraph.id() }}"
+           href="#collapseOne-{{ paragraph.id() }}"
+           role="button"
+           onmousedown="utag_link(utag_data.titre_page,'services sur mesure' ,'{{ content.field_title.0['#context']['value']|escape('html') }}','accordion')"
+           aria-expanded="false">
+          <div class="accordion-card-title justify-content-between w-100">
+            <div class="accordion-title text-decoration-none py-1">
+              {{content.field_title}}
             </div>
-            <div id="serviceDescription-{{ paragraph.id() }}"
-                 class="collapse mt-1"
-                 aria-labelledby="serviceTitle-{{ paragraph.id() }}">
-              <div class="accordion-card-body standard mw-100">
-                {{ content.field_accroche }}
 
-                {% if content.field_redirection_url[0]['#url']|length > 0 %}
-                  <a href="{{ content.field_redirection_url[0]['#url'] }}"
-                     onmousedown="utag_link(utag_data.titre_page,'services sur mesure' ,'{{ content.field_title.0['#context']['value']|escape('html') }}','En savoir plus')"
-                     class="o-link-arrow mt-1">{{ 'More information'|t }}</a>
-                {% endif %}
-
+            {% if paragraph.field_option_services[0].value == 1 %}
+              <div class="pl-1 mr-md-1">
+                <span class="ob1-capsule ob1-capsule-context small mr-0">{{ 'Option'|t }}</span>
               </div>
-            </div>
+            {% endif %}
+
+            <span class="accordion-icon" aria-hidden="true"></span>
           </div>
-        </div>
-      {% endblock %}
-  </div>
+        </a>
+    </div>
+    <div id="serviceDescription-{{ paragraph.id() }}"
+         class="collapse mt-1"
+         aria-labelledby="serviceTitle-{{ paragraph.id() }}">
+      <div class="accordion-card-body standard mw-100">
+        {{ content.field_accroche }}
+
+        {% if content.field_redirection_url[0]['#url']|length > 0 %}
+          <a href="{{ content.field_redirection_url[0]['#url'] }}"
+             onmousedown="utag_link(utag_data.titre_page,'services sur mesure' ,'{{ content.field_title.0['#context']['value']|escape('html') }}','En savoir plus')"
+             class="o-link-arrow mt-1">{{ 'More information'|t }}</a>
+        {% endif %}
+      </div>
+    </div>
+  {% endblock content %}
 {% endblock paragraph %}

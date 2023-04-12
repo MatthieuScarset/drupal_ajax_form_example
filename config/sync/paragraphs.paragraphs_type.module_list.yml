@@ -1,0 +1,10 @@
+uuid: 6686039d-6a50-4320-8571-7559ad159866
+langcode: en
+status: true
+dependencies: {  }
+id: module_list
+label: '[Module] List'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

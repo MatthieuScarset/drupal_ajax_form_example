@@ -9,8 +9,10 @@ dependencies:
     - node.type.office
     - node.type.product
     - node.type.profile
+    - workflows.workflow.content
   module:
     - block
+    - content_moderation
     - content_translation
     - contextual
     - entity_browser
@@ -34,9 +36,6 @@ dependencies:
     - taxonomy
     - toolbar
     - tour
-    - workbench
-    - workbench_access
-    - workbench_moderation
     - xmlsitemap
 id: digital_admin
 label: 'Digital Admin'
@@ -54,7 +53,6 @@ permissions:
   - 'access toolbar'
   - 'access tour'
   - 'access user profiles'
-  - 'access workbench'
   - 'administer blocks'
   - 'administer meta tags'
   - 'administer nodes'
@@ -68,7 +66,6 @@ permissions:
   - 'administer users'
   - 'administer xmlsitemap'
   - 'assign roles'
-  - 'assign workbench access'
   - 'create cloud_service_provider content'
   - 'create content translations'
   - 'create mss_article content'
@@ -117,17 +114,10 @@ permissions:
   - 'translate shortcut'
   - 'update content translations'
   - 'use archived_published transition'
-  - 'use draft_draft transition'
-  - 'use draft_needs_review transition'
-  - 'use draft_published transition'
-  - 'use needs_review_draft transition'
-  - 'use needs_review_needs_review transition'
-  - 'use needs_review_published transition'
-  - 'use published_archived transition'
-  - 'use published_draft transition'
-  - 'use published_published transition'
+  - 'use content transition archived'
+  - 'use content transition create_new_draft'
+  - 'use content transition publish'
   - 'use text format full_html'
-  - 'use workbench access'
   - 'view all revisions'
   - 'view any unpublished content'
   - 'view cloud_service_provider revisions'
@@ -139,4 +129,3 @@ permissions:
   - 'view product revisions'
   - 'view scheduled update entities'
   - 'view the administration theme'
-  - 'view workbench access information'

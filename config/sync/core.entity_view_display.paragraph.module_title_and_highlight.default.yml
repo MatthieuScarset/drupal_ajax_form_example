@@ -1,0 +1,29 @@
+uuid: 34d417b2-afcf-437b-93cc-3583aa5c1d47
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.module_title_and_highlight.field_highlight
+    - field.field.paragraph.module_title_and_highlight.field_title
+    - paragraphs.paragraphs_type.module_title_and_highlight
+id: paragraph.module_title_and_highlight.default
+targetEntityType: paragraph
+bundle: module_title_and_highlight
+mode: default
+content:
+  field_highlight:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

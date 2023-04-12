@@ -9,7 +9,6 @@ dependencies:
   module:
     - image_widget_crop
     - path
-    - workbench_moderation
 _core:
   default_config_hash: i0Asv1qAVwoFWvzIWLkoZ6cc_Za0E5sTviPg4xgr2fk
 id: media.image_with_crop.default
@@ -76,4 +75,5 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  replace_file: true

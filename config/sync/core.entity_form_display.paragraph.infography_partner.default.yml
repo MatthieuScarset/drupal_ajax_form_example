@@ -10,7 +10,6 @@ dependencies:
     - paragraphs.paragraphs_type.infography_partner
   module:
     - image
-    - workbench_moderation
 id: paragraph.infography_partner.default
 targetEntityType: paragraph
 bundle: infography_partner

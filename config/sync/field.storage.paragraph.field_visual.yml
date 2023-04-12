@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   module:
-    - media_entity
+    - media
     - paragraphs
 id: paragraph.field_visual
 field_name: field_visual
@@ -13,7 +13,7 @@ settings:
   target_type: media
 module: core
 locked: false
-cardinality: 1
+cardinality: 2
 translatable: false
 indexes: {  }
 persist_with_no_fields: false

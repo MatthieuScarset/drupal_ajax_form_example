@@ -798,3 +798,18 @@ function oab_tristan_update_9003() {
   }
 
 }
+
+
+/**
+ * Migrate workbench moderation data to Content Moderation
+ */
+function oab_tristan_update_9004(&$sandbox) {
+  include_once("updates/update_9004.inc");
+  _processUpdateWithSandbox_9004($sandbox);
+  if ($sandbox['#finished'] === 1) {
+    _reset_changed_date_to_initial($sandbox);
+    _check_tables_for_workbench_moderation_uninstallation();
+    _uninstall_workbench_moderation();
+  }
+
+}

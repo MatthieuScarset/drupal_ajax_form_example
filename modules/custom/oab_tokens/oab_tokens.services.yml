@@ -1,0 +1,5 @@
+services:
+  oab_tokens.node_token_service:
+    class: Drupal\oab_tokens\Services\NodeTokenService
+    arguments:
+      - '@entity_type.manager'

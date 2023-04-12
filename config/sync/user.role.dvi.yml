@@ -17,13 +17,10 @@ dependencies:
     - quickedit
     - replicate_ui
     - roleassign
-    - scheduled_updates
     - shortcut
     - system
     - toolbar
     - tour
-    - workbench
-    - workbench_moderation
 id: dvi
 label: DVI
 weight: 8
@@ -42,12 +39,7 @@ permissions:
   - 'access toolbar'
   - 'access tour'
   - 'access user profiles'
-  - 'access workbench'
   - 'administer media'
-  - 'administer scheduled updates'
-  - 'administer scheduled_update display'
-  - 'administer scheduled_update fields'
-  - 'administer scheduled_update form display'
   - 'administer url aliases'
   - 'assign roles'
   - 'create distributor content'
@@ -73,23 +65,11 @@ permissions:
   - 'revert product revisions'
   - 'update any media'
   - 'update media'
-  - 'use archived_published transition'
-  - 'use draft_draft transition'
-  - 'use draft_needs_review transition'
-  - 'use draft_published transition'
-  - 'use needs_review_draft transition'
-  - 'use needs_review_needs_review transition'
-  - 'use needs_review_published transition'
-  - 'use published_archived transition'
-  - 'use published_draft transition'
-  - 'use published_published transition'
   - 'use text format full_html'
   - 'view all revisions'
   - 'view any unpublished content'
   - 'view distributor revisions'
   - 'view latest version'
-  - 'view moderation states'
   - 'view own unpublished content'
   - 'view product revisions'
-  - 'view scheduled update entities'
   - 'view the administration theme'
