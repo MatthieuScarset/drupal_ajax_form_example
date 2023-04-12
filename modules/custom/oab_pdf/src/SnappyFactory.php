@@ -3,6 +3,7 @@
 namespace Drupal\oab_pdf;
 
 use Drupal\oab_pdf\Exception\SnappyNotFoundException;
+use h4cc\WKHTMLToPDF\WKHTMLToPDF;
 use Knp\Snappy\Pdf;
 use Psr\Log\LoggerInterface;
 
@@ -20,11 +21,13 @@ class SnappyFactory {
    * @throws \Drupal\oab_pdf\Exception\SnappyNotFoundException
    */
   public function get(LoggerInterface $logger): Pdf {
-    $bin_path = DRUPAL_ROOT . '/vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64';
+//    $bin_path = DRUPAL_ROOT . '/vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64';
+    $bin_path = WKHTMLToPDF::PATH;
     if (file_exists($bin_path)) {
       ini_set('memory_limit', '-1');
       $snappy = new Pdf($bin_path);
       $snappy->setOption('quiet', true);
+      $snappy->setOption('enable-local-file-access', true);
       $snappy->setLogger($logger);
 
       return $snappy;
