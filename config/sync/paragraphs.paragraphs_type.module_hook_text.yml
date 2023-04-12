@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: module_hook_text
-label: 'Module Hook Text'
+label: '[Module] Hook Text'
 icon_uuid: null
 icon_default: null
 description: ''
