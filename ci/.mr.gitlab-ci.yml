@@ -9,3 +9,4 @@ sonarqube-mr:
   stage: test
   only:
     - merge_requests
+    - master

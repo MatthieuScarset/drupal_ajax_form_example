@@ -21,9 +21,9 @@ variables:
 
 
 # Sonarqube analyze on .pre
-#sonarqube:
-#  extends: .sonarqube_template
-#  stage: .pre
+sonarqube:
+  extends: .sonarqube_template
+  stage: .pre
 
 
 # Création d'un dossier spécifique et copie des fichiers nécessaires au build
