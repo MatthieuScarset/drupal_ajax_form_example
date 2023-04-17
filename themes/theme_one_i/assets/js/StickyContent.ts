@@ -35,7 +35,29 @@ class StickyContent {
       });
     }).observe(this.header, {attributeOldValue: true, attributeFilter:['class']});
 
+    setTimeout(() => {
+       this.onLoadScroll();
+    }, 200);
+
     this.setTop();
+  }
+
+  private onLoadScroll() {
+    let isCategoryPage = window.location.href.includes('categories');
+
+    if (isCategoryPage) {
+      let internalRefPosition = window.location.href.indexOf('#');
+
+      if (internalRefPosition !== -1) {
+        let internalRefName = window.location.href.substring(internalRefPosition);
+        let internalRefElement = (document.querySelector(internalRefName) as HTMLElement);
+
+        let top = this.pageMenu.offsetHeight + internalRefElement.offsetHeight;
+        let pagePosition = document.body.clientHeight;
+        
+        window.scrollBy(pagePosition, -top);
+      }
+    }
   }
 
   private setTop() {
