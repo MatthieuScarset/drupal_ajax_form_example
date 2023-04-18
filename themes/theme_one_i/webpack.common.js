@@ -9,7 +9,7 @@ module.exports = {
   entry: {
     "css/style": './assets/scss/style.scss',
     "js/script.min": "./assets/js/_mainScript.js",
-    "js/modularProduct.min": './assets/js/modular_product/main.js',
+    "js/modularContent.min": './assets/js/modular_content/main.js',
     "js/productFormule.min": './assets/js/product_formule/main.js',
   },
   output: {

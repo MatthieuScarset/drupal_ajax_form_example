@@ -31,10 +31,10 @@ contact-button:
   js:
     assets/legacy_js/contact_button.js: {}
 
-modular_product:
+modular_content:
   version: VERSION
   js:
-    dist/js/modularProduct.min.js: {attributes: { type: module }}
+    dist/js/modularContent.min.js: {attributes: { type: module }}
   dependencies:
     - theme_one_i/product_formule
 

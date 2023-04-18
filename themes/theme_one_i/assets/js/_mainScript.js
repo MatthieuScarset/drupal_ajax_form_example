@@ -3,11 +3,6 @@ import {defineCustomElement} from "vue";
 
 /* Import OB1 */
 import '@ob1/web';
-import ModuleMap from "./corporate/ModuleMap";
-
-export {
-  ModuleMap
-}
 
 
 // Hack pour jQuery

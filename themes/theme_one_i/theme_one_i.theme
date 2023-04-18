@@ -25,11 +25,18 @@ use Drupal\oab_modular_product\Services\OabModularProductService;
 function theme_one_i_preprocess_html(&$variables) {
   global $config;
 
+  $route_match = \Drupal::routeMatch();
+  /** @var Node $node */
+  $node = $route_match->getParameter('node');
 
   $c = Drupal::config("oab.version");
   $version = $c->get('value');
   if(!isset($config['header_env'])){
     $config['header_env'] = "";
+  }
+
+  if (isset($node) && isset($node->field_dark_mode) && $node->field_dark_mode->value === '1') {
+    $variables['attributes']['class'][] = 'dark-mode';
   }
 
   $variables['header_env'] = $config['header_env'];
@@ -135,8 +142,8 @@ function theme_one_i_preprocess_paragraph__module_testimonial_item(&$variables) 
 function theme_one_i_preprocess_node(&$variables) {
   $node_type = $variables['node']->type->entity->get('type');
 
-  if ($node_type === 'modular_product') {
-    $variables['#attached']['library'][] = 'theme_one_i/modular_product';
+  if (in_array($node_type, ['modular_product', 'corporate'])) {
+    $variables['#attached']['library'][] = 'theme_one_i/modular_content';
   }
 
   if($variables['view_mode'] === 'teaser_paragraph_module_blog') {
