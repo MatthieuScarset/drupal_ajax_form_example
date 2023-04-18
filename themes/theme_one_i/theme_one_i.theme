@@ -45,10 +45,13 @@ function theme_one_i_preprocess_region(&$variables) {
   $node = $route_match->getParameter('node');
   $config = \Drupal::config('system.site');
   $variables['site_name'] = $config->get('name');
-  $variables['background_color'] = 'bg-gray2';
 
-  if ($variables['region'] === 'top_zone' && $node->bundle() === 'corporate') {
-    $variables['background_color'] = 'bg-transparent';
+  if ($variables['region'] === 'top_zone') {
+    if ($node->bundle() === 'corporate') {
+      $variables['attributes']['class'][] = 'bg-transparent';
+    } else {
+      $variables['attributes']['class'][] = 'bg-gray2';
+    }
   }
 }
 
