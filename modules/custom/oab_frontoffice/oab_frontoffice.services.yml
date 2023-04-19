@@ -12,6 +12,10 @@ services:
     arguments: ['@entity_type.manager', '@oab_develop.helper.string_utilities']
     tags:
       - { name: breadcrumb_builder, priority: 101 }
+  oab_frontoffice_node_simple.breadcrumb:
+    class: Drupal\oab_frontoffice\Breadcrumb\NodeSimpleBreadcrumbBuilder
+    tags:
+      - { name: breadcrumb_builder, priority: 102 }
   oab_frontoffice.twig.OabExtension:
       class: Drupal\oab_frontoffice\Twig\OabExtension
       arguments: ['@module_handler', '@file_url_generator', '@file_system', '@request_stack']

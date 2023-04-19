@@ -402,24 +402,17 @@ function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, 
       $form['field_teaser']['widget'][0]['value']['#maxlength'] = $description;
       $form['field_teaser']['widget'][0]['value']['#description'] .= ' '.FieldFilteredMarkup::create($description.' characters max');
     }
-
-    if (isset($form["field_enable_wysiwyg_paragraph"])) {
-      //On rend la case à cocher Enable Wysywyg paragraph accessible uniquement pour les admins
-      if (!in_array('administrator', \Drupal::currentUser()->getRoles())) {
-        $form['field_enable_wysiwyg_paragraph']['#disabled'] = TRUE;
-      }
-      //on vérifie si le paragraph WYSIWYG est activé ou non => s'il ne l'est pas on le supprime des options disponibles pour les modules
-      if (isset($form["field_enable_wysiwyg_paragraph"]['widget']['value']["#default_value"]) &&
-        $form["field_enable_wysiwyg_paragraph"]['widget']['value']["#default_value"] === false &&
-        isset($form["field_modules"]["widget"]["actions"]["bundle"]["#options"]['paragraph_wysiwyg'])) {
-
-        //le paragraph WYSIWYG n'est pas actif, on le supprime des choix pour les modules
-        unset($form["field_modules"]["widget"]["actions"]["bundle"]["#options"]['paragraph_wysiwyg']);
-      }
-    }
+    $form = hideWysiwygParagraph($form);
   }
 
-  if (in_array($form_id, array('nod_corporate_form', 'node_corporate_edit_form'))) {
+  if (in_array($form_id, ['node_corporate_form', 'node_corporate_edit_form'])) {
+    $form = hideWysiwygParagraph($form);
+  }
+}
+
+function hideWysiwygParagraph($form) {
+
+  if (isset($form["field_enable_wysiwyg_paragraph"])) {
     //On rend la case à cocher Enable Wysywyg paragraph accessible uniquement pour les admins
     if (!in_array('administrator', \Drupal::currentUser()->getRoles())) {
       $form['field_enable_wysiwyg_paragraph']['#disabled'] = TRUE;
@@ -434,6 +427,8 @@ function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, 
       unset($form["field_modules"]["widget"]["actions"]["bundle"]["#options"]['paragraph_wysiwyg']);
     }
   }
+
+  return $form;
 }
 
 /**
