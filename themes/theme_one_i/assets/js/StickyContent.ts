@@ -59,7 +59,7 @@ class StickyContent {
       if (internalRefName) {
         let internalRefElement = (document.querySelector(internalRefName) as HTMLElement);
 
-        let top = this.pageMenu.offsetHeight + internalRefElement.offsetHeight;
+        let top = internalRefElement.offsetHeight + this.getBodyPaddingTop() - 35;
         let pagePosition = document.body.clientHeight;
 
         window.scrollBy(pagePosition, -top);
