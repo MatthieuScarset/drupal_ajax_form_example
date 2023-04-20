@@ -402,15 +402,15 @@ function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, 
       $form['field_teaser']['widget'][0]['value']['#maxlength'] = $description;
       $form['field_teaser']['widget'][0]['value']['#description'] .= ' '.FieldFilteredMarkup::create($description.' characters max');
     }
-    $form = hideWysiwygParagraph($form);
+    oab_modular_product_hide_wysiwyg_paragraph($form);
   }
 
   if (in_array($form_id, ['node_corporate_form', 'node_corporate_edit_form'])) {
-    $form = hideWysiwygParagraph($form);
+    oab_modular_product_hide_wysiwyg_paragraph($form);
   }
 }
 
-function hideWysiwygParagraph($form) {
+function oab_modular_product_hide_wysiwyg_paragraph(&$form) {
 
   if (isset($form["field_enable_wysiwyg_paragraph"])) {
     //On rend la case à cocher Enable Wysywyg paragraph accessible uniquement pour les admins
