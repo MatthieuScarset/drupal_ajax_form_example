@@ -47,6 +47,7 @@ class TopZoneModularProductBlock extends BlockBase {
   public function build(): array {
     $block = [];
     $node = $this->getContextValue('node');
+    $sous_product_category = null;
 
     if ($node instanceof Node && $node->bundle() === "modular_product") {
       $block['product'] = $node;
@@ -58,9 +59,8 @@ class TopZoneModularProductBlock extends BlockBase {
         }
       }
 
-      if ($node->hasField('field_visual')) {
-        $product_top_zone_media = Media::load($node->field_visual->target_id ?? 0);
-
+      if ($sous_product_category->hasField('field_image_illustration')) {
+        $product_top_zone_media = Media::load($sous_product_category->field_image_illustration->target_id ?? 0);
         if ($product_top_zone_media) {
           $product_top_zone_image = File::load($product_top_zone_media->field_image->target_id ?? 0);
           if ($product_top_zone_image) {
@@ -69,6 +69,7 @@ class TopZoneModularProductBlock extends BlockBase {
           }
         }
       }
+
     }
     return $block;
   }
