@@ -99,12 +99,15 @@ function _processUpdateWithSandbox_9002(&$sandbox, &$log_file) {
 
       }
       elseif ($sandbox['ct_current'] === 'media') {
+
         //on traite les médias
         $query = \Drupal::entityQuery('media');
         $query->sort('mid', 'ASC');
         $orGroup = $query->orConditionGroup();
         $orGroup->condition('field_image.title', 'Orange Business Services', 'CONTAINS');
         $orGroup->condition('field_image.alt', 'Orange Business Services', 'CONTAINS');
+        $orGroup->condition('thumbnail.title', 'Orange Business Services', 'CONTAINS');
+        $orGroup->condition('thumbnail.alt', 'Orange Business Services', 'CONTAINS');
         $query->condition($orGroup);
         $query->condition('mid', $sandbox['lastId'], '>');
         $query->range(0, 100);
@@ -124,19 +127,28 @@ function _processUpdateWithSandbox_9002(&$sandbox, &$log_file) {
             /** @var \Drupal\media\Entity\Media $media */
             $media = \Drupal\media\Entity\Media::load($mid);
 
+            $image_fields = [
+              'field_image',
+              'thumbnail'
+            ];
+
             // On conserve la date de dernière modif de chaque media qu'on touche pour pouvoir la remettre à la fin
             $sandbox['medias'][$mid] = $media->getChangedTime();
 
-            $values_field = $media->get('field_image')->getValue();
-            foreach ($values_field as $key => $value) {
-              if (isset($values_field[$key]["alt"])) {
-                $values_field[$key]["alt"] = str_replace('Orange Business Services', 'Orange Business', $values_field[$key]["alt"]);
-              }
-              if (isset($values_field[$key]["title"])) {
-                $values_field[$key]["title"] = str_replace('Orange Business Services', 'Orange Business', $values_field[$key]["title"]);
+            foreach ($media->getFields() as $field) {
+              if (in_array($field->getName(), $image_fields)) {
+                $values_field = $media->get($field->getName())->getValue();
+                foreach ($values_field as $key => $value) {
+                  if (isset($values_field[$key]["alt"])) {
+                    $values_field[$key]["alt"] = str_replace('Orange Business Services', 'Orange Business', $values_field[$key]["alt"]);
+                  }
+                  if (isset($values_field[$key]["title"])) {
+                    $values_field[$key]["title"] = str_replace('Orange Business Services', 'Orange Business', $values_field[$key]["title"]);
+                  }
+                }
+                $media->set($field->getName(), $values_field);
               }
             }
-            $media->set('field_image', $values_field);
             $media->save();
 
             fputcsv($log_file, [

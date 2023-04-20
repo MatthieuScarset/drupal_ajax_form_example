@@ -68,6 +68,9 @@ const CT_FIELDS = [
       'field_meta_title'
     ],
     'field_p_wysiwyg_rebond' => [
+    ],
+    'partner' => [
+      'field_content'
     ]
 ];
 
@@ -176,6 +179,16 @@ function _processUpdateWithSandbox_9001(&$sandbox, &$log_file) {
           'field_product_name',
           'field_teaser',
         ];
+
+        $langcodes_available = [
+          'en',
+          'fr',
+          'es',
+          'pt-br',
+          'ru',
+          'ru-en'
+        ];
+
         //on traite le CT dans $sandbox['ct_current']
         $query = \Drupal::entityQuery('node');
         $query->accessCheck(FALSE);
@@ -209,13 +222,17 @@ function _processUpdateWithSandbox_9001(&$sandbox, &$log_file) {
 
             foreach (CT_FIELDS[$sandbox['ct_current']] as $field) {
               if (in_array($field, $text_fields)) {
-                $values_field = $node->get($field)->getValue();
-                foreach ($values_field as $key => $value) {
-                  if (isset($values_field[$key]["value"])) {
-                    $values_field[$key]["value"] = str_replace('Orange Business Services', 'Orange Business', $values_field[$key]["value"]);
+                foreach ($langcodes_available as $lang) {
+                  if ($node->hasTranslation($lang)) {
+                    $values_field = $node->getTranslation($lang)->get($field)->getValue();
+                    foreach ($values_field as $key => $value) {
+                      if (isset($values_field[$key]["value"])) {
+                        $values_field[$key]["value"] = str_replace('Orange Business Services', 'Orange Business', $values_field[$key]["value"]);
+                      }
+                    }
+                    $node->getTranslation($lang)->set($field, $values_field);
                   }
                 }
-                $node->set($field, $values_field);
               }
               elseif ($field === 'field_axiome_data') {
                 $values_field = $node->get('field_axiome_data')->getValue();
