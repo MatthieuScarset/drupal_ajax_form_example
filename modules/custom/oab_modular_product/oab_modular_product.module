@@ -393,6 +393,10 @@ function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, 
         $form["field_modules"]["widget"]["add_more"]['add_more_button_paragraph_wysiwyg']['#access'] = false;
       }
     }
+
+    if (isset($form['field_visual'])) {
+      $form['field_visual']['#access'] = FALSE;
+    }
   }
 }
 
