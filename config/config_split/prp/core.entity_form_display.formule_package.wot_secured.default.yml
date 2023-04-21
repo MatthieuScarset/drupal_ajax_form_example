@@ -11,7 +11,6 @@ dependencies:
   module:
     - inline_entity_form
     - oab_mp_formule_field
-    - workbench_moderation
 id: formule_package.wot_secured.default
 targetEntityType: formule_package
 bundle: wot_secured
