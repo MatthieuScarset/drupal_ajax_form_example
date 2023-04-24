@@ -6,6 +6,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\oab_modular_product\Services\OabModularProductService;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\taxonomy\Entity\Term;
 
 /**
  * Implements hook_inline_entity_form_entity_form_alter().
@@ -394,11 +395,24 @@ function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, 
       }
     }
 
-    if (isset($form['field_visual'])) {
-      $form['field_visual']['#access'] = FALSE;
-    }
   }
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function oab_modular_product_form_taxonomy_term_product_categories_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  /** @var Term $term */
+  $term = $form_state->getFormObject()->getEntity();
+  $parent_id = $term->parent->target_id;
+
+  if ($parent_id == 0) {
+    $form['group_niveau_2']['#access'] = FALSE;
+  } else {
+    $form['group_niveau_1']['#access'] = FALSE;
+  }
+}
+
 
 /**
  * Implements hook_entity_bundle_field_info_alter().
