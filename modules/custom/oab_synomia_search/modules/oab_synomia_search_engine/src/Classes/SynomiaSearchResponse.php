@@ -228,6 +228,9 @@ class SynomiaSearchResponse {
             case 'simple_page':
               $type_name = 'Article';
               break;
+            case 'content':
+              $type_name = 'Content';
+              break;
             default:
               $type_object = NodeType::load($type_id);
               if (isset($type_object) && !empty($type_object)) {
