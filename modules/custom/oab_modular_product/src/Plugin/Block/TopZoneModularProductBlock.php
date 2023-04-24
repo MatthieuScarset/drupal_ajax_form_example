@@ -47,30 +47,27 @@ class TopZoneModularProductBlock extends BlockBase {
   public function build(): array {
     $block = [];
     $node = $this->getContextValue('node');
-    $sous_product_category = null;
 
     if ($node instanceof Node && $node->bundle() === "modular_product") {
       $block['product'] = $node;
 
-      if ($node->hasField('field_product_category')) {
-        $sous_product_category = Term::load($node->field_product_category->target_id ?? 0);
-        if ($sous_product_category) {
-          $block['product_category'] = $sous_product_category->getName();
-        }
-      }
+      $sous_product_category = Term::load($node->field_product_category->target_id ?? 0);
 
-      if ($sous_product_category->hasField('field_image_illustration')) {
+      if ($sous_product_category) {
+        $block['product_category'] = $sous_product_category->getName();
         $product_top_zone_media = Media::load($sous_product_category->field_image_illustration->target_id ?? 0);
+
         if ($product_top_zone_media) {
           $product_top_zone_image = File::load($product_top_zone_media->field_image->target_id ?? 0);
+
           if ($product_top_zone_image) {
             $block['product_top_zone_image_uri'] = $product_top_zone_image->getFileUri();
             $block['product_top_zone_image_alt'] = $product_top_zone_media->field_image->alt;
           }
         }
       }
-
     }
+
     return $block;
   }
 }

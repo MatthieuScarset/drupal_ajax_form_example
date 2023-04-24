@@ -6,6 +6,7 @@ dependencies:
     - field.field.taxonomy_term.product_categories.field_block_rebond
     - field.field.taxonomy_term.product_categories.field_icon
     - field.field.taxonomy_term.product_categories.field_image
+    - field.field.taxonomy_term.product_categories.field_image_illustration
     - field.field.taxonomy_term.product_categories.field_simple_description
     - taxonomy.vocabulary.product_categories
   module:
@@ -48,6 +49,15 @@ content:
         attribute: lazy
     third_party_settings: {  }
     weight: 2
+    region: content
+  field_image_illustration:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 6
     region: content
   field_simple_description:
     type: basic_string

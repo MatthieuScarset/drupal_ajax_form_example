@@ -3,7 +3,6 @@ langcode: fr
 status: true
 dependencies:
   config:
-    - entity_browser.browser.browse_media_modal
     - field.field.node.modular_product.field_badge
     - field.field.node.modular_product.field_blogs
     - field.field.node.modular_product.field_call_to_action
@@ -25,7 +24,6 @@ dependencies:
     - workflows.workflow.content
   module:
     - content_moderation
-    - entity_browser
     - entity_browser_entity_form
     - field_group
     - inline_entity_form
@@ -43,7 +41,6 @@ third_party_settings:
         - field_modular_product_tarif
         - field_call_to_action_button
         - field_call_to_action_link
-        - field_visual
       label: 'Top Zone'
       region: content
       parent_name: group_onglets
@@ -386,21 +383,6 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-  field_visual:
-    type: entity_browser_entity_reference
-    weight: 35
-    region: content
-    settings:
-      entity_browser: browse_media_modal
-      field_widget_display: rendered_entity
-      field_widget_edit: true
-      field_widget_remove: true
-      field_widget_replace: false
-      open: false
-      field_widget_display_settings:
-        view_mode: modular_product_image_top_zone
-      selection_mode: selection_append
-    third_party_settings: {  }
   langcode:
     type: language_select
     weight: 3
@@ -410,19 +392,19 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 100
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 4
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 5
+    weight: 4
     region: content
     settings:
       display_label: true
@@ -436,13 +418,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 10
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 2
+    weight: 1
     region: content
     settings:
       match_operator: CONTAINS
@@ -451,11 +433,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 3
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
   created: true
+  field_visual: true
   promote: true
   sticky: true
