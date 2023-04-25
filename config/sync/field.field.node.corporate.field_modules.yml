@@ -7,8 +7,11 @@ dependencies:
     - node.type.corporate
     - paragraphs.paragraphs_type.module_blog
     - paragraphs.paragraphs_type.module_cross_link
+    - paragraphs.paragraphs_type.module_hook_text
     - paragraphs.paragraphs_type.module_key_figures
     - paragraphs.paragraphs_type.module_list
+    - paragraphs.paragraphs_type.module_map
+    - paragraphs.paragraphs_type.module_title_and_highlight
     - paragraphs.paragraphs_type.module_video
     - paragraphs.paragraphs_type.paragraph_wysiwyg
   module:
@@ -32,6 +35,9 @@ settings:
       paragraph_wysiwyg: paragraph_wysiwyg
       module_key_figures: module_key_figures
       module_list: module_list
+      module_hook_text: module_hook_text
+      module_map: module_map
+      module_title_and_highlight: module_title_and_highlight
       module_video: module_video
     negate: 0
     target_bundles_drag_drop:
@@ -143,6 +149,9 @@ settings:
       module_header_default:
         weight: 94
         enabled: false
+      module_hook_text:
+        weight: 98
+        enabled: true
       module_key_figures:
         weight: 95
         enabled: true
@@ -151,6 +160,9 @@ settings:
         enabled: false
       module_list:
         weight: 97
+        enabled: true
+      module_map:
+        weight: 102
         enabled: true
       module_partner:
         weight: 84
@@ -178,7 +190,7 @@ settings:
         enabled: false
       module_title_and_highlight:
         weight: 106
-        enabled: false
+        enabled: true
       module_video:
         weight: 107
         enabled: true
@@ -199,6 +211,9 @@ settings:
         enabled: false
       subhome_presse_carrousel:
         weight: 97
+        enabled: false
+      title_and_image:
+        weight: 119
         enabled: false
       title_and_link:
         weight: 98

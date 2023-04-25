@@ -54,7 +54,7 @@ function theme_one_i_preprocess_region(&$variables) {
   $variables['site_name'] = $config->get('name');
 
   if ($variables['region'] === 'top_zone') {
-    if ($node->bundle() === 'corporate') {
+    if (isset($node) && $node->bundle() === 'corporate') {
       $variables['attributes']['class'][] = 'bg-transparent';
     } else {
       $variables['attributes']['class'][] = 'bg-gray2';
