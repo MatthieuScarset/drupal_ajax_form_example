@@ -18,7 +18,6 @@
   set classes = [
     'region',
     'region-' ~ region|clean_class,
-    'container-fluid',
     'site-width',
   ]
 %}
@@ -28,6 +27,8 @@
   {{ drupal_block('page_menu_modular_product_block') }}
 
   <div{{ attributes.addClass(classes) }}>
-    {{ elements|without('pagemenuofviewscategory', 'page_menu_modular_product_block') }}
+    <div class="container-fluid">
+      {{ elements|without('pagemenuofviewscategory', 'page_menu_modular_product_block') }}
+    </div>
   </div>
 {% endif %}
