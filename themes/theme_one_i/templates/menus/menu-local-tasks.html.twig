@@ -16,14 +16,16 @@
  */
 #}
 
-<div class="container-fluid site-width">
-  {% if primary %}
-    <h2 class="d-none">{{ 'Primary tabs'|t }}</h2>
-    <ul class="tabs--primary nav nav-tabs"> {{ primary }} </ul>
-  {% endif %}
+<div class="site-width">
+  <div class="container-fluid">
+    {% if primary %}
+      <h2 class="d-none">{{ 'Primary tabs'|t }}</h2>
+      <ul class="tabs--primary nav nav-tabs"> {{ primary }} </ul>
+    {% endif %}
 
-  {% if secondary %}
-    <h2 class="d-none">{{ 'Secondary tabs'|t }}</h2>
-    <ul class="tabs--secondary nav nav-tabs">{{ secondary }}</ul>
-  {% endif %}
+    {% if secondary %}
+      <h2 class="d-none">{{ 'Secondary tabs'|t }}</h2>
+      <ul class="tabs--secondary nav nav-tabs">{{ secondary }}</ul>
+    {% endif %}
+  </div>
 </div>

@@ -49,12 +49,14 @@
 {% block paragraph %}
   {% block content %}
     <div id="detail-gamme" {{ attributes.addClass("bg-gray2 pt-2 pt-md-5") }}>
-      <div class="container-fluid site-width">
-        <div class="small text-gray3 font-weight-bold pt-0">{{ module_title|t }}</div>
-        <h2 class="h1 col-12 col-md-7 mb-2 p-0">{{ content.field_title }}</h2>
-        <div class="col-12 col-md-7 lead font-weight-bold mb-2 mb-md-4 p-0 pb-0 pb-md-1">{{ content.field_accroche }}</div>
-        <div class="row">
-          {{ content.field_gamme }}
+      <div class="site-width">
+        <div class="container-fluid">
+          <div class="small text-gray3 font-weight-bold pt-0">{{ module_title|t }}</div>
+          <h2 class="h1 col-12 col-md-7 mb-2 p-0">{{ content.field_title }}</h2>
+          <div class="col-12 col-md-7 lead font-weight-bold mb-2 mb-md-4 p-0 pb-0 pb-md-1">{{ content.field_accroche }}</div>
+          <div class="row">
+            {{ content.field_gamme }}
+          </div>
         </div>
       </div>
     </div>

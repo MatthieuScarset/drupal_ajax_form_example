@@ -1,15 +1,17 @@
 <div {{ attributes.addClass('block', 'page-menu-modular-product', 'sticky-top', 'mt-lg-2') }}>
   {% if content.children_items is not empty %}
-    <nav class="ob1-menu-page sub_local_menu col bg-white">
-      <ul class="nav o-nav-light site-width h-100">
-        {% for child in content.children_items %}
-          <li class="nav-item">
-            <a class="nav-link h-100"
-               onmousedown="utag_link(utag_data.titre_page,'navigation','localnav','{{ child.label }}')"
-               href="#{{ child.id }}" >{{ child.label }}</a>
-          </li>
-        {% endfor %}
-      </ul>
+    <nav class="ob1-menu-page sub_local_menu bg-white">
+      <div class="site-width">
+        <ul class="nav o-nav-light container-fluid h-100 px-1">
+          {% for child in content.children_items %}
+            <li class="nav-item">
+              <a class="nav-link h-100"
+                 onmousedown="utag_link(utag_data.titre_page,'navigation','localnav','{{ child.label }}')"
+                 href="#{{ child.id }}" >{{ child.label }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
     </nav>
   {% endif %}
 

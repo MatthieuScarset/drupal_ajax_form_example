@@ -27,24 +27,25 @@
   {% import _self as menus %}
   {% if items %}
     <div class="bg bg-gray4 text-dark py-1">
-      <div class="container-fluid site-width">
-        <div class="row text-align-center">
-          {% for item in items %}
+      <div class="site-width">
+        <div class="container-fluid">
+          <div class="row text-align-center">
+            {% for item in items %}
 
-            {% set link_target = item.url.options.target ? '_blank' : '_self'  %}
-            {% set link_icon = item.url.options.icon %}
+              {% set link_target = item.url.options.target ? '_blank' : '_self'  %}
+              {% set link_icon = item.url.options.icon %}
 
-            {% if items|length == 4 %}
-              {% set class = 'col-3' %}
-            {% else %}
-              {% set class = 'col-4' %} {# if(items==3 and != 4 ) / placé en 3 blocs version desktop #}
-            {% endif %}
+              {% if items|length == 4 %}
+                {% set class = 'col-3' %}
+              {% else %}
+                {% set class = 'col-4' %} {# if(items==3 and != 4 ) / placé en 3 blocs version desktop #}
+              {% endif %}
 
-            {% if items|length == 3 and loop.index == 1 %}
-              {% set class = class ~" col-xs-12" %}
-            {% else %}
-              {% set class = class ~" col-xs-6" %}
-            {% endif %}
+              {% if items|length == 3 and loop.index == 1 %}
+                {% set class = class ~" col-xs-12" %}
+              {% else %}
+                {% set class = class ~" col-xs-6" %}
+              {% endif %}
 
 
               {% if (items|length == 3) %}
@@ -88,7 +89,8 @@
                   {{ link(link_text, item.url, {'target': link_target, 'onmousedown': 'utag_link(utag_data.titre_page, \'Footer\', \'Images thèmes\', \'' ~ item.title ~ '\');'}) }}
                 </div>
               {% endif %}
-          {% endfor %}
+            {% endfor %}
+          </div>
         </div>
       </div>
     </div>

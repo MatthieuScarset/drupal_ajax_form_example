@@ -23,62 +23,62 @@
 
   <div{{ attributes.addClass(classes) }}>
     {{ elements.theme_one_i_onecookiecomplianceblock }}
-
+    <div class="site-width">
+      <div class="container-fluid">
       {# Begin Top Navbar Menu #}
-      <nav class="navbar navbar-dark bg-dark navbar-expand-md supra">
-        <div class="container-fluid site-width">
-
-          {% if elements.theme_one_i_topnavbarfr %}
-            {{ elements.theme_one_i_topnavbarfr }}
-          {% endif %}
-          {% if elements.theme_one_i_topnavbaren %}
-            {{ elements.theme_one_i_topnavbaren }}
-          {% endif %}
+      <nav class="navbar navbar-dark bg-dark navbar-expand-md supra justify-content-between">
 
 
-          {# TODO : insert here a divider to separate sections #}
-          {# Render the top account items on the right #}
-          {% if elements.theme_one_i_toprightnavbarfr %}
-            {{ elements.theme_one_i_toprightnavbarfr }}
-          {% endif %}
-          <div class="top_right_links">
-            {% if elements.theme_one_i_toprightnavbaren %}
-              {{ elements.theme_one_i_toprightnavbaren }}
+            {% if elements.theme_one_i_topnavbarfr %}
+              {{ elements.theme_one_i_topnavbarfr }}
             {% endif %}
-            {% if elements.siuhellouserblockonei %}
-              {{ elements.siuhellouserblockonei }}
+            {% if elements.theme_one_i_topnavbaren %}
+              {{ elements.theme_one_i_topnavbaren }}
             {% endif %}
-          </div>
-        </div>
+
+
+            {# TODO : insert here a divider to separate sections #}
+            {# Render the top account items on the right #}
+            {% if elements.theme_one_i_toprightnavbarfr %}
+              {{ elements.theme_one_i_toprightnavbarfr }}
+            {% endif %}
+            <div class="top_right_links">
+              {% if elements.theme_one_i_toprightnavbaren %}
+                {{ elements.theme_one_i_toprightnavbaren }}
+              {% endif %}
+              {% if elements.siuhellouserblockonei %}
+                {{ elements.siuhellouserblockonei }}
+              {% endif %}
+            </div>
       </nav>
       {# End Top navbar #}
 
       {# Begin Main Mega Menu#}
       <nav id="main_nav" class="main_nav navbar navbar-expand-lg navbar-dark bg-dark" role="navigation">
 
-        <div class="container-fluid site-width">
-          <div class="navbar-brand">
-            {% if elements.theme_one_i_branding %}
-              {{ elements.theme_one_i_branding }}
-            {% endif %}
-          </div>
+            <div class="navbar-brand">
+              {% if elements.theme_one_i_branding %}
+                {{ elements.theme_one_i_branding }}
+              {% endif %}
+            </div>
 
-          <div class="mega-menu-desktop mega-menu navbar-collapse collapse">
-            {% if elements.theme_one_i_mainnavigationfr %}
-              {{ elements.theme_one_i_mainnavigationfr }}
-            {% endif %}
-            {% if elements.theme_one_i_mainnavigationen %}
-              {{ elements.theme_one_i_mainnavigationen }}
-            {% endif %}
-          </div>
+            <div class="mega-menu-desktop mega-menu navbar-collapse collapse">
+              {% if elements.theme_one_i_mainnavigationfr %}
+                {{ elements.theme_one_i_mainnavigationfr }}
+              {% endif %}
+              {% if elements.theme_one_i_mainnavigationen %}
+                {{ elements.theme_one_i_mainnavigationen }}
+              {% endif %}
+            </div>
 
 
-          <div class="nav navbar-nav navbar-right ">
-            {{ elements.theme_one_i_righticonblock }}
-          </div>
-        </div>
+            <div class="nav navbar-nav navbar-right ">
+              {{ elements.theme_one_i_righticonblock }}
+            </div>
       </nav>
       {# End Main Mega Menu - Desktop #}
+      </div>
     </div>
+  </div>
 
 {% endif %}

@@ -54,10 +54,12 @@
 
   {% block content %}
    {# affiche le contenu saisi dans le back office: #}
-    <div class="container-fluid site-width">
+    <div class="site-width">
+      <div class="container-fluid">
         <div class="text-right">
               {{ content }}
          </div>
+      </div>
     </div>
   {% endblock %}
 </section>

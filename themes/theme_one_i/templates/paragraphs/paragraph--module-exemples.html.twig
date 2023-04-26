@@ -49,12 +49,12 @@
 {% block paragraph %}
   {% block content %}
     <div id="exemple" {{ attributes.addClass("bg-dark py-2 py-md-5 text-white") }}>
-      <div class="container-fluid site-width">
-        <div class="small text-gray4 font-weight-bold pt-0">{{ module_title|t }}</div>
-        <h2 class="h1 col-12 col-md-7 mb-2 mb-md-4 p-0">{{ content.field_title }}</h2>
-
-        {{ content.field_items_3_4 }}
-
+      <div class="site-width">
+        <div class="container-fluid">
+          <div class="small text-gray4 font-weight-bold pt-0">{{ module_title|t }}</div>
+          <h2 class="h1 col-12 col-md-7 mb-2 mb-md-4 p-0">{{ content.field_title }}</h2>
+          {{ content.field_items_3_4 }}
+        </div>
       </div>
     </div>
   {% endblock %}

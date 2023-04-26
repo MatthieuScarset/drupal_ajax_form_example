@@ -1,20 +1,26 @@
 {% block paragraph %}
   <div id="temoignages" {{ attributes.addClass("py-3", "py-md-5") }}>
     {% block content %}
-      <div class="row container-fluid site-width pl-0">
-        <span class="col-12 small font-weight-bold text-gray3 ">{{ module_title|t }}</span>
+      <div class="site-width">
+        <div class="container-fluid">
+          <span class="small font-weight-bold text-gray3 ">{{ module_title|t }}</span>
+        </div>
       </div>
-      <div class="col-12 custom-slider">
+      <div class="custom-slider">
         <div class="row">
-          <div class="col-12 container-fluid site-width pb-2">
-            <div class="row justify-content-between">
-              <h2 class="h1 col-12 col-md-7 mb-md-3 pb-0">{{ content.field_title }}</h2>
-              {% if content.field_testimonial['#items']|length >= 2 %}
-                <div class="col-md-2 d-none d-md-inline-flex justify-content-end slider-controller">
-                  <button class="btn btn-secondary" type="button" data-direction="left" ><span class="icon icon-arrow-previous" aria-hidden="true"></span></button>
-                  <button class="btn btn-secondary" type="button" data-direction="right"><span class="icon icon-arrow-next" aria-hidden="true"></span></button>
+          <div class="col-12 pb-2">
+            <div class="site-width">
+              <div class="container-fluid">
+                <div class="row justify-content-between">
+                  <h2 class="h1 col-12 col-md-7 mb-md-3 pb-0">{{ content.field_title }}</h2>
+                  {% if content.field_testimonial['#items']|length >= 2 %}
+                    <div class="col-md-2 d-none d-md-inline-flex justify-content-end slider-controller">
+                      <button class="btn btn-secondary" type="button" data-direction="left" ><span class="icon icon-arrow-previous" aria-hidden="true"></span></button>
+                      <button class="btn btn-secondary" type="button" data-direction="right"><span class="icon icon-arrow-next" aria-hidden="true"></span></button>
+                    </div>
+                  {% endif %}
                 </div>
-              {% endif %}
+              </div>
             </div>
           </div>
           <div class="col-12">

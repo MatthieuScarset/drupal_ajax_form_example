@@ -6,51 +6,56 @@
   'field--label-' ~ label_display,
 ]
 %}
-
-<div class="row">
-  {% if 1 == items|length %}
-    {% if items.0.content["#paragraph"].field_video|length == 1 %}
-      <div{{ attributes.addClass(classes,"col-12", "bg-gray2","container-fluid", "site-width","pr-1","pr-md-0", "pl-md-2") }}>
-    {% else %}
-      <div{{ attributes.addClass(classes, "col-12", "bg-gray2", "pl-0") }}>
-    {% endif %}
-        <div class="row container-fluid site-width mt-4 mb-2 my-md-4 px-0 pl-xxl-3 position-relative">
-          {% if items.0.content["#paragraph"].field_video|length != 1 %}
-            <img class="testimonial-left-img" src="/themes/theme_one_i/assets/image/Illustrations-temoignagnes.png" alt="illustration temoignage left">
-            <div class="col-12 col-md-9 offset-md-3 mt-4 mt-md-0">
-          {% else %}
-            <img class="d-block d-md-none testimonial-left-img" src="/themes/theme_one_i/assets/image/Illustrations-temoignagnes.png" alt="illustration temoignage left">
-            <div class="col-12 pl-0 pr-md-4 mt">
-          {% endif %}
-              <div class="row">
-                {{ items.0.content }}
-              </div>
-          </div>
-          {% if items.0.content["#paragraph"].field_video|length == 1 %}
-            <img class="d-none d-md-block testimonial-right-img" src="/themes/theme_one_i/assets/image/Illustrations-temoignages-2.png" alt="illustration temoignage right">
-          {% endif %}
-        </div>
-      </div>
+{% if 1 == items|length %}
+  {% if items.0.content["#paragraph"].field_video|length == 1 %}
+    <div{{ attributes.addClass(classes,"bg-gray2", "site-width") }}>
   {% else %}
-    <div {{ attributes.addClass(classes,"col-12", "bg-gray2") }}>
-      <div class="row container-fluid site-width position-relative mt-4 mb-md-4 px-0">
-        <img class="testimonial-left-img" src="/themes/theme_one_i/assets/image/Illustrations-temoignagnes.png" alt="illustration temoignage left">
-        <div class="col-12 col-md-9 offset-md-3 mt-4 mt-md-0 pr-0">
-          <div class="row overflow-auto testimonial-item-container slider-container">
-            {% for item in items %}
-              {% if loop.first %}
-                <div {{ item.attributes.addClass('field--item', 'col-10', 'col-md-6', 'px-0') }}>
-                  {{ item.content }}
+    <div{{ attributes.addClass(classes,"bg-gray2") }}>
+      <div class="site-width">
+  {% endif %}
+        <div class="container-fluid pt-4 pb-2 py-md-4 position-relative">
+          <div class="row">
+            {% if items.0.content["#paragraph"].field_video|length != 1 %}
+              <img class="testimonial-left-img" src="/themes/theme_one_i/assets/image/Illustrations-temoignagnes.png" alt="illustration temoignage left">
+              <div class="col-12 col-md-9 offset-md-3 mt-4 mt-md-0">
+            {% else %}
+              <img class="d-block d-md-none testimonial-left-img" src="/themes/theme_one_i/assets/image/Illustrations-temoignagnes.png" alt="illustration temoignage left">
+              <div class="col-12 pl-md-0 pr-md-4">
+            {% endif %}
+                <div class="row">
+                  {{ items.0.content }}
                 </div>
-              {% else %}
-                <div {{ item.attributes.addClass('field--item','col-10', 'col-md-6', 'offset-1', 'px-0') }}>
-                  {{ item.content }}
-                </div>
-              {% endif %}
-            {% endfor %}
+              </div>
+            {% if items.0.content["#paragraph"].field_video|length == 1 %}
+              <img class="d-none d-md-block testimonial-right-img" src="/themes/theme_one_i/assets/image/Illustrations-temoignages-2.png" alt="illustration temoignage right">
+          </div>
+            {% endif %}
+          </div>
+      </div>
+    </div>
+{% else %}
+  <div {{ attributes.addClass(classes, "bg-gray2") }}>
+    <div class="site-width">
+      <div class="container-fluid">
+        <div class="row position-relative pt-4 pb-2 py-md-4">
+          <img class="testimonial-left-img" src="/themes/theme_one_i/assets/image/Illustrations-temoignagnes.png" alt="illustration temoignage left">
+          <div class="col-12 col-md-9 offset-md-3 mt-4 mt-md-0 pr-0">
+            <div class="row overflow-auto testimonial-item-container slider-container">
+              {% for item in items %}
+                {% if loop.first %}
+                  <div {{ item.attributes.addClass('field--item', 'col-10', 'col-md-6') }}>
+                    {{ item.content }}
+                  </div>
+                {% else %}
+                  <div {{ item.attributes.addClass('field--item','col-10', 'col-md-6', 'offset-1') }}>
+                    {{ item.content }}
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
           </div>
         </div>
       </div>
     </div>
-  {% endif %}
-</div>
+  </div>
+{% endif %}

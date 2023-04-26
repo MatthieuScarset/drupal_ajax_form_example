@@ -1,35 +1,37 @@
 {% block paragraph %}
   <div {{ attributes.addClass("py-md-5", "py-3", "bg-gray2") }}>
-    <div class="container-fluid site-width">
-      {% block content %}
-      <div class="col-12 pr-0 pr-md-1 custom-slider">
-        <div class="row justify-content-between">
-          <h2 class="col-12 col-md-7 pl-0 mb-1 mb-md-4">{{ content.field_title }}</h2>
-          {% if content.field_partners_logo['#items']|length > 3 %}
-            <div class="col-md-2 d-none d-md-inline-flex justify-content-end slider-controller">
-              <button class="btn btn-secondary" type="button" data-direction="left"><span class="icon icon-arrow-previous"
-                                                                                          aria-hidden="true"></span>
-              </button>
-              <button class="btn btn-secondary" type="button" data-direction="right"><span class="icon icon-arrow-next"
-                                                                                           aria-hidden="true"></span>
-              </button>
-            </div>
-          {% endif %}
-          <div class="row w-100">
-            {% if content.field_highlight.0 is not null %}
-            <div class="col-12 col-md-4 lead font-weight-bold mb-3 mb-md-0">
-              {{ content.field_highlight }}
-            </div>
-            <div class="col-12 col-md-8 pr-0 w-100">
+    <div class="site-width">
+      <div class="container-fluid">
+        {% block content %}
+        <div class="col-12 pr-0 pr-md-1 custom-slider">
+          <div class="row justify-content-between">
+            <h2 class="col-12 col-md-7 pl-0 mb-1 mb-md-4">{{ content.field_title }}</h2>
+            {% if content.field_partners_logo['#items']|length > 3 %}
+              <div class="col-md-2 d-none d-md-inline-flex justify-content-end slider-controller">
+                <button class="btn btn-secondary" type="button" data-direction="left"><span class="icon icon-arrow-previous"
+                                                                                            aria-hidden="true"></span>
+                </button>
+                <button class="btn btn-secondary" type="button" data-direction="right"><span class="icon icon-arrow-next"
+                                                                                             aria-hidden="true"></span>
+                </button>
+              </div>
+            {% endif %}
+            <div class="row w-100">
+              {% if content.field_highlight.0 is not null %}
+                <div class="col-12 col-md-4 lead font-weight-bold mb-3 mb-md-0">
+                  {{ content.field_highlight }}
+                </div>
+                <div class="col-12 col-md-8 pr-0 w-100">
               {% else %}
-              <div class="col-12 pr-0">
-                {% endif %}
-                {{ content.field_partners_logo }}
+                <div class="col-12 pr-0">
+              {% endif %}
+                  {{ content.field_partners_logo }}
+                </div>
               </div>
             </div>
           </div>
-        </div>
         {% endblock %}
       </div>
     </div>
-  {% endblock %}
+  </div>
+{% endblock %}

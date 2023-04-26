@@ -27,8 +27,9 @@
   {% import _self as menus %}
   {% if items %}
     <div class="bg bg-gray4 text-dark py-1">
-      <div class="container-fluid site-width">
-        <div class="row text-align-center">
+      <div class="site-width">
+        <div class="container-fluid">
+          <div class="row text-align-center">
           {% for item in items %}
 
             {% set link_target = item.url.options.target ? '_blank' : '_self'  %}
@@ -81,6 +82,7 @@
               {% endif %}
 
           {% endfor %}
+        </div>
         </div>
       </div>
     </div>
