@@ -1,5 +1,5 @@
 
-class OabExempleMobileSlider {
+class ModuleExempleMobileSlider {
   constructor(root, parent) {
 
     this.$root = root;
@@ -66,4 +66,4 @@ class OabExempleMobileSlider {
 }
 
 
-export default OabExempleMobileSlider;
+export default ModuleExempleMobileSlider;
