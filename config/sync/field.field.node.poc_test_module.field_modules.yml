@@ -165,7 +165,7 @@ settings:
         weight: 88
         enabled: true
       module_key_figures_items:
-        weight: 89
+        weight: 102
         enabled: false
       module_list:
         weight: 85

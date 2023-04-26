@@ -25,4 +25,5 @@ visibility:
     context_mapping:
       node: '@node.node_route_context:node'
     bundles:
+      corporate: corporate
       modular_product: modular_product

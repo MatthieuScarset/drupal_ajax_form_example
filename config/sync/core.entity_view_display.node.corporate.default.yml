@@ -1,0 +1,50 @@
+uuid: 23fde35c-62ca-4df1-849d-c7be146e7e7b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.corporate.field_dark_mode
+    - field.field.node.corporate.field_enable_wysiwyg_paragraph
+    - field.field.node.corporate.field_header
+    - field.field.node.corporate.field_meta_description
+    - field.field.node.corporate.field_meta_title
+    - field.field.node.corporate.field_modules
+    - node.type.corporate
+  module:
+    - entity_reference_revisions
+    - user
+id: node.corporate.default
+targetEntityType: node
+bundle: corporate
+mode: default
+content:
+  field_header:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_modules:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  content_moderation_control: true
+  field_dark_mode: true
+  field_enable_wysiwyg_paragraph: true
+  field_meta_description: true
+  field_meta_title: true
+  langcode: true

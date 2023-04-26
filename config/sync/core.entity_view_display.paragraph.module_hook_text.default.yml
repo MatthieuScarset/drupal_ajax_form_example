@@ -1,0 +1,29 @@
+uuid: 1e4dc6b3-8741-4e31-949b-f5dd9174c73b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.module_hook_text.field_highlight
+    - field.field.paragraph.module_hook_text.field_title
+    - paragraphs.paragraphs_type.module_hook_text
+id: paragraph.module_hook_text.default
+targetEntityType: paragraph
+bundle: module_hook_text
+mode: default
+content:
+  field_highlight:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

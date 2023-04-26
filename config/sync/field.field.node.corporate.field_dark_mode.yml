@@ -1,0 +1,23 @@
+uuid: 50abe890-7e3c-4ee4-8072-9610769c98c4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_dark_mode
+    - node.type.corporate
+id: node.corporate.field_dark_mode
+field_name: field_dark_mode
+entity_type: node
+bundle: corporate
+label: 'Dark Mode'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
