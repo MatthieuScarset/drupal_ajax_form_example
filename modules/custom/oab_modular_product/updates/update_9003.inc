@@ -55,7 +55,7 @@ if (file_exists($file_name_complete) && filesize($file_name_complete) > 0) {
   }
 
   fclose($fp);
-  unlink($file_name_complete);
+  //unlink($file_name_complete);
 }
 
 
