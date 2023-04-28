@@ -17,3 +17,10 @@ function oab_modular_product_update_9001() {
 function oab_modular_product_update_9002() {
   include_once("updates/update_9002.inc");
 }
+
+/**
+ * Update field_image_illustration of taxonomy product categories
+ */
+function oab_modular_product_update_9003() {
+  include_once("updates/update_9003.inc");
+}
