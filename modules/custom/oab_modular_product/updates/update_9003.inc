@@ -12,40 +12,73 @@ if (file_exists($file_name_complete) && filesize($file_name_complete) > 0) {
   $header = fgetcsv($fp); // skip première ligne
 
   while ($row = fgetcsv($fp)) {
-    $term_name = $row[0];
-    $mid = $row[1];
+    $category_fr = $row[1];
+    $sub_category_fr = $row[2];
+    $category_en = $row[3];
+    $sub_category_en = $row[4];
+    $mid = $row[5];
 
-    $separator = "-";
-    $tab = explode($separator, $term_name);
-
-    $category_name = $tab[0];
-    $parent_terms = $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
+    //update for frensh sub category
+    $parent_terms_fr = $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
       [
         'vid' => 'product_categories',
-        'name' => $category_name
+        'name' => $category_fr
       ]
     );
-    /** @var Term $parent_term */
-    $parent_term = reset($parent_terms);
+    /** @var Term $parent_term_fr */
+    $parent_term_fr = reset($parent_terms_fr);
 
-    if ($parent_term) {
-      $parent_term_id = $parent_term->id();
-      $sub_category_name = $tab[1];
-      $sub_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
+    if ($parent_term_fr) {
+      $parent_term_id = $parent_term_fr->id();
+      $sub_terms_fr = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
         [
           'vid' => 'product_categories',
-          'name' => $sub_category_name
+          'name' => $sub_category_fr
         ]
       );
 
-      if (count($sub_terms) > 1) {
-        foreach ($sub_terms as $element) {
+      if (count($sub_terms_fr) > 1) {
+        foreach ($sub_terms_fr as $element) {
           if ($element->parent->target_id === $parent_term_id) {
             break;
           }
         }
       } else {
-        $element = reset($sub_terms);
+        $element = reset($sub_terms_fr);
+      };
+      if ($element) {
+        $element->set('field_image_illustration', Media::load($mid));
+        $element->save();
+      }
+    }
+
+    //update for english sub category
+    $parent_terms_en = $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
+      [
+        'vid' => 'product_categories',
+        'name' => $category_en
+      ]
+    );
+    /** @var Term $parent_term_en */
+    $parent_term_en = reset($parent_terms_en);
+
+    if ($parent_term_en) {
+      $parent_term_id = $parent_term_en->id();
+      $sub_terms_en = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
+        [
+          'vid' => 'product_categories',
+          'name' => $sub_category_en
+        ]
+      );
+
+      if (count($sub_terms_en) > 1) {
+        foreach ($sub_terms_en as $element) {
+          if ($element->parent->target_id === $parent_term_id) {
+            break;
+          }
+        }
+      } else {
+        $element = reset($sub_terms_en);
       };
       if ($element) {
         $element->set('field_image_illustration', Media::load($mid));
