@@ -49,44 +49,50 @@
 {% block paragraph %}
   {% block content %}
     <div id="detail-offre" {{ attributes.addClass("bg-gray2 py-2 py-md-5") }} data-paragraph="{{ paragraph.bundle }}" data-track-zone="detail offre">
-      <div class="container-fluid site-width">
-        <div class="small text-gray3 font-weight-bold pt-0">{{ module_title|t }}</div>
-        <h2 class="h1 col-12 col-md-7 mb-2 p-0">{{ content.field_title }}</h2>
+      <div class="site-width">
+        <div class="container-fluid">
+          <div class="small text-gray3 font-weight-bold pt-0">{{ module_title|t }}</div>
+          <h2 class="h1 col-12 col-md-7 mb-2 p-0">{{ content.field_title }}</h2>
+        </div>
 
         {% if 1 == content.field_items['#items']|length %}
-          <div class="items-module-detail-offre w-100 px-0">
-            {{ content.field_items }}
+          <div class="container-fluid">
+            <div class="items-module-detail-offre w-100 px-0">
+              {{ content.field_items }}
+            </div>
           </div>
-        {% else %}
+          {% else %}
 
-          <div class="row custom-slider mx-0" >
-            <div class="col-12 w-100">
-              <div class="row justify-content-between mb-2 mb-md-4 px-0">
-                <div class="col-12 col-md-7 lead font-weight-bold p-0">{{ content.field_accroche }}</div>
+            <div class="custom-slider" >
+              <div class="container-fluid">
+                <div class="row justify-content-between mb-2 mb-md-4 px-0">
+                    <div class="col-12 col-md-7 lead font-weight-bold p-0">{{ content.field_accroche }}</div>
 
-                {% if content.field_items['#items']|length > 3 %}
-                  <div class="col-md-2 d-none d-md-inline-flex justify-content-end align-items-end slider-controller pr-0">
-                    <button class="btn btn-secondary" type="button" data-direction="left" ><span class="icon icon-arrow-previous" aria-hidden="true"></span></button>
-                    <button class="btn btn-secondary" type="button" data-direction="right"><span class="icon icon-arrow-next" aria-hidden="true"></span></button>
+                    {% if content.field_items['#items']|length > 3 %}
+                      <div class="col-md-2 d-none d-md-inline-flex justify-content-end align-items-end slider-controller pr-0">
+                        <button class="btn btn-secondary" type="button" data-direction="left" ><span class="icon icon-arrow-previous" aria-hidden="true"></span></button>
+                        <button class="btn btn-secondary" type="button" data-direction="right"><span class="icon icon-arrow-next" aria-hidden="true"></span></button>
+                      </div>
+                    {% endif %}
                   </div>
-                {% endif %}
+              </div>
+
+              <div class="container-fluid mx-0 ml-xxl-3">
+                <div class="col-12 items-module-detail-offre px-0">
+                  {{ content.field_items }}
+                </div>
               </div>
             </div>
 
-              <div class="col-12 items-module-detail-offre px-0">
-                {{ content.field_items }}
+            <div class="row mt-2 mt-md-4">
+              <div class="col-12 col-md-4 mb-1 mb-md-0">
+                <h3 class="h4 p-0 mb-1">{{ content.field_tab_title }}</h3>
+                <span class="lead">{{ content.field_highlight }}</span>
               </div>
-          </div>
-
-          <div class="row mt-2 mt-md-4">
-            <div class="col-12 col-md-4 mb-1 mb-md-0">
-              <h3 class="h4 p-0 mb-1">{{ content.field_tab_title }}</h3>
-              <span class="lead">{{ content.field_highlight }}</span>
+              <div class="col-md-8">{{ content.field_key_points }}</div>
             </div>
-            <div class="col-md-8">{{ content.field_key_points }}</div>
-          </div>
 
-        {% endif %}
+          {% endif %}
       </div>
     </div>
   {% endblock %}

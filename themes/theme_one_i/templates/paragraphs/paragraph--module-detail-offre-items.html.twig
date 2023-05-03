@@ -86,6 +86,7 @@
           </div>
 
         </div>
+      {% if content.field_offres_inclus['#items']|length > 2 %}
         <button type="button"
                 class="o-link-arrow see-more down font-weight-bold text-center pb-2 w-100"
                 onmousedown="utag_link(utag_data.titre_page,'detail offre' ,'{{ paragraph.field_title.getValue[0]['value'] }}','voir tout')">
@@ -95,6 +96,7 @@
           <span class="d-md-none text-voir-detail">{{ "Show details"|t }}</span>
           <span class="text-masquer-detail d-none">{{ "Hide details"|t }}</span>
         </button>
+      {% endif %}
       </div>
 
     {%endif%}
