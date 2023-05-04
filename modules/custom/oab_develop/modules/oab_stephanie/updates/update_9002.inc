@@ -9,7 +9,7 @@ const CONTENT_TYPES = [
 
 function _processUpdateWithSandbox_9002(&$sandbox, &$log_file) {
 
-  $logger = \Drupal::logger(UPDATE_LOGGER);
+  $logger = \Drupal::logger("oab_updates");
   $database = \Drupal::database();
 
   if (empty($sandbox['ct_todo'])
@@ -188,7 +188,7 @@ function _processUpdateWithSandbox_9002(&$sandbox, &$log_file) {
 
 
 function _reset_changed_date_to_initial_medias($sandbox) {
-  $logger = \Drupal::logger(UPDATE_LOGGER);
+  $logger = \Drupal::logger("oab_updates");
 
   if (is_array($sandbox['medias'])) {
     $logger->notice("Remise en place du changed des %nb_medias medias mis à jour", ['%nb_medias' => count($sandbox['medias'])]);
