@@ -1,17 +1,19 @@
 {% block paragraph %}
-  <div {{ attributes.addClass("my-md-5", "my-3", "container-fluid", "site-width") }}>
-    {% block content %}
-      <div class="col-12 pr-0 pr-md-1">
-        <div class="row">
-          <h2 class="col-12 col-md-7 pl-0">{{ content.field_title }}</h2>
-          <div class="col-12 col-md-7 lead font-weight-bold px-0 pb-0 mb-1 mb-md-2">
-            {{ content.field_highlight }}
-          </div>
-          <div class="col-12 px-0">
-            {{ content.field_item }}
+  <div {{ attributes.addClass("my-md-5", "my-3", "site-width") }}>
+    <div class="container-fluid">
+      {% block content %}
+        <div class="col-12 pr-0 pr-md-1">
+          <div class="row">
+            <h2 class="col-12 col-md-7 pl-0">{{ content.field_title }}</h2>
+            <div class="col-12 col-md-7 lead font-weight-bold px-0 pb-0 mb-1 mb-md-2">
+              {{ content.field_highlight }}
+            </div>
+            <div class="col-12 px-0">
+              {{ content.field_item }}
+            </div>
           </div>
         </div>
-      </div>
-    {% endblock %}
+      {% endblock %}
+    </div>
   </div>
 {% endblock %}

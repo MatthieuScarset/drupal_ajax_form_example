@@ -50,7 +50,8 @@
 {% block paragraph %}
   {% block content %}
     <div id="services" {{ attributes.addClass(classes) }}>
-      <div class="container-fluid site-width">
+      <div class="site-width">
+        <div class="container-fluid">
         <div class="row justify-content-between">
           <div class="sticky-top h-100 col-12 col-md-4 pt-md-3">
             <div class="small text-gray3 font-weight-bold pt-0">{{ module_title|t }}</div>
@@ -61,6 +62,7 @@
            <hr class="separator mt-2 separator--gray4">
            {{ content.field_items_services }}
          </div>
+        </div>
         </div>
       </div>
     </div>

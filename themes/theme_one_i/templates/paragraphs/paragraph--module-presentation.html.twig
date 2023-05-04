@@ -49,10 +49,11 @@
 %}
 {% block paragraph %}
   <div id="presentation" {{ attributes.addClass(classes) }}>
-    <div class="container-fluid site-width">
-      <div class="small font-weight-bold text-gray3">{{ module_title|t }}</div>
-      <div class="row">
-        <div class="col-12 pr-0 pr-md-1">
+    <div class="site-width">
+      <div class="container-fluid">
+        <div class="small font-weight-bold text-gray3">{{ module_title|t }}</div>
+        <div class="row">
+          <div class="col-12 pr-0 pr-md-1">
             <div class="row w-100 justify-content-between">
               {% if paragraph.field_media_type.value == 'video' or paragraph.field_media_type.value == 'image' %}
                 <div class="col-12 col-lg-6  d-flex justify-content-center col-img-video order-lg-2 ">
@@ -66,13 +67,12 @@
                 </div>
                 <div class="col-12 col-lg-5 order-lg-1">
               {% else %}
-                  <div class="col-12 col-lg-7 order-lg-1">
+                <div class="col-12 col-lg-7 order-lg-1">
               {% endif %}
-                    <h2 class="h1 mb-1 mb-md-2">{{ content.field_title }}</h2>
-                    <div class="lead font-weight-bold highlight mb-1 mb-md-2">{{ content.field_highlight }}</div>
-                    <div class="standard mb-1 mb-md-2">{{ content.field_standard_text }}</div>
-
-                    {% if content.field_enable_for_who['#items'].value %}
+                  <h2 class="h1 mb-1 mb-md-2">{{ content.field_title }}</h2>
+                  <div class="lead font-weight-bold highlight mb-1 mb-md-2">{{ content.field_highlight }}</div>
+                  <div class="standard mb-1 mb-md-2">{{ content.field_standard_text }}</div>
+                  {% if content.field_enable_for_who['#items'].value %}
                     <div class="for_who_block">
                       <span class="h4 mb-0">{{ content.field_for_who_title }}</span>
                       {% if parent_node_title %}
@@ -80,7 +80,7 @@
                       {% endif %}
                       <div>{{ content.field_for_who_links_list }}</div>
                     </div>
-                    {% endif %}
+                  {% endif %}
               </div>
             </div>
             <div class="row w-100 justify-content-between">
@@ -88,6 +88,7 @@
                 {{ content.field_additional_modules }}
               </div>
             </div>
+          </div>
         </div>
       </div>
     </div>

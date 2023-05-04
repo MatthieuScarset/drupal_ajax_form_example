@@ -66,66 +66,71 @@ We call a macro which calls itself to render the full tree.
 {% endmacro %}
 
 {% macro mega_menu_items(parent, items) %}
-  <div class="container-fluid site-width mega-menu-container">
-    <div class="row justify-content-between pb-1 pr-2 mt-2">
-      <span class="col-3 text-dark title_megamenu">{{ parent.content.field_subtitle }}</span>
-      <a class="col-auto o-link-arrow mega-menu-global-link pt-0"
-         href="{{ parent.content.field_global_link.0['#url'] }}"
-         onmousedown="utag_link(utag_data.titre_page,'Menu','{{ parent.title }}','{{ parent.content.field_global_link.0['#title'] }}')"
-      >
-        {{ parent.content.field_global_link.0['#title'] }}</a>
-    </div>
-    <div class="row mb-2">
-      {% for item in items %}
-        <div class="col-4">
-          <a class="mb-1 nav-link sous_items" href="{{ item.url }}"
-             onmousedown="utag_link(utag_data.titre_page,'Menu','{{ parent.title }}','{{ item.title }}')">{{ item.title }}</a>
-          {% if item.below %}
-            {% for sous_item in item.below %}
-              <a class="mb-1 nav-link sous_items" href="{{ sous_item.url }}"
-                 onmousedown="utag_link(utag_data.titre_page,'Menu','{{ parent.title }}','{{ sous_item.title }}')">{{ sous_item.title }}</a>
-            {% endfor %}
-          {% endif %}
-        </div>
-      {% endfor %}
+  <div class="site-width mega-menu-container">
+    <div class="container-fluid">
+      <div class="row justify-content-between pb-1 pr-2 mt-2">
+        <span class="col-3 text-dark title_megamenu">{{ parent.content.field_subtitle }}</span>
+        <a class="col-auto o-link-arrow mega-menu-global-link pt-0"
+           href="{{ parent.content.field_global_link.0['#url'] }}"
+           onmousedown="utag_link(utag_data.titre_page,'Menu','{{ parent.title }}','{{ parent.content.field_global_link.0['#title'] }}')"
+        >
+          {{ parent.content.field_global_link.0['#title'] }}</a>
+      </div>
+      <div class="row mb-2">
+        {% for item in items %}
+          <div class="col-4">
+            <a class="mb-1 nav-link sous_items" href="{{ item.url }}"
+               onmousedown="utag_link(utag_data.titre_page,'Menu','{{ parent.title }}','{{ item.title }}')">{{ item.title }}</a>
+            {% if item.below %}
+              {% for sous_item in item.below %}
+                <a class="mb-1 nav-link sous_items" href="{{ sous_item.url }}"
+                   onmousedown="utag_link(utag_data.titre_page,'Menu','{{ parent.title }}','{{ sous_item.title }}')">{{ sous_item.title }}</a>
+              {% endfor %}
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 {% endmacro %}
 
 {% macro wysiwyg_template_mega_menu_items(content, items, parent_title) %}
-  <div class="container-fluid site-width ml-0 pl-0">
-    <div class="row">
-    {%  if content.field_highlight.0 is defined and content.field_highlight.0['#text'] is not null %}
-      <div class="pr-0 col-4 border-right border-gray4">
-        <div class="w-100">
-          {{ content.field_highlight }}
+  <div class="site-width">
+    <div class="container-fluid ml-0 pl-0">
+      <div class="row">
+      {%  if content.field_highlight.0 is defined and content.field_highlight.0['#text'] is not null %}
+        <div class="pr-0 col-4 border-right border-gray4">
+          <div class="w-100">
+            {{ content.field_highlight }}
+          </div>
         </div>
-      </div>
-      <div class="pt-2 pb-1 pl-4 col-8">
-    {% else %}
-      <div class="pt-2 pb-1 item_megamenu_list col-12">
-    {% endif %}
-        <div class="row">
-          {% for item in items %}
-            <div class="col-6">
-              <h4 class="mb-2 p-0 title_megamenu">{{ item.title }}</h4>
-              {% if item.below %}
-                {% for sous_item in item.below %}
-                  <a class="mb-1 nav-link sous_items" href="{{ sous_item.url }}"
-                     onmousedown="utag_link(utag_data.titre_page,'Menu','{{ parent_title }}','{{ sous_item.title }}')">{{ sous_item.title }}</a>
-                {% endfor %}
-              {% endif %}
-            </div>
-          {% endfor %}
+        <div class="pt-2 pb-1 pl-4 col-8">
+      {% else %}
+        <div class="pt-2 pb-1 item_megamenu_list col-12">
+      {% endif %}
+          <div class="row">
+            {% for item in items %}
+              <div class="col-6">
+                <h4 class="mb-2 p-0 title_megamenu">{{ item.title }}</h4>
+                {% if item.below %}
+                  {% for sous_item in item.below %}
+                    <a class="mb-1 nav-link sous_items" href="{{ sous_item.url }}"
+                       onmousedown="utag_link(utag_data.titre_page,'Menu','{{ parent_title }}','{{ sous_item.title }}')">{{ sous_item.title }}</a>
+                  {% endfor %}
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
         </div>
       </div>
     </div>
-  </div>
+    </div>
 {% endmacro %}
 
 {% macro product_template_mega_menu_items(title, items) %}
-  <div class="container-fluid mega-menu-container ml-0 pl-0">
-    <div class="row">
+  <div class="site-width mega-menu-container">
+    <div class="container-fluid ml-0 pl-0">
+      <div class="row">
       <div class="pt-2 pb-4 col-4 item_megamenu_list border-right border-gray4">
         <ul class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
           {% for item in items %}
@@ -166,6 +171,7 @@ We call a macro which calls itself to render the full tree.
           {% endfor %}
         </div>
       </div>
+    </div>
     </div>
   </div>
 {% endmacro %}

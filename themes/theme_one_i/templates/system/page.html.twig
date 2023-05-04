@@ -134,8 +134,10 @@
 {% if page.footer %}
     {% block footer %}
         <footer class="o-footer" role="contentinfo">
-          <div class="container-fluid site-width">
-            {{ page.footer }}
+          <div class="site-width">
+            <div class="container-fluid">
+              {{ page.footer }}
+            </div>
           </div>
         </footer>
     {% endblock %}
