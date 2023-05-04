@@ -1,4 +1,4 @@
-class OabDetailOffre {
+class ModuleDetailOffre {
 
   constructor(elem) {
     this.$root = elem;
@@ -65,11 +65,11 @@ class OabDetailOffre {
 
 document.addEventListener("DOMContentLoaded", () => {
   Array.from(document.querySelectorAll(".items-module-detail-offre")).forEach((detailOffre) => {
-    new OabDetailOffre(detailOffre);
+    new ModuleDetailOffre(detailOffre);
   });
 });
 
 // rattachement au contexte window pour pouvoir l'utiliser en dehors du JS
-window.OabDetailOffre = OabDetailOffre;
+window.OabDetailOffre = ModuleDetailOffre;
 
-export default OabDetailOffre;
+export default ModuleDetailOffre;

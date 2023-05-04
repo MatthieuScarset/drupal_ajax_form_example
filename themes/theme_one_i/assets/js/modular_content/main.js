@@ -1,15 +1,15 @@
 
-import OabCustomSlider from "./oabCustomSlider";
-import StepSlider from "./stepSlider";
-import OabDetailOffre from "./oabDetailOffre";
-import OabExempleSlider from "./oabExempleSlider";
-import ModuleMap from "./ModuleMap";
-import './tealium_modular_product';
+import CustomSlider from "./custom-slider";
+import ModuleStepSlider from "./module-step-slider";
+import ModuleDetailOffre from "./module-detail-offre";
+import ModuleExempleSlider from "./module-exemple-slider";
+import ModuleMap from "./module-map";
+import './tealium-modular-product';
 
 export {
-  OabCustomSlider,
-  StepSlider,
-  OabDetailOffre,
-  OabExempleSlider,
+  CustomSlider,
+  ModuleStepSlider,
+  ModuleDetailOffre,
+  ModuleExempleSlider,
   ModuleMap
 };

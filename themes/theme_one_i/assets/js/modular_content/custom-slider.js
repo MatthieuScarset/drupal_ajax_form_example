@@ -1,6 +1,6 @@
 import { elementScrollIntoViewPolyfill } from "seamless-scroll-polyfill";
 
-class OabCustomSlider {
+class CustomSlider {
 
   constructor(elem) {
     elementScrollIntoViewPolyfill();
@@ -70,11 +70,11 @@ class OabCustomSlider {
 
 document.addEventListener("DOMContentLoaded", () => {
   Array.from(document.querySelectorAll(".custom-slider")).forEach((slider) => {
-    new OabCustomSlider(slider);
+    new CustomSlider(slider);
   });
 });
 
 // rattachement au contexte window pour pouvoir l'utiliser en dehors du JS
-window.OabCustomSlider = OabCustomSlider;
+window.OabCustomSlider = CustomSlider;
 
-export default OabCustomSlider;
+export default CustomSlider;

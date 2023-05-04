@@ -1,6 +1,6 @@
-import OabExempleMobileSlider from "./OabExempleMobileSlider";
+import ModuleExempleMobileSlider from "./module-exemple-mobile-slider";
 
-class OabExempleSlider {
+class ModuleExempleSlider {
 
   constructor(elem) {
     this.$root = elem;
@@ -31,7 +31,7 @@ class OabExempleSlider {
       window.addEventListener('scroll', this.$startIfVisibleReference = this._startIfVisible.bind(this));
     }
 
-    this.$mobileSlider = new OabExempleMobileSlider(this.$contentSlider, this);
+    this.$mobileSlider = new ModuleExempleMobileSlider(this.$contentSlider, this);
 
   }
 
@@ -187,11 +187,11 @@ class OabExempleSlider {
 
 document.addEventListener("DOMContentLoaded", () => {
   Array.from(document.querySelectorAll(".example-items")).forEach((exempleSlider) => {
-    new OabExempleSlider(exempleSlider);
+    new ModuleExempleSlider(exempleSlider);
   });
 });
 
 // rattachement au contexte window pour pouvoir l'utiliser en dehors du JS
-window.OabExempleSlider = OabExempleSlider;
+window.OabExempleSlider = ModuleExempleSlider;
 
-export default OabExempleSlider;
+export default ModuleExempleSlider;

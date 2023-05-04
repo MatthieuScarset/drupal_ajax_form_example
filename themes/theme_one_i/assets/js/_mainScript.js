@@ -13,9 +13,9 @@ $.animate = $.fn.animate;
 /*
   Import TS scripts
  */
-// require('./ExampleTs.ts');
-require('./StickyContent.ts');
-require('./StickyHeader.js');
+// require('./example-ts.ts');
+require('./sticky-content.ts');
+require('./sticky-header.js');
 
 
 /*

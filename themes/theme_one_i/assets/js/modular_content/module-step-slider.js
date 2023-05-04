@@ -1,4 +1,4 @@
-class StepSlider {
+class ModuleStepSlider {
   constructor(elem) {
 
     this.$root = elem;
@@ -83,11 +83,11 @@ class StepSlider {
 
 document.addEventListener("DOMContentLoaded", () => {
   Array.from(document.querySelectorAll(".step-slider")).forEach((slider) => {
-    new StepSlider(slider);
+    new ModuleStepSlider(slider);
   });
 });
 
 // rattachement au contexte window pour pouvoir l'utiliser en dehors du JS
-window.StepSlider = StepSlider;
+window.StepSlider = ModuleStepSlider;
 
-export default StepSlider;
+export default ModuleStepSlider;
