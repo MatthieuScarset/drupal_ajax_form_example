@@ -1,0 +1,33 @@
+uuid: b9210dd5-4922-4524-aee3-85b2169eb808
+langcode: en
+status: true
+dependencies:
+  module:
+    - language
+    - node
+id: corporate_fr
+label: 'Corporate FR'
+type: 'canonical_entities:node'
+pattern: '/pourquoi-nous/[node:title]'
+selection_criteria:
+  eae83537-1bcd-4090-8c25-4a95a1b1eb94:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: eae83537-1bcd-4090-8c25-4a95a1b1eb94
+    context_mapping:
+      node: node
+    bundles:
+      corporate: corporate
+  2fdc82f0-85a6-46e5-a435-39bc9e9a40af:
+    id: language
+    negate: false
+    uuid: 2fdc82f0-85a6-46e5-a435-39bc9e9a40af
+    context_mapping:
+      language: 'node:langcode:language'
+    langcodes:
+      fr: fr
+selection_logic: and
+weight: -10
+relationships:
+  'node:langcode:language':
+    label: Language

@@ -25,11 +25,18 @@ use Drupal\oab_modular_product\Services\OabModularProductService;
 function theme_one_i_preprocess_html(&$variables) {
   global $config;
 
+  $route_match = \Drupal::routeMatch();
+  /** @var Node $node */
+  $node = $route_match->getParameter('node');
 
   $c = Drupal::config("oab.version");
   $version = $c->get('value');
   if(!isset($config['header_env'])){
     $config['header_env'] = "";
+  }
+
+  if (isset($node) && isset($node->field_dark_mode) && $node->field_dark_mode->value === '1') {
+    $variables['attributes']['class'][] = 'dark-mode';
   }
 
   $variables['header_env'] = $config['header_env'];
@@ -40,8 +47,19 @@ function theme_one_i_preprocess_region(&$variables) {
   // Create the $content variable that templates expect.
   $variables['language'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
+  $route_match = \Drupal::routeMatch();
+  /** @var Node $node */
+  $node = $route_match->getParameter('node');
   $config = \Drupal::config('system.site');
   $variables['site_name'] = $config->get('name');
+
+  if ($variables['region'] === 'top_zone') {
+    if (isset($node) && $node->bundle() === 'corporate') {
+      $variables['attributes']['class'][] = 'bg-transparent';
+    } else {
+      $variables['attributes']['class'][] = 'bg-gray2';
+    }
+  }
 }
 
 function theme_one_i_preprocess_page(&$variables)
@@ -124,8 +142,8 @@ function theme_one_i_preprocess_paragraph__module_testimonial_item(&$variables) 
 function theme_one_i_preprocess_node(&$variables) {
   $node_type = $variables['node']->type->entity->get('type');
 
-  if ($node_type === 'modular_product') {
-    $variables['#attached']['library'][] = 'theme_one_i/modular_product';
+  if (in_array($node_type, ['modular_product', 'corporate'])) {
+    $variables['#attached']['library'][] = 'theme_one_i/modular_content';
   }
 
   if($variables['view_mode'] === 'teaser_paragraph_module_blog') {
@@ -397,7 +415,7 @@ function theme_one_i_theme_suggestions_page_alter(array &$suggestions, array $va
   if ($node = Drupal::routeMatch()->getParameter('node')) {
     if (is_object($node)) {
       $content_type = $node->bundle();
-      $suggestions = array_merge($suggestions, __suggestion_nodes($hook, $content_type, $content_type === 'modular_product'));
+      $suggestions = array_merge($suggestions, __suggestion_nodes($hook, $content_type, in_array($content_type, ["modular_product", "corporate"])));
     }
   }
 }
@@ -409,7 +427,7 @@ function theme_one_i_theme_suggestions_region_alter(array &$suggestions, array $
   if ($node = Drupal::routeMatch()->getParameter('node')) {
     if (is_object($node)) {
       $content_type = $node->bundle();
-      $suggestions = array_merge($suggestions, __suggestion_nodes($hook, $variables['elements']['#region'], in_array($content_type, ["modular_product", "poc_test_module"])));
+      $suggestions = array_merge($suggestions, __suggestion_nodes($hook, $variables['elements']['#region'], in_array($content_type, ["modular_product", "corporate", "poc_test_module"])));
     }
   }
 }
@@ -524,4 +542,29 @@ function theme_one_i_theme_suggestions_taxonomy_term_alter(array &$suggestions, 
   $suggestions[] = 'taxonomy_term__' . $sanitized_view_mode;
   $suggestions[] = 'taxonomy_term__' . $term->bundle() . '__' . $sanitized_view_mode;
   $suggestions[] = 'taxonomy_term__' . $term->id() . '__' . $sanitized_view_mode;
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function theme_one_i_preprocess_paragraph(&$variables) {
+  if (!isset($variables['paragraph'])) {
+    return;
+  }
+
+  /** @var Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+
+  if ($paragraph->bundle() === "title_and_image"
+    && NULL !== ($parent_entity = $paragraph->getParentEntity())) {
+
+    /** @var Paragraph $parent_entity */
+
+    // field_map ayant le premier id on en a besoin pour ajouter la class active
+    if ($parent_entity->getEntityTypeId() === "paragraph" && $parent_entity->bundle() === "module_map"
+      && $parent_entity->field_map->target_id === $paragraph->id()
+    ) {
+      $variables['attributes']['class'][] = 'active';
+    }
+  }
 }

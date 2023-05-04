@@ -176,7 +176,14 @@ class SynomiaSearchResponse {
                 $facets = $facets_tag->getElementsByTagName("aspect");
                 foreach ($facets as $facet) {
                     if ($facet->firstChild->nodeValue != "#SYNAUTRE#") {
-                        $this->facets[str_replace(' ', '_', $facet->firstChild->nodeValue)] = array('facetName' => $this->getTypeLabel(str_replace(' ', '_', $facet->firstChild->nodeValue)), 'nbresults' => $facet->getAttribute('nb_res'));
+                        $this->facets[str_replace(' ', '_', $facet->firstChild->nodeValue)] =
+                          array(
+                            'facetName' => $this->getTypeLabel(
+                              str_replace(' ', '_', $facet->firstChild->nodeValue)
+                            ),
+                            'nbresults' => $facet->getAttribute('nb_res')
+                          )
+                        ;
                     }
                 }
             }
@@ -206,23 +213,23 @@ class SynomiaSearchResponse {
      */
     private function getTypeLabel($type_id) {
         $type_name = $type_id;
-        if($this->typeSearch === 'mss') {
+        if ($this->typeSearch === 'mss') {
           /**
            * @var \Drupal\Core\Field\FieldDefinitionInterface[]
            */
           $bundle_fields = $this->entityFieldManager->getFieldDefinitions('node', 'mss_article');
           $types_mss = $bundle_fields['field_typology']?->getSetting("allowed_values");
-          if(isset($types_mss[$type_id]) && is_string($types_mss[$type_id])) {
+          if (isset($types_mss[$type_id]) && is_string($types_mss[$type_id])) {
             return ucfirst($types_mss[$type_id]);
           }
         }
         else {
           switch ($type_id) {
-            case 'full_html':
-              $type_name = 'Content';
-              break;
             case 'simple_page':
               $type_name = 'Article';
+              break;
+            case 'content':
+              $type_name = 'Content';
               break;
             default:
               $type_object = NodeType::load($type_id);
@@ -246,7 +253,7 @@ class SynomiaSearchResponse {
     $content_types = $this->getOrderContentTypesArray();
     if (!empty($content_types)) {
       foreach ($content_types as $contentType) {
-        if( isset($old_results_array[$contentType])) {
+        if (isset($old_results_array[$contentType])) {
           $new_facets_array_ordered[$contentType] = $old_facets_array[$contentType];
           unset($old_facets_array[$contentType]);
         }
@@ -266,7 +273,7 @@ class SynomiaSearchResponse {
     $content_types = $this->getOrderContentTypesArray();
     if (!empty($content_types)) {
       foreach ($content_types as $contentType) {
-        if( isset($old_results_array[$contentType])) {
+        if (isset($old_results_array[$contentType])) {
           $new_results_array_ordered[$contentType] = $old_results_array[$contentType];
           unset($old_results_array[$contentType]);
         }
@@ -284,7 +291,7 @@ class SynomiaSearchResponse {
     $config = $config_factory->get(OabSynomiaSearchSettingsForm::getConfigName());
     if (!empty($config) && !empty($config->get('order_content_types_'.$current_language))) {
       $order_string = "";
-      if ($this->typeSearch == 'mss'){
+      if ($this->typeSearch == 'mss') {
         $order_string = $config->get('order_typology_mss_assistance');
       }
       else {

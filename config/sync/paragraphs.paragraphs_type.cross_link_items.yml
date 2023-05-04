@@ -1,0 +1,10 @@
+uuid: a5b04e1e-e5ac-46d2-a8fc-dab845bec2ed
+langcode: en
+status: true
+dependencies: {  }
+id: cross_link_items
+label: '[Module Cross link] Items'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

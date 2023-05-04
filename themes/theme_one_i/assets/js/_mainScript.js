@@ -5,7 +5,6 @@ import {defineCustomElement} from "vue";
 import '@ob1/web';
 
 
-
 // Hack pour jQuery
 window.$ = jQuery.noConflict();
 $.animate = $.fn.animate;
@@ -17,6 +16,7 @@ $.animate = $.fn.animate;
 // require('./ExampleTs.ts');
 require('./StickyContent.ts');
 require('./StickyHeader.js');
+
 
 /*
   Import VueJS Components

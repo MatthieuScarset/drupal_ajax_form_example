@@ -1,0 +1,36 @@
+.double-color {
+  display: flex;
+  flex-direction: column;
+
+  @include media-breakpoint-up('md') {
+    flex-direction: initial;
+  }
+
+  @mixin panel {
+    display: flex;
+    width: 100%;
+    @include media-breakpoint-up('md') {
+      width: 50%;
+    }
+    & > div {
+      // Half site-width
+      max-width: 720px;
+      margin: 0 auto;
+    }
+  }
+
+  .left-panel {
+    @include panel;
+    & > div {
+      margin-right: 0;
+    }
+  }
+
+  .right-panel {
+    @include panel;
+    & > div {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+}

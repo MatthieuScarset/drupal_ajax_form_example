@@ -1,0 +1,34 @@
+.dark-mode {
+  background-color: $black;
+
+  .main-container, .region-top-zone {
+    div:not(.alert), h1, h2, h3, span  {
+      @extend .text-white;
+    }
+
+    a:not(.btn_accept_cookie_youtube) {
+      @extend .o-link-reverse;
+    }
+
+    ol {
+      @extend .ob1-breadcrumb-inverse;
+    }
+
+    section[id$="local-tasks"] {
+      ul {
+        border-bottom-color: $white;
+
+        li {
+          background-color: $white;
+          color: $black;
+
+          a:hover, a:active {
+            color: $gray3;
+            background-color: transparent;
+            border-color: $gray3;
+          }
+        }
+      }
+    }
+  }
+}

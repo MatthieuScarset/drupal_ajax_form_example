@@ -1,0 +1,10 @@
+uuid: 6b341539-402e-41da-916f-48da8c9073d6
+langcode: en
+status: true
+dependencies: {  }
+id: title_and_image
+label: 'Title and image'
+icon_uuid: null
+icon_default: null
+description: 'Is used in module map'
+behavior_plugins: {  }

@@ -5,6 +5,7 @@ fr:
     category_page:
       - category_page
   contents:
+    - corporate
     - modular_product
     - poc_test_module
   routes: {  }
@@ -16,6 +17,7 @@ en:
     category_page:
       - category_page
   contents:
+    - corporate
     - modular_product
     - poc_test_module
   routes:

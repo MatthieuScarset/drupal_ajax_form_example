@@ -8,6 +8,7 @@ use Drupal\Core\Breadcrumb\BreadcrumbBuilderInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
+use Drupal\node\Entity\Node;
 use Drupal\oab_hub\Controller\OabHubController;
 use Drupal\views\Views;
 use Drupal\oab_hub\HubFrontUrlTrait;
@@ -46,6 +47,7 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
          *        - Affichage du home + nom de la subhome de rattachement cliquable
          *    > On est ailleurs : Pas de fil d'ariane
          */
+        /** @var Node $node */
         $node = $route_match->getParameter('node');
 
         $parameters = $route_match->getParameters()->all();
@@ -179,7 +181,7 @@ class OabFrontofficBreadcrumbBuilder implements BreadcrumbBuilderInterface {
             }
             elseif (isset($node)
               && method_exists(get_class($parameters['node']), 'getType')
-              && $parameters['node']->getType() == 'cloud_service_provider'){
+              && $parameters['node']->getType() == 'cloud_service_provider') {
               //ajout du fil d'ariane pour les CSP de BVPN
               $breadcrumb->addLink(Link::fromTextAndUrl(t('Home'), $this->getHubFrontUrl()));
               $breadcrumb->addLink(Link::createFromRoute(t('BVPN Galerie - List of Cloud Services'), 'view.bvpn_gallery.csp_list_page'));

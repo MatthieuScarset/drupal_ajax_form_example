@@ -1,0 +1,184 @@
+uuid: 4a7b6ea7-ea58-45f3-aa2f-1fbfa11e4243
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_map
+    - paragraphs.paragraphs_type.module_map
+    - paragraphs.paragraphs_type.title_and_image
+  module:
+    - entity_reference_revisions
+id: paragraph.module_map.field_map
+field_name: field_map
+entity_type: paragraph
+bundle: module_map
+label: map
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      title_and_image: title_and_image
+    negate: 0
+    target_bundles_drag_drop:
+      call_to_action:
+        weight: 53
+        enabled: false
+      contact_button_item:
+        weight: 54
+        enabled: false
+      default_button:
+        weight: 55
+        enabled: false
+      detail_gamme_items_offres:
+        weight: 56
+        enabled: false
+      documentation:
+        weight: 57
+        enabled: false
+      home_banner:
+        weight: 61
+        enabled: false
+      home_caroussel:
+        weight: 62
+        enabled: false
+      home_column:
+        weight: 63
+        enabled: false
+      home_column_section:
+        weight: 64
+        enabled: false
+      home_playlist:
+        weight: 65
+        enabled: false
+      home_thematic_columns:
+        weight: 66
+        enabled: false
+      homepage_banner_experience:
+        weight: 58
+        enabled: false
+      homepage_banner_item:
+        weight: 59
+        enabled: false
+      homepage_news:
+        weight: 60
+        enabled: false
+      infography_partner:
+        weight: 67
+        enabled: false
+      marketo:
+        weight: 68
+        enabled: false
+      module_3_4_colonnes:
+        weight: 69
+        enabled: false
+      module_3_4_colonnes_items:
+        weight: 70
+        enabled: false
+      module_benefits:
+        weight: 71
+        enabled: false
+      module_benefits_item:
+        weight: 72
+        enabled: false
+      module_blog:
+        weight: 73
+        enabled: false
+      module_configurateur_details:
+        weight: 74
+        enabled: false
+      module_cross_sell:
+        weight: 75
+        enabled: false
+      module_cross_sell_item:
+        weight: 76
+        enabled: false
+      module_customer_space:
+        weight: 77
+        enabled: false
+      module_detail_gamme:
+        weight: 78
+        enabled: false
+      module_detail_gamme_items:
+        weight: 79
+        enabled: false
+      module_detail_offre:
+        weight: 80
+        enabled: false
+      module_detail_offre_items:
+        weight: 81
+        enabled: false
+      module_exemples:
+        weight: 82
+        enabled: false
+      module_exemples_items:
+        weight: 83
+        enabled: false
+      module_faq:
+        weight: 84
+        enabled: false
+      module_faq_quesions:
+        weight: 85
+        enabled: false
+      module_map:
+        weight: 86
+        enabled: false
+      module_partner:
+        weight: 87
+        enabled: false
+      module_presentation:
+        weight: 88
+        enabled: false
+      module_services:
+        weight: 89
+        enabled: false
+      module_step:
+        weight: 90
+        enabled: false
+      module_steps:
+        weight: 91
+        enabled: false
+      module_testimonial:
+        weight: 92
+        enabled: false
+      module_testimonial_item:
+        weight: 93
+        enabled: false
+      module_text_video_image:
+        weight: 94
+        enabled: false
+      paragraph_block_rebond:
+        weight: 95
+        enabled: false
+      paragraph_product_call_to_action:
+        weight: 96
+        enabled: false
+      paragraph_wysiwyg:
+        weight: 97
+        enabled: false
+      rebond_wysiwyg:
+        weight: 98
+        enabled: false
+      related_content:
+        weight: 99
+        enabled: false
+      subhome_presse_carrousel:
+        weight: 100
+        enabled: false
+      title_and_image:
+        weight: 101
+        enabled: true
+      title_and_link:
+        weight: 102
+        enabled: false
+      titre_and_description:
+        weight: 103
+        enabled: false
+      titre_and_description_and_link:
+        weight: 104
+        enabled: false
+field_type: entity_reference_revisions

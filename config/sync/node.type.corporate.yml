@@ -1,0 +1,17 @@
+uuid: 4148841f-9892-4e09-aafc-2e0c42a465e7
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Corporate
+type: corporate
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false
