@@ -4,9 +4,6 @@ fr:
   views:
     category_page:
       - category_page
-  contents:
-    - modular_product
-    - poc_test_module
   routes: {  }
 en:
   url:
@@ -15,8 +12,5 @@ en:
   views:
     category_page:
       - category_page
-  contents:
-    - modular_product
-    - poc_test_module
   routes:
     - oab_offices_map.page

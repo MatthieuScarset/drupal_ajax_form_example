@@ -3,6 +3,7 @@
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\FieldFilteredMarkup;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\NodeTypeInterface;
 use Drupal\oab_modular_product\Services\OabModularProductService;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Core\Entity\EntityInterface;
@@ -393,6 +394,58 @@ function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, 
         $form["field_modules"]["widget"]["add_more"]['add_more_button_paragraph_wysiwyg']['#access'] = false;
       }
     }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function oab_modular_product_form_node_type_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  /** @var \Drupal\node\Entity\NodeType $entity */
+  $entity = $form_state->getFormObject()->getEntity();
+
+  $form['theme_settings'] = [
+    '#type' => "details",
+    '#title' => t('Theme Settings'),
+    '#group' => 'additional_settings'
+  ];
+
+  $form['theme_settings']['ob1_theme'] = [
+    '#type' => 'checkbox',
+    '#title' => t('ob1'),
+    '#description' => t('this content type use ob1 theme'),
+    '#default_value' => $entity->getThirdPartySetting('oab_modular_product', 'ob1_theme'),
+    '#attributes' => [
+      "id" => 'field_ob1_theme'
+    ]
+  ];
+  $form['theme_settings']['background_e2e'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Background e2e'),
+    '#description' => t('this content type use e2e Background'),
+    '#default_value' => $entity->getThirdPartySetting('oab_modular_product', 'background_e2e'),
+    '#states' => [
+      'visible' => [
+        ':input[id="field_ob1_theme"]' => ['checked' => true]
+        ]
+    ]
+  ];
+
+  $form['#entity_builders'][] = '_oab_modular_product_form_node_type_form_builder';
+}
+
+function _oab_modular_product_form_node_type_form_builder($entity_type, NodeTypeInterface $type, &$form, FormStateInterface $form_state) {
+  if ($form_state->getValue('ob1_theme')) {
+    $type->setThirdPartySetting('oab_modular_product', 'ob1_theme', $form_state->getValue('ob1_theme'));
+
+    if ($form_state->getValue('background_e2e')) {
+      $type->setThirdPartySetting('oab_modular_product', 'background_e2e', $form_state->getValue('background_e2e'));
+    } else {
+      $type->unsetThirdPartySetting('oab_modular_product', 'background_e2e');
+    }
+  } else {
+    $type->unsetThirdPartySetting('oab_modular_product', 'ob1_theme');
   }
 }
 
