@@ -4,8 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.module_detail_offre.field_accroche
-    - field.field.paragraph.module_detail_offre.field_call_to_action_buton
-    - field.field.paragraph.module_detail_offre.field_call_to_action_link_simple
     - field.field.paragraph.module_detail_offre.field_highlight
     - field.field.paragraph.module_detail_offre.field_items
     - field.field.paragraph.module_detail_offre.field_key_points
@@ -14,7 +12,6 @@ dependencies:
     - paragraphs.paragraphs_type.module_detail_offre
   module:
     - entity_reference_revisions
-    - link
 id: paragraph.module_detail_offre.default
 targetEntityType: paragraph
 bundle: module_detail_offre
@@ -26,30 +23,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 2
-    region: content
-  field_call_to_action_buton:
-    type: link
-    label: above
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-    weight: 7
-    region: content
-  field_call_to_action_link_simple:
-    type: link
-    label: above
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-    weight: 8
     region: content
   field_highlight:
     type: basic_string

@@ -4,8 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.module_detail_offre.field_accroche
-    - field.field.paragraph.module_detail_offre.field_call_to_action_buton
-    - field.field.paragraph.module_detail_offre.field_call_to_action_link_simple
     - field.field.paragraph.module_detail_offre.field_highlight
     - field.field.paragraph.module_detail_offre.field_items
     - field.field.paragraph.module_detail_offre.field_key_points
@@ -14,7 +12,6 @@ dependencies:
     - paragraphs.paragraphs_type.module_detail_offre
   module:
     - field_group
-    - link
     - paragraphs
 third_party_settings:
   field_group:
@@ -26,7 +23,7 @@ third_party_settings:
       label: 'Services et accompagnements'
       region: content
       parent_name: ''
-      weight: 5
+      weight: 3
       format_type: fieldset
       format_settings:
         classes: ''
@@ -47,22 +44,6 @@ content:
       rows: 2
       placeholder: ''
     third_party_settings: {  }
-  field_call_to_action_buton:
-    type: link_default
-    weight: 2
-    region: content
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
-  field_call_to_action_link_simple:
-    type: link_default
-    weight: 3
-    region: content
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
   field_highlight:
     type: string_textarea
     weight: 5
@@ -73,7 +54,7 @@ content:
     third_party_settings: {  }
   field_items:
     type: paragraphs
-    weight: 4
+    weight: 2
     region: content
     settings:
       title: Paragraph
