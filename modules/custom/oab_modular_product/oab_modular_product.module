@@ -416,9 +416,6 @@ function oab_modular_product_form_node_type_form_alter(&$form, FormStateInterfac
     '#title' => t('ob1'),
     '#description' => t('this content type use ob1 theme'),
     '#default_value' => $entity->getThirdPartySetting('oab_modular_product', 'ob1_theme'),
-    '#attributes' => [
-      "id" => 'field_ob1_theme'
-    ]
   ];
   $form['theme_settings']['background_e2e'] = [
     '#type' => 'checkbox',
@@ -427,7 +424,7 @@ function oab_modular_product_form_node_type_form_alter(&$form, FormStateInterfac
     '#default_value' => $entity->getThirdPartySetting('oab_modular_product', 'background_e2e'),
     '#states' => [
       'visible' => [
-        ':input[id="field_ob1_theme"]' => ['checked' => true]
+        ':input[name="ob1_theme"]' => ['checked' => true]
         ]
     ]
   ];
@@ -436,16 +433,12 @@ function oab_modular_product_form_node_type_form_alter(&$form, FormStateInterfac
 }
 
 function _oab_modular_product_form_node_type_form_builder($entity_type, NodeTypeInterface $type, &$form, FormStateInterface $form_state) {
-  if ($form_state->getValue('ob1_theme')) {
-    $type->setThirdPartySetting('oab_modular_product', 'ob1_theme', $form_state->getValue('ob1_theme'));
+  $type->setThirdPartySetting('oab_modular_product', 'ob1_theme', $form_state->getValue('ob1_theme'));
 
-    if ($form_state->getValue('background_e2e')) {
-      $type->setThirdPartySetting('oab_modular_product', 'background_e2e', $form_state->getValue('background_e2e'));
-    } else {
-      $type->unsetThirdPartySetting('oab_modular_product', 'background_e2e');
-    }
+  if ($form_state->getValue('ob1_theme')) {
+    $type->setThirdPartySetting('oab_modular_product', 'background_e2e', $form_state->getValue('background_e2e'));
   } else {
-    $type->unsetThirdPartySetting('oab_modular_product', 'ob1_theme');
+    $type->setThirdPartySetting('oab_modular_product', 'background_e2e', 0);
   }
 }
 
