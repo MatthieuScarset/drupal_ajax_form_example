@@ -1,0 +1,8 @@
+name: OAB PDF
+description: 'OAB module for generating PDF management'
+type: module
+package: OAB
+version: '9.x-1.0'
+core_version_requirement: ^9.0
+project: 'oab_pdf'
+datestamp: 1674824584

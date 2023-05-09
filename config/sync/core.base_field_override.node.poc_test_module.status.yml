@@ -1,0 +1,22 @@
+uuid: 5a08c9ce-7960-4790-8209-62a37c6eaef0
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.poc_test_module
+id: node.poc_test_module.status
+field_name: status
+entity_type: node
+bundle: poc_test_module
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

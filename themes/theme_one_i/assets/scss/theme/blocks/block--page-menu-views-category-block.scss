@@ -1,11 +1,8 @@
-.block.page-menu-category-block.sticky-top {
-  z-index: 1019;
-}
 .page-menu-category-block {
   @include media-breakpoint-up(lg) {
     margin-top: 25px;
 
-    .ob1-menu-page > ul {
+    &.sticky-top .ob1-menu-page > ul {
       justify-content: space-around;
     }
   }

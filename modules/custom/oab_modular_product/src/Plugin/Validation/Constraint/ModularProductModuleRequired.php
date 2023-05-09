@@ -17,6 +17,6 @@ use Drupal\Core\Annotation\Translation;
 class ModularProductModuleRequired extends Constraint{
 
   // The message that will be shown if the value is not an integer.
-  public string $required = 'The module %value is required';
-  public string $required_multi = 'Modules %value are required';
+  public string $required = 'The module %value is required when publishing.';
+  public string $requiredMulti = 'Modules %value are required when publishing.';
 }

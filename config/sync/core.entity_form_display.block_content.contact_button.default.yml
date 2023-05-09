@@ -9,7 +9,6 @@ dependencies:
     - field.field.block_content.contact_button.field_cb_label_sup
   module:
     - paragraphs
-    - workbench_moderation
 id: block_content.contact_button.default
 targetEntityType: block_content
 bundle: contact_button

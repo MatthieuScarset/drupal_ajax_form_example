@@ -11,32 +11,25 @@
     position: fixed;
     right: 0;
     bottom: 0;
-    width: 100% !important;
-    height: 100% !important;
 
-    h2#faqModalTitle{
-      span {
-        font-size: 3.5rem;
-      }
-    }
-  }
-
-  .modal-content {
     .modal-body {
+      h3 {
+        span.icon::before {
+          font-size: 3.5rem;
+        }
+      }
+
       .question-answer {
         overflow-y: scroll;
         scrollbar-width: none ;
-        position: absolute;
-        top: 6.5rem;
-        bottom: 0;
 
         &::-webkit-scrollbar {
           display: none;
         }
       }
     }
-  }
 
+  }
 
   @include media-breakpoint-up(md) {
     &.fade {
@@ -52,22 +45,14 @@
       }
     }
 
-    .modal-dialog {
+    .modal-dialog .modal-content {
+      .modal-header {
+        top: 3.75rem;
+        right: 3.75rem;
+      }
 
-      .modal-content {
-        min-height: 100%;
-        height: fit-content;
-
-
-        span.icon {
-          font-size: 3rem;
-        }
-
-        #faqAccordion {
-          .card:last-child {
-            border: none !important;
-          }
-        }
+      .modal-body h3 div {
+        margin: auto 0;
       }
     }
   }

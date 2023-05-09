@@ -46,9 +46,8 @@
  */
 #}
 
-
-<div class="top-zone-modular-product row text-dark align-items-center">
-  <div class="block-image col-lg-6 no-gutters order-lg-12">
+<div class="row text-dark align-items-center justify-content-between py-1 py-md-2">
+  <div class="mp-image-top-zone col-lg-6 no-gutters order-lg-12 mb-1 mb-lg-0">
     {% set imagestyle = {
       '#theme':      'image_style',
       '#style_name': 'modular_product_image_top_zone',
@@ -59,26 +58,24 @@
     {{ imagestyle }}
   </div>
 
-  <div class="block-text col-12 col-lg-6 col-6 no-gutters order-lg-0">
-    <p class="product-category text-gray3 font-weight-bold">{{ content.product_category }}</p>
-    <h1 class="product-name lead font-weight-bold">{{ content.product.field_product_name[0].value }}</h1>
-    {% if content.product_top_zone_image_uri|length > 0 %}
-      {% set teaser_class = "product-teaser" %}
-    {% else %}
-      {% set teaser_class = "product-teaser-without-image" %}
-    {% endif %}
+  <div class="col-12 col-lg-5 col-5 no-gutters order-lg-0">
+    <h1 class="standard text-gray3 font-weight-bold py-0 my-0">{{ content.product.field_product_name[0].value }}</h1>
 
-    {% if content.product.field_call_to_action_link[0].url|length > 0 and content.product.field_call_to_action_link[0].title |length > 0 %}
+    {% if content.product.field_call_to_action_link[0].url|length > 0
+       and content.product.field_call_to_action_link[0].title |length > 0 %}
       {% set link_arrow = "o-link-arrow" %}
     {% endif %}
-    <h2 class="{{ teaser_class }} no-signature">{{ content.product.field_teaser[0].value }}</h2>
+
+    <h2 class="mt-1 mx-0 mb-2 no-signature">{{ content.product.field_teaser[0].value }}</h2>
+
     {% if content.product.field_modular_product_tarif[0].value is not null %}
-      <p class="product-tarif lead font-weight-bold">{{ content.product.field_modular_product_tarif[0].value }}</p>
+      <p class="lead font-weight-bold mb-1">{{ content.product.field_modular_product_tarif[0].value }}</p>
     {% endif %}
-    <div class="block-cta row no-gutters pb-1">
+
+    <div class="row no-gutters pb-2">
       <a href="{{ content.product.field_call_to_action_button[0].url }}"
          onmousedown="utag_link(utag_data.titre_page,'topzone','CTA_1','{{ content.product.field_call_to_action_button[0].title }}')"
-         class="product-cta-button btn btn-primary mr-sm-4 mb-1 mb-xl-0">{{ content.product.field_call_to_action_button[0].title }}</a>
+         class="product-cta-button btn btn-primary mr-4 mb-1 mb-xl-0">{{ content.product.field_call_to_action_button[0].title }}</a>
       <a href="{{ content.product.field_call_to_action_link[0].url }}"
          onmousedown="utag_link(utag_data.titre_page,'topzone','CTA_2','{{ content.product.field_call_to_action_button[0].title }}')"
          class="product-cta-link-text {{ link_arrow }} pt-1 mw-100">{{ content.product.field_call_to_action_link[0].title }}</a>

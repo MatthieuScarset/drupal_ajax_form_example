@@ -9,7 +9,7 @@ services:
       - { name: breadcrumb_builder, priority: 100 }
   oab_frontoffice_product.breadcrumb:
     class: Drupal\oab_frontoffice\Breadcrumb\ProductBreadcrumbBuilder
-    arguments: ['@entity_type.manager']
+    arguments: ['@entity_type.manager', '@oab_develop.helper.string_utilities']
     tags:
       - { name: breadcrumb_builder, priority: 101 }
   oab_frontoffice.twig.OabExtension:
