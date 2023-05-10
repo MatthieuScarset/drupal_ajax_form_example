@@ -13,8 +13,9 @@ class Ob1ContentThemeNegotiator extends AbstractOb1ThemeNegotiator implements Th
 
     /** @var NodeInterface $current_node */
     $current_node = $route_match->getParameter('node');
+    $is_admin_route = \Drupal::service('router.admin_context')->isAdminRoute();
 
-    if ($current_node) {
+    if ($current_node && !$is_admin_route) {
       return $current_node->type->entity->getThirdPartySetting('oab_modular_product', 'ob1_theme');
     }
 
