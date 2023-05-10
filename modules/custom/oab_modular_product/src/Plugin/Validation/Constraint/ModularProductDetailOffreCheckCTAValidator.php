@@ -23,22 +23,22 @@ class ModularProductDetailOffreCheckCTAValidator extends ConstraintValidator {
         $value_cta_detail_offre_global = $item->entity->get('field_call_to_action_buton')->getValue();
         if (!empty($value_cta_detail_offre_global[0]["title"])) {
           //LE CTA globale est rempli au niveau du module détail Ofrre => on doit vérifier les enfants
-          if (!empty($entity->get('field_items'))) {
-            $offre_items = $entity->get('field_items')->getValue();
-            $bool_error = false;
+          
+          if (!empty($entity->field_items)) {
+            $bool_error = FALSE;
             $i = 0;
             //tant qu'il y a des enfants et qu'il n'y a pas d'erreur
-            while (!$bool_error && $i < count($offre_items)) {
-              $offre_item = $offre_items[$i]['entity'];
-              if($offre_item->get('field_cta') !== NULL) {
-                $cta_offre = $offre_item->get('field_cta')->getValue(); // on récupère la liste des CTA de l'item de l'offre
-                if(count($cta_offre) > 0) {
+            foreach ($entity->field_items as $field_items) {
+              if (!$bool_error) {
+                $offre_item =  $field_items->subform;
+
+                if ($offre_item['field_cta'] !== NULL && count($offre_item['field_cta']) > 1) {
                   // il y a un CTA sur l'item => on renvoie une erreur
-                  $bool_error = true;
+                  $bool_error = TRUE;
                   $this->context->addViolation($constraint->error);
                 }
+                $i++;
               }
-              $i++;
             }
           }
         }
