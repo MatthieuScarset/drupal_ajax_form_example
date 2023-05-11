@@ -3,6 +3,13 @@ class ModuleDetailOffre {
   constructor(elem) {
     this.$root = elem;
     this.$offres = this.$root.querySelectorAll('.detail-offre-item');
+    this.$offresClose = this.$root.querySelectorAll('.detail-offre-item.item-close');
+
+
+    if (this.$offresClose.length > 1) {
+      updateOffresHeight(this.$offresClose);
+    }
+
     this.$root.querySelectorAll('button.see-more').forEach((btn) => {
       btn.addEventListener('click', this._toggleItems);
     });
@@ -74,7 +81,109 @@ class ModuleDetailOffre {
       });
     }
   }
+}
+function updateOffresHeight(elems) {
+  let oneHaveCta = false;
+  let oneHavePrice = false;
+  let haveGlobalCta = false;
+  let maxCtaNb = 0;
 
+  let offreGlobalCta = document.querySelector('#detail-offre .product-cta-button.btn-primary');
+
+  if (offreGlobalCta != null) {
+    haveGlobalCta = true;
+  }
+
+  // boucle pour savoir les éléments présents dans l'ensemble des offres
+  elems.forEach(function(elem) {
+    let offreCta = elem.querySelectorAll('.call-to-action .field--item')
+    let offrePrice = elem.querySelectorAll('.offre-price');
+
+    let haveSeeMore = false;
+
+    if (elem.querySelector('.see-more') === null) {
+       elem.classList.add('see-full');
+    }
+
+    if (!haveGlobalCta) {
+      if (oneHaveCta === false && offreCta.length > 0) {
+        oneHaveCta = true;
+
+        if (offreCta.length > maxCtaNb) {
+          maxCtaNb = offreCta.length;
+        }
+      }
+    }
+    if (oneHavePrice === false && offrePrice.length > 0) {
+      oneHavePrice = true
+    }
+
+    //pour la version mobile, on applique les modification de height pour chaque élément
+    if (window.matchMedia('(max-width: 736px)').matches) {
+      if (haveGlobalCta) {
+        if (offrePrice.length > 0 ) {
+          if (offreCta.length > 0) {
+            elem.classList.add('oneCtaAndPrice');
+          } else {
+            elem.classList.add('onlyPrice');
+          }
+        } else if (offreCta.length > 0) {
+          elem.classList.add('onlyOneCta');
+        } else {
+          elem.classList.add('onlyText');
+        }
+      } else {
+        if (offrePrice.length > 0 && offreCta.length === 0) {
+          elem.classList.add('onlyPrice');
+        } else if (offrePrice.length === 0 && offreCta.length > 0 ) {
+          if (offreCta.length === 1) {
+            elem.classList.add('onlyOneCta');
+          } else {
+            elem.classList.add('onlyCtas');
+          }
+        } else if (offrePrice.length > 0 && offreCta.length > 0) {
+          if (offreCta.length === 1) {
+            elem.classList.add('oneCtaAndPrice');
+          } else {
+            elem.classList.add('allElem');
+          }
+        } else {
+          elem.classList.add('onlyText');
+        }
+      }
+    }
+
+  });
+
+  //boucle pour appliquer les différentes height en fonction du résultat de la boucle précédente pour les grands écrans
+  if (window.matchMedia('(min-width: 736px)').matches) {
+    elems.forEach(function (elem) {
+      let offreHeader = elem.querySelector('.detail-offre-content-header');
+
+      if (!oneHavePrice && !oneHaveCta) {
+        offreHeader.style.height = '10rem';
+        elem.classList.add('onlyText');
+      }
+      else if (oneHavePrice && !oneHaveCta) {
+        offreHeader.style.height = '12rem';
+        elem.classList.add('onlyPrice');
+      }
+      else if (!oneHavePrice && oneHaveCta) {
+        if (maxCtaNb === 1) {
+          offreHeader.style.height = '13.125rem';
+          elem.classList.add('onlyOneCta');
+        }
+        else {
+          offreHeader.style.height = '17.325rem';
+          elem.classList.add('onlyCtas');
+        }
+      }
+      else {
+        offreHeader.style.height = '21rem';
+        elem.classList.add('allElem');
+      }
+    })
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
