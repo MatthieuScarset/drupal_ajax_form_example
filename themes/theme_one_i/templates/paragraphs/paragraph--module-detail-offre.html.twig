@@ -53,17 +53,20 @@
         <div class="container-fluid">
           <div class="small text-gray3 font-weight-bold pt-0">{{ module_title|t }}</div>
           <h2 class="h1 col-12 col-md-7 mb-2 p-0">{{ content.field_title }}</h2>
+        </div>
 
-          {% if 1 == content.field_items['#items']|length %}
+        {% if 1 == content.field_items['#items']|length %}
+          <div class="container-fluid">
             <div class="items-module-detail-offre w-100 px-0">
               {{ content.field_items }}
             </div>
+          </div>
           {% else %}
 
-          <div class="custom-slider" >
-            <div class="col-12 w-100">
-              <div class="row justify-content-between mb-2 mb-md-4 px-0">
-                <div class="col-12 col-md-7">
+            <div class="custom-slider" >
+              <div class="container-fluid">
+                <div class="row justify-content-between mb-2 mb-md-4 px-0">
+                  <div class="col-12 col-md-7">
                   <div class="row">
                     <div class="col-12 lead font-weight-bold p-0 ">{{ content.field_accroche }}</div>
                     {% if content.field_call_to_action_buton["#items"]|length > 0  %}

@@ -22,7 +22,7 @@
       max-height: 19rem;
       overflow: hidden;
       @include media-breakpoint-up(md) {
-        max-height: 33.125rem;
+        max-height: 31.375rem;
       }
 
       button.see-more {
@@ -30,10 +30,13 @@
         max-width: 100%;
         padding-top: 0.7rem;
         @include media-breakpoint-up(md) {
-          max-width: 88%;
+          max-width: 24.375rem;
           padding-right: 2rem;
           padding-top: 8.125rem;
           background: linear-gradient(rgba(255, 255, 255, 0) 20%, white, white);
+        }
+        @include media-breakpoint-up(lg) {
+          max-width: 20rem;
         }
 
         span.text-voir-tout {
@@ -82,8 +85,17 @@
       flex-wrap: unset;
       scrollbar-width: none;
 
+      &:first-child {
+        padding-left: 0;
+      }
+
       &::-webkit-scrollbar {
         display: none;
+      }
+
+      .item-detail-offre {
+        max-width: 24.375rem;
+        flex: 0 0 100%;
       }
     }
 
