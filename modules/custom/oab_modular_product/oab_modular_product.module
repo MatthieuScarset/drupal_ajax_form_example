@@ -443,11 +443,13 @@ function oab_modular_product_entity_bundle_field_info_alter(&$fields, EntityType
     }
   }
 
-
   if ($entity_type->id() === "node" && $bundle === "modular_product") {
     if (isset($fields['field_modules'])) {
       $fields['field_modules'] -> addConstraint('ModularProductOrderModule');
       $fields['field_modules'] -> addConstraint('ModularProductModuleRequired');
+    }
+    if(isset($fields['field_detail_offre'])) {
+      $fields['field_detail_offre']->addConstraint('ModularProductDetailOffreCheckCTA');
     }
   }
 }
@@ -540,10 +542,10 @@ function oab_modular_product_preprocess_field(&$variables) {
  * Implements hook_preprocess_HOOK().
  */
 function oab_modular_product_preprocess_paragraph__module_detail_offre_items(&$variables) {
-
   /** @var Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   $is_single = false;
+  $variables['display_cta'] = TRUE;
 
   if (isset($paragraph)) {
     $parent = $paragraph->getParentEntity();
@@ -552,6 +554,9 @@ function oab_modular_product_preprocess_paragraph__module_detail_offre_items(&$v
     if (1 == $number_items) {
       $is_single = true;
     }
+
+    //on regarde si le CTA du parent (global) est renseigné ou non
+    $variables['display_cta'] = $parent->field_call_to_action_buton->isEmpty();
   }
   $variables['is_single'] = $is_single;
 }
