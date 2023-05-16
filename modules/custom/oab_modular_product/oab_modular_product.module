@@ -416,6 +416,7 @@ function oab_modular_product_hide_wysiwyg_paragraph(&$form) {
     //On rend la case à cocher Enable Wysywyg paragraph accessible uniquement pour les admins
     if (!in_array('administrator', \Drupal::currentUser()->getRoles())) {
       $form['field_enable_wysiwyg_paragraph']['#disabled'] = TRUE;
+      $form['field_enable_wysiwyg_paragraph']['#access'] = FALSE;
     }
 
     //on vérifie si le paragraph WYSIWYG est activé ou non => s'il ne l'est pas on le supprime des options disponibles pour les modules

@@ -18,7 +18,6 @@ dependencies:
     - field.field.node.modular_product.field_modules
     - field.field.node.modular_product.field_presentation
     - field.field.node.modular_product.field_product_category
-    - field.field.node.modular_product.field_product_name
     - field.field.node.modular_product.field_teaser
     - field.field.node.modular_product.field_visual
     - node.type.modular_product
@@ -30,6 +29,11 @@ targetEntityType: node
 bundle: modular_product
 mode: teaser_categroy_page
 content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
   field_badge:
     type: entity_reference_label
     label: hidden
@@ -54,14 +58,6 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 4
-    region: content
-  field_product_name:
-    type: string
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 0
     region: content
   field_teaser:
     type: basic_string
