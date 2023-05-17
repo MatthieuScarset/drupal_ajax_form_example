@@ -3,9 +3,9 @@ class ModuleDetailOffre {
   constructor(elem) {
     this.$root = elem;
     this.$offres = this.$root.querySelectorAll('.detail-offre-item');
+
+
     this.$offresClose = this.$root.querySelectorAll('.detail-offre-item.item-close');
-
-
     if (this.$offresClose.length > 1) {
       updateOffresHeight(this.$offresClose);
     }
@@ -13,10 +13,31 @@ class ModuleDetailOffre {
     this.$root.querySelectorAll('button.see-more').forEach((btn) => {
       btn.addEventListener('click', this._toggleItems);
     });
+
+    this.$offres.forEach((offre) => {
+      new ResizeObserver(function(elem) {
+        let offre_height = elem[0].contentRect.height;
+        let seeMoreBtn = offre.querySelector('button.see-more');
+
+        console.log(offre.classList, offre.classList.contains('item-close'))
+
+        if (offre.classList.contains('item-close')) {
+          if (window.matchMedia("(max-width: 767px)").matches
+            || window.matchMedia("(min-width: 767px)").matches && offre_height > offre.offsetHeight) {
+            seeMoreBtn.classList.remove('btn-hidden');
+          } else {
+            seeMoreBtn.classList.add('btn-hidden');
+          }
+        } else {
+          if (window.matchMedia("(min-width: 767px)").matches && offre_height < 608) {
+            seeMoreBtn.classList.add('btn-hidden');
+          }
+        }
+      }).observe(offre.querySelector('.detail-offre-content'));
+    });
   }
 
   _toggleItems = (event) => {
-
     if (window.matchMedia("(max-width: 767px)").matches) {
       const is_initially_open = event.currentTarget.closest('.detail-offre-item').classList.contains('item-open');
 
@@ -82,6 +103,8 @@ class ModuleDetailOffre {
     }
   }
 }
+
+// modifie la taille de la carte offre pour la version mobile
 function updateOffresHeight(elems) {
   let oneHaveCta = false;
   let oneHavePrice = false;
@@ -154,36 +177,6 @@ function updateOffresHeight(elems) {
     }
 
   });
-
-  //boucle pour appliquer les différentes height en fonction du résultat de la boucle précédente pour les grands écrans
-  if (window.matchMedia('(min-width: 736px)').matches) {
-    elems.forEach(function (elem) {
-      let offreHeader = elem.querySelector('.detail-offre-content-header');
-
-      if (!oneHavePrice && !oneHaveCta) {
-        offreHeader.style.height = '10rem';
-        elem.classList.add('onlyText');
-      }
-      else if (oneHavePrice && !oneHaveCta) {
-        offreHeader.style.height = '12rem';
-        elem.classList.add('onlyPrice');
-      }
-      else if (!oneHavePrice && oneHaveCta) {
-        if (maxCtaNb === 1) {
-          offreHeader.style.height = '13.125rem';
-          elem.classList.add('onlyOneCta');
-        }
-        else {
-          offreHeader.style.height = '17.325rem';
-          elem.classList.add('onlyCtas');
-        }
-      }
-      else {
-        offreHeader.style.height = '21rem';
-        elem.classList.add('allElem');
-      }
-    })
-  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {

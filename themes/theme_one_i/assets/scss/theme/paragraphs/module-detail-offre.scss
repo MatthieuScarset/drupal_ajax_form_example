@@ -34,60 +34,72 @@
       }
 
       &.item-close {
-        max-height: 38rem;
+        height: 23rem;
         overflow: hidden;
 
         @include media-breakpoint-down(md) {
           &.onlyText {
             height: 16rem;
+
             &.see-full {
               height: 21.5rem;
             }
+
             .detail-offre-content-header {
               height: 9rem;
             }
           }
           &.onlyPrice {
             height: 18rem;
+
             &.see-full {
               height: 24rem;
             }
+
             .detail-offre-content-header {
               height: 11rem;
             }
           }
           &.onlyOneCta {
             height: 20rem;
+
             &.see-full {
               height: 27rem;
             }
+
             .detail-offre-content-header {
               height: 13rem;
             }
           }
           &.onlyCtas {
             height: 23.5rem;
+
             &.see-full {
               height: 31rem;
             }
+
             .detail-offre-content-header {
               height: 17rem;
             }
           }
           &.oneCtaAndPrice {
             height: 24rem;
+
             &.see-full {
               height: 30rem;
             }
+
             .detail-offre-content-header {
               height: 17rem;
             }
           }
           &.allElem {
             height: 27rem;
+
             &.see-full {
               height: 35rem;
             }
+
             .detail-offre-content-header {
               height: 20.5rem;
             }
@@ -95,27 +107,25 @@
         }
 
         @include media-breakpoint-up(md) {
-          &.onlyText {
-            max-height: 27rem;
-          }
-          &.onlyPrice {
-            max-height: 29rem;
-          }
-          &.onlyOneCta {
-            max-height: 30rem;
-          }
-          &.onlyCtas {
-            max-height: 34.5rem;
-          }
-          &.allElem {
-            max-height: 38rem;
-          }
+          height: 38rem;
         }
+
 
         button.see-more {
           background: $white;
           max-width: 100%;
           padding-top: 0.7rem;
+          transition: visibility 0s, opacity 0.5s linear;
+
+          &.btn-hidden {
+            opacity: 0;
+            visibility: hidden;
+          }
+
+          &:not(.btn-hidden) {
+            opacity: 1;
+            visibility: visible;
+          }
           @include media-breakpoint-up(md) {
             max-width: 24.375rem;
             padding-right: 2rem;
