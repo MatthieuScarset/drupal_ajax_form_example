@@ -4,10 +4,8 @@ class ModuleDetailOffre {
     this.$root = elem;
     this.$offres = this.$root.querySelectorAll('.detail-offre-item');
 
-
-    this.$offresClose = this.$root.querySelectorAll('.detail-offre-item.item-close');
-    if (this.$offresClose.length > 1) {
-      updateOffresHeight(this.$offresClose);
+    if (this.$offres.length > 1) {
+      updateOffresHeight(this.$offres);
     }
 
     this.$root.querySelectorAll('button.see-more').forEach((btn) => {
@@ -18,8 +16,6 @@ class ModuleDetailOffre {
       new ResizeObserver(function(elem) {
         let offre_height = elem[0].contentRect.height;
         let seeMoreBtn = offre.querySelector('button.see-more');
-
-        console.log(offre.classList, offre.classList.contains('item-close'))
 
         if (offre.classList.contains('item-close')) {
           if (window.matchMedia("(max-width: 767px)").matches
@@ -122,8 +118,6 @@ function updateOffresHeight(elems) {
     let offreCta = elem.querySelectorAll('.call-to-action .field--item')
     let offrePrice = elem.querySelectorAll('.offre-price');
 
-    let haveSeeMore = false;
-
     if (elem.querySelector('.see-more') === null) {
        elem.classList.add('see-full');
     }
@@ -141,7 +135,7 @@ function updateOffresHeight(elems) {
       oneHavePrice = true
     }
 
-    //pour la version mobile, on applique les modification de height pour chaque élément
+    //pour la version mobile, on applique les modifications de height pour chaque élément
     if (window.matchMedia('(max-width: 736px)').matches) {
       if (haveGlobalCta) {
         if (offrePrice.length > 0 ) {

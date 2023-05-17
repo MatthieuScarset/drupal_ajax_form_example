@@ -117,20 +117,22 @@
           padding-top: 0.7rem;
           transition: visibility 0s, opacity 0.5s linear;
 
-          &.btn-hidden {
-            opacity: 0;
-            visibility: hidden;
-          }
-
-          &:not(.btn-hidden) {
-            opacity: 1;
-            visibility: visible;
-          }
           @include media-breakpoint-up(md) {
             max-width: 24.375rem;
             padding-right: 2rem;
             padding-top: 8.125rem;
             background: linear-gradient(rgba(255, 255, 255, 0) 25%, white, white);
+
+            &.btn-hidden {
+              opacity: 0;
+              visibility: hidden;
+            }
+
+            &:not(.btn-hidden) {
+              opacity: 1;
+              visibility: visible;
+            }
+
           }
           @include media-breakpoint-up(lg) {
             max-width: 20rem;
