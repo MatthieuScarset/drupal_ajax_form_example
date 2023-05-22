@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.module_detail_offre.field_accroche
+    - field.field.paragraph.module_detail_offre.field_enable_service_and_support
     - field.field.paragraph.module_detail_offre.field_highlight
     - field.field.paragraph.module_detail_offre.field_items
     - field.field.paragraph.module_detail_offre.field_key_points
@@ -23,7 +24,7 @@ third_party_settings:
       label: 'Services et accompagnements'
       region: content
       parent_name: ''
-      weight: 3
+      weight: 4
       format_type: fieldset
       format_settings:
         classes: ''
@@ -44,9 +45,16 @@ content:
       rows: 2
       placeholder: ''
     third_party_settings: {  }
+  field_enable_service_and_support:
+    type: boolean_checkbox
+    weight: 3
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_highlight:
     type: string_textarea
-    weight: 5
+    weight: 8
     region: content
     settings:
       rows: 2
@@ -73,7 +81,7 @@ content:
     third_party_settings: {  }
   field_key_points:
     type: string_textfield
-    weight: 6
+    weight: 9
     region: content
     settings:
       size: 60
@@ -81,7 +89,7 @@ content:
     third_party_settings: {  }
   field_tab_title:
     type: string_textfield
-    weight: 4
+    weight: 7
     region: content
     settings:
       size: 60
