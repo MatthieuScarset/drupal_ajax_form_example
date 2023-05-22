@@ -8,7 +8,7 @@ id: node.modular_product.title
 field_name: title
 entity_type: node
 bundle: modular_product
-label: Title
+label: 'Product name'
 description: ''
 required: true
 translatable: true
