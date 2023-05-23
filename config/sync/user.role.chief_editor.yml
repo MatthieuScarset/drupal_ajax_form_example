@@ -36,8 +36,8 @@ dependencies:
     - node.type.region
     - node.type.simple_page
     - node.type.solution
-    - workflows.workflow.content
     - node.type.webform
+    - workflows.workflow.content
   module:
     - comment
     - content_moderation
@@ -51,6 +51,7 @@ dependencies:
     - oab_background_image
     - oab_siu_connexion
     - oab_subhomes
+    - path
     - quickedit
     - replicate_ui
     - scheduled_updates
@@ -88,6 +89,7 @@ permissions:
   - 'administer scheduled_update fields'
   - 'administer scheduled_update form display'
   - 'administer subhome entity entities'
+  - 'bypass node access'
   - 'create background media'
   - 'create blog_post content'
   - 'create cloud_service_provider content'
@@ -122,6 +124,7 @@ permissions:
   - 'create region content'
   - 'create simple_page content'
   - 'create solution content'
+  - 'create url aliases'
   - 'delete all revisions'
   - 'delete any background media'
   - 'delete any blog_post content'
