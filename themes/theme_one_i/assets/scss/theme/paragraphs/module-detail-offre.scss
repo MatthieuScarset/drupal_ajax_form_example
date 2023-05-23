@@ -135,7 +135,13 @@
 
           }
           @include media-breakpoint-up(lg) {
-            max-width: 22rem;
+            max-width: 18rem;
+          }
+          @include media-breakpoint-up(xl) {
+            max-width: 20rem;
+          }
+          @include media-breakpoint-up(xxl) {
+            max-width: 24rem;
           }
 
           span.text-voir-tout {
