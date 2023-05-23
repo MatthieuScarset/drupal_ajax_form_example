@@ -135,7 +135,7 @@
 
           }
           @include media-breakpoint-up(lg) {
-            max-width: 20rem;
+            max-width: 22rem;
           }
 
           span.text-voir-tout {
@@ -195,6 +195,10 @@
       .col-3-5 {
         max-width: 24.375rem;
         flex: 0 0 100%;
+
+        button.see-more {
+          max-width: 20rem !important;
+        }
       }
     }
 

@@ -13,19 +13,20 @@ class ModuleDetailOffre {
     });
 
     this.$offres.forEach((offre) => {
+      let offre_container_height = offre.offsetHeight - parseInt(window.getComputedStyle(offre).getPropertyValue('padding-bottom'));
       new ResizeObserver(function(elem) {
         let offre_height = elem[0].contentRect.height;
         let seeMoreBtn = offre.querySelector('button.see-more');
 
         if (offre.classList.contains('item-close')) {
           if (window.matchMedia("(max-width: 767px)").matches
-            || window.matchMedia("(min-width: 767px)").matches && offre_height > offre.offsetHeight) {
+            || window.matchMedia("(min-width: 767px)").matches && offre_height > offre_container_height) {
             seeMoreBtn.classList.remove('btn-hidden');
           } else {
             seeMoreBtn.classList.add('btn-hidden');
           }
         } else {
-          if (window.matchMedia("(min-width: 767px)").matches && offre_height < 608) {
+          if (window.matchMedia("(min-width: 767px)").matches && offre_height < offre_container_height) {
             seeMoreBtn.classList.add('btn-hidden');
           }
         }
