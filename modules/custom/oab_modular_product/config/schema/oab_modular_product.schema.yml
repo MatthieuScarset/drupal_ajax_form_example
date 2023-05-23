@@ -1,0 +1,10 @@
+node.type.*.third_party.oab_modular_product:
+  type: config_object
+  label: 'Theme Settings'
+  mapping:
+    ob1_theme:
+      type: checkbox
+      label: 'Content type use Ob1 theme'
+    background_e2e:
+      type: checkbox
+      label: 'Content type can have e2e Background'

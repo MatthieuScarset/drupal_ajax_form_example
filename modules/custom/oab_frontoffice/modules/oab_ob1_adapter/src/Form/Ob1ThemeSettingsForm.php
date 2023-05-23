@@ -28,16 +28,6 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
   private $viewsStorage;
 
   /**
-   * @var EntityTypeManager
-   */
-  private $entityTypeManager;
-
-  /**
-   * @var EntityStorageInterface|mixed|object
-   */
-  private $contentTypeStorage;
-
-  /**
    * Constructs a \Drupal\system\ConfigFormBase object.
    *
    * @param ConfigFactoryInterface $config_factory
@@ -49,9 +39,7 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
   public function __construct(ConfigFactoryInterface $config_factory, EntityTypeManager $entity_type_manager) {
     parent::__construct($config_factory);
     $this->conf  = $this->config($this->getConfigName());
-    $this->entityTypeManager = $entity_type_manager;
     $this->viewsStorage = $entity_type_manager->getStorage('view');
-    $this->contentTypeStorage = $entity_type_manager->getStorage('node_type');
   }
 
   /**
@@ -115,7 +103,6 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
 
     foreach (['fr','en'] as $langcode) {
       $selected_displays = array_filter($form_state->getValue($langcode . '_selected_displays'));
-      $selected_contents = array_filter($form_state->getValue($langcode . '_selected_contents'));
       $selected_urls = $form_state->getValue($langcode . '_url');
       $selected_routes = $form_state->getValue($langcode . '_routes');
 
@@ -131,15 +118,9 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
         $selected_to_save[$elems[0]][] = $elems[1];
       }
 
-      $content_selected_to_save = [];
-      foreach ($selected_contents as $content) {
-        $content_selected_to_save[] = $content;
-      }
-
       $conf = [];
       $conf['url'] = $url_selected_to_save;
       $conf['views'] = $selected_to_save;
-      $conf['contents'] = $content_selected_to_save;
       $conf['routes'] = array_filter(array_map('trim', explode("\n", $selected_routes)));
       $config->set($langcode, $conf);
     }
@@ -153,7 +134,6 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
     $conf = $this->conf->get($langcode);
     /** @var View[] $view_types */
     $view_types = $this->viewsStorage->loadMultiple();
-    $content_types = $this->contentTypeStorage->loadMultiple();
 
 
     $tab = [
@@ -219,26 +199,6 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
       '#options' => $options,
       '#title' => t('select views displays'),
       '#default_value' => $default
-    ];
-
-    $tab['contents'] = [
-      '#type' => 'details',
-      '#open' => false,
-      '#title' => t('Content Type conf')
-    ];
-
-    $content_options = [];
-    foreach ($content_types as $content) {
-      if ($content->get('status')) {
-        $content_options[$content->get('type')] = $content->label();
-      }
-    }
-
-    $tab['contents'][$langcode . '_selected_contents'] = [
-      '#type' => 'checkboxes',
-      '#options' => $content_options,
-      '#title' => t('select content types'),
-      '#default_value' => $conf['contents'] ?? ''
     ];
 
     return $tab;
