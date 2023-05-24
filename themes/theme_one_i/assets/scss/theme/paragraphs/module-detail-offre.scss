@@ -181,6 +181,16 @@
         .accroche {
           min-height: 2.75rem;
         }
+
+        @include media-breakpoint-down(md) {
+          .offre-title {
+            min-height: 2rem;
+          }
+
+          .offre-price {
+            font-size: 1.125rem
+          }
+        }
       }
     }
 
