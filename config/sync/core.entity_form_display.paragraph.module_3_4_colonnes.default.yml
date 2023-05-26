@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.module_3_4_colonnes.field_accroche
-    - field.field.paragraph.module_3_4_colonnes.field_items_3_4
+    - field.field.paragraph.module_3_4_colonnes.field_item
     - field.field.paragraph.module_3_4_colonnes.field_title
     - paragraphs.paragraphs_type.module_3_4_colonnes
   module:
@@ -22,9 +22,9 @@ content:
       rows: 3
       placeholder: ''
     third_party_settings: {  }
-  field_items_3_4:
+  field_item:
     type: paragraphs
-    weight: 3
+    weight: 4
     region: content
     settings:
       title: Paragraph
@@ -35,7 +35,7 @@ content:
       closed_mode_threshold: 0
       add_mode: dropdown
       form_display_mode: default
-      default_paragraph_type: module_3_4_colonnes_items
+      default_paragraph_type: module_benefits_item
       features:
         add_above: '0'
         collapse_edit_all: collapse_edit_all

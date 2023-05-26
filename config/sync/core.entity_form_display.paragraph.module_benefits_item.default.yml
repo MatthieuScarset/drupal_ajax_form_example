@@ -5,8 +5,11 @@ dependencies:
   config:
     - field.field.paragraph.module_benefits_item.field_description
     - field.field.paragraph.module_benefits_item.field_icon
+    - field.field.paragraph.module_benefits_item.field_redirection_url
     - field.field.paragraph.module_benefits_item.field_title
     - paragraphs.paragraphs_type.module_benefits_item
+  module:
+    - link
 id: paragraph.module_benefits_item.default
 targetEntityType: paragraph
 bundle: module_benefits_item
@@ -27,6 +30,14 @@ content:
     settings:
       size: 50
       placeholder: ''
+    third_party_settings: {  }
+  field_redirection_url:
+    type: link_default
+    weight: 3
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
     third_party_settings: {  }
   field_title:
     type: string_textfield

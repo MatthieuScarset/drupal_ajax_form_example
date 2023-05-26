@@ -1,9 +1,0 @@
-<div class="field-items-modules row">
-  {% for item in items %}
-    {% if 4 == items|length %}
-      <div{{ item.attributes.addClass('field-items', 'col-11 col-md-3') }}>{{ item.content }}</div>
-    {% else %}
-      <div{{ item.attributes.addClass('field-items', 'col-11 col-md-4') }}>{{ item.content }}</div>
-    {% endif %}
-  {% endfor %}
-</div>
