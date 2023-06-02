@@ -3,3 +3,7 @@
 function oab_ob1_adapter_install() {
   drupal_set_installed_schema_version('oab_ob1_adapter', 8000);
 }
+
+function oab_ob1_adapter_9001() {
+  include_once("updates/update_9001.inc");
+}
