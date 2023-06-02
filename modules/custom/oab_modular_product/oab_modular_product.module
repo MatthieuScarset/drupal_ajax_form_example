@@ -403,29 +403,10 @@ function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, 
       $form['field_teaser']['widget'][0]['value']['#description'] .= ' '.FieldFilteredMarkup::create($description.' characters max');
     }
     oab_modular_product_hide_wysiwyg_paragraph($form);
-    $form['#validate'][] = 'oab_modular_product_form_validate';
   }
 
   if (in_array($form_id, ['node_corporate_form', 'node_corporate_edit_form'])) {
     oab_modular_product_hide_wysiwyg_paragraph($form);
-  }
-}
-
-function oab_modular_product_form_validate($form, FormStateInterface $form_state) {
-
-  $key_points = $form_state->getValue('field_key_points');
-
-  // Vérifiez si au moins une valeur est présente.
-  $has_value = false;
-  foreach ($key_points as $value) {
-    if (!empty($value['value'])) {
-      $has_value = true;
-      break;
-    }
-  }
-
-  if (!$has_value) {
-    $form_state->setErrorByName('field_key_point', t('At least one value is required for Category page -> key points.'));
   }
 }
 
@@ -467,6 +448,10 @@ function oab_modular_product_entity_bundle_field_info_alter(&$fields, EntityType
     if (isset($fields['field_modules'])) {
       $fields['field_modules'] -> addConstraint('ModularProductOrderModule');
       $fields['field_modules'] -> addConstraint('ModularProductModuleRequired');
+    }
+
+    if (isset($fields['field_key_points'])) {
+      $fields['field_key_points']->addConstraint('ModularProductKeyPoints');
     }
   }
 }
