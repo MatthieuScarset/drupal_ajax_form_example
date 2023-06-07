@@ -15,6 +15,6 @@ use Symfony\Component\Validator\Constraint;
  */
 class ModularProductKeyPoints extends Constraint {
 
-  public string $message = 'At least one value is required for Category page -> key points.';
+  public string $message = 'You should have 3 key points in Category page';
 
 }
