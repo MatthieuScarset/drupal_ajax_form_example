@@ -8,6 +8,7 @@ use Drupal\oab_modular_product\Services\OabModularProductService;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Core\Entity\EntityInterface;
 
+
 /**
  * Implements hook_inline_entity_form_entity_form_alter().
  */
@@ -19,6 +20,10 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
   if (!isset($entity_form['#bundle'])) {
     return;
   }
+
+  //Désactivation des champs des paragraphs (en inline entity) qui ont une valeur par défaut
+  \Drupal::service('oab_modular_product.form_service')
+    ->disableFieldWithDefaultValue($entity_form, $form_state, $entity_form['#entity']);
 
   /** @var OabModularProductService $conf_modular_product */
   $conf_modular_product = \Drupal::service('oab_modular_product.settings');
@@ -164,6 +169,10 @@ function oab_modular_product_field_widget_single_element_form_alter(array &$elem
   if (!isset($element['#paragraph_type'])) {
     return;
   }
+
+  //Désactivation des champs des paragraphs (en paragraph stable) qui ont une valeur par défaut
+  \Drupal::service('oab_modular_product.form_service')
+    ->disableFieldWithDefaultValue($element['subform'], $form_state, Paragraph::create(['type' => $element['#paragraph_type']]));
 
 
   /** @var OabModularProductService $conf_modular_product */
@@ -403,6 +412,9 @@ function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, 
       $form['field_teaser']['widget'][0]['value']['#description'] .= ' '.FieldFilteredMarkup::create($description.' characters max');
     }
     oab_modular_product_hide_wysiwyg_paragraph($form);
+
+    //Désactivation des champs dans le node modular product
+    \Drupal::service('oab_modular_product.form_service')->disableFieldWithDefaultValue($form, $form_state);
   }
 
   if (in_array($form_id, ['node_corporate_form', 'node_corporate_edit_form'])) {

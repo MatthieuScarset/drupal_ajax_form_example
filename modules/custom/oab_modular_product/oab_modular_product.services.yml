@@ -7,3 +7,7 @@ services:
   oab_modular_product.settings:
     class: \Drupal\oab_modular_product\Services\OabModularProductService
     arguments: ['@oab_modular_product.conf_settings']
+
+  oab_modular_product.form_service:
+    class: Drupal\oab_modular_product\Services\ModularProductFormService
+    arguments: ['@current_user', '@entity_type.manager']
