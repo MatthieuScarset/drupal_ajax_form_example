@@ -2,9 +2,11 @@
 
 namespace Drupal\oab_modular_product\Services;
 
+use Drupal\Core\Entity\Entity\EntityFormDisplay;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeManager;
+use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountProxy;
 use Drupal\paragraphs\Entity\Paragraph;
@@ -31,14 +33,14 @@ class ModularProductFormService {
       return;
     }
 
-    /** @var \Drupal\Core\Entity\EntityStorageInterface $storage */
+    /** @var EntityStorageInterface $storage */
     $storage = $form_state->getStorage();
 
-    /** @var \Drupal\Core\Entity\Entity\EntityFormDisplay $form_display */
+    /** @var EntityFormDisplay $form_display */
     $form_display = $storage['form_display'];
     $form_display_content = $form_display->get('content');
 
-    /** @var \Drupal\Core\Entity\EntityInterface $entity */
+    /** @var EntityInterface $entity */
     $entity = $entity ?? $form_state->getFormObject()->getEntity();
 
     //Paragraphs
@@ -59,7 +61,7 @@ class ModularProductFormService {
       }
     }
 
-    /** @var \Drupal\Core\Field\BaseFieldDefinition[] $field_definitions */
+    /** @var BaseFieldDefinition[] $field_definitions */
     $field_definitions = $entity->getFieldDefinitions();
 
     $avoided_field_type = ['boolean', 'entity_reference', 'entity_reference_revisions'];
