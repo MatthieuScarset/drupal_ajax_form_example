@@ -23,10 +23,10 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
 
   //Désactivation des fields des paragraphs qui ont une valeur par défaut
   //uniquement dans modular product
-  /** @var EntityInterface $entity */
-  $entity = $form_state->getformObject()->getEntity();
+  /** @var EntityInterface $original_node */
+  $original_node = $form_state->getformObject()->getEntity();
 
-  if ($entity->bundle() === 'modular_product') {
+  if ($original_node->bundle() === 'modular_product') {
     \Drupal::service('oab_modular_product.form_service')
       ->disableFieldWithDefaultValue($entity_form, $form_state, $entity_form['#entity']);
   }
@@ -179,10 +179,10 @@ function oab_modular_product_field_widget_single_element_form_alter(array &$elem
 
   //Désactivation des fields des paragraphs qui ont une valeur par défaut
   //uniquement dans modular product
-  /** @var EntityInterface $entity */
-  $entity = $form_state->getformObject()->getEntity();
+  /** @var EntityInterface $original_node */
+  $original_node = $form_state->getformObject()->getEntity();
 
-  if ($entity->bundle() === 'modular_product') {
+  if ($original_node->bundle() === 'modular_product') {
     \Drupal::service('oab_modular_product.form_service')
       ->disableFieldWithDefaultValue($element['subform'], $form_state, Paragraph::create(['type' => $element['#paragraph_type']]));
   }

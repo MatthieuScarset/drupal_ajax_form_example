@@ -38,7 +38,7 @@ class ModularProductFormService {
 
     /** @var EntityFormDisplay $form_display */
     $form_display = $storage['form_display'];
-    $form_display_content = $form_display->get('content');
+    $form_display_content = $form_display ?->get('content');
 
     /** @var EntityInterface $entity */
     $entity = $entity ?? $form_state->getFormObject()->getEntity();
@@ -69,14 +69,14 @@ class ModularProductFormService {
     foreach ($form_display_content as $field_name => $field) {
       if (isset($form[$field_name]) && isset($field_definitions[$field_name])
         && !in_array($field_definitions[$field_name]->getType(), $avoided_field_type)
-        && $this->isDefaultValueEmpty($field_definitions[$field_name]->getDefaultValue($entity))
+        && $this->isDefaultValueNotEmpty($field_definitions[$field_name]->getDefaultValue($entity))
       ) {
         $form[$field_name]['#disabled'] = 'disabled';
       }
     }
   }
 
-  private function isDefaultValueEmpty(mixed $default_value): bool {
+  private function isDefaultValueNotEmpty(mixed $default_value): bool {
     return isset($default_value[0]["value"]) && strlen($default_value[0]["value"]);
   }
 }
