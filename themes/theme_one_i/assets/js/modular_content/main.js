@@ -4,6 +4,7 @@ import ModuleStepSlider from "./module-step-slider";
 import ModuleDetailOffre from "./module-detail-offre";
 import ModuleExempleSlider from "./module-exemple-slider";
 import ModuleMap from "./module-map";
+import ModuleStorytelling from "./module-storytelling";
 import './tealium-modular-product';
 
 export {
@@ -11,5 +12,6 @@ export {
   ModuleStepSlider,
   ModuleDetailOffre,
   ModuleExempleSlider,
-  ModuleMap
+  ModuleMap,
+  ModuleStorytelling
 };
