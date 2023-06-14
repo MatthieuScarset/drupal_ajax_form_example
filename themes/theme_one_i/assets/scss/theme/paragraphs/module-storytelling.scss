@@ -41,13 +41,20 @@
 
       .left-panel {
         background-color: inherit;
+
+        .item-icon {
+          font-size: px-to-rem(20);
+
+          &:hover {
+            color: $primary;
+          }
+        }
       }
 
       .right-panel {
         background-color: inherit;
         height: 100vh;
         overflow-y: scroll;
-        overscroll-behavior: contain;
         -ms-overflow-style: none;  /* IE and Edge */
         scrollbar-width: none;  /* Firefox */
 
