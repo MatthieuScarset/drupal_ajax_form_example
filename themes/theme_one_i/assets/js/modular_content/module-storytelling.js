@@ -15,9 +15,6 @@ class ModuleStorytelling {
     this.$root.querySelector('.right-panel').addEventListener('scroll', () => {
       this._changeActiveIcon();
     });
-
-    this._trapScroll();
-
   }
 
   _isActive() {
@@ -40,11 +37,10 @@ class ModuleStorytelling {
   }
 
   _changeActiveIcon() {
-    let idStoryActive = '#story' + this._isActive();
-    let storyActive = this.$root.querySelector(idStoryActive);
+    let storyActive = this.$root.querySelector('#story' + this._isActive());
 
     this.$root.querySelectorAll('.items-list-item').forEach((storyList) => {
-      if (storyList !== idStoryActive) {
+      if (storyList !== storyActive.id) {
         storyList.classList.remove('active');
         storyList.querySelector('.item-icon').classList.remove('d-mb-block');
         storyList.querySelector('.item-icon').classList.add('d-none');
@@ -55,7 +51,6 @@ class ModuleStorytelling {
     storyActive.querySelector('.item-icon').classList.toggle('d-mb-block');
     storyActive.querySelector('.item-icon').classList.toggle('d-none');
   }
-
 }
 
 document.addEventListener("DOMContentLoaded", () => {
