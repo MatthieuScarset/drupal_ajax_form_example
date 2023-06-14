@@ -33,13 +33,7 @@
     .right-panel {
       background-color: $greige;
 
-      .storypart {
-        padding-bottom: 2rem;
 
-        &:last-child {
-          padding-bottom: 0;
-        }
-      }
     }
 
     @include media-breakpoint-up(md) {
@@ -65,7 +59,13 @@
         }
 
         .storypart {
-          padding-bottom: 5rem;
+          overflow-y: scroll;
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+
+          &::-webkit-scrollbar {
+            display: none;
+          }
 
           .storypart-text {
             margin-left: 6rem;

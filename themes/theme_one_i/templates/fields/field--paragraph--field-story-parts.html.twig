@@ -47,8 +47,8 @@
 %}
 <div{{ attributes.addClass(classes, 'field--items') }}>
   {% for item in items %}
-    <div{{ item.attributes.addClass('field--item storypart m-2 mr-md-0 ml-md-4
-     my-md-5') }}>
+    <div{{ item.attributes.addClass('field--item storypart m-2 m-md-0 ml-md-4
+     py-md-5 h-100 position-relative .trapScroll') }}>
       {{ item.content }}
     </div>
   {% endfor %}

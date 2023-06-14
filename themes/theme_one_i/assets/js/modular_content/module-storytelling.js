@@ -4,7 +4,6 @@ class ModuleStorytelling {
 
   constructor(elem) {
     this.$root = elem;
-    this.$current = 1;
     this.$storyPanel = elem.querySelector('.right-panel');
     this.$storyParts = this.$root.querySelectorAll('.storypart');
     this.firstStoryPart = this.$root.querySelector('#story1');
@@ -15,26 +14,29 @@ class ModuleStorytelling {
 
     this.$root.querySelector('.right-panel').addEventListener('scroll', () => {
       this._changeActiveIcon();
-    })
+    });
+
+    this._trapScroll();
+
   }
 
   _isActive() {
-    let isVisible
+    let indexElemVisible = 1;
 
     this.$storyParts.forEach((storyPart, index) => {
       const rect = storyPart.getBoundingClientRect();
-      const position = (rect.top + rect.bottom) / 2;
-
       const topPosition = this.$storyPanel.getBoundingClientRect().top;
-      const bottomPosition = this.$storyPanel.getBoundingClientRect().bottom;
+
+      let elemStyle =  window.getComputedStyle(storyPart);
+      let elemPaddingBottom = parseInt(elemStyle.paddingBottom)
 
       //verify if the element is visible
-      if ((rect.top > (topPosition - 10) || position > topPosition) && (position < bottomPosition || Math.trunc(rect.bottom) < bottomPosition)) {
-        isVisible = index+1;
+      if ((rect.bottom - elemPaddingBottom) > topPosition && (rect.top - elemPaddingBottom)  <= topPosition) {
+        indexElemVisible = index+1;
       }
-    })
+    });
 
-    return isVisible;
+    return indexElemVisible;
   }
 
   _changeActiveIcon() {
@@ -52,8 +54,8 @@ class ModuleStorytelling {
     storyActive.classList.add('active');
     storyActive.querySelector('.item-icon').classList.toggle('d-mb-block');
     storyActive.querySelector('.item-icon').classList.toggle('d-none');
-
   }
+
 }
 
 document.addEventListener("DOMContentLoaded", () => {

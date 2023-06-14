@@ -1,0 +1,48 @@
+uuid: f99e3fa0-e6a3-4c48-ace6-fd4d0e2bd186
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.module_storytelling_item.field_description
+    - field.field.paragraph.module_storytelling_item.field_highlight
+    - field.field.paragraph.module_storytelling_item.field_title
+    - field.field.paragraph.module_storytelling_item.field_visual
+    - paragraphs.paragraphs_type.module_storytelling_item
+id: paragraph.module_storytelling_item.default
+targetEntityType: paragraph
+bundle: module_storytelling_item
+mode: default
+content:
+  field_description:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_highlight:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_visual:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: storytelling_image
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }
