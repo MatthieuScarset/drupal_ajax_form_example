@@ -5,12 +5,12 @@
   width: 150px;
 
   @include media-breakpoint-up(lg) {
-    bottom: -6.5rem;
+    bottom: -7.5rem;
     right: -1rem;
     width: 180px
   }
   @include media-breakpoint-up(xxl) {
-    right: -3rem;
+    right: 0.85rem;
   }
 }
 

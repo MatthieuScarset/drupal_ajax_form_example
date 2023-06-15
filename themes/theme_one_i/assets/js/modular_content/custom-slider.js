@@ -7,6 +7,7 @@ class CustomSlider {
 
     this.$root = elem;
     this.$container = this.$root.querySelector('.slider-container');
+    this.$currentStepSlider = this.$root.querySelector('.current-step-slider');
     if (this.$container) {
       this.$containerChildrens = this.$container.children;
     } else {
@@ -27,6 +28,8 @@ class CustomSlider {
     const elem = this._getFirstHidden(direction);
 
     if (typeof elem !== 'undefined') {
+
+      this._changeStepSlider(elem.dataset.target);
 
       if (elem.classList.contains('item-detail-offre')) {
         this.$width = elem.getBoundingClientRect().width;
@@ -65,6 +68,10 @@ class CustomSlider {
       }
     });
     return firstHidden;
+  }
+
+  _changeStepSlider(number) {
+    this.$currentStepSlider.innerText = number;
   }
 }
 

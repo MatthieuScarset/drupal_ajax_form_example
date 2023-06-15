@@ -1,45 +1,25 @@
 {% block content %}
-  {% if nb_testimonial == 1 %}
-    {% if content.field_video.0 %}
-      <div class="col-12 col-md-6 mt-3 mt-md-0">
+  {% if content.field_video.0 %}
+      <div class="col-12 col-md-6 order-last order-md-first mt-2 mt-md-0">
         {{ content.field_video }}
       </div>
-      <div class="col-12 col-md-5 offset-md-1">
-    {% endif %}
-        <div class="row">
-          <h3 class="col-12 lead text-gray3 pb-1">
-            {{ content.field_title }}
-          </h3>
-          <div class="col-12 pb-md-1">
-            <h4 class="font-weight-bold">{{ content.field_highlight }}</h4>
-          </div>
-          {% if content.field_testimonial_link.0["#url"] %}
-            <div class="col-12">
-              <a class="o-link-arrow no-decoration" href="{{ content.field_testimonial_link.0["#url"] }}"
-                 onmousedown="utag_link(utag_data.titre_page,'temoignages','{{ content.field_title.0['#context']['value']|escape('html') }}','{{ "Read the customer story"|t }}')">
-                {{ "Read the customer story"|t }}</a>
-            </div>
-          {% endif %}
-        </div>
-    {% if content.field_video.0 %}
-      </div>
-    {% endif %}
+      <div class="col-12 col-md-5 align-self-center order-first order-md-last mt-2 mt-md-0">
   {% else %}
-      <div class="row">
-        <div class="col-12 lead text-gray3 pb-1">
-          {{ content.field_title }}
-        </div>
-        <div class="col-12 pb-md-1">
-          <h4 class="font-weight-bold">{{ content.field_highlight }}</h4>
-        </div>
-        {% if content.field_testimonial_link.0["#url"] %}
-          <div class="col-12">
-            <a class="o-link-arrow no-decoration" href="{{ content.field_testimonial_link.0["#url"] }}"
-               onmousedown="utag_link(utag_data.titre_page,'temoignages','{{ content.field_title.0['#context']['value']|escape('html') }}','{{ "Read the customer story"|t }}')">
-              {{ "Read the customer story"|t }}</a>
-          </div>
-        {% endif %}
-      </div>
+    <div class="col-12 col-md-8 offset-md-1 mt-2 mt-md-0">
   {% endif %}
-{% endblock %}
+
+      <h3 class="lead text-gray3 mb-1">{{ content.field_title }}</h3>
+      <span class="h4 font-weight-bold">{{ content.field_highlight }}</span>
+      {% if content.field_testimonial_link.0["#url"] %}
+        <a class="o-link-arrow mt-2"
+           href="{{ content.field_testimonial_link.0["#url"] }}"
+           onmousedown="utag_link(utag_data.titre_page,'temoignages',
+             '{{ content.field_title.0['#context']['value']|escape('html') }}',
+             '{{ "Read the customer story"|t }}')"
+        >
+          {{ "Read the customer story"|t }}
+        </a>
+      {% endif %}
+    </div>
+  {% endblock %}
 

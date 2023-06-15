@@ -6,56 +6,27 @@
   'field--label-' ~ label_display,
 ]
 %}
-{% if 1 == items|length %}
-  {% if items.0.content["#paragraph"].field_video|length == 1 %}
-    <div{{ attributes.addClass(classes,"bg-gray2", "site-width") }}>
-  {% else %}
-    <div{{ attributes.addClass(classes,"bg-gray2") }}>
-      <div class="site-width">
-  {% endif %}
-        <div class="container-fluid pt-4 pb-2 py-md-4 position-relative">
-          <div class="row">
-            {% if items.0.content["#paragraph"].field_video|length != 1 %}
-              <img class="testimonial-left-img" src="/themes/theme_one_i/assets/image/Illustrations-temoignagnes.png" alt="illustration temoignage left">
-              <div class="col-12 col-md-9 offset-md-3 mt-4 mt-md-0">
-            {% else %}
-              <img class="d-block d-md-none testimonial-left-img" src="/themes/theme_one_i/assets/image/Illustrations-temoignagnes.png" alt="illustration temoignage left">
-              <div class="col-12 pl-md-0 pr-md-4">
-            {% endif %}
-                <div class="row">
-                  {{ items.0.content }}
-                </div>
-              </div>
-            {% if items.0.content["#paragraph"].field_video|length == 1 %}
-              <img class="d-none d-md-block testimonial-right-img" src="/themes/theme_one_i/assets/image/Illustrations-temoignages-2.png" alt="illustration temoignage right">
-          </div>
-            {% endif %}
-          </div>
-      </div>
-    </div>
-{% else %}
-  <div {{ attributes.addClass(classes, "bg-gray2") }}>
-    <div class="site-width">
-      <div class="container-fluid">
-        <div class="row position-relative pt-4 pb-2 py-md-4">
-          <img class="testimonial-left-img" src="/themes/theme_one_i/assets/image/Illustrations-temoignagnes.png" alt="illustration temoignage left">
-          <div class="col-12 col-md-9 offset-md-3 mt-4 mt-md-0 pr-0">
-            <div class="row overflow-auto testimonial-item-container slider-container">
-              {% for item in items %}
-                {% if loop.first %}
-                  <div {{ item.attributes.addClass('field--item', 'col-10', 'col-md-6') }}>
-                    {{ item.content }}
-                  </div>
-                {% else %}
-                  <div {{ item.attributes.addClass('field--item','col-10', 'col-md-6', 'offset-1') }}>
-                    {{ item.content }}
-                  </div>
-                {% endif %}
-              {% endfor %}
-            </div>
-          </div>
+
+{% set have_video_class = "row no-gutters justify-content-between px-1 px-md-4" %}
+
+<div class="bg-gray2 mx--1 mx-md-0 pt-5 pb-3 py-md-4">
+  <img class="d-none d-md-block testimonial-right-img"
+       src="/themes/theme_one_i/assets/image/Illustrations-temoignages-2.png"
+       alt="illustration temoignage right"
+  >
+
+  <img class="d-block d-md-none testimonial-left-img"
+       src="/themes/theme_one_i/assets/image/Illustrations-temoignagnes.png"
+       alt="illustration temoignage left">
+
+  <div class="row no-gutters overflow-auto testimonial-item-container slider-container">
+    {% for key, item in items %}
+      <div class="col-11 col-md-12 align-self-md-center"
+           data-target="{{ key + 1 }}">
+        <div class="{{ item.content["#paragraph"].field_video.value is not empty ? have_video_class : "" }}">
+          {{ item.content }}
         </div>
       </div>
-    </div>
+    {% endfor %}
   </div>
-{% endif %}
+</div>
