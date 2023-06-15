@@ -152,7 +152,7 @@ function oab_marketo_preprocess_paragraph(&$variables) {
       'mktoMunchkinID' => $marketo_conf->get('marketo.general.mkto_munchkin_id'),
       'mktoFormID' => (int) $paragraph->field_form_id->value,
       'formName' => $formName,
-      'useAltares' => true,
+      'useAltares' => (bool) $paragraph->field_requires_altares->value,
       'customFollowUpUrl' => isset($redirection_url) ? $redirection_url : "",
       'followUpMsgDiv' => "FormFollowUpMessage_" . (int) $paragraph->field_form_id->value,
       'mktoFieldOrder' => isset($list_field) ? $list_field : ["submitButton","LegalInfos"]
@@ -196,9 +196,6 @@ function oab_marketo_preprocess_node(&$variables) {
 
       // Variables nécessaires pour l'instanciation du formulaire par les scripts marketo
       $variables['#attached']['drupalSettings']['marketo_data'] = [
-        'mktoDomain' => $mkto_config->get('marketo.general.mkto_domain'),
-        'mktoMunchkinID' => $mkto_config->get('marketo.general.mkto_munchkin_id'),
-        'useAltares' => false,
         'mktoPdfName' => $node->label(),
         'mktoPdfLink' => isset($file) ? $file->createFileUrl() : null,
         'mktoPdfTheme' => _oab_get_labels_from_term($node->get('field_document_thematic')),
