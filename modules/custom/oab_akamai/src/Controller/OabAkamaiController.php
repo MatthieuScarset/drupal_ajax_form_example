@@ -273,7 +273,8 @@ class OabAkamaiController extends ControllerBase
     }
 
     private function akamai_getTimestamp() {
-        return str_replace('-', '', date(DATE_ISO8601));
+      // Akamai a besoin du timestamp dans ce format, malgré la déprécation
+      return str_replace('-', '', date(DATE_ISO8601));
     }
 
 }

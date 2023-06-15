@@ -3,7 +3,7 @@
 use Drupal\oab_akamai\Form\OabAkamaiForm;
 
 function oab_akamai_install() {
-  drupal_set_installed_schema_version('oab_akamai', 8000);
+  \Drupal::service('update.update_hook_registry')->setInstalledVersion('oab_akamai', 8000);
     // Set the site name.
     \Drupal::configFactory()->getEditable(OabAkamaiForm::getConfigName())
         ->set('enable_hook', 0)

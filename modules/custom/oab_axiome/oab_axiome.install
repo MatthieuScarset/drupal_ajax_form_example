@@ -5,7 +5,7 @@
  * Implements hook_install().
  */
 function oab_axiome_install() {
-   // drupal_set_installed_schema_version('oab_axiome', 8000);
+   // \Drupal::service('update.update_hook_registry')->setInstalledVersion('oab_axiome', 8000);
    // variable_set('revision_auto_draft', array('none'));
 
   //oabt_YmlImport('oab.axiome.yml');
@@ -23,7 +23,9 @@ function oab_axiome_install() {
 }
 
 function oab_axiome_uninstall() {
-    drupal_install_schema('oab_axiome');
+//  fonction depréciée et supprimée en D10, et pk installer
+//  des tables BDD lors de la désinstallation d'un module ??
+//    drupal_install_schema('oab_axiome');
 }
 
 /** Définit l'ordre des updates par rapport aux autres modules

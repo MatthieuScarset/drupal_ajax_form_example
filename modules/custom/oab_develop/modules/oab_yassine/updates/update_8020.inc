@@ -2068,27 +2068,27 @@ loadConfigField('field/storage', 'field.storage.node.field_top_zone_image');
 // ---------------------------
 
 // import view homepage
-$config_path = drupal_get_path('module', 'oab_backoffice') . '/config/core/entity_view_display/core.entity_view_display.paragraph.homepage_banner_experience.default.yml';
+$config_path = \Drupal::service('extension.path.resolver')->getPath('module', 'oab_backoffice') . '/config/core/entity_view_display/core.entity_view_display.paragraph.homepage_banner_experience.default.yml';
 $data = Yaml::parse($config_path);
 \Drupal::configFactory()->getEditable('core.entity_view_display.paragraph.homepage_banner_experience.default')->setData($data)->save(TRUE);
 
 // import view homepage
-$config_path = drupal_get_path('module', 'oab_backoffice') . '/config/core/entity_view_display/core.entity_view_display.paragraph.homepage_banner_item.default.yml';
+$config_path = \Drupal::service('extension.path.resolver')->getPath('module', 'oab_backoffice') . '/config/core/entity_view_display/core.entity_view_display.paragraph.homepage_banner_item.default.yml';
 $data = Yaml::parse($config_path);
 \Drupal::configFactory()->getEditable('core.entity_view_display.paragraph.homepage_banner_item.default')->setData($data)->save(TRUE);
 
 // import view homepage
-$config_path = drupal_get_path('module', 'oab_backoffice') . '/config/core/entity_view_display/core.entity_view_display.paragraph.homepage_news.default.yml';
+$config_path = \Drupal::service('extension.path.resolver')->getPath('module', 'oab_backoffice') . '/config/core/entity_view_display/core.entity_view_display.paragraph.homepage_news.default.yml';
 $data = Yaml::parse($config_path);
 \Drupal::configFactory()->getEditable('core.entity_view_display.paragraph.homepage_news.default')->setData($data)->save(TRUE);
 
 // import view homepage
-$config_path = drupal_get_path('module', 'oab_backoffice') . '/config/core/entity_view_display/core.entity_view_display.paragraph.infography_partner.default.yml';
+$config_path = \Drupal::service('extension.path.resolver')->getPath('module', 'oab_backoffice') . '/config/core/entity_view_display/core.entity_view_display.paragraph.infography_partner.default.yml';
 $data = Yaml::parse($config_path);
 \Drupal::configFactory()->getEditable('core.entity_view_display.paragraph.infography_partner.default')->setData($data)->save(TRUE);
 
 // import view homepage
-$config_path = drupal_get_path('module', 'oab_backoffice') . '/config/core/entity_view_display/core.entity_view_display.node.homepage.full.yml';
+$config_path = \Drupal::service('extension.path.resolver')->getPath('module', 'oab_backoffice') . '/config/core/entity_view_display/core.entity_view_display.node.homepage.full.yml';
 $data = Yaml::parse($config_path);
 \Drupal::configFactory()->getEditable('core.entity_view_display.node.homepage.full')->setData($data)->save(TRUE);
 
@@ -2098,23 +2098,23 @@ $data = Yaml::parse($config_path);
 // Form Display
 // ---------------------------
 
-$config_path = drupal_get_path('module', 'oab_backoffice') . '/config/core/entity_form_display/core.entity_form_display.paragraph.homepage_banner_experience.default.yml';
+$config_path = \Drupal::service('extension.path.resolver')->getPath('module', 'oab_backoffice') . '/config/core/entity_form_display/core.entity_form_display.paragraph.homepage_banner_experience.default.yml';
 $data = Yaml::parse($config_path);
 \Drupal::configFactory()->getEditable('core.entity_form_display.paragraph.homepage_banner_experience.default')->setData($data)->save(TRUE);
 
-$config_path = drupal_get_path('module', 'oab_backoffice') . '/config/core/entity_form_display/core.entity_form_display.paragraph.homepage_banner_item.default.yml';
+$config_path = \Drupal::service('extension.path.resolver')->getPath('module', 'oab_backoffice') . '/config/core/entity_form_display/core.entity_form_display.paragraph.homepage_banner_item.default.yml';
 $data = Yaml::parse($config_path);
 \Drupal::configFactory()->getEditable('core.entity_form_display.paragraph.homepage_banner_item.default')->setData($data)->save(TRUE);
 
-$config_path = drupal_get_path('module', 'oab_backoffice') . '/config/core/entity_form_display/core.entity_form_display.paragraph.homepage_news.default.yml';
+$config_path = \Drupal::service('extension.path.resolver')->getPath('module', 'oab_backoffice') . '/config/core/entity_form_display/core.entity_form_display.paragraph.homepage_news.default.yml';
 $data = Yaml::parse($config_path);
 \Drupal::configFactory()->getEditable('core.entity_form_display.paragraph.homepage_news.default')->setData($data)->save(TRUE);
 
-$config_path = drupal_get_path('module', 'oab_backoffice') . '/config/core/entity_form_display/core.entity_form_display.paragraph.infography_partner.default.yml';
+$config_path = \Drupal::service('extension.path.resolver')->getPath('module', 'oab_backoffice') . '/config/core/entity_form_display/core.entity_form_display.paragraph.infography_partner.default.yml';
 $data = Yaml::parse($config_path);
 \Drupal::configFactory()->getEditable('core.entity_form_display.paragraph.infography_partner.default')->setData($data)->save(TRUE);
 
-$config_path = drupal_get_path('module', 'oab_backoffice') . '/config/core/entity_form_display/core.entity_form_display.node.homepage.default.yml';
+$config_path = \Drupal::service('extension.path.resolver')->getPath('module', 'oab_backoffice') . '/config/core/entity_form_display/core.entity_form_display.node.homepage.default.yml';
 $data = Yaml::parse($config_path);
 \Drupal::configFactory()->getEditable('core.entity_form_display.node.homepage.default')->setData($data)->save(TRUE);
 
@@ -2122,7 +2122,7 @@ $data = Yaml::parse($config_path);
 // ---------------------------
 // Views partner
 // ---------------------------
-$config_path = drupal_get_path('module', 'oab_backoffice') . '/config/views/views.view.homepage_partner.yml';
+$config_path = \Drupal::service('extension.path.resolver')->getPath('module', 'oab_backoffice') . '/config/views/views.view.homepage_partner.yml';
 $data = Yaml::parse($config_path);
 \Drupal::configFactory()->getEditable('views.view.homepage_partner')->setData($data)->save(TRUE);
 
