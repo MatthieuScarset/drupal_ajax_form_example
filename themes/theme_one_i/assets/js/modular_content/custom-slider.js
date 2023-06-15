@@ -71,7 +71,9 @@ class CustomSlider {
   }
 
   _changeStepSlider(number) {
-    this.$currentStepSlider.innerText = number;
+    if (this.$currentStepSlider) {
+      this.$currentStepSlider.innerText = number;
+    }
   }
 }
 
