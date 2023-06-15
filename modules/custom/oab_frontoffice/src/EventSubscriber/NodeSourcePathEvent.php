@@ -148,13 +148,16 @@ class NodeSourcePathEvent implements EventSubscriberInterface {
                     ) {
 
                       \Drupal::logger('node_source_redirect')
-                        ->debug('2. Redirect from %source to %dest. uri_wo_options: %uri_wo_options | path_list : %path_list | Is front : %is_front', [
-                          '%source' => $current_uri,
-                          '%dest' => $new_url,
-                          '%path_list' => implode(' | ', $path_list),
-                          '%uri_wo_options' => $this->removeOptionsFromUrl($current_uri),
-                          '%is_front' => \Drupal::service('path.matcher')->isFrontPage() ? "oui" : "non"
-                        ]);
+                        ->debug('2. Redirect from %source to %dest. uri_wo_options: %uri_wo_options '
+                          . '| path_list : %path_list | Is front : %is_front',
+                          [
+                            '%source' => $current_uri,
+                            '%dest' => $new_url,
+                            '%path_list' => implode(' | ', $path_list),
+                            '%uri_wo_options' => $this->removeOptionsFromUrl($current_uri),
+                            '%is_front' => \Drupal::service('path.matcher')->isFrontPage() ? "oui" : "non"
+                          ]
+                        );
 
                         $response = new RedirectResponse($new_url, 301);
                         $event->setResponse($response);

@@ -46,7 +46,8 @@ class FooterSocialBlock extends BlockBase {
             '#type' => 'text_format',
             '#title' => t('Custom text'),
             '#default_value' => isset($config['footer_social_custom_text']['value']) ? $config['footer_social_custom_text']['value'] : '',
-            '#format' => isset($config['footer_social_custom_text']['format']) ? $config['footer_social_custom_text']['format'] : 'full_html',
+            '#format' => isset($config['footer_social_custom_text']['format'])
+              ? $config['footer_social_custom_text']['format'] : 'full_html',
         );
         return $form;
     }

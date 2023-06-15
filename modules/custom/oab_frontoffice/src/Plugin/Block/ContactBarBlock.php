@@ -66,7 +66,8 @@ class ContactBarBlock extends BlockBase {
                 $block['numero'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['contact_us'];
 
 
-                $block['detail_numero'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['contact_form'];
+                $block['detail_numero'] = $axiome_data['Children']['ruby_theme']['Children']
+                                          ['ruby_zone_seemore']['Attributes']['contact_form'];
             }
         }
       }*/
@@ -95,7 +96,8 @@ class ContactBarBlock extends BlockBase {
     $form['link_assistance_text'] = [
           '#title' => $this->t('Texte du lien vers l\'espace assistance'),
           '#type' => 'textfield',
-          '#default_value' => isset($this->configuration['link_assistance_text']) ? $this->configuration['link_assistance_text'] : 'Assistance',
+          '#default_value' => isset($this->configuration['link_assistance_text'])
+            ? $this->configuration['link_assistance_text'] : 'Assistance',
           '#required' => false,
       ];
 

@@ -19,8 +19,7 @@ use Drupal\oab_backbones\Classes\ShadowSites;
 use Drupal\pathauto\MessengerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class ShadowSitesForm extends FormBase
-{
+class ShadowSitesForm extends FormBase {
 
   /**
    * @var FileSystemInterface
@@ -34,12 +33,13 @@ class ShadowSitesForm extends FormBase
 
   /**
    * PerformanceDataForm constructor.
+   *
    * @param FileSystemInterface $file_system
-   * @param ImportShadowSites $importShadowSites
+   * @param ImportShadowSites $import_shadow_sites
    */
-  public function __construct(FileSystemInterface $file_system, ImportShadowSites $importShadowSites) {
+  public function __construct(FileSystemInterface $file_system, ImportShadowSites $import_shadow_sites) {
     $this->fileSystem = $file_system;
-    $this->importShadowSites = $importShadowSites;
+    $this->importShadowSites = $import_shadow_sites;
   }
 
   /**

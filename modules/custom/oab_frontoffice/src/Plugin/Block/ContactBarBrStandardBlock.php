@@ -60,13 +60,15 @@ class ContactBarBrStandardBlock extends BlockBase {
         $form['link_offices'] = [
             '#title' => $this->t('Link to Our local offices'),
             '#type' => 'textfield',
-            '#default_value' => isset($this->configuration['link_offices']) ? $this->configuration['link_offices'] : 'http://www.orange-business.com/en/where-we-are',
+            '#default_value' => isset($this->configuration['link_offices'])
+              ? $this->configuration['link_offices'] : 'http://www.orange-business.com/en/where-we-are',
             '#required' => false,
         ];
         $form['link_offices_text'] = [
             '#title' => $this->t('Link text to Our local offices'),
             '#type' => 'textfield',
-            '#default_value' => isset($this->configuration['link_offices_text']) ? $this->configuration['link_offices_text'] : 'Our local offices',
+            '#default_value' => isset($this->configuration['link_offices_text'])
+              ? $this->configuration['link_offices_text'] : 'Our local offices',
             '#required' => false,
         ];
 
@@ -92,7 +94,8 @@ class ContactBarBrStandardBlock extends BlockBase {
         $form['link_contact_text'] = [
             '#title' => $this->t('Link text to Contact sales'),
             '#type' => 'textfield',
-            '#default_value' => isset($this->configuration['link_contact_text']) ? $this->configuration['link_contact_text'] : 'Contact sales',
+            '#default_value' => isset($this->configuration['link_contact_text'])
+              ? $this->configuration['link_contact_text'] : 'Contact sales',
             '#required' => false,
         ];
 

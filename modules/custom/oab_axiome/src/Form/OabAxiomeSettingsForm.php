@@ -188,7 +188,9 @@ class OabAxiomeSettingsForm extends ConfigFormBase {
       if (!rename($archive_path, $new_path)) {
         $this->messengerService->addMessage($this->t("Moving archive failed."), 'error');
       } else {
-        $this->messengerService->addMessage($this->t("Moving archive succeed. Archive will be reimport at next cron (max 15min)."), 'success');
+        $this->messengerService->addMessage(
+          $this->t("Moving archive succeed. Archive will be reimport at next cron (max 15min)."),
+          'success');
       }
 
   }

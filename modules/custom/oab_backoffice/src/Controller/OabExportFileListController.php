@@ -45,7 +45,9 @@ class OabExportFileListController extends ControllerBase {
   private $fileUrlGenerator;
 
 
-  public function __construct(FileSystemInterface $file_system, UrlGeneratorInterface $url_interface, FileUrlGenerator $file_url_generator) {
+  public function __construct(FileSystemInterface $file_system,
+                              UrlGeneratorInterface $url_interface,
+                              FileUrlGenerator $file_url_generator) {
       $this->fileSystem = $file_system;
       $this->url = $url_interface;
       $this->fileUrlGenerator = $file_url_generator;
@@ -340,7 +342,7 @@ class OabExportFileListController extends ControllerBase {
             # Cas d'un timestamp
             if (strlen($value_array['value']) === 10 && is_numeric($value_array['value'])) {
               $date = date('d/m/Y H:i:s', $value_array['value']);
-              if ( false != $date) {
+              if (false != $date) {
                 return $date;
               }
             }

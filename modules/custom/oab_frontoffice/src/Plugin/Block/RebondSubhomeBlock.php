@@ -31,14 +31,14 @@ class RebondSubhomeBlock extends BlockBase {
     const LINK_TEXT = 'block_link_text';
     const IMAGE = 'block_image_src';
 
-    private $default_img_src = '/modules/custom/oab_frontoffice/images/visuel-mediatheque.png';
+    private $defaultImgSrc = '/modules/custom/oab_frontoffice/images/visuel-mediatheque.png';
 
     public function build() {
 
         // Retrieve existing configuration for this block.
         $config = $this->getConfiguration();
 
-        $img_src = $this->default_img_src;
+        $img_src = $this->defaultImgSrc;
         if (isset($config[self::IMAGE])) {
           $file = File::load($config[self::IMAGE]);
           if ($file !== null) {
