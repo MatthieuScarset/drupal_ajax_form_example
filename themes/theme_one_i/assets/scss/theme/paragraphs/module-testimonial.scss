@@ -1,4 +1,4 @@
-.testimonial-right-img {
+.testimonial-desktop-img {
   position: absolute;
   bottom: -5.5rem;
   right: 0;
@@ -6,15 +6,14 @@
 
   @include media-breakpoint-up(lg) {
     bottom: -7.5rem;
-    right: -1rem;
     width: 180px
   }
   @include media-breakpoint-up(xxl) {
-    right: 0.85rem;
+    right: -0.15rem;
   }
 }
 
-.testimonial-left-img {
+.testimonial-mobile-img {
   position: absolute;
   top: -2rem;
   left: 1rem;

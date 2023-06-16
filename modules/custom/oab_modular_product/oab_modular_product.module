@@ -586,6 +586,8 @@ function oab_modular_product_preprocess_paragraph__module_presentation(&$variabl
 function oab_modular_product_preprocess_paragraph__module_customer_space(&$variables) {
 
   $conf_modular_product = \Drupal::service('oab_modular_product.settings');
+
+  dd($variables);
   $variables['module_title'] = $conf_modular_product->getCustomerSpaceModuleTitle();
 }
 
@@ -595,6 +597,7 @@ function oab_modular_product_preprocess_paragraph__module_customer_space(&$varia
 function oab_modular_product_preprocess_paragraph(&$variables) {
   /** @var Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
+  $parent_entity_bundle  = $paragraph->getParentEntity()->bundle();
   /** @var OabModularProductService $conf_modular_product */
   $conf_modular_product = \Drupal::service('oab_modular_product.settings');
   switch ($paragraph->bundle()) {
@@ -617,7 +620,8 @@ function oab_modular_product_preprocess_paragraph(&$variables) {
       $variables['module_title'] = $conf_modular_product->getExamplesModuleTitle();
       break;
     case 'module_testimonial' :
-      $variables['module_title'] = $conf_modular_product->getTestimonialModuleTitle();
+        $variables['module_title'] = $parent_entity_bundle === 'modular_product' ?
+          $conf_modular_product->getTestimonialModuleTitle() : '';
       break;
     default:
       $variables['module_title'] = '';

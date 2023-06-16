@@ -9,15 +9,15 @@
 
 {% set have_video_class = "row no-gutters justify-content-between px-1 px-md-4" %}
 
-<div class="bg-gray2 mx--1 mx-md-0 pt-5 pb-3 py-md-4">
-  <img class="d-none d-md-block testimonial-right-img"
+<div class="bg-gray2 mx--1 mx-md-0 pt-5 pb-3 py-md-4 position-relative">
+  <img class="d-none d-md-block testimonial-desktop-img"
        src="/themes/theme_one_i/assets/image/Illustrations-temoignages-2.png"
-       alt="illustration temoignage right"
+       alt="illustration testimonial"
   >
 
-  <img class="d-block d-md-none testimonial-left-img"
+  <img class="d-block d-md-none testimonial-mobile-img"
        src="/themes/theme_one_i/assets/image/Illustrations-temoignagnes.png"
-       alt="illustration temoignage left">
+       alt="illustration testimonial">
 
   <div class="row no-gutters overflow-auto testimonial-item-container slider-container">
     {% for key, item in items %}
