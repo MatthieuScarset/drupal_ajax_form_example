@@ -7,7 +7,7 @@
 ]
 %}
 
-{% set have_video_class = "row no-gutters justify-content-between px-1 px-md-4" %}
+{% set have_video_class = "row no-gutters justify-content-between px-1 px-md-4 h-100" %}
 
 <div class="bg-gray2 mx--1 mx-md-0 pt-5 pb-3 py-md-4 position-relative">
   <img class="d-none d-md-block testimonial-desktop-img"
@@ -19,7 +19,7 @@
        src="/themes/theme_one_i/assets/image/Illustrations-temoignagnes.png"
        alt="illustration testimonial">
 
-  <div class="row no-gutters overflow-auto testimonial-item-container slider-container">
+  <div class="row no-gutters overflow-auto testimonial-item-container slider-container h-100">
     {% for key, item in items %}
       <div class="col-11 col-md-12 align-self-md-center"
            data-target="{{ key + 1 }}">
