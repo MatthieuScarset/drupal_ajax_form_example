@@ -29,7 +29,7 @@ class ModularProductDetailOffreCheckCTAValidator extends ConstraintValidator {
               if (isset($offre_item['field_cta']) && count($offre_item['field_cta']) > 1) {
                 // il y a un CTA sur l'item => on renvoie une erreur
                 $this->context->addViolation($constraint->error);
-              } elseif ($field_item->entity->field_cta->count() > 1) {
+              } elseif (!isset($offre_item['field_cta']) && $field_item->entity->field_cta->count() > 0) {
                 $this->context->addViolation($constraint->error);
               }
           }
