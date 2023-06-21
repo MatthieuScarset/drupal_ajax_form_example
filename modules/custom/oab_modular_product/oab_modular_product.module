@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\Core\Entity\EntityFormInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\FieldFilteredMarkup;
 use Drupal\Core\Form\FormStateInterface;
@@ -17,7 +18,8 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
   /*
    * Ici, on ne va gérer que les alterations du formulaire du paragraph
    */
-  if (!isset($entity_form['#bundle'])) {
+  if (!isset($entity_form['#bundle'])
+    || !is_a($form_state->getformObject(), EntityFormInterface::class)) {
     return;
   }
 
@@ -173,7 +175,8 @@ function oab_modular_product_field_widget_single_element_form_alter(array &$elem
   /*
    * Ici, on ne va gérer que les alterations du formulaire du paragraph
    */
-  if (!isset($element['#paragraph_type'])) {
+  if (!isset($element['#paragraph_type'])
+      || !is_a($form_state->getformObject(), EntityFormInterface::class)) {
     return;
   }
 
