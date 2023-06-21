@@ -23,7 +23,7 @@ class ViewsThemeSettings extends DisplayExtenderPluginBase {
    * Provide the key options for this plugin.
    */
   public function defineOptionsAlter(&$options) {
-    $options['ob1_settings'] = [
+    $options['theme'] = [
       'contains' => [
         'ob1' => ['default' => 0],
       ]
@@ -38,11 +38,11 @@ class ViewsThemeSettings extends DisplayExtenderPluginBase {
       'title' => t('Theme Settings'),
       'column' => 'second',
     ];
-    $theme_settings = $this->hasThemeSettings() ? $this->getOb1SettingsValues() : FALSE;
-    $options['ob1_settings'] = [
+    $theme_applied = $this->hasThemeSettings() ? $this->getThemeValues() : FALSE;
+    $options['theme'] = [
       'category' => 'theme_settings',
-      'title' => t('Ob1 Theme Settings'),
-      'value' => $theme_settings ? t('use ob1') : t('no settings'),
+      'title' => t('Theme'),
+      'value' => $theme_applied ? t('Ob1') : t('Boosted is by default'),
     ];
   }
 
@@ -51,19 +51,20 @@ class ViewsThemeSettings extends DisplayExtenderPluginBase {
    */
   public function buildOptionsForm(&$form, FormStateInterface $form_state) {
 
-    if ($form_state->get('section') == 'ob1_settings') {
-      $form['#title'] .= t('The Ob1 theme settings for this display');
-      $theme_settings = $this->getOb1SettingsValues();
+    if ($form_state->get('section') == 'theme') {
+      $form['#title'] .= t('Change theme for this display');
+      $theme_applied = $this->getThemeValues();
 
-      $form['ob1_settings'] = [
+      $form['theme'] = [
         '#type' => 'container',
         '#tree' => True,
       ];
-      $form['ob1_settings']['ob1'] = [
+
+      $form['theme']['ob1'] = [
         '#type' => 'checkbox',
         '#title' => t('ob1'),
-        '#description' => t('this content type use ob1 theme'),
-        '#default_value' => $theme_settings['ob1'],
+        '#description' => t('Use ob1 theme for this display'),
+        '#default_value' => $theme_applied['ob1'],
       ];
     }
   }
@@ -72,10 +73,10 @@ class ViewsThemeSettings extends DisplayExtenderPluginBase {
    * Handle any special handling on the validate form.
    */
   public function submitOptionsForm(&$form, FormStateInterface $form_state) {
-    if ($form_state->get('section') == 'ob1_settings') {
-      $theme_settings = $form_state->getValue('ob1_settings');
+    if ($form_state->get('section') == 'theme') {
+      $theme_applied = $form_state->getValue('theme');
 
-      $this->options['ob1_settings'] = $theme_settings;
+      $this->options['theme'] = $theme_applied;
     }
   }
 
@@ -83,7 +84,7 @@ class ViewsThemeSettings extends DisplayExtenderPluginBase {
    * Identify whether or not the current display has custom theme settings defined.
    */
   public function hasThemeSettings(): bool {
-    $theme_settings = $this->getOb1SettingsValues();
+    $theme_settings = $this->getThemeValues();
     return !empty($theme_settings['ob1']);
   }
 
@@ -93,7 +94,7 @@ class ViewsThemeSettings extends DisplayExtenderPluginBase {
    * @return array
    *   The Theme Settings values.
    */
-  public function getOb1SettingsValues() {
-    return $this->options['ob1_settings'];
+  public function getThemeValues() {
+    return $this->options['theme'];
   }
 }
