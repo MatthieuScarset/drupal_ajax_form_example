@@ -21,8 +21,6 @@ class Ob1ViewThemeNegotiator extends AbstractOb1ThemeNegotiator implements Theme
         $view = View::load($current_route->getDefault('view_id'));
         $display = $view->getDisplay($current_route->getDefault('display_id'));
 
-        dd($display);
-
         if (!isset($display['display_options']['display_extenders']['theme_settings'])) {
           return false;
         }
