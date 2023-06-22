@@ -70,7 +70,7 @@ class ViewsThemeSettings extends DisplayExtenderPluginBase {
 
       $options['theme'] = [
         'category' => 'oab_theme_settings',
-        'title' => $this->t("Language theme of display"),
+        'title' => $this->t("Select theme by language"),
         'value' => count($languages_with_ob1)
           ? $this->t('Languages with Ob1: %langs', ['%langs' => implode(', ', array_keys($languages_with_ob1))])
           : $this->t("No language with Ob1")
