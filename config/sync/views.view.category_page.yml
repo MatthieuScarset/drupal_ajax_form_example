@@ -450,9 +450,15 @@ display:
     position: 1
     display_options:
       display_extenders:
-        theme_settings:
+        oab_theme_settings:
           theme:
-            ob1: 1
+            en: ob1
+            pt-br: default
+            es: default
+            fr: ob1
+            ru: default
+            ru-en: default
+            ja: default
       path: category-page/%tid
     cache_metadata:
       max-age: -1

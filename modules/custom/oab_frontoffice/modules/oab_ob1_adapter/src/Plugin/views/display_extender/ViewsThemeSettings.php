@@ -3,7 +3,10 @@
 namespace Drupal\oab_ob1_adapter\Plugin\views\display_extender;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\views\Annotation\ViewsDisplayExtender;
 use Drupal\views\Plugin\views\display_extender\DisplayExtenderPluginBase;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * views theme selection
@@ -11,7 +14,7 @@ use Drupal\views\Plugin\views\display_extender\DisplayExtenderPluginBase;
  * @ingroup views_display_extender_plugins
  *
  * @ViewsDisplayExtender(
- *   id = "theme_settings",
+ *   id = "oab_theme_settings",
  *   title = @Translation("Theme settings for Views"),
  *   help = @Translation("Use the ob1 configuration"),
  *   no_ui = FALSE
@@ -20,30 +23,59 @@ use Drupal\views\Plugin\views\display_extender\DisplayExtenderPluginBase;
 class ViewsThemeSettings extends DisplayExtenderPluginBase {
 
   /**
-   * Provide the key options for this plugin.
+   * @var \Drupal\Core\Language\LanguageManagerInterface
    */
-  public function defineOptionsAlter(&$options) {
-    $options['theme'] = [
-      'contains' => [
-        'ob1' => ['default' => 0],
-      ]
-    ];
+  private LanguageManagerInterface $languageManager;
+
+
+  /**
+   * Constructs a PluginBase object.
+   *
+   * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin_id for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, LanguageManagerInterface $language_manager) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+
+    $this->definition = $plugin_definition + $configuration;
+    $this->languageManager = $language_manager;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static($configuration, $plugin_id, $plugin_definition, $container->get('language_manager'));
   }
 
   /**
    * Provide the default summary for options and category in the views UI.
    */
   public function optionsSummary(&$categories, &$options) {
-    $categories['theme_settings'] = [
-      'title' => t('Theme Settings'),
-      'column' => 'second',
-    ];
-    $theme_applied = $this->hasThemeSettings() ? $this->getThemeValues() : FALSE;
-    $options['theme'] = [
-      'category' => 'theme_settings',
-      'title' => t('Theme'),
-      'value' => $theme_applied ? t('Ob1') : t('Boosted is by default'),
-    ];
+
+// On applique le choix du theme que sur les views de type page
+    if ($this->displayHandler->pluginId === 'page') {
+      $categories['oab_theme_settings'] = [
+        'title' => t('Theme Settings'),
+        'column' => 'second',
+      ];
+
+      $languages_with_ob1 = array_filter($this->options['theme'] ?? [], function($value) {
+        return $value === 'ob1';
+      });
+
+      $options['theme'] = [
+        'category' => 'oab_theme_settings',
+        'title' => $this->t("Language theme of display"),
+        'value' => count($languages_with_ob1)
+          ? $this->t('Languages with Ob1: %langs', ['%langs' => implode(', ', array_keys($languages_with_ob1))])
+          : $this->t("No language with Ob1")
+      ];
+    }
   }
 
   /**
@@ -51,21 +83,25 @@ class ViewsThemeSettings extends DisplayExtenderPluginBase {
    */
   public function buildOptionsForm(&$form, FormStateInterface $form_state) {
 
-    if ($form_state->get('section') == 'theme') {
-      $form['#title'] .= t('Change theme for this display');
-      $theme_applied = $this->getThemeValues();
+    if ($form_state->get('section') === 'theme') {
+      $form['#title'] .= $this->t('Select theme by language for this display');
 
       $form['theme'] = [
         '#type' => 'container',
-        '#tree' => True,
+        '#tree' => true
       ];
 
-      $form['theme']['ob1'] = [
-        '#type' => 'checkbox',
-        '#title' => t('ob1'),
-        '#description' => t('Use ob1 theme for this display'),
-        '#default_value' => $theme_applied['ob1'],
-      ];
+      foreach ($this->languageManager->getLanguages() as $language) {
+        $form['theme'][$language->getId()] = [
+          '#type' => 'radios',
+          '#title' => $language->getName(),
+          '#default_value' => $this->options['theme'][$language->getId()] ?? "default",
+          '#options' => [
+            'default' => $this->t('Default'),
+            'ob1' => $this->t('Ob1'),
+          ],
+        ];
+      }
     }
   }
 
@@ -74,27 +110,8 @@ class ViewsThemeSettings extends DisplayExtenderPluginBase {
    */
   public function submitOptionsForm(&$form, FormStateInterface $form_state) {
     if ($form_state->get('section') == 'theme') {
-      $theme_applied = $form_state->getValue('theme');
-
-      $this->options['theme'] = $theme_applied;
+      $this->options['theme'] = $form_state->getValue('theme') ?? [];
     }
   }
 
-  /**
-   * Identify whether or not the current display has custom theme settings defined.
-   */
-  public function hasThemeSettings(): bool {
-    $theme_settings = $this->getThemeValues();
-    return !empty($theme_settings['ob1']);
-  }
-
-  /**
-   * Get the Theme Settings configuration for this display.
-   *
-   * @return array
-   *   The Theme Settings values.
-   */
-  public function getThemeValues() {
-    return $this->options['theme'];
-  }
 }

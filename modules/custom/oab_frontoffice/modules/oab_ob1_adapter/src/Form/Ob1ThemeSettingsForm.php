@@ -26,7 +26,7 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
    */
   public function __construct(ConfigFactoryInterface $config_factory) {
     parent::__construct($config_factory);
-    $this->conf  = $this->config($this->getConfigName());
+    $this->conf = $this->config($this->getConfigName());
   }
 
   /**
