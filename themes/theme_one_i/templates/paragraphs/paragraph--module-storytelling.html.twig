@@ -50,34 +50,34 @@
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
-      <div class="site-width">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="left-panel sticky-top h-100 col-12 col-md-5 py-2 py-md-5">
+      <div class="site-width w-100 my-0">
+        <div class="container-fluid h-100">
+          <div class="row h-100">
+            <div class="title-panel sticky-top col-12 col-md-5 py-2 py-md-5">
                 <div class="d-flex flex-column">
-                <h2 class="h1">{{ content.field_title }}</h2>
-                <div class="lead">{{ content.field_highlight }}</div>
-                <div class="d-none d-md-block">
-                  {% if content.field_story_parts['#items']|length > 1 %}
-                    <ul class="item-list list-unstyled storytelling-list row">
-                      {% for item in content.field_story_parts['#items'] %}
-                        <li class="col-12">
-                            <div id="story{{ loop.index }}" class="items-list-item">
-                              <div class="item-icon icon-arrow-next text-primary d-none" aria-hidden="true"></div>
-                              <div class="item-container no-border-bottom">
-                                <div class="item-text">
-                                   Part {{ loop.index }}
+                  <h2 class="h1">{{ content.field_title }}</h2>
+                  <div class="lead">{{ content.field_highlight }}</div>
+                  <div class="d-none d-md-block">
+                    {% if content.field_story_parts['#items']|length > 1 %}
+                      <ul class="item-list list-unstyled storytelling-list row">
+                        {% for item in content.field_story_parts['#items'] %}
+                          <li class="col-12">
+                              <div data-story-title-id="{{ item.target_id }}" class="items-list-item {% if loop.first %} active {% endif %}">
+                                <div class="item-icon icon-arrow-next {% if not loop.first %} d-none {% endif %}" aria-hidden="true"></div>
+                                <div class="item-container no-border-bottom">
+                                  <div class="item-text">
+                                     {{ 'Part @loop'|t({'@loop': loop.index}) }}
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                        </li>
-                      {% endfor %}
-                    </ul>
-                  {% endif %}
-                </div>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                  </div>
               </div>
             </div>
-            <div class="right-panel col-12 col-md-7">
+            <div class="story-panel col-12 col-md-7">
                 {{ content.field_story_parts }}
             </div>
           </div>

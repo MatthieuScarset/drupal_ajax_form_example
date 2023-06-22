@@ -47,8 +47,8 @@
 %}
 <div {{ attributes.addClass(classes, 'field--items') }}>
   {% for item in items %}
-    <div {{ item.attributes.addClass('field--item storypart m-2 m-md-0 ml-md-4
-     py-md-5 h-100') }}>
+    <div data-story-id="{{ item.content['#paragraph'].id.value }}"
+      {{ item.attributes.addClass('field--item storypart mb-2 mb-md-0 ml-md-4 py-md-5') }}>
       {{ item.content }}
     </div>
   {% endfor %}
