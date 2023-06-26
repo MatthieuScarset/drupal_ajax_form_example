@@ -23,62 +23,6 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
   /** @var OabModularProductService $conf_modular_product */
   $conf_modular_product = \Drupal::service('oab_modular_product.settings');
 
-  $title_short = $conf_modular_product->getShortTitleMaxCharacter();
-  $title_long = $conf_modular_product->getLongTitleMaxCharacter();
-  $description = $conf_modular_product->getLongDescriptionMaxCharacter();
-
-  $size_title_short = min(150, $conf_modular_product->getShortTitleMaxCharacter()+10);
-
-  $module = [
-    'module_list',
-    'module_key_figures_items',
-    'module_key_figures',
-    'module_title_and_highlight'
-  ];
-
-  if (in_array($entity_form['#bundle'], $module)) {
-
-    if (isset($entity_form['field_title'])) {
-      $entity_form['field_title']['widget'][0]['value']['#maxlength'] = $title_short;
-      $entity_form['field_title']['widget'][0]['value']['#size'] = $size_title_short;
-      $entity_form['field_title']['widget'][0]['value']['#description'] .= ' '.FieldFilteredMarkup::create("$title_short characters max");
-    }
-
-    if (isset($entity_form['field_description'])) {
-      $entity_form['field_description']['widget'][0]['value']['#maxlength'] = $title_short;
-      $entity_form['field_description']['widget'][0]['value']['#size'] = $size_title_short;
-      $entity_form['field_description']['widget'][0]['value']['#description'] .= ' '.FieldFilteredMarkup::create("$title_short characters max");
-    }
-
-    if (isset($entity_form['field_highlight'])) {
-      if ($entity_form['#bundle'] === 'module_title_and_highlight') {
-        $nbChar = $description;
-      }
-      else {
-        $nbChar = $title_long;
-      }
-
-      $entity_form['field_highlight']['widget'][0]['value']['#maxlength'] = $nbChar;
-      $entity_form['field_highlight']['widget'][0]['value']['#description'] .= ' ' .FieldFilteredMarkup::create("$nbChar characters max");
-    }
-  }
-
-
-  // gestion nombres characters Module Header Default
-  if($entity_form['#bundle'] === 'module_header_default') {
-    if (isset($entity_form['field_title'])) {
-      $entity_form['field_title']['widget'][0]['value']['#maxlength'] = $title_short;
-      $entity_form['field_title']['widget'][0]['value']['#size'] = $size_title_short;
-      $entity_form['field_title']['widget'][0]['value']['#description'] .= ' ' . FieldFilteredMarkup::create($title_short . ' characters max');
-    }
-
-    if (isset($entity_form['field_highlight'])) {
-      $entity_form['field_highlight']['widget'][0]['value']['#maxlength'] = 350;
-      $entity_form['field_highlight']['widget'][0]['value']['#description'] .= ' ' . FieldFilteredMarkup::create('350 characters max');
-      $entity_form['field_highlight']['widget'][0]['value']['#rows'] = 4;
-    }
-  }
-
   $mp_modules = [
     'module_3_4_colonnes',
     'module_exemples',
@@ -87,8 +31,7 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
     'module_partner',
     'module_steps',
     'module_text_video_image',
-    'module_customer_space',
-    'module_video'
+    'module_customer_space'
   ];
 
   $module = [
@@ -96,10 +39,20 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
     'module_key_figures_items',
     'module_key_figures',
     'module_title_and_highlight',
-    'cross_link_items'
+    'cross_link_items',
+    'module_map',
+    'module_video',
+    'module_hook_text',
+    'module_header_default'
+  ];
+
+  $module_with_textarea = [
+    'module_header_default',
+    'module_hook_text'
   ];
 
   $max_char_short_title = $conf_modular_product->getShortTitleMaxCharacter();
+  $max_char_long_title = $conf_modular_product->getLongTitleMaxCharacter();
   $max_char_description = $conf_modular_product->getLongDescriptionMaxCharacter();
   $field_title_markup = FieldFilteredMarkup::create("$max_char_short_title characters max");
   $field_description_markup = FieldFilteredMarkup::create("$max_char_description characters max");
@@ -108,6 +61,9 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
 
 
   if (in_array($entity_form['#bundle'], $mp_modules) || in_array($entity_form['#bundle'], $module)) {
+    $max_length = 0;
+    $markup = '';
+
     $fields = [
       'field_accroche',
       'field_highlight',
@@ -116,16 +72,31 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
 
     foreach ($fields as $field) {
       if (isset($entity_form[$field])) {
-        $field_max_length = $field === 'field_title' ? $max_char_short_title : $max_char_description;
-        $field_description = $field === 'field_title' ? $field_title_markup : $field_description_markup;
-        $entity_form[$field]['widget'][0]['value']['#maxlength'] = $field_max_length;
-        $entity_form[$field]['widget'][0]['value']['#description'] .= ' '.$field_description;
-
-        if ($field === 'field_highlight') {
-          $entity_form[$field]['widget'][0]['value']['#rows'] = 2;
-        } elseif ($field === 'field_title') {
+        if ($field === 'field_highlight' || $field === 'field_accroche') {
+          if (in_array($entity_form['#bundle'], $module_with_textarea)) {
+            $max_length = 350;
+            $markup = FieldFilteredMarkup::create("$max_length characters max");
+            $entity_form[$field]['widget'][0]['value']['#rows'] = 4;
+          }
+          elseif ($entity_form['#bundle'] === 'module_list') {
+            $max_length = $max_char_long_title;
+            $markup = FieldFilteredMarkup::create("$max_length characters max");
+            $entity_form[$field]['widget'][0]['value']['#rows'] = 2;
+          }
+          else {
+            $max_length = $max_char_description;
+            $markup = $field_description_markup;
+            $entity_form[$field]['widget'][0]['value']['#rows'] = 2;
+          }
+        }
+        elseif ($field === 'field_title') {
+          $max_length = $max_char_short_title;
+          $markup = $field_title_markup;
           $entity_form[$field]['widget'][0]['value']['#size'] = $size_title_short;
         }
+
+        $entity_form[$field]['widget'][0]['value']['#maxlength'] = $max_length;
+        $entity_form[$field]['widget'][0]['value']['#description'] .= ' '.$markup;
       }
     }
   }
