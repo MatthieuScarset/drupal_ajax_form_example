@@ -1,5 +1,3 @@
-import ModuleExempleSlider from "./module-exemple-slider";
-
 class ModuleStorytelling {
 
   constructor(elem) {
