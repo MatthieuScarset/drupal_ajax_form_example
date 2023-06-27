@@ -37,6 +37,8 @@
       background: linear-gradient(180deg, $white 1.87rem, $greige 1.87rem);
 
       .storypart-image {
+        margin-left: -15px;
+
         img {
           width: 100%;
           height: auto;
@@ -70,6 +72,10 @@
 
         .storypart {
           min-height: 100vh;
+
+          .storypart-image {
+            margin-left: inherit;
+          }
 
           .storypart-text {
             margin-left: 6rem;
