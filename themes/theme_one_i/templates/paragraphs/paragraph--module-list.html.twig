@@ -48,6 +48,8 @@
   not paragraph.isPublished() ? 'paragraph--unpublished'
 ]
 %}
+{% set is_numerical_list = content.field_numerical_list.0['#markup'] %}
+
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
@@ -71,7 +73,7 @@
             </div>
           </div>
 
-          <div class="col-12 col-md-6  pt-3 pt-md-5">
+          <div class="col-12 col-md-6 pt-3 pt-md-5 {% if is_numerical_list %} numerical-list {% endif %}">
             {{ content.field_lists }}
           </div>
 

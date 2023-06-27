@@ -1,0 +1,23 @@
+uuid: b6706487-8fe9-4e94-9ffa-53bd1cfd1f05
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_numerical_list
+    - paragraphs.paragraphs_type.module_list
+id: paragraph.module_list.field_numerical_list
+field_name: field_numerical_list
+entity_type: paragraph
+bundle: module_list
+label: 'numerical list'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

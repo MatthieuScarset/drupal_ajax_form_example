@@ -5,7 +5,7 @@
 
     <div class="list-item {{ classes }}">
       <div class="h4 d-flex py-0 mb-0">
-          <div class="text-gray3 mr-1 mr-md-2"> {{ "%02d"|format(loop.index) }} </div>
+          <div class="list-item-number text-gray3 mr-1 mr-md-2"> {{ "%02d"|format(loop.index) }} </div>
           <div> {{ item.content['#paragraph'].field_title.value }} </div>
       </div>
       {% if item.content['#paragraph'].field_highlight.value is not empty %}
