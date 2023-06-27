@@ -53,8 +53,31 @@
       <div class="container-fluid mt-1 mb-3 mb-md-5">
         <div class="row">
           <div class="{{ content.field_image_full['#items'].value ? 'col-md-9' : 'col-md-7'}} col-12 d-flex flex-column justify-content-between">
-            <h2 class="h1 mb-2 mb-md-3 ">{{ content.field_title }}</h2>
-            <h4 class="mw-100 mb-0">{{ content.field_highlight }}</h4>
+            <h1 class="mb-0">{{ content.field_title }}</h1>
+
+            {% if content.field_accroche.0 is not null %}
+              <h2 class="h4 mw-100 mt-2 mt-md-3 mb-0"> {{ content.field_accroche }} </h2>
+            {% endif %}
+
+            {% if content.field_highlight.0 is not null %}
+              <span class="lead mt-2 mt-md-3">{{ content.field_highlight }}</span>
+            {% endif %}
+
+            {% if content.field_call_to_action_buton.0 is not empty %}
+              <div class="d-md-flex flex-md-wrap mt-2 mt-md-3">
+                <a href="{{ content.field_call_to_action_buton.0['#url'] }}" class="btn btn-primary">
+                  {{ content.field_call_to_action_buton.0['#title'] }}
+                </a>
+
+                {% if content.field_call_to_action_link_simple.0 is not empty %}
+                  <a href="{{ content.field_call_to_action_link_simple.0['#url'] }}"
+                     class="o-link-arrow align-self-md-center ml-md-2 mt-2 mt-md-0"
+                  >
+                    {{ content.field_call_to_action_link_simple.0['#title'] }}
+                  </a>
+                {% endif %}
+              </div>
+            {% endif %}
           </div>
           {% if content.field_visual['#items'] %} {# vérification de la présence d'au moins une Image pour utiliser twig peak #}
             {% if content.field_image_full['#items'].value %} {# vérification du type d'affichage choisi (toute largueur ou non) #}
@@ -74,7 +97,7 @@
                 </div>
               {% endif %}
             {% else %}
-              <div class="offset-md-1 mt-2 mt-md-0 col-12 col-md-4">
+              <div class="offset-md-1 mt-2 mt-md-0 col-12 col-md-4 align-self-md-center">
                 {# Chargement de la première image en utilisant le style d'affichage 420x420 grâce au twig peak "drupal_image" #}
                 {{ drupal_image(content.field_visual.0['#media'].field_image.target_id, '420x420') }}
               </div>
