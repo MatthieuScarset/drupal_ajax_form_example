@@ -28,6 +28,7 @@
 
 # Ignore IDE conf
 /.idea
+/.vscode
 
 # Ignore config data
 /config/data
