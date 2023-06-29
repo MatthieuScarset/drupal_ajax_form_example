@@ -39,6 +39,7 @@ dependencies:
     - comment
     - config
     - config_translation
+    - content_moderation
     - content_translation
     - contextual
     - embed

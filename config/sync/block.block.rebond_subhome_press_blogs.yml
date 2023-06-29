@@ -22,7 +22,7 @@ settings:
   block_text: 'View more Blogs'
   block_link: /en/blogs
   block_link_text: 'Click here'
-  block_image_src: '37718'
+  block_image_src: '39909'
 visibility:
   language:
     id: language
