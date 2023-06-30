@@ -59,8 +59,8 @@
           <div class="sticky-top h-100 col-12 col-md-5 pt-md-3">
             <div class="bg-dark text-white mx--1 mx-md-0">
               <div class="px-1 py-3 py-md-5 px-md-4">
-                <h2 class="h1 pb-0 mb-2 mb-md-3">{{ content.field_title }}</h2>
-                <span class="lead text-gray4 py-0">{{ content.field_highlight }}</span>
+                <h2 class="h1 pb-0 mb-0">{{ content.field_title }}</h2>
+                <span class="lead text-gray4 py-0 mt-2 mt-md-3">{{ content.field_highlight }}</span>
 
                 {% if content.field_redirection_url[0]['#url']|length > 0 %}
                   <a href="{{ content.field_redirection_url[0]['#url'] }}"
