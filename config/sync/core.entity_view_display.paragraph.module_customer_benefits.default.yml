@@ -1,0 +1,24 @@
+uuid: aa16762c-e97a-413b-ac31-28b1e7ac3062
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.module_customer_benefits.field_customer_benefits_items
+    - paragraphs.paragraphs_type.module_customer_benefits
+  module:
+    - entity_reference_revisions
+id: paragraph.module_customer_benefits.default
+targetEntityType: paragraph
+bundle: module_customer_benefits
+mode: default
+content:
+  field_customer_benefits_items:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

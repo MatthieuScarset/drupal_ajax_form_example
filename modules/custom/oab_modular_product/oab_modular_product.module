@@ -440,6 +440,8 @@ function oab_modular_product_entity_bundle_field_info_alter(&$fields, EntityType
       $fields['field_step']->addConstraint('ModularProductMinItems');
     } elseif (($bundle === "module_customer_space" || $bundle === "module_benefits") && isset($fields['field_item'])) {
       $fields['field_item']->addConstraint('ModularProductMinItems');
+    } elseif ($bundle === "module_customer_benefits" && isset($field['field_customer_benefits'])) {
+      $field['field_customer_benefits']->addConstraint('ModularProductMinItems');
     }
   }
 

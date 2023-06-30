@@ -1,0 +1,10 @@
+.paragraph--type--module-customer-benefits {
+  .customer-benefits-items {
+    border-left: 2px solid #f16e00 ;
+
+    @include media-breakpoint-up(md) {
+      border-top: 2px solid #F16E00 ;
+      border-left: none ;
+    }
+  }
+}

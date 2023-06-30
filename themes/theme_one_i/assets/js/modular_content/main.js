@@ -4,12 +4,15 @@ import ModuleStepSlider from "./module-step-slider";
 import ModuleDetailOffre from "./module-detail-offre";
 import ModuleExempleSlider from "./module-exemple-slider";
 import ModuleMap from "./module-map";
+import ModuleCustomerBenefits from "./module-customer-benefits";
 import './tealium-modular-product';
+
 
 export {
   CustomSlider,
   ModuleStepSlider,
   ModuleDetailOffre,
   ModuleExempleSlider,
-  ModuleMap
+  ModuleMap,
+  ModuleCustomerBenefits
 };
