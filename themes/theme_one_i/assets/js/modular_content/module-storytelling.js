@@ -6,13 +6,13 @@ class ModuleStorytelling {
     this.$observer =  new IntersectionObserver(function(entries) {
       entries.forEach((entry) => {
         if(entry.isIntersecting) {
-          elem.querySelectorAll('.items-list-item').forEach((storyList) => {
-            if (storyList.dataset.storyTitleId !== entry.target.dataset.storyId) {
-              storyList.classList.remove('active');
-              storyList.querySelector('.item-icon').classList.add('d-none');
+          elem.querySelectorAll('.items-list-item').forEach((storyTitle) => {
+            if (storyTitle.dataset.storyId !== entry.target.dataset.storyId) {
+              storyTitle.classList.remove('active');
+              storyTitle.querySelector('.item-icon').classList.add('d-none');
             } else {
-              storyList.classList.add('active');
-              storyList.querySelector('.item-icon').classList.remove('d-none');
+              storyTitle.classList.add('active');
+              storyTitle.querySelector('.item-icon').classList.remove('d-none');
             }
           });
         }

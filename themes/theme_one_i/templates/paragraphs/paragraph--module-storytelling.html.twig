@@ -62,12 +62,12 @@
                       <ul class="item-list list-unstyled storytelling-list row">
                         {% for item in content.field_story_parts['#items'] %}
                           <li class="col-12">
-                              <div data-story-title-id="{{ item.target_id }}" class="items-list-item {% if loop.first %} active {% endif %}">
+                              <div data-story-id="{{ item.target_id }}" class="items-list-item {% if loop.first %} active {% endif %}">
                                 <div class="item-icon icon-arrow-next {% if not loop.first %} d-none {% endif %}" aria-hidden="true"></div>
                                 <div class="item-container no-border-bottom">
-                                  <div class="item-text">
-                                     {{ 'Part @loop'|t({'@loop': loop.index}) }}
-                                  </div>
+                                  <span class="item-text">
+                                     {{ content.field_story_parts[loop.index0]['#paragraph'].field_title.value }}
+                                  </span>
                                 </div>
                               </div>
                           </li>
