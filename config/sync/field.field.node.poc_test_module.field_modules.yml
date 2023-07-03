@@ -67,9 +67,6 @@ settings:
       contact_button_item:
         weight: 52
         enabled: false
-      cross_link_items:
-        weight: 66
-        enabled: false
       customer_benefits_items:
         weight: 67
         enabled: false
@@ -133,9 +130,6 @@ settings:
       module_configurateur_details:
         weight: 72
         enabled: false
-      module_cross_link:
-        weight: 88
-        enabled: false
       module_cross_sell:
         weight: 73
         enabled: true
@@ -175,9 +169,6 @@ settings:
       module_header_default:
         weight: 85
         enabled: true
-      module_hook_text:
-        weight: 102
-        enabled: false
       module_key_figures:
         weight: 88
         enabled: true
@@ -187,9 +178,6 @@ settings:
       module_list:
         weight: 85
         enabled: true
-      module_map:
-        weight: 106
-        enabled: false
       module_partner:
         weight: 84
         enabled: true
@@ -217,9 +205,6 @@ settings:
       module_title_and_highlight:
         weight: 99
         enabled: false
-      module_video:
-        weight: 116
-        enabled: false
       paragraph_block_rebond:
         weight: 92
         enabled: false
@@ -237,9 +222,6 @@ settings:
         enabled: false
       subhome_presse_carrousel:
         weight: 97
-        enabled: false
-      title_and_image:
-        weight: 123
         enabled: false
       title_and_link:
         weight: 98

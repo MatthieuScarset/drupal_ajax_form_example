@@ -436,12 +436,26 @@ function oab_modular_product_hide_wysiwyg_paragraph(&$form) {
  */
 function oab_modular_product_entity_bundle_field_info_alter(&$fields, EntityTypeInterface $entity_type, $bundle) {
   if ($entity_type->id() === "paragraph") {
-    if ($bundle === "module_steps" && isset($fields['field_step'])) {
-      $fields['field_step']->addConstraint('ModularProductMinItems');
-    } elseif (($bundle === "module_customer_space" || $bundle === "module_benefits") && isset($fields['field_item'])) {
-      $fields['field_item']->addConstraint('ModularProductMinItems');
-    } elseif ($bundle === "module_customer_benefits" && isset($field['field_customer_benefits'])) {
-      $field['field_customer_benefits']->addConstraint('ModularProductMinItems');
+    //Liste modules avec 3 items obligatoires
+    $modules = [
+      'module_steps',
+      'module_customer_space',
+      'module_customer_benefits'
+    ];
+
+    //Liste fiels des modules où ajouter la contrainte
+    $module_fields = [
+      'field_step',
+      'field_item',
+      'field_customer_benefits_items'
+    ];
+
+    if (in_array($bundle, $modules)) {
+      foreach ($module_fields as $module_field) {
+        if (isset($fields[$module_field])) {
+          $fields[$module_field]->addConstraint('ModularProductMinItems');
+        }
+      }
     }
   }
 

@@ -2,8 +2,16 @@ class ModuleCustomerBenefits {
   constructor(root) {
     this.$root = root;
     this.$cutomerBenefitsItems = Array.from(this.$root.querySelectorAll('.customer-benefits-items'));
-    let minHeight = 0;
 
+    $(window).resize(()=> {
+      this._setMinHeight();
+    });
+
+    this._setMinHeight();
+  }
+
+  _setMinHeight() {
+    let minHeight = 0;
     if (window.matchMedia("(min-width: 736px)").matches) {
       this.$cutomerBenefitsItems.forEach((item) => {
         minHeight = Math.max(minHeight, item.querySelector('.field-title').offsetHeight);
@@ -14,6 +22,8 @@ class ModuleCustomerBenefits {
     }
   }
 }
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const elems = document.querySelectorAll(".paragraph--type--module-customer-benefits");
