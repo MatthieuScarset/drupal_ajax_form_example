@@ -586,8 +586,6 @@ function oab_modular_product_preprocess_paragraph__module_presentation(&$variabl
 function oab_modular_product_preprocess_paragraph__module_customer_space(&$variables) {
 
   $conf_modular_product = \Drupal::service('oab_modular_product.settings');
-
-  dd($variables);
   $variables['module_title'] = $conf_modular_product->getCustomerSpaceModuleTitle();
 }
 
