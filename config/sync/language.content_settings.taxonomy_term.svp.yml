@@ -1,0 +1,16 @@
+uuid: 25e96bf4-a5d0-481d-8aaf-0c8d6d779a0c
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.svp
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.svp
+target_entity_type_id: taxonomy_term
+target_bundle: svp
+default_langcode: current_interface
+language_alterable: true

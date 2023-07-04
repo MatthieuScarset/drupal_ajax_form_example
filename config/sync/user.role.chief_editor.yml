@@ -36,6 +36,7 @@ dependencies:
     - node.type.region
     - node.type.simple_page
     - node.type.solution
+    - node.type.svp
     - node.type.webform
     - taxonomy.vocabulary.subhomes
     - workflows.workflow.content
@@ -126,6 +127,7 @@ permissions:
   - 'create region content'
   - 'create simple_page content'
   - 'create solution content'
+  - 'create svp content'
   - 'create url aliases'
   - 'delete all revisions'
   - 'delete any background media'
@@ -161,6 +163,7 @@ permissions:
   - 'delete any region content'
   - 'delete any simple_page content'
   - 'delete any solution content'
+  - 'delete any svp content'
   - 'delete background image entities'
   - 'delete blog_post revisions'
   - 'delete cloud_service_provider revisions'
@@ -212,6 +215,7 @@ permissions:
   - 'delete own region content'
   - 'delete own simple_page content'
   - 'delete own solution content'
+  - 'delete own svp content'
   - 'delete partner revisions'
   - 'delete press_kit revisions'
   - 'delete press_release revisions'
@@ -220,6 +224,7 @@ permissions:
   - 'delete region revisions'
   - 'delete simple_page revisions'
   - 'delete solution revisions'
+  - 'delete svp revisions'
   - 'edit any background media'
   - 'edit any blog_post content'
   - 'edit any cloud_service_provider content'
@@ -253,6 +258,7 @@ permissions:
   - 'edit any region content'
   - 'edit any simple_page content'
   - 'edit any solution content'
+  - 'edit any svp content'
   - 'edit background image entities'
   - 'edit own background media'
   - 'edit own blog_post content'
@@ -288,6 +294,7 @@ permissions:
   - 'edit own region content'
   - 'edit own simple_page content'
   - 'edit own solution content'
+  - 'edit own svp content'
   - 'edit own webform content'
   - 'edit subhome entity entities'
   - 'edit terms in subhomes'
@@ -319,9 +326,11 @@ permissions:
   - 'revert region revisions'
   - 'revert simple_page revisions'
   - 'revert solution revisions'
+  - 'revert svp revisions'
   - 'skip comment approval'
   - 'translate corporate node'
   - 'translate profile node'
+  - 'translate svp node'
   - 'update any media'
   - 'update media'
   - 'use content transition archived'
@@ -368,6 +377,7 @@ permissions:
   - 'view scheduled update entities'
   - 'view simple_page revisions'
   - 'view solution revisions'
+  - 'view svp revisions'
   - 'view the administration theme'
   - 'view unpublished background image entities'
   - 'view unpublished subhome entity entities'

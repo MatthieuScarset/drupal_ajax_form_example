@@ -1,0 +1,16 @@
+uuid: 285e282d-d0bb-4b56-8ff1-265b23b39b7c
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.svp
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: node.svp
+target_entity_type_id: node
+target_bundle: svp
+default_langcode: current_interface
+language_alterable: true

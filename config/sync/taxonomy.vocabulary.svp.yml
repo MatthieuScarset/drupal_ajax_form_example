@@ -1,0 +1,8 @@
+uuid: 6d5cfe70-9f9b-44dd-b0de-27abf17b69aa
+langcode: en
+status: true
+dependencies: {  }
+name: SVP
+vid: svp
+description: 'Link SVP with Action domains'
+weight: 0
