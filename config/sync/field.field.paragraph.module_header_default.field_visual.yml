@@ -11,7 +11,7 @@ field_name: field_visual
 entity_type: paragraph
 bundle: module_header_default
 label: Images
-description: "<p>Attention:</p>\r\n\r\n\r\nSi 1 image ajoutée :\r\n<ul>\r\n<li>utiliser le crop 420:420 si la case image full n'est pas cochée</li>\r\n<li>utiliser le crop 1320:420 si la case image full est cochée</li>\r\n</ul>\r\n\r\nsi 2 images sont ajoutées :\r\n<ul>\r\n<li>utiliser le crop 420:420 pour la première image et le crop 870:420 pour la deuxième</li>\r\n<li>si la case Image full n'est pas cochée la première image ajoutée sera celle visible</li>\r\n</ul>\r\n\r\n<p><strong>Attention si aucun crop n'est appliqué sur les images, elles ne s'afficheront pas avec les bonnes dimensions sur la page</strong></p>"
+description: "<p>Attention:</p>\r\n\r\n\r\nSi 1 image ajoutée :\r\n<ul>\r\n<li>utiliser le crop 645:410 si la case image full n'est pas cochée</li>\r\n<li>utiliser le crop 1320:420 si la case image full est cochée</li>\r\n</ul>\r\n\r\nsi 2 images sont ajoutées :\r\n<ul>\r\n<li>utiliser le crop 420:420 pour la première image et le crop 870:420 pour la deuxième</li>\r\n<li>si la case Image full n'est pas cochée la première image ajoutée sera celle visible</li>\r\n</ul>\r\n\r\n<p><strong>Attention si aucun crop n'est appliqué sur les images, elles ne s'afficheront pas avec les bonnes dimensions sur la page</strong></p>"
 required: false
 translatable: false
 default_value: {  }

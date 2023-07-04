@@ -47,31 +47,42 @@
   not paragraph.isPublished() ? 'paragraph--unpublished'
 ]
 %}
+
+{% set col = content.field_visual['#items'] is null or
+  content.field_image_full['#items'].value ? 'col-md-9' : 'col-md-5' %}
+
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
-      <div class="container-fluid mt-1 mb-3 mb-md-5">
+      <div class="container-fluid pt-1 pb-3 py-md-3">
         <div class="row">
-          <div class="{{ content.field_image_full['#items'].value ? 'col-md-9' : 'col-md-7'}} col-12 d-flex flex-column justify-content-between">
-            <h1 class="mb-0">{{ content.field_title }}</h1>
+          <div class="col-12 {{ col }} align-self-md-center">
+            <h1 class="mb-0 pb-0"> {{ content.field_title }} </h1>
 
             {% if content.field_accroche.0 is not null %}
-              <h2 class="h4 mw-100 mt-2 mt-md-3 mb-0"> {{ content.field_accroche }} </h2>
+              <h2 class="h4 mw-100 mt-2 mt-md-3 mb-0 py-0"> {{ content.field_accroche }} </h2>
             {% endif %}
 
             {% if content.field_highlight.0 is not null %}
-              <span class="lead mt-2 mt-md-3">{{ content.field_highlight }}</span>
+              <div class="lead mt-2 mt-md-3 py-0"> {{ content.field_highlight }} </div>
             {% endif %}
 
             {% if content.field_call_to_action_buton.0 is not empty %}
               <div class="d-md-flex flex-md-wrap mt-2 mt-md-3">
-                <a href="{{ content.field_call_to_action_buton.0['#url'] }}" class="btn btn-primary">
+                <a href="{{ content.field_call_to_action_buton.0['#url'] }}" class="btn btn-primary"
+                   onmousedown="utag_link(utag_data.titre_page,'header',
+                     '{{ content.field_title.0['#context']['value']|escape('html') }}',
+                     '{{ content.field_call_to_action_buton.0['#title'] }}')"
+                >
                   {{ content.field_call_to_action_buton.0['#title'] }}
                 </a>
 
                 {% if content.field_call_to_action_link_simple.0 is not empty %}
                   <a href="{{ content.field_call_to_action_link_simple.0['#url'] }}"
                      class="o-link-arrow align-self-md-center ml-md-2 mt-2 mt-md-0"
+                     onmousedown="utag_link(utag_data.titre_page,'header',
+                       '{{ content.field_title.0['#context']['value']|escape('html') }}',
+                       '{{ content.field_call_to_action_link_simple.0['#title'] }}')"
                   >
                     {{ content.field_call_to_action_link_simple.0['#title'] }}
                   </a>
@@ -82,24 +93,24 @@
           {% if content.field_visual['#items'] %} {# vérification de la présence d'au moins une Image pour utiliser twig peak #}
             {% if content.field_image_full['#items'].value %} {# vérification du type d'affichage choisi (toute largueur ou non) #}
               {% if content.field_visual['#items']|length == 2 %}
-                <div class="col-12 col-md-4 mt-2 mt-md-4">
+                <div class="col-12 col-md-4 mt-2 mt-md-3">
                   {# Chargement de la première image en utilisant le style d'affichage 420x420 grâce au twig peak "drupal_image" #}
                   {{ drupal_image(content.field_visual.0['#media'].field_image.target_id, '420x420') }}
                 </div>
-                <div class="col-12 col-md-8 mt-2 mt-md-4">
+                <div class="col-12 col-md-8 mt-2 mt-md-3">
                   {# Chargement de la deuxième image en utilisant le style d'affichage 870x420 grâce au twig peak "drupal_image" #}
                   {{ drupal_image(content.field_visual.1['#media'].field_image.target_id, '870x420') }}
                 </div>
               {% else %}
-                <div class="col-12 mt-2 mt-md-4">
+                <div class="col-12 mt-2 mt-md-3">
                   {# Chargement de l'image en utilisant le style d'affichage 1320x420 grâce au twig peak "drupal_image" #}
                   {{ drupal_image(content.field_visual.0['#media'].field_image.target_id, '1320x420') }}
                 </div>
               {% endif %}
             {% else %}
-              <div class="offset-md-1 mt-2 mt-md-0 col-12 col-md-4 align-self-md-center">
+              <div class="offset-md-1 mt-2 mt-md-0 col-12 col-md-6 align-self-md-center">
                 {# Chargement de la première image en utilisant le style d'affichage 420x420 grâce au twig peak "drupal_image" #}
-                {{ drupal_image(content.field_visual.0['#media'].field_image.target_id, '420x420') }}
+                {{ drupal_image(content.field_visual.0['#media'].field_image.target_id, 'modular_product_image_top_zone') }}
               </div>
             {% endif %}
           {% endif %}
