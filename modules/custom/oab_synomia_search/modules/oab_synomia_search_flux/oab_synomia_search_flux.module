@@ -34,6 +34,8 @@ function oab_synomia_search_flux_page_attachments(array &$attachments) {
         $rubrique = 'product';
       } elseif (in_array($rubrique, ['corporate', 'full_html'])) {
         $rubrique = 'content';
+      } elseif ($rubrique == 'svp') {
+        $rubrique = 'svp';
       } elseif ($rubrique == 'mss_article') {
         if (isset($node->field_typology->value)) {
           $rubrique = $node->field_typology->value;
