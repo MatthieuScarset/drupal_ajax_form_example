@@ -28,6 +28,7 @@ dependencies:
     - node.type.region
     - node.type.simple_page
     - node.type.solution
+    - node.type.svp
     - node.type.webform
   module:
     - content_moderation
@@ -101,5 +102,6 @@ type_settings:
       - region
       - simple_page
       - solution
+      - svp
       - webform
   default_moderation_state: draft
