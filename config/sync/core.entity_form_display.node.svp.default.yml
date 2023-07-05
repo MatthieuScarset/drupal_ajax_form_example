@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.svp.field_meta_description
     - field.field.node.svp.field_meta_title
     - field.field.node.svp.field_modules
+    - field.field.node.svp.field_svp
     - node.type.svp
   module:
     - content_moderation
@@ -22,6 +23,7 @@ third_party_settings:
       children:
         - group_language
         - group_configuration
+        - group_classify
         - group_top_zone
         - group_modules
         - group_seo_metatags
@@ -74,7 +76,7 @@ third_party_settings:
       label: 'Top zone'
       region: content
       parent_name: group_onglets
-      weight: 22
+      weight: 23
       format_type: tab
       format_settings:
         classes: ''
@@ -89,7 +91,7 @@ third_party_settings:
       label: Modules
       region: content
       parent_name: group_onglets
-      weight: 23
+      weight: 24
       format_type: tab
       format_settings:
         classes: ''
@@ -105,7 +107,22 @@ third_party_settings:
       label: 'SEO Metatags'
       region: content
       parent_name: group_onglets
-      weight: 24
+      weight: 25
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_classify:
+      children:
+        - field_svp
+      label: Classify
+      region: hidden
+      parent_name: group_onglets
+      weight: 22
       format_type: tab
       format_settings:
         classes: ''
@@ -187,6 +204,16 @@ content:
     third_party_settings:
       entity_browser_entity_form:
         entity_browser_id: _none
+  field_svp:
+    type: entity_reference_autocomplete
+    weight: 7
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   langcode:
     type: language_select
     weight: 2
@@ -196,19 +223,19 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 9
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 5
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 7
+    weight: 5
     region: content
     settings:
       display_label: true
@@ -222,13 +249,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 8
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 4
+    weight: 1
     region: content
     settings:
       match_operator: CONTAINS
@@ -237,7 +264,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 6
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }

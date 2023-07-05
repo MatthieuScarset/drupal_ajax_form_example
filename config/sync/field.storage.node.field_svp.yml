@@ -1,0 +1,20 @@
+uuid: 04cfd527-dec9-48e7-bc52-1567bd6cb17c
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_svp
+field_name: field_svp
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

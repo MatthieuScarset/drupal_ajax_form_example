@@ -1,0 +1,17 @@
+<?php
+
+use Drupal\Core\Entity\EntityTypeInterface;
+
+/**
+ * @file
+ * Contains hook and preprocess for SVP node type.
+ */
+
+/**
+ * Implements hook_entity_bundle_field_info_alter().
+ */
+function oab_svp_entity_bundle_field_info_alter(&$fields, EntityTypeInterface $entity_type, $bundle) {
+  if (isset($fields['field_svp'])) {
+    $fields['field_svp']->addConstraint('SVPNodeToTerm');
+  }
+}

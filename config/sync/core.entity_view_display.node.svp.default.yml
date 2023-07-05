@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.svp.field_meta_description
     - field.field.node.svp.field_meta_title
     - field.field.node.svp.field_modules
+    - field.field.node.svp.field_svp
     - node.type.svp
   module:
     - entity_reference_revisions
@@ -46,4 +47,5 @@ hidden:
   field_enable_wysiwyg_paragraph: true
   field_meta_description: true
   field_meta_title: true
+  field_svp: true
   langcode: true
