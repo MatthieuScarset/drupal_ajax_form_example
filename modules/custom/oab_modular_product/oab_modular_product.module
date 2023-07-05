@@ -74,7 +74,7 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
       if (isset($entity_form[$field])) {
         if ($field === 'field_highlight' || $field === 'field_accroche') {
           if (in_array($entity_form['#bundle'], $module_with_textarea)) {
-            $max_length = 350;
+            $max_length = $field === 'field_highlight' ? 350 : $max_char_description;
             $markup = FieldFilteredMarkup::create("$max_length characters max");
             $entity_form[$field]['widget'][0]['value']['#rows'] = 4;
           }

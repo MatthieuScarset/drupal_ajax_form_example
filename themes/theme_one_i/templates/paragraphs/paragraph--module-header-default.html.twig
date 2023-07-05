@@ -48,8 +48,8 @@
 ]
 %}
 
-{% set col = content.field_visual['#items'] is null or
-  content.field_image_full['#items'].value ? 'col-md-9' : 'col-md-5' %}
+{% set col = content.field_header_visuals['#items'] is null or
+  content.field_image_full['#items'].value ? 'col-md-9' : 'col-md-5 pb-0 pb-md-2' %}
 
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
@@ -90,27 +90,27 @@
               </div>
             {% endif %}
           </div>
-          {% if content.field_visual['#items'] %} {# vérification de la présence d'au moins une Image pour utiliser twig peak #}
+          {% if content.field_header_visuals['#items'] %} {# vérification de la présence d'au moins une Image pour utiliser twig peak #}
             {% if content.field_image_full['#items'].value %} {# vérification du type d'affichage choisi (toute largueur ou non) #}
-              {% if content.field_visual['#items']|length == 2 %}
+              {% if content.field_header_visuals['#items']|length == 2 %}
                 <div class="col-12 col-md-4 mt-2 mt-md-3">
                   {# Chargement de la première image en utilisant le style d'affichage 420x420 grâce au twig peak "drupal_image" #}
-                  {{ drupal_image(content.field_visual.0['#media'].field_image.target_id, '420x420') }}
+                  {{ drupal_image(content.field_header_visuals.0['#media'].field_image.target_id, '420x420') }}
                 </div>
                 <div class="col-12 col-md-8 mt-2 mt-md-3">
                   {# Chargement de la deuxième image en utilisant le style d'affichage 870x420 grâce au twig peak "drupal_image" #}
-                  {{ drupal_image(content.field_visual.1['#media'].field_image.target_id, '870x420') }}
+                  {{ drupal_image(content.field_header_visuals.1['#media'].field_image.target_id, '870x420') }}
                 </div>
               {% else %}
                 <div class="col-12 mt-2 mt-md-3">
                   {# Chargement de l'image en utilisant le style d'affichage 1320x420 grâce au twig peak "drupal_image" #}
-                  {{ drupal_image(content.field_visual.0['#media'].field_image.target_id, '1320x420') }}
+                  {{ drupal_image(content.field_header_visuals.0['#media'].field_image.target_id, '1320x420') }}
                 </div>
               {% endif %}
             {% else %}
               <div class="offset-md-1 mt-2 mt-md-0 col-12 col-md-6 align-self-md-center">
                 {# Chargement de la première image en utilisant le style d'affichage 420x420 grâce au twig peak "drupal_image" #}
-                {{ drupal_image(content.field_visual.0['#media'].field_image.target_id, 'modular_product_image_top_zone') }}
+                {{ drupal_image(content.field_header_visuals.0['#media'].field_image.target_id, 'modular_product_image_top_zone') }}
               </div>
             {% endif %}
           {% endif %}
