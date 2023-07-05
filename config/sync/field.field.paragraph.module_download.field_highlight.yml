@@ -1,5 +1,5 @@
-uuid: 54154f53-384b-4c9f-8e30-7724e319f3ff
-langcode: fr
+uuid: 1842af6b-2af7-411c-ad52-75c6e3c830a6
+langcode: en
 status: true
 dependencies:
   config:
@@ -9,9 +9,9 @@ id: paragraph.module_download.field_highlight
 field_name: field_highlight
 entity_type: paragraph
 bundle: module_download
-label: Description
+label: Highlight
 description: ''
-required: true
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
