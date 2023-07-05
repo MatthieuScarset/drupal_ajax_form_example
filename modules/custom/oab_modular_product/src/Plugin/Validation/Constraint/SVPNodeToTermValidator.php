@@ -36,11 +36,18 @@ class SVPNodeToTermValidator extends ConstraintValidator {
     if ($entity->bundle() == 'svp') {
       $tids = explode(', ', $items->getString());
       $nids = \Drupal::entityTypeManager()->getStorage('node')->getQuery()
-        ->condition('nid', $entity->id(), '!=')
         ->condition('field_svp', $tids, 'IN')
         ->condition('status', NodeInterface::PUBLISHED)
         ->accessCheck(FALSE)
         ->execute();
+
+      // Remove current node from results.
+      if (!$entity->isNew()) {
+        $current_nid = $entity->id();
+        $nids = array_filter($nids, function ($nid) use ($current_nid) {
+          return $nid != $current_nid;
+        });
+      }
 
       if (!empty($nids)) {
         if (count($nids) > 1) {
