@@ -443,14 +443,14 @@ function oab_modular_product_entity_bundle_field_info_alter(&$fields, EntityType
       'module_customer_benefits'
     ];
 
-    //Liste fiels des modules où ajouter la contrainte
-    $module_fields = [
-      'field_step',
-      'field_item',
-      'field_customer_benefits_items'
-    ];
-
     if (in_array($bundle, $modules)) {
+      //Liste fiels des modules où ajouter la contrainte
+      $module_fields = [
+        'field_step',
+        'field_item',
+        'field_customer_benefits_items'
+      ];
+
       foreach ($module_fields as $module_field) {
         if (isset($fields[$module_field])) {
           $fields[$module_field]->addConstraint('ModularProductMinItems');
