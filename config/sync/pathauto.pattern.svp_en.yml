@@ -1,0 +1,33 @@
+uuid: 6a10bda5-bc40-41f4-9107-86292a6c64a6
+langcode: en
+status: true
+dependencies:
+  module:
+    - language
+    - node
+id: svp_en
+label: 'SVP EN'
+type: 'canonical_entities:node'
+pattern: 'business-needs/[node:field_header:entity:field_title]'
+selection_criteria:
+  04085f59-230a-44a3-8c0d-2aba1c452f13:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 04085f59-230a-44a3-8c0d-2aba1c452f13
+    context_mapping:
+      node: node
+    bundles:
+      svp: svp
+  58963440-5b35-4e8a-be93-dd2472b2f732:
+    id: language
+    negate: false
+    uuid: 58963440-5b35-4e8a-be93-dd2472b2f732
+    context_mapping:
+      language: 'node:langcode:language'
+    langcodes:
+      en: en
+selection_logic: and
+weight: -10
+relationships:
+  'node:langcode:language':
+    label: Language
