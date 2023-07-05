@@ -33,7 +33,9 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
     'module_list',
     'module_key_figures_items',
     'module_key_figures',
-    'module_title_and_highlight'
+    'module_title_and_highlight',
+    'module_business_case',
+    'module_business_case_item'
   ];
 
   if (in_array($entity_form['#bundle'], $module)) {
@@ -76,6 +78,24 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
       $entity_form['field_highlight']['widget'][0]['value']['#maxlength'] = 350;
       $entity_form['field_highlight']['widget'][0]['value']['#description'] .= ' ' . FieldFilteredMarkup::create('350 characters max');
       $entity_form['field_highlight']['widget'][0]['value']['#rows'] = 4;
+    }
+  }
+
+  if ($entity_form['#bundle'] === 'module_business_case') {
+    if (isset($entity_form['field_subtitle'])) {
+      $entity_form['field_subtitle']['widget'][0]['value']['#maxlength'] = $title_short;
+      $entity_form['field_subtitle']['widget'][0]['value']['#size'] = $size_title_short;
+      $entity_form['field_subtitle']['widget'][0]['value']['#description'] .= ' ' . FieldFilteredMarkup::create($title_short . ' characters max');
+    }
+  }
+
+  if ($entity_form['#bundle'] === 'module_business_case_item') {
+    if (isset($entity_form['field_item_key_points'])) {
+      for ($i = 0; $i < 3; $i++) {
+        $entity_form['field_item_key_points']['widget'][$i]['value']['#maxlength'] = $title_short;
+        $entity_form['field_item_key_points']['widget'][$i]['value']['#size'] = $size_title_short;
+        $entity_form['field_item_key_points']['widget'][$i]['value']['#description'] .= ' ' . FieldFilteredMarkup::create($title_short . ' characters max');
+      }
     }
   }
 
@@ -679,3 +699,19 @@ function oab_modular_product_preprocess_paragraph__module_faq(&$variables) {
     $variables['faq_description'] = $token->replace($paragraph->field_highlight->value, array('entity' => $paragraph->getParentEntity()));
   }
 }
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function oab_modular_product_preprocess_paragraph__module_business_case(&$variables) {
+  /** @var Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+  $items = $paragraph->get('field_business_case_item')->referencedEntities();
+  foreach ($items as $item){
+    if (!$item->get('field_customer_logo')->isEmpty()) {
+      $variables['has_logo'] = true;
+      break;
+    }
+  }
+}
+
