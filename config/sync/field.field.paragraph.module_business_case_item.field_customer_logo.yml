@@ -1,0 +1,29 @@
+uuid: c09dfd6a-1ac0-4cb3-acd8-ba59a2ae2253
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_customer_logo
+    - media.type.logo
+    - paragraphs.paragraphs_type.module_business_case_item
+id: paragraph.module_business_case_item.field_customer_logo
+field_name: field_customer_logo
+entity_type: paragraph
+bundle: module_business_case_item
+label: 'Customer Logo'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      logo: logo
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: image
+field_type: entity_reference

@@ -1,0 +1,19 @@
+uuid: db9a0882-ac6b-4b90-85af-aa4f052fd8ed
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.module_business_case
+id: paragraph.module_business_case.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: module_business_case
+label: Title
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
