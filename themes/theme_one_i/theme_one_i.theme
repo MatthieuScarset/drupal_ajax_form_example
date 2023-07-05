@@ -54,7 +54,7 @@ function theme_one_i_preprocess_region(&$variables) {
   $variables['site_name'] = $config->get('name');
 
   if ($variables['region'] === 'top_zone') {
-    if (isset($node) && $node->bundle() === 'corporate') {
+    if (isset($node) && in_array($node->bundle(), ['corporate', 'svp'])) {
       $variables['attributes']['class'][] = 'bg-transparent';
     } else {
       $variables['attributes']['class'][] = 'bg-gray2';
@@ -75,7 +75,10 @@ function theme_one_i_preprocess_page(&$variables)
   $node = $route_match->getParameter('node');
 
   //On cache le block Page Title
-  if (preg_match('/^view.category_page/', $route_name) || $node ?->bundle() === 'modular_product') {
+  $is_node_without_title_block = $node instanceof NodeInterface && in_array($node->bundle(), [
+    'modular_product', 'svp'
+  ]);
+  if (preg_match('/^view.category_page/', $route_name) || $is_node_without_title_block) {
     $variables['page']['content']['theme_one_i_page_title']['#access'] = FALSE;
   }
 }
