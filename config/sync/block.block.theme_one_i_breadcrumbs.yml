@@ -27,3 +27,4 @@ visibility:
     bundles:
       corporate: corporate
       modular_product: modular_product
+      svp: svp

@@ -7,3 +7,9 @@ services:
   oab_modular_product.settings:
     class: \Drupal\oab_modular_product\Services\OabModularProductService
     arguments: ['@oab_modular_product.conf_settings']
+  
+  oab_modular_product.breadcrumb.svp:
+    class: Drupal\oab_modular_product\Breadcrumb\SVPBreadcrumbBuilder
+    arguments: ['@entity_type.manager', '@language_manager']
+    tags:
+      - { name: breadcrumb_builder, priority: 701 }
