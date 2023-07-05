@@ -1,0 +1,18 @@
+uuid: 99068f95-e8ae-4de8-ac35-81f70001a7c9
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.svp
+id: node.svp.title
+field_name: title
+entity_type: node
+bundle: svp
+label: 'Backoffice title'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
