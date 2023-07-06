@@ -48,8 +48,8 @@
 ]
 %}
 
-{% set col = content.field_header_visuals['#items'] is null or
-  content.field_image_full['#items'].value ? 'col-md-9' : 'col-md-5 pb-0 pb-md-2' %}
+{% set col = paragraph.field_header_visuals is empty or
+  paragraph.field_image_full.value ? 'col-md-9' : 'col-md-5 pb-0 pb-md-2' %}
 
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
@@ -71,8 +71,8 @@
               <div class="d-md-flex flex-md-wrap mt-2 mt-md-3">
                 <a href="{{ content.field_call_to_action_buton.0['#url'] }}" class="btn btn-primary"
                    onmousedown="utag_link(utag_data.titre_page,'header',
-                     '{{ content.field_title.0['#context']['value']|escape('html') }}',
-                     '{{ content.field_call_to_action_buton.0['#title'] }}')"
+                     '{{ paragraph.field_title.value }}',
+                     '{{ paragraph.field_call_to_action_buton.title }}')"
                 >
                   {{ content.field_call_to_action_buton.0['#title'] }}
                 </a>
@@ -81,8 +81,8 @@
                   <a href="{{ content.field_call_to_action_link_simple.0['#url'] }}"
                      class="o-link-arrow align-self-md-center ml-md-2 mt-2 mt-md-0"
                      onmousedown="utag_link(utag_data.titre_page,'header',
-                       '{{ content.field_title.0['#context']['value']|escape('html') }}',
-                       '{{ content.field_call_to_action_link_simple.0['#title'] }}')"
+                       '{{ paragraph.field_title.value }}',
+                       '{{ paragraph.field_call_to_action_link_simple.title }}')"
                   >
                     {{ content.field_call_to_action_link_simple.0['#title'] }}
                   </a>
