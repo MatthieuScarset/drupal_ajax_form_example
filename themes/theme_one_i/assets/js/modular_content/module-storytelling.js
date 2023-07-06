@@ -18,7 +18,7 @@ class ModuleStorytelling {
           });
         }
       });
-    }, { threshold: 0, rootMargin: '-' + this.windowHeight*0.3 + 'px 0px -' + this.windowHeight*0.7 + 'px 0px' });
+    }, { threshold: 0, rootMargin: `-${this.windowHeight*0.3}px 0px -${this.windowHeight*0.7}px 0px` });
 
     this.$storyParts.forEach((el) => this.$observer.observe(el));
   }
