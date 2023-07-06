@@ -436,29 +436,19 @@ function oab_modular_product_hide_wysiwyg_paragraph(&$form) {
  */
 function oab_modular_product_entity_bundle_field_info_alter(&$fields, EntityTypeInterface $entity_type, $bundle) {
   if ($entity_type->id() === "paragraph") {
-    //Liste modules avec 3 items obligatoires
-    $modules = [
-      'module_steps',
-      'module_customer_space',
-      'module_customer_benefits'
+    //Liste des fiels des modules où ajouter la contrainte
+    $constraint_fields = [
+      'field_step' => ['module_steps'],
+      'field_item' => ['module_customer_space', 'module_benefits'],
+      'field_customer_benefits_items' => ['module_customer_benefits']
     ];
 
-    if (in_array($bundle, $modules)) {
-      //Liste fiels des modules où ajouter la contrainte
-      $module_fields = [
-        'field_step',
-        'field_item',
-        'field_customer_benefits_items'
-      ];
-
-      foreach ($module_fields as $module_field) {
-        if (isset($fields[$module_field])) {
-          $fields[$module_field]->addConstraint('ModularProductMinItems');
-        }
+    foreach ($constraint_fields as $field_name => $modules) {
+      if (isset($fields[$field_name]) && in_array($bundle, $modules)) {
+        $fields[$field_name]->addConstraint('ModularProductMinItems');
       }
     }
   }
-
 
   if ($entity_type->id() === "node" && $bundle === "modular_product") {
     if (isset($fields['field_modules'])) {
