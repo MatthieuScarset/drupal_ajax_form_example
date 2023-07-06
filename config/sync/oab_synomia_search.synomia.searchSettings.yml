@@ -1,6 +1,6 @@
 nb_results_per_page: null
-order_content_types_en: 'product, region, country, solution, industry, customer_story, partner, press_release, press_kit, document, blog_post, magazine, content'
-order_content_types_fr: 'product, solution, industry, customer_story, partner, press_release, press_kit, document, blog_post, magazine, content, region, country'
+order_content_types_en: 'product, region, country, solution, industry, customer_story, partner, press_release, press_kit, document, blog_post, magazine, content, svp'
+order_content_types_fr: 'product, solution, industry, customer_story, partner, press_release, press_kit, document, blog_post, magazine, content, region, country, svp'
 order_content_types_ru: 'product, solution, industry, customer_story, partner, press_release, press_kit, document, blog_post, magazine, content, region, country'
 order_content_types_ru-en: 'product, solution, industry, customer_story, partner, press_release, press_kit, document, blog_post, magazine, content'
 order_content_types_pt-br: 'product, region, country, solution, industry, customer_story, partner, press_release, press_kit, document, blog_post, magazine, content'
