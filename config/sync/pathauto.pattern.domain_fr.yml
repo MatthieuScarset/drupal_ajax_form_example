@@ -1,0 +1,33 @@
+uuid: af23e416-3de1-4334-bd8a-305bc649a3b1
+langcode: en
+status: true
+dependencies:
+  module:
+    - language
+    - node
+id: domain_fr
+label: 'Domaine FR'
+type: 'canonical_entities:node'
+pattern: 'enjeux/[node:field_svp]/[node:field_header:entity:field_title]'
+selection_criteria:
+  a9b147fd-9c43-486b-8233-0ae77edb2b8e:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: a9b147fd-9c43-486b-8233-0ae77edb2b8e
+    context_mapping:
+      node: node
+    bundles:
+      domain: domain
+  4e11cd46-529b-417f-8486-389414e0e891:
+    id: language
+    negate: false
+    uuid: 4e11cd46-529b-417f-8486-389414e0e891
+    context_mapping:
+      language: 'node:langcode:language'
+    langcodes:
+      fr: fr
+selection_logic: and
+weight: -10
+relationships:
+  'node:langcode:language':
+    label: Language
