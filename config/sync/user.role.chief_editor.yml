@@ -19,6 +19,7 @@ dependencies:
     - node.type.customer_story
     - node.type.distributor
     - node.type.document
+    - node.type.domain
     - node.type.external_content
     - node.type.full_html
     - node.type.homepage
@@ -102,6 +103,7 @@ permissions:
   - 'create customer_story content'
   - 'create distributor content'
   - 'create document content'
+  - 'create domain content'
   - 'create embed_video media'
   - 'create external_content content'
   - 'create file media'
@@ -139,6 +141,7 @@ permissions:
   - 'delete any customer_story content'
   - 'delete any distributor content'
   - 'delete any document content'
+  - 'delete any domain content'
   - 'delete any embed_video media'
   - 'delete any external_content content'
   - 'delete any file media'
@@ -173,6 +176,7 @@ permissions:
   - 'delete customer_story revisions'
   - 'delete distributor revisions'
   - 'delete document revisions'
+  - 'delete domain revisions'
   - 'delete external_content revisions'
   - 'delete full_html revisions'
   - 'delete industry revisions'
@@ -191,6 +195,7 @@ permissions:
   - 'delete own customer_story content'
   - 'delete own distributor content'
   - 'delete own document content'
+  - 'delete own domain content'
   - 'delete own embed_video media'
   - 'delete own external_content content'
   - 'delete own file media'
@@ -234,6 +239,7 @@ permissions:
   - 'edit any customer_story content'
   - 'edit any distributor content'
   - 'edit any document content'
+  - 'edit any domain content'
   - 'edit any embed_video media'
   - 'edit any external_content content'
   - 'edit any file media'
@@ -270,6 +276,7 @@ permissions:
   - 'edit own customer_story content'
   - 'edit own distributor content'
   - 'edit own document content'
+  - 'edit own domain content'
   - 'edit own embed_video media'
   - 'edit own external_content content'
   - 'edit own file media'
@@ -309,6 +316,7 @@ permissions:
   - 'revert customer_story revisions'
   - 'revert distributor revisions'
   - 'revert document revisions'
+  - 'revert domain revisions'
   - 'revert external_content revisions'
   - 'revert full_html revisions'
   - 'revert homepage revisions'
@@ -329,6 +337,7 @@ permissions:
   - 'revert svp revisions'
   - 'skip comment approval'
   - 'translate corporate node'
+  - 'translate domain node'
   - 'translate profile node'
   - 'translate svp node'
   - 'update any media'
@@ -351,6 +360,7 @@ permissions:
   - 'view customer_story revisions'
   - 'view distributor revisions'
   - 'view document revisions'
+  - 'view domain revisions'
   - 'view external_content revisions'
   - 'view full_html revisions'
   - 'view homepage revisions'
