@@ -15,7 +15,7 @@ use Drupal\node\NodeInterface;
 /**
  * Provides a breadcrumb builder for node:svp.
  */
-class SVPBreadcrumbBuilder implements BreadcrumbBuilderInterface {
+class SvpBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
   use StringTranslationTrait;
 
@@ -65,13 +65,8 @@ class SVPBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     $links[] = Link::createFromRoute($this->t('Home'), '<front>', [], ['language' => $current_language]);
     $links[] = Link::createFromRoute($this->t('Business needs'), '<nolink>');
 
-    $custom_title = $node->label();
-    if ($node->hasField('field_header') && !$node->get('field_header')->isEmpty()) {
-      $paragraph = $node->get('field_header')->referencedEntities()[0];
-      if ($paragraph->hasField('field_title') && !$paragraph->get('field_title')->isEmpty()) {
-        $custom_title = $paragraph->get('field_title')->getString();
-      }
-    }
+    // Get title from Top Zone paragraph otherwise use node title.
+    $custom_title =  $node?->field_header?->entity?->field_title?->value ?? $node->label();
     $links[] = Link::createFromRoute($custom_title, 'entity.node.canonical', ['node' => $node->id()]);
 
     $breadcrumb = new Breadcrumb();
