@@ -24,7 +24,7 @@ class SVPNodeToTermValidator extends ConstraintValidator {
     }
 
     $bundle = $entity->bundle();
-    $allowed_bundles = ['svp'];
+    $allowed_bundles = ['svp', 'domain'];
     if (!in_array($bundle, $allowed_bundles)) {
       $this->context->addViolation($constraint->wrongBundle, [
         '%field' => $items->getName(),
