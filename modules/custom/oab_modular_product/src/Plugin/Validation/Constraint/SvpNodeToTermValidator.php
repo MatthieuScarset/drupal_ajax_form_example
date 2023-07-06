@@ -2,15 +2,38 @@
 
 namespace Drupal\oab_modular_product\Plugin\Validation\Constraint;
 
+use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\node\NodeInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 /**
  * Validates the field_svp constraint.
  */
-class SVPNodeToTermValidator extends ConstraintValidator {
+class SvpNodeToTermValidator extends ConstraintValidator implements ContainerInjectionInterface {
+
+  /**
+   * Entity type manager service.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
+    $this->entityTypeManager = $entity_type_manager;
+  }
+
+  /**
+   * @inheritDoc
+   */
+  public static function create(ContainerInterface $container) {
+    return new self(
+      $container->get('entity_type.manager')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -33,10 +56,11 @@ class SVPNodeToTermValidator extends ConstraintValidator {
     }
 
     // Check SVP term is not used in another published SVP node.
-    if ($entity->bundle() == 'svp') {
-      $tids = explode(', ', $items->getString());
-      $nids = \Drupal::entityTypeManager()->getStorage('node')->getQuery()
-        ->condition('field_svp', $tids, 'IN')
+    if ($entity->bundle() == 'svp' && !$items->isEmpty()) {
+      $tid = $items[0]->target_id;
+
+      $nids = $this->entityTypeManager->getStorage('node')->getQuery()
+        ->condition('field_svp', $tid)
         ->condition('status', NodeInterface::PUBLISHED)
         ->accessCheck(FALSE)
         ->execute();

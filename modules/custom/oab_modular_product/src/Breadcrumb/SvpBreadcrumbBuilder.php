@@ -15,7 +15,7 @@ use Drupal\node\NodeInterface;
 /**
  * Provides a breadcrumb builder for node:svp.
  */
-class SVPBreadcrumbBuilder implements BreadcrumbBuilderInterface {
+class SvpBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
   use StringTranslationTrait;
 
@@ -65,23 +65,9 @@ class SVPBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     $links[] = Link::createFromRoute($this->t('Home'), '<front>', [], ['language' => $current_language]);
     $links[] = Link::createFromRoute($this->t('Business needs'), '<nolink>');
 
-    // Parent SVP page.
-    if ($node->bundle() == 'domain' && $node->hasField('field_svp') && !$node->get('field_svp')->isEmpty()) {
-      $tids = explode(', ', $node->get('field_svp')->getString());
-      $nids = $this->entityTypeManager->getStorage('node')->getQuery()
-        ->condition('type', 'svp')
-        ->condition('field_svp', $tids, 'IN')
-        ->condition('status', NodeInterface::PUBLISHED)
-        ->accessCheck(FALSE)
-        ->execute();
-
-      $parents = !empty($nids) ? $this->entityTypeManager->getStorage('node')->loadMultiple($nids) : [];
-      foreach ($parents as $parent) {
-        $links[] = Link::createFromRoute($this->getCustomTitle($parent), 'entity.node.canonical', ['node' => $parent->id()]);
-      }
-    }
-
-    $links[] = Link::createFromRoute($this->getCustomTitle($node), '<nolink>');
+    // Get title from Top Zone paragraph otherwise use node title.
+    $custom_title =  $node?->field_header?->entity?->field_title?->value ?? $node->label();
+    $links[] = Link::createFromRoute($custom_title, 'entity.node.canonical', ['node' => $node->id()]);
 
     $breadcrumb = new Breadcrumb();
     $breadcrumb->setLinks($links);
