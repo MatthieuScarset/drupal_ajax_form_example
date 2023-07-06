@@ -8,6 +8,7 @@ fr:
     - corporate
     - modular_product
     - poc_test_module
+    - svp
   routes: {  }
 en:
   url:
@@ -20,5 +21,6 @@ en:
     - corporate
     - modular_product
     - poc_test_module
+    - svp
   routes:
     - oab_offices_map.page

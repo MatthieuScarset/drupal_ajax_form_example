@@ -26,5 +26,6 @@ visibility:
       node: '@node.node_route_context:node'
     bundles:
       corporate: corporate
+      domain: domain
       modular_product: modular_product
       svp: svp

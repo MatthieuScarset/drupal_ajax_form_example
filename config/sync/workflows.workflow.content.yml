@@ -11,6 +11,7 @@ dependencies:
     - node.type.customer_story
     - node.type.distributor
     - node.type.document
+    - node.type.domain
     - node.type.external_content
     - node.type.full_html
     - node.type.homepage
@@ -85,6 +86,7 @@ type_settings:
       - customer_story
       - distributor
       - document
+      - domain
       - external_content
       - full_html
       - homepage
