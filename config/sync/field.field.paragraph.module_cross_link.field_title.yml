@@ -1,0 +1,19 @@
+uuid: 5657c6f4-4ce4-4b92-8950-7948098a5a06
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.module_cross_link
+id: paragraph.module_cross_link.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: module_cross_link
+label: Title
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

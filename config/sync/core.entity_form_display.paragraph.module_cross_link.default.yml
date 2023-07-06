@@ -3,7 +3,9 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.module_cross_link.field_background_variation
     - field.field.paragraph.module_cross_link.field_cross_link_items
+    - field.field.paragraph.module_cross_link.field_title
     - paragraphs.paragraphs_type.module_cross_link
   module:
     - entity_browser_entity_form
@@ -13,9 +15,15 @@ targetEntityType: paragraph
 bundle: module_cross_link
 mode: default
 content:
+  field_background_variation:
+    type: options_buttons
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_cross_link_items:
     type: inline_entity_form_complex
-    weight: 0
+    weight: 2
     region: content
     settings:
       form_mode: default
@@ -32,6 +40,14 @@ content:
     third_party_settings:
       entity_browser_entity_form:
         entity_browser_id: _none
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
 hidden:
   created: true
   status: true

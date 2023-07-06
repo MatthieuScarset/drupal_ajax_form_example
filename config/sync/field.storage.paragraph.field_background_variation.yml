@@ -1,0 +1,30 @@
+uuid: abf4d4fc-3cd6-4a79-888f-afabc85bfdb5
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_background_variation
+field_name: field_background_variation
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: light-double-color
+      label: Light
+    -
+      value: dark-double-color
+      label: Dark
+    -
+      value: bg-gray
+      label: Gray
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
