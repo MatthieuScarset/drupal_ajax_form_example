@@ -78,10 +78,10 @@ class SvpBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
   /**
    * Get the node title or the top zone title.
-   * 
+   *
    * @param \Drupal\node\NodeInterface $node
    *   A give node.
-   * 
+   *
    * @return string
    *   The custom title.
    */
