@@ -18,9 +18,16 @@ function oab_tealium_page_attachments(array &$attachments) {
   }
 
   $attachments['#attached']['drupalSettings']['tealium']['type_langue'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
-  
+
   $node = \Drupal::routeMatch()->getParameter('node');
-  if ($node instanceof NodeInterface && $node->bundle() == 'svp') {
-    $variables['#attached']['drupalSettings']['tealium']['type_page'] = 'SVP';
+  if ($node instanceof NodeInterface) {
+    switch ($node->bundle()) {
+      case 'svp':
+        $variables['#attached']['drupalSettings']['tealium']['type_page'] = 'SVP';
+        break;
+      case 'domain':
+        $variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Domain';
+        break;
+    }
   }
 }

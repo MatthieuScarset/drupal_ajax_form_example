@@ -76,7 +76,7 @@ function theme_one_i_preprocess_page(&$variables)
 
   //On cache le block Page Title
   $is_node_without_title_block = $node instanceof NodeInterface && in_array($node->bundle(), [
-    'modular_product', 'svp'
+    'modular_product', 'svp', 'domain'
   ]);
   if (preg_match('/^view.category_page/', $route_name) || $is_node_without_title_block) {
     $variables['page']['content']['theme_one_i_page_title']['#access'] = FALSE;
