@@ -51,7 +51,7 @@ class SVPBreadcrumbBuilder implements BreadcrumbBuilderInterface {
    */
   public function applies(RouteMatchInterface $route_match) {
     $node = $route_match->getParameter('node');
-    return $node instanceof NodeInterface && $node->bundle() == 'svp';
+    return $node instanceof NodeInterface && in_array($node->bundle(), ['svp', 'domain']);
   }
 
   /**
@@ -65,19 +65,50 @@ class SVPBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     $links[] = Link::createFromRoute($this->t('Home'), '<front>', [], ['language' => $current_language]);
     $links[] = Link::createFromRoute($this->t('Business needs'), '<nolink>');
 
-    $custom_title = $node->label();
-    if ($node->hasField('field_header') && !$node->get('field_header')->isEmpty()) {
-      $paragraph = $node->get('field_header')->referencedEntities()[0];
-      if ($paragraph->hasField('field_title') && !$paragraph->get('field_title')->isEmpty()) {
-        $custom_title = $paragraph->get('field_title')->getString();
+    // Parent SVP page.
+    if ($node->bundle() == 'domain' && $node->hasField('field_svp') && !$node->get('field_svp')->isEmpty()) {
+      $tids = explode(', ', $node->get('field_svp')->getString());
+      $nids = $this->entityTypeManager->getStorage('node')->getQuery()
+        ->condition('type', 'svp')
+        ->condition('field_svp', $tids, 'IN')
+        ->condition('status', NodeInterface::PUBLISHED)
+        ->accessCheck(FALSE)
+        ->execute();
+
+      $parents = !empty($nids) ? $this->entityTypeManager->getStorage('node')->loadMultiple($nids) : [];
+      foreach ($parents as $parent) {
+        $links[] = Link::createFromRoute($this->getCustomTitle($parent), 'entity.node.canonical', ['node' => $parent->id()]);
       }
     }
-    $links[] = Link::createFromRoute($custom_title, 'entity.node.canonical', ['node' => $node->id()]);
+
+    $links[] = Link::createFromRoute($this->getCustomTitle($node), '<nolink>');
 
     $breadcrumb = new Breadcrumb();
     $breadcrumb->setLinks($links);
     $breadcrumb->addCacheContexts(['languages:' . LanguageInterface::TYPE_CONTENT]);
     $breadcrumb->addCacheableDependency($node);
     return $breadcrumb;
+  }
+
+  /**
+   * Get the node title or the top zone title.
+   * 
+   * @param \Drupal\node\NodeInterface $node
+   *   A give node.
+   * 
+   * @return string
+   *   The custom title.
+   */
+  public function getCustomTitle(NodeInterface $node) {
+    $custom_title = $node->label();
+
+    if ($node->hasField('field_header') && !$node->get('field_header')->isEmpty()) {
+      $paragraph = $node->get('field_header')->referencedEntities()[0];
+      if ($paragraph->hasField('field_title') && !$paragraph->get('field_title')->isEmpty()) {
+        $custom_title = $paragraph->get('field_title')->getString();
+      }
+    }
+
+    return $custom_title;
   }
 }
