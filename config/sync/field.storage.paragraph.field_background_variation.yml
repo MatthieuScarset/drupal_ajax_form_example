@@ -18,7 +18,7 @@ settings:
       value: dark-double-color
       label: Dark
     -
-      value: bg-gray
+      value: bg-gray2
       label: Gray
   allowed_values_function: ''
 module: options
