@@ -21,7 +21,7 @@ function oab_modular_product_update_9002() {
 /**
  * Ajout des traductions pour le type "SVP".
  */
-function oab_modular_product_update_9003() {
+function oab_modular_product_update_9004() {
   $translations = [
     'Business needs' => [
       'fr' => 'Vos enjeux'
