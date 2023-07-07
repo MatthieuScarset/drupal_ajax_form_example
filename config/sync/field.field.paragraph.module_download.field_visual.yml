@@ -1,16 +1,16 @@
-uuid: 1d19e30e-5688-44d4-a54b-fbd3471897e4
+uuid: 73caa088-820e-40d6-883f-48d7927ff482
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_pdf_simple
-    - media.type.file
+    - field.storage.paragraph.field_visual
+    - media.type.image
     - paragraphs.paragraphs_type.module_download
-id: paragraph.module_download.field_pdf_simple
-field_name: field_pdf_simple
+id: paragraph.module_download.field_visual
+field_name: field_visual
 entity_type: paragraph
 bundle: module_download
-label: Pdf
+label: Image
 description: ''
 required: false
 translatable: false
@@ -20,7 +20,7 @@ settings:
   handler: 'default:media'
   handler_settings:
     target_bundles:
-      file: file
+      image: image
     sort:
       field: _none
       direction: ASC

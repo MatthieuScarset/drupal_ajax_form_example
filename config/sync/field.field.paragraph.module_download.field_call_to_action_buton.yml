@@ -1,0 +1,23 @@
+uuid: 7ed9d0ef-e455-4a90-afd0-920043ea33be
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_call_to_action_buton
+    - paragraphs.paragraphs_type.module_download
+  module:
+    - link
+id: paragraph.module_download.field_call_to_action_buton
+field_name: field_call_to_action_buton
+entity_type: paragraph
+bundle: module_download
+label: CTA
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 17
+field_type: link
