@@ -453,7 +453,7 @@ function oab_modular_product_entity_bundle_field_info_alter(&$fields, EntityType
 
   // Validate SVP entity_reference field.
   if (isset($fields['field_svp'])) {
-    $fields['field_svp']->addConstraint('SVPNodeToTerm');
+    $fields['field_svp']->addConstraint('SvpNodeToTerm');
   }
 }
 

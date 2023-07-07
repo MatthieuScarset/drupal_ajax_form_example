@@ -29,7 +29,7 @@ class SvpBreadcrumbBuilder implements BreadcrumbBuilderInterface {
   /**
    * The language manager service.
    *
-   * @var \Drupal\Core\Language\LanguageManagerInterface|null
+   * @var \Drupal\Core\Language\LanguageManagerInterface
    */
   protected $languageManager;
 
@@ -38,10 +38,10 @@ class SvpBreadcrumbBuilder implements BreadcrumbBuilderInterface {
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager service.
-   * @param \Drupal\Core\Language\LanguageManagerInterface|null $language_manager
+   * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
    *   The language manager service.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, LanguageManagerInterface $language_manager = NULL) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, LanguageManagerInterface $language_manager) {
     $this->entityTypeManager = $entity_type_manager;
     $this->languageManager = $language_manager;
   }
