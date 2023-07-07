@@ -59,8 +59,8 @@
       <a href="{{ content.field_redirection_url[0]['#url'] }}"
          class="o-link-arrow p-0 mt-2"
          onmousedown="utag_link(utag_data.titre_page,'Crosslink',
-           '{{ content.field_title.0['#context']['value']|escape('html') }}',
-           '{{ content.field_redirection_url[0]['#title'] }}'
+           '{{ paragraph.field_title.value }}',
+           '{{ paragraph.field_redirection_url.title }}'
          )"
       >
         {{ content.field_redirection_url[0]['#title'] }}
