@@ -62,6 +62,7 @@ class SvpNodeToTermValidator extends ConstraintValidator implements ContainerInj
       $nids = $this->entityTypeManager->getStorage('node')->getQuery()
         ->condition('field_svp', $tid)
         ->condition('status', NodeInterface::PUBLISHED)
+        ->condition('type', 'svp')
         ->accessCheck(FALSE)
         ->execute();
 
