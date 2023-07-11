@@ -4,11 +4,15 @@ status: true
 dependencies:
   module:
     - menu_ui
+    - oab_modular_product
 third_party_settings:
   menu_ui:
     available_menus:
       - main
     parent: 'main:'
+  oab_modular_product:
+    ob1_theme: 1
+    background_e2e: 1
 name: Domain
 type: domain
 description: 'Children of SVP pages.'
