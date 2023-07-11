@@ -4,7 +4,9 @@ use Drupal\block_content\Entity\BlockContent;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\file\Entity\File;
 use Drupal\node\Entity\Node;
+use Drupal\node\Entity\NodeType;
 use Drupal\node\NodeInterface;
+use Drupal\node\NodeTypeInterface;
 use Drupal\oab_mp_formules\Entity\ProductFormuleEntity;
 use Drupal\oab_mp_product_formule_packages\Entity\FormulePackage;
 use Drupal\oab_subhomes\Entity\SubhomeEntity;
@@ -418,12 +420,14 @@ function theme_one_i_theme_suggestions_page_alter(array &$suggestions, array $va
   if ($node = Drupal::routeMatch()->getParameter('node')) {
     if (is_object($node)) {
       $content_type = $node->bundle();
-      $suggestions = array_merge($suggestions, __suggestion_nodes($hook, $content_type, in_array($content_type, [
-        "modular_product",
-        "corporate",
-        "svp",
-        "domain",
-      ])));
+
+      /** @var NodeTypeInterface $node_type */
+      $node_type = NodeType::load($content_type);
+      $e2e = $node_type->getThirdPartySetting('oab_modular_product', 'background_e2e');
+
+      if ($e2e) {
+        $suggestions = array_merge($suggestions, __suggestion_nodes($hook, $content_type, true));
+      }
     }
   }
 }
@@ -435,13 +439,14 @@ function theme_one_i_theme_suggestions_region_alter(array &$suggestions, array $
   if ($node = Drupal::routeMatch()->getParameter('node')) {
     if (is_object($node)) {
       $content_type = $node->bundle();
-      $suggestions = array_merge($suggestions, __suggestion_nodes($hook, $variables['elements']['#region'], in_array($content_type, [
-        "modular_product",
-        "corporate",
-        "poc_test_module",
-        "svp",
-        "domain",
-      ])));
+
+      /** @var NodeTypeInterface $node_type */
+      $node_type = NodeType::load($content_type);
+      $e2e = $node_type->getThirdPartySetting('oab_modular_product', 'background_e2e');
+
+      if ($e2e) {
+        $suggestions = array_merge($suggestions, __suggestion_nodes($hook, $variables['elements']['#region'], true));
+      }
     }
   }
 }

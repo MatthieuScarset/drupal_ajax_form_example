@@ -4,12 +4,6 @@ fr:
   views:
     category_page:
       - category_page
-  contents:
-    - corporate
-    - domain
-    - modular_product
-    - poc_test_module
-    - svp
   routes: {  }
 en:
   url:
@@ -18,11 +12,5 @@ en:
   views:
     category_page:
       - category_page
-  contents:
-    - corporate
-    - domain
-    - modular_product
-    - poc_test_module
-    - svp
   routes:
     - oab_offices_map.page
