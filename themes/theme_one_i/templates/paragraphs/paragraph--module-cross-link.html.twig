@@ -52,12 +52,14 @@
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
-    <div class="site-width">
-      <div class="container-fluid">
-        <h2 class="no-signature pt-3 pb-0 px-1 mb-0 ml-md-4">{{ content.field_title }}</h2>
-      </div>
-    </div>
-    <div class="double-color {{ paragraph.field_background_variation.value }}">
+      {% if content.field_title['#items'] %}
+        <div class="site-width">
+          <div class="container-fluid">
+            <h2 class="no-signature pt-3 pb-0 px-1 mb-0 ml-md-4">{{ content.field_title }}</h2>
+          </div>
+        </div>
+      {% endif %}
+      <div class="double-color {{ paragraph.field_background_variation.value }}">
           <div class="left-panel px-1 px-md-0">
             <div>
               {{ content.field_cross_link_items[0] }}
