@@ -8,6 +8,7 @@ use Drupal\node\NodeTypeInterface;
 use Drupal\oab_modular_product\Services\OabModularProductService;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\NodeInterface;
 
 /**
  * Implements hook_inline_entity_form_entity_form_alter().
@@ -675,6 +676,37 @@ function oab_modular_product_preprocess_paragraph(&$variables) {
       break;
     default:
       $variables['module_title'] = '';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function oab_modular_product_preprocess_paragraph__module_domains(&$variables) {
+  $parent = $variables['paragraph']->getParentEntity();
+  if (!$parent instanceof NodeInterface || !$parent->hasField('field_svp') || $parent->field_svp->isEmpty()) {
+    return;
+  }
+  
+  // Load domains from SVP term.
+  $tid = $parent->field_svp->target_id;
+  $entity_type_manager = \Drupal::service('entity_type.manager');
+  $node_storage = $entity_type_manager->getStorage('node');
+  $node_view_builder = $entity_type_manager->getViewBuilder('node');
+
+  $nids = $node_storage->getQuery()
+    ->condition('field_svp', $tid)
+    ->condition('status', NodeInterface::PUBLISHED)
+    ->condition('type', 'domain')
+    ->accessCheck(FALSE)
+    ->sort('created', 'DESC')
+    ->range(0, 6)
+    ->execute();
+
+  $view_mode = 'teaser';
+  $variables['domains'] = [];
+  foreach ($nids as $nid) {
+    $variables['domains'][] = $node_view_builder->view($node_storage->load($nid), $view_mode);
   }
 }
 

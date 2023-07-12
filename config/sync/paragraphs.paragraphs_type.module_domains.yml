@@ -1,9 +1,9 @@
-uuid: 4407c911-424e-4201-8b57-58a5cffe8138
+uuid: 12416a61-b786-4fd8-b26f-48234e7f60c0
 langcode: en
 status: true
 dependencies: {  }
-id: module_domain
-label: '[Module] Domain'
+id: module_domains
+label: '[Module] Domains'
 icon_uuid: null
 icon_default: null
 description: ''

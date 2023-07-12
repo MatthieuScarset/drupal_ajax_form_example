@@ -1,0 +1,22 @@
+<section{{ attributes.addClass('domain-teaser') }}>
+  {% if content.field_logo.0 %}
+    <div class="domain-teaser__logo">
+      {{ content.field_logo }}
+    </div>
+  {% endif %}
+  {% if content.field_teaser_title.0 %}
+    <div class="domain-teaser__title">
+      {{ content.field_teaser_title }}
+    </div>
+  {% endif %}
+  {% if content.field_teaser.0 %}
+    <div class="domain-teaser__text">
+      {{ content.field_teaser }}
+    </div>
+  {% endif %}
+    <div class="domain-teaser__link">
+      <a class="o-link" href="{{ path('entity.node.canonical', {'node': node.id() })}}">
+        {{ 'Read more'|t }}
+      </a>
+    </div>
+</section>
