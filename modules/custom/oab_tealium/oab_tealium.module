@@ -23,10 +23,10 @@ function oab_tealium_page_attachments(array &$attachments) {
   if ($node instanceof NodeInterface) {
     switch ($node->bundle()) {
       case 'svp':
-        $variables['#attached']['drupalSettings']['tealium']['type_page'] = 'SVP';
+        $attachments['#attached']['drupalSettings']['tealium']['type_page'] = 'SVP';
         break;
       case 'domain':
-        $variables['#attached']['drupalSettings']['tealium']['type_page'] = 'Domain';
+        $attachments['#attached']['drupalSettings']['tealium']['type_page'] = 'Domain';
         break;
     }
   }

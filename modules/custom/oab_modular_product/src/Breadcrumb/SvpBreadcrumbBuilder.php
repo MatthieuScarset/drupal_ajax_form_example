@@ -65,9 +65,24 @@ class SvpBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     $links[] = Link::createFromRoute($this->t('Home'), '<front>', [], ['language' => $current_language]);
     $links[] = Link::createFromRoute($this->t('Business needs'), '<nolink>');
 
-    // Get title from Top Zone paragraph otherwise use node title.
-    $custom_title =  $node?->field_header?->entity?->field_title?->value ?? $node->label();
-    $links[] = Link::createFromRoute($custom_title, 'entity.node.canonical', ['node' => $node->id()]);
+    if ($node->bundle == 'domain') {
+      // Load domains from SVP term.
+      $tid = $node->field_svp->target_id;
+      $nids = $this->entityTypeManager->getStorage('node')->getQuery()
+        ->condition('field_svp', $tid)
+        ->condition('status', NodeInterface::PUBLISHED)
+        ->condition('type', 'svp')
+        ->accessCheck(FALSE)
+        ->execute();
+
+      $nid = reset($nids) ?? NULL;
+      $parent = $nid ? $this->entityTypeManager->getStorage('node')->load($nid) : NULL;
+      if ($parent instanceof NodeInterface) {
+        // Get title from Top Zone paragraph otherwise use node title.
+        $custom_title =  $parent?->field_header?->entity?->field_title?->value ?? $parent->label();
+        $links[] = Link::createFromRoute($custom_title, 'entity.node.canonical', ['node' => $parent->id()]);
+      }
+    }
 
     $breadcrumb = new Breadcrumb();
     $breadcrumb->setLinks($links);
@@ -76,25 +91,4 @@ class SvpBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     return $breadcrumb;
   }
 
-  /**
-   * Get the node title or the top zone title.
-   *
-   * @param \Drupal\node\NodeInterface $node
-   *   A give node.
-   *
-   * @return string
-   *   The custom title.
-   */
-  public function getCustomTitle(NodeInterface $node) {
-    $custom_title = $node->label();
-
-    if ($node->hasField('field_header') && !$node->get('field_header')->isEmpty()) {
-      $paragraph = $node->get('field_header')->referencedEntities()[0];
-      if ($paragraph->hasField('field_title') && !$paragraph->get('field_title')->isEmpty()) {
-        $custom_title = $paragraph->get('field_title')->getString();
-      }
-    }
-
-    return $custom_title;
-  }
 }
