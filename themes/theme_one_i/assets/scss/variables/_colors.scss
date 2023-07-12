@@ -6,6 +6,10 @@
       @extend .text-white;
     }
 
+    .double-color, .double-color > .left-panel {
+      @extend .bg-dark;
+    }
+
     a:not(.btn_accept_cookie_youtube) {
       @extend .o-link-reverse;
     }
