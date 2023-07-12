@@ -1,0 +1,8 @@
+uuid: 5a65d7df-8b21-4e8f-a5c8-317fb390b160
+langcode: en
+status: true
+dependencies: {  }
+id: node__domain
+label: 'Content: Domain'
+tags:
+  title: '[node:field_meta_title] | [site:name]'
