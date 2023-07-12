@@ -56,9 +56,8 @@ function theme_one_i_preprocess_region(&$variables) {
   $variables['site_name'] = $config->get('name');
 
   if ($variables['region'] === 'top_zone') {
-    if (isset($node) && in_array($node->bundle(), ['corporate', 'svp'])) {
-      $variables['attributes']['class'][] = 'bg-transparent';
-    } else {
+    $variables['attributes']['class'][] = 'bg-transparent';
+    if (isset($node) && in_array($node->bundle(), ['modular_product'])) {
       $variables['attributes']['class'][] = 'bg-gray2';
     }
   }
