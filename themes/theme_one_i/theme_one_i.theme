@@ -146,7 +146,7 @@ function theme_one_i_preprocess_paragraph__module_testimonial_item(&$variables) 
 function theme_one_i_preprocess_node(&$variables) {
   $node_type = $variables['node']->type->entity->get('type');
 
-  if (in_array($node_type, ['modular_product', 'corporate'])) {
+  if (in_array($node_type, ['modular_product', 'corporate', 'svp'])) {
     $variables['#attached']['library'][] = 'theme_one_i/modular_content';
   }
 
