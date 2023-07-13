@@ -65,10 +65,6 @@ class SvpBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     $links[] = Link::createFromRoute($this->t('Home'), '<front>', [], ['language' => $current_language]);
     $links[] = Link::createFromRoute($this->t('Business needs'), '<nolink>');
 
-    // Get title from Top Zone paragraph otherwise use node title.
-    $custom_title =  $node?->field_header?->entity?->field_title?->value ?? $node->label();
-    $links[] = Link::createFromRoute($custom_title, 'entity.node.canonical', ['node' => $node->id()]);
-
     $breadcrumb = new Breadcrumb();
     $breadcrumb->setLinks($links);
     $breadcrumb->addCacheContexts(['languages:' . LanguageInterface::TYPE_CONTENT]);
