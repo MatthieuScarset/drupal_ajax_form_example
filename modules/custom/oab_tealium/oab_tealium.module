@@ -21,6 +21,6 @@ function oab_tealium_page_attachments(array &$attachments) {
   
   $node = \Drupal::routeMatch()->getParameter('node');
   if ($node instanceof NodeInterface && $node->bundle() == 'svp') {
-    $variables['#attached']['drupalSettings']['tealium']['type_page'] = 'SVP';
+    $attachments['#attached']['drupalSettings']['tealium']['type_page'] = 'SVP';
   }
 }
