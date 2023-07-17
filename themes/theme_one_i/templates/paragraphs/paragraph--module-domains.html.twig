@@ -18,7 +18,9 @@
           <div class="row d-flex">
             {% for key, domain in domains if key|first != '#' %}
               <div class="col-12 col-md-4 pb-2 d-flex">
-                {{ domain }}
+                <div class="bg-primary d-flex">
+                  {{ domain }}
+                </div>
               </div>
             {% endfor %}
           </div>

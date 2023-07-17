@@ -13,3 +13,22 @@
     }
   }
 }
+
+/**
+ * Do something on hover on an element. 
+ *
+ * @code 
+ * .myclass {
+ *   @include hover {
+ *     background: nicecolor;
+ *   }
+ * }
+ *
+ * @endcode
+ */
+@mixin hover {
+  &:hover,
+  &:focus {
+    @content;
+  }
+}
