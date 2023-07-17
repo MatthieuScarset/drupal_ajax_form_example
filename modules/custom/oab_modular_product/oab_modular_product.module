@@ -7,6 +7,7 @@ use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\node\NodeTypeInterface;
 use Drupal\oab_modular_product\Services\OabModularProductService;
 use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\paragraphs\ParagraphInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\node\NodeInterface;
 
@@ -160,20 +161,22 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
  * Implements hook_field_widget_single_element_form_alter().
  */
 function oab_modular_product_field_widget_single_element_form_alter(array &$element, FormStateInterface $form_state, array $context) {
-  /*
-   * Ici, on ne va gérer que les alterations du formulaire du paragraph
-   */
-  if (!isset($element['#paragraph_type'])) {
-    return;
-  }
-
+  $field_name = $context['items']?->getName();
+  $entity = $form_state->getFormObject()->getEntity();
 
   /** @var OabModularProductService $conf_modular_product */
   $conf_modular_product = \Drupal::service('oab_modular_product.settings');
 
-  $user_roles = \Drupal::currentUser()->getRoles();
-  $user_is_admin = in_array('administrator', $user_roles);
+  $max_char_short_title = $conf_modular_product->getShortTitleMaxCharacter();
+  $max_char_long_title = $conf_modular_product->getLongTitleMaxCharacter();
+  $max_char_description = $conf_modular_product->getLongDescriptionMaxCharacter();
 
+  $size_title_short = min(150, $conf_modular_product->getShortTitleMaxCharacter()+10);
+  $size_title_long = min(150, $conf_modular_product->getLongTitleMaxCharacter()+10);
+  $size_description = min(150, $conf_modular_product->getLongDescriptionMaxCharacter()+10);
+
+  // Alter fields in Paragraphs.
+  if ($entity instanceof ParagraphInterface) {
   $mp_modules = [
     'module_3_4_colonnes_items',
     'module_exemples_items',
@@ -194,14 +197,6 @@ function oab_modular_product_field_widget_single_element_form_alter(array &$elem
     'titre_and_description_and_link',
     'titre_and_description',
   ];
-
-  $max_char_short_title = $conf_modular_product->getShortTitleMaxCharacter();
-  $max_char_long_title = $conf_modular_product->getLongTitleMaxCharacter();
-  $max_char_description = $conf_modular_product->getLongDescriptionMaxCharacter();
-
-  $size_title_short = min(150, $conf_modular_product->getShortTitleMaxCharacter()+10);
-  $size_title_long = min(150, $conf_modular_product->getLongTitleMaxCharacter()+10);
-  $size_description = min(150, $conf_modular_product->getLongDescriptionMaxCharacter()+10);
 
   if (in_array($element['#paragraph_type'], $mp_modules)) {
     if (isset($element['subform']['field_title'])) {
@@ -276,10 +271,7 @@ function oab_modular_product_field_widget_single_element_form_alter(array &$elem
   }
 
   if ($element['#paragraph_type'] === 'module_faq') {
-  /*
-   * liste des fields seulement modifiable par les admins
-   */
-
+      // liste des fields seulement modifiable par les admins.
     $field_restricted = [
       'field_title',
       'field_highlight',
@@ -287,6 +279,8 @@ function oab_modular_product_field_widget_single_element_form_alter(array &$elem
       'field_function',
       'field_visual'
     ];
+      
+      $user_is_admin = in_array('administrator', \Drupal::currentUser()->getRoles());
 
     foreach ($field_restricted as $field_name) {
       if (isset($element['subform'][$field_name])) {
@@ -379,6 +373,16 @@ function oab_modular_product_field_widget_single_element_form_alter(array &$elem
     unset($element['subform']['field_highlight']);
     unset($element['subform']['field_redirection_url']);
     unset($element['subform']['field_key_points']);
+  }
+}
+
+  // Alter fields for node:domain.
+  if ($entity instanceof NodeInterface && $entity->bundle() == 'domain') {
+    if ($field_name == 'field_teaser_title') {
+      $element['value']['#maxlength'] = $max_char_short_title;
+      $element['value']['#size'] = $size_title_short;
+      $element['value']['#description'] .= ' ' . FieldFilteredMarkup::create($max_char_short_title . ' characters max');
+    }
   }
 }
 
