@@ -687,7 +687,8 @@ function oab_modular_product_preprocess_paragraph(&$variables) {
  * Implements hook_preprocess_HOOK().
  */
 function oab_modular_product_preprocess_paragraph__module_domains(&$variables) {
-  $parent = $variables['paragraph']->getParentEntity();
+  $paragraph = $variables['paragraph'];
+  $parent = $paragraph->getParentEntity();
   if (!$parent instanceof NodeInterface || !$parent->hasField('field_svp') || $parent->field_svp->isEmpty()) {
     return;
   }
@@ -707,11 +708,16 @@ function oab_modular_product_preprocess_paragraph__module_domains(&$variables) {
     ->sort('created', 'DESC')
     ->range(0, 6)
     ->execute();
-
-  $view_mode = 'teaser';
-  $variables['domains'] = [];
+    
+    // Get the paragraph title for utag.
+    $module_title = $paragraph?->field_title?->value;
+    
+    $view_mode = 'teaser';
+    $variables['domains'] = [];
   foreach ($nids as $nid) {
-    $variables['domains'][] = $node_view_builder->view($node_storage->load($nid), $view_mode);
+    $node = $node_storage->load($nid);
+    $node->__set('module_title', $module_title);
+    $variables['domains'][] = $node_view_builder->view($node, $view_mode);
   }
 }
 
