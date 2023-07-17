@@ -177,204 +177,204 @@ function oab_modular_product_field_widget_single_element_form_alter(array &$elem
 
   // Alter fields in Paragraphs.
   if ($entity instanceof ParagraphInterface) {
-  $mp_modules = [
-    'module_3_4_colonnes_items',
-    'module_exemples_items',
-    'module_detail_offre',
-    'module_detail_offre_items',
-    'module_benefits_item',
-    'module_faq',
-    'module_step',
-    'module_presentation',
-    'module_cross_sell',
-    'module_blog',
-    'detail_gamme_items_offres',
-    'module_detail_gamme',
-    'module_detail_gamme_items',
-  ];
-
-  $mp_sous_modules = [
-    'titre_and_description_and_link',
-    'titre_and_description',
-  ];
-
-  if (in_array($element['#paragraph_type'], $mp_modules)) {
-    if (isset($element['subform']['field_title'])) {
-      $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = $max_char_short_title;
-      $element['subform']['field_title']['widget'][0]['value']['#size'] = $size_title_short;
-      $element['subform']['field_title']['widget'][0]['value']['#description']
-        .= ' '.FieldFilteredMarkup::create($max_char_short_title.' characters max');
-    }
-
-    if (isset($element['subform']['field_tab_title'])) {
-      $element['subform']['field_tab_title']['widget'][0]['value']['#maxlength'] = $max_char_short_title;
-      $element['subform']['field_tab_title']['widget'][0]['value']['#size'] = $size_title_short;
-      $element['subform']['field_tab_title']['widget'][0]['value']['#description']
-        .=  ' '.FieldFilteredMarkup::create($max_char_short_title.' characters max');
-    }
-
-    if (isset($element['subform']['field_exemple_key_points'])) {
-      $element['subform']['field_exemple_key_points']['widget'][0]['value']['#maxlength'] = $max_char_description;
-      $element['subform']['field_exemple_key_points']['widget'][0]['value']['#size'] = $size_description;
-      $element['subform']['field_exemple_key_points']['widget'][0]['value']['#description']
-        .= ' '.FieldFilteredMarkup::create($max_char_description.' characters max');
-    }
-
-    if (isset($element['subform']['field_accroche'])) {
-      $element['subform']['field_accroche']['widget'][0]['value']['#maxlength'] = $max_char_description;
-      $element['subform']['field_accroche']['widget'][0]['value']['#description']
-        .= ' '.FieldFilteredMarkup::create($max_char_description.' characters max');
-    }
-
-    if (isset($element['subform']['field_highlight'])) {
-      $element['subform']['field_highlight']['widget'][0]['value']['#maxlength'] = $max_char_description;
-      $element['subform']['field_highlight']['widget'][0]['value']['#description']
-        .= ' ' .FieldFilteredMarkup::create($max_char_description.' characters max');
-      $element['subform']['field_highlight']['widget'][0]['value']['#rows'] = 2;
-    }
-
-    if (isset($element['subform']['field_key_points'])) {
-      $element['subform']['field_key_points']['widget'][0]['value']['#maxlength'] = $max_char_description;
-      $element['subform']['field_key_points']['widget'][0]['value']['#size'] = $size_description;
-      $element['subform']['field_key_points']['widget'][0]['value']['#description']
-        .= ' '.FieldFilteredMarkup::create($max_char_description.' characters max');
-    }
-
-    if (isset($element['subform']['field_key_points_step'])) {
-      $element['subform']['field_key_points_step']['widget'][0]['value']['#maxlength'] = $max_char_description;
-      $element['subform']['field_key_points_step']['widget'][0]['value']['#size'] = $size_description;
-      $element['subform']['field_key_points_step']['widget'][0]['value']['#description']
-        .= ' '.FieldFilteredMarkup::create($max_char_description.' characters max');
-    }
-
-    if (isset($element['subform']['field_description'])) {
-      $element['subform']['field_description']['widget'][0]['value']['#maxlength'] = $max_char_description;
-      $element['subform']['field_description']['widget'][0]['value']['#size'] = $size_description;
-      $element['subform']['field_description']['widget'][0]['value']['#description']
-        .= ' '.FieldFilteredMarkup::create($max_char_description.' characters max');
-    }
-  }
-
-  if (in_array($element['#paragraph_type'], $mp_sous_modules)) {
-    if (isset($element['subform']['field_title'])) {
-      $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = $max_char_long_title;
-      $element['subform']['field_title']['widget'][0]['value']['#size'] = $size_title_long;
-      $element['subform']['field_title']['widget'][0]['value']['#description']
-        .= ' '.FieldFilteredMarkup::create($max_char_long_title.' characters max');
-    }
-
-    if (isset($element['subform']['field_accroche'])) {
-      $element['subform']['field_accroche']['widget'][0]['value']['#maxlength'] = $max_char_description;
-      $element['subform']['field_accroche']['widget'][0]['value']['#description']
-        .= ' '.FieldFilteredMarkup::create($max_char_description.' characters max');
-    }
-  }
-
-  if ($element['#paragraph_type'] === 'module_faq') {
-      // liste des fields seulement modifiable par les admins.
-    $field_restricted = [
-      'field_title',
-      'field_highlight',
-      'field_panel_title',
-      'field_function',
-      'field_visual'
+    $mp_modules = [
+      'module_3_4_colonnes_items',
+      'module_exemples_items',
+      'module_detail_offre',
+      'module_detail_offre_items',
+      'module_benefits_item',
+      'module_faq',
+      'module_step',
+      'module_presentation',
+      'module_cross_sell',
+      'module_blog',
+      'detail_gamme_items_offres',
+      'module_detail_gamme',
+      'module_detail_gamme_items',
     ];
+
+    $mp_sous_modules = [
+      'titre_and_description_and_link',
+      'titre_and_description',
+    ];
+
+    if (in_array($element['#paragraph_type'], $mp_modules)) {
+      if (isset($element['subform']['field_title'])) {
+        $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = $max_char_short_title;
+        $element['subform']['field_title']['widget'][0]['value']['#size'] = $size_title_short;
+        $element['subform']['field_title']['widget'][0]['value']['#description']
+          .= ' '.FieldFilteredMarkup::create($max_char_short_title.' characters max');
+      }
+
+      if (isset($element['subform']['field_tab_title'])) {
+        $element['subform']['field_tab_title']['widget'][0]['value']['#maxlength'] = $max_char_short_title;
+        $element['subform']['field_tab_title']['widget'][0]['value']['#size'] = $size_title_short;
+        $element['subform']['field_tab_title']['widget'][0]['value']['#description']
+          .=  ' '.FieldFilteredMarkup::create($max_char_short_title.' characters max');
+      }
+
+      if (isset($element['subform']['field_exemple_key_points'])) {
+        $element['subform']['field_exemple_key_points']['widget'][0]['value']['#maxlength'] = $max_char_description;
+        $element['subform']['field_exemple_key_points']['widget'][0]['value']['#size'] = $size_description;
+        $element['subform']['field_exemple_key_points']['widget'][0]['value']['#description']
+          .= ' '.FieldFilteredMarkup::create($max_char_description.' characters max');
+      }
+
+      if (isset($element['subform']['field_accroche'])) {
+        $element['subform']['field_accroche']['widget'][0]['value']['#maxlength'] = $max_char_description;
+        $element['subform']['field_accroche']['widget'][0]['value']['#description']
+          .= ' '.FieldFilteredMarkup::create($max_char_description.' characters max');
+      }
+
+      if (isset($element['subform']['field_highlight'])) {
+        $element['subform']['field_highlight']['widget'][0]['value']['#maxlength'] = $max_char_description;
+        $element['subform']['field_highlight']['widget'][0]['value']['#description']
+          .= ' ' .FieldFilteredMarkup::create($max_char_description.' characters max');
+        $element['subform']['field_highlight']['widget'][0]['value']['#rows'] = 2;
+      }
+
+      if (isset($element['subform']['field_key_points'])) {
+        $element['subform']['field_key_points']['widget'][0]['value']['#maxlength'] = $max_char_description;
+        $element['subform']['field_key_points']['widget'][0]['value']['#size'] = $size_description;
+        $element['subform']['field_key_points']['widget'][0]['value']['#description']
+          .= ' '.FieldFilteredMarkup::create($max_char_description.' characters max');
+      }
+
+      if (isset($element['subform']['field_key_points_step'])) {
+        $element['subform']['field_key_points_step']['widget'][0]['value']['#maxlength'] = $max_char_description;
+        $element['subform']['field_key_points_step']['widget'][0]['value']['#size'] = $size_description;
+        $element['subform']['field_key_points_step']['widget'][0]['value']['#description']
+          .= ' '.FieldFilteredMarkup::create($max_char_description.' characters max');
+      }
+
+      if (isset($element['subform']['field_description'])) {
+        $element['subform']['field_description']['widget'][0]['value']['#maxlength'] = $max_char_description;
+        $element['subform']['field_description']['widget'][0]['value']['#size'] = $size_description;
+        $element['subform']['field_description']['widget'][0]['value']['#description']
+          .= ' '.FieldFilteredMarkup::create($max_char_description.' characters max');
+      }
+    }
+
+    if (in_array($element['#paragraph_type'], $mp_sous_modules)) {
+      if (isset($element['subform']['field_title'])) {
+        $element['subform']['field_title']['widget'][0]['value']['#maxlength'] = $max_char_long_title;
+        $element['subform']['field_title']['widget'][0]['value']['#size'] = $size_title_long;
+        $element['subform']['field_title']['widget'][0]['value']['#description']
+          .= ' '.FieldFilteredMarkup::create($max_char_long_title.' characters max');
+      }
+
+      if (isset($element['subform']['field_accroche'])) {
+        $element['subform']['field_accroche']['widget'][0]['value']['#maxlength'] = $max_char_description;
+        $element['subform']['field_accroche']['widget'][0]['value']['#description']
+          .= ' '.FieldFilteredMarkup::create($max_char_description.' characters max');
+      }
+    }
+
+    if ($element['#paragraph_type'] === 'module_faq') {
+      // liste des fields seulement modifiable par les admins.
+      $field_restricted = [
+        'field_title',
+        'field_highlight',
+        'field_panel_title',
+        'field_function',
+        'field_visual'
+      ];
       
       $user_is_admin = in_array('administrator', \Drupal::currentUser()->getRoles());
 
-    foreach ($field_restricted as $field_name) {
-      if (isset($element['subform'][$field_name])) {
-        if ($user_is_admin) {
-          $element['subform'][$field_name]['widget']['#access'] = true;
-        }
-        else {
-          $element['subform'][$field_name]['widget']['#access'] = false;
+      foreach ($field_restricted as $field_name) {
+        if (isset($element['subform'][$field_name])) {
+          if ($user_is_admin) {
+            $element['subform'][$field_name]['widget']['#access'] = true;
+          }
+          else {
+            $element['subform'][$field_name]['widget']['#access'] = false;
+          }
         }
       }
-    }
-    $element['subform']["field_highlight"][0]['token_tree'] = array(
-      '#theme' => 'token_tree_link',
-      '#token_types' => array('obs'),
-      '#weight' => 90,
-      '#global_types' => FALSE,
-      '#click_insert' => TRUE,
-    );
-  }
-
-  if ($element['#paragraph_type'] === 'module_benefits_item') {
-    if (isset($element['subform']["field_icon"])) {
-      $element['subform']["field_icon"][0]['token_tree'] = [
+      $element['subform']["field_highlight"][0]['token_tree'] = array(
         '#theme' => 'token_tree_link',
-        '#token_types' => ['icomoon'],
+        '#token_types' => array('obs'),
         '#weight' => 90,
         '#global_types' => FALSE,
         '#click_insert' => TRUE,
+      );
+    }
+
+    if ($element['#paragraph_type'] === 'module_benefits_item') {
+      if (isset($element['subform']["field_icon"])) {
+        $element['subform']["field_icon"][0]['token_tree'] = [
+          '#theme' => 'token_tree_link',
+          '#token_types' => ['icomoon'],
+          '#weight' => 90,
+          '#global_types' => FALSE,
+          '#click_insert' => TRUE,
+        ];
+      }
+    }
+
+    if ($element['#paragraph_type'] === 'module_presentation') {
+      $element['subform']['field_for_who_title']['#states'] = [
+        'visible' => [
+          ':input[name="field_presentation[0][subform][field_enable_for_who][value]"]' => ['checked' => TRUE],
+        ]
+      ];
+      $element['subform']['field_for_who_links_list']['#states'] = [
+        'visible' => [
+          ':input[name="field_presentation[0][subform][field_enable_for_who][value]"]' => ['checked' => TRUE],
+        ]
+      ];
+      $element['subform']['field_visual']['#states'] = [
+        'visible' => [
+          ':input[name="field_presentation[0][subform][field_media_type]"]' => ['value' => 'image'],
+        ],
+        'required' => [
+          ':input[name="field_presentation[0][subform][field_media_type]"]' => ['value' => 'image'],
+        ]
+      ];
+      $element['subform']['field_video']['#states'] = [
+        'visible' => [
+          ':input[name="field_presentation[0][subform][field_media_type]"]' => ['value' => 'video'],
+        ],
+        'required' => [
+          ':input[name="field_presentation[0][subform][field_media_type]"]' => ['value' => 'video'],
+        ]
       ];
     }
-  }
 
-  if ($element['#paragraph_type'] === 'module_presentation') {
-    $element['subform']['field_for_who_title']['#states'] = [
-      'visible' => [
-        ':input[name="field_presentation[0][subform][field_enable_for_who][value]"]' => ['checked' => TRUE],
-      ]
-    ];
-    $element['subform']['field_for_who_links_list']['#states'] = [
-      'visible' => [
-        ':input[name="field_presentation[0][subform][field_enable_for_who][value]"]' => ['checked' => TRUE],
-      ]
-    ];
-    $element['subform']['field_visual']['#states'] = [
-      'visible' => [
-        ':input[name="field_presentation[0][subform][field_media_type]"]' => ['value' => 'image'],
-      ],
-      'required' => [
-        ':input[name="field_presentation[0][subform][field_media_type]"]' => ['value' => 'image'],
-      ]
-    ];
-    $element['subform']['field_video']['#states'] = [
-      'visible' => [
-        ':input[name="field_presentation[0][subform][field_media_type]"]' => ['value' => 'video'],
-      ],
-      'required' => [
-        ':input[name="field_presentation[0][subform][field_media_type]"]' => ['value' => 'video'],
-      ]
-    ];
-  }
+    if ($element['#paragraph_type'] === 'module_cross_sell_item') {
+      $position = $element['subform']['#parents'][4];
 
-  if ($element['#paragraph_type'] === 'module_cross_sell_item') {
-    $position = $element['subform']['#parents'][4];
-
-    $element['subform']['field_internal_product']['#states'] = [
-      'visible' => [
-        ':input[name="field_cross_sell[0][subform][field_offer_item]['.$position.'][subform][field_external_product][value]"]'
-        => ['checked' => FALSE],
-      ]
-    ];
-
-    $element['subform']['external_product'] = [
-      '#type' => 'fieldset',
-      '#title' => t('External Offer'),
-      '#states' => [
+      $element['subform']['field_internal_product']['#states'] = [
         'visible' => [
           ':input[name="field_cross_sell[0][subform][field_offer_item]['.$position.'][subform][field_external_product][value]"]'
-          => ['checked' => TRUE],
+          => ['checked' => FALSE],
         ]
-      ],
-      '#weight' => 500,
-      'field_name' => $element['subform']['field_name'],
-      'field_highlight' => $element['subform']['field_highlight'],
-      'field_redirection_url' => $element['subform']['field_redirection_url'],
-      'field_key_points' => $element['subform']['field_key_points']
+      ];
 
-    ];
+      $element['subform']['external_product'] = [
+        '#type' => 'fieldset',
+        '#title' => t('External Offer'),
+        '#states' => [
+          'visible' => [
+            ':input[name="field_cross_sell[0][subform][field_offer_item]['.$position.'][subform][field_external_product][value]"]'
+            => ['checked' => TRUE],
+          ]
+        ],
+        '#weight' => 500,
+        'field_name' => $element['subform']['field_name'],
+        'field_highlight' => $element['subform']['field_highlight'],
+        'field_redirection_url' => $element['subform']['field_redirection_url'],
+        'field_key_points' => $element['subform']['field_key_points']
 
-    unset($element['subform']['field_name']);
-    unset($element['subform']['field_highlight']);
-    unset($element['subform']['field_redirection_url']);
-    unset($element['subform']['field_key_points']);
+      ];
+
+      unset($element['subform']['field_name']);
+      unset($element['subform']['field_highlight']);
+      unset($element['subform']['field_redirection_url']);
+      unset($element['subform']['field_key_points']);
+    }
   }
-}
 
   // Alter fields for node:domain.
   if ($entity instanceof NodeInterface && $entity->bundle() == 'domain') {
@@ -702,6 +702,7 @@ function oab_modular_product_preprocess_paragraph__module_domains(&$variables) {
     ->condition('field_svp', $tid)
     ->condition('status', NodeInterface::PUBLISHED)
     ->condition('type', 'domain')
+    ->condition('langcode', $parent->langcode->value)
     ->accessCheck(FALSE)
     ->sort('created', 'DESC')
     ->range(0, 6)
