@@ -1,0 +1,50 @@
+/// Make element fully-clickable.
+/// @author Matthieu Scarset
+/// @param string $element
+///   (optional) The button element which should get the click. Default: 'a'.
+/// @param string $wrapper
+///   (optional) The element's HTML wrapper(s), useful if convoluted markup. Default: empty string.
+/// @link https://gist.github.com/MatthieuScarset/397da3b000ce6d9523dd50f525eabaf0
+///
+/// @example Simple card div with the link directly inside.
+/// <div class="fullclick">
+///   <h2>I am a title</h2>
+///   <p>I am a description and you should read me.</p>
+///   <a href="https://matthieuscarset.com">Click me somewhere on this card</a>
+/// </div>
+///
+/// @example Card div with multiple links.
+/// <div class="node node--view-mode--teaser">
+///   <h2>I am a title</h2>
+///   <p>I am a description and you should read me.</p>
+///   <div class="actions">
+///      <a class="button button--share" href="#">Share</a>
+///      <a class="button button--readmore" href="https://matthieuscarset.com">Read more</a>
+///   </a>
+/// </div>
+/// 
+/// @example SCSS code for the example above:
+/// .node--view-mode--teaser {
+///   @include fullclick('a', '.domain-teaser__bottom');
+/// }
+/// 
+
+@mixin fullclick($element: 'a', $wrapper: '') {
+  position: relative;
+
+  & #{$wrapper} #{$element}:first-of-type:before {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+  }
+}
+
+// Utility CSS class.
+.fullclick {
+  @include fullclick;
+}

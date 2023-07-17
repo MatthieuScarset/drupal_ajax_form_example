@@ -7,23 +7,24 @@
     'bg-greige',
     'p-2',
     'text-break',
+    'fullclick',
     'domain-teaser',
   ]
 %}
 <section{{ attributes.addClass(classes) }}>
-  <div class="d-flex flex-column gap-y-1 domain-teaser__top">
+  <div class="d-flex flex-column domain-teaser__top">
     {% if content.field_logo.0 %}
-      <div class="domain-teaser__logo">
+      <div class="m-0 pb-2 domain-teaser__logo">
         {{ content.field_logo }}
       </div>
     {% endif %}
     {% if content.field_teaser_title.0 %}
-      <div class="h3 p-0 m-0 domain-teaser__title">
+      <div class="h3 m-0 pb-2 domain-teaser__title">
         {{ content.field_teaser_title }}
       </div>
     {% endif %}
     {% if content.field_teaser.0 %}
-      <div class="p-0 m-0 domain-teaser__text">
+      <div class="m-0 pb-2 domain-teaser__text">
         {{ content.field_teaser }}
       </div>
     {% endif %}
