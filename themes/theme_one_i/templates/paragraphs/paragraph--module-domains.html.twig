@@ -15,9 +15,9 @@
         {% endif %}
         {# See oab_modular_product_preprocess_paragraph__module_domains() #}
         {% if domains|length %}
-          <div class="row">
+          <div class="row d-flex">
             {% for key, domain in domains if key|first != '#' %}
-              <div class="col-12 col-md-4">
+              <div class="col-12 col-md-4 pb-2 d-flex">
                 {{ domain }}
               </div>
             {% endfor %}

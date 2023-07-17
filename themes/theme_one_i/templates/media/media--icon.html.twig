@@ -1,0 +1,4 @@
+{# Raw template on purpose to remove unnecessary markup. #}
+{% set alt = content.field_media_svg['#object'].name.value %}
+{% set src = content.field_media_svg.0['#markup'] %}
+<img alt="{{ alt }}" src="{{ src }}">

@@ -1,3 +1,5 @@
 .domain-teaser {
-  @extend .bg-greige;
+  img {
+    max-width: 100%;
+  }
 }
