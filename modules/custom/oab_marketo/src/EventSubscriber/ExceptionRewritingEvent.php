@@ -39,7 +39,7 @@ class ExceptionRewritingEvent implements EventSubscriberInterface {
 
   public function onException(ExceptionEvent $event) {
 
-    if (strpos($this->routeMatch->getRouteName(), 'oab_marketo.altares_api') === false) {
+    if (!str_contains($this->routeMatch->getRouteName(), 'oab_marketo.altares_api')) {
       return;
     }
 

@@ -27,7 +27,10 @@ class AltaresApiController extends ControllerBase implements ContainerInjectionI
     private $altaresService;
     private $photoCommercialeService;
 
-    public function __construct(AltaresTokenService $altares_token_service, DnbService $altares_service, PhotoCommercialeService $photo_commerciale_service) {
+    public function __construct(AltaresTokenService $altares_token_service,
+                                DnbService $altares_service,
+                                PhotoCommercialeService $photo_commerciale_service
+    ) {
         $this->altaresTokenService = $altares_token_service;
         $this->altaresService = $altares_service;
         $this->photoCommercialeService = $photo_commerciale_service;

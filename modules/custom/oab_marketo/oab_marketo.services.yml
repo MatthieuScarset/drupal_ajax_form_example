@@ -6,20 +6,20 @@ services:
 
   # Dnb Config
   oab_marketo.altares_settings:
-    class: \Drupal\Core\Config\ImmutableConfig
+    class: Drupal\Core\Config\ImmutableConfig
     factory: config.factory:get
     arguments: ['oab_marketo.altares_settings']
 
   # Implements Access Service for routing
   oab_develop.config_form_access:
-    class: \Drupal\oab_marketo\Access\AltaresSettingsFormAccess
+    class: Drupal\oab_marketo\Access\AltaresSettingsFormAccess
     arguments: ['@oab_marketo.altares_settings']
     tags:
       - { name: access_check, applies_to: _oab_altares_settings_access }
 
   # Implements Access Service for routing
   oab_marketo.api_access:
-    class: \Drupal\oab_marketo\Access\AltaresApiAccess
+    class: Drupal\oab_marketo\Access\AltaresApiAccess
     arguments:
       - '@oab_marketo.altares_token.service'
       - '@request_stack'
@@ -46,14 +46,14 @@ services:
   ## Here is all we need to manage Token (get, save, give, etc...)
 
   oab_marketo.dnb_token_http_client_factory:
-    class: \Drupal\oab_marketo\DnbTokenHttpClient\DnbTokenHttpClientFactory
+    class: Drupal\oab_marketo\DnbTokenHttpClient\DnbTokenHttpClientFactory
     arguments:
       - '@http_client_factory'
       - '@oab_marketo.altares_settings'
 
   # Dnb HTTP CLIENT (the real Guzzle with headers & credentials already setted up)
   oab_marketo.dnb_token_http_client:
-    class: \GuzzleHttp\Client
+    class: GuzzleHttp\Client
     factory: oab_marketo.dnb_token_http_client_factory:get
 
   # Dnb Token Client
@@ -75,7 +75,7 @@ services:
   ###############################################
   ## Here is Dnb API
   oab_marketo.dnb_http_client_factory:
-    class: \Drupal\oab_marketo\DnbHttpClient\DnbHttpClientFactory
+    class: Drupal\oab_marketo\DnbHttpClient\DnbHttpClientFactory
     arguments:
       - '@http_client_factory'
       - '@oab_marketo.altares_settings'
@@ -83,7 +83,7 @@ services:
 
   # Dnb HTTP CLIENT (the real Guzzle with headers & credentials already setted up)
   oab_marketo.dnb_http_client:
-    class: \GuzzleHttp\Client
+    class: GuzzleHttp\Client
     factory: oab_marketo.dnb_http_client_factory:get
 
   # Dnb Client
