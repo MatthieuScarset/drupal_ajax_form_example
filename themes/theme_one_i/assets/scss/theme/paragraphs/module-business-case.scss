@@ -1,20 +1,32 @@
 .item-logo {
-  .business-case-items {
-    overflow-x: scroll;
-    flex-wrap: unset;
-    scrollbar-width: none;
-
-    &::-webkit-scrollbar {
-      display: none;
+  .logo-section {
+    min-height: 53px;
+    .customer-logo {
+      .contextual-region {
+        justify-content: left !important;
+      }
+      img {
+        height: 23px;
+      }
     }
-    @include media-breakpoint-up(md) {
-      overflow-x: hidden;
-      flex-wrap: wrap;
-    }
-  }
-
-  .customer-logo {
-    min-height: 30px;
   }
 }
+
+.business-case-items {
+  overflow-x: scroll;
+  flex-wrap: unset;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @include media-breakpoint-up(md) {
+    overflow-x: hidden;
+    flex-wrap: wrap;
+  }
+}
+
+
+
 

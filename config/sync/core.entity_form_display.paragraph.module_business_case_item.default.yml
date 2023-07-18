@@ -4,8 +4,8 @@ status: true
 dependencies:
   config:
     - entity_browser.browser.browse_logo_modal
-    - field.field.paragraph.module_business_case_item.field_customer_logo
     - field.field.paragraph.module_business_case_item.field_item_key_points
+    - field.field.paragraph.module_business_case_item.field_partners_logo
     - field.field.paragraph.module_business_case_item.field_redirection_url
     - field.field.paragraph.module_business_case_item.field_title
     - paragraphs.paragraphs_type.module_business_case_item
@@ -17,7 +17,15 @@ targetEntityType: paragraph
 bundle: module_business_case_item
 mode: default
 content:
-  field_customer_logo:
+  field_item_key_points:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_partners_logo:
     type: entity_browser_entity_reference
     weight: 0
     region: content
@@ -31,17 +39,9 @@ content:
       field_widget_display_settings: {  }
       selection_mode: selection_append
     third_party_settings: {  }
-  field_item_key_points:
-    type: string_textfield
-    weight: 3
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_redirection_url:
     type: link_default
-    weight: 4
+    weight: 3
     region: content
     settings:
       placeholder_url: ''

@@ -1,19 +1,19 @@
-uuid: c09dfd6a-1ac0-4cb3-acd8-ba59a2ae2253
+uuid: ecd332b5-7b6e-4d81-983c-638d52bc6f08
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_customer_logo
+    - field.storage.paragraph.field_partners_logo
     - media.type.logo
     - paragraphs.paragraphs_type.module_business_case_item
-id: paragraph.module_business_case_item.field_customer_logo
-field_name: field_customer_logo
+id: paragraph.module_business_case_item.field_partners_logo
+field_name: field_partners_logo
 entity_type: paragraph
 bundle: module_business_case_item
 label: 'Customer Logo'
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
@@ -25,5 +25,5 @@ settings:
       field: _none
       direction: ASC
     auto_create: false
-    auto_create_bundle: image
+    auto_create_bundle: ''
 field_type: entity_reference

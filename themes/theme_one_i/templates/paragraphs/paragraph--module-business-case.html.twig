@@ -40,7 +40,7 @@
 #}
 
 {% block paragraph %}
-  <div {{ attributes.addClass("bg-gray2", has_logo ? 'item-logo')}}>
+  <div {{ attributes.addClass("bg-gray2", 'custom-alignment', has_logo ? 'item-logo')}}>
     <div class="py-5 px-4 site-width">
       <div class="container-fluid">
         {% block content %}
@@ -48,29 +48,42 @@
 
           {% if (content.field_business_case_item["#items"]|length == 2) %}
             {% set class = " d-block d-md-none "  %}
-           <div class="row">
+            <div class="row">
               <div class="col-12 col-md-8"> {{ content.field_business_case_item }}  </div>
-               <div class="d-none d-md-block col-12 col-md-4 ">
-                 <div class="bg-dark d-flex flex-wrap h-100 p-3">
-                   <div class="align-self-md-center ">
-                     <h4 class="mb-2 text-white"> {{ content.field_subtitle }} </h4>
-                     <a href="{{ content.field_call_to_action_buton[0]['#url'] }}"
-                        class="btn btn-primary btn-inverse">
-                       {{ content.field_call_to_action_buton[0]['#title'] }}
-                     </a>
-                   </div>
+              <div class="d-none d-md-block col-12 col-md-4 ">
+                <div class="bg-dark d-flex flex-wrap h-100 p-3">
+                  <div class="align-self-md-center text-break">
+                    <h4 class="mb-2 text-white"> {{ content.field_subtitle }} </h4>
+                    <a href="{{ content.field_call_to_action_buton[0]['#url'] }}"
+                       class="btn btn-primary btn-inverse"
+                       onmousedown="utag_link(utag_data.titre_page,
+                         '{{ paragraph.field_title.value }}',
+                         '{{ paragraph.field_subtitle.value }}',
+                         '{{ paragraph.field_call_to_action_buton.title }}'
+                         )"
+                    >
+                      {{ content.field_call_to_action_buton[0]['#title'] }}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-                 </div>
-               </div>
-           </div>
           {% else %}
-            <div class="mb-4"> {{ content.field_business_case_item }} </div>
-{% set class = " d-md-block "  %}
+            <div> {{ content.field_business_case_item }} </div>
+            {% set class = "d-md-block"  %}
           {% endif %}
-          <div class="{{ class }}">
+
+          <div {{ attributes.addClass("mt-4", "{{ class }}") }}>
             <h4 class="mb-2"> {{ content.field_subtitle }} </h4>
             <a href="{{ content.field_call_to_action_buton[0]['#url'] }}"
-               class="btn btn-primary">
+               class="btn btn-primary text-break"
+               onmousedown="utag_link(utag_data.titre_page,
+                 '{{ paragraph.field_title.value }}',
+                 '{{ paragraph.field_subtitle.value }}',
+                 '{{ paragraph.field_call_to_action_buton.title }}'
+                 )"
+            >
               {{ content.field_call_to_action_buton[0]['#title'] }}
             </a>
           </div>

@@ -707,8 +707,8 @@ function oab_modular_product_preprocess_paragraph__module_business_case(&$variab
   /** @var Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   $items = $paragraph->get('field_business_case_item')->referencedEntities();
-  foreach ($items as $item){
-    if (!$item->get('field_customer_logo')->isEmpty()) {
+  foreach ($items as $item) {
+    if (!$item->get('field_partners_logo')->isEmpty()) {
       $variables['has_logo'] = true;
       break;
     }
