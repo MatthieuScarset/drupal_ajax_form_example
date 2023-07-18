@@ -11,7 +11,7 @@
     max-height: px-to-rem(60);
   }
 
-  &.variation--default img {
+  &--default img {
     @include media-breakpoint-up(md) {
       min-height: px-to-rem(90);
       max-height: px-to-rem(90);

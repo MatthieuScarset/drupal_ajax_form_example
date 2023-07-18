@@ -718,12 +718,13 @@ function oab_modular_product_preprocess_paragraph__module_domains(&$variables) {
   // Get the paragraph title for utag.
   $module_title = $paragraph?->field_title?->value;
   
-  $view_mode = 'teaser';
+  // Alternative view mode if paragraph placed on a node:domain.
+  $view_mode = $parent->bundle() == 'domain' ? 'link' : 'teaser';
+
   $variables['domains'] = [];
   foreach ($nids as $nid) {
     $node = $node_storage->load($nid);
     $node->__set('module_title', $module_title);
-    $node->__set('module_variation', $parent->bundle() == 'domain' ? 'link' : NULL);
     $variables['domains'][] = $node_view_builder->view($node, $view_mode);
   }
 }

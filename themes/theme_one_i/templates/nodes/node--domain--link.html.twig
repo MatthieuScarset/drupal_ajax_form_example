@@ -1,7 +1,6 @@
 {# @see oab_modular_product_preprocess_paragraph__module_domains() #}
 {% set logo = content.field_logo.0 %}
 {% set title = content.field_teaser_title.0 %}
-{% set text = content.field_teaser.0 %}
 {% set link = {
     url: path('entity.node.canonical', {'node': node.id() }),
     title: 'Read more'|t
@@ -17,7 +16,7 @@
   set classes = [
     'd-flex',
     'flex-column',
-    'justify-content-between',
+    'justify-content-center',
     'w-100',
     'p-2',
     'bg-greige',
@@ -26,38 +25,22 @@
     'node--type--' ~ node.bundle|clean_class,
     'node--view-mode--' ~ view_mode|clean_class,
     'domain-card',
-    'domain-card--default',
+    'domain-card--link',
   ]
 %}
 
 <section{{attributes.addClass(classes)}}>
-	<div class="d-flex flex-column domain-card__top">
+	<div class="d-flex flex-row align-items-center domain-card__top">
 		{% if logo|length %}
-			<div class="pb-2 domain-card__logo">
+			<div class="pr-md-2 domain-card__logo">
 				{{ logo }}
 			</div>
 		{% endif %}
 
 		{% if title|length %}
-      <div class="h3 m-0 pb-2 domain-card__title">
-        {{ title }}
-      </div>
+      <a class="lead domain-card__title" href="{{ link.url }}" onmousedown="utag_link({{ utag.titre_page }}, '{{ utag.module_title }}', '{{ utag.title }}', '{{ utag.text }}');">
+        <strong>{{ title|render|slice(0, 70) }}</strong>
+      </a>
 		{% endif %}
-
-    {% if text|length %}
-      <div class="pb-2 domain-card__text">
-        {{ text }}
-      </div>
-    {% endif %}
 	</div>
-
-  {% if link %}
-    <div class="d-flex flex-column justify-content-end domain-card__bottom">
-      <div class="pt-2 domain-card__link">
-        <a class="o-link-arrow" href="{{ link.url }}" onmousedown="utag_link({{ utag.titre_page }}, '{{ utag.module_title }}', '{{ utag.title }}', '{{ utag.text }}');">
-          {{ link.title }}
-        </a>
-      </div>
-    </div>
-	{% endif %}
 </section>
