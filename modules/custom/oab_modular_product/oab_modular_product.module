@@ -699,24 +699,31 @@ function oab_modular_product_preprocess_paragraph__module_domains(&$variables) {
   $node_storage = $entity_type_manager->getStorage('node');
   $node_view_builder = $entity_type_manager->getViewBuilder('node');
 
-  $nids = $node_storage->getQuery()
-    ->condition('field_svp', $tid)
-    ->condition('status', NodeInterface::PUBLISHED)
-    ->condition('type', 'domain')
-    ->condition('langcode', $parent->langcode->value)
-    ->accessCheck(FALSE)
-    ->sort('created', 'DESC')
-    ->range(0, 6)
-    ->execute();
-    
-    // Get the paragraph title for utag.
-    $module_title = $paragraph?->field_title?->value;
-    
-    $view_mode = 'teaser';
-    $variables['domains'] = [];
+  $q = $node_storage->getQuery();
+
+  // Exclude current domain.
+  if ($parent->bundle() == 'domain') {
+    $q->condition('nid', $parent->id(), '!=');
+  }
+
+  $q->condition('field_svp', $tid);
+  $q->condition('status', NodeInterface::PUBLISHED);
+  $q->condition('type', 'domain');
+  $q->condition('langcode', $parent->langcode->value);
+  $q->accessCheck(FALSE);
+  $q->sort('created', 'DESC');
+  $q->range(0, 6);
+  $nids = $q->execute();
+  
+  // Get the paragraph title for utag.
+  $module_title = $paragraph?->field_title?->value;
+  
+  $view_mode = 'teaser';
+  $variables['domains'] = [];
   foreach ($nids as $nid) {
     $node = $node_storage->load($nid);
     $node->__set('module_title', $module_title);
+    $node->__set('module_variation', $parent->bundle() == 'domain' ? 'link' : NULL);
     $variables['domains'][] = $node_view_builder->view($node, $view_mode);
   }
 }

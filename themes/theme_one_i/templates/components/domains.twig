@@ -1,0 +1,23 @@
+<div{{ attributes.addClass('site-width') }}>
+  <div class="container-fluid mt-1 mb-3 mb-md-5">
+    <div class="row">
+      <div class="col-12">
+        {% if title|length %}
+          <h2 class="h1 my-3 pt-0 pb-md-2">{{ title }}</h2>
+        {% endif %}
+        {# See oab_modular_product_preprocess_paragraph__module_domains() #}
+        {% if domains|length %}
+          <div class="row d-flex">
+            {% for key, domain in domains if key|first != '#' %}
+              <div class="col-12 col-md-4 pb-2 d-flex w-100">
+                <div class="bg-primary d-flex w-100">
+                  {{ domain }}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
