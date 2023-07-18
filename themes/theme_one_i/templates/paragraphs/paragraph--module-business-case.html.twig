@@ -74,10 +74,10 @@
             {% set class = "d-md-block"  %}
           {% endif %}
 
-          <div {{ attributes.addClass("mt-4", "{{ class }}") }}>
+          <div class="mt-4 {{ class }}">
             <h4 class="mb-2"> {{ content.field_subtitle }} </h4>
             <a href="{{ content.field_call_to_action_buton[0]['#url'] }}"
-               class="btn btn-primary text-break"
+               class="btn btn-primary"
                onmousedown="utag_link(utag_data.titre_page,
                  '{{ paragraph.field_title.value }}',
                  '{{ paragraph.field_subtitle.value }}',
