@@ -102,8 +102,8 @@ class PhotoCommercialeService {
    *
    * @return PhotoCommercialeItem|null
    */
-  public function getPhotoCommercialeItem(string|null $reg_numb_type,
-                                          string|null $reg_numb,
+  public function getPhotoCommercialeItem(string $reg_numb_type,
+                                          string $reg_numb,
                                           string $raison_sociale
   ): ?PhotoCommercialeItem {
 

@@ -122,8 +122,8 @@ class AltaresApiController extends ControllerBase implements ContainerInjectionI
         $res = $this->altaresService->getInfo($duns);
 
         if (!empty($res)) {
-          $reg_numb_type = $res[0]["organization"]["registrationNumbers"][0]["typeDescription"];
-          $reg_numb = $res[0]["organization"]["registrationNumbers"][0]["registrationNumber"];
+          $reg_numb_type = $res[0]["organization"]["registrationNumbers"][0]["typeDescription"] ?? '';
+          $reg_numb = $res[0]["organization"]["registrationNumbers"][0]["registrationNumber"] ?? '';
           $raison_sociale = $res[0]["organization"]["primaryName"];
 
           $photo_commerciale = $this->photoCommercialeService->getPhotoCommercialeItem($reg_numb_type, $reg_numb, $raison_sociale);
