@@ -32,9 +32,21 @@
  */
 #}
 {% if embed_url_youtube is defined and embed_url_youtube is not empty %}
-  <div{{ attributes.addClass('embed-responsive embed-responsive-16by9') }}>
-      <iframe src="{{ embed_url_youtube }}" allowfullscreen class="embed-responsive-item"></iframe>
-  </div>
+  <ytb-embed
+    video-src="{{ embed_url_youtube }}"
+    video-title="{{ name }}"
+  >
+
+    <div slot="cover-img">
+      {{ content.field_illustration }}
+    </div>
+
+
+    <div slot="cookieBlock">
+      {{ drupal_entity('block_content', 'eb454a17-56da-4d21-b3ca-565449d7c452') }}
+    </div>
+
+  </ytb-embed>
 {% else %}
-  {{ media }}
+  {{ content }}
 {% endif %}

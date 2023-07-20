@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Language\LanguageManager;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\Render\Renderer;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -19,29 +20,34 @@ use Symfony\Component\HttpKernel\KernelEvents;
  */
 class IframeChangeSrcEvent implements EventSubscriberInterface {
 
+  use StringTranslationTrait;
+
 
   /**
    * @var LanguageManager
    */
   private $languageManager;
+
   /**
    * @var Renderer
    */
   private $renderer;
+
   /**
    * @var EntityTypeManager
    */
   private $entityTypeManager;
 
   public function __construct(
-    Renderer $renderer,
+    Renderer          $renderer,
     EntityTypeManager $entity_type_manager,
-    LanguageManager $language_manager
+    LanguageManager   $language_manager
   ) {
     $this->languageManager = $language_manager;
     $this->renderer = $renderer;
     $this->entityTypeManager = $entity_type_manager;
   }
+
   /**
    * {@inheritdoc}
    *
@@ -63,6 +69,7 @@ class IframeChangeSrcEvent implements EventSubscriberInterface {
         $xpath = new \DOMXPath($html);
         /** @var \DOMElement $iframe */
         foreach ($xpath->query("//iframe[(contains(@src, 'youtube'))]") as $iframe) {
+          //          dd("coucou");
           //on change les attributs de l'iframe youtube pour passer le src en data-src
           $iframe->setAttribute('data-src', $iframe->getAttribute('src'));
           $iframe->removeAttribute('src');
@@ -98,12 +105,12 @@ class IframeChangeSrcEvent implements EventSubscriberInterface {
                 $div_didomi_message->setAttribute('class', 'didomi-message');
                 //html du block => dans la div didomi-message
                 $new_block_element = $html->createDocumentFragment();
-                $new_block_element->appendXML($body_html_block_didomi['value']);
+                $new_block_element->appendXML($body_html_block_didomi);
                 $div_didomi_message->appendChild($new_block_element);
 
                 $a_button = $html->createElement('a');
                 $a_button->setAttribute('class', 'btn btn-default btn_accept_cookie_youtube');
-                $a_button->textContent = t('Accept');
+                $a_button->textContent = $this->t('Accept');
 
                 $div_didomi_message->appendChild($a_button);
 
@@ -123,9 +130,10 @@ class IframeChangeSrcEvent implements EventSubscriberInterface {
               }
             }
           }
-        }
 
+        }
       }
     }
   }
- }
+
+}
