@@ -10,6 +10,7 @@ dependencies:
     - paragraphs.paragraphs_type.module_hook_text
     - paragraphs.paragraphs_type.module_key_figures
     - paragraphs.paragraphs_type.module_list
+    - paragraphs.paragraphs_type.paragraph_wysiwyg
   module:
     - entity_reference_revisions
 id: node.svp.field_modules
@@ -31,6 +32,7 @@ settings:
       module_hook_text: module_hook_text
       module_key_figures: module_key_figures
       module_list: module_list
+      paragraph_wysiwyg: paragraph_wysiwyg
     negate: 0
     target_bundles_drag_drop:
       call_to_action:
@@ -197,7 +199,7 @@ settings:
         enabled: false
       paragraph_wysiwyg:
         weight: 115
-        enabled: false
+        enabled: true
       rebond_wysiwyg:
         weight: 116
         enabled: false
