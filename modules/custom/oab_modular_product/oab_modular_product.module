@@ -710,7 +710,6 @@ function oab_modular_product_preprocess_paragraph__module_business_case(&$variab
   foreach ($items as $item) {
     if (!$item->get('field_partners_logo')->isEmpty()) {
       $variables['has_logo'] = true;
-      break;
     }
   }
 }

@@ -4,20 +4,20 @@ class CustomAlignment {
     this.$moduleItems = Array.from(this.$root.querySelectorAll('.horizontal-align-item'));
 
     $(window).resize(()=> {
-      this._setMinHeight();
+      this._setHeighToAlign();
     });
 
-    this._setMinHeight();
+    this._setHeighToAlign();
   }
 
-  _setMinHeight() {
-    let minHeight = 0;
+  _setHeighToAlign() {
+    let heightToAlign = 0;
     if (window.matchMedia("(min-width: 736px)").matches) {
       this.$moduleItems.forEach((item) => {
-        minHeight = Math.max(minHeight, item.querySelector('.horizontal-align-item-field').offsetHeight);
+        heightToAlign = Math.max(heightToAlign, item.querySelector('.horizontal-align-item-field').offsetHeight);
       });
       this.$moduleItems.forEach((item) => {
-        item.querySelector('.horizontal-align-item-field').style.minHeight = `${minHeight}px`;
+        item.querySelector('.horizontal-align-item-field').style.heightToAlign = `${heightToAlign}px`;
       });
     }
   }
