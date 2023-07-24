@@ -23,7 +23,6 @@ variables:
 #  extends: .sonarqube_template
 #  stage: .pre
 
-
 # Création d'un dossier spécifique et copie des fichiers nécessaires au build
 Prepare Drupal:
   stage: prepare
