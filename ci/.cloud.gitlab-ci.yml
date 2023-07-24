@@ -115,7 +115,6 @@ Build Image:
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
     DOCKER_OPTS: "--insecure-registry='multirepo-oab.si.fr.intraorange:5002'"
-    REGISTRY: $INTERNAL_ARTIFACTORY_DOCKER_REGISTRY
     IMAGE_PATH: /portail_obs/dev
     IMAGE_NAME: php-fpm
   dependencies:
