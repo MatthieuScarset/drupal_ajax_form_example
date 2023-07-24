@@ -117,6 +117,8 @@ Build Image:
     - Build Assets
     - Vault
   before_script:
+    # Load Orange G2 certificates
+    - update-ca-certificates
     - docker login -u $COMPTE_PROJET -p $CP_PASSWORD $INTERNAL_ARTIFACTORY_DOCKER_REGISTRY
   script:
     - mv themes/theme_one_i/dist build/themes/theme_one_i/dist
