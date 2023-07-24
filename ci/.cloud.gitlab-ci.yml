@@ -1,91 +1,130 @@
 
-# DEFINE DEV SPECIFIC VARIABLES AND JBS
 stages:          # List of stages for jobs, and their order of execution
-  - build_assets
-  - deploy
-  - build
-  - update
+  - prepare
+  - build_drupal
+  - build_image
 
-# Include files to overrides specifics variables
+
+# Include job templates
 include:
   - '/ci/.templates.d/sonarqube.yml'
-  - local: /ci/.cloud.d/.dev.gitlab-ci.yml
-    rules:
-      - if: $CI_COMMIT_BRANCH == "dev"
-  - local: /ci/.cloud.d/.int.gitlab-ci.yml
-    rules:
-      - if: $CI_COMMIT_BRANCH == "integration"
-  - local: /ci/.cloud.d/.commerce.gitlab-ci.yml
-    rules:
-      - if: $CI_COMMIT_BRANCH == "commerce/main"
-  - local: /ci/.cloud.d/.commerce-dev.gitlab-ci.yml
-    rules:
-      - if: $CI_COMMIT_BRANCH == "commerce/dev"
 
 variables:
-  SSH_COMMAND: "ssh -o StrictHostKeyChecking=no $SSH_USER@$SERVER_IP"
-  EXEC_PHP_FPM: "$SSH_COMMAND docker exec $CONTAINER_FPM"
-  DOCKER_COMPOSE_PATH: "$CUSTOM_PROJECT_PATH/$DOCKER_COMPOSE_FILE"
+  $COMPTE_PROJET: $COMPTE_PROJET_DEV
+  ARTIFACTORY_DOCKER_REGISTRY: $INTERNAL_ARTIFACTORY_DOCKER_REGISTRY
+  ARTIFACTORY_RUBY_REGISTRY: $ARTIFACTORY_DOCKER_REGISTRY/portail_obs/dev
+  VAULT_ADDR: $VAULT_ADDR
+  VAULT_PATH: /prj/portail-obs/compte-projet/
+  VAULT_OPTS: "-tls-skip-verify=true"
+  VAULT_NAMESPACE: "namespace-portail-obs"
 
 
-before_script:
-  - 'command -v ssh-agent >/dev/null || ( apk update && apk add openssh-client )'
-  - eval $(ssh-agent -s)
-  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-  - mkdir -p ~/.ssh
-  - chmod 700 ~/.ssh
-
-
-sonarqube-dev:
+# Sonarqube analyze on .pre
+sonarqube:
   extends: .sonarqube_template
   stage: .pre
 
-Build assets:
-  stage: build_assets
+
+# Création d'un dossier spécifique et copie des fichiers nécessaires au build
+Prepare Drupal:
+  stage: prepare
+  script:
+    - mkdir build
+    - cp -r modules build/
+    - cp -r patches build/
+    - cp -r themes build/
+    - cp -r sites build/
+    - cp composer.* build/
+    - cp load.environment.php build/
+    - echo $CI_COMMIT_TAG >> build/modules/custom/oab_develop/.version
+  artifacts:
+    paths:
+      - build
+    expire_in: 1 hour
+
+Vault:
+  stage: prepare
+  image: vault
+  before_script:
+    - apk add jq
+  script:
+    # Load Orange G2 certificates
+    - update-ca-certificates
+
+    # Vault variables
+    - export VAULT_TOKEN="$(vault write -field=token auth/git-oab/login role=$VAULT_NAMESPACE jwt=$CI_JOB_JWT)"
+    - export CP_PASSWORD="$(vault kv get -field=INTERNAL_ARTIFACTORY_TOKEN $VAULT_PATH/Devs)"
+    - echo "CP_PASSWORD=$CP_PASSWORD" >> vault.env
+  artifacts:
+    reports:
+      dotenv: vault.env
+    paths:
+      - privateKey.key
+      - certificate.crt
+    expire_in: 10 minutes
+
+Build Drupal:
+  stage: build_drupal
+  image: php:8.1
+  dependencies:
+    - Prepare Drupal
+  before_script:
+    ## Install Composer
+    - apt-get update
+    - apt-get install -y git zip unzip
+    - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    - php composer-setup.php
+    - php -r "unlink('composer-setup.php');"
+    - apt-get install -y --no-install-recommends libmagickwand-dev imagemagick > /dev/null
+    - pecl install imagick > /dev/null
+    - docker-php-ext-enable imagick > /dev/null
+    - docker-php-ext-configure gd --prefix=/usr --with-jpeg --with-freetype > /dev/null
+    - docker-php-ext-install gd > /dev/null
+    - docker-php-ext-enable gd > /dev/null
+  script:
+    - cd build
+    - php ../composer.phar install --no-dev
+  after_script:
+    ## Clean Up Repo
+    - rm composer.phar
+    - cd build
+    - ls -la sites/
+    - ls -la sites/default
+    - rm -r patches INSTALL.txt .ht.router.php .eslint* .csslintrc web.config
+  artifacts:
+    paths:
+      - build
+    expire_in: 1 hour
+
+Build Assets:
+  stage: build_drupal
   image: node
   script:
     - cd themes/theme_one_i
     - yarn install
-    - yarn build
+    - yarn build-prod
   artifacts:
     paths:
       - themes/theme_one_i/dist
     expire_in: 1 hour
 
-
-Deploy dev:
-  stage: deploy
+Build Image:
+  stage: build_image
+  image: docker:latest
+  services:
+    - docker:dind
   dependencies:
-    - Build assets
+    - Build Drupal
+    - Build Assets
+    - Vault
+  before_script:
+    - docker login -u $COMPTE_PROJET -p $CP_PASSWORD $ARTIFACTORY_DOCKER_REGISTRY
   script:
-    - echo "CI_PIPELINE_ID=$CI_PIPELINE_ID" >> ci-data
-    - echo "CI_PIPELINE_URL=$CI_PIPELINE_URL" >> ci-data
-    - echo "CI_COMMIT_TIMESTAMP=$CI_COMMIT_TIMESTAMP" >> ci-data
-    - echo "CI_COMMIT_MESSAGE=$CI_COMMIT_MESSAGE" >> ci-data
-    - echo "CI_PROJECT_URL=$CI_PROJECT_URL" >> ci-data
-    - echo "CI_COMMIT_SHA=$CI_COMMIT_SHA" >> ci-data
-    - |
-      $SSH_COMMAND "
-        [ -f $DOCKER_COMPOSE_PATH ] && docker compose -f $DOCKER_COMPOSE_PATH down;
-        [ -d $CUSTOM_PROJECT_PATH ] && rm -r $CUSTOM_PROJECT_PATH;
-        mkdir -p $CUSTOM_PROJECT_PATH"
-    - scp -r $(pwd)/* $SSH_USER@$SERVER_IP:$CUSTOM_PROJECT_PATH
+    - mv themes/theme_one_i/dist build/themes/theme_one_i/dist
+    - docker build -t php_tmp -f ci/.fe.d/Dockerfile .
+    - docker image tag php_tmp $ARTIFACTORY_RUBY_REGISTRY:CI_JOB_ID
+    - docker images
+    - docker image push $ARTIFACTORY_RUBY_REGISTRY:CI_JOB_ID
+  tags:
+    - image_build
 
-
-Build drupal:
-  stage: build
-  script:
-    - $SSH_COMMAND cp $SHARED_DIR/.env-dev $CUSTOM_PROJECT_PATH/.env
-    - $SSH_COMMAND cp $SHARED_DIR/settings.local.php $CUSTOM_PROJECT_PATH/sites/default/
-    - $SSH_COMMAND docker compose -f $DOCKER_COMPOSE_PATH --env-file $CUSTOM_PROJECT_PATH/.env up -d --build --remove-orphans
-    - $EXEC_PHP_FPM composer install
-
-
-Update drupal:
-  stage: update
-  script:
-    # drush cr needed for Drupal to discover new modules
-    - $EXEC_PHP_FPM drush cr
-    - $EXEC_PHP_FPM drush cim --yes
-    - $EXEC_PHP_FPM drush updb --yes
-    - $EXEC_PHP_FPM drush cr
