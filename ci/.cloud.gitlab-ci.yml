@@ -11,8 +11,8 @@ include:
 
 variables:
   COMPTE_PROJET: $COMPTE_PROJET_DEV
-  INTERNAL_ARTIFACTORY_DOCKER_REGISTRY: $INTERNAL_ARTIFACTORY_DOCKER_REGISTRY
-  ARTIFACTORY_RUBY_REGISTRY: $INTERNAL_ARTIFACTORY_DOCKER_REGISTRY/portail_obs/dev
+  REGISTRY: $INTERNAL_ARTIFACTORY_DOCKER_REGISTRY
+  PATH: /portail_obs/dev
   VAULT_ADDR: $VAULT_ADDR
   VAULT_PATH: /prj/portail-obs/compte-projet/
   VAULT_OPTS: "-tls-skip-verify=true"
@@ -126,7 +126,7 @@ Build Image:
     - docker login -u $COMPTE_PROJET -p $CP_PASSWORD $INTERNAL_ARTIFACTORY_DOCKER_REGISTRY
   script:
     - mv themes/theme_one_i/dist build/themes/theme_one_i/dist
-    - docker build -t php_tmp -f ci/.fe.d/Dockerfile .
+    - docker build -t php_tmp -f config/docker/cloud/Dockerfile .
     - docker image tag php_tmp $ARTIFACTORY_RUBY_REGISTRY:CI_JOB_ID
     - docker image push $ARTIFACTORY_RUBY_REGISTRY:CI_JOB_ID
   tags:
