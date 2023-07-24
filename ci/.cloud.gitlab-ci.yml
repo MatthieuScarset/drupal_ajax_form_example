@@ -111,7 +111,11 @@ Build Image:
   stage: build_image
   image: docker:latest
   services:
-    - docker:dind
+    - name: docker:dind
+      command: ["--insecure-registry=multirepo-oab.si.fr.intraorange:5002", "--registry-mirror=https://multirepo-oab.si.fr.intraorange:5002"]
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_OPTS: "--insecure-registry='multirepo-oab.si.fr.intraorange:5002'"
   dependencies:
     - Build Drupal
     - Build Assets
@@ -124,7 +128,6 @@ Build Image:
     - mv themes/theme_one_i/dist build/themes/theme_one_i/dist
     - docker build -t php_tmp -f ci/.fe.d/Dockerfile .
     - docker image tag php_tmp $ARTIFACTORY_RUBY_REGISTRY:CI_JOB_ID
-    - docker images
     - docker image push $ARTIFACTORY_RUBY_REGISTRY:CI_JOB_ID
   tags:
     - image_build
