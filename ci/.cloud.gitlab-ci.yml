@@ -11,8 +11,8 @@ include:
 
 variables:
   COMPTE_PROJET: $COMPTE_PROJET_DEV
-  ARTIFACTORY_DOCKER_REGISTRY: $INTERNAL_ARTIFACTORY_DOCKER_REGISTRY
-  ARTIFACTORY_RUBY_REGISTRY: $ARTIFACTORY_DOCKER_REGISTRY/portail_obs/dev
+  INTERNAL_ARTIFACTORY_DOCKER_REGISTRY: $INTERNAL_ARTIFACTORY_DOCKER_REGISTRY
+  ARTIFACTORY_RUBY_REGISTRY: $INTERNAL_ARTIFACTORY_DOCKER_REGISTRY/portail_obs/dev
   VAULT_ADDR: $VAULT_ADDR
   VAULT_PATH: /prj/portail-obs/compte-projet/
   VAULT_OPTS: "-tls-skip-verify=true"
@@ -36,7 +36,6 @@ Prepare Drupal:
     - cp -r sites build/
     - cp composer.* build/
     - cp load.environment.php build/
-    - echo $CI_COMMIT_TAG >> build/modules/custom/oab_develop/.version
   artifacts:
     paths:
       - build
@@ -118,7 +117,7 @@ Build Image:
     - Build Assets
     - Vault
   before_script:
-    - docker login -u $COMPTE_PROJET -p $CP_PASSWORD $ARTIFACTORY_DOCKER_REGISTRY
+    - docker login -u $COMPTE_PROJET -p $CP_PASSWORD $INTERNAL_ARTIFACTORY_DOCKER_REGISTRY
   script:
     - mv themes/theme_one_i/dist build/themes/theme_one_i/dist
     - docker build -t php_tmp -f ci/.fe.d/Dockerfile .
