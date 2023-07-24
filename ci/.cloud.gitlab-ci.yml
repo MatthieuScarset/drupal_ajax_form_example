@@ -128,8 +128,8 @@ Build Image:
   script:
     - mv themes/theme_one_i/dist build/themes/theme_one_i/dist
     - docker build -t php_tmp -f config/docker/cloud/Dockerfile .
-    - docker image tag php_tmp $REGISTRY/$IMAGE_PATH/$IMAGE_NAME:CI_JOB_ID
-    - docker image push $REGISTRY/$IMAGE_PATH/$IMAGE_NAME:CI_JOB_ID
+    - docker image tag php_tmp $REGISTRY/$IMAGE_PATH/$IMAGE_NAME:$CI_JOB_ID
+    - docker image push $REGISTRY/$IMAGE_PATH/$IMAGE_NAME:$CI_JOB_ID
   tags:
     - image_build
 
