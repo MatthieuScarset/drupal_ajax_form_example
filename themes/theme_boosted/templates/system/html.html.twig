@@ -71,11 +71,13 @@
       {% endif %}
   </head>
   <body{{ attributes.addClass(body_classes) }} >
-  TUTUTUTUTTU :)
     <a href="#main-content" class="visually-hidden focusable skip-link">
       {{ 'Skip to main content'|t }}
     </a>
     {{ page_top }}
+    <div style="height: 100px; background-color: red;">
+      JE SUIS LA
+    </div>
     {{ page }}
     {{ page_bottom }}
     <js-bottom-placeholder token="{{ placeholder_token|raw }}">
