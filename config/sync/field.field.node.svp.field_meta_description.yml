@@ -5,13 +5,19 @@ dependencies:
   config:
     - field.storage.node.field_meta_description
     - node.type.svp
+  module:
+    - require_on_publish
+third_party_settings:
+  require_on_publish:
+    require_on_publish: true
+    warn_on_empty: true
 id: node.svp.field_meta_description
 field_name: field_meta_description
 entity_type: node
 bundle: svp
 label: 'Meta description'
 description: 'This field is limited to 56 characters (used for SEO-optimization)'
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''

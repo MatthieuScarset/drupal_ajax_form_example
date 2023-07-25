@@ -6,12 +6,18 @@ dependencies:
     - field.storage.node.field_modules
     - node.type.svp
     - paragraphs.paragraphs_type.module_cross_link
+    - paragraphs.paragraphs_type.module_domains
     - paragraphs.paragraphs_type.module_hook_text
     - paragraphs.paragraphs_type.module_key_figures
     - paragraphs.paragraphs_type.module_list
     - paragraphs.paragraphs_type.paragraph_wysiwyg
   module:
     - entity_reference_revisions
+    - require_on_publish
+third_party_settings:
+  require_on_publish:
+    require_on_publish: true
+    warn_on_empty: true
 id: node.svp.field_modules
 field_name: field_modules
 entity_type: node
@@ -27,6 +33,7 @@ settings:
   handler_settings:
     target_bundles:
       module_cross_link: module_cross_link
+      module_domains: module_domains
       module_hook_text: module_hook_text
       module_key_figures: module_key_figures
       module_list: module_list
@@ -126,6 +133,9 @@ settings:
       module_detail_offre_items:
         weight: 92
         enabled: false
+      module_domains:
+        weight: 94
+        enabled: true
       module_exemples:
         weight: 93
         enabled: false
