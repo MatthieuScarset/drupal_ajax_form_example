@@ -6,8 +6,8 @@ stages:          # List of stages for jobs, and their order of execution
 
 
 # Include job templates
-#include:
-#  - '/ci/.templates.d/sonarqube.yml'
+include:
+  - '/ci/.templates.d/sonarqube.yml'
 
 variables:
   COMPTE_PROJET: $COMPTE_PROJET_DEV
@@ -19,9 +19,9 @@ variables:
 
 
 # Sonarqube analyze on .pre
-#sonarqube:
-#  extends: .sonarqube_template
-#  stage: .pre
+sonarqube:
+  extends: .sonarqube_template
+  stage: .pre
 
 # Création d'un dossier spécifique et copie des fichiers nécessaires au build
 Prepare Drupal:
@@ -114,7 +114,7 @@ Build Image:
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
     DOCKER_OPTS: "--insecure-registry='multirepo-oab.si.fr.intraorange:5002'"
-    IMAGE_PATH: portail_obs/dev
+    IMAGE_PATH: portail_obs/$CI_COMMIT_BRANCH
     IMAGE_NAME: php-fpm
   dependencies:
     - Build Drupal
