@@ -184,5 +184,8 @@
         "Force https when recreating URL": "patches/saml_sp/patch_php_saml.patch"
       }
     }
+  },
+  "scripts": {
+    "phpcbf": "for F in $(git diff --name-only); do vendor/bin/phpcbf \"$F\"; done"
   }
 }
