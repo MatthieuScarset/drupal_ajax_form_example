@@ -36,7 +36,6 @@ class SmartRedirectionEvent implements EventSubscriberInterface {
 
 
   public function checkRedirection(ExceptionEvent $event) {
-
     // Pour être sur, pour les API Marketo/Altares.
     // Gestion des exceptions dans leur module
     $route_name = \Drupal::routeMatch()->getRouteName();
@@ -51,38 +50,39 @@ class SmartRedirectionEvent implements EventSubscriberInterface {
       return;
     }
 
-    #On vérifie le code de retour (S'il existe, et si 404 ou 403)
-    if (method_exists($event->getThrowable(), "getStatusCode")
-      && $event->getThrowable()->getStatusCode() == 404) {
+    #On vérifie le code de retour.
+    $status_code = method_exists($event->getThrowable(), "getStatusCode") ? $event->getThrowable()->getStatusCode() : NULL;
 
-      ########################
-      ## CAS DES 404
-      $request_url = $event->getRequest()->getRequestUri();        #Recuperation de l'URL
-      if (substr($request_url, 0, 1) == "/") {      #Si l'URL commence par /, je le supprime (pour le découpage)
+    # CAS DES 404
+    if ($status_code == 404) {
+      #Recuperation de l'URL
+      $request_url = $event->getRequest()->getRequestUri();
+      
+      #Si l'URL commence par /, je le supprime (pour le découpage)
+      if (substr($request_url, 0, 1) == "/") {
         $request_url =  substr($request_url, 1);
       }
-      $url_parts = explode("/", $request_url);             #Découpage de l'URL, via le /
-      ##kint(count($urlParts));
-      if (count($url_parts) == 2) {
-        #Si on a 2 elements, on redirige vers la home
-        #(cas des subhomes => /fr/blogs)
-        $response = new RedirectResponse(Url::fromRoute('<front>')->toString());
-        $event->setResponse($response);
-      } elseif (count($url_parts) > 2) {
-        #Si on a plus, on redirige vers la subhome en question
-        #Si elle n'existe pas, elle sera ensuite redirigé vers la home par la partie d'au-dessus
+      #Découpage de l'URL, via le /
+      $url_parts = explode("/", $request_url);
+
+      #Si on a plus, on redirige vers la subhome en question
+      #Si elle n'existe pas, elle sera ensuite redirigé vers la home par la partie d'au-dessus
+      if (count($url_parts) > 2) {
         $response = new RedirectResponse("/".$url_parts[0] . "/" .$url_parts[1]);
         $event->setResponse($response);
       }
 
-    } elseif (method_exists($event->getThrowable(), "getStatusCode")
-      && $event->getThrowable()->getStatusCode() == 403) {
-      ########################
-      ## CAS DES 403
-
+      #Si on a 2 elements ou moins, on redirige vers la home
+      #(cas des subhomes => /fr/blogs)
+      if (count($url_parts) == 2) {
+        $response = new RedirectResponse(Url::fromRoute('<front>')->toString());
+        $event->setResponse($response);
+      }
+    }
+    
+    # CAS DES 403
+    if ($status_code == 403) {
       // Petit check pour les requetes AJAX de l'API OBL
-      $route_name = \Drupal::routeMatch()->getRouteName();
-
       if (\Drupal::currentUser()->isAnonymous() && strpos($route_name, 'oab_obl') !== 0) {
         # Si user n'est pas loggué, on redirige vers la home
         $response = new RedirectResponse(Url::fromRoute('<front>')->toString());
