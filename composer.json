@@ -186,6 +186,6 @@
     }
   },
   "scripts": {
-    "phpcbf": "for F in $(git diff --name-only); do vendor/bin/phpcbf \"$F\"; done"
+    "codefix": "for F in $(git diff --name-only); do vendor/bin/phpcbf \"$F\"; done"
   }
 }
