@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ruleset name="phpcs-standard">
   <description>Codestyle ruleset for Drupal</description>
+  <config name="drupal_core_version" value="9"/>
 
   <!-- Specify standards. -->
-  <rule ref="Drupal"/>
-  <rule ref="DrupalPractice"/>
+  <rule ref="vendor/drupal/coder/coder_sniffer/Drupal"/>
+  <rule ref="vendor/drupal/coder/coder_sniffer/DrupalPractice"/>
 
   <!-- Include path with the Drupal and DrupalPractice rules. -->
   <config name="installed_paths" value="vendor/drupal/coder/coder_sniffer"/>
