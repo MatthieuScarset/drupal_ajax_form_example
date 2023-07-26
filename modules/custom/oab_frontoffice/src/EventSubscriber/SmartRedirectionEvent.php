@@ -70,12 +70,12 @@ class SmartRedirectionEvent implements EventSubscriberInterface {
       if (count($url_parts) > 2) {
         $response = new RedirectResponse("/".$url_parts[0] . "/" .$url_parts[1]);
         $event->setResponse($response);
+      } else {
+        #Si on a 2 elements ou moins, on redirige vers la home
+        #(cas des subhomes => /fr/blogs ou URL inconnue /blabla)
+        $response = new RedirectResponse(Url::fromRoute('<front>')->toString());
+        $event->setResponse($response);
       }
-
-      #Si on a 2 elements ou moins, on redirige vers la home
-      #(cas des subhomes => /fr/blogs ou URL inconnue /blabla)
-      $response = new RedirectResponse(Url::fromRoute('<front>')->toString());
-      $event->setResponse($response);
     }
     
     # CAS DES 403
