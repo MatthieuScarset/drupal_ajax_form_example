@@ -36,8 +36,9 @@ dependencies:
     - node.type.region
     - node.type.simple_page
     - node.type.solution
-    - workflows.workflow.content
     - node.type.webform
+    - taxonomy.vocabulary.subhomes
+    - workflows.workflow.content
   module:
     - comment
     - content_moderation
@@ -51,11 +52,13 @@ dependencies:
     - oab_background_image
     - oab_siu_connexion
     - oab_subhomes
+    - path
     - quickedit
     - replicate_ui
     - scheduled_updates
     - shortcut
     - system
+    - taxonomy
     - toolbar
     - tour
 id: chief_editor
@@ -77,17 +80,18 @@ permissions:
   - 'access marketo entity browser pages'
   - 'access media overview'
   - 'access shortcuts'
+  - 'access taxonomy overview'
   - 'access toolbar'
   - 'access tour'
   - 'access user profiles'
   - 'add background image entities'
   - 'add subhome entity entities'
   - 'administer media'
-  - 'administer menu'
   - 'administer scheduled_update display'
   - 'administer scheduled_update fields'
   - 'administer scheduled_update form display'
   - 'administer subhome entity entities'
+  - 'bypass node access'
   - 'create background media'
   - 'create blog_post content'
   - 'create cloud_service_provider content'
@@ -122,6 +126,7 @@ permissions:
   - 'create region content'
   - 'create simple_page content'
   - 'create solution content'
+  - 'create url aliases'
   - 'delete all revisions'
   - 'delete any background media'
   - 'delete any blog_post content'
@@ -285,6 +290,7 @@ permissions:
   - 'edit own solution content'
   - 'edit own webform content'
   - 'edit subhome entity entities'
+  - 'edit terms in subhomes'
   - 'post comments'
   - 'replicate entities'
   - 'revert all revisions'

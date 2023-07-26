@@ -6,9 +6,10 @@ dependencies:
     - filter.format.full_html
     - node.type.distributor
     - node.type.product
+    - workflows.workflow.content
   module:
+    - content_moderation
     - entity_browser
-    - field_ui
     - file
     - filter
     - media
@@ -65,6 +66,9 @@ permissions:
   - 'revert product revisions'
   - 'update any media'
   - 'update media'
+  - 'use content transition archived'
+  - 'use content transition create_new_draft'
+  - 'use content transition publish'
   - 'use text format full_html'
   - 'view all revisions'
   - 'view any unpublished content'

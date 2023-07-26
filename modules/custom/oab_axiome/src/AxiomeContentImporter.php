@@ -347,7 +347,8 @@ class AxiomeContentImporter {
             $message .= "\t WARNING : missing `ruby_zone_detailed_contents` \n";
             $is_valid = false;
         }
-        if (empty($axiome_data['Children']['ruby_theme']['Children']['ruby_zone_banner']['Attributes']['background_image']['url_archive'])) {
+        if (empty($axiome_data['Children']['ruby_theme']['Children']['ruby_zone_banner']['Attributes']
+        ['background_image']['url_archive'])) {
             $message .= "\t WARNING : missing `ruby_zone_banner.background_image.url_archive` \n";
             $is_valid = false;
         }

@@ -65,13 +65,15 @@ class RebondProductBlock extends BlockBase {
             ['Attributes']['online_purchase_dedicated_portal'])) {
 
             $block['rebondProduct_type'] = 'portailDedie';
-            $block['rebondProduct_link'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['online_purchase_dedicated_portal'];
+            $block['rebondProduct_link'] = $axiome_data['Children']['ruby_theme']['Children']
+          ['ruby_zone_seemore']['Attributes']['online_purchase_dedicated_portal'];
 
           }  elseif (isset($axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']
           ['Attributes']['online_purchase_shops'])) {
 
             $block['rebondProduct_type'] = 'boutique';
-            $block['rebondProduct_link'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['online_purchase_shops'];
+            $block['rebondProduct_link'] = $axiome_data['Children']['ruby_theme']['Children']
+          ['ruby_zone_seemore']['Attributes']['online_purchase_shops'];
 
           }*/
 
@@ -89,9 +91,11 @@ class RebondProductBlock extends BlockBase {
           $block['rebondProduct']['discover_link'] = $ece_settings->get('discover_link');
 
           if (isset($axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']
-              ['Attributes']['online_purchase_customer_area']) && is_string($axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']
+              ['Attributes']['online_purchase_customer_area'])
+            && is_string($axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']
             ['Attributes']['online_purchase_customer_area'])) {
-            $block['rebondProduct']['connect_link'] = $axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes']['online_purchase_customer_area'];
+            $block['rebondProduct']['connect_link'] = $axiome_data['Children']['ruby_theme']['Children']
+            ['ruby_zone_seemore']['Attributes']['online_purchase_customer_area'];
             $block['rebondProduct']['ece_display'] = 'yes';
           } else {
             $block['rebondProduct']['ece_display'] = 'no';

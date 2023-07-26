@@ -42,7 +42,8 @@ class TestShowroomBlock  extends BlockBase {
 
         if ($type == 'product') {
             /**
-             * Préparation du code à venir pour Axiome : par la suite les information pourront venir d'Axiome, il faudra alors modifier ce block pour afficher les infos d'Axiome
+             * Préparation du code à venir pour Axiome : par la suite les information pourront venir d'Axiome,
+             * il faudra alors modifier ce block pour afficher les infos d'Axiome
              */
             /*
             if ($node->hasField('field_axiome_data')) {

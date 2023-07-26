@@ -60,7 +60,7 @@ class OabDevelopCommands extends DrushCommands implements SiteAliasManagerAwareI
       while ($row = fgets($fp)) {
         $row = trim(preg_replace('/\s+/', ' ', $row));
         if (!empty($row) && !str_starts_with($row, '#')
-            && strlen($row) > 1  /* Prevent empty lines to be executed */) {
+            && strlen($row) > 1) { /* Prevent empty lines to be executed */
           $this->output()->writeln('- ' . $row);
 
           $args = explode(' ', $row);
@@ -95,7 +95,7 @@ class OabDevelopCommands extends DrushCommands implements SiteAliasManagerAwareI
       $modules = [];
       while ($row = fgets($fp)) {
         $row = trim(preg_replace('/\s+/', ' ', $row));
-        if (!empty($row) && !str_starts_with($row, '#') && strlen($row) > 1/* Prevent empty lines to be executed */) {
+        if (!empty($row) && !str_starts_with($row, '#') && strlen($row) > 1) { /* Prevent empty lines to be executed */
           $modules[] = $row;
         }
       }
@@ -114,7 +114,12 @@ class OabDevelopCommands extends DrushCommands implements SiteAliasManagerAwareI
       $options['yes'] = true;
     }
 
-    $process = $this->processManager()->drush(siteAlias: $this->siteAliasManager()->getSelf(), command: $cmd, args: $args, options: $options);
+    $process = $this->processManager()->drush(
+      siteAlias: $this->siteAliasManager()->getSelf(),
+      command: $cmd,
+      args: $args,
+      options: $options
+    );
     $process->enableOutput(true);
     $process->mustRun();
     foreach ($process as $data) {

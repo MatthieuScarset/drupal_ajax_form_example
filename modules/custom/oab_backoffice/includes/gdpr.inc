@@ -4,15 +4,22 @@
  * Regroupement de toutes les fonctions spécifiques à la GDPR pour ne pas surcharger le fichier .module
  */
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Datetime;
-use Drupal\oab_akamai\Form\OabAkamaiForm;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
-use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\node\Entity\Node;
+use Drupal\oab_akamai\Controller\OabAkamaiController;
+use Drupal\oab_akamai\Form\OabAkamaiForm;
+use Drupal\oab_backoffice\Controller\OabExportFileListController;
 use Drupal\user\Entity\User;
+use Drupal\webform\Entity\Webform;
+use Drupal\webform\Entity\WebformSubmission;
 
 define('GDPR_THIRD_PARTY_MODULE', 'oab_backoffice');
 
-function gdpr_is_webform_submission_authorized(Drupal\webform\Entity\WebformSubmission $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
+function gdpr_is_webform_submission_authorized(WebformSubmission $entity, $operation, AccountInterface $account) {
 
     if ($operation == "delete" && in_array('webform_business_analyst', $account->getRoles())) {
 
@@ -21,16 +28,16 @@ function gdpr_is_webform_submission_authorized(Drupal\webform\Entity\WebformSubm
 
         if (array_key_exists($account->id(), $business_analaysts_list)) {
 
-            return Drupal\Core\Access\AccessResult::allowed();
+            return AccessResult::allowed();
         }
     }
-    return Drupal\Core\Access\AccessResult::neutral();
+    return AccessResult::neutral();
 }
 
 /**
  * Je regroupe tout dans une fonction perso, parce que je m'en sers dans plusieurs hook_access
  */
-function gdpr_is_webform_authorized(Drupal\webform\Entity\Webform $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
+function gdpr_is_webform_authorized(Webform $entity, $operation, AccountInterface $account) {
     /**
      * Si l'utilisateur est un business owner, je lui donne les droits que sur les webforms auxquels il est business owner
      * pour voir les soumissions et faire des modifs
@@ -52,7 +59,7 @@ function gdpr_is_webform_authorized(Drupal\webform\Entity\Webform $entity, $oper
         $business_analaysts_list = $entity->getThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_business_analysts');
 
         if (is_array($business_analaysts_list) && array_key_exists($account->id(), $business_analaysts_list)) {
-            return Drupal\Core\Access\AccessResult::allowed();
+            return AccessResult::allowed();
         }
 
     }
@@ -62,11 +69,11 @@ function gdpr_is_webform_authorized(Drupal\webform\Entity\Webform $entity, $oper
 
         $allowed = gdpr_check_authorized_view($entity, $account);
         if ($allowed) {
-            return Drupal\Core\Access\AccessResult::allowed();
+            return AccessResult::allowed();
         } elseif ($allowed == false) {
-            return Drupal\Core\Access\AccessResult::forbidden();
+            return AccessResult::forbidden();
         } elseif ($allowed == null) {
-            return Drupal\Core\Access\AccessResult::neutral();
+            return AccessResult::neutral();
         }
     }
 
@@ -76,7 +83,7 @@ function gdpr_is_webform_authorized(Drupal\webform\Entity\Webform $entity, $oper
     }*/
 
 
-    return Drupal\Core\Access\AccessResult::neutral();
+    return AccessResult::neutral();
 }
 
 
@@ -137,7 +144,7 @@ function gdpr_check_authorized_view($entity, $account) {
 /**
  * Gestion des accès spécifiques aux webform
  */
-function gdpr_hook_node_acces(Drupal\node\Entity\Node $entity, $operation, \Drupal\Core\Session\AccountInterface $account) {
+function gdpr_hook_node_acces(Node $entity, $operation, AccountInterface $account) {
     if ($entity->getType() == 'webform' && $operation == 'view') {
         if ($entity->get('webform')->count() > 0) {
             $webform_value = $entity->get('webform')->first()->getValue();
@@ -150,7 +157,7 @@ function gdpr_hook_node_acces(Drupal\node\Entity\Node $entity, $operation, \Drup
 
     }
 
-    return Drupal\Core\Access\AccessResult::neutral();
+    return AccessResult::neutral();
 }
 
 /**
@@ -296,7 +303,7 @@ function gdpr_hook_tokens(array &$replacements, $type, $tokens, array $data) {
 /**
  * A la creation d'un webform, on envoie des emails
  */
-function gdpr_hook_webform_insert(Drupal\webform\Entity\Webform $entity) {
+function gdpr_hook_webform_insert(Webform $entity) {
     $current_user = Drupal::currentUser();
     $current_language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
@@ -353,7 +360,7 @@ function gdpr_business_analysts_list() {
 /**
  * Fonction appellée à la validation de l'edition d'un webform pour sauvegarder nos paramètres spécifiques à la GDPR
  */
-function gdpr_webform_submit(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+function gdpr_webform_submit(&$form, FormStateInterface $form_state) {
 
     if ($entity = $form_state->getFormObject()->getEntity()) {
         $entity->setThirdPartySetting(GDPR_THIRD_PARTY_MODULE, 'gdpr_business_owner', $form_state->getValue('gdpr_business_owner'));
@@ -595,7 +602,7 @@ function gdpr_hook_entity_update($entity) {
                 $query->condition('webform', $webform_id);
                 $result = $query->execute();
 
-                $akamai_ctrl = new \Drupal\oab_akamai\Controller\OabAkamaiController();
+                $akamai_ctrl = new OabAkamaiController();
                 $host = "https://" . \Drupal::request()->getHost();
 
                 foreach ($result as $value) {
@@ -698,7 +705,7 @@ function gdpr_hook_cron() {
         #####################################
         #####################################
         # Suppression des elements du dossier d'export des listes de documents du site
-        \Drupal\oab_backoffice\Controller\OabExportFileListController::clearStorageDir();
+        OabExportFileListController::clearStorageDir();
 
 
 }

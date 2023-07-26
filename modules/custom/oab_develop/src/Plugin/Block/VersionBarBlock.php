@@ -73,14 +73,20 @@ class VersionBarBlock extends BlockBase implements ContainerFactoryPluginInterfa
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition,
-                              ThemeManagerInterface $theme_manager, ThemeHandlerInterface $themeHandler,
-                              RouteMatchInterface $routeMatch, StateInterface $state) {
+  public function __construct(
+    array $configuration,
+    $plugin_id,
+    $plugin_definition,
+    ThemeManagerInterface $theme_manager,
+    ThemeHandlerInterface $theme_handler,
+    RouteMatchInterface   $route_match,
+    StateInterface $state
+  ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->themeManager = $theme_manager;
-    $this->routeMatch = $routeMatch;
+    $this->routeMatch = $route_match;
     $this->state = $state;
-    $this->themeHandler = $themeHandler;
+    $this->themeHandler = $theme_handler;
   }
 
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
@@ -117,7 +123,7 @@ class VersionBarBlock extends BlockBase implements ContainerFactoryPluginInterfa
       $version = substr($version, 0, strpos($version, "-"));
     }
     // if the file ".version" doesn't exist, the version is given by composer
-    if (strlen($version) === 0 ) {
+    if (strlen($version) === 0) {
       $version = $composer['pretty_version'] ?? $composer["version"] ?? "Not Found";
     }
 
@@ -143,8 +149,8 @@ class VersionBarBlock extends BlockBase implements ContainerFactoryPluginInterfa
       $datas = explode(";", $file_data);
       foreach ($datas as $data) {
         $tmp = explode("=", $data);
-        if(count($tmp) == 2) {
-          if($tmp[0] == "CI_COMMIT_TIMESTAMP" && !empty($tmp[1])) {
+        if (count($tmp) == 2) {
+          if ($tmp[0] == "CI_COMMIT_TIMESTAMP" && !empty($tmp[1])) {
             try {
 
               $ci_datas[$tmp[0]] = (new \DateTime($tmp[1]))->format("d/m/Y H:i");

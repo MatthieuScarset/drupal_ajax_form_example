@@ -11,8 +11,7 @@ use Drupal\Core\Session\AccountInterface;
 /**
  * Configure example settings for this site.
  */
-class OabAkamaiManualFlushForm extends ConfigFormBase
-{
+class OabAkamaiManualFlushForm extends ConfigFormBase {
     public static function getConfigName() {
         return 'oab.akamai_manual_flush';
     }

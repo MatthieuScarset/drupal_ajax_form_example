@@ -104,7 +104,11 @@ function _in_hook_form_alter(&$form, FormStateInterface $form_state, $form_id) {
                 }
             }
             if ($can_edit !== true) {
-                \Drupal::messenger()->addMessage(t('You can not edit/delete this node cause you don\'t have access to this language.'), 'error', TRUE);
+                \Drupal::messenger()->addMessage(
+                  t('You can not edit/delete this node cause you don\'t have access to this language.'),
+                  'error',
+                  TRUE
+                );
                 $response = new Symfony\Component\HttpFoundation\RedirectResponse('/admin/content');
                 $response->send();
                 exit();

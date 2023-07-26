@@ -14,8 +14,7 @@ use Drupal\Core\Database\Database;
 /**
  * Classe pour les méthodes qui concernent les Imports
  */
-class BackbonesImport
-{
+class BackbonesImport {
     const TABLE_NAME = 'oab_backbones_import';
 
     public function getHeaderTable() {

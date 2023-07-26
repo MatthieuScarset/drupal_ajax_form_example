@@ -149,7 +149,11 @@ $termes = array(
 );
 
 foreach ($termes as $term => $trad) {
-  $termsArray = taxonomy_term_load_multiple_by_name($term, 'regions');
+//  $termsArray = taxonomy_term_load_multiple_by_name($term, 'regions');
+  $termsArray = \Drupal::entityTypeManager()
+    ->getStorage("taxonomy_term")
+    ->loadByProperties(["name" => $term, "vid" => "regions"]);
+
   foreach ($termsArray as $foundterm) {
     if (!empty($foundterm) && !$foundterm->hasTranslation('ru')) {
       $entity_array = $foundterm->toArray();

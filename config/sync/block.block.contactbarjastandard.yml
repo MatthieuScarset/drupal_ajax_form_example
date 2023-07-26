@@ -3,8 +3,8 @@ langcode: en
 status: true
 dependencies:
   module:
-    - ctools
     - language
+    - node
     - oab_frontoffice
   theme:
     - theme_boosted
@@ -21,12 +21,12 @@ settings:
   provider: oab_frontoffice
   context_mapping:
     node: '@node.node_route_context:node'
-  link_offices: 'http://www.orange-business.com/en/where-we-are'
+  link_offices: 'https://www.orange-business.com/en/where-we-are?region=191&country=582'
   link_offices_text: 現地事務所
   link_help: 'https://www.orange-business.com/en/any-request'
-  link_help_text: ' 問い合わせ'
+  link_help_text: 営業コンタクト
   link_contact: 'https://www.orange-business.com/en/contact-us'
-  link_contact_text: 営業コンタクト
+  link_contact_text: ' 問い合わせ'
 visibility:
   language:
     id: language

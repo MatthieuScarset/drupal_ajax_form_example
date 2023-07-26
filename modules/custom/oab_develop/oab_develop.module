@@ -1,10 +1,13 @@
 <?php
 
+use Drupal\Core\Database\Database;
 use Drupal\Core\Extension\ExtensionPathResolver;
-use Drupal\Core\Messenger\MessengerInterface;
-use Symfony\Component\Yaml\Yaml;
-use Drupal\locale\SourceString;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\oab_develop\Form\OabLogSettingsForm;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\taxonomy\Entity\Vocabulary;
+use Symfony\Component\Yaml\Yaml;
 
 define('LOG_DIR', 'public://log/');
 
@@ -71,7 +74,7 @@ function taxonomy_rename_taxo($old, $new, $vid, $lang) {
         }
     } else {
         // creation du terme
-        $entity = \Drupal\taxonomy\Entity\Term::create([
+        $entity = Term::create([
             'vid' => $vid,
             'name' => $new,
             'langcode' => $lang,
@@ -80,7 +83,7 @@ function taxonomy_rename_taxo($old, $new, $vid, $lang) {
         $tid_rename = $entity->id();
     }
     if (isset($tid_rename)) {
-        $connection = \Drupal\Core\Database\Database::getConnection();
+        $connection = Database::getConnection();
         $query = $connection->update('taxonomy_term_field_data');
         $query->fields([
             'name' => $new,
@@ -109,11 +112,11 @@ function taxonomy_rename_vocab($name_voca, $default_name, $vid, $lang) {
 //    $query->condition('name', "taxonomy.vocabulary.".$vid);
 //    $entity = $query->execute();
 
-    $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::load($vid);
+    $vocabulary = Vocabulary::load($vid);
     if (!isset($vocabulary)) {
 
         // create vocabulary
-        $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::create(array(
+        $vocabulary = Vocabulary::create(array(
             'vid' => $vid,
             'description' => '',
             'content_translation' => true,
@@ -159,11 +162,18 @@ function isValidDate($date, $format) {
 /**
  * Creation d'un field en bdd
  */
-function createField($field_name, $bundle, $label, $type = 'text_long', $required = FALSE, $entity_type_id = 'node', $other_config = array()) {
-
-    $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName($entity_type_id, $field_name);
+function createField(
+  $field_name,
+  $bundle,
+  $label,
+  $type = 'text_long',
+  $required = FALSE,
+  $entity_type_id = 'node',
+  $other_config = array()
+) {
+    $field_storage = FieldStorageConfig::loadByName($entity_type_id, $field_name);
     if (empty($field_storage)) {
-        \Drupal\field\Entity\FieldStorageConfig::create(array(
+        FieldStorageConfig::create(array(
             'field_name' => $field_name,
             'entity_type' => $entity_type_id,
             'type' => $type,
@@ -172,7 +182,7 @@ function createField($field_name, $bundle, $label, $type = 'text_long', $require
         Drupal::messenger()->addMessage('Field `'.$field_name.'` already exists in bundle');
     }
 
-    $field = \Drupal\field\Entity\FieldConfig::loadByName($entity_type_id, $bundle, $field_name);
+    $field = FieldConfig::loadByName($entity_type_id, $bundle, $field_name);
     if (empty($field)) {
         $config_array = array(
             'field_name' =>  $field_name,
@@ -184,7 +194,7 @@ function createField($field_name, $bundle, $label, $type = 'text_long', $require
         if (!empty($other_config)) {
             $config_array = array_merge($config_array, $other_config);
         }
-        \Drupal\field\Entity\FieldConfig::create($config_array)->save();
+        FieldConfig::create($config_array)->save();
     } else {
         Drupal::messenger()->addMessage('Field `'.$field_name.'` already exists in bundle `'.$bundle.'`');
     }
@@ -193,11 +203,12 @@ function createField($field_name, $bundle, $label, $type = 'text_long', $require
 /**
  * Creation d'un field en bdd
  */
-function createFieldReference($field_name, $bundle, $label, $target, $type = 'text_long', $required = FALSE, $entity_type_id = 'node', $other_config = array()) {
+function createFieldReference($field_name, $bundle, $label, $target, $type = 'text_long',
+                              $required = FALSE, $entity_type_id = 'node', $other_config = array()) {
 
-    $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName($entity_type_id, $field_name);
+    $field_storage = FieldStorageConfig::loadByName($entity_type_id, $field_name);
     if (empty($field_storage)) {
-        \Drupal\field\Entity\FieldStorageConfig::create(array(
+        FieldStorageConfig::create(array(
             'field_name' => $field_name,
             'entity_type' => $entity_type_id,
             'type' => $type,
@@ -207,7 +218,7 @@ function createFieldReference($field_name, $bundle, $label, $target, $type = 'te
         Drupal::messenger()->addMessage('Field `'.$field_name.'` already exists in bundle');
     }
 
-    $field = \Drupal\field\Entity\FieldConfig::loadByName($entity_type_id, $bundle, $field_name);
+    $field = FieldConfig::loadByName($entity_type_id, $bundle, $field_name);
     if (empty($field)) {
         $config_array = array(
             'field_name' =>  $field_name,
@@ -220,7 +231,7 @@ function createFieldReference($field_name, $bundle, $label, $target, $type = 'te
         if (!empty($other_config)) {
             $config_array = array_merge($config_array, $other_config);
         }
-        \Drupal\field\Entity\FieldConfig::create($config_array)->save();
+        FieldConfig::create($config_array)->save();
     } else {
         Drupal::messenger()->addMessage('Field `'.$field_name.'` already exists in bundle `'.$bundle.'`');
     }
@@ -269,7 +280,7 @@ function oabt_taxoAddDescription($term_id, $text) {
     if (isset($entity)) {
         foreach ($entity as $tid) {
             // on update le champ description
-            $term_update = \Drupal\taxonomy\Entity\Term::load($tid);
+            $term_update = Term::load($tid);
             $term_update->set('description', $text);
             $term_update->save();
         }
@@ -328,7 +339,8 @@ function check_log_for_cron() {
             }
 
             $params['subject'] = "Notifications d'erreurs sur orange-business.com";
-            $params['body'] = "Veuillez trouvez en PJ les logs d'obs.com<br />" . nl2br($erreurs) . "<br />Cordialement,<br />L'equipe ruby";
+            $params['body'] = "Veuillez trouvez en PJ les logs d'obs.com<br />" . nl2br($erreurs) .
+              "<br />Cordialement,<br />L'equipe ruby";
             \Drupal::service('plugin.manager.mail')->mail('oab_develop', 'mail_log', $mails, 'fr', $params);
         }
     }

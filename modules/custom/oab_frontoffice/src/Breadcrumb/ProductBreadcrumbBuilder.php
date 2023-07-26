@@ -95,8 +95,7 @@ class ProductBreadcrumbBuilder implements BreadcrumbBuilderInterface {
       $breadcrumb->addLink(Link::fromTextAndUrl(t('Home'), $this->getHubFrontUrl()));
       $breadcrumb->addLink(Link::fromTextAndUrl($parent->getName(), $parent_url));
       $breadcrumb->addLink(Link::fromTextAndUrl($term->getName(), $ancre_term));
-    }
-    else {
+    } else {
       // on est sur un produit sans Product Category => on reprend l'ancien fil d'ariane
       if ($node->hasField('field_subhome')) {
 

@@ -79,7 +79,8 @@ class ContactBarDviBlock extends BlockBase {
         $form['link_partenaire_text'] = [
             '#title' => $this->t('Texte du lien vers le formulaire Devenir partenaire'),
             '#type' => 'textfield',
-            '#default_value' => isset($this->configuration['link_partenaire_text']) ? $this->configuration['link_partenaire_text'] : 'Devenir partenaire',
+            '#default_value' => isset($this->configuration['link_partenaire_text'])
+              ? $this->configuration['link_partenaire_text'] : 'Devenir partenaire',
             '#required' => false,
         ];
 
@@ -92,7 +93,8 @@ class ContactBarDviBlock extends BlockBase {
         $form['link_contact_text'] = [
             '#title' => $this->t('Texte du lien vers Contact DVI'),
             '#type' => 'textfield',
-            '#default_value' => isset($this->configuration['link_contact_text']) ? $this->configuration['link_contact_text'] : 'Contact DVI',
+            '#default_value' => isset($this->configuration['link_contact_text'])
+              ? $this->configuration['link_contact_text'] : 'Contact DVI',
             '#required' => false,
         ];
 

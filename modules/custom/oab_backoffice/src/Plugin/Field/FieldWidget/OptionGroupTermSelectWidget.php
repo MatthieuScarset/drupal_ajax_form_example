@@ -34,7 +34,11 @@ class OptionGroupTermSelectWidget extends OptionsWidgetBase implements Container
   /**
    * {@inheritdoc}
    */
-  public function __construct($plugin_id, $plugin_definition, FieldDefinitionInterface $field_definition, array $settings, array $third_party_settings, EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct($plugin_id, $plugin_definition,
+                              FieldDefinitionInterface $field_definition,
+                              array $settings,
+                              array $third_party_settings,
+                              EntityTypeManagerInterface $entity_type_manager) {
     parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $third_party_settings);
     $this->entityTypeManager = $entity_type_manager;
   }

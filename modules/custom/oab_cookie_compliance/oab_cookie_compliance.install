@@ -4,7 +4,7 @@
 use Drupal\oab_cookie_compliance\Form\CookieComplianceSettingsForm;
 
 function oab_cookie_compliance_install() {
-    drupal_set_installed_schema_version('oab_cookie_compliance', 8000);
+    \Drupal::service('update.update_hook_registry')->setInstalledVersion('oab_cookie_compliance', 8000);
 
     #####
     # A l'installation, je set automatiquement les messages par défaut qui sont en confi

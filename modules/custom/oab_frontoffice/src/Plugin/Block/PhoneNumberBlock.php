@@ -59,7 +59,8 @@ class PhoneNumberBlock extends BlockBase {
                 $form['block_title'] = [
                     '#title' => $this->t('Block Title'),
                     '#type' => 'textfield',
-                    '#default_value' => isset($this->configuration['block_title']) ? $this->configuration['block_title'] : 'To contact him by phone',
+                    '#default_value' => isset($this->configuration['block_title'])
+                      ? $this->configuration['block_title'] : 'To contact him by phone',
                     '#required' => true,
                 ];
         $form['content'] = array(

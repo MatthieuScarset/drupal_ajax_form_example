@@ -36,10 +36,14 @@ class MssCategoryBlock extends BlockBase implements ContainerFactoryPluginInterf
   private $entityTypeManager;
 
 
-  public function __construct(array $configuration, $plugin_id, $plugin_definition,
-                              EntityTypeManagerInterface $entityTypeManager) {
+  public function __construct(
+    array $configuration,
+    $plugin_id,
+    $plugin_definition,
+    EntityTypeManagerInterface $entity_type_manager
+  ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->entityTypeManager = $entityTypeManager;
+    $this->entityTypeManager = $entity_type_manager;
   }
 
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {

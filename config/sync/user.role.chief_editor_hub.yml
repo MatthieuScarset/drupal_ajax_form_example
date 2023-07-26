@@ -18,6 +18,7 @@ dependencies:
     - node.type.simple_page
     - node.type.solution
   module:
+    - content_moderation
     - entity_browser
     - file
     - filter
