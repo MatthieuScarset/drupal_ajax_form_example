@@ -415,6 +415,21 @@ function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, 
   if ($node instanceof NodeInterface && in_array($node->bundle(), ['modular_product', 'corporate', 'svp', 'domain'])) {
     oab_modular_product_hide_wysiwyg_paragraph($form);
   }
+
+  // Alter fields for node:domain.
+  if ($node instanceof NodeInterface && $node->bundle() == 'domain') {
+    /** @var OabModularProductService $conf_modular_product */
+    $conf_modular_product = \Drupal::service('oab_modular_product.settings');
+    $max_char_short_title = $conf_modular_product->getShortTitleMaxCharacter();
+    $size_title_short = min(150, $conf_modular_product->getShortTitleMaxCharacter() + 10);
+
+    if (isset($form['field_teaser_title'])) {
+      $element = &$form['field_teaser_title']['widget'][0]['value'];
+      $element['#maxlength'] = $max_char_short_title;
+      $element['#size'] = $size_title_short;
+      $element['#description'] .= ' ' . FieldFilteredMarkup::create($max_char_short_title . ' characters max');
+    }
+  }
 }
 
 /**
