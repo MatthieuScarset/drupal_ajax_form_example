@@ -16,6 +16,8 @@ variables:
   VAULT_PATH: /prj/portail-obs/compte-projet/
   VAULT_OPTS: "-tls-skip-verify=true"
   VAULT_NAMESPACE: "namespace-portail-obs"
+  IMAGE_PATH: portail_obs/$CI_COMMIT_BRANCH
+  IMAGE_NAME: php-fpm-nginx
 
 
 # Sonarqube analyze on .pre
@@ -114,8 +116,6 @@ Build Image:
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
     DOCKER_OPTS: "--insecure-registry='multirepo-oab.si.fr.intraorange:5002'"
-    IMAGE_PATH: portail_obs/$CI_COMMIT_BRANCH
-    IMAGE_NAME: php-fpm
   dependencies:
     - Build Drupal
     - Build Assets
