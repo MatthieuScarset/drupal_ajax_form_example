@@ -71,14 +71,14 @@ class SvpBreadcrumbBuilder implements BreadcrumbBuilderInterface {
       $parents = $this->entityTypeManager->getStorage('node')->loadByProperties([
         'field_svp' => $tid,
         'status' => NodeInterface::PUBLISHED,
-        'type' => 'svp'
+        'type' => 'svp',
       ]);
 
       $parent = reset($parents) ?? NULL;
       if ($parent instanceof NodeInterface) {
         // Get title from Top Zone paragraph otherwise use node title.
-        $custom_title =  $parent?->field_header?->entity?->field_title?->value ?? $parent->label();
-        $links[] = Link::createFromRoute($custom_title, '<nolink>');
+        $custom_title = $parent?->field_header?->entity?->field_title?->value ?? $parent->label();
+        $links[] = Link::fromTextAndUrl($custom_title, $parent->toUrl('canonical'));
       }
     }
 
