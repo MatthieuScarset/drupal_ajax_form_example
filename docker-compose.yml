@@ -63,14 +63,18 @@ services:
 
     php-fpm:
       build:
-        dockerfile: config/docker/cloud/Dockerfile
-        context: .
+        context: config/docker/local/php-fpm
+        args:
+          UID: $UID
+          GID: $GID
       container_name: $CONTAINER_PHP_FPM
-      env_file:
-        - .env
+      working_dir: /application
       depends_on:
         - mysql
       volumes:
+        - .:/application
+        - ./config/docker/local/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
+        - ./config/docker/local/php-fpm/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
         - ${DRUPAL_SITES_FILES_DIR:-./sites/default/files}:/application/sites/default/files
       networks:
         - proxy

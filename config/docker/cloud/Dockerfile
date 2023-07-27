@@ -5,8 +5,15 @@ WORKDIR "/application"
 # Fix debconf warnings upon build
 ARG DEBIAN_FRONTEND=noninteractive
 
+# Copy confs
+COPY ./config/docker/cloud/nginx.conf /etc/nginx/sites-enabled/default
+COPY ./config/docker/cloud/entrypoint.sh /etc/entrypoint.sh
 ADD ./config/docker/cloud/php-ini-overrides.ini /usr/local/etc/php/conf.d/99-overrides.ini
 
+
+# Install nginx
+RUN apt-get update -y \
+    && apt-get install -y nginx
 
 #############################################################################
 #############################################################################
@@ -73,3 +80,6 @@ COPY ./config/config_split /application/config/config_split
 
 # Export vendor bin to get Drush
 ENV PATH="$PATH:/application/vendor/bin"
+
+
+ENTRYPOINT ["/etc/entrypoint.sh"]
