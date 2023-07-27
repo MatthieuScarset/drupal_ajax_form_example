@@ -32,24 +32,3 @@
     @content;
   }
 }
-
-/**
- * Do something on hover on an element. 
- *
- * @see node--domain--teaser.html.twig
- * @endcode
- */
-@mixin fullclick($element: 'a', $wrapper: '') {
-  position: relative;
-
-  & > #{$wrapper} #{$element}:first-of-type:before {
-    display: block;
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-  }
-}
