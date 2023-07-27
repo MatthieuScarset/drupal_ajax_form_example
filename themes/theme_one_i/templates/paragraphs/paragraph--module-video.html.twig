@@ -51,10 +51,10 @@
 <div {{ attributes.addClass(classes) }}>
     <div class="site-width">
       <div class="container-fluid">
-        <div class="block-video">
+        <div class="block-video mx--1 mx-md-0">
           {{ content.field_video }}
         </div>
-{#        {{ dd() }}#}
+
         {% if paragraph.field_title.value is defined and paragraph.field_title.value is not empty %}
           <div class="row mt-1 mt-md-3">
             <div class="col-12 col-md-6">
