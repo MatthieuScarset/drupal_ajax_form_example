@@ -36,6 +36,14 @@ Prepare Drupal:
     - cp -r sites build/
     - cp composer.* build/
     - cp load.environment.php build/
+
+    # Copy Commit/CI info
+    - echo "CI_PIPELINE_ID=$CI_PIPELINE_ID" >> build/ci-data
+    - echo "CI_PIPELINE_URL=$CI_PIPELINE_URL" >> build/ci-data
+    - echo "CI_COMMIT_TIMESTAMP=$CI_COMMIT_TIMESTAMP" >> build/ci-data
+    - echo "CI_COMMIT_MESSAGE=$CI_COMMIT_MESSAGE" >> build/ci-data
+    - echo "CI_PROJECT_URL=$CI_PROJECT_URL" >> build/ci-data
+    - echo "CI_COMMIT_SHA=$CI_COMMIT_SHA" >> build/ci-data
   artifacts:
     paths:
       - build
