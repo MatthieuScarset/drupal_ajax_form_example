@@ -6,15 +6,15 @@
   }
 
   img {
-    width: auto;
-    min-height: px-to-rem(60);
-    max-height: px-to-rem(60);
+    height: auto;
+    min-width: px-to-rem(60);
+    min-width: px-to-rem(60);
   }
 
   &--default img {
     @include media-breakpoint-up(md) {
-      min-height: px-to-rem(90);
-      max-height: px-to-rem(90);
+      min-width: px-to-rem(90);
+      max-width: px-to-rem(90);
     }
   }
 }
