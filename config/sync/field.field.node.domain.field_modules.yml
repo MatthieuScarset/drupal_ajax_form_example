@@ -12,6 +12,11 @@ dependencies:
     - paragraphs.paragraphs_type.paragraph_wysiwyg
   module:
     - entity_reference_revisions
+    - require_on_publish
+third_party_settings:
+  require_on_publish:
+    require_on_publish: true
+    warn_on_empty: true
 id: node.domain.field_modules
 field_name: field_modules
 entity_type: node

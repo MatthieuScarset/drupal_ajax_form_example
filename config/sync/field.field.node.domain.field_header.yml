@@ -8,13 +8,18 @@ dependencies:
     - paragraphs.paragraphs_type.module_header_default
   module:
     - entity_reference_revisions
+    - require_on_publish
+third_party_settings:
+  require_on_publish:
+    require_on_publish: true
+    warn_on_empty: true
 id: node.domain.field_header
 field_name: field_header
 entity_type: node
 bundle: domain
 label: Header
 description: ''
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
