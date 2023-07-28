@@ -737,8 +737,9 @@ function oab_modular_product_preprocess_paragraph__module_domains(&$variables) {
   $q->range(0, 6);
   $nids = $q->execute();
   
-  // Get the paragraph title for utag.
+  // Get values for utag.
   $module_title = $paragraph?->field_title?->value;
+  $page_title = $parent?->field_header?->entity?->field_title?->value ?? $parent->label();
   
   // Alternative view mode if paragraph placed on a node:domain.
   $view_mode = $parent->bundle() == 'domain' ? 'link' : 'teaser';
@@ -746,7 +747,8 @@ function oab_modular_product_preprocess_paragraph__module_domains(&$variables) {
   $variables['domains'] = [];
   foreach ($nids as $nid) {
     $node = $node_storage->load($nid);
-    $node->__set('module_title', $module_title);
+    $node->__set('parent_page_title', $page_title);
+    $node->__set('parent_module_title', $module_title);
     $variables['domains'][] = $node_view_builder->view($node, $view_mode);
   }
 }

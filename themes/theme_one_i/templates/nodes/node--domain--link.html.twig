@@ -6,10 +6,10 @@
     title: 'Read more'|t
 } %}
 {% set utag = {
-  titre_page: utag_data.titre_page,
-  module_title: node.module_title,
+  titre_page: node.parent_page_title,
+  module_title: node.parent_module_title,
   title: node.label(),
-  text: link.title
+  text: null
 } %}
 
 {%
