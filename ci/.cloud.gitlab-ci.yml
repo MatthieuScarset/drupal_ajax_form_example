@@ -90,7 +90,7 @@ Build Drupal:
     - docker-php-ext-enable gd > /dev/null
   script:
     - cd build
-    - php ../composer.phar install --no-dev
+    - php ../composer.phar install
   after_script:
     ## Clean Up Repo
     - rm composer.phar
