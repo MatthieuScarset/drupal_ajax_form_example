@@ -1,9 +1,9 @@
 uuid: 9d7275d1-81e5-4b80-bb00-5f89e362f76d
-langcode: fr
+langcode: en
 status: true
 dependencies: {  }
 id: module_exemples
-label: '[MP] Module exemples de réalisations'
+label: '[MP] Module Examples'
 icon_uuid: null
 icon_default: null
 description: ''

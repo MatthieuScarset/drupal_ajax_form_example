@@ -1,5 +1,5 @@
 uuid: 4cba0809-92e2-426f-9511-292decfece02
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -9,7 +9,7 @@ id: paragraph.module_benefits_item.field_description
 field_name: field_description
 entity_type: paragraph
 bundle: module_benefits_item
-label: 'Item description'
+label: Highlight
 description: ''
 required: false
 translatable: true

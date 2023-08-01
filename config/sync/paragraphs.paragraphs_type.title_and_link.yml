@@ -6,5 +6,5 @@ id: title_and_link
 label: '[MP] [Presentation] Title and link'
 icon_uuid: null
 icon_default: null
-description: ''
+description: 'Is used in module presentation'
 behavior_plugins: {  }

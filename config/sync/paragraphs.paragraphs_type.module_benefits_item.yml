@@ -1,10 +1,10 @@
 uuid: 5e25913e-2912-4312-ba00-74460fd208d1
-langcode: fr
+langcode: en
 status: true
 dependencies: {  }
 id: module_benefits_item
 label: '[MP] Benefits Item'
 icon_uuid: null
 icon_default: null
-description: ''
+description: 'Is used in module Benefits, Customer Space, 3-6 Columns'
 behavior_plugins: {  }

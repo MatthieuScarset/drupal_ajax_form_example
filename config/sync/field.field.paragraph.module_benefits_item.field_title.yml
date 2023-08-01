@@ -1,5 +1,5 @@
 uuid: 0d913773-dc85-426f-9fa0-3b1aa0a4945b
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -9,7 +9,7 @@ id: paragraph.module_benefits_item.field_title
 field_name: field_title
 entity_type: paragraph
 bundle: module_benefits_item
-label: 'Item Title'
+label: Title
 description: ''
 required: false
 translatable: true

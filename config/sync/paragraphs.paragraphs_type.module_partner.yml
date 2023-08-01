@@ -1,9 +1,9 @@
 uuid: 89dc179d-04c2-43db-b221-28ee79cfd972
-langcode: fr
+langcode: en
 status: true
 dependencies: {  }
 id: module_partner
-label: '[MP] Module Partenaire'
+label: '[MP] Module Partner'
 icon_uuid: null
 icon_default: null
 description: ''

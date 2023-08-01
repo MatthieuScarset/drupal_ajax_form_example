@@ -1,5 +1,5 @@
 uuid: 0801b282-656d-4426-ac51-2cceaf2f12c2
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -9,7 +9,7 @@ id: paragraph.module_steps.field_title
 field_name: field_title
 entity_type: paragraph
 bundle: module_steps
-label: Titre
+label: Title
 description: ''
 required: true
 translatable: true

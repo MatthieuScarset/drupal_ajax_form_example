@@ -12,7 +12,7 @@ id: paragraph.module_map.field_map
 field_name: field_map
 entity_type: paragraph
 bundle: module_map
-label: map
+label: Map
 description: ''
 required: true
 translatable: false
@@ -30,6 +30,9 @@ settings:
         enabled: false
       contact_button_item:
         weight: 54
+        enabled: false
+      cross_link_items:
+        weight: 64
         enabled: false
       default_button:
         weight: 55
@@ -91,6 +94,9 @@ settings:
       module_configurateur_details:
         weight: 74
         enabled: false
+      module_cross_link:
+        weight: 85
+        enabled: false
       module_cross_sell:
         weight: 75
         enabled: false
@@ -124,6 +130,21 @@ settings:
       module_faq_quesions:
         weight: 85
         enabled: false
+      module_header_default:
+        weight: 97
+        enabled: false
+      module_hook_text:
+        weight: 98
+        enabled: false
+      module_key_figures:
+        weight: 99
+        enabled: false
+      module_key_figures_items:
+        weight: 100
+        enabled: false
+      module_list:
+        weight: 101
+        enabled: false
       module_map:
         weight: 86
         enabled: false
@@ -150,6 +171,12 @@ settings:
         enabled: false
       module_text_video_image:
         weight: 94
+        enabled: false
+      module_title_and_highlight:
+        weight: 111
+        enabled: false
+      module_video:
+        weight: 112
         enabled: false
       paragraph_block_rebond:
         weight: 95

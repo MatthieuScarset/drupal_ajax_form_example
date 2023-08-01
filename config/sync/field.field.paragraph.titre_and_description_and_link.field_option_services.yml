@@ -1,5 +1,5 @@
 uuid: ccfacb2e-8a3d-4088-a1db-0e56d99e3e41
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -9,7 +9,7 @@ id: paragraph.titre_and_description_and_link.field_option_services
 field_name: field_option_services
 entity_type: paragraph
 bundle: titre_and_description_and_link
-label: 'Cocher pour afficher option'
+label: 'Checked to display "Option"'
 description: ''
 required: false
 translatable: false

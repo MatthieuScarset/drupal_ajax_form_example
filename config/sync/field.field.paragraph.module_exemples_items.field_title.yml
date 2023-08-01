@@ -1,5 +1,5 @@
 uuid: c7d4cdfa-1b4d-4e41-81a7-eec737cd0cfd
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -9,7 +9,7 @@ id: paragraph.module_exemples_items.field_title
 field_name: field_title
 entity_type: paragraph
 bundle: module_exemples_items
-label: 'Titre item'
+label: Title
 description: ''
 required: true
 translatable: true

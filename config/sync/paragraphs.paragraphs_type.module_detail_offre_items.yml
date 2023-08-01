@@ -6,5 +6,5 @@ id: module_detail_offre_items
 label: '[MP] [Offer details] Item'
 icon_uuid: null
 icon_default: null
-description: ''
+description: 'Is used in module offer detail'
 behavior_plugins: {  }

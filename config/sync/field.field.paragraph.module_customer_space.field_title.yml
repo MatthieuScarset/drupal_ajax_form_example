@@ -9,7 +9,7 @@ id: paragraph.module_customer_space.field_title
 field_name: field_title
 entity_type: paragraph
 bundle: module_customer_space
-label: Titre
+label: Title
 description: ''
 required: true
 translatable: true

@@ -1,5 +1,5 @@
 uuid: d9e30cdb-03d0-4f36-9b07-86280de342de
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -9,7 +9,7 @@ id: paragraph.module_testimonial_item.field_highlight
 field_name: field_highlight
 entity_type: paragraph
 bundle: module_testimonial_item
-label: 'Testimonial teaser'
+label: 'Testimonial hook'
 description: ''
 required: false
 translatable: true

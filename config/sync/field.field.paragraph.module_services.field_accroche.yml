@@ -1,5 +1,5 @@
 uuid: 91148fe8-6e58-40a0-aa98-6520b2e651c0
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -9,7 +9,7 @@ id: paragraph.module_services.field_accroche
 field_name: field_accroche
 entity_type: paragraph
 bundle: module_services
-label: 'Description services'
+label: Highlight
 description: ''
 required: true
 translatable: true

@@ -1,5 +1,5 @@
 uuid: 4631d1c0-4e79-45ab-9c5f-24e86694f12d
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -12,7 +12,7 @@ id: paragraph.module_detail_gamme_items.field_gamme
 field_name: field_gamme
 entity_type: paragraph
 bundle: module_detail_gamme_items
-label: 'Offres Gamme'
+label: 'Gamme Offer'
 description: ''
 required: false
 translatable: true
@@ -30,6 +30,9 @@ settings:
         enabled: false
       contact_button_item:
         weight: 45
+        enabled: false
+      cross_link_items:
+        weight: 64
         enabled: false
       default_button:
         weight: 46
@@ -88,8 +91,20 @@ settings:
       module_blog:
         weight: 64
         enabled: false
+      module_configurateur_details:
+        weight: 84
+        enabled: false
+      module_cross_link:
+        weight: 85
+        enabled: false
       module_cross_sell:
         weight: 65
+        enabled: false
+      module_cross_sell_item:
+        weight: 87
+        enabled: false
+      module_customer_space:
+        weight: 88
         enabled: false
       module_detail_gamme:
         weight: 66
@@ -115,6 +130,24 @@ settings:
       module_faq_quesions:
         weight: 73
         enabled: false
+      module_header_default:
+        weight: 97
+        enabled: false
+      module_hook_text:
+        weight: 98
+        enabled: false
+      module_key_figures:
+        weight: 99
+        enabled: false
+      module_key_figures_items:
+        weight: 100
+        enabled: false
+      module_list:
+        weight: 101
+        enabled: false
+      module_map:
+        weight: 102
+        enabled: false
       module_partner:
         weight: 74
         enabled: false
@@ -130,8 +163,20 @@ settings:
       module_steps:
         weight: 78
         enabled: false
+      module_testimonial:
+        weight: 108
+        enabled: false
+      module_testimonial_item:
+        weight: 109
+        enabled: false
       module_text_video_image:
         weight: 79
+        enabled: false
+      module_title_and_highlight:
+        weight: 111
+        enabled: false
+      module_video:
+        weight: 112
         enabled: false
       paragraph_block_rebond:
         weight: 80
@@ -150,6 +195,9 @@ settings:
         enabled: false
       subhome_presse_carrousel:
         weight: 85
+        enabled: false
+      title_and_image:
+        weight: 119
         enabled: false
       title_and_link:
         weight: 86
