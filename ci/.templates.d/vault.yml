@@ -1,0 +1,25 @@
+Vault:
+  image: vault
+  before_script:
+    - apk add jq
+  script:
+    # Load Orange G2 certificates
+    - update-ca-certificates
+
+    # Vault variables
+    - export VAULT_TOKEN="$(vault write -field=token auth/git-oab/login role=$VAULT_NAMESPACE jwt=$CI_JOB_JWT)"
+    - export PASSWORD_OPS="$(vault kv get -field=apiKey $VAULT_PATH/OPS-BDX)"
+    - echo "PASSWORD_OPS=$PASSWORD_OPS" >> vault.env
+    - export LETSENCRYPT_NAME="$(vault kv get -field=LETSENCRYPT_NAME $VAULT_PATH/Devs)"
+    - echo "LETSENCRYPT_NAME=$LETSENCRYPT_NAME" >> vault.env
+    - export LETSENCRYPT_CONTENT="$(vault kv get -field=LETSENCRYPT_CONTENT $VAULT_PATH/Devs)"
+    - echo "LETSENCRYPT_CONTENT=$LETSENCRYPT_CONTENT" >> vault.env
+    - echo "$(vault kv get -field=SIU_CERT $VAULT_PATH/Devs)" >> certificate.crt
+    - echo "$(vault kv get -field=SIU_PRIVATE_KEY $VAULT_PATH/Devs)" >> privateKey.key
+  artifacts:
+    reports:
+      dotenv: vault.env
+    paths:
+      - privateKey.key
+      - certificate.crt
+    expire_in: 10 minutes
