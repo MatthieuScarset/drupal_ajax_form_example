@@ -13,7 +13,7 @@ entity_type: paragraph
 bundle: module_business_case_item
 label: 'Customer Case URL'
 description: ''
-required: false
+required: true
 translatable: true
 default_value: {  }
 default_value_callback: ''
