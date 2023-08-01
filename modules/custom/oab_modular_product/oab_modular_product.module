@@ -7,6 +7,8 @@ use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\oab_modular_product\Services\OabModularProductService;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\NodeForm;
+use Drupal\node\NodeInterface;
 
 /**
  * Implements hook_inline_entity_form_entity_form_alter().
@@ -384,8 +386,11 @@ function oab_modular_product_field_widget_single_element_form_alter(array &$elem
  * Implements hook_form_alter().
  */
 function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form_object = $form_state->getFormObject();
+  $node = $form_object instanceof NodeForm ? $form_object->getEntity() : NULL;
 
-  if (in_array($form_id, array('node_modular_product_form', 'node_modular_product_edit_form'))) {
+  // Restrict text fields size.
+  if ($node instanceof NodeInterface && in_array($node->bundle(), ['modular_product'])) {
     /** @var \Drupal\oab_modular_product\Services\OabModularProductService $conf_modular_product */
     $conf_modular_product = \Drupal::service('oab_modular_product.settings');
     $title_short = $conf_modular_product->getShortTitleMaxCharacter();
@@ -402,10 +407,10 @@ function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, 
       $form['field_teaser']['widget'][0]['value']['#maxlength'] = $description;
       $form['field_teaser']['widget'][0]['value']['#description'] .= ' '.FieldFilteredMarkup::create($description.' characters max');
     }
-    oab_modular_product_hide_wysiwyg_paragraph($form);
   }
 
-  if (in_array($form_id, ['node_corporate_form', 'node_corporate_edit_form'])) {
+  // Remove paragraph:wysiwyg from widget add button.
+  if ($node instanceof NodeInterface && in_array($node->bundle(), ['modular_product', 'corporate', 'svp'])) {
     oab_modular_product_hide_wysiwyg_paragraph($form);
   }
 }
