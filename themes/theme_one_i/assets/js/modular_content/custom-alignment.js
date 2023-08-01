@@ -17,7 +17,7 @@ class CustomAlignment {
         heightToAlign = Math.max(heightToAlign, item.querySelector('.horizontal-align-item-field').offsetHeight);
       });
       this.$moduleItems.forEach((item) => {
-        item.querySelector('.horizontal-align-item-field').style.heightToAlign = `${heightToAlign}px`;
+        item.querySelector('.horizontal-align-item-field').style.minHeight = `${heightToAlign}px`;
       });
     }
   }
