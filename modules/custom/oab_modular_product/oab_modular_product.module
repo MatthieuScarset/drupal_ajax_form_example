@@ -411,19 +411,14 @@ function oab_modular_product_hide_wysiwyg_paragraph(&$form) {
  */
 function oab_modular_product_entity_bundle_field_info_alter(&$fields, EntityTypeInterface $entity_type, $bundle) {
   if ($entity_type->id() === "paragraph") {
-    //Liste des fiels des modules où ajouter la contrainte
-    $constraint_fields = [
-      'field_step' => ['module_steps'],
-      'field_item' => ['module_customer_space', 'module_benefits'],
-      'field_customer_benefits_items' => ['module_customer_benefits'],
-      'field_business_case_item' => ['module_business_case'],
-      'field_item_key_points' => ['module_business_case_item'],
-    ];
-
-    foreach ($constraint_fields as $field_name => $modules) {
-      if (isset($fields[$field_name]) && in_array($bundle, $modules)) {
-        $fields[$field_name]->addConstraint('ModularProductMinItems');
-      }
+    if ($bundle === "module_steps" && isset($fields['field_step'])) {
+      $fields['field_step']->addConstraint('ModularProductMinItems');
+    } elseif (($bundle === "module_customer_space" || $bundle === "module_benefits") && isset($fields['field_item'])) {
+      $fields['field_item']->addConstraint('ModularProductMinItems');
+    } elseif ($bundle === "module_business_case" && isset($fields['field_business_case_item'])) {
+      $fields['field_business_case_item']->addConstraint('ModularProductMinItems');
+    } elseif ($bundle === "module_business_case_item" && isset($fields['field_item_key_points'])) {
+      $fields['field_item_key_points']->addConstraint('ModularProductMinItems');
     }
   }
 
