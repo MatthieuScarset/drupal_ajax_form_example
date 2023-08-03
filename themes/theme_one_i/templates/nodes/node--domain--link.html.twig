@@ -8,7 +8,7 @@
 {% set utag = {
   titre_page: node.parent_page_title ?: '',
   module_title: node.parent_module_title ?: '',
-  title: node.label(),
+  title: title ?: node.label(),
   text: ''
 } %}
 

@@ -1,7 +1,7 @@
 {# @see oab_modular_product_preprocess_paragraph__module_domains() #}
 {% set logo = content.field_logo.0 %}
-{% set title = content.field_teaser_title.0 %}
-{% set text = content.field_teaser.0 %}
+{% set title = content.field_teaser_title.0['#context']['value'] %}
+{% set text = content.field_teaser.0['#context']['value'] %}
 {% set link = {
     url: path('entity.node.canonical', {'node': node.id() }),
     title: 'Read more'|t
@@ -9,7 +9,7 @@
 {% set utag = {
   titre_page: node.parent_page_title ?: '',
   module_title: node.parent_module_title ?: '',
-  title: node.label(),
+  title: title ?: node.label(),
   text: link.title ?: ''
 } %}
 
