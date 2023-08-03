@@ -5,13 +5,19 @@ dependencies:
   config:
     - field.storage.node.field_meta_title
     - node.type.homepage
+  module:
+    - require_on_publish
+third_party_settings:
+  require_on_publish:
+    require_on_publish: true
+    warn_on_empty: true
 id: node.homepage.field_meta_title
 field_name: field_meta_title
 entity_type: node
 bundle: homepage
 label: 'Meta title'
 description: ''
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''

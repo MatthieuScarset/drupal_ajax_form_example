@@ -6,14 +6,19 @@ dependencies:
     - field.storage.node.field_content
     - node.type.mss_article
   module:
+    - require_on_publish
     - text
+third_party_settings:
+  require_on_publish:
+    require_on_publish: true
+    warn_on_empty: true
 id: node.mss_article.field_content
 field_name: field_content
 entity_type: node
 bundle: mss_article
 label: Content
 description: ''
-required: true
+required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''

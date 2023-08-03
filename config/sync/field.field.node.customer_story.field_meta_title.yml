@@ -5,13 +5,19 @@ dependencies:
   config:
     - field.storage.node.field_meta_title
     - node.type.customer_story
+  module:
+    - require_on_publish
+third_party_settings:
+  require_on_publish:
+    require_on_publish: true
+    warn_on_empty: true
 id: node.customer_story.field_meta_title
 field_name: field_meta_title
 entity_type: node
 bundle: customer_story
 label: 'Meta title'
 description: 'This field is limited to 56 characters (used for SEO-optimization)'
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
