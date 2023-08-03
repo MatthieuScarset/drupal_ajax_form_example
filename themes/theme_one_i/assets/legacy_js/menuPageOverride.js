@@ -1,9 +1,9 @@
-
 class MenuPageOverride {
   constructor() {
 
     this.$is_scrolling = false;
     this.$pageMenu = $('.ob1-menu-page');
+    this.$header = $('header');
 
     this.$pageMenu.find('ul.nav a.nav-link').click((e) => {this._onItemClick(e)});
     $(window).scroll((e) => this._onScroll());
@@ -46,10 +46,13 @@ class MenuPageOverride {
 
   _onItemClick(event) {
     const target = $(event.currentTarget).attr('href');
+
+    const bodyRect = document.body.getBoundingClientRect(),
+      elemRect = document.querySelector(`[href='${target}']`).getBoundingClientRect();
     if ($(target).length) {
       event.preventDefault();
       $('html,body').animate({
-        scrollTop: $(target).offset().top - this._getFixedItemsHeight()
+        scrollTop: $(target).offset().top - this._getFixedItemsHeight(bodyRect.top > elemRect.bottom)
       }, {
         duration: 1000,
         start: () => {this.$is_scrolling = true},
@@ -59,18 +62,24 @@ class MenuPageOverride {
     }
   }
 
-  _getFixedItemsHeight() {
-    let init = parseInt($('body').css('padding-top').replace("px", ''));
-    $('.sticky-top').each(function () {
-      if(!$(this).parents().hasClass('paragraph--type--module-presentation')) {
-        init += $(this).height();
-      }
-    });
+  _getFixedItemsHeight(withHeader = true) {
+    let init = this._getBodyPaddingTop();
+
+    if (withHeader) {
+      init += $(this.$header).height();
+    }
+    init += $('.ob1-menu-page').height();
+
     return init;
   }
+
+  _getBodyPaddingTop() {
+    if (document.querySelector('body').style.paddingTop.length) {
+      return parseInt((document.querySelector('body').style.paddingTop).replace("px", ''));
+    }
+    return 0;
+  }
 }
-
-
 
 if ($('.ob1-menu-page').length) {
   new MenuPageOverride();
