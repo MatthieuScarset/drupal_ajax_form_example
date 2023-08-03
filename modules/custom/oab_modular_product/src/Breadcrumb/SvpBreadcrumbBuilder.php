@@ -66,13 +66,16 @@ class SvpBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     $links[] = Link::createFromRoute($this->t('Business needs'), '<nolink>');
 
     if ($node->bundle() == 'domain') {
+      $parents = [];
+      
       // Load domains from SVP term.
-      $tid = $node->field_svp->target_id;
-      $parents = $this->entityTypeManager->getStorage('node')->loadByProperties([
-        'field_svp' => $tid,
-        'status' => NodeInterface::PUBLISHED,
-        'type' => 'svp',
-      ]);
+      if ($tid = $node->field_svp->target_id) {
+        $parents = $this->entityTypeManager->getStorage('node')->loadByProperties([
+          'field_svp' => $tid,
+          'status' => NodeInterface::PUBLISHED,
+          'type' => 'svp',
+        ]);
+      }
 
       $parent = reset($parents) ?? NULL;
       if ($parent instanceof NodeInterface) {
