@@ -840,7 +840,6 @@ $databases['default']['default'] = array (
   'driver' => 'mysql',
 );
 
-
 /**
  * Load local development override configuration, if available.
  *
@@ -857,4 +856,5 @@ $databases['default']['default'] = array (
 if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
   include $app_root . '/' . $site_path . '/settings.local.php';
 }
+
 

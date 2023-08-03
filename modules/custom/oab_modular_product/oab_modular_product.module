@@ -7,6 +7,7 @@ use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\oab_modular_product\Services\OabModularProductService;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\taxonomy\Entity\Term;
 
 /**
  * Implements hook_inline_entity_form_entity_form_alter().
@@ -426,10 +427,27 @@ function oab_modular_product_hide_wysiwyg_paragraph(&$form) {
       //le paragraph WYSIWYG n'est pas actif, on le supprime des choix pour les modules
       unset($form["field_modules"]["widget"]["actions"]["bundle"]["#options"]['paragraph_wysiwyg']);
     }
+
   }
 
   return $form;
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function oab_modular_product_form_taxonomy_term_product_categories_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  /** @var Term $term */
+  $term = $form_state->getFormObject()->getEntity();
+  $parent_id = $term->parent->target_id;
+
+  if ($parent_id == 0) {
+    $form['group_niveau_2']['#access'] = FALSE;
+  } else {
+    $form['group_niveau_1']['#access'] = FALSE;
+  }
+}
+
 
 /**
  * Implements hook_entity_bundle_field_info_alter().
