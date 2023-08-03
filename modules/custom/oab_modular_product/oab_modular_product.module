@@ -379,6 +379,19 @@ function oab_modular_product_field_widget_single_element_form_alter(array &$elem
     unset($element['subform']['field_redirection_url']);
     unset($element['subform']['field_key_points']);
   }
+  // Masquer services et accompagnemenr dans détails de l'offre
+ if ($element['#paragraph_type'] === 'module_detail_offre') {
+  $title_service_and_suppport = $element['subform']['field_tab_title']['widget'][0]['value']['#default_value'];
+  //activer le field enable service and support pour les contenus déjà crée
+  if (isset($title_service_and_suppport) && !empty($title_service_and_suppport)) {
+    $element['subform']['field_enable_service_and_support']['widget']['value']['#default_value'] = true;
+  }
+  $element['subform']['group_services_et_accompagnement']['#states'] = [
+    'visible' => [
+      ':input[name="field_detail_offre[0][subform][field_enable_service_and_support][value]"]' => ['checked' => TRUE],
+    ]
+  ];
+ }
 }
 
 /**
@@ -404,6 +417,13 @@ function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, 
       $form['field_teaser']['widget'][0]['value']['#description'] .= ' '.FieldFilteredMarkup::create($description.' characters max');
     }
     oab_modular_product_hide_wysiwyg_paragraph($form);
+
+    //On rend la case à cocher Enable service and support accessible uniquement pour les admins
+    if (isset($form['field_detail_offre'])) {
+      if (!in_array('administrator', \Drupal::currentUser()->getRoles())) {
+        $form['field_detail_offre']['widget'][0]['subform']['field_enable_service_and_support']['#disabled'] = true;
+      }
+    }
   }
 
   if (in_array($form_id, ['node_corporate_form', 'node_corporate_edit_form'])) {
@@ -429,7 +449,6 @@ function oab_modular_product_hide_wysiwyg_paragraph(&$form) {
     }
 
   }
-
   return $form;
 }
 
