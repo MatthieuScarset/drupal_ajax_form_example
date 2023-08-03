@@ -9,7 +9,7 @@
         {% if cards|length %}
           <div class="row d-flex">
             {% for key, card in cards if key|first != '#' %}
-              <div class="col-12 col-md-4 pb-2 d-flex w-100">
+              <div class="horizontal-align-item col-12 col-md-4 pb-2 d-flex w-100">
                 <div class="bg-primary d-flex w-100">
                   {{ card }}
                 </div>
