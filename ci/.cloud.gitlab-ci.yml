@@ -25,14 +25,59 @@ sonarqube:
   extends: .sonarqube_template
   stage: .pre
 
+Vault:
+  stage: .pre
+  image: vault
+  before_script:
+    - apk add jq
+  script:
+    # Load Orange G2 certificates
+    - update-ca-certificates
+
+    # Vault variables
+    - export VAULT_TOKEN="$(vault write -field=token auth/git-oab/login role=$VAULT_NAMESPACE jwt=$CI_JOB_JWT)"
+    - export CP_PASSWORD="$(vault kv get -field=INTERNAL_ARTIFACTORY_TOKEN $VAULT_PATH/Devs)"
+    - echo "CP_PASSWORD=$CP_PASSWORD" >> vault.env
+  artifacts:
+    reports:
+      dotenv: vault.env
+    paths:
+      - privateKey.key
+      - certificate.crt
+    expire_in: 10 minutes
+
+
+# Création d'un dossier spécifique et copie des fichiers nécessaires au build
+Prepare Drupal:
+  stage: prepare
+  script:
+    - mkdir build
+    - cp -r modules build/
+    - cp -r patches build/
+    - cp -r themes build/
+    - cp -r sites build/
+    - cp composer.* build/
+    - cp load.environment.php build/
+
+    # Copy Commit/CI info
+    - echo "CI_PIPELINE_ID=$CI_PIPELINE_ID" >> build/ci-data
+    - echo "CI_PIPELINE_URL=$CI_PIPELINE_URL" >> build/ci-data
+    - echo "CI_COMMIT_TIMESTAMP=$CI_COMMIT_TIMESTAMP" >> build/ci-data
+    - echo "CI_COMMIT_MESSAGE=$CI_COMMIT_MESSAGE" >> build/ci-data
+    - echo "CI_PROJECT_URL=$CI_PROJECT_URL" >> build/ci-data
+    - echo "CI_COMMIT_SHA=$CI_COMMIT_SHA" >> build/ci-data
+  artifacts:
+    paths:
+      - build
+    expire_in: 1 hour
 
 .build_assets: &build_assets
-  stage: build_assets
+  stage: build_drupal
   image: node
   script:
     - cd $THEME_DIR
     - yarn install
-    - yarn build-prod
+    - yarn build
   artifacts:
     paths:
       - $THEME_DIR/dist
@@ -49,12 +94,57 @@ Build assets Theme One I Hub :
   variables:
     THEME_DIR: 'themes/theme_oab_hub_one_i'
 
-
-Deploy dev:
-  stage: deploy
+Build Drupal:
+  stage: build_drupal
+  image: php:8.1
   dependencies:
+    - Prepare Drupal
+  before_script:
+    ## Install Composer
+    - apt-get update
+    - apt-get install -y git zip unzip
+    - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    - php composer-setup.php
+    - php -r "unlink('composer-setup.php');"
+    - apt-get install -y --no-install-recommends libmagickwand-dev imagemagick > /dev/null
+    - pecl install imagick > /dev/null
+    - docker-php-ext-enable imagick > /dev/null
+    - docker-php-ext-configure gd --prefix=/usr --with-jpeg --with-freetype > /dev/null
+    - docker-php-ext-install gd > /dev/null
+    - docker-php-ext-enable gd > /dev/null
+  script:
+    - cd build
+    - php ../composer.phar install
+  after_script:
+    ## Clean Up Repo
+    - rm composer.phar
+    - cd build
+    - ls -la sites/
+    - ls -la sites/default
+    - rm -r patches INSTALL.txt .ht.router.php .eslint* .csslintrc web.config
+  artifacts:
+    paths:
+      - build
+    expire_in: 1 hour
+
+Build Image:
+  stage: build_image
+  image: docker:latest
+  services:
+    - name: docker:dind
+      command: ["--insecure-registry=multirepo-oab.si.fr.intraorange:5002", "--registry-mirror=https://multirepo-oab.si.fr.intraorange:5002"]
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_OPTS: "--insecure-registry='multirepo-oab.si.fr.intraorange:5002'"
+  dependencies:
+    - Build Drupal
     - Build assets Theme One I
     - Build assets Theme One I Hub
+    - Vault
+  before_script:
+    # Load Orange G2 certificates
+    - update-ca-certificates
+    - docker login -u $COMPTE_PROJET -p $CP_PASSWORD $REGISTRY
   script:
     - mv themes/theme_one_i/dist build/themes/theme_one_i/dist
     - docker build -t php_tmp -f config/docker/cloud/Dockerfile .
