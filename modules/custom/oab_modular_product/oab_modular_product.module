@@ -168,6 +168,28 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
       ]
     ];
   }
+
+  // gestion nombre characters Module StoryTelling et StoryTelling Items
+  if (in_array($entity_form['#bundle'], ['module_storytelling', 'module_storytelling_item'])) {
+    if ($entity_form['#bundle'] === 'module_storytelling') {
+      $nb_char = 50;
+    } else {
+      $nb_char = 30;
+    }
+
+    if (isset($entity_form['field_title'])) {
+        $entity_form['field_title']['widget'][0]['value']['#maxlength'] = $nb_char;
+        $entity_form['field_title']['widget'][0]['value']['#size'] = $nb_char+10;
+        $entity_form['field_title']['widget'][0]['value']['#description'] .= ' ' . FieldFilteredMarkup::create($nb_char . ' characters max');
+    }
+
+    if (isset($entity_form['field_highlight'])) {
+      $entity_form['field_highlight']['widget'][0]['value']['#maxlength'] =  $title_long;
+      $entity_form['field_highlight']['widget'][0]['value']['#description'] .=
+        ' ' . FieldFilteredMarkup::create($title_long . ' characters max');
+      $entity_form['field_highlight']['widget'][0]['value']['#rows'] = 3;
+    }
+  }
 }
 
 /**

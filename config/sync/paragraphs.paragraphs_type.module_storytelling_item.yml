@@ -1,0 +1,10 @@
+uuid: 8682e91d-50e5-4f0f-9660-8be81c9133d9
+langcode: en
+status: true
+dependencies: {  }
+id: module_storytelling_item
+label: '[Module] Storytelling item'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

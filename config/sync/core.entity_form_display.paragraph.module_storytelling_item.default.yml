@@ -1,0 +1,60 @@
+uuid: 1c0001d8-7f69-4454-aaec-5af6e160222a
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.browse_media_modal
+    - field.field.paragraph.module_storytelling_item.field_description
+    - field.field.paragraph.module_storytelling_item.field_highlight
+    - field.field.paragraph.module_storytelling_item.field_title
+    - field.field.paragraph.module_storytelling_item.field_visual
+    - paragraphs.paragraphs_type.module_storytelling_item
+  module:
+    - entity_browser
+id: paragraph.module_storytelling_item.default
+targetEntityType: paragraph
+bundle: module_storytelling_item
+mode: default
+content:
+  field_description:
+    type: string_textfield
+    weight: 3
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_highlight:
+    type: string_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_visual:
+    type: entity_browser_entity_reference
+    weight: 0
+    region: content
+    settings:
+      entity_browser: browse_media_modal
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      field_widget_replace: false
+      open: false
+      field_widget_display_settings:
+        view_mode: default
+      selection_mode: selection_append
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

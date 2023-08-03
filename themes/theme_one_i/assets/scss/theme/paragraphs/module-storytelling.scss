@@ -1,0 +1,94 @@
+.storytelling {
+
+    .title-panel {
+      background-color: $white;
+
+      .items-list-item {
+        min-height: inherit;
+        max-height: px-to-rem(50);
+
+        .item-icon, .item-icon:hover {
+          @extend .text-primary;
+        }
+
+        .item-container {
+          &:not(.item-loading):after {
+            content: none;
+          }
+
+          .item-text {
+            @extend .font-weight-bold, .text-gray3;
+            font-size: 1.25rem;
+          }
+        }
+
+        &.active {
+
+          .item-container {
+            .item-text {
+              @extend .text-dark;
+            }
+          }
+        }
+      }
+    }
+
+    .story-panel {
+      background: linear-gradient(180deg, $white 1.87rem, $greige 1.87rem);
+
+      .storypart-image {
+        margin-left: -15px;
+
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+
+    @include media-breakpoint-up(md) {
+      background: linear-gradient(90deg, $white 50%, $greige 50%);
+
+      .title-panel {
+        background-color: inherit;
+        height: 100vh;
+
+        .item-icon {
+          font-size: px-to-rem(20);
+
+          &:hover {
+            color: $primary;
+          }
+        }
+      }
+
+      .story-panel {
+        background: inherit;
+
+
+        & > div {
+          max-width: max-content;
+        }
+
+        .storypart {
+          min-height: 100vh;
+
+          .storypart-image {
+            margin-left: inherit;
+          }
+
+          .storypart-text {
+            margin-left: 6rem;
+          }
+        }
+      }
+    }
+
+    @include media-breakpoint-up(xl) {
+      .story-panel {
+        & > div {
+          margin-right: 0;
+        }
+      }
+    }
+}

@@ -1,0 +1,21 @@
+uuid: 0266344c-4ea8-49f0-a109-3fdd01101fde
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_visual
+    - paragraphs.paragraphs_type.module_storytelling_item
+id: paragraph.module_storytelling_item.field_visual
+field_name: field_visual
+entity_type: paragraph
+bundle: module_storytelling_item
+label: Image
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings: {  }
+field_type: entity_reference
