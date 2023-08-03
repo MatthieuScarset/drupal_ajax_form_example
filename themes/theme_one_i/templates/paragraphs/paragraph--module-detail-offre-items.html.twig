@@ -54,7 +54,9 @@
           {{ content.field_documentation }}
           <h4 class="text-primary py-0 mt-1 mb-2">{{ content.field_price_label }}</h4>
           <div class="call-to-action">
-            {{ content.field_cta}}
+            {% if (display_cta) %}
+              {{ content.field_cta}}
+            {% endif %}
             {{ content.field_formule }}
           </div>
         </div>
@@ -73,7 +75,9 @@
             <div class="accroche">{{ content.field_accroche }}</div>
             <h4 class="text-primary py-0 my-1">{{ content.field_price_label }}</h4>
             <div class="call-to-action">
-              {{ content.field_cta}}
+              {% if (display_cta) %}
+                {{ content.field_cta}}
+              {% endif %}
               {{ content.field_formule }}
             </div>
           </div>
