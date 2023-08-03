@@ -68,18 +68,24 @@
 
     {% else %}
 
-      <div class="detail-offre-item bg-white h-100 py-1 px-1 py-md-3 px-md-2 item-close">
+      <div class="detail-offre-item bg-white p-1 p-md-2 item-close">
         <div class="detail-offre-content">
           <div class="detail-offre-content-header">
-            <h3 class="h4 pb-0 mb-1">{{ content.field_title }}</h3>
-            <div class="accroche">{{ content.field_accroche }}</div>
-            <h4 class="text-primary py-0 my-1">{{ content.field_price_label }}</h4>
-            <div class="call-to-action">
-              {% if (display_cta) %}
-                {{ content.field_cta}}
-              {% endif %}
-              {{ content.field_formule }}
+            <div class="offre-title mb-1">
+              <h3 class="h4 pb-0 mb-0">{{ content.field_title }}</h3>
             </div>
+            <div class="accroche">{{ content.field_accroche }}</div>
+            {% if content.field_price_label['#items'] != null %}
+              <h4 class="offre-price text-primary py-0 mt-1">{{ content.field_price_label }}</h4>
+            {% endif %}
+            {% if content.field_cta['#items'] != null or content.field_formule['#item'] != null %}
+              <div class="call-to-action mt-1">
+                {% if (display_cta) %}
+                  {{ content.field_cta}}
+                {% endif %}
+                {{ content.field_formule }}
+              </div>
+              {% endif %}
           </div>
           <hr class="separator separator--gray4 mt-1 mt-sm-2">
 
@@ -91,7 +97,7 @@
 
         </div>
         <button type="button"
-                class="o-link-arrow see-more down font-weight-bold text-center pb-2 w-100"
+                class="o-link-arrow see-more down font-weight-bold text-center pb-2 w-100 btn-hidden"
                 onmousedown="utag_link(utag_data.titre_page,'detail offre' ,'{{ paragraph.field_title.getValue[0]['value'] }}','voir tout')">
           <span class="text-voir-tout">{{ "see more"|t }}</span>
           <span class="text-voir-moins d-none">{{ "see less"|t }}</span>

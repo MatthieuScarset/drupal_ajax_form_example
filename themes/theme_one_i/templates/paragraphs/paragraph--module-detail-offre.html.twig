@@ -53,27 +53,30 @@
         <div class="container-fluid">
           <div class="small text-gray3 font-weight-bold pt-0">{{ module_title|t }}</div>
           <h2 class="h1 col-12 col-md-7 mb-2 p-0">{{ content.field_title }}</h2>
+        </div>
 
-          {% if 1 == content.field_items['#items']|length %}
+        {% if 1 == content.field_items['#items']|length %}
+          <div class="container-fluid">
             <div class="items-module-detail-offre w-100 px-0">
               {{ content.field_items }}
             </div>
-          {% else %}
+          </div>
+        {% else %}
 
-            <div class="row custom-slider mx-0" >
-              <div class="col-12 w-100">
-                <div class="row justify-content-between mb-2 mb-md-4 px-0">
-                  <div class="col-12 col-md-7">
-                  <div class="row">
-                    <div class="col-12 lead font-weight-bold p-0 ">{{ content.field_accroche }}</div>
-                    {% if content.field_call_to_action_buton["#items"]|length > 0  %}
-                    <div class="col-12 d-flex px-0 pt-md-2">
-                        {{ content.field_call_to_action_buton }}
-                        {{ content.field_call_to_action_link_simple }}
-                    </div>
-                    {% endif %}
+          <div class="container-fluid" >
+            <div class="custom-slider">
+              <div class="row mb-2 mb-md-4 px-1">
+                <div class="col-12 col-md-10">
+                <div class="row justify-content-between">
+                  <div class="col-12 col-md-7 lead font-weight-bold p-0 ">{{ content.field_accroche }}</div>
+                  {% if content.field_call_to_action_buton["#items"]|length > 0  %}
+                  <div class="col-12 d-md-flex px-0 pt-1 pt-md-2">
+                      {{ content.field_call_to_action_buton }}
+                      {{ content.field_call_to_action_link_simple }}
                   </div>
+                  {% endif %}
                 </div>
+              </div>
 
                   {% if content.field_items['#items']|length > 3 %}
                     <div class="col-md-2 d-none d-md-inline-flex justify-content-end align-items-end slider-controller pr-0">
@@ -81,24 +84,27 @@
                       <button class="btn btn-secondary" type="button" data-direction="right"><span class="icon icon-arrow-next" aria-hidden="true"></span></button>
                     </div>
                   {% endif %}
-                </div>
+
               </div>
 
-                <div class="col-12 items-module-detail-offre px-0">
-                  {{ content.field_items }}
-                </div>
-            </div>
 
+              <div class="col-12 items-module-detail-offre px-0">
+                {{ content.field_items }}
+              </div>
+            </div>
+          </div>
+
+          <div class="container-fluid">
             <div class="row mt-2 mt-md-4">
-              <div class="col-12 col-md-4 mb-1 mb-md-0">
-                <h3 class="h4 p-0 mb-1">{{ content.field_tab_title }}</h3>
-                <span class="lead">{{ content.field_highlight }}</span>
-              </div>
-              <div class="col-md-8">{{ content.field_key_points }}</div>
+            <div class="col-12 col-md-4 mb-1 mb-md-0">
+              <h3 class="h4 p-0 mb-1">{{ content.field_tab_title }}</h3>
+              <span class="lead">{{ content.field_highlight }}</span>
             </div>
+            <div class="col-md-8">{{ content.field_key_points }}</div>
+          </div>
+          </div>
 
-          {% endif %}
-        </div>
+        {% endif %}
       </div>
     </div>
   {% endblock %}

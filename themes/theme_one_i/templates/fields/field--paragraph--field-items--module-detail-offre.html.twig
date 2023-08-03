@@ -5,7 +5,7 @@
 {% else %}
   <div class="field-items-modules slider-container row">
     {% for item in items %}
-        <div class="item-detail-offre col-12 mb-1 mb-md-0 col-md-4">{{ item.content }}</div>
+        <div class="item-detail-offre col-12 col-md-4 {% if items|length > 3 %} col-3-5 {% endif %}mb-1 mb-md-0">{{ item.content }}</div>
     {% endfor %}
   </div>
 {% endif %}
