@@ -1,0 +1,30 @@
+uuid: 0292093b-517b-4edb-85a5-910bdf2ca439
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:3b1ecc36-575f-4f26-9f46-95aa5804ef6d'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_ngr_fix_boosted_megamenu
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -81
+provider: null
+plugin: 'block_content:3b1ecc36-575f-4f26-9f46-95aa5804ef6d'
+settings:
+  id: 'block_content:3b1ecc36-575f-4f26-9f46-95aa5804ef6d'
+  label: '[NGR] Fix Boosted Megamenu'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: "/en/solutions/collaborative-workspace\r\n/solutions/collaborative-workspace"

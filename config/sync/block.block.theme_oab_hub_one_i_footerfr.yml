@@ -1,0 +1,33 @@
+uuid: 2161be86-0cfb-46bd-acfb-210bc082691d
+langcode: fr
+status: false
+dependencies:
+  config:
+    - system.menu.footer-fr
+  module:
+    - language
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_footerfr
+theme: theme_oab_hub_one_i
+region: footer
+weight: -83
+provider: null
+plugin: 'system_menu_block:footer-fr'
+settings:
+  id: 'system_menu_block:footer-fr'
+  label: 'Footer FR'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      fr: fr

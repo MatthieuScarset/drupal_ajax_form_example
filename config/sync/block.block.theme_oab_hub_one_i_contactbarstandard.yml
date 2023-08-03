@@ -1,0 +1,63 @@
+uuid: 06adb05f-6b10-4966-956f-5e1d92709eb2
+langcode: en
+status: false
+dependencies:
+  module:
+    - language
+    - node
+    - oab_frontoffice
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_contactbarstandard
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -43
+provider: null
+plugin: contact_bar_standard_block
+settings:
+  id: contact_bar_standard_block
+  label: 'Contact Bar Standard'
+  label_display: '0'
+  provider: oab_frontoffice
+  context_mapping:
+    node: '@node.node_route_context:node'
+  content: ''
+  content_format: full_html
+  link_assistance: 'https://espaceclient.orange-business.com/web/ece2/assistance'
+  link_assistance_text: Assistance
+  link_contact: /fr/contact
+  link_contact_text: 'Nous contacter'
+  link_ecrire: '/fr/contact#etude'
+  link_ecrire_text: 'Nous écrire'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      blog_post: blog_post
+      country: country
+      customer_story: customer_story
+      document: document
+      full_html: full_html
+      homepage: homepage
+      industry: industry
+      magazine: magazine
+      office: office
+      partner: partner
+      simple_page: simple_page
+      solution: solution
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      fr: fr
+  request_path:
+    id: request_path
+    negate: true
+    context_mapping: {  }
+    pages: "/ce-que-les-analystes-disent-de-nous\r\n/gartner-magic-quadrant-for-unified-communications-as-a-service-worldwide-sept-2017\r\n/gartner-apac-network-services-juin-2017\r\n/gartner-pilote-activites-digitales-collaborateurs-transformation-poste-travail\r\n/idc-marketscape-worldwide-network-consulting-services-2017-vendor-assessment-juin-2017\r\n/gartner-pan-european-network-services-march-2017\r\n/vertical-systems-group-global-ethernet-leaderboard-march-2017\r\n/idc-apac-marketscape-for-next-generation-telcos-telecom-services-2016-2017-march-2017\r\n/globaldata-collaboration-and-communications-global-feb-2017\r\n/frost-and-sullivan-europe-competitive-strategy-innovation-and-leadership-award-managed-security\r\n/gartner-magic-quadrant-for-network-services-global-feb-2017\r\n/frost-sullivan-iq-for-apac-hosted-telephony-and-ucc-service-providers-2016-feb-2017\r\n/gartner-magic-quadrant-for-managed-security-services-worldwide-jan-2017\r\n/orange-vendor-rating-by-gartner-jan-2017\r\n/gartner-magic-quadrant-for-network-services-global-feb-2017\r\n/directeur-dinterventions-grace-digital-boostez-productivite-techniciens-et-augmentez-satisfaction\r\n/ventes-indirectes\r\n/produits/teaming\r\n/produits/working-together-google-g-suite\r\n/produits/working-together-microsoft-office-365\r\n/produits/teaming-desk\r\n/produits/teaming-meet\r\n/produits/teaming-call\r\n/produits/working-together-forfait-promo-3meg\r\n/produits/working-together-forfait-promo-3pmo\r\n/produits/working-together-ready\r\n/produits/working-together\r\n/produits/working-together-smoothie\r\n/produits/working-together-flash\r\n/dossier/gdpr/pme-conformite\r\n/temoignage-client/conseil-departemental-vaucluse-soigne-mise-en-conformite-avec-rgpd\r\n/blogs/rgpd-former-sur-sujet-y-avez-pense\r\n/mediatheque/infographie/RGPD-4-etapes-pour-mettre-votre-pme-en-conformite\r\n/pme/transformation-digitale\r\n/pme/transformation-digitale-halte-aux-idees-recues\r\n/pme/transformation-digitale-besoins-pme\r\n/pme/transformation-digitale-accompagnement-consultant\r\n/mediatheque/e-book/transformation-digitale-pme-en-6-etapes\r\n/blogs/usages-dentreprise/economie-des-telecoms/arret-du-rtc-6-idees-recues-dont-il-faut-se-debarrasser\r\n/blogs/fin-rtc-comment-remplacer-ligne-analogique-0\r\n/magazine/travail-collaboratif-ce-qu-attendent-les-collaborateurs\r\n/blogs/collaboration-dans-cloud-chance-pour-securite-lentreprise\r\n/blogs/3-ingredients-indispensables-reussite-transformation-espaces-travail\r\n/blogs/outils-collaboration-faire-transformation-digitale-sans-meme-y-penser\r\n/temoignage-client/etablissements-lalo-strategie-digitale-btoc-pour-lencre-et-papier\r\n/produits/working-together-flash-solutions-digitales-humaines\r\n/solutions/cloud-computing/datacenter-modernisation-cloud-prive\r\n/dossier/industrie-reseaux-connectee\r\n/contact\r\n"

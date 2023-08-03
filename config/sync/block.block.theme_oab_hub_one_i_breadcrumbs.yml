@@ -1,0 +1,20 @@
+uuid: 63fcf564-1fc3-4a18-9013-29d617222f9d
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_breadcrumbs
+theme: theme_oab_hub_one_i
+region: content
+weight: -50
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }

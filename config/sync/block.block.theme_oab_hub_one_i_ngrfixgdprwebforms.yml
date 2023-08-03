@@ -1,0 +1,34 @@
+uuid: a1e6639b-04c1-462e-b3bc-36418bd7fb31
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:300b1f86-f130-4995-9c3f-c17b12a1cfd0'
+  module:
+    - block_content
+    - webform
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_ngrfixgdprwebforms
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -79
+provider: null
+plugin: 'block_content:300b1f86-f130-4995-9c3f-c17b12a1cfd0'
+settings:
+  id: 'block_content:300b1f86-f130-4995-9c3f-c17b12a1cfd0'
+  label: '[NGR] Fix GDPR webforms'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  webform:
+    id: webform
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    webforms:
+      request_for_personal_data_2: request_for_personal_data_2
+      request_for_personal_data_fr: request_for_personal_data_fr

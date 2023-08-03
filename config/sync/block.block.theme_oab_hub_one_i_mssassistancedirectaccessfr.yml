@@ -1,0 +1,33 @@
+uuid: f0493b78-bb1a-45b1-ba59-b93a5c241ab0
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.direct-access-mss-assist-fr
+  module:
+    - language
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_mssassistancedirectaccessfr
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -85
+provider: null
+plugin: 'system_menu_block:direct-access-mss-assist-fr'
+settings:
+  id: 'system_menu_block:direct-access-mss-assist-fr'
+  label: 'MSS Assistance Direct Access fr'
+  label_display: visible
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      fr: fr

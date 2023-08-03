@@ -1,0 +1,31 @@
+uuid: 07699620-b66e-4757-93b6-0514ae8215dd
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:6e7580fa-a5f6-436c-95e6-10145f5862d4'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_iotbannerfr
+theme: theme_oab_hub_one_i
+region: pre_content
+weight: -53
+provider: null
+plugin: 'block_content:6e7580fa-a5f6-436c-95e6-10145f5862d4'
+settings:
+  id: 'block_content:6e7580fa-a5f6-436c-95e6-10145f5862d4'
+  label: 'IoT Banner FR'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "/solutions/iot/produits\r\n/solutions/iot/temoignages-clients"

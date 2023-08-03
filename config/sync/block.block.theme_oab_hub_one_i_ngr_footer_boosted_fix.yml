@@ -1,0 +1,25 @@
+uuid: 68c507b2-dcd0-477b-94a5-be01da3c7f12
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:b523cf6a-1b1d-4571-9add-d05b53735dd3'
+  module:
+    - block_content
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_ngr_footer_boosted_fix
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -76
+provider: null
+plugin: 'block_content:b523cf6a-1b1d-4571-9add-d05b53735dd3'
+settings:
+  id: 'block_content:b523cf6a-1b1d-4571-9add-d05b53735dd3'
+  label: '[NGR] Footer Boosted fix'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

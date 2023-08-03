@@ -1,0 +1,24 @@
+uuid: 33095d87-b5d9-4dd7-8ee1-7300b9164648
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_breadcrumbs_subhome_press
+theme: theme_oab_hub_one_i
+region: top_zone
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: 'Breadcrumbs Subhome Press'
+  label_display: '0'
+  provider: system
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/presse\r\n/press"

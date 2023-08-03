@@ -1,0 +1,36 @@
+uuid: ced62a5b-1a8b-4bab-8c33-224442262b97
+langcode: fr
+status: true
+dependencies:
+  module:
+    - language
+    - oab_frontoffice
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_righticonblock
+theme: theme_oab_hub_one_i
+region: header
+weight: -79
+provider: null
+plugin: right_icon_block
+settings:
+  id: right_icon_block
+  label: 'Right icon Block'
+  label_display: '0'
+  provider: oab_frontoffice
+  right_icon_custom_text:
+    value: '<p><span aria-hidden="true" class="glyphicon glyphicon-search" data-target="#search-form" data-toggle="collapse" font-size="2em"></span><span aria-hidden="true" class="align-right icon icon-share hidden-xs hidden-sm" data-target="#social-share" data-toggle="collapse"></span></p>'
+    format: full_html
+visibility:
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      en: en
+      pt-br: pt-br
+      es: es
+      fr: fr
+      ru: ru
+      ru-en: ru-en

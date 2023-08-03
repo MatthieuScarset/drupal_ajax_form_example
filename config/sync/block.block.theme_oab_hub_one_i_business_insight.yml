@@ -1,0 +1,31 @@
+uuid: 7775e5cd-56dd-48bc-8a45-8fd52a778a71
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:9b405ebf-75c0-4647-b35a-d1fbe42521af'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_business_insight
+theme: theme_oab_hub_one_i
+region: top_zone
+weight: -50
+provider: null
+plugin: 'block_content:9b405ebf-75c0-4647-b35a-d1fbe42521af'
+settings:
+  id: 'block_content:9b405ebf-75c0-4647-b35a-d1fbe42521af'
+  label: business_insight
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "/visions-business\r\n/business-insight"

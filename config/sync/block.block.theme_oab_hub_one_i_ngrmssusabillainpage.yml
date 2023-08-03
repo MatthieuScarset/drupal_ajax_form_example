@@ -1,0 +1,30 @@
+uuid: b9bd612d-a925-42cf-befd-876327cc5af6
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:d0009bf5-f7e5-4342-ad4f-53bb216e4d78'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_ngrmssusabillainpage
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -47
+provider: null
+plugin: 'block_content:d0009bf5-f7e5-4342-ad4f-53bb216e4d78'
+settings:
+  id: 'block_content:d0009bf5-f7e5-4342-ad4f-53bb216e4d78'
+  label: '[NGR][MSS] Usabilla In Page'
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /blogs/building-data-driven-business-these-are-five-areas-you-need-master

@@ -1,0 +1,28 @@
+uuid: 1c966bdf-abf4-4c7e-9af0-e80badd50dcc
+langcode: en
+status: false
+dependencies:
+  module:
+    - oab_frontoffice
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_relatedcontent_2
+theme: theme_oab_hub_one_i
+region: sidebar
+weight: -31
+provider: null
+plugin: related_content_block
+settings:
+  id: related_content_block
+  label: 'Related content'
+  label_display: visible
+  provider: oab_frontoffice
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: /test-block

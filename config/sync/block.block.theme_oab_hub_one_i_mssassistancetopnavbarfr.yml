@@ -1,0 +1,33 @@
+uuid: 4a996364-73a9-494f-8335-d1f0c2d439b9
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.top-navbar-mss-assistanc-fr
+  module:
+    - language
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_mssassistancetopnavbarfr
+theme: theme_oab_hub_one_i
+region: header
+weight: -82
+provider: null
+plugin: 'system_menu_block:top-navbar-mss-assistanc-fr'
+settings:
+  id: 'system_menu_block:top-navbar-mss-assistanc-fr'
+  label: 'MSS Assistance Top Navbar fr'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      fr: fr

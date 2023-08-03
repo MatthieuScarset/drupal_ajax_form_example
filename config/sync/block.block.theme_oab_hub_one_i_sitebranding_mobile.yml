@@ -1,0 +1,23 @@
+uuid: 8e5150a5-7007-4bad-b25c-5888a82706a2
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_sitebranding_mobile
+theme: theme_oab_hub_one_i
+region: header_mobile
+weight: 0
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding Mobile'
+  label_display: '0'
+  provider: system
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: false
+visibility: {  }

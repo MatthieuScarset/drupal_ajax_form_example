@@ -1,0 +1,33 @@
+uuid: e179711a-d291-43eb-b8e9-063f31aaeeab
+langcode: fr
+status: false
+dependencies:
+  config:
+    - system.menu.main-navigation-ru
+  module:
+    - language
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_mainnavigationru
+theme: theme_oab_hub_one_i
+region: header
+weight: -61
+provider: null
+plugin: 'system_menu_block:main-navigation-ru'
+settings:
+  id: 'system_menu_block:main-navigation-ru'
+  label: 'Main navigation RU'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      ru: ru

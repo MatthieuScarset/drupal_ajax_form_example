@@ -5,6 +5,7 @@ fr:
     category_page:
       - category_page
   routes: {  }
+  hubs: {  }
 en:
   url:
     - /where-we-are
@@ -14,3 +15,5 @@ en:
       - category_page
   routes:
     - oab_offices_map.page
+  hubs:
+    - '1282'

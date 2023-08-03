@@ -1,0 +1,25 @@
+uuid: 743896af-046f-4a96-9e8c-5e268fd4cbb0
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:58e3901f-6181-4d0f-9456-86f396322107'
+  module:
+    - block_content
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_oneipreviewproducts
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -59
+provider: null
+plugin: 'block_content:58e3901f-6181-4d0f-9456-86f396322107'
+settings:
+  id: 'block_content:58e3901f-6181-4d0f-9456-86f396322107'
+  label: one-i-preview-products
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

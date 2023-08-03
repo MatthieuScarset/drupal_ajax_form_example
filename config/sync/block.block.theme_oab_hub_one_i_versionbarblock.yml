@@ -1,0 +1,38 @@
+uuid: f240c227-b9b1-4008-8fa1-ab5b7801d5d4
+langcode: fr
+status: false
+dependencies:
+  module:
+    - oab_develop
+    - user
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_versionbarblock
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -51
+provider: null
+plugin: version_bar_block
+settings:
+  id: version_bar_block
+  label: 'Version Bar Block'
+  label_display: '0'
+  provider: oab_develop
+  message: 'Page avec le thème Boosted'
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      webform_manager: webform_manager
+      webform_business_owner: webform_business_owner
+      webform_admin: webform_admin
+      administrator: administrator
+      webform_spoc_securite: webform_spoc_securite
+      chief_editor: chief_editor
+      digital_admin: digital_admin
+      contributor: contributor
+      chief_editor_hub: chief_editor_hub
+      webform_business_analyst: webform_business_analyst
