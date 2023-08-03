@@ -486,6 +486,10 @@ function oab_modular_product_entity_bundle_field_info_alter(&$fields, EntityType
       $fields['field_modules'] -> addConstraint('ModularProductOrderModule');
       $fields['field_modules'] -> addConstraint('ModularProductModuleRequired');
     }
+
+    if (isset($fields['field_key_points'])) {
+      $fields['field_key_points']->addConstraint('ModularProductKeyPoints');
+    }
   }
 }
 

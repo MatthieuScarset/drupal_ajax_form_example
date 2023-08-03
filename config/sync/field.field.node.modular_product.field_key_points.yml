@@ -5,6 +5,12 @@ dependencies:
   config:
     - field.storage.node.field_key_points
     - node.type.modular_product
+  module:
+    - require_on_publish
+third_party_settings:
+  require_on_publish:
+    require_on_publish: true
+    warn_on_empty: true
 id: node.modular_product.field_key_points
 field_name: field_key_points
 entity_type: node
@@ -17,3 +23,4 @@ default_value: {  }
 default_value_callback: ''
 settings: {  }
 field_type: string
+
