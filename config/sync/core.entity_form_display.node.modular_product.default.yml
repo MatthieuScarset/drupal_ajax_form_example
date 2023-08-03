@@ -17,7 +17,6 @@ dependencies:
     - field.field.node.modular_product.field_modules
     - field.field.node.modular_product.field_presentation
     - field.field.node.modular_product.field_product_category
-    - field.field.node.modular_product.field_product_name
     - field.field.node.modular_product.field_teaser
     - field.field.node.modular_product.field_visual
     - node.type.modular_product
@@ -35,8 +34,7 @@ third_party_settings:
   field_group:
     group_top_zone:
       children:
-        - field_product_category
-        - field_product_name
+        - title
         - field_teaser
         - field_modular_product_tarif
         - field_call_to_action_button
@@ -44,7 +42,7 @@ third_party_settings:
       label: 'Top Zone'
       region: content
       parent_name: group_onglets
-      weight: 4
+      weight: 5
       format_type: tab
       format_settings:
         classes: ''
@@ -56,8 +54,7 @@ third_party_settings:
     group_write:
       children:
         - langcode
-        - group_modules_configuration
-      label: Write
+      label: Language
       region: content
       parent_name: group_onglets
       weight: 3
@@ -72,6 +69,7 @@ third_party_settings:
     group_onglets:
       children:
         - group_write
+        - group_modules_configuration
         - group_top_zone
         - group_presentation
         - group_detail_offre
@@ -91,12 +89,11 @@ third_party_settings:
         width_breakpoint: 640
     group_presentation:
       children:
-        - title
         - field_presentation
       label: Presentation
       region: content
       parent_name: group_onglets
-      weight: 5
+      weight: 6
       format_type: tab
       format_settings:
         classes: ''
@@ -108,15 +105,16 @@ third_party_settings:
     group_modules_configuration:
       children:
         - field_enable_wysiwyg_paragraph
-      label: 'Modules configuration'
+      label: Configuration
       region: content
-      parent_name: group_write
-      weight: 5
-      format_type: fieldset
+      parent_name: group_onglets
+      weight: 4
+      format_type: tab
       format_settings:
         classes: ''
         show_empty_fields: false
         id: ''
+        formatter: closed
         description: ''
         required_fields: true
     group_modules:
@@ -125,7 +123,7 @@ third_party_settings:
       label: Modules
       region: content
       parent_name: group_onglets
-      weight: 7
+      weight: 8
       format_type: tab
       format_settings:
         classes: ''
@@ -142,7 +140,7 @@ third_party_settings:
       label: 'To go further'
       region: content
       parent_name: group_onglets
-      weight: 8
+      weight: 9
       format_type: tab
       format_settings:
         classes: ''
@@ -157,7 +155,7 @@ third_party_settings:
       label: 'Offer details/Gamme'
       region: content
       parent_name: group_onglets
-      weight: 6
+      weight: 7
       format_type: tab
       format_settings:
         classes: ''
@@ -168,13 +166,14 @@ third_party_settings:
         required_fields: true
     group_category_page:
       children:
+        - field_product_category
         - field_key_points
         - field_badge
         - field_call_to_action
       label: 'Category page'
       region: content
       parent_name: group_onglets
-      weight: 8
+      weight: 10
       format_type: tab
       format_settings:
         classes: ''
@@ -190,7 +189,7 @@ mode: default
 content:
   field_badge:
     type: options_select
-    weight: 5
+    weight: 31
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -215,7 +214,7 @@ content:
     third_party_settings: {  }
   field_call_to_action:
     type: entity_reference_paragraphs
-    weight: 6
+    weight: 32
     region: content
     settings:
       title: Call-to-action
@@ -227,7 +226,7 @@ content:
     third_party_settings: {  }
   field_call_to_action_button:
     type: link_default
-    weight: 33
+    weight: 7
     region: content
     settings:
       placeholder_url: ''
@@ -235,7 +234,7 @@ content:
     third_party_settings: {  }
   field_call_to_action_link:
     type: link_default
-    weight: 34
+    weight: 8
     region: content
     settings:
       placeholder_url: ''
@@ -307,7 +306,7 @@ content:
     third_party_settings: {  }
   field_key_points:
     type: string_textfield
-    weight: 4
+    weight: 30
     region: content
     settings:
       size: 60
@@ -315,7 +314,7 @@ content:
     third_party_settings: {  }
   field_modular_product_tarif:
     type: string_textfield
-    weight: 32
+    weight: 6
     region: content
     settings:
       size: 60
@@ -367,21 +366,28 @@ content:
       displayLangcode: true
       filterLangcode: true
     third_party_settings: {  }
-  field_product_name:
-    type: string_textfield
-    weight: 30
-    region: content
-    settings:
-      size: 80
-      placeholder: ''
-    third_party_settings: {  }
   field_teaser:
     type: string_textarea
-    weight: 31
+    weight: 5
     region: content
     settings:
       rows: 5
       placeholder: ''
+    third_party_settings: {  }
+  field_visual:
+    type: entity_browser_entity_reference
+    weight: 9
+    region: content
+    settings:
+      entity_browser: browse_media_modal
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      field_widget_replace: false
+      open: false
+      field_widget_display_settings:
+        view_mode: modular_product_image_top_zone
+      selection_mode: selection_append
     third_party_settings: {  }
   langcode:
     type: language_select
