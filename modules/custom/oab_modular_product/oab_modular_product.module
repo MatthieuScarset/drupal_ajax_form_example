@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\Core\Entity\EntityFormInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\FieldFilteredMarkup;
 use Drupal\Core\Form\FormStateInterface;
@@ -9,6 +10,7 @@ use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\taxonomy\Entity\Term;
 
+
 /**
  * Implements hook_inline_entity_form_entity_form_alter().
  */
@@ -17,9 +19,21 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
   /*
    * Ici, on ne va gérer que les alterations du formulaire du paragraph
    */
-  if (!isset($entity_form['#bundle'])) {
+  if (!isset($entity_form['#bundle'])
+    || !is_a($form_state->getformObject(), EntityFormInterface::class)) {
     return;
   }
+
+  //Désactivation des fields des paragraphs qui ont une valeur par défaut
+  //uniquement dans modular product
+  /** @var EntityInterface $original_node */
+  $original_node = $form_state->getformObject()->getEntity();
+
+  if ($original_node->bundle() === 'modular_product') {
+    \Drupal::service('oab_modular_product.form_service')
+      ->disableFieldWithDefaultValue($entity_form, $form_state, $entity_form['#entity']);
+  }
+
 
   /** @var OabModularProductService $conf_modular_product */
   $conf_modular_product = \Drupal::service('oab_modular_product.settings');
@@ -162,8 +176,19 @@ function oab_modular_product_field_widget_single_element_form_alter(array &$elem
   /*
    * Ici, on ne va gérer que les alterations du formulaire du paragraph
    */
-  if (!isset($element['#paragraph_type'])) {
+  if (!isset($element['#paragraph_type'])
+      || !is_a($form_state->getformObject(), EntityFormInterface::class)) {
     return;
+  }
+
+  //Désactivation des fields des paragraphs qui ont une valeur par défaut
+  //uniquement dans modular product
+  /** @var EntityInterface $original_node */
+  $original_node = $form_state->getformObject()->getEntity();
+
+  if ($original_node->bundle() === 'modular_product') {
+    \Drupal::service('oab_modular_product.form_service')
+      ->disableFieldWithDefaultValue($element['subform'], $form_state, Paragraph::create(['type' => $element['#paragraph_type']]));
   }
 
 
@@ -424,6 +449,9 @@ function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, 
         $form['field_detail_offre']['widget'][0]['subform']['field_enable_service_and_support']['#disabled'] = true;
       }
     }
+
+    //Désactivation des fields avec valeur par défaut dans modular product
+    \Drupal::service('oab_modular_product.form_service')->disableFieldWithDefaultValue($form, $form_state);
   }
 
   if (in_array($form_id, ['node_corporate_form', 'node_corporate_edit_form'])) {
