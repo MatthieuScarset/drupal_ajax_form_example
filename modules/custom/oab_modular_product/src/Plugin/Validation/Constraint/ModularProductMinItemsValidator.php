@@ -17,30 +17,15 @@ class ModularProductMinItemsValidator extends ConstraintValidator {
    */
   public function validate($entity, Constraint $constraint) {
 
-    switch ($entity->getEntity()->bundle()) {
-      case 'module_business_case':
-        if ($entity->count() < 2) {
-          $this->context->addViolation($constraint->minItems, [
-            '%value' => $entity->getEntity()->bundle()
-          ]);
-        }
-        break;
+    $max_items = $entity->getEntity()->bundle() === "module_business_case"
+      ? 2
+      : 3;  // Default value
 
-      case 'module_business_case_item':
-        if ($entity->count() < 3) {
-          $this->context->addViolation($constraint->keyPointValue, [
-            '%value' => $entity->getEntity()->bundle()
-          ]);
-        }
-        break;
-
-      default:
-        if ($entity->count() < 3) {
-          $this->context->addViolation($constraint->minValue, [
-            '%value' => $entity->getEntity()->bundle()
-          ]);
-        }
-        break;
+    if ($entity->count() < $max_items) {
+      $this->context->addViolation($constraint->minValue, [
+        '%max_items' => $max_items,
+        '%value' => $entity->getEntity()->bundle()
+      ]);
     }
   }
 
