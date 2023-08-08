@@ -1,0 +1,9 @@
+.testimonial-item-container {
+  max-width: 100%;
+  flex-wrap: inherit;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
