@@ -3474,7 +3474,15 @@ hr.reseau-mobile-accords-roaming {
   }
 
 }
+
+.homepage-header {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
 .claim-homepage-container {
+  background-color: rgba(0,0,0,0.4);
+  border-top:2px solid grey;
   text-align: center;
   min-height: 90px;
 }
