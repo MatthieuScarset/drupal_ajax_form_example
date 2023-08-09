@@ -5,7 +5,7 @@
         <div class="container-fluid">
           <span class="small font-weight-bold text-gray3 ">{{ module_title|t }}</span>
           <div class="custom-slider">
-            <div class="row justify-content-between align-items-center mb-1">
+            <div class="row justify-content-between align-items-center mb-1 mb-md-4">
               <div class="col-12 col-md-7">
                 <h2 class="h1">{{ content.field_title }}</h2>
               </div>
@@ -13,7 +13,7 @@
               {% set total_items = content.field_testimonial['#items']|length %}
 
               {% if total_items >= 2 %}
-                <div class="col-md-2 d-none d-md-inline-flex justify-content-end slider-controller">
+                <div class="col-md-2 d-none d-md-inline-flex justify-content-end slider-controller mb-md-2">
                   <div  class="lead font-weight-bold align-self-center mr-2">
                     <span class="current-step-slider">1</span><span>/{{ total_items }}</span>
                   </div>
