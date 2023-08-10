@@ -4,8 +4,11 @@ fr:
   views:
     category_page:
       - category_page
+  contents:
+    - corporate
+    - modular_product
+    - poc_test_module
   routes: {  }
-  hubs: {  }
 en:
   url:
     - /where-we-are
@@ -13,7 +16,9 @@ en:
   views:
     category_page:
       - category_page
+  contents:
+    - corporate
+    - modular_product
+    - poc_test_module
   routes:
     - oab_offices_map.page
-  hubs:
-    - '1282'

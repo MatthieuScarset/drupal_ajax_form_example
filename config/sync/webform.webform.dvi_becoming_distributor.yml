@@ -10,7 +10,7 @@ third_party_settings:
     gdpr_spoc_security: '567'
     gdpr_expiration_date: ''
     gdpr_business_analysts:
-      1922: '1922'
+      3806: '3806'
       3011: '3011'
     gdpr_form_published: 1
 weight: 0
@@ -179,7 +179,8 @@ elements: |-
     '#format': full_html
   captcha:
     '#type': captcha
-    '#captcha_type': recaptcha/reCAPTCHA
+    '#captcha_type': image_captcha/Image
+    '#captcha_title': ' Vérifions que vous n''êtes pas un robot.'
   actions:
     '#type': webform_actions
     '#title': 'Submit button(s)'

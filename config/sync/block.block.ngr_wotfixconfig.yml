@@ -1,0 +1,30 @@
+uuid: 7f5492d0-9975-486c-bcac-9d3f75b7c1f1
+langcode: fr
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:b6fa8a86-8678-4185-b900-ca60fc65f301'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_one_i
+id: ngr_wotfixconfig
+theme: theme_one_i
+region: prefooter
+weight: 0
+provider: null
+plugin: 'block_content:b6fa8a86-8678-4185-b900-ca60fc65f301'
+settings:
+  id: 'block_content:b6fa8a86-8678-4185-b900-ca60fc65f301'
+  label: '[NGR] WoT - Fix Config'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/produits/working-together-ready\r\n/solutions/collaboration-teletravail/working-together-ready"

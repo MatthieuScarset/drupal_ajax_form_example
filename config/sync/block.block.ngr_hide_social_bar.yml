@@ -1,0 +1,30 @@
+uuid: 47f50c47-d036-4a38-8550-731604412f90
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:f470fefd-fd2e-41b9-a7f4-8a700793a9f2'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_boosted
+id: ngr_hide_social_bar
+theme: theme_boosted
+region: prefooter
+weight: -46
+provider: null
+plugin: 'block_content:f470fefd-fd2e-41b9-a7f4-8a700793a9f2'
+settings:
+  id: 'block_content:f470fefd-fd2e-41b9-a7f4-8a700793a9f2'
+  label: hide_social_bar
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/cookie-policy-essential\r\n/politique-cookie-essentiel\r\n/politika-konfidencialnosti\r\n/pravovaya-informatsiya\r\n/delestage-electrique-toutes-les-infos-entreprises-utiles"

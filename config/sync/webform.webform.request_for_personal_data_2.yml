@@ -10,11 +10,8 @@ third_party_settings:
     gdpr_spoc_security: '567'
     gdpr_expiration_date: ''
     gdpr_business_analysts:
-      1491: '1491'
-      1495: '1495'
-      1492: '1492'
-      1493: '1493'
-      1439: '1439'
+      4351: '4351'
+      3802: '3802'
       1494: '1494'
     gdpr_form_published: 1
 weight: 0
@@ -114,27 +111,19 @@ elements: |-
   container_01:
     '#type': container
     '#states':
-      invisible:
-        ':input[name="tell_us_if"]':
-          empty: true
       visible:
         ':input[name="tell_us_if"]':
           value: 'you are an Orange Business Services terminated customer'
+      invisible:
+        '':
+          '': ''
     your_job_role:
       '#type': textfield
       '#title': 'Votre fonction*'
+      '#title_display': inline
       '#required': true
-      '#states':
-        invisible:
-          - ':input[name="tell_us_if"]':
-              empty: true
-          - xor
-          - ':input[name="tell_us_if"]':
-              '!value': 'you are an Orange Business Services terminated customer'
-        visible:
-          ':input[name="tell_us_if"]':
-            value: 'you are an Orange Business Services terminated customer'
       '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+      '#format_items': comma
   processed_text_02:
     '#type': processed_text
     '#text': |
@@ -166,30 +155,18 @@ elements: |-
   container_04:
     '#type': container
     '#states':
-      invisible:
-        - ':input[name="tell_us_if"]':
-            empty: true
-        - xor
-        - ':input[name="tell_us_if"]':
-            '!value': 'you are not an Orange Business Services customer'
       visible:
         ':input[name="tell_us_if"]':
           value: 'you are not an Orange Business Services customer'
+      invisible:
+        '':
+          '': ''
     proof_of_identity_of_the_applicant:
       '#type': managed_file
       '#title': 'Justificatif d''identité du demandeur'
       '#description': '<p>Toute demande d’exercice de droits doit être accompagnée de la photocopie d’un justificatif d’identité (carte nationale d’identité ou passeport).</p>'
       '#required': true
-      '#states':
-        invisible:
-          - ':input[name="tell_us_if"]':
-              empty: true
-          - xor
-          - ':input[name="tell_us_if"]':
-              '!value': 'you are not an Orange Business Services customer'
-        visible:
-          ':input[name="tell_us_if"]':
-            value: 'you are not an Orange Business Services customer'
+      '#format_items': comma
       '#file_extensions': 'gif jpg png bmp pdf'
       '#sanitize': true
   processed_text_03:
@@ -225,8 +202,8 @@ elements: |-
     '#type': container
     '#states':
       invisible:
-        ':input[name="tell_us_if"]':
-          empty: true
+        '':
+          '': ''
       visible:
         - ':input[name="tell_us_if"]':
             value: 'you are an Orange Business Services customer'
@@ -248,8 +225,8 @@ elements: |-
       '#required': true
       '#states':
         invisible:
-          ':input[name="tell_us_if"]':
-            '!value': 'you are an Orange Business Services terminated customer'
+          '':
+            '': ''
         visible:
           - ':input[name="tell_us_if"]':
               value: 'you are an Orange Business Services customer'
@@ -261,12 +238,6 @@ elements: |-
   container_02:
     '#type': container
     '#states':
-      invisible:
-        - ':input[name="your_inquiry_concerns"]':
-            empty: true
-        - xor
-        - ':input[name="your_inquiry_concerns"]':
-            '!value': 'Data for a user in your company'
       visible:
         ':input[name="your_inquiry_concerns"]':
           value: 'Data for a user in your company'
@@ -281,84 +252,56 @@ elements: |-
       '#type': textfield
       '#title': 'Nom*'
       '#required': true
-      '#states':
-        invisible:
-          ':input[name="your_inquiry_concerns"]':
-            '!value': 'Data for a user in your company'
-        visible:
-          ':input[name="your_inquiry_concerns"]':
-            value: 'Data for a user in your company'
       '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+      '#format_items': comma
     first_name_2:
       '#type': textfield
       '#title': 'Prénom*'
       '#required': true
-      '#states':
-        invisible:
-          - ':input[name="your_inquiry_concerns"]':
-              empty: true
-          - xor
-          - ':input[name="your_inquiry_concerns"]':
-              '!value': 'Data for a user in your company'
-        visible:
-          ':input[name="your_inquiry_concerns"]':
-            value: 'Data for a user in your company'
       '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+      '#format_items': comma
     email_address_2:
       '#type': textfield
       '#title': 'Adresse de messagerie*'
       '#required': true
-      '#states':
-        invisible:
-          - ':input[name="your_inquiry_concerns"]':
-              empty: true
-          - xor
-          - ':input[name="your_inquiry_concerns"]':
-              '!value': 'Data for a user in your company'
-        visible:
-          ':input[name="your_inquiry_concerns"]':
-            value: 'Data for a user in your company'
       '#multiple__no_items_message': '<p>No items entered. Please add items below.</p>'
+      '#format_items': comma
     user_certificate:
       '#type': managed_file
       '#title': 'Attestation utilisateur*'
+      '#required': true
       '#states':
-        optional:
+        invisible:
           ':input[name="your_inquiry_concerns"]':
             '!value': 'Data for a user in your company'
-        required:
+        visible:
           ':input[name="your_inquiry_concerns"]':
             value: 'Data for a user in your company'
+      '#format_items': comma
       '#file_extensions': 'pdf png jpg jpeg'
       '#sanitize': true
   container_05:
     '#type': container
     '#states':
-      invisible:
-        - ':input[name="tell_us_if"]':
-            empty: true
-        - xor
-        - ':input[name="tell_us_if"]':
-            '!value': 'you are an Orange Business Services customer'
       visible:
         ':input[name="tell_us_if"]':
           value: 'you are an Orange Business Services customer'
+      invisible:
+        '':
+          '': ''
     legal_representative_certificate:
       '#type': managed_file
       '#title': 'Formulaire d’autorisation*'
       '#description': '<p>Vous devez joindre le formulaire (<a href="/sites/default/files/formulaire-d%27autorisation-final-fr_update-octobre.pdf">formulaire d’autorisation</a>) dûment rempli et signé à votre demande.</p>'
       '#description_display': before
-      '#required': true
       '#states':
-        invisible:
-          - ':input[name="tell_us_if"]':
-              empty: true
-          - xor
-          - ':input[name="tell_us_if"]':
-              '!value': 'you are an Orange Business Services customer'
-        visible:
+        optional:
+          ':input[name="tell_us_if"]':
+            '!value': 'you are an Orange Business Services customer'
+        required:
           ':input[name="tell_us_if"]':
             value: 'you are an Orange Business Services customer'
+      '#format_items': comma
       '#file_extensions': 'pdf png jpg jpeg'
       '#sanitize': true
   processed_text_09:
@@ -537,19 +480,51 @@ access:
     permissions: {  }
   view_any:
     roles: {  }
-    users: {  }
+    users:
+      - 1491
+      - 1495
+      - 1492
+      - 1493
+      - 1439
+      - 3802
+      - 3803
+      - 1494
     permissions: {  }
   update_any:
     roles: {  }
-    users: {  }
+    users:
+      - 1491
+      - 1495
+      - 1492
+      - 1493
+      - 1439
+      - 3802
+      - 3803
+      - 1494
     permissions: {  }
   delete_any:
     roles: {  }
-    users: {  }
+    users:
+      - 1491
+      - 1495
+      - 1492
+      - 1493
+      - 1439
+      - 3802
+      - 3803
+      - 1494
     permissions: {  }
   purge_any:
     roles: {  }
-    users: {  }
+    users:
+      - 1491
+      - 1495
+      - 1492
+      - 1493
+      - 1439
+      - 3802
+      - 3803
+      - 1494
     permissions: {  }
   view_own:
     roles: {  }

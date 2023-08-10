@@ -6,19 +6,17 @@ dependencies:
     - oab_backoffice
 third_party_settings:
   oab_backoffice:
-    gdpr_business_owner: '1101'
-    gdpr_spoc_security: '1102'
+    gdpr_business_owner: '567'
+    gdpr_spoc_security: '567'
     gdpr_expiration_date: '2019-12-31'
-    gdpr_business_analysts:
-      1697: '1697'
-      1497: '1497'
-    gdpr_form_published: 1
+    gdpr_business_analysts: {  }
+    gdpr_form_published: 0
 weight: 0
 open: null
 close: null
 uid: 1
 template: false
-archive: false
+archive: true
 id: formulaire_de_contact_presse
 title: 'Formulaire de contact Presse'
 description: ''
@@ -57,7 +55,8 @@ elements: |-
     '#required': true
   captcha:
     '#type': captcha
-    '#captcha_type': recaptcha/reCAPTCHA
+    '#captcha_type': image_captcha/Image
+    '#captcha_title': 'Vérifions que vous n''êtes pas un robot.'
   actions:
     '#type': webform_actions
     '#title': 'Submit button(s)'
