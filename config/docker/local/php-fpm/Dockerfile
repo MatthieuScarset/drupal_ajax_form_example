@@ -1,4 +1,4 @@
-FROM php:8.0-fpm
+FROM php:8.1-fpm
 
 WORKDIR "/application"
 
@@ -42,6 +42,10 @@ RUN apt-get install	-y libmemcached-dev \
 # ADD OpCache
 RUN docker-php-ext-enable opcache
 RUN pecl install apcu && docker-php-ext-enable apcu
+
+# XDebug
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
 
 ## Mise en place Mailhog
 RUN wget https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendmail_linux_amd64 -O /usr/local/bin/mhsendmail

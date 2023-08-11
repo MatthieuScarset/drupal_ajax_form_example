@@ -43,7 +43,8 @@ class OabLogSettingsForm extends ConfigFormBase {
         $form[self::OAB_LOG_ACTIF] = array(
             '#type' => 'checkbox',
             '#title' => $this->t('Activer le log alternatif OAB'),
-            '#description'  => "Lorsque Drupal::Logger sera appelé pour un channel commencant par 'oab_', les messages seront loggés dans le fichier files/log/oabt/log.txt qui est ensuite envoyé par mail. Cf la fonction oabt_tracelog()",
+            '#description'  => "Lorsque Drupal::Logger sera appelé pour un channel commencant par 'oab_', les messages seront "
+              . "loggés dans le fichier files/log/oabt/log.txt qui est ensuite envoyé par mail. Cf la fonction oabt_tracelog()",
             '#default_value' => $config->get(self::OAB_LOG_ACTIF),
         );
 
@@ -60,7 +61,8 @@ class OabLogSettingsForm extends ConfigFormBase {
         $form[self::MAILS_DESTINATAIRE] = array(
             '#type' => 'textfield',
             '#title' => $this->t('Liste destinataires'),
-            '#description' => "Separez les mails par une virgule et un espace. Un cron enverra les logs recueillis dans le fichier ci-dessus",
+            '#description' => "Separez les mails par une virgule et un espace."
+              . " Un cron enverra les logs recueillis dans le fichier ci-dessus",
             '#default_value' => $config->get(self::MAILS_DESTINATAIRE),
         );
 

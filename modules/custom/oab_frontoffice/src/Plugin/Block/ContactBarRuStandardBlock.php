@@ -60,26 +60,30 @@ class ContactBarRuStandardBlock extends BlockBase {
         $form['link_offices'] = [
             '#title' => $this->t('Link to Our local offices'),
             '#type' => 'textfield',
-            '#default_value' => isset($this->configuration['link_offices']) ? $this->configuration['link_offices'] : 'www.orange-business.com/ ru/contacts?region=all&country=659',
+            '#default_value' => isset($this->configuration['link_offices'])
+              ? $this->configuration['link_offices'] : 'www.orange-business.com/ ru/contacts?region=all&country=659',
             '#required' => false,
         ];
         $form['link_offices_text'] = [
             '#title' => $this->t('Link text to Our local offices'),
             '#type' => 'textfield',
-            '#default_value' => isset($this->configuration['link_offices_text']) ? $this->configuration['link_offices_text'] : 'Найти наш офис',
+            '#default_value' => isset($this->configuration['link_offices_text'])
+              ? $this->configuration['link_offices_text'] : 'Найти наш офис',
             '#required' => false,
         ];
 
         $form['link_help'] = [
             '#title' => $this->t('Link to Get help'),
             '#type' => 'textfield',
-            '#default_value' => isset($this->configuration['link_help']) ? $this->configuration['link_help'] : '',
+            '#default_value' => isset($this->configuration['link_help'])
+              ? $this->configuration['link_help'] : '',
             '#required' => false,
         ];
         $form['link_help_text'] = [
             '#title' => $this->t('Link text to Get Help'),
             '#type' => 'textfield',
-            '#default_value' => isset($this->configuration['link_help_text']) ? $this->configuration['link_help_text'] : 'Сообщить о проблеме',
+            '#default_value' => isset($this->configuration['link_help_text'])
+              ? $this->configuration['link_help_text'] : 'Сообщить о проблеме',
             '#required' => false,
         ];
 
@@ -92,7 +96,8 @@ class ContactBarRuStandardBlock extends BlockBase {
         $form['link_contact_text'] = [
             '#title' => $this->t('Link text to Contact sales'),
             '#type' => 'textfield',
-            '#default_value' => isset($this->configuration['link_contact_text']) ? $this->configuration['link_contact_text'] : 'Стать клиентом',
+            '#default_value' => isset($this->configuration['link_contact_text'])
+              ? $this->configuration['link_contact_text'] : 'Стать клиентом',
             '#required' => false,
         ];
 

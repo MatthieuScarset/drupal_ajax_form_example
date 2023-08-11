@@ -14,8 +14,7 @@ use Drupal\Core\Database\Database;
 /**
  * Classe pour les méthodes qui concernent les données d'import
  */
-class BackbonesImportData
-{
+class BackbonesImportData {
     const TABLE_NAME = 'oab_backbones_import_data';
 
     /** Méthode qui supprimes toutes les data pour un import */

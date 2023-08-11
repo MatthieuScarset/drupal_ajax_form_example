@@ -14,8 +14,7 @@ use Drupal\Core\Database\Database;
 /**
  * Classe pour les méthodes qui concernent les Shadows sites avec la BDD
  */
-class ShadowSites
-{
+class ShadowSites {
     const TABLE_NAME = 'oab_backbones_shadowsites';
 
     public function getHeaderTable() {

@@ -9,8 +9,7 @@ use Drupal\oab_data_import\Classes\ProductCategoriesTermsImport;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
-class OabSettingsProductCategoriesTermsImportForm extends FormBase
-{
+class OabSettingsProductCategoriesTermsImportForm extends FormBase {
 
   /**
    * @var ProductCategoriesTermsImport
@@ -107,8 +106,7 @@ class OabSettingsProductCategoriesTermsImportForm extends FormBase
         // If the file passed validation:
         if (!$file[0]) {
             $form_state->setErrorByName('file', t('No file was uploaded.'));
-        }
-        else{
+        } else {
           $filename = $file[0]->getFilename();
           $input["filename"] = $filename;
           $form_state->setUserInput($input);

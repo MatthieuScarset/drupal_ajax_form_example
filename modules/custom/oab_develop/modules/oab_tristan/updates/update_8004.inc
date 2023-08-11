@@ -314,7 +314,11 @@ $termList = [
 foreach ($termList as $taxoTerm => $view) {
 
   ##on cherche l'Objet
-  $termsArray = taxonomy_term_load_multiple_by_name($taxoTerm, "subhomes");
+//  $termsArray = taxonomy_term_load_multiple_by_name($taxoTerm, "subhomes");
+  // Correction depréciation pour exemple
+  $termsArray = \Drupal::entityTypeManager()
+    ->getStorage("taxonomy_term")
+    ->loadByProperties(["name" => $taxoTerm, "vid" => "subhomes"]);
 
   ##On boucle sur tous les termes trouvés (Magazine par exemple..)
   foreach ($termsArray as $term_id => $termObject) {

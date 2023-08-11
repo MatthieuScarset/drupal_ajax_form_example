@@ -7,10 +7,12 @@ dependencies:
     - node.type.corporate
     - paragraphs.paragraphs_type.module_blog
     - paragraphs.paragraphs_type.module_cross_link
+    - paragraphs.paragraphs_type.module_customer_space
     - paragraphs.paragraphs_type.module_hook_text
     - paragraphs.paragraphs_type.module_key_figures
     - paragraphs.paragraphs_type.module_list
     - paragraphs.paragraphs_type.module_map
+    - paragraphs.paragraphs_type.module_text_video_image
     - paragraphs.paragraphs_type.module_title_and_highlight
     - paragraphs.paragraphs_type.module_video
     - paragraphs.paragraphs_type.paragraph_wysiwyg
@@ -31,7 +33,9 @@ settings:
   handler_settings:
     target_bundles:
       module_blog: module_blog
+      module_customer_space: module_customer_space
       module_cross_link: module_cross_link
+      module_text_video_image: module_text_video_image
       paragraph_wysiwyg: paragraph_wysiwyg
       module_key_figures: module_key_figures
       module_list: module_list
@@ -121,7 +125,7 @@ settings:
         enabled: false
       module_customer_space:
         weight: 75
-        enabled: false
+        enabled: true
       module_detail_gamme:
         weight: 76
         enabled: false
@@ -187,7 +191,7 @@ settings:
         enabled: false
       module_text_video_image:
         weight: 91
-        enabled: false
+        enabled: true
       module_title_and_highlight:
         weight: 106
         enabled: true

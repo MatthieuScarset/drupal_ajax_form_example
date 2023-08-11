@@ -114,12 +114,12 @@ loadConfigField('field/storage', 'field.storage.node.field_corporate_button_text
 
 
 // import VIEW DISPLAY FULL
-$config_path = drupal_get_path('module', 'oab_backoffice') . '/config/core/entity_view_display/core.entity_view_display.node.homepage.full.yml';
+$config_path = \Drupal::service('extension.path.resolver')->getPath('module', 'oab_backoffice') . '/config/core/entity_view_display/core.entity_view_display.node.homepage.full.yml';
 $data = Yaml::parse($config_path);
 \Drupal::configFactory()->getEditable('core.entity_view_display.node.homepage.full')->setData($data)->save(TRUE);
 
 // import FORM DISPLAY DEFAULT
-$config_path = drupal_get_path('module', 'oab_backoffice') . '/config/core/entity_form_display/core.entity_form_display.node.homepage.default.yml';
+$config_path = \Drupal::service('extension.path.resolver')->getPath('module', 'oab_backoffice') . '/config/core/entity_form_display/core.entity_form_display.node.homepage.default.yml';
 $data = Yaml::parse($config_path);
 \Drupal::configFactory()->getEditable('core.entity_form_display.node.homepage.default.yml')->setData($data)->save(TRUE);
 

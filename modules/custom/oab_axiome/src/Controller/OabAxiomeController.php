@@ -9,8 +9,7 @@ use Drupal\oab_axiome\AxiomeImporter;
 use Drupal\oab_axiome\Form\OabAxiomeSettingsForm;
 
 
-class OabAxiomeController extends ControllerBase
-{
+class OabAxiomeController extends ControllerBase {
   /**
    * {@inheritdoc}
    */

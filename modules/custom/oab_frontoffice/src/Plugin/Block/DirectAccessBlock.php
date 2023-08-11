@@ -49,7 +49,8 @@ class DirectAccessBlock extends BlockBase {
             '#type' => 'text_format',
             '#title' => t('Custom text'),
             '#default_value' => isset($config['direct_access_custom_text']['value']) ? $config['direct_access_custom_text']['value'] : '',
-            '#format' => isset($config['direct_access_custom_text']['format']) ? $config['direct_access_custom_text']['format'] : 'full_html',
+            '#format' => isset($config['direct_access_custom_text']['format'])
+              ? $config['direct_access_custom_text']['format'] : 'full_html',
         );
         return $form;
     }

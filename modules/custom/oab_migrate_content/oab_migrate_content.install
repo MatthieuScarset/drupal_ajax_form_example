@@ -33,7 +33,7 @@ function oab_migrate_content_uninstall() {
 
 function oab_migrate_content_install() {
 
-    drupal_set_installed_schema_version('oab_migrate_content', 8000);
+    \Drupal::service('update.update_hook_registry')->setInstalledVersion('oab_migrate_content', 8000);
 
     $solutions = get_correspondances_soltutionD7_to_solutionD8();
     \Drupal::state()->set('correspondence_taxo_solution', $solutions);

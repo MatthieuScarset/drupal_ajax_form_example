@@ -9,8 +9,7 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 
-class HubExtension extends AbstractExtension
-{
+class HubExtension extends AbstractExtension {
 
     /**
      * Returns the name of the extension.

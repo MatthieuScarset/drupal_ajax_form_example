@@ -19,8 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class OabAkamaiController extends ControllerBase
-{
+class OabAkamaiController extends ControllerBase {
     private $schema = "https://";
     private $authPrefixe;
     private $baseUrl;
@@ -127,7 +126,7 @@ class OabAkamaiController extends ControllerBase
             $this->messenger()->addMessage(t("Cache Akamaï vidé pour la page $page"), 'status', true);
         } else {
             $msg = (isset($json_ret['detail'])) ? ": " . $json_ret['detail'] : "";
-            $this->messenger()->addError(t("Erreur lors de l'appel à Akamaï pour la page $page $msg. Voir en log pour plus d'infos"),true);
+            $this->messenger()->addError(t("Erreur lors de l'appel à Akamaï pour la page $page $msg. Voir en log pour plus d'infos"), true);
             \Drupal::logger('oab_akamai')->notice("Erreur lors du flush Akamaï avec le retour : $ret_value");
         }
 
@@ -137,7 +136,7 @@ class OabAkamaiController extends ControllerBase
 
     public function flushVarnish($origin_url, $host) {
 
-      if(!isset($this->varnishIp) || empty($this->varnishIp)) {
+      if (!isset($this->varnishIp) || empty($this->varnishIp)) {
         return true;
       }
       else {
@@ -273,7 +272,8 @@ class OabAkamaiController extends ControllerBase
     }
 
     private function akamai_getTimestamp() {
-        return str_replace('-', '', date(DATE_ISO8601));
+      // Akamai a besoin du timestamp dans ce format, malgré la déprécation
+      return str_replace('-', '', date(DATE_ISO8601));
     }
 
 }

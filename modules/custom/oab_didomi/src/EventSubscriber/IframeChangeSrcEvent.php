@@ -33,10 +33,14 @@ class IframeChangeSrcEvent implements EventSubscriberInterface {
    */
   private $entityTypeManager;
 
-  public function __construct(Renderer $renderer, EntityTypeManager $entityTypeManager, LanguageManager $languageManager) {
-    $this->languageManager = $languageManager;
+  public function __construct(
+    Renderer $renderer,
+    EntityTypeManager $entity_type_manager,
+    LanguageManager $language_manager
+  ) {
+    $this->languageManager = $language_manager;
     $this->renderer = $renderer;
-    $this->entityTypeManager = $entityTypeManager;
+    $this->entityTypeManager = $entity_type_manager;
   }
   /**
    * {@inheritdoc}
@@ -53,7 +57,7 @@ class IframeChangeSrcEvent implements EventSubscriberInterface {
     $content = $event->getResponse()?->getContent();
 
 
-    if(!empty($content)) {
+    if (!empty($content)) {
       @$html->loadHTML($content);
       if (!empty($html)) {
         $xpath = new \DOMXPath($html);
@@ -109,10 +113,10 @@ class IframeChangeSrcEvent implements EventSubscriberInterface {
                 $super_div_parent = $html->createElement('div');
                 $super_div_parent->setAttribute('class', 'divParentIframeYoutube');
                 $super_div_parent->setAttribute('is', 'div-iframe-youtube');
-                $parentNode = $iframe->parentNode;
+                $parent_node = $iframe->parentNode;
                 $super_div_parent->appendChild($iframe);
                 $super_div_parent->appendChild($div_parent_block);
-                $parentNode->appendChild($super_div_parent);
+                $parent_node->appendChild($super_div_parent);
 
                 //on save le nouveau html formé
                 $event->getResponse()->setContent($xpath->document->saveHTML());

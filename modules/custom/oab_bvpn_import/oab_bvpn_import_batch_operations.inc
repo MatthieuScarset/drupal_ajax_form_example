@@ -77,15 +77,14 @@ function oab_bvpn_import_batch($columns, $line_number, &$context) {
   // CSP Location = > champs geolocation multiple
   // format dans le csv : "lat, lng","lat2, lng2",...
   $all_coordinates = array();
-  $geoloc_array = explode('","',$csp['field_csp_location']);
+  $geoloc_array = explode('","', $csp['field_csp_location']);
   if (count($geoloc_array) > 0) {
     foreach ($geoloc_array as $geoloc_item) {
-      $geoloc_item = str_replace('"','', $geoloc_item);
+      $geoloc_item = str_replace('"', '', $geoloc_item);
       $coordinates = explode(',', $geoloc_item);
       if (count($coordinates) > 1) {
         $all_coordinates[] = ['lat' => trim($coordinates[0]), 'lng' => trim($coordinates[1])];
-      }
-      else {
+      } else {
         logErrorMessage($line_number, $csp['title'], 'incorrect format gps coordinates (Location) ', $csp['field_csp_location'], $context);
       }
     }
@@ -100,9 +99,18 @@ function oab_bvpn_import_batch($columns, $line_number, &$context) {
     $term = getTermFromLabelAndVocabulary($label, 'location', $csp['langcode']);
     if ($term !== false) {
       $tids_location[] = $term->id();
-    }
-    else {
-      logErrorMessage($line_number, $csp['title'], 'incorrect taxonomy term (lang:'.$csp['langcode'].') for Location (term not found) ', $label, $context);
+    } else {
+      logErrorMessage(
+        $line_number,
+        $csp['title'],
+        t("incorrect taxonomy term (lang: @cspLangCode) for Location (term not found)",
+          [
+            '@cspLangCode' => $csp['langcode']
+          ]
+        ),
+        $label,
+        $context
+      );
     }
   }
   $node->set('field_location', $tids_location);
@@ -111,18 +119,28 @@ function oab_bvpn_import_batch($columns, $line_number, &$context) {
   $type_pro_term = getTermFromLabelAndVocabulary($csp['field_provider_type'], 'service_providers', $csp['langcode']);
   if ($type_pro_term !== false) {
     $node->set('field_provider_type', $type_pro_term->id());
-  }
-  else {
-    logErrorMessage($line_number, $csp['title'], 'incorrect taxonomy term for Service providers type (term not found) ', $csp['field_provider_type'], $context);
+  } else {
+    logErrorMessage(
+      $line_number,
+      $csp['title'],
+      'incorrect taxonomy term for Service providers type (term not found)',
+      $csp['field_provider_type'],
+      $context
+    );
   }
 
   // Type of Cloud Service
-  $type_CS_term = getTermFromLabelAndVocabulary($csp['field_type_of_cloud_services'], 'type_of_cloud_service', $csp['langcode']);
-  if ($type_CS_term !== false) {
-    $node->set('field_type_of_cloud_services', $type_CS_term->id());
-  }
-  else {
-    logErrorMessage($line_number, $csp['title'], 'incorrect taxonomy term for Type of Cloud service (term not found) ', $csp['field_type_of_cloud_services'], $context);
+  $type_cs_term = getTermFromLabelAndVocabulary($csp['field_type_of_cloud_services'], 'type_of_cloud_service', $csp['langcode']);
+  if ($type_cs_term !== false) {
+    $node->set('field_type_of_cloud_services', $type_cs_term->id());
+  } else {
+    logErrorMessage(
+      $line_number,
+      $csp['title'],
+      'incorrect taxonomy term for Type of Cloud service (term not found)',
+      $csp['field_type_of_cloud_services'],
+      $context
+    );
   }
 
   //Logo
@@ -155,8 +173,7 @@ function oab_bvpn_import_batch($columns, $line_number, &$context) {
     $image_media->save();
 
     $node->set('field_logo', $image_media->id());
-  }
-  else {
+  } else {
     logErrorMessage($line_number, $csp['title'], 'logo file not found ', $logo_file_path_name, $context);
   }
   $node->save();
@@ -203,9 +220,16 @@ function getTermFromLabelAndVocabulary($term_label, $vocabulary, $lang_code = "e
   );
  if (isset($entities) && !empty($entities)) {
     return array_shift($entities);
-  }
-  else {
-    \Drupal::logger("oab_bvpn_import")->info('terme non trouvé - vid : '.$vocabulary.' - langcode : '.$lang_code.' - name: '.trim($term_label));
+  } else {
+    \Drupal::logger("oab_bvpn_import")->info(
+      t('terme non trouvé - vid : @vocabulary - langcode : @langCode - name: @label',
+        [
+          '@vocabulary' => $vocabulary,
+          '@langCode' => $lang_code,
+          '@label' => trim($term_label)
+        ]
+      )
+    );
     return false;
   }
 }

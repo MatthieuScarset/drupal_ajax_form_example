@@ -16,8 +16,7 @@ use Drupal\oab_backbones\Classes\ImportPerformanceData;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
-class PerformanceDataForm extends FormBase
-{
+class PerformanceDataForm extends FormBase {
 
   /**
    * @var FileSystemInterface
@@ -31,12 +30,13 @@ class PerformanceDataForm extends FormBase
 
   /**
    * PerformanceDataForm constructor.
+   *
    * @param FileSystemInterface $file_system
-   * @param ImportPerformanceData $importPerformanceData
+   * @param ImportPerformanceData $import_performance_data
    */
-  public function __construct(FileSystemInterface $file_system, ImportPerformanceData $importPerformanceData) {
+  public function __construct(FileSystemInterface $file_system, ImportPerformanceData $import_performance_data) {
       $this->fileSystem = $file_system;
-      $this->importPerformanceData = $importPerformanceData;
+      $this->importPerformanceData = $import_performance_data;
   }
 
   /**
@@ -248,7 +248,8 @@ class PerformanceDataForm extends FormBase
             // openstat_backbone_path_performance_1.0_usa_mYYYYmm.csv.zip
             if (preg_match('/openstat_backbone_path_performance_1\.0_usa_m([0-9]{6})/', $filename, $matches)) {
                 // Move the file into the Drupal file system.
-                if ($this->fileSystem->move($file[0]->getFileUri(), ImportPerformanceData::IMPORT_DIRECTORY . 'DATA_' . $matches[1] . '.csv.zip', $this->fileSystem::EXISTS_REPLACE)) {
+                if ($this->fileSystem->move($file[0]->getFileUri(),
+                  ImportPerformanceData::IMPORT_DIRECTORY . 'DATA_' . $matches[1] . '.csv.zip', $this->fileSystem::EXISTS_REPLACE)) {
                     // Save the file for use in the submit handler.
                     $input = &$form_state->getUserInput();
                     $input["month"] = $matches[1];

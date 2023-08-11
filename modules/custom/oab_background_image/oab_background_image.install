@@ -1,7 +1,7 @@
 <?php
 
 function oab_background_image_install() {
-    drupal_set_installed_schema_version('oab_background_image', 8000);
+    \Drupal::service('update.update_hook_registry')->setInstalledVersion('oab_background_image', 8000);
     module_set_weight("oab_will", 30);
 
     // Création du type de contenu et des fields nécessaires

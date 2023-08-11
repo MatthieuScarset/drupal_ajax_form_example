@@ -16,8 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Classe qui va faire l'import des Shadow Sites
  */
-class ImportShadowSites
-{
+class ImportShadowSites {
     const IMPORT_DIRECTORY = 'public://backbones/sites/';
 
     /**

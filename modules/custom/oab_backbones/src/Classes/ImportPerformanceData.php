@@ -19,8 +19,7 @@ use Drupal\Core\Url;
 /**
  * Classe qui va faire l'import des données
  */
-class ImportPerformanceData
-{
+class ImportPerformanceData {
     const IMPORT_TMP_DIRECTORY = 'public://backbones/tmp/';
     const IMPORT_DIRECTORY = 'public://backbones/data/';
     const FINAL_FILENAME = 'openstat_backbone_path_performance_1.0_usa_m';

@@ -1,7 +1,7 @@
 {
     "name": "drupal/recommended-project",
     "description": "Project template for Drupal 9 projects with a relocated document root",
-    "version": "2.4.1",
+    "version": "2.4.2",
     "type": "project",
     "license": "GPL-2.0-or-later",
     "homepage": "https://www.drupal.org/project/drupal",
@@ -107,7 +107,7 @@
                 "[web-root]/sites/development.services.yml": false,
                 "[web-root]/sites/default/default.services.yml": false,
                 "[web-root]/sites/default/default.settings.php": false,
-                "[web-root]/README.txt": false,
+                "[web-root]/README.md": false,
                 "[web-root]/sites/example.settings.local.php": false
             }
         },

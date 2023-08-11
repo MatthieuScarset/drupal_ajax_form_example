@@ -28,6 +28,7 @@
 
 # Ignore IDE conf
 /.idea
+/.vscode
 
 # Ignore config data
 /config/data
@@ -35,3 +36,7 @@
 /data
 /mysql
 /log
+
+# Ignore XDebug config file.
+# (required until we find a fix to use host.docker.internal)
+/config/docker/local/php-fpm/xdebug.ini

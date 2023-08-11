@@ -15,7 +15,12 @@ $results = $data->fetchAll(\PDO::FETCH_OBJ);
 if (count($results) == 0) {
     // on créé le fichier dans Drupal
     $filesystem = \Drupal::service('file_system');
-    $pathImg = drupal_get_path('module', 'oab_tibo').'/images/'.$fichierImg;
+//    $pathImg = drupal_get_path('module', 'oab_tibo').'/images/'.$fichierImg;
+
+  // Correction depréciation juste pour exemple
+    $pathImg = \Drupal::service('extension.path.resolver')
+      ->getPath('module', 'oab_tibo') . '/images/'.$fichierImg;
+
     // Create file entity.
     $image = File::create();
     $image->setFileUri($pathImg);

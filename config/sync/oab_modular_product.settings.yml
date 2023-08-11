@@ -29,21 +29,28 @@ modules_settings:
     module_services:
       weight: '-10'
       required: 0
+      second_position: 0
     module_customer_space:
       weight: '-9'
       required: 0
+      second_position: 0
     module_steps:
       weight: '-8'
       required: 0
+      second_position: 0
     module_exemples:
       weight: '-7'
       required: 0
+      second_position: 0
     module_benefits:
       required: '1'
       weight: '-6'
+      second_position: 0
     module_testimonial:
       weight: '-5'
       required: 0
+      second_position: 0
     module_partner:
+      second_position: '1'
       weight: '-4'
       required: 0

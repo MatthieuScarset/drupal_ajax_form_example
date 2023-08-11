@@ -1,4 +1,4 @@
-FROM multirepo.orangeapplicationsforbusiness.com:5002/portail_obs/nginx-php/alpine-php8:8.0.20
+FROM multirepo.orangeapplicationsforbusiness.com:5002/portail_obs/nginx-php/alpine-php8.1:latest
 
 
 ADD --chown=nobody:www-data ./build /var/www/html/
