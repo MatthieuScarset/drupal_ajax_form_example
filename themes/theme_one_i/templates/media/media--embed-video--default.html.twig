@@ -31,22 +31,22 @@
  * @ingroup themeable
  */
 #}
+
 {% if embed_url_youtube is defined and embed_url_youtube is not empty %}
+{#  {{ dd(media.field_cover_image.value) }}#}
   <ytb-embed
     video-src="{{ embed_url_youtube }}"
     video-title="{{ name }}"
   >
-
-    <div slot="cover-img">
-      {{ content.field_illustration }}
+    <div class="position-relative" slot="cover-img">
+{#      <img class="play-svg" src="/themes/theme_one_i/assets/image/play.svg" alt="play"/>#}
+      {{ content.field_cover_image }}
     </div>
-
 
     <div slot="cookieBlock">
       {{ drupal_entity('block_content', 'eb454a17-56da-4d21-b3ca-565449d7c452') }}
     </div>
-
   </ytb-embed>
 {% else %}
-  {{ content }}
+  {{ media }}
 {% endif %}

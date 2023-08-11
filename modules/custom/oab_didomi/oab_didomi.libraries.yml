@@ -4,7 +4,7 @@ oab_didomi_library:
     theme:
       css/style_didomi.css: {}
   js:
-    #js/test_script_tealium.js: {} #pour les tests
+    js/test_script_tealium.js: {} #pour les tests
     #https://tags.tiqcdn.com/utag/orange/obscare/qa/utag.js: { type: external, minified: true } #pour les tests
     js/iframe_youtube.js: { attributes: { type: module }}
   dependencies:

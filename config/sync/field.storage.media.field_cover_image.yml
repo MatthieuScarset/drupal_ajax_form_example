@@ -1,0 +1,19 @@
+uuid: 1d5f639f-3c1a-4724-9ccc-fae8001cb9f8
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.field_cover_image
+field_name: field_cover_image
+entity_type: media
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

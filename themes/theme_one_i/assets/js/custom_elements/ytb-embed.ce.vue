@@ -1,7 +1,7 @@
 <script lang="ts">
 
 import {defineComponent} from "vue";
-import {Didomi, Drupal, drupalSettings} from "../drupal";
+import {Didomi, Drupal, drupalSettings} from "../Drupal";
 
 enum SLOTS {
   Video,
@@ -31,9 +31,10 @@ export default defineComponent({
       }
     },
     areYtbCookiesAccepted(): boolean {
-      var youtubeDidomi = Didomi().getUserStatusForVendor(drupalSettings.didomi.vendor_id_youtube);
+      let youtubeDidomi = Didomi().getUserStatusForVendor(drupalSettings.didomi.vendor_id_youtube);
       return !(youtubeDidomi == false || youtubeDidomi == undefined)
     },
+
     acceptCookies() {
       //on récupère le UserConsent
       const userConsent = Didomi().getUserStatus();

@@ -13,3 +13,19 @@
     }
   }
 }
+
+img.play-svg {
+  position: absolute;
+  width: px-to-rem(70) !important;
+  height: px-to-rem(70) !important;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+
+  @include media-breakpoint-up(md) {
+    width: px-to-rem(90) !important;
+    height: px-to-rem(90) !important;
+  }
+}
