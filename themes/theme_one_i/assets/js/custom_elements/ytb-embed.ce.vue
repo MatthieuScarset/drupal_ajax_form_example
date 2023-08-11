@@ -21,6 +21,7 @@ export default defineComponent({
       SLOTS: SLOTS,
       currentSlot: SLOTS.CoverImage
     }
+
   },
   methods: {
     showVideo() {
@@ -44,7 +45,7 @@ export default defineComponent({
         userConsent.vendors.consent.enabled.push(ytbVendorId);
       }
       //suppression de l'élément dans les vendor disabled
-      for (var i = 0; i < userConsent.vendors.consent.disabled.length; i++) {
+      for (let i = 0; i < userConsent.vendors.consent.disabled.length; i++) {
         if (userConsent.vendors.consent.disabled[i] === ytbVendorId) {
           userConsent.vendors.consent.disabled.splice(i, 1);
         }
