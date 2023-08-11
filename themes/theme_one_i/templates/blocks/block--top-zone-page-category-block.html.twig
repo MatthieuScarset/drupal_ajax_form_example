@@ -45,31 +45,9 @@
  * @ingroup templates
  */
 #}
-
-
-<div class="header-page-categ text-white bg-dark  align-items-center">
-  <div class="site-width">
-    <div class="container-fluid">
-  <div class="row align-items-center">
-    <div class="col col-12 col-lg-6 no-gutters block-titre-teaser  p-0 p-xxl-1">
-      <div class="w-100">
-        <h1>{{ content.categ_title }}</h1>
-      </div>
-      <div class="d-none d-md-block w-100">
-        {{ content.categ_description }}
-      </div>
-    </div>
-    <div class="col d-none d-lg-block col-lg-6 no-gutters">
-      {% set imagestyle = {
-        '#theme':      'image_style',
-        '#style_name': 'top_zone_page_category',
-        '#uri':        content.categ_image_uri,
-        '#alt':        content.categ_image_alt,
-        '#attributes': { class: 'swiper-image' },
-      } %}
-      {{ imagestyle }}
-    </div>
-  </div>
-</div>
+<div class="header-page-categ text-white bg-dark row mt-1">
+  <div class="col-12 col-lg-9 mb-md-4">
+    <h1>{{ content.categ_title }}</h1>
+      {{ content.categ_description }}
   </div>
 </div>

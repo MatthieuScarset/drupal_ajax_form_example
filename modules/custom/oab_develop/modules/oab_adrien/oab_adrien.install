@@ -74,3 +74,10 @@ function oab_adrien_update_8012() {
 function oab_adrien_update_8014() {
   include_once('updates/update_8014.inc');
 }
+
+
+function oab_adrien_update_9001() {
+  $translations = ['Our solutions' => 'Nos solutions'];
+
+  Drupal::service('oab_develop.helper.translations')->translateOneLangue('fr', $translations);
+}

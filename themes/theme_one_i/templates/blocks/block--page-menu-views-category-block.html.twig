@@ -1,14 +1,16 @@
-<div {{ attributes.addClass('block', 'page-menu-category-block', 'sticky-top') }}>
+<div {{ attributes.addClass('block', 'page-menu-category-block', 'sticky-top', 'mt-lg-2') }}>
       {% if content.children_items is not empty %}
-      <nav class="ob1-menu-page sub_local_menu col bg-white">
-        <ul class="nav o-nav-light site-width ">
-      {% for child in content.children_items %}
-        <li class="nav-item">
-          <a class="nav-link" href="#{{ replaceSpacesAndSpecialChars(child.label) }}"
-             onmousedown="utag_link(utag_data.titre_page, 'categ_page_menu', '{{ child.label|lower }}', '');">{{ child.label }}</a>
-        </li>
-      {% endfor %}
-      </ul>
+      <nav class="ob1-menu-page sub_local_menu bg-white">
+        <div class="site-width">
+          <ul class="nav o-nav-light container-fluid h-100 px-1">
+          {% for child in content.children_items %}
+            <li class="nav-item">
+              <a class="nav-link h-100" href="#{{ replaceSpacesAndSpecialChars(child.label) }}"
+                 onmousedown="utag_link(utag_data.titre_page, 'categ_page_menu', '{{ child.label|lower }}', '');">{{ child.label }}</a>
+            </li>
+          {% endfor %}
+          </ul>
+        </div>
       </nav>
     {% endif %}
 
