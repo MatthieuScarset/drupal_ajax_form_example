@@ -67,7 +67,7 @@ class SvpBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
     if ($node->bundle() == 'domain') {
       $parents = [];
-      
+
       // Load domains from SVP term.
       if ($tid = $node->field_svp->target_id) {
         $parents = $this->entityTypeManager->getStorage('node')->loadByProperties([
@@ -87,9 +87,13 @@ class SvpBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
     $breadcrumb = new Breadcrumb();
     $breadcrumb->setLinks($links);
-    $breadcrumb->addCacheContexts(['languages:' . LanguageInterface::TYPE_CONTENT]);
-    $breadcrumb->addCacheableDependency($node);
+    $breadcrumb->addCacheContexts(['url']);
+
+    if (!$node->isNew()) {
+      $breadcrumb->addCacheTags(["node:$node->id()"]);
+      $breadcrumb->addCacheableDependency($node);
+    }
+
     return $breadcrumb;
   }
-
 }
