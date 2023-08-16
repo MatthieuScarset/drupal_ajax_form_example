@@ -52,7 +52,7 @@
 ]
 %}
     {% for item in items %}
-      <div{{ attributes.addClass(classes, 'field--item') }}>
+      <div{{ attributes.addClass(classes, 'field--item', 'my-auto') }}>
         <a href="{{ item.content["#url"] }}" class="o-link-arrow mw-100"> {{ item.content["#title"] }}</a>
         <span ></span>
       </div>

@@ -10,6 +10,7 @@ third_party_settings:
     gdpr_spoc_security: '567'
     gdpr_expiration_date: ''
     gdpr_business_analysts:
+      3806: '3806'
       1922: '1922'
       3011: '3011'
     gdpr_form_published: 1
@@ -101,7 +102,8 @@ elements: |-
     '#format': full_html
   captcha_dvi_contact_distributor:
     '#type': captcha
-    '#captcha_type': recaptcha/reCAPTCHA
+    '#captcha_type': image_captcha/Image
+    '#captcha_title': 'Vérifions que vous n''êtes pas un robot.'
   distributeur_email:
     '#type': hidden
     '#title': distributeur-email

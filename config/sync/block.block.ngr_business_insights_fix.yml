@@ -12,7 +12,7 @@ dependencies:
 id: ngr_business_insights_fix
 theme: theme_boosted
 region: prefooter
-weight: 0
+weight: -70
 provider: null
 plugin: 'block_content:0d5f26f6-505d-4501-8ce4-a111c066b4c0'
 settings:
@@ -26,5 +26,5 @@ settings:
 visibility:
   request_path:
     id: request_path
-    negate: false
+    negate: true
     pages: "/business-insight\r\n/visions-business"

@@ -3,3 +3,10 @@
 function oab_ob1_adapter_install() {
   \Drupal::service('update.update_hook_registry')->setInstalledVersion('oab_ob1_adapter', 8000);
 }
+
+/**
+ *  Ajout theme settings via le display extender dans les views
+ */
+function oab_ob1_adapter_update_9001() {
+  include_once("updates/update_9001.inc");
+}

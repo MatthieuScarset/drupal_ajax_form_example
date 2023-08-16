@@ -1,0 +1,48 @@
+
+{# Begin Main Menu Menu - Mobile #}
+<nav id="main_nav_mobile" class="main_nav navbar navbar-expand-lg navbar-dark bg-dark" role="navigation">
+  <div class="container-fluid site-width">
+    <div class="navbar-brand">
+      {% if elements.theme_oab_hub_one_i_sitebranding_mobile %}
+        {{ elements.theme_oab_hub_one_i_sitebranding_mobile }}
+      {% endif %}
+    </div>
+
+    <div class="d-flex float-right menu-xs">
+      <section id="block-righticonblock">
+        {% if (language == 'en') %}
+          <a href="https://my-service-space.orange-business.com/MSSLoginForm/public/welcome-action.do" target="_self"
+             title="My Service Space" alt="My Service Space" class="link-white">
+            <i class="nav-link icon icon-avatar"></i>
+          </a>
+        {% endif %}
+        {% if (language == 'fr') %}
+          <a href="https://espaceclient.orange-business.com/group/ece2/home?codeContexte=eceDefault" target="_self"
+             title="Espace Client Entreprise" alt="Espace Client Entreprise" class="link-white">
+            <i class="nav-link icon icon-avatar"></i>
+          </a>
+        {% endif %}
+      </section>
+
+      <button class="navbar-toggler sandwich-button hub-one-i" type="button" data-toggle="collapse" data-target="#megamenu_mobile"
+              aria-controls="#megamenu_mobile" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
+    <div class="navbar-collapse collapse" id="megamenu_mobile">
+
+      <div class="menu_principal">
+        <div class="mega-menu">
+          <div class="navbar-nav" role="menu">
+            {{ elements|hub_getMenu('theme_oab_hub_one_i_mssassistancemainmenufr_mobile')  }}
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</nav>
+{# End Main Mega Menu - Mobile #}

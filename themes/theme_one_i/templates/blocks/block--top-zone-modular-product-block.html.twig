@@ -47,6 +47,7 @@
 #}
 
 <div class="row text-dark align-items-center justify-content-between py-1 py-md-2">
+  {% if content.product_top_zone_image_uri is defined %}
   <div class="mp-image-top-zone col-lg-6 no-gutters order-lg-12 mb-1 mb-lg-0">
     {% set imagestyle = {
       '#theme':      'image_style',
@@ -57,9 +58,10 @@
     } %}
     {{ imagestyle }}
   </div>
+  {% endif %}
 
   <div class="col-12 col-lg-5 col-5 no-gutters order-lg-0">
-    <h1 class="standard text-gray3 font-weight-bold py-0 my-0">{{ content.product.field_product_name[0].value }}</h1>
+    <h1 class="standard text-gray3 font-weight-bold py-0 my-0">{{ content.product.title.value }}</h1>
 
     {% if content.product.field_call_to_action_link[0].url|length > 0
        and content.product.field_call_to_action_link[0].title |length > 0 %}

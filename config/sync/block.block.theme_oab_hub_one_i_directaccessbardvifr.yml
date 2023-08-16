@@ -1,0 +1,38 @@
+uuid: bbea13d0-df50-4867-a672-389fc17b7433
+langcode: fr
+status: false
+dependencies:
+  config:
+    - system.menu.direct-access-bar-dvi-fr
+  module:
+    - language
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_directaccessbardvifr
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -62
+provider: null
+plugin: 'system_menu_block:direct-access-bar-dvi-fr'
+settings:
+  id: 'system_menu_block:direct-access-bar-dvi-fr'
+  label: 'Direct Access Bar DVI FR'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      fr: fr
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: '/ventes-indirectes*'

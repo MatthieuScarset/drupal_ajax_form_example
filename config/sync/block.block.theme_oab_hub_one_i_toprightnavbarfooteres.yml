@@ -1,0 +1,33 @@
+uuid: c4d94c9b-0a3d-44dd-b55d-9e05b57763b8
+langcode: es
+status: false
+dependencies:
+  config:
+    - system.menu.top-right-navbar-footer-es
+  module:
+    - language
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_toprightnavbarfooteres
+theme: theme_oab_hub_one_i
+region: footer
+weight: -60
+provider: null
+plugin: 'system_menu_block:top-right-navbar-footer-es'
+settings:
+  id: 'system_menu_block:top-right-navbar-footer-es'
+  label: 'Top right navbar Footer ES'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      es: es

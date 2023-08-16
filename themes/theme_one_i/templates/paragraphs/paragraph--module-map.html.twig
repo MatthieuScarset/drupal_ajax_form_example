@@ -62,14 +62,14 @@
 
               {% if content.field_redirection_url[0]['#url']|length > 0 %}
                 <a href="{{ content.field_redirection_url[0]['#url'] }}"
-                   class="o-link-arrow o-link-reverse my-1 my-md-2">
+                   class="o-link-arrow o-link-reverse ob1-link-large my-1 my-md-2">
                   {{ content.field_redirection_url[0]['#title'] }}
                 </a>
               {% endif %}
 
               <div class="mb-2 mb-md-0 d-flex flex-md-wrap map-image-title">
                   {% for key in content.field_map['#items']|keys %}
-                    <a class="{% if loop.first %} active {% endif %} button-chip mr-1 mb-0 mb-md-1"
+                    <a class="{% if loop.first %} active {% endif %} col-auto button-chip mr-1 mb-0 mb-md-1"
                        data-target="{{ content.field_map[key]['#paragraph'].id() }}"
                     >
                       {{ content.field_map[key]['#paragraph'].field_title.value }}

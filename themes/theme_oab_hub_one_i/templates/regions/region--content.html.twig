@@ -1,0 +1,31 @@
+{#
+/**
+ * @file
+ * Theme override to display a region.
+ *
+ * Available variables:
+ * - content: The content for this region, typically blocks.
+ * - attributes: HTML attributes for the region div.
+ * - region: The name of the region variable as defined in the theme's
+ *   .info.yml file.
+ *
+ * @see template_preprocess_region()
+ *
+ * @ingroup templates
+ */
+#}
+{%
+  set classes = [
+    'region',
+    'region-' ~ region|clean_class,
+  ]
+%}
+{% if content %}
+
+  {{ drupal_block('page_menu_views_category_block') }}
+  {{ drupal_block('page_menu_modular_product_block') }}
+
+  <div{{ attributes.addClass(classes) }}>
+    {{ elements|without('pagemenuofviewscategory', 'page_menu_modular_product_block') }}
+  </div>
+{% endif %}

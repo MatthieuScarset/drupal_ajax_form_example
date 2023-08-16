@@ -1,17 +1,23 @@
+uuid: null
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_profile
     - node.type.blog_post
-    - node.type.profile
+  module:
+    - require_on_publish
+third_party_settings:
+  require_on_publish:
+    require_on_publish: true
+    warn_on_empty: true
 id: node.blog_post.field_profile
 field_name: field_profile
 entity_type: node
 bundle: blog_post
 label: Blogger
 description: ''
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''

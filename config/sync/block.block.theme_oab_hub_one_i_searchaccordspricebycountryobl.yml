@@ -1,0 +1,20 @@
+uuid: f2825019-cbb0-42a5-b0d8-0cd4ca25f7b8
+langcode: en
+status: false
+dependencies:
+  module:
+    - oab_orange_business_lounge
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_searchaccordspricebycountryobl
+theme: theme_oab_hub_one_i
+region: sidebar
+weight: -32
+provider: null
+plugin: search_accords_price_by_country_obl_block
+settings:
+  id: search_accords_price_by_country_obl_block
+  label: 'Search Accords Price By Country OBL'
+  label_display: visible
+  provider: oab_orange_business_lounge
+visibility: {  }

@@ -1,0 +1,30 @@
+uuid: bd151944-facb-4a09-82ac-a5b870ac99df
+langcode: fr
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:4294ad19-a6cc-4996-8fed-3bb4b01a4941'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_one_i
+id: ngr_mppvementionslegales
+theme: theme_one_i
+region: prefooter
+weight: -65
+provider: null
+plugin: 'block_content:4294ad19-a6cc-4996-8fed-3bb4b01a4941'
+settings:
+  id: 'block_content:4294ad19-a6cc-4996-8fed-3bb4b01a4941'
+  label: '[NGR][MP] PVE - Mentions légales'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /produits/packs-video

@@ -1,0 +1,30 @@
+uuid: 3494877a-33c5-40ec-999b-c5724a08ddd7
+langcode: en
+status: false
+dependencies:
+  module:
+    - node
+    - oab_frontoffice
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_dvicontactdistributorblock
+theme: theme_oab_hub_one_i
+region: sidebar
+weight: -41
+provider: null
+plugin: dvi_contact_distributor_block
+settings:
+  id: dvi_contact_distributor_block
+  label: 'Dvi - Contact Distributor Block'
+  label_display: visible
+  provider: oab_frontoffice
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      distributor: distributor

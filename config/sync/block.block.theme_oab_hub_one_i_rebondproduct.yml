@@ -1,0 +1,41 @@
+uuid: 7146a224-5507-4fdd-9e34-eaa2b86a46c3
+langcode: fr
+status: false
+dependencies:
+  module:
+    - language
+    - node
+    - oab_frontoffice
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_rebondproduct
+theme: theme_oab_hub_one_i
+region: sidebar
+weight: -49
+provider: null
+plugin: rebond_product_block
+settings:
+  id: rebond_product_block
+  label: 'Rebond product'
+  label_display: '0'
+  provider: oab_frontoffice
+  context_mapping:
+    node: '@node.node_route_context:node'
+  content: ''
+  content_format: full_html
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      product: product
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      en: en
+      fr: fr

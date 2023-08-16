@@ -1,0 +1,23 @@
+uuid: f0c5ddcd-16c9-4def-9867-cd1004390a93
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_enable_service_and_support
+    - paragraphs.paragraphs_type.module_detail_offre
+id: paragraph.module_detail_offre.field_enable_service_and_support
+field_name: field_enable_service_and_support
+entity_type: paragraph
+bundle: module_detail_offre
+label: 'Enable service and support'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

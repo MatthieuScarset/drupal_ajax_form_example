@@ -1,0 +1,33 @@
+uuid: 49d7693c-bff1-48c1-9420-961cc4a3ec29
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.direct-access-bar-en
+  module:
+    - language
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_directaccessbaren
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -60
+provider: null
+plugin: 'system_menu_block:direct-access-bar-en'
+settings:
+  id: 'system_menu_block:direct-access-bar-en'
+  label: 'Direct Access Bar EN'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility:
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      en: en

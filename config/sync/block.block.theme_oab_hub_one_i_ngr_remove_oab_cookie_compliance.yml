@@ -1,0 +1,25 @@
+uuid: 81b706b9-ed1e-4a59-b0cb-38d8d981fc2f
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:01e8ed61-868f-48bf-8dd5-ea7d2d94bc58'
+  module:
+    - block_content
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_ngr_remove_oab_cookie_compliance
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -61
+provider: null
+plugin: 'block_content:01e8ed61-868f-48bf-8dd5-ea7d2d94bc58'
+settings:
+  id: 'block_content:01e8ed61-868f-48bf-8dd5-ea7d2d94bc58'
+  label: remove_oab_cookie_compliance
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

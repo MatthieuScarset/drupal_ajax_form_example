@@ -11,7 +11,7 @@ dependencies:
 id: ngr_onei_remove_oab_cookie_compliance
 theme: theme_one_i
 region: prefooter
-weight: 0
+weight: -46
 provider: null
 plugin: 'block_content:01e8ed61-868f-48bf-8dd5-ea7d2d94bc58'
 settings:

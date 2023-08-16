@@ -42,7 +42,8 @@ class JsonExceptionRewriting implements EventSubscriberInterface {
   public function onException(ExceptionEvent $event) {
     //On ne gère ici que les erreurs de la JSON Api
     $path = \Drupal::service('path.current')->getPath();
-    if (strpos($this->routeMatch->getRouteName(), 'jsonapi') === false && strpos($path, 'jsonapi') === false) {
+    $route_name = $this->routeMatch->getRouteName() ?? '';
+    if (strpos($route_name, 'jsonapi') === false && strpos($path, 'jsonapi') === false) {
       return;
     }
 

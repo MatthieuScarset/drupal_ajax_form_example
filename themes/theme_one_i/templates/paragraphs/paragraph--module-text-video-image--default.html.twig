@@ -50,48 +50,50 @@
 {% block paragraph %}
 <div {{ attributes.addClass(classes) }}>
   <div class="site-width">
-    <div class="container-fluid row">
-      <div class="col-12 pr-0 pr-md-1">
-        {% if paragraph.field_display_mode.value == 'left' %}
-        <div class="row w-100 justify-content-between left">
-            <div class="col-12 col-lg-6 d-flex justify-content-center col-img-video">
-              <div class="img-video mb-1 mb-lg-0">
-                {% if paragraph.field_media_type.value == 'video' %}
-                  {{ content.field_video }}
-                {% else %}
-                  {{ content.field_visual }}
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 pr-0 pr-md-1">
+          {% if paragraph.field_display_mode.value == 'left' %}
+          <div class="row w-100 justify-content-between left">
+              <div class="col-12 col-lg-6 d-flex justify-content-center col-img-video">
+                <div class="img-video mb-1 mb-lg-0">
+                  {% if paragraph.field_media_type.value == 'video' %}
+                    {{ content.field_video }}
+                  {% else %}
+                    {{ content.field_visual }}
+                  {% endif %}
+                </div>
+              </div>
+              <div class="col-12 col-lg-5">
+                <h2 class="h1 mb-1 mb-md-2">{{ content.field_title }}</h2>
+                <div class="lead font-weight-bold highlight mb-1 mb-md-2">{{ content.field_highlight }}</div>
+                {% if (paragraph.field_standard_text.value is not empty) %}
+                  {% set class ="standard mb-1 mb-md-2" %}
                 {% endif %}
+                <div class="{{ class }}">{{ content.field_standard_text }}</div>
+                {{ content.field_call_to_action_link_simple }}
+              </div>
+              </div>
+          {% else %}
+            <div class="row w-100 justify-content-between right">
+              <div class="col-12 col-lg-6  d-flex justify-content-center col-img-video order-lg-2">
+                <div class="img-video mb-1 mb-lg-0">
+                  {% if paragraph.field_media_type.value == 'video' %}
+                    {{ content.field_video }}
+                  {% else %}
+                    {{ content.field_visual }}
+                  {% endif %}
+                </div>
+              </div>
+              <div class="col-12 col-lg-5 order-lg-1">
+                <h2 class="h1 mb-1 mb-md-2">{{ content.field_title }}</h2>
+                <div class="lead font-weight-bold highlight mb-1 mb-md-2">{{ content.field_highlight }}</div>
+                <div class="standard mb-1 mb-md-2">{{ content.field_standard_text }}</div>
+                {{ content.field_call_to_action_link_simple }}
               </div>
             </div>
-            <div class="col-12 col-lg-5">
-              <h2 class="mb-1 mb-md-2">{{ content.field_title }}</h2>
-              <div class="lead font-weight-bold highlight mb-1 mb-md-2">{{ content.field_highlight }}</div>
-              {% if (paragraph.field_standard_text.value is not empty) %}
-                {% set class ="standard mb-1 mb-md-2" %}
-              {% endif %}
-              <div class="{{ class }}">{{ content.field_standard_text }}</div>
-              {{ content.field_call_to_action_link_simple }}
-            </div>
-            </div>
-        {% else %}
-          <div class="row w-100 justify-content-between right">
-            <div class="col-12 col-lg-6  d-flex justify-content-center col-img-video order-lg-2">
-              <div class="img-video mb-1 mb-lg-0">
-                {% if paragraph.field_media_type.value == 'video' %}
-                  {{ content.field_video }}
-                {% else %}
-                  {{ content.field_visual }}
-                {% endif %}
-              </div>
-            </div>
-            <div class="col-12 col-lg-5 order-lg-1">
-              <h2 class="mb-1 mb-md-2">{{ content.field_title }}</h2>
-              <div class="lead font-weight-bold highlight mb-1 mb-md-2">{{ content.field_highlight }}</div>
-              <div class="standard mb-1 mb-md-2">{{ content.field_standard_text }}</div>
-              {{ content.field_call_to_action_link_simple }}
-            </div>
-          </div>
-        {% endif %}
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>

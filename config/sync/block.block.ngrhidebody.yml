@@ -1,0 +1,30 @@
+uuid: 41a74eb7-7329-4c72-a24d-9b5bce9d3d15
+langcode: fr
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:1fcb7689-711d-4286-b6f4-f89da564ecfa'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_boosted
+id: ngrhidebody
+theme: theme_boosted
+region: prefooter
+weight: -54
+provider: null
+plugin: 'block_content:1fcb7689-711d-4286-b6f4-f89da564ecfa'
+settings:
+  id: 'block_content:1fcb7689-711d-4286-b6f4-f89da564ecfa'
+  label: '[NGR] Hide Body'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/working-together-flash-redirect\r\n/produits/working-together-smoothie-redirect"

@@ -1,0 +1,33 @@
+uuid: b3a04388-8b52-45b2-aa42-a6b1aa9888b1
+langcode: en
+status: false
+dependencies:
+  module:
+    - node
+    - oab_frontoffice
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_phonenumber
+theme: theme_oab_hub_one_i
+region: sidebar
+weight: -40
+provider: null
+plugin: phone_number_block
+settings:
+  id: phone_number_block
+  label: 'Phone Number'
+  label_display: visible
+  provider: oab_frontoffice
+  context_mapping:
+    node: '@node.node_route_context:node'
+  block_title: 'Pour le contacter par téléphone'
+  content: ''
+  content_format: full_html
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      distributor: distributor

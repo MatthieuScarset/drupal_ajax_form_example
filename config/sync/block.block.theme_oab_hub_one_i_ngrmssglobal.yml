@@ -1,0 +1,31 @@
+uuid: b3005953-d8d4-4bcf-9567-54a0fa127be9
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:c87a5964-5305-4067-b60e-11facf3fcba7'
+  module:
+    - block_content
+    - oab_hub
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_ngrmssglobal
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: 0
+provider: null
+plugin: 'block_content:c87a5964-5305-4067-b60e-11facf3fcba7'
+settings:
+  id: 'block_content:c87a5964-5305-4067-b60e-11facf3fcba7'
+  label: '[NGR] MSS Global'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  hub_condition:
+    id: hub_condition
+    hub_id:
+      1282: '1282'
+    negate: false

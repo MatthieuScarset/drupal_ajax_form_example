@@ -13,6 +13,7 @@ dependencies:
     - paragraphs.paragraphs_type.module_list
     - paragraphs.paragraphs_type.module_map
     - paragraphs.paragraphs_type.module_text_video_image
+    - paragraphs.paragraphs_type.module_storytelling
     - paragraphs.paragraphs_type.module_title_and_highlight
     - paragraphs.paragraphs_type.module_video
     - paragraphs.paragraphs_type.paragraph_wysiwyg
@@ -43,6 +44,7 @@ settings:
       module_map: module_map
       module_title_and_highlight: module_title_and_highlight
       module_video: module_video
+      module_storytelling: module_storytelling
     negate: 0
     target_bundles_drag_drop:
       call_to_action:
@@ -182,6 +184,12 @@ settings:
         enabled: false
       module_steps:
         weight: 88
+        enabled: false
+      module_storytelling:
+        weight: 110
+        enabled: true
+      module_storytelling_item:
+        weight: 111
         enabled: false
       module_testimonial:
         weight: 89

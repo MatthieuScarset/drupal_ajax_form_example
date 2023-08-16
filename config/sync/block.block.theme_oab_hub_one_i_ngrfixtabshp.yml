@@ -1,0 +1,33 @@
+uuid: 35724327-3df1-4786-b87f-c8241235e39f
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:a0a43c1d-1250-4ad4-b23b-4d495c213810'
+  module:
+    - block_content
+    - node
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_ngrfixtabshp
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -78
+provider: null
+plugin: 'block_content:a0a43c1d-1250-4ad4-b23b-4d495c213810'
+settings:
+  id: 'block_content:a0a43c1d-1250-4ad4-b23b-4d495c213810'
+  label: '[NGR] Fix tabs HP'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      homepage: homepage

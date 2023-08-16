@@ -1,0 +1,20 @@
+uuid: b5b004b7-6f4e-47f4-b2c8-02883004d218
+langcode: fr
+status: false
+dependencies:
+  module:
+    - oab_cookie_compliance
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_cookiecomplianceblock
+theme: theme_oab_hub_one_i
+region: header
+weight: -54
+provider: null
+plugin: cookie_compliance_block
+settings:
+  id: cookie_compliance_block
+  label: 'Cookie compliance Block'
+  label_display: '0'
+  provider: oab_cookie_compliance
+visibility: {  }

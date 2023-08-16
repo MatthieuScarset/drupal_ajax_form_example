@@ -8,7 +8,7 @@ tac_lite_config_scheme_1:
   name: view
   perms:
     grant_view: grant_view
-  unpublished: 0
+  unpublished: 1
   term_visibility: 1
   tac_lite_create: 0
 tac_lite_grants_scheme_1:

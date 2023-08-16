@@ -45,10 +45,10 @@ class PromoActuBlock extends BlockBase {
 
 
         if ($type == 'product') {
-            if ($node->hasField('field_axiome_data')) {
+            if (isset($node->field_axiome_data->value)) {
 
                 //on deserialise les données à passer au template
-                $field_axiome_data = isset($node->field_axiome_data) ? unserialize($node->field_axiome_data->value) : array();
+                $field_axiome_data = unserialize($node->field_axiome_data->value);
                 if (is_countable($field_axiome_data) && count($field_axiome_data) > 0) {
 
                     if (isset($field_axiome_data['Children']['ruby_theme']['Children']['ruby_zone_seemore']['Attributes'])) {

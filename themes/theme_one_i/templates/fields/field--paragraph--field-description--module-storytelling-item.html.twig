@@ -1,0 +1,9 @@
+{% if items|length == 1 %}
+  {{ element }}
+{% else %}
+  <ul class="list col-12 pt-O mb-0">
+    {% for item in items %}
+      <li class="pb-1">{{ item.content }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}

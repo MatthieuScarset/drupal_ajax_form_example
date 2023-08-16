@@ -1,0 +1,25 @@
+uuid: cdfa0409-590b-4b24-9b87-fbcab907036c
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:de2b5240-da09-49e7-acfe-2ccc985146af'
+  module:
+    - block_content
+  theme:
+    - theme_one_i
+id: ngrfixtrackmenu_2
+theme: theme_one_i
+region: prefooter
+weight: -47
+provider: null
+plugin: 'block_content:de2b5240-da09-49e7-acfe-2ccc985146af'
+settings:
+  id: 'block_content:de2b5240-da09-49e7-acfe-2ccc985146af'
+  label: '[NGR] Fix track Menu'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

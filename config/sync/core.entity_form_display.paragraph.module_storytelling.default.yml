@@ -1,0 +1,55 @@
+uuid: f6ec54f5-0f27-4a9e-a2d5-c4973152b46d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.module_storytelling.field_highlight
+    - field.field.paragraph.module_storytelling.field_story_parts
+    - field.field.paragraph.module_storytelling.field_title
+    - paragraphs.paragraphs_type.module_storytelling
+  module:
+    - entity_browser_entity_form
+    - inline_entity_form
+id: paragraph.module_storytelling.default
+targetEntityType: paragraph
+bundle: module_storytelling
+mode: default
+content:
+  field_highlight:
+    type: string_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_story_parts:
+    type: inline_entity_form_complex
+    weight: 2
+    region: content
+    settings:
+      form_mode: default
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: false
+      match_operator: CONTAINS
+      allow_duplicate: true
+      collapsible: true
+      collapsed: false
+      revision: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: _none
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
