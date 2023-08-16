@@ -6,10 +6,12 @@ dependencies:
     - field.storage.node.field_modules
     - node.type.domain
     - paragraphs.paragraphs_type.module_cross_link
+    - paragraphs.paragraphs_type.module_cross_sell
     - paragraphs.paragraphs_type.module_domains
     - paragraphs.paragraphs_type.module_hook_text
     - paragraphs.paragraphs_type.module_key_figures
     - paragraphs.paragraphs_type.module_list
+    - paragraphs.paragraphs_type.module_partner
     - paragraphs.paragraphs_type.paragraph_wysiwyg
   module:
     - entity_reference_revisions
@@ -28,10 +30,12 @@ settings:
   handler_settings:
     target_bundles:
       module_cross_link: module_cross_link
+      module_cross_sell: module_cross_sell
       module_domains: module_domains
       module_hook_text: module_hook_text
       module_key_figures: module_key_figures
       module_list: module_list
+      module_partner: module_partner
       paragraph_wysiwyg: paragraph_wysiwyg
     negate: 0
     target_bundles_drag_drop:
@@ -109,7 +113,7 @@ settings:
         enabled: true
       module_cross_sell:
         weight: 86
-        enabled: false
+        enabled: true
       module_cross_sell_item:
         weight: 87
         enabled: false
@@ -166,7 +170,7 @@ settings:
         enabled: false
       module_partner:
         weight: 105
-        enabled: false
+        enabled: true
       module_presentation:
         weight: 106
         enabled: false
