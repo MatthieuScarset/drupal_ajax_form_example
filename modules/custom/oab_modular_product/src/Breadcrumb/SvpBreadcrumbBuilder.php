@@ -90,7 +90,7 @@ class SvpBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     $breadcrumb->addCacheContexts(['url']);
 
     if (!$node->isNew()) {
-      $breadcrumb->addCacheTags(["node:$node->id()"]);
+      $breadcrumb->addCacheTags(['node:' . $node->id()]);
       $breadcrumb->addCacheableDependency($node);
     }
 
