@@ -54,12 +54,12 @@ function theme_one_i_preprocess_region(&$variables) {
   $variables['site_name'] = $config->get('name');
 
   if ($variables['region'] === 'top_zone') {
-    if (isset($node) && $node->bundle() === 'corporate') {
-      $variables['attributes']['class'][] = 'bg-transparent';
+    if (isset($node) && $node->bundle() === 'modular_product') {
+      $variables['attributes']['class'][] = 'bg-gray2';
     } elseif ($route_match->getRouteName() === 'view.category_page.category_page') {
       $variables['attributes']['class'][] = 'bg-dark text-white';
     } else {
-      $variables['attributes']['class'][] = 'bg-gray2';
+      $variables['attributes']['class'][] = 'bg-transparent';
     }
   }
 }
