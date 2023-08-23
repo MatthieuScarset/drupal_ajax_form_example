@@ -5,6 +5,7 @@ namespace Drupal\oab_didomi\EventSubscriber;
 use Drupal\block_content\Entity\BlockContent;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Language\LanguageManager;
+use Drupal\Core\Render\AttachmentsInterface;
 use Drupal\Core\Render\Markup;
 use Drupal\Core\Render\Renderer;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
@@ -67,71 +68,71 @@ class IframeChangeSrcEvent implements EventSubscriberInterface {
       @$html->loadHTML($content);
       if (!empty($html)) {
         $xpath = new \DOMXPath($html);
-        /** @var \DOMElement $iframe */
-        foreach ($xpath->query("//iframe[(contains(@src, 'youtube'))]") as $iframe) {
-          //          dd("coucou");
-          //on change les attributs de l'iframe youtube pour passer le src en data-src
-          $iframe->setAttribute('data-src', $iframe->getAttribute('src'));
-          $iframe->removeAttribute('src');
-          $iframe->setAttribute('style', 'display: none;');
 
-          //on load le block didomi contenant le message à afficher et le bouton pour accepter le cookie
-          $block_didomi = $this->entityTypeManager->getStorage('block_content')
-            ->loadByProperties(['uuid' => 'eb454a17-56da-4d21-b3ca-565449d7c452']);
+        /** @var \DOMNodeList $ytb_iframes */
+        $ytb_iframes = $xpath->query("//iframe[(contains(@src, 'youtube'))]");
 
-          if (count($block_didomi) > 0) {
-            $block_didomi = reset($block_didomi);
-            /** @var BlockContent $block_didomi */
-            $languages = $block_didomi->getTranslationLanguages(TRUE);
-            if (key_exists($this->languageManager->getCurrentLanguage()
-              ->getId(), $languages)) {
-              $block_didomi = $block_didomi->getTranslation($this->languageManager->getCurrentLanguage()
-                ->getId());
-            }
-            //on récupère le contenu html
-            $body_html_block_didomi = $block_didomi->get('body')->getValue();
-
-            if (count($body_html_block_didomi) > 0) {
-              $body_html_block_didomi = reset($body_html_block_didomi);
-
-              if (isset($body_html_block_didomi['value'])) {
-                //on crée l'element pour afficher le contenu du block
-                $div_parent_block = $html->createElement('div');
-                $div_parent_block->setAttribute('class', 'divParentBlockMessageCookie');
-                $div_parent_block->setAttribute('style', 'display: none;');
-
-                // la div didomi-message : case noire au fond blanc
-                $div_didomi_message = $html->createElement('div');
-                $div_didomi_message->setAttribute('class', 'didomi-message');
-                //html du block => dans la div didomi-message
-                $new_block_element = $html->createDocumentFragment();
-                $new_block_element->appendXML($body_html_block_didomi);
-                $div_didomi_message->appendChild($new_block_element);
-
-                $a_button = $html->createElement('a');
-                $a_button->setAttribute('class', 'btn btn-default btn_accept_cookie_youtube');
-                $a_button->textContent = $this->t('Accept');
-
-                $div_didomi_message->appendChild($a_button);
-
-                $div_parent_block->appendChild($div_didomi_message);
-
-                //on crée une div parent pour y mettre l'iframe + le nouveau block
-                $super_div_parent = $html->createElement('div');
-                $super_div_parent->setAttribute('class', 'divParentIframeYoutube');
-                $super_div_parent->setAttribute('is', 'div-iframe-youtube');
-                $parent_node = $iframe->parentNode;
-                $super_div_parent->appendChild($iframe);
-                $super_div_parent->appendChild($div_parent_block);
-                $parent_node->appendChild($super_div_parent);
-
-                //on save le nouveau html formé
-                $event->getResponse()->setContent($xpath->document->saveHTML());
-              }
-            }
-          }
-
+        // Si on a pas d'iframes, on stop le script tout de suite
+        if ($ytb_iframes === null || $ytb_iframes->length === 0) {
+          return;
         }
+
+        //on load le block didomi contenant le message à afficher et le bouton pour accepter le cookie
+        $block_didomi = $this->entityTypeManager->getStorage('block_content')
+          ->loadByProperties(['uuid' => 'eb454a17-56da-4d21-b3ca-565449d7c452']);
+
+        $body_html_block_didomi = "";
+        if (count($block_didomi) > 0) {
+          $block_didomi = reset($block_didomi);
+          /** @var BlockContent $block_didomi */
+
+          $current_language_id = $this->languageManager->getCurrentLanguage()->getId();
+          if (key_exists($current_language_id, $block_didomi->getTranslationLanguages(TRUE))) {
+            $block_didomi = $block_didomi->getTranslation($current_language_id);
+          }
+          //on récupère le contenu html
+          $body_html_block_didomi = $block_didomi->body->value;
+        }
+
+        /** @var \DOMElement $iframe */
+        foreach ($ytb_iframes as $iframe) {
+
+          //on crée l'element pour afficher le contenu du block
+          $div_cookie_block = $html->createElement('div');
+          $div_cookie_block->setAttribute('slot', 'cookieBlock');
+
+          //Ajout de l'html du block
+          $msg_block_element = $html->createDocumentFragment();
+          $msg_block_element->appendXML($body_html_block_didomi);
+          $div_cookie_block->appendChild($msg_block_element);
+
+          //on crée une div parent pour y mettre l'iframe + le nouveau block
+          $ytb_embed_tag = $html->createElement('ytb-embed');
+          $ytb_embed_tag->setAttribute('video-src', $iframe->getAttribute('src'));
+          $ytb_embed_tag->setAttribute('video-title', $this->t("Youtube video"));
+          $ytb_embed_tag->setAttribute('no-cover-image', 'true');
+
+          // Ajout du cookie msg to the ytb embed tag
+          $ytb_embed_tag->appendChild($div_cookie_block);
+
+          // Finally, get the parent node and add the fully ytb-embed tag
+          $parent_node = $iframe->parentNode;
+          $parent_node->appendChild($ytb_embed_tag);
+
+          // delete the iframe
+          $iframe->remove();
+        }
+
+        // Ajout des custom elements
+        /** @var \DOMElement $body */
+        foreach ($xpath->query("//body") as $body) {
+          $script_tag = $html->createElement('script');
+          $script_tag->setAttribute("src", "/themes/theme_one_i/dist/js/ytb-embed.min.js");
+          $body->appendChild($script_tag);
+        }
+
+        //on save le nouveau html formé
+        $event->getResponse()->setContent($xpath->document->saveHTML());
       }
     }
   }

@@ -1,7 +1,7 @@
 <script lang="ts">
 
 import {defineComponent} from "vue";
-import {Didomi, Drupal, drupalSettings} from "../Drupal";
+import {Drupal, drupalSettings} from "../drupal";
 
 enum SLOTS {
   Video,
@@ -13,45 +13,65 @@ export default defineComponent({
 
   props: {
     videoSrc: String,
-    videoTitle: String
+    videoTitle: String,
+    noCoverImage: Boolean,
+    autoplay: Boolean
   },
   data() {
     return {
       Drupal: Drupal,
       SLOTS: SLOTS,
-      currentSlot: SLOTS.CoverImage
+      // Default slot at loading. If no cover image is provided, we display the CookieMessage
+      currentSlot: SLOTS.CoverImage,
+      isDidomiDefined: false,
+      didomi: {}
     }
+  },
+  mounted() {
+
+    // if Didomi is not available in window context at loading, we assume that it won't be loaded
+    // If it's available later on, the next function will do the job
+    if (!window.hasOwnProperty("Didomi")) {
+      this.isDidomiDefined = false;
+    }
+
+    // Function to be called by Didomi when it's ready
+    (<any> window).didomiOnReady = (<any> window).didomiOnReady || [];
+    (<any> window).didomiOnReady.push(function (Didomi){
+      // this.didomi = Didomi;
+      this.isDidomiDefined = true;
+
+      if (Didomi.isConsentRequired()) {
+        // Define default slot at loading
+        if (this.noCoverImage) {
+          this.currentSlot = this.areYtbCookiesAccepted() ? SLOTS.Video : SLOTS.CookieMessage;
+        } else {
+          this.currentSlot = SLOTS.CoverImage
+        }
+      }
+
+      // Create event for when param change
+      Didomi.getObservableOnUserConsentStatusForVendor(drupalSettings.didomi.vendor_id_youtube)
+        .subscribe(function (consentStatus) {
+          if (this.currentSlot !== SLOTS.CoverImage) {
+            this.currentSlot = consentStatus ? SLOTS.Video : SLOTS.CookieMessage
+          }
+        }.bind(this));
+    }.bind(this));
 
   },
   methods: {
     showVideo() {
-      if (this.areYtbCookiesAccepted()) {
-        this.currentSlot = SLOTS.Video;
-      } else {
-        this.currentSlot = SLOTS.CookieMessage
-      }
+      this.currentSlot = this.areYtbCookiesAccepted() ? SLOTS.Video : SLOTS.CookieMessage;
     },
     areYtbCookiesAccepted(): boolean {
-      let youtubeDidomi = Didomi().getUserStatusForVendor(drupalSettings.didomi.vendor_id_youtube);
+      let youtubeDidomi = (<any> window).Didomi.getUserStatusForVendor(drupalSettings.didomi.vendor_id_youtube);
       return !(youtubeDidomi == false || youtubeDidomi == undefined)
     },
-
     acceptCookies() {
-      //on récupère le UserConsent
-      const userConsent = Didomi().getUserStatus();
-      const ytbVendorId = drupalSettings.didomi.vendor_id_youtube;
-      //ajout de l'élément dans les vendor enabled
-      if (!userConsent.vendors.consent.enabled.includes(ytbVendorId)) {
-        userConsent.vendors.consent.enabled.push(ytbVendorId);
-      }
-      //suppression de l'élément dans les vendor disabled
-      for (let i = 0; i < userConsent.vendors.consent.disabled.length; i++) {
-        if (userConsent.vendors.consent.disabled[i] === ytbVendorId) {
-          userConsent.vendors.consent.disabled.splice(i, 1);
-        }
-      }
-      //on enregistre le nouvel UserConsent
-      Didomi().setUserStatus(userConsent);
+      const transaction = (<any> window).Didomi.openTransaction();
+      transaction.enableVendor(drupalSettings.didomi.vendor_id_youtube);
+      transaction.commit();
       this.showVideo();
     }
   }
@@ -60,23 +80,30 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="cover-image" v-on:click="showVideo()" v-if="this.currentSlot === SLOTS.CoverImage">
-    <slot name="cover-img"></slot>
+<!--  If Didomi is not defined, we show a specific message-->
+  <div v-if="!this.isDidomiDefined" class="cookie-message">
+    <p>{{ Drupal.t("Cookie management script is not defined. Please add this page to your white list to allow the Youtube video") }}</p>
   </div>
-  <div class="cookie-message" v-if="this.currentSlot === SLOTS.CookieMessage">
-    <slot name="cookieBlock"></slot>
-    <button
-      class="btn btn-accept-cookies"
-      v-on:click="acceptCookies()"
-    >{{ Drupal.t("Accept") }}</button>
+  <div v-else>
+    <div class="cover-image" v-on:click="showVideo()" v-if="this.currentSlot === SLOTS.CoverImage">
+      <slot name="cover-img"></slot>
+    </div>
+    <div class="cookie-message" v-else-if="this.currentSlot === SLOTS.CookieMessage">
+      <slot name="cookieBlock"></slot>
+      <button
+        class="btn btn-accept-cookies"
+        v-on:click="acceptCookies()"
+      >{{ Drupal.t("Accept") }}</button>
+    </div>
+    <div class="ytb-iframe embed-responsive embed-responsive-16by9" v-else-if="this.currentSlot === SLOTS.Video">
+      <iframe allowfullscreen=""
+              class="embed-responsive-item"
+              :src="this.videoSrc + '?autoplay=' + this.autoplay"
+              :title="this.videoTitle"
+      ></iframe>
+    </div>
   </div>
-  <div class="ytb-iframe embed-responsive embed-responsive-16by9" v-if="this.currentSlot === SLOTS.Video">
-    <iframe allowfullscreen=""
-            class="embed-responsive-item"
-            :src="this.videoSrc"
-            :title="this.videoTitle"
-    ></iframe>
-  </div>
+
 </template>
 
 <style lang="scss">

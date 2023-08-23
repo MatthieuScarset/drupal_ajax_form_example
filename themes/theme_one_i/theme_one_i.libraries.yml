@@ -9,7 +9,6 @@ global-styling:
     dist/js/script.min.js: {}
     dist/js/script-legacy.min.js: {}
 
-
   dependencies:
 #  Jquery core drupal mis en commentaire car c'est une version ligth et qu'il manque des éléments nécessaire a ob1
     - core/drupal
