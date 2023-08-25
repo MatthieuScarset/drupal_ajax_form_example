@@ -54,7 +54,8 @@ export default defineComponent({
       Didomi.getObservableOnUserConsentStatusForVendor(drupalSettings.didomi.vendor_id_youtube)
         .subscribe(function (consentStatus) {
           if (this.currentSlot !== SLOTS.CoverImage) {
-            this.currentSlot = consentStatus ? SLOTS.Video : SLOTS.CookieMessage
+            // consentStatus can be false even if the vendor is accepted, because it take the category status into consideration too
+            this.currentSlot = (consentStatus || this.areYtbCookiesAccepted()) ? SLOTS.Video : SLOTS.CookieMessage
           }
         }.bind(this));
     }.bind(this));
