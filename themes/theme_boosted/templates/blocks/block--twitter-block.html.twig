@@ -1,6 +1,5 @@
-<section {{ attributes.addClass('block', 'clearfix', 'twitter-block') }}>
-
-    {% if content.tweets and content.tweets is iterable and content.tweets|length > 0 %}
+{% if content.tweets and content.tweets is iterable and content.tweets|length > 0 %}
+  <section {{ attributes.addClass('block', 'clearfix', 'twitter-block') }}>
         <div id="twitter-block-carousel">
             <div class="carousel-inner">
                 {% for key, tweet in content.tweets %}
@@ -10,5 +9,5 @@
                 {% endfor %}
             </div>
         </div>
-    {% endif %}
-</section>
+  </section>
+{% endif %}
