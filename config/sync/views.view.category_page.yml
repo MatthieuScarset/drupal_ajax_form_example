@@ -335,6 +335,8 @@ display:
         - 'config:core.entity_view_display.node.cloud_service_provider.subhome'
         - 'config:core.entity_view_display.node.cloud_service_provider.teaser'
         - 'config:core.entity_view_display.node.cloud_service_provider.tile'
+        - 'config:core.entity_view_display.node.corporate.default'
+        - 'config:core.entity_view_display.node.corporate.teaser'
         - 'config:core.entity_view_display.node.country.default'
         - 'config:core.entity_view_display.node.country.related_content'
         - 'config:core.entity_view_display.node.country.right_linked_content'
@@ -384,6 +386,9 @@ display:
         - 'config:core.entity_view_display.node.modular_product.teaser_categroy_page'
         - 'config:core.entity_view_display.node.modular_product.teaser_product_cross_sell'
         - 'config:core.entity_view_display.node.modular_product.tile'
+        - 'config:core.entity_view_display.node.mss_article.default'
+        - 'config:core.entity_view_display.node.mss_article.pdf'
+        - 'config:core.entity_view_display.node.mss_article.teaser'
         - 'config:core.entity_view_display.node.news.default'
         - 'config:core.entity_view_display.node.news.subhome'
         - 'config:core.entity_view_display.node.news.teaser'
@@ -395,6 +400,8 @@ display:
         - 'config:core.entity_view_display.node.partner.right_linked_content'
         - 'config:core.entity_view_display.node.partner.subhome'
         - 'config:core.entity_view_display.node.partner.teaser'
+        - 'config:core.entity_view_display.node.poc_test_module.default'
+        - 'config:core.entity_view_display.node.poc_test_module.teaser'
         - 'config:core.entity_view_display.node.press_kit.default'
         - 'config:core.entity_view_display.node.press_kit.related_content'
         - 'config:core.entity_view_display.node.press_kit.right_linked_content'
@@ -442,7 +449,16 @@ display:
     display_plugin: page
     position: 1
     display_options:
-      display_extenders: {  }
+      display_extenders:
+        oab_theme_settings:
+          theme:
+            en: ob1
+            pt-br: default
+            es: default
+            fr: ob1
+            ru: default
+            ru-en: default
+            ja: default
       path: category-page/%tid
     cache_metadata:
       max-age: -1
@@ -463,6 +479,8 @@ display:
         - 'config:core.entity_view_display.node.cloud_service_provider.subhome'
         - 'config:core.entity_view_display.node.cloud_service_provider.teaser'
         - 'config:core.entity_view_display.node.cloud_service_provider.tile'
+        - 'config:core.entity_view_display.node.corporate.default'
+        - 'config:core.entity_view_display.node.corporate.teaser'
         - 'config:core.entity_view_display.node.country.default'
         - 'config:core.entity_view_display.node.country.related_content'
         - 'config:core.entity_view_display.node.country.right_linked_content'
@@ -512,6 +530,9 @@ display:
         - 'config:core.entity_view_display.node.modular_product.teaser_categroy_page'
         - 'config:core.entity_view_display.node.modular_product.teaser_product_cross_sell'
         - 'config:core.entity_view_display.node.modular_product.tile'
+        - 'config:core.entity_view_display.node.mss_article.default'
+        - 'config:core.entity_view_display.node.mss_article.pdf'
+        - 'config:core.entity_view_display.node.mss_article.teaser'
         - 'config:core.entity_view_display.node.news.default'
         - 'config:core.entity_view_display.node.news.subhome'
         - 'config:core.entity_view_display.node.news.teaser'
@@ -523,6 +544,8 @@ display:
         - 'config:core.entity_view_display.node.partner.right_linked_content'
         - 'config:core.entity_view_display.node.partner.subhome'
         - 'config:core.entity_view_display.node.partner.teaser'
+        - 'config:core.entity_view_display.node.poc_test_module.default'
+        - 'config:core.entity_view_display.node.poc_test_module.teaser'
         - 'config:core.entity_view_display.node.press_kit.default'
         - 'config:core.entity_view_display.node.press_kit.related_content'
         - 'config:core.entity_view_display.node.press_kit.right_linked_content'

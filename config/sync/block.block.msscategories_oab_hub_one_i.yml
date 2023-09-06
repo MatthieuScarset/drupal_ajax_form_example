@@ -1,0 +1,28 @@
+uuid: 6964b6cf-f0ee-44fd-bf3f-4bb8b6d66a49
+langcode: fr
+status: true
+dependencies:
+  module:
+    - oab_frontoffice
+    - oab_hub
+  theme:
+    - theme_oab_hub_one_i
+id: msscategories_oab_hub_one_i
+theme: theme_oab_hub_one_i
+region: sidebar
+weight: 0
+provider: null
+plugin: msscategories_block
+settings:
+  id: msscategories_block
+  label: 'MSS Categories '
+  label_display: '0'
+  provider: oab_frontoffice
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  hub_condition:
+    id: hub_condition
+    hub_id:
+      1282: '1282'
+    negate: false

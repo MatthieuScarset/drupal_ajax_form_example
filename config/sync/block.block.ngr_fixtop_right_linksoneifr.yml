@@ -1,0 +1,33 @@
+uuid: dad758bc-de10-49ab-81b1-700b83fe6bcf
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:a5fa0c36-9e61-4e60-bec7-aa1c0653bd47'
+  module:
+    - block_content
+    - language
+  theme:
+    - theme_one_i
+id: ngr_fixtop_right_linksoneifr
+theme: theme_one_i
+region: prefooter
+weight: 0
+provider: null
+plugin: 'block_content:a5fa0c36-9e61-4e60-bec7-aa1c0653bd47'
+settings:
+  id: 'block_content:a5fa0c36-9e61-4e60-bec7-aa1c0653bd47'
+  label: '[NGR] Fix top_right_links One-i FR'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      fr: fr

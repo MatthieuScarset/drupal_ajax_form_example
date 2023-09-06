@@ -1,0 +1,56 @@
+uuid: 9b498a35-261e-4118-b5bc-3a2ecd6b2c90
+langcode: en
+status: false
+dependencies:
+  module:
+    - language
+    - node
+    - oab_frontoffice
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_contactbarjastandard
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -67
+provider: null
+plugin: contact_bar_ja_standard_block
+settings:
+  id: contact_bar_ja_standard_block
+  label: 'Contact Bar JA Standard'
+  label_display: '0'
+  provider: oab_frontoffice
+  context_mapping:
+    node: '@node.node_route_context:node'
+  link_offices: 'http://www.orange-business.com/en/where-we-are'
+  link_offices_text: 現地事務所
+  link_help: 'https://www.orange-business.com/en/any-request'
+  link_help_text: ' 問い合わせ'
+  link_contact: 'https://www.orange-business.com/en/contact-us'
+  link_contact_text: 営業コンタクト
+visibility:
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      ja: ja
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      blog_post: blog_post
+      country: country
+      customer_story: customer_story
+      document: document
+      full_html: full_html
+      homepage: homepage
+      industry: industry
+      magazine: magazine
+      partner: partner
+      product: product
+      region: region
+      simple_page: simple_page
+      solution: solution

@@ -1,0 +1,47 @@
+uuid: 9580face-3524-4205-94d5-bd8a3cc804d8
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:2f2057f2-3ebd-49a6-85a8-c7c1fbecf182'
+  module:
+    - block_content
+    - language
+    - node
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_engenericmyservicespacem
+theme: theme_oab_hub_one_i
+region: sidebar
+weight: -60
+provider: null
+plugin: 'block_content:2f2057f2-3ebd-49a6-85a8-c7c1fbecf182'
+settings:
+  id: 'block_content:2f2057f2-3ebd-49a6-85a8-c7c1fbecf182'
+  label: '[EN][Generic] My Service Space M'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "/products/audio-and-web-conferencing\r\n/products/business-together-microsoft"
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      product: product
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      en: en

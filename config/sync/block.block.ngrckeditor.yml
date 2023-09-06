@@ -1,0 +1,25 @@
+uuid: 0bf2d893-f895-4bcf-9797-29c32b9d3eee
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:17a035be-5b46-4fe9-a64f-74abbcadb340'
+  module:
+    - block_content
+  theme:
+    - theme_obs_backoffice
+id: ngrckeditor
+theme: theme_obs_backoffice
+region: content
+weight: 0
+provider: null
+plugin: 'block_content:17a035be-5b46-4fe9-a64f-74abbcadb340'
+settings:
+  id: 'block_content:17a035be-5b46-4fe9-a64f-74abbcadb340'
+  label: '[NGR] CKEDITOR'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

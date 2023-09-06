@@ -1,0 +1,30 @@
+uuid: 75fe5c99-3a72-425f-abbd-82845e4285c7
+langcode: en
+status: false
+dependencies:
+  module:
+    - node
+    - oab_frontoffice
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_testshowroom
+theme: theme_oab_hub_one_i
+region: sidebar
+weight: -45
+provider: null
+plugin: test_showroom_block
+settings:
+  id: test_showroom_block
+  label: 'Test Showroom Block'
+  label_display: '0'
+  provider: oab_frontoffice
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      product: product

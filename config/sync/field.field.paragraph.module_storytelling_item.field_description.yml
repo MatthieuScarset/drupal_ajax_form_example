@@ -1,0 +1,19 @@
+uuid: 97178f61-212c-4c86-be47-b6ed07dafffc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_description
+    - paragraphs.paragraphs_type.module_storytelling_item
+id: paragraph.module_storytelling_item.field_description
+field_name: field_description
+entity_type: paragraph
+bundle: module_storytelling_item
+label: 'Item bullet point'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

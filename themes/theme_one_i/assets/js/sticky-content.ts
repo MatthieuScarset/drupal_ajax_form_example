@@ -1,9 +1,12 @@
+import {drupalSettings, Drupal} from './drupal.js';
+
 class StickyContent {
   private elems = [];
   private readonly header: HTMLElement;
   private readonly pageMenu: HTMLElement;
 
   constructor() {
+
     this.elems = Array.from(document.querySelectorAll('.sticky-top')).filter((elem) => {
       return !elem.closest('header') && !elem.querySelector('.ob1-menu-page');
     });
@@ -35,7 +38,33 @@ class StickyContent {
       });
     }).observe(this.header, {attributeOldValue: true, attributeFilter:['class']});
 
+
+
+    //lancement de la fonction pour éviter que le header et la local nav se superpose à l'élément contenant l'id d'ancrage interne
+    // se lance 0.2s après le début du chargement de la page pour que la nouvelle position
+    // soit prise en compte lors d'un changement de page avec un id d'ancrage dans l'url
+    setTimeout(() => {
+       this.onLoadScroll();
+    }, 200);
+
     this.setTop();
+  }
+
+  private onLoadScroll() {
+    let isCategoryPage = drupalSettings.path.currentPath.includes('category-page');
+
+    if (isCategoryPage) {
+      let internalRefName = window.location.hash;
+
+      if (internalRefName) {
+        let internalRefElement = (document.querySelector(internalRefName) as HTMLElement);
+
+        let top = internalRefElement.offsetHeight + this.getBodyPaddingTop() - 35;
+        let pagePosition = document.body.clientHeight;
+
+        window.scrollBy(pagePosition, -top);
+      }
+    }
   }
 
   private setTop() {

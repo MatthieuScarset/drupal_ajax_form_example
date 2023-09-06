@@ -85,6 +85,7 @@ class OabExtension extends AbstractExtension {
       new TwigFilter('formatDate', [$this, 'formatDate']),
       new TwigFilter('linkAxiome', [$this, 'linkAxiome']),
       new TwigFilter('base64_encode', [$this, 'base64_encode']),
+      new TwigFilter('addslashes', [$this, 'addslashes']),
     ];
 
     return $filters;
@@ -366,6 +367,10 @@ class OabExtension extends AbstractExtension {
 
   public function replaceSpacesAndSpecialChars($string) {
     return htmlentities(\Drupal::service('oab_develop.helper.string_utilities')->getSlug($string));
+  }
+
+  public function addSlashes(string $string) {
+    return addslashes($string);
   }
 
 }

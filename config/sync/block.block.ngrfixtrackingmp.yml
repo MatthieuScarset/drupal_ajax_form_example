@@ -1,0 +1,33 @@
+uuid: 826ba0f7-8a2a-4ae2-9c65-a782f7d3c69a
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:6e2e70e0-3bdf-4bc7-9c96-1d9e9bfe7e15'
+  module:
+    - block_content
+    - node
+  theme:
+    - theme_one_i
+id: ngrfixtrackingmp
+theme: theme_one_i
+region: prefooter
+weight: 0
+provider: null
+plugin: 'block_content:6e2e70e0-3bdf-4bc7-9c96-1d9e9bfe7e15'
+settings:
+  id: 'block_content:6e2e70e0-3bdf-4bc7-9c96-1d9e9bfe7e15'
+  label: '[NGR] Fix tracking MP'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      modular_product: modular_product

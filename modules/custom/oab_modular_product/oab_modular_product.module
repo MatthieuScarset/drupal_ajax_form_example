@@ -1,12 +1,16 @@
 <?php
 
+use Drupal\Core\Entity\EntityFormInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\FieldFilteredMarkup;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\NodeTypeInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\oab_modular_product\Services\OabModularProductService;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\taxonomy\Entity\Term;
+
 
 /**
  * Implements hook_inline_entity_form_entity_form_alter().
@@ -16,68 +20,24 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
   /*
    * Ici, on ne va gérer que les alterations du formulaire du paragraph
    */
-  if (!isset($entity_form['#bundle'])) {
+  if (!isset($entity_form['#bundle'])
+    || !is_a($form_state->getformObject(), EntityFormInterface::class)) {
     return;
   }
 
+  //Désactivation des fields des paragraphs qui ont une valeur par défaut
+  //uniquement dans modular product
+  /** @var EntityInterface $original_node */
+  $original_node = $form_state->getformObject()->getEntity();
+
+  if ($original_node->bundle() === 'modular_product') {
+    \Drupal::service('oab_modular_product.form_service')
+      ->disableFieldWithDefaultValue($entity_form, $form_state, $entity_form['#entity']);
+  }
+
+
   /** @var OabModularProductService $conf_modular_product */
   $conf_modular_product = \Drupal::service('oab_modular_product.settings');
-
-  $title_short = $conf_modular_product->getShortTitleMaxCharacter();
-  $title_long = $conf_modular_product->getLongTitleMaxCharacter();
-  $description = $conf_modular_product->getLongDescriptionMaxCharacter();
-
-  $size_title_short = min(150, $conf_modular_product->getShortTitleMaxCharacter()+10);
-
-  $module = [
-    'module_list',
-    'module_key_figures_items',
-    'module_key_figures',
-    'module_title_and_highlight'
-  ];
-
-  if (in_array($entity_form['#bundle'], $module)) {
-
-    if (isset($entity_form['field_title'])) {
-      $entity_form['field_title']['widget'][0]['value']['#maxlength'] = $title_short;
-      $entity_form['field_title']['widget'][0]['value']['#size'] = $size_title_short;
-      $entity_form['field_title']['widget'][0]['value']['#description'] .= ' '.FieldFilteredMarkup::create("$title_short characters max");
-    }
-
-    if (isset($entity_form['field_description'])) {
-      $entity_form['field_description']['widget'][0]['value']['#maxlength'] = $title_short;
-      $entity_form['field_description']['widget'][0]['value']['#size'] = $size_title_short;
-      $entity_form['field_description']['widget'][0]['value']['#description'] .= ' '.FieldFilteredMarkup::create("$title_short characters max");
-    }
-
-    if (isset($entity_form['field_highlight'])) {
-      if ($entity_form['#bundle'] === 'module_title_and_highlight') {
-        $nbChar = $description;
-      }
-      else {
-        $nbChar = $title_long;
-      }
-
-      $entity_form['field_highlight']['widget'][0]['value']['#maxlength'] = $nbChar;
-      $entity_form['field_highlight']['widget'][0]['value']['#description'] .= ' ' .FieldFilteredMarkup::create("$nbChar characters max");
-    }
-  }
-
-
-  // gestion nombres characters Module Header Default
-  if($entity_form['#bundle'] === 'module_header_default') {
-    if (isset($entity_form['field_title'])) {
-      $entity_form['field_title']['widget'][0]['value']['#maxlength'] = $title_short;
-      $entity_form['field_title']['widget'][0]['value']['#size'] = $size_title_short;
-      $entity_form['field_title']['widget'][0]['value']['#description'] .= ' ' . FieldFilteredMarkup::create($title_short . ' characters max');
-    }
-
-    if (isset($entity_form['field_highlight'])) {
-      $entity_form['field_highlight']['widget'][0]['value']['#maxlength'] = 350;
-      $entity_form['field_highlight']['widget'][0]['value']['#description'] .= ' ' . FieldFilteredMarkup::create('350 characters max');
-      $entity_form['field_highlight']['widget'][0]['value']['#rows'] = 4;
-    }
-  }
 
   $mp_modules = [
     'module_3_4_colonnes',
@@ -87,8 +47,7 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
     'module_partner',
     'module_steps',
     'module_text_video_image',
-    'module_customer_space',
-    'module_video'
+    'module_customer_space'
   ];
 
   $module = [
@@ -96,10 +55,20 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
     'module_key_figures_items',
     'module_key_figures',
     'module_title_and_highlight',
-    'cross_link_items'
+    'cross_link_items',
+    'module_map',
+    'module_video',
+    'module_hook_text',
+    'module_header_default'
+  ];
+
+  $module_with_textarea = [
+    'module_header_default',
+    'module_hook_text'
   ];
 
   $max_char_short_title = $conf_modular_product->getShortTitleMaxCharacter();
+  $max_char_long_title = $conf_modular_product->getLongTitleMaxCharacter();
   $max_char_description = $conf_modular_product->getLongDescriptionMaxCharacter();
   $field_title_markup = FieldFilteredMarkup::create("$max_char_short_title characters max");
   $field_description_markup = FieldFilteredMarkup::create("$max_char_description characters max");
@@ -108,6 +77,9 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
 
 
   if (in_array($entity_form['#bundle'], $mp_modules) || in_array($entity_form['#bundle'], $module)) {
+    $max_length = 0;
+    $markup = '';
+
     $fields = [
       'field_accroche',
       'field_highlight',
@@ -116,16 +88,31 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
 
     foreach ($fields as $field) {
       if (isset($entity_form[$field])) {
-        $field_max_length = $field === 'field_title' ? $max_char_short_title : $max_char_description;
-        $field_description = $field === 'field_title' ? $field_title_markup : $field_description_markup;
-        $entity_form[$field]['widget'][0]['value']['#maxlength'] = $field_max_length;
-        $entity_form[$field]['widget'][0]['value']['#description'] .= ' '.$field_description;
-
-        if ($field === 'field_highlight') {
-          $entity_form[$field]['widget'][0]['value']['#rows'] = 2;
-        } elseif ($field === 'field_title') {
+        if ($field === 'field_highlight' || $field === 'field_accroche') {
+          if (in_array($entity_form['#bundle'], $module_with_textarea)) {
+            $max_length = 350;
+            $markup = FieldFilteredMarkup::create("$max_length characters max");
+            $entity_form[$field]['widget'][0]['value']['#rows'] = 4;
+          }
+          elseif ($entity_form['#bundle'] === 'module_list') {
+            $max_length = $max_char_long_title;
+            $markup = FieldFilteredMarkup::create("$max_length characters max");
+            $entity_form[$field]['widget'][0]['value']['#rows'] = 2;
+          }
+          else {
+            $max_length = $max_char_description;
+            $markup = $field_description_markup;
+            $entity_form[$field]['widget'][0]['value']['#rows'] = 2;
+          }
+        }
+        elseif ($field === 'field_title') {
+          $max_length = $max_char_short_title;
+          $markup = $field_title_markup;
           $entity_form[$field]['widget'][0]['value']['#size'] = $size_title_short;
         }
+
+        $entity_form[$field]['widget'][0]['value']['#maxlength'] = $max_length;
+        $entity_form[$field]['widget'][0]['value']['#description'] .= ' '.$markup;
       }
     }
   }
@@ -152,6 +139,28 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
       ]
     ];
   }
+
+  // gestion nombre characters Module StoryTelling et StoryTelling Items
+  if (in_array($entity_form['#bundle'], ['module_storytelling', 'module_storytelling_item'])) {
+    if ($entity_form['#bundle'] === 'module_storytelling') {
+      $nb_char = 50;
+    } else {
+      $nb_char = 30;
+    }
+
+    if (isset($entity_form['field_title'])) {
+        $entity_form['field_title']['widget'][0]['value']['#maxlength'] = $nb_char;
+        $entity_form['field_title']['widget'][0]['value']['#size'] = $nb_char+10;
+        $entity_form['field_title']['widget'][0]['value']['#description'] .= ' ' . FieldFilteredMarkup::create($nb_char . ' characters max');
+    }
+
+    if (isset($entity_form['field_highlight'])) {
+      $entity_form['field_highlight']['widget'][0]['value']['#maxlength'] =  $title_long;
+      $entity_form['field_highlight']['widget'][0]['value']['#description'] .=
+        ' ' . FieldFilteredMarkup::create($title_long . ' characters max');
+      $entity_form['field_highlight']['widget'][0]['value']['#rows'] = 3;
+    }
+  }
 }
 
 /**
@@ -161,8 +170,19 @@ function oab_modular_product_field_widget_single_element_form_alter(array &$elem
   /*
    * Ici, on ne va gérer que les alterations du formulaire du paragraph
    */
-  if (!isset($element['#paragraph_type'])) {
+  if (!isset($element['#paragraph_type'])
+      || !is_a($form_state->getformObject(), EntityFormInterface::class)) {
     return;
+  }
+
+  //Désactivation des fields des paragraphs qui ont une valeur par défaut
+  //uniquement dans modular product
+  /** @var EntityInterface $original_node */
+  $original_node = $form_state->getformObject()->getEntity();
+
+  if ($original_node->bundle() === 'modular_product') {
+    \Drupal::service('oab_modular_product.form_service')
+      ->disableFieldWithDefaultValue($element['subform'], $form_state, Paragraph::create(['type' => $element['#paragraph_type']]));
   }
 
 
@@ -378,6 +398,19 @@ function oab_modular_product_field_widget_single_element_form_alter(array &$elem
     unset($element['subform']['field_redirection_url']);
     unset($element['subform']['field_key_points']);
   }
+  // Masquer services et accompagnemenr dans détails de l'offre
+ if ($element['#paragraph_type'] === 'module_detail_offre') {
+  $title_service_and_suppport = $element['subform']['field_tab_title']['widget'][0]['value']['#default_value'];
+  //activer le field enable service and support pour les contenus déjà crée
+  if (isset($title_service_and_suppport) && !empty($title_service_and_suppport)) {
+    $element['subform']['field_enable_service_and_support']['widget']['value']['#default_value'] = true;
+  }
+  $element['subform']['group_services_et_accompagnement']['#states'] = [
+    'visible' => [
+      ':input[name="field_detail_offre[0][subform][field_enable_service_and_support][value]"]' => ['checked' => TRUE],
+    ]
+  ];
+ }
 }
 
 /**
@@ -403,6 +436,16 @@ function oab_modular_product_form_alter(&$form, FormStateInterface $form_state, 
       $form['field_teaser']['widget'][0]['value']['#description'] .= ' '.FieldFilteredMarkup::create($description.' characters max');
     }
     oab_modular_product_hide_wysiwyg_paragraph($form);
+
+    //On rend la case à cocher Enable service and support accessible uniquement pour les admins
+    if (isset($form['field_detail_offre'])) {
+      if (!in_array('administrator', \Drupal::currentUser()->getRoles())) {
+        $form['field_detail_offre']['widget'][0]['subform']['field_enable_service_and_support']['#disabled'] = true;
+      }
+    }
+
+    //Désactivation des fields avec valeur par défaut dans modular product
+    \Drupal::service('oab_modular_product.form_service')->disableFieldWithDefaultValue($form, $form_state);
   }
 
   if (in_array($form_id, ['node_corporate_form', 'node_corporate_edit_form'])) {
@@ -416,6 +459,7 @@ function oab_modular_product_hide_wysiwyg_paragraph(&$form) {
     //On rend la case à cocher Enable Wysywyg paragraph accessible uniquement pour les admins
     if (!in_array('administrator', \Drupal::currentUser()->getRoles())) {
       $form['field_enable_wysiwyg_paragraph']['#disabled'] = TRUE;
+      $form['field_enable_wysiwyg_paragraph']['#access'] = FALSE;
     }
 
     //on vérifie si le paragraph WYSIWYG est activé ou non => s'il ne l'est pas on le supprime des options disponibles pour les modules
@@ -426,9 +470,73 @@ function oab_modular_product_hide_wysiwyg_paragraph(&$form) {
       //le paragraph WYSIWYG n'est pas actif, on le supprime des choix pour les modules
       unset($form["field_modules"]["widget"]["actions"]["bundle"]["#options"]['paragraph_wysiwyg']);
     }
-  }
 
+  }
   return $form;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function oab_modular_product_form_taxonomy_term_product_categories_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  /** @var Term $term */
+  $term = $form_state->getFormObject()->getEntity();
+  $parent_id = $term->parent->target_id;
+
+  if ($parent_id == 0) {
+    $form['group_niveau_2']['#access'] = FALSE;
+  } else {
+    $form['group_niveau_1']['#access'] = FALSE;
+  }
+}
+
+
+/**
+ * Implements hook_form_alter().
+ */
+function oab_modular_product_form_node_type_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  /** @var \Drupal\node\Entity\NodeType $entity */
+  $entity = $form_state->getFormObject()->getEntity();
+
+  // On vérifie si le CT n'est pas un Contenu MSS
+  if (!str_starts_with($entity->id(), 'mss')) {
+    $form['theme_settings'] = [
+      '#type' => "details",
+      '#title' => t('Theme Settings'),
+      '#group' => 'additional_settings'
+    ];
+
+    $form['theme_settings']['ob1_theme'] = [
+      '#type' => 'checkbox',
+      '#title' => t('ob1'),
+      '#description' => t('this content type use ob1 theme'),
+      '#default_value' => $entity->getThirdPartySetting('oab_modular_product', 'ob1_theme'),
+    ];
+    $form['theme_settings']['background_e2e'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Background e2e'),
+      '#description' => t('this content type use e2e Background'),
+      '#default_value' => $entity->getThirdPartySetting('oab_modular_product', 'background_e2e'),
+      '#states' => [
+        'visible' => [
+          ':input[name="ob1_theme"]' => ['checked' => true]
+        ]
+      ]
+    ];
+
+    $form['#entity_builders'][] = '_oab_modular_product_form_node_type_form_builder';
+  }
+}
+
+function _oab_modular_product_form_node_type_form_builder($entity_type, NodeTypeInterface $type, &$form, FormStateInterface $form_state) {
+  $type->setThirdPartySetting('oab_modular_product', 'ob1_theme', $form_state->getValue('ob1_theme'));
+
+  if ($form_state->getValue('ob1_theme')) {
+    $type->setThirdPartySetting('oab_modular_product', 'background_e2e', $form_state->getValue('background_e2e'));
+  } else {
+    $type->setThirdPartySetting('oab_modular_product', 'background_e2e', 0);
+  }
 }
 
 /**
@@ -443,11 +551,17 @@ function oab_modular_product_entity_bundle_field_info_alter(&$fields, EntityType
     }
   }
 
-
   if ($entity_type->id() === "node" && $bundle === "modular_product") {
     if (isset($fields['field_modules'])) {
       $fields['field_modules'] -> addConstraint('ModularProductOrderModule');
       $fields['field_modules'] -> addConstraint('ModularProductModuleRequired');
+    }
+
+    if (isset($fields['field_key_points'])) {
+      $fields['field_key_points']->addConstraint('ModularProductKeyPoints');
+    }
+    if(isset($fields['field_detail_offre'])) {
+      $fields['field_detail_offre']->addConstraint('ModularProductDetailOffreCheckCTA');
     }
   }
 }
@@ -540,10 +654,10 @@ function oab_modular_product_preprocess_field(&$variables) {
  * Implements hook_preprocess_HOOK().
  */
 function oab_modular_product_preprocess_paragraph__module_detail_offre_items(&$variables) {
-
   /** @var Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   $is_single = false;
+  $variables['display_cta'] = TRUE;
 
   if (isset($paragraph)) {
     $parent = $paragraph->getParentEntity();
@@ -552,6 +666,9 @@ function oab_modular_product_preprocess_paragraph__module_detail_offre_items(&$v
     if (1 == $number_items) {
       $is_single = true;
     }
+
+    //on regarde si le CTA du parent (global) est renseigné ou non
+    $variables['display_cta'] = $parent->field_call_to_action_buton->isEmpty();
   }
   $variables['is_single'] = $is_single;
 }

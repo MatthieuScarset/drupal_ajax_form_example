@@ -1,0 +1,10 @@
+uuid: c3f887ec-d43a-409e-8ed4-5c7a08e40868
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.storytelling_image
+label: 'Storytelling Image'
+targetEntityType: media
+cache: true

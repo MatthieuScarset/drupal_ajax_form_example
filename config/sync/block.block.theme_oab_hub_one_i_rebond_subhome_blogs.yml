@@ -1,0 +1,30 @@
+uuid: 0dc52e90-043e-407b-98f7-56eec924b926
+langcode: fr
+status: false
+dependencies:
+  module:
+    - oab_frontoffice
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_rebond_subhome_blogs
+theme: theme_oab_hub_one_i
+region: sidebar
+weight: -37
+provider: null
+plugin: rebond_subhome_block
+settings:
+  id: rebond_subhome_block
+  label: Blogs
+  label_display: visible
+  provider: oab_frontoffice
+  block_text: 'Retrouvez l''ensemble de nos articles de blog'
+  block_link: /fr/blogs
+  block_link_text: 'En savoir plus'
+  block_image_src: '26369'
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: /fr/presse

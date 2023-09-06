@@ -6,12 +6,13 @@ dependencies:
     - 'block_content:basic:3b1ecc36-575f-4f26-9f46-95aa5804ef6d'
   module:
     - block_content
+    - system
   theme:
     - theme_boosted
 id: ngr_fix_boosted_megamenu
 theme: theme_boosted
 region: prefooter
-weight: 0
+weight: -65
 provider: null
 plugin: 'block_content:3b1ecc36-575f-4f26-9f46-95aa5804ef6d'
 settings:
@@ -22,4 +23,8 @@ settings:
   status: true
   info: ''
   view_mode: full
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: "/en/solutions/collaborative-workspace\r\n/solutions/collaborative-workspace"

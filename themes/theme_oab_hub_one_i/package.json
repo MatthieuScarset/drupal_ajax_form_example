@@ -1,0 +1,31 @@
+{
+  "name": "theme_oab_hub_one_i",
+  "version": "1.0.0",
+  "description": "Theme for Oab Hub One-I",
+  "license": "MIT",
+  "scripts": {
+    "build": "NODE_OPTIONS=\"--openssl-legacy-provider\" webpack",
+    "watch": "NODE_OPTIONS=\"--openssl-legacy-provider\" webpack watch"
+  },
+  "devDependencies": {
+    "autoprefixer": "10.2.6",
+    "css-loader": "5.2.6",
+    "mini-css-extract-plugin": "1.6.2",
+    "postcss": "8.3.5",
+    "postcss-loader": "4.3.0",
+    "sass": "1.35.1",
+    "sass-loader": "11.1.1",
+    "style-loader": "2.0.0",
+    "webpack": "5.41.1",
+    "webpack-cli": "4.7.2",
+    "webpack-import-glob-loader": "1.6.3"
+  },
+  "dependencies": {
+    "@babel/core": "^7.20.7",
+    "@babel/runtime": "^7.20.7",
+    "babel-loader": "8.2.5",
+    "file-loader": "^6.2.0",
+    "resolve-url-loader": "^5.0.0",
+    "seamless-scroll-polyfill": "^2.1.8"
+  }
+}

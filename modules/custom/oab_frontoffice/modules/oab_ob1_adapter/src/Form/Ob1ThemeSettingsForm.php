@@ -2,12 +2,9 @@
 
 namespace Drupal\oab_ob1_adapter\Form;
 
-use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
-use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Core\Config\Config;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\ImmutableConfig;
-use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -22,10 +19,6 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
    */
   private $conf;
 
-  /**
-   * @var EntityStorageInterface|mixed|object
-   */
-  private $viewsStorage;
 
   /**
    * @var EntityTypeManager
@@ -33,25 +26,21 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
   private $entityTypeManager;
 
   /**
-   * @var EntityStorageInterface|mixed|object
+   * @var \Drupal\Core\Entity\EntityStorageInterface|mixed|object
    */
-  private $contentTypeStorage;
+  private mixed $taxonomyTermStorage;
 
   /**
    * Constructs a \Drupal\system\ConfigFormBase object.
    *
    * @param ConfigFactoryInterface $config_factory
    *   The factory for configuration objects.
-   * @param EntityTypeManager $entity_type_manager
-   * @throws InvalidPluginDefinitionException
-   * @throws PluginNotFoundException
    */
   public function __construct(ConfigFactoryInterface $config_factory, EntityTypeManager $entity_type_manager) {
     parent::__construct($config_factory);
     $this->conf  = $this->config($this->getConfigName());
     $this->entityTypeManager = $entity_type_manager;
-    $this->viewsStorage = $entity_type_manager->getStorage('view');
-    $this->contentTypeStorage = $entity_type_manager->getStorage('node_type');
+    $this->taxonomyTermStorage = $entity_type_manager->getStorage('taxonomy_term');
   }
 
   /**
@@ -114,10 +103,9 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
     $config = $this->config($this->getConfigName());
 
     foreach (['fr','en'] as $langcode) {
-      $selected_displays = array_filter($form_state->getValue($langcode . '_selected_displays'));
-      $selected_contents = array_filter($form_state->getValue($langcode . '_selected_contents'));
       $selected_urls = $form_state->getValue($langcode . '_url');
       $selected_routes = $form_state->getValue($langcode . '_routes');
+      $selected_hubs = array_filter($form_state->getValue($langcode . '_selected_hubs'));
 
       $url_selected_to_save = [];
       $url_elems = array_filter(array_map('trim', explode("\n", $selected_urls)));
@@ -125,22 +113,10 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
         $url_selected_to_save[] = $url;
       }
 
-      $selected_to_save = [];
-      foreach ($selected_displays as $display) {
-        $elems = explode('.', $display);
-        $selected_to_save[$elems[0]][] = $elems[1];
-      }
-
-      $content_selected_to_save = [];
-      foreach ($selected_contents as $content) {
-        $content_selected_to_save[] = $content;
-      }
-
       $conf = [];
       $conf['url'] = $url_selected_to_save;
-      $conf['views'] = $selected_to_save;
-      $conf['contents'] = $content_selected_to_save;
       $conf['routes'] = array_filter(array_map('trim', explode("\n", $selected_routes)));
+      $conf['hubs'] = $selected_hubs;
       $config->set($langcode, $conf);
     }
     $config->save();
@@ -154,6 +130,7 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
     /** @var View[] $view_types */
     $view_types = $this->viewsStorage->loadMultiple();
     $content_types = $this->contentTypeStorage->loadMultiple();
+    $hubs = $this->taxonomyTermStorage->loadByProperties(['vid' => 'hub']);
 
 
     $tab = [
@@ -186,59 +163,25 @@ class Ob1ThemeSettingsForm extends ConfigFormBase {
     $tab['routes'][$langcode . '_routes'] = [
       '#type' => 'textarea',
       '#title' => t('List routes One-i'),
-      '#description' => t('Specify pages by using their routename. Enter one path per line without the langcode for ex: \'/en \'.'),
-      '#default_value' => implode(PHP_EOL, $conf['routes']) ?? ''
+      '#description' => t('Specify pages by using their routename. Enter one path per line without the langcode for ex: \'/en \'.'), '#default_value' => implode(PHP_EOL, $conf['routes']) ?? ''
     ];
 
-    $tab['views'] = [
-      '#type' => "details",
-      "#open" => false,
-      '#title' => t("Views conf")
-    ];
-
-    $options = [];
-    foreach ($view_types as $view) {
-      if ($view->get('status')) {
-        foreach ($view->get('display') as $display) {
-          if ($display['display_plugin'] == 'page') {
-            $options[$view->id().'.'.$display['id']] = $view->label().' - '.$display['display_title'];
-          }
-        }
-      }
-    }
-
-    $default = [];
-    foreach ($conf['views'] as $view => $displays) {
-      foreach ($displays as $display) {
-        $default[] = $view.'.'.$display;
-      }
-    }
-
-    $tab['views'][$langcode . '_selected_displays'] = [
-      '#type' => 'checkboxes',
-      '#options' => $options,
-      '#title' => t('select views displays'),
-      '#default_value' => $default
-    ];
-
-    $tab['contents'] = [
+    $tab['hubs'] = [
       '#type' => 'details',
       '#open' => false,
-      '#title' => t('Content Type conf')
+      '#title' => t('Hubs conf')
     ];
 
-    $content_options = [];
-    foreach ($content_types as $content) {
-      if ($content->get('status')) {
-        $content_options[$content->get('type')] = $content->label();
-      }
+    $hub_options = [];
+    foreach ($hubs as $hub) {
+      $hub_options[$hub->id()] = $hub->label();
     }
 
-    $tab['contents'][$langcode . '_selected_contents'] = [
+    $tab['hubs'][$langcode . '_selected_hubs'] = [
       '#type' => 'checkboxes',
-      '#options' => $content_options,
-      '#title' => t('select content types'),
-      '#default_value' => $conf['contents'] ?? ''
+      '#options' => $hub_options,
+      '#title' => t('select hubs'),
+      '#default_value' => $conf['hubs'] ?? ''
     ];
 
     return $tab;

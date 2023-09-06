@@ -13,19 +13,10 @@ class Ob1ContentThemeNegotiator extends AbstractOb1ThemeNegotiator implements Th
 
     /** @var NodeInterface $current_node */
     $current_node = $route_match->getParameter('node');
+    $is_admin_route = \Drupal::service('router.admin_context')->isAdminRoute();
 
-    // Toutes les routes ou le thème doit s'appliquer
-    // ie. le front, mais aussi les pages de prévi et revisions
-    $routes_to_apply = [
-      'entity.node.latest_version',
-      'entity.node.canonical',
-      'entity.node.revision'
-    ];
-
-    if (isset($current_node) && in_array($route_match->getRouteName(), $routes_to_apply)) {
-        return
-          (isset($current_node->field_use_theme_ob1) && $current_node->field_use_theme_ob1->value == 1)
-          || $this->ob1AdapterService->hasContent($current_node->bundle());
+    if ($current_node && !$is_admin_route) {
+      return $current_node->type->entity->getThirdPartySetting('oab_modular_product', 'ob1_theme');
     }
 
     return false;

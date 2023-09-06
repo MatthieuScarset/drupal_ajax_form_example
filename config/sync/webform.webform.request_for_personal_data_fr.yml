@@ -10,11 +10,8 @@ third_party_settings:
     gdpr_spoc_security: '567'
     gdpr_expiration_date: ''
     gdpr_business_analysts:
-      1491: '1491'
-      1495: '1495'
-      1492: '1492'
-      1493: '1493'
-      1439: '1439'
+      4351: '4351'
+      3802: '3802'
       1494: '1494'
     gdpr_form_published: 1
 weight: 0
@@ -511,19 +508,51 @@ access:
     permissions: {  }
   view_any:
     roles: {  }
-    users: {  }
+    users:
+      - 1491
+      - 1495
+      - 1492
+      - 1493
+      - 1439
+      - 3802
+      - 3803
+      - 1494
     permissions: {  }
   update_any:
     roles: {  }
-    users: {  }
+    users:
+      - 1491
+      - 1495
+      - 1492
+      - 1493
+      - 1439
+      - 3802
+      - 3803
+      - 1494
     permissions: {  }
   delete_any:
     roles: {  }
-    users: {  }
+    users:
+      - 1491
+      - 1495
+      - 1492
+      - 1493
+      - 1439
+      - 3802
+      - 3803
+      - 1494
     permissions: {  }
   purge_any:
     roles: {  }
-    users: {  }
+    users:
+      - 1491
+      - 1495
+      - 1492
+      - 1493
+      - 1439
+      - 3802
+      - 3803
+      - 1494
     permissions: {  }
   view_own:
     roles: {  }

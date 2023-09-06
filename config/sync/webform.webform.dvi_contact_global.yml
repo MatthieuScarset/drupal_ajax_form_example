@@ -10,6 +10,7 @@ third_party_settings:
     gdpr_spoc_security: '567'
     gdpr_expiration_date: ''
     gdpr_business_analysts:
+      3806: '3806'
       1922: '1922'
       3011: '3011'
     gdpr_form_published: 1
@@ -114,9 +115,10 @@ elements: |-
     '#text': |
       <p><span style="font-size:1rem;">Orange Business Services s’engage, dans le cadre de ses activités et conformément à la législation en vigueur en France et en Europe, à assurer la protection, la confidentialité et la sécurité des données à caractère personnel des utilisateurs de ses services, ainsi qu’à respecter leur vie privée. Vous pouvez consulter <u><a href="/fr/donnees-personnelles" target="_blank">notre charte relative à la protection des données personnelles et de la vie privée</a></u>.</span></p>
     '#format': full_html
-  captcha_dvi_global:
+  captcha:
     '#type': captcha
-    '#captcha_type': recaptcha/reCAPTCHA
+    '#captcha_type': image_captcha/Image
+    '#captcha_title': 'Vérifions que vous n''êtes pas un robot.'
   actions:
     '#type': webform_actions
     '#title': 'Submit button(s)'

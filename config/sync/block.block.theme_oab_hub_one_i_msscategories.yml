@@ -1,0 +1,35 @@
+uuid: 765c207e-e242-47a0-a617-c3e6802fe90a
+langcode: en
+status: false
+dependencies:
+  module:
+    - node
+    - oab_frontoffice
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_msscategories
+theme: theme_oab_hub_one_i
+region: sidebar
+weight: -35
+provider: null
+plugin: msscategories_block
+settings:
+  id: msscategories_block
+  label: Categories
+  label_display: visible
+  provider: oab_frontoffice
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      mss_article: mss_article
+  node_type:
+    id: node_type
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      mss_article: mss_article

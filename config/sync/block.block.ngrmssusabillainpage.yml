@@ -1,0 +1,30 @@
+uuid: 0840af52-1707-44ad-a4a7-00910946efa6
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:d0009bf5-f7e5-4342-ad4f-53bb216e4d78'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_boosted
+id: ngrmssusabillainpage
+theme: theme_boosted
+region: prefooter
+weight: 0
+provider: null
+plugin: 'block_content:d0009bf5-f7e5-4342-ad4f-53bb216e4d78'
+settings:
+  id: 'block_content:d0009bf5-f7e5-4342-ad4f-53bb216e4d78'
+  label: '[NGR][MSS] Usabilla In Page'
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /blogs/building-data-driven-business-these-are-five-areas-you-need-master

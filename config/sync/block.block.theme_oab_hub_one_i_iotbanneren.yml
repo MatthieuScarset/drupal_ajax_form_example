@@ -1,0 +1,31 @@
+uuid: 3aaf7f45-8745-4fb4-9e9a-63d9c1d3cc0c
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:b3860fd5-d056-4941-8e51-cbdc1201c66e'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_iotbanneren
+theme: theme_oab_hub_one_i
+region: pre_content
+weight: -54
+provider: null
+plugin: 'block_content:b3860fd5-d056-4941-8e51-cbdc1201c66e'
+settings:
+  id: 'block_content:b3860fd5-d056-4941-8e51-cbdc1201c66e'
+  label: 'IoT Banner EN'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "/solutions/iot/products\r\n/solutions/iot/customer-stories"

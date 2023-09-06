@@ -1,0 +1,70 @@
+uuid: ac156649-43fa-43cf-a813-94a547911c0c
+langcode: fr
+status: false
+dependencies:
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_directaccessblock
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -42
+provider: null
+plugin: direct_access_block
+settings:
+  id: direct_access_block
+  label: 'Direct Access Block'
+  label_display: '0'
+  provider: oab_frontoffice
+  direct_access_custom_text:
+    value: |-
+
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bg bg_blue">
+          <div id="slider_direct_access" class="container">
+            <div class="item-direct-access nopadding text-align-center">
+                <div class="div_direct_access border-right">
+                    <i class="glyphicon icon icon-wifi link_direct_access">
+                        <a class="text_direct_access " href="" target="_blank"> Blogs</a> 
+                    </i>
+                </div>
+            </div>
+            <div class="item-direct-access nopadding text-align-center">
+                <div class="div_direct_access border-right">
+                    <i class="glyphicon icon icon-Collective_class_training link_direct_access">
+                        <a class="text_direct_access " href="" target="_blank"> Newsroom</a> 
+                    </i>
+                </div>
+            </div>
+            <div class="item-direct-access nopadding text-align-center">
+                <div class="div_direct_access border-right">
+                    <i class="glyphicon icon icon-playmode_random link_direct_access">
+                        <a class="text_direct_access " href="" target="_blank"> Document</a> 
+                    </i>
+                </div>
+            </div>
+            <div class="item-direct-access nopadding text-align-center">
+                <div class="div_direct_access border-right">
+                    <i class="glyphicon icon icon-hotel link_direct_access">
+                        <a class="text_direct_access " href="" target="_blank"> News</a> 
+                    </i>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    format: full_html
+  visibility:
+    'entity_bundle:node':
+      id: 'entity_bundle:node'
+      bundles:
+        blog_post: blog_post
+        customer_story: customer_story
+        document: document
+        magazine: magazine
+        partner: partner
+        press_kit: press_kit
+        press_release: press_release
+        simple_page: simple_page
+      negate: false
+      context_mapping:
+        node: '@node.node_route_context:node'
+visibility: {  }

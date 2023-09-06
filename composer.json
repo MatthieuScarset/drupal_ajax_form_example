@@ -1,199 +1,199 @@
 {
-  "name": "drupal/recommended-project",
-  "description": "Project template for Drupal 9 projects with a relocated document root",
-  "version": "2.4.2",
-  "type": "project",
-  "license": "GPL-2.0-or-later",
-  "homepage": "https://www.drupal.org/project/drupal",
-  "support": {
-    "docs": "https://www.drupal.org/docs/user_guide/en/index.html",
-    "chat": "https://www.drupal.org/node/314178"
-  },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://packages.drupal.org/8"
-    }
-  ],
-  "require": {
-    "php": "^8.0.0",
-    "composer/installers": "^1.9",
-    "cweagans/composer-patches": "^1.7",
-    "drupal/admin_toolbar": "^3.0",
-    "drupal/advagg": "^4.1",
-    "drupal/autologout": "^1.3",
-    "drupal/captcha": "^1.1",
-    "drupal/config_filter": "^2.2",
-    "drupal/config_ignore": "^2.3",
-    "drupal/config_split": "2.0.0-beta5",
-    "drupal/core": "~9.5.0",
-    "drupal/core-composer-scaffold": "~9.5.0",
-    "drupal/core-project-message": "~9.5.0",
-    "drupal/core-recommended": "~9.5.0",
-    "drupal/ctools": "^3.4",
-    "drupal/embed": "^1.4",
-    "drupal/entity": "^1.2",
-    "drupal/entity_browser": "^2.5",
-    "drupal/entity_embed": "^1.1",
-    "drupal/entity_reference_revisions": "^1.9",
-    "drupal/field_group": "^3.1",
-    "drupal/geolocation": "3.10",
-    "drupal/image_widget_crop": "^2.3",
-    "drupal/inline_entity_form": "1.0-rc9",
-    "drupal/jsonapi_extras": "^3.20",
-    "drupal/linkit": "5.0-beta13",
-    "drupal/media_entity_file_replace": "^1.0",
-    "drupal/media_entity_generic": "^1.1",
-    "drupal/memcache": "^2.4",
-    "drupal/menu_item_extras": "^2",
-    "drupal/metatag": "^1.16",
-    "drupal/multiple_fields_remove_button": "1.0-alpha13",
-    "drupal/paragraphs": "^1.12",
-    "drupal/password_policy": "3.1",
-    "drupal/pathauto": "^1.8",
-    "drupal/recaptcha": "^3.0",
-    "drupal/redirect": "^1.6",
-    "drupal/replicate_ui": "^1.0",
-    "drupal/require_on_publish": "^1.6",
-    "drupal/robotstxt": "^1.4",
-    "drupal/roleassign": "1.0-beta1",
-    "drupal/saml_sp": "^4.1",
-    "drupal/scheduled_updates": "1.x-dev",
-    "drupal/seckit": "^2.0",
-    "drupal/simplify": "^1.2",
-    "drupal/svg_image_field": "^2.1",
-    "drupal/tac_lite": "^1.5",
-    "drupal/twig_tweak": "^3.0",
-    "drupal/ultimate_cron": "2.0-alpha5",
-    "drupal/views_infinite_scroll": "^1.8",
-    "drupal/webform": "^6.0",
-    "drupal/xmlsitemap": "^1.0",
-    "drush/drush": "^11.0",
-    "h4cc/wkhtmltopdf-amd64": "^0.12.4",
-    "knplabs/knp-snappy": "^1.4",
-    "vlucas/phpdotenv": "^5.3"
-  },
-  "require-dev": {
-    "drupal/coder": "^8.3",
-    "drupal/console": "~1.0",
-    "drupal/devel": "^4.1",
-    "drupal/devel_php": "^1.3",
-    "kint-php/kint": "^4.1"
-  },
-  "autoload": {
-    "classmap": [
-      "scripts/composer/ScriptHandler.php"
+    "name": "drupal/recommended-project",
+    "description": "Project template for Drupal 9 projects with a relocated document root",
+    "version": "2.4.2",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://www.drupal.org/project/drupal",
+    "support": {
+        "docs": "https://www.drupal.org/docs/user_guide/en/index.html",
+        "chat": "https://www.drupal.org/node/314178"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
     ],
-    "files": [
-      "load.environment.php"
-    ]
-  },
-  "conflict": {
-    "drupal/drupal": "*"
-  },
-  "minimum-stability": "stable",
-  "prefer-stable": true,
-  "config": {
-    "sort-packages": true,
-    "allow-plugins": {
-      "cweagans/composer-patches": true,
-      "composer/installers": true,
-      "drupal/core-composer-scaffold": true,
-      "drupal/core-project-message": true,
-      "drupal/console-extend-plugin": true,
-      "dealerdirect/phpcodesniffer-composer-installer": true
+    "require": {
+        "php": "^8.0.0",
+        "composer/installers": "^1.9",
+        "cweagans/composer-patches": "^1.7",
+        "drupal/admin_toolbar": "^3.0",
+        "drupal/advagg": "^4.1",
+        "drupal/autologout": "^1.3",
+        "drupal/captcha": "^1.1",
+        "drupal/config_filter": "^2.2",
+        "drupal/config_ignore": "^2.3",
+        "drupal/config_split": "2.0.0-beta5",
+        "drupal/core": "~9.5.0",
+        "drupal/core-composer-scaffold": "~9.5.0",
+        "drupal/core-project-message": "~9.5.0",
+        "drupal/core-recommended": "~9.5.0",
+        "drupal/ctools": "^3.4",
+        "drupal/embed": "^1.4",
+        "drupal/entity": "^1.2",
+        "drupal/entity_browser": "^2.5",
+        "drupal/entity_embed": "^1.1",
+        "drupal/entity_reference_revisions": "^1.9",
+        "drupal/field_group": "^3.1",
+        "drupal/geolocation": "3.10",
+        "drupal/image_widget_crop": "^2.3",
+        "drupal/inline_entity_form": "1.0-rc9",
+        "drupal/jsonapi_extras": "^3.20",
+        "drupal/linkit": "5.0-beta13",
+        "drupal/media_entity_file_replace": "^1.0",
+        "drupal/media_entity_generic": "^1.1",
+        "drupal/memcache": "^2.4",
+        "drupal/menu_item_extras": "^2",
+        "drupal/metatag": "^1.16",
+        "drupal/multiple_fields_remove_button": "1.0-alpha13",
+        "drupal/paragraphs": "^1.12",
+        "drupal/password_policy": "3.1",
+        "drupal/pathauto": "^1.8",
+        "drupal/recaptcha": "^3.0",
+        "drupal/redirect": "^1.6",
+        "drupal/replicate_ui": "^1.0",
+        "drupal/require_on_publish": "^1.6",
+        "drupal/robotstxt": "^1.4",
+        "drupal/roleassign": "1.0-beta1",
+        "drupal/saml_sp": "^4.1",
+        "drupal/scheduled_updates": "1.x-dev",
+        "drupal/seckit": "^2.0",
+        "drupal/simplify": "^1.2",
+        "drupal/svg_image_field": "^2.1",
+        "drupal/tac_lite": "^1.5",
+        "drupal/twig_tweak": "^3.0",
+        "drupal/ultimate_cron": "2.0-alpha5",
+        "drupal/views_infinite_scroll": "^1.8",
+        "drupal/webform": "^6.0",
+        "drupal/xmlsitemap": "^1.0",
+        "drush/drush": "^11.0",
+        "h4cc/wkhtmltopdf-amd64": "^0.12.4",
+        "knplabs/knp-snappy": "^1.4",
+        "vlucas/phpdotenv": "^5.3"
+    },
+    "require-dev": {
+        "drupal/coder": "^8.3",
+        "drupal/console": "~1.0",
+        "drupal/devel": "^4.1",
+        "drupal/devel_php": "^1.3",
+        "kint-php/kint": "^4.1"
+    },
+    "autoload": {
+        "classmap": [
+            "scripts/composer/ScriptHandler.php"
+        ],
+        "files": [
+            "load.environment.php"
+        ]
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "cweagans/composer-patches": true,
+            "composer/installers": true,
+            "drupal/core-composer-scaffold": true,
+            "drupal/core-project-message": true,
+            "drupal/console-extend-plugin": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "extra": {
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "./"
+            },
+            "file-mapping": {
+                "[web-root]/sites/development.services.yml": false,
+                "[web-root]/sites/default/default.services.yml": false,
+                "[web-root]/sites/default/default.settings.php": false,
+                "[web-root]/README.md": false,
+                "[web-root]/sites/example.settings.local.php": false
+            }
+        },
+        "installer-paths": {
+            "core": [
+                "type:drupal-core"
+            ],
+            "libraries/{$name}": [
+                "type:drupal-library"
+            ],
+            "modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/Commands/contrib/{$name}": [
+                "type:drupal-drush"
+            ],
+            "modules/custom/{$name}": [
+                "type:drupal-custom-module"
+            ],
+            "profiles/custom/{$name}": [
+                "type:drupal-custom-profile"
+            ],
+            "themes/custom/{$name}": [
+                "type:drupal-custom-theme"
+            ]
+        },
+        "drupal-core-project-message": {
+            "include-keys": [
+                "homepage",
+                "support"
+            ],
+            "post-create-project-cmd-message": [
+                "<bg=blue;fg=white>                                                         </>",
+                "<bg=blue;fg=white>  Congratulations, you’ve installed the Drupal codebase  </>",
+                "<bg=blue;fg=white>  from the drupal/recommended-project template!          </>",
+                "<bg=blue;fg=white>                                                         </>",
+                "",
+                "<bg=yellow;fg=black>Next steps</>:",
+                "  * Install the site: https://www.drupal.org/docs/8/install",
+                "  * Read the user guide: https://www.drupal.org/docs/user_guide/en/index.html",
+                "  * Get support: https://www.drupal.org/support",
+                "  * Get involved with the Drupal community:",
+                "      https://www.drupal.org/getting-involved",
+                "  * Remove the plugin that prints this message:",
+                "      composer remove drupal/core-project-message"
+            ]
+        },
+        "patches": {
+            "drupal/scheduled_updates": {
+                "Fix D9 compatibility": "https://www.drupal.org/files/issues/2021-03-08/3172330-24.patch"
+            },
+            "drupal/core": {
+                "Fix LatestRevisionCheck": "https://www.drupal.org/files/issues/2021-12-28/3035113-33.patch",
+                "Give current request to RequestPath Condition when it call too soon": "patches/saml_sp/patch_core_system_requestpath.patch",
+                "https://www.drupal.org/project/paragraphs/issues/3031598#comment-14296164": "https://www.drupal.org/files/issues/2022-06-21/3207813-15.patch",
+                "https://www.drupal.org/project/drupal/issues/3135409": "https://www.drupal.org/files/issues/2022-10-17/3135409-17.patch"
+            },
+            "drupal/media_entity_file_replace": {
+                "Add specification for old media Generic": "patches/media_entity_file_replace/patch_media_generic.patch"
+            },
+            "drupal/saml_sp": {
+                "Adapt contrib module to our needs": "patches/saml_sp/patch_saml_sp.patch"
+            },
+            "onelogin/php-saml": {
+                "Force https when recreating URL": "patches/saml_sp/patch_php_saml.patch"
+            }
+        }
+    },
+    "scripts": {
+        "code-fix": [
+            "DrupalProject\\composer\\ScriptHandler::codeFix"
+        ],
+        "code-check": [
+            "DrupalProject\\composer\\ScriptHandler::codeCheck"
+        ]
     }
-  },
-  "extra": {
-    "drupal-scaffold": {
-      "locations": {
-        "web-root": "./"
-      },
-      "file-mapping": {
-        "[web-root]/sites/development.services.yml": false,
-        "[web-root]/sites/default/default.services.yml": false,
-        "[web-root]/sites/default/default.settings.php": false,
-        "[web-root]/README.md": false,
-        "[web-root]/sites/example.settings.local.php": false
-      }
-    },
-    "installer-paths": {
-      "core": [
-        "type:drupal-core"
-      ],
-      "libraries/{$name}": [
-        "type:drupal-library"
-      ],
-      "modules/contrib/{$name}": [
-        "type:drupal-module"
-      ],
-      "profiles/contrib/{$name}": [
-        "type:drupal-profile"
-      ],
-      "themes/contrib/{$name}": [
-        "type:drupal-theme"
-      ],
-      "drush/Commands/contrib/{$name}": [
-        "type:drupal-drush"
-      ],
-      "modules/custom/{$name}": [
-        "type:drupal-custom-module"
-      ],
-      "profiles/custom/{$name}": [
-        "type:drupal-custom-profile"
-      ],
-      "themes/custom/{$name}": [
-        "type:drupal-custom-theme"
-      ]
-    },
-    "drupal-core-project-message": {
-      "include-keys": [
-        "homepage",
-        "support"
-      ],
-      "post-create-project-cmd-message": [
-        "<bg=blue;fg=white>                                                         </>",
-        "<bg=blue;fg=white>  Congratulations, you’ve installed the Drupal codebase  </>",
-        "<bg=blue;fg=white>  from the drupal/recommended-project template!          </>",
-        "<bg=blue;fg=white>                                                         </>",
-        "",
-        "<bg=yellow;fg=black>Next steps</>:",
-        "  * Install the site: https://www.drupal.org/docs/8/install",
-        "  * Read the user guide: https://www.drupal.org/docs/user_guide/en/index.html",
-        "  * Get support: https://www.drupal.org/support",
-        "  * Get involved with the Drupal community:",
-        "      https://www.drupal.org/getting-involved",
-        "  * Remove the plugin that prints this message:",
-        "      composer remove drupal/core-project-message"
-      ]
-    },
-    "patches": {
-      "drupal/scheduled_updates": {
-        "Fix D9 compatibility": "https://www.drupal.org/files/issues/2021-03-08/3172330-24.patch"
-      },
-      "drupal/core": {
-        "Fix LatestRevisionCheck": "https://www.drupal.org/files/issues/2021-12-28/3035113-33.patch",
-        "Give current request to RequestPath Condition when it call too soon": "patches/saml_sp/patch_core_system_requestpath.patch",
-        "https://www.drupal.org/project/paragraphs/issues/3031598#comment-14296164": "https://www.drupal.org/files/issues/2022-06-21/3207813-15.patch",
-        "https://www.drupal.org/project/drupal/issues/3135409": "https://www.drupal.org/files/issues/2022-10-17/3135409-17.patch"
-      },
-      "drupal/media_entity_file_replace": {
-        "Add specification for old media Generic": "patches/media_entity_file_replace/patch_media_generic.patch"
-      },
-      "drupal/saml_sp": {
-        "Adapt contrib module to our needs": "patches/saml_sp/patch_saml_sp.patch"
-      },
-      "onelogin/php-saml": {
-        "Force https when recreating URL": "patches/saml_sp/patch_php_saml.patch"
-      }
-    }
-  },
-  "scripts": {
-    "code-fix": [
-      "DrupalProject\\composer\\ScriptHandler::codeFix"
-    ],
-    "code-check": [
-      "DrupalProject\\composer\\ScriptHandler::codeCheck"
-    ]
-  }
 }

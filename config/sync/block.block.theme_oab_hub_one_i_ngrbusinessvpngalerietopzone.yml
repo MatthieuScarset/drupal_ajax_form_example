@@ -1,0 +1,30 @@
+uuid: 0d5fb246-04c0-4f05-8d51-40dca003b1b6
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:764c76c2-f69b-454e-ad04-4c1ddab9ccc5'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_ngrbusinessvpngalerietopzone
+theme: theme_oab_hub_one_i
+region: pre_content
+weight: -69
+provider: null
+plugin: 'block_content:764c76c2-f69b-454e-ad04-4c1ddab9ccc5'
+settings:
+  id: 'block_content:764c76c2-f69b-454e-ad04-4c1ddab9ccc5'
+  label: '[NGR] Business VPN Galerie - TopZone'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/products/business-vpn-galerie/cloud-services/map\r\n/products/business-vpn-galerie/cloud-services/list"

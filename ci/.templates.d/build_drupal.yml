@@ -1,0 +1,49 @@
+
+
+# Création d'un dossier spécifique et copie des fichiers nécessaires au build
+Prepare Drupal:
+  stage: prepare
+  script:
+    - mkdir build
+    - cp -r modules build/
+    - cp -r patches build/
+    - cp -r themes build/
+    - cp -r sites build/
+    - cp composer.* build/
+    - cp load.environment.php build/
+    - echo $CI_COMMIT_TAG >> build/modules/custom/oab_develop/.version
+  artifacts:
+    paths:
+      - build
+    expire_in: 1 hour
+
+
+Build Drupal:
+  image: php:8.0
+  before_script:
+    ## Install Composer
+    - apt-get update
+    - apt-get install -y git zip unzip
+    - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    - php composer-setup.php
+    - php -r "unlink('composer-setup.php');"
+    - apt-get install -y --no-install-recommends libmagickwand-dev imagemagick > /dev/null
+    - pecl install imagick > /dev/null
+    - docker-php-ext-enable imagick > /dev/null
+    - docker-php-ext-configure gd --prefix=/usr --with-jpeg --with-freetype > /dev/null
+    - docker-php-ext-install gd > /dev/null
+    - docker-php-ext-enable gd > /dev/null
+  script:
+    - cd build
+    - php ../composer.phar install --no-dev
+  after_script:
+    ## Clean Up Repo
+    - rm composer.phar
+    - cd build
+    - ls -la sites/
+    - ls -la sites/default
+    - rm -r patches INSTALL.txt .ht.router.php .eslint* .csslintrc web.config
+  artifacts:
+    paths:
+      - build
+    expire_in: 1 hour

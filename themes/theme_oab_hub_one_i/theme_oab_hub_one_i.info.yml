@@ -1,0 +1,33 @@
+# core: 8|9
+type: theme
+base theme: theme_one_i
+
+name: 'Theme OAB Hub One-i'
+description: 'Sous-theme de One-I utilisé pour les hub'
+package: 'Theme OAB Hub One-i'
+
+regions:
+  header: 'Header'
+  header_mobile: 'Header Mobile'
+  top_zone: 'Top Zone'
+  pre_content: 'Pre Content'
+  content: 'Content'
+  sidebar: 'Side Bar'
+  prefooter: 'Pre Footer'
+  footer: 'Footer'
+
+libraries:
+  - 'theme_oab_hub_one_i/global-styling'
+
+# The following are dynamic library overrides based on certain criteria,
+# usually a theme setting.
+#
+# @see \Drupal\boosted\Plugin\Alter\LibraryInfo::alter()
+#
+#  core/drupal.dialog: boosted/drupal.dialog
+#  core/drupal.dialog.ajax: boosted/drupal.dialog.ajax
+
+version: '9.0.0'
+core_version_requirement: ^8 || ^9
+project: 'theme_oab_hub_one_i'
+datestamp: 1450531741

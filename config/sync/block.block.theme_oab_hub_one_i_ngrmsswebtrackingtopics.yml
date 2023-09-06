@@ -1,0 +1,31 @@
+uuid: b86b57fe-c8f2-4fcf-8aa0-49ab68578ae1
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:db9e9e5f-187a-47f4-8399-527bb17ffa3b'
+  module:
+    - block_content
+    - oab_hub
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_ngrmsswebtrackingtopics
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: 0
+provider: null
+plugin: 'block_content:db9e9e5f-187a-47f4-8399-527bb17ffa3b'
+settings:
+  id: 'block_content:db9e9e5f-187a-47f4-8399-527bb17ffa3b'
+  label: '[NGR] MSS Webtracking Topics'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  hub_condition:
+    id: hub_condition
+    hub_id:
+      1282: '1282'
+    negate: false

@@ -1,0 +1,36 @@
+uuid: 56fdfed3-2c20-4fb7-8481-48e90f86cfea
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:c04b86da-ff8e-4406-8b4c-5c8280ddbf90'
+  module:
+    - block_content
+    - oab_hub
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_ngrmsscontact
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: 0
+provider: null
+plugin: 'block_content:c04b86da-ff8e-4406-8b4c-5c8280ddbf90'
+settings:
+  id: 'block_content:c04b86da-ff8e-4406-8b4c-5c8280ddbf90'
+  label: '[NGR] MSS Contact'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  hub_condition:
+    id: hub_condition
+    hub_id:
+      1282: '1282'
+    negate: false
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/mss-assistance/account-settings\r\n/mss-assistance/solutions\r\n/mss-assistance/reporting\r\n/mss-assistance/maintenance\r\n/mss-assistance/incidents\r\n/mss-assistance/changes\r\n/mss-assistance/ordering\r\n/mss-assistance/billing\r\n/mss-assistance/documents\r\n/mss-assistance/data-policy\r\n/mss-assistance/start-guides"

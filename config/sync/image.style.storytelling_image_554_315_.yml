@@ -1,0 +1,15 @@
+uuid: 6fecc313-51b4-49d6-96bc-69f26d126129
+langcode: en
+status: true
+dependencies: {  }
+name: storytelling_image_554_315_
+label: 'Storytelling Image (554*315)'
+effects:
+  7dc4f6ad-dd81-4fbe-aaf5-64bfecba60ad:
+    uuid: 7dc4f6ad-dd81-4fbe-aaf5-64bfecba60ad
+    id: image_scale_and_crop
+    weight: -10
+    data:
+      width: 554
+      height: 315
+      anchor: left-top

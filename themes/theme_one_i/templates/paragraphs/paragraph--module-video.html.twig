@@ -44,31 +44,41 @@
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
     not paragraph.isPublished() ? 'paragraph--unpublished',
-  'py-2 py-md-5'
+    'py-2 py-md-5'
   ]
 %}
 {% block paragraph %}
 <div {{ attributes.addClass(classes) }}>
-  <div class="block-video">
-    {{ content.field_video }}
-  </div>
-  {% if paragraph.field_title.value is defined and paragraph.field_title.value is not empty %}
-  <div class="site-width">
-    <div class="block-text container-fluid">
-      <div class="row d-flex justify-content-center">
-        <div class="content-title col-md-10 content-text pl-md-4 pr-md-4">
-          <h2 class="h1 mt-1 mt-md-4 mb-1 mb-md-2">{{ content.field_title }}</h2>
+    <div class="site-width">
+      <div class="container-fluid">
+        <div class="block-video mx-n1 mx-md-0">
+          {{ content.field_video }}
         </div>
-      </div>
-      <div class="row d-flex justify-content-center">
-        <div class="col-md-10 content-text pl-md-4 pr-md-4">
-          <div class="lead font-weight-bold highlight mb-1 mb-md-1">{{ content.field_highlight }}</div>
-          <div class="standard mb-1 mb-md-2">{{ content.field_standard_text }}</div>
-          {{ content.field_call_to_action_link_simple }}
-        </div>
+
+        {% if paragraph.field_title.value is defined and paragraph.field_title.value is not empty %}
+          <div class="row mt-1 mt-md-3">
+            <div class="col-12 col-md-6">
+              <h2 class="h1 mb-0">{{ content.field_title }}</h2>
+            </div>
+
+            {% if paragraph.field_highlight.value is not empty
+               or paragraph.field_standard_text.value is not empty
+               or paragraph.field_call_to_action_link_simple.value is not empty %}
+              <div class="col-12 col-md-7 mt-1 mt-md-2">
+                {% if paragraph.field_highlight.value is not empty %}
+                  <div class="lead font-weight-bold mb-1 mb-md-1">{{ content.field_highlight }}</div>
+                {% endif %}
+
+                {% if paragraph.field_standard_text.value is not empty %}
+                  <div class="standard mb-1 mb-md-2">{{ content.field_standard_text }}</div>
+                {% endif %}
+
+                {{ content.field_call_to_action_link_simple }}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
       </div>
     </div>
-  </div>
-  {% endif %}
 </div>
 {% endblock paragraph %}

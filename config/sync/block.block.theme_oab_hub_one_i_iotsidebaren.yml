@@ -1,0 +1,31 @@
+uuid: 2a898814-99a8-4c31-a83b-9b29949f8b55
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:5fd49f9f-4404-453d-bf12-a09d01df0b98'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_iotsidebaren
+theme: theme_oab_hub_one_i
+region: sidebar
+weight: 0
+provider: null
+plugin: 'block_content:5fd49f9f-4404-453d-bf12-a09d01df0b98'
+settings:
+  id: 'block_content:5fd49f9f-4404-453d-bf12-a09d01df0b98'
+  label: 'IoT Sidebar EN'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    context_mapping: {  }
+    pages: "/solutions/iot/products\r\n/solutions/iot/customer-stories"

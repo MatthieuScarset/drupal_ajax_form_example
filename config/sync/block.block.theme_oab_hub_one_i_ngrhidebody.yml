@@ -1,0 +1,30 @@
+uuid: 0e63eb02-c41c-4785-b4e6-444fd654f9b6
+langcode: fr
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:1fcb7689-711d-4286-b6f4-f89da564ecfa'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_ngrhidebody
+theme: theme_oab_hub_one_i
+region: prefooter
+weight: -73
+provider: null
+plugin: 'block_content:1fcb7689-711d-4286-b6f4-f89da564ecfa'
+settings:
+  id: 'block_content:1fcb7689-711d-4286-b6f4-f89da564ecfa'
+  label: '[NGR] Hide Body'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/working-together-flash-redirect\r\n/produits/working-together-smoothie-redirect"

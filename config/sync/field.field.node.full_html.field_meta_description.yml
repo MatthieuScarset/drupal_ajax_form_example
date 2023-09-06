@@ -5,13 +5,19 @@ dependencies:
   config:
     - field.storage.node.field_meta_description
     - node.type.full_html
+  module:
+    - require_on_publish
+third_party_settings:
+  require_on_publish:
+    require_on_publish: true
+    warn_on_empty: true
 id: node.full_html.field_meta_description
 field_name: field_meta_description
 entity_type: node
 bundle: full_html
 label: 'Meta description'
 description: ''
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''

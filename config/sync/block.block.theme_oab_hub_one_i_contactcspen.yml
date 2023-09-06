@@ -1,0 +1,41 @@
+uuid: 19e3acae-1f4c-4821-a213-b1a00984c71e
+langcode: fr
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:ea50b916-a069-4fac-a324-bd82a04a5def'
+  module:
+    - block_content
+    - language
+    - node
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_contactcspen
+theme: theme_oab_hub_one_i
+region: sidebar
+weight: -36
+provider: null
+plugin: 'block_content:ea50b916-a069-4fac-a324-bd82a04a5def'
+settings:
+  id: 'block_content:ea50b916-a069-4fac-a324-bd82a04a5def'
+  label: 'Contact CSP EN'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: null
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      cloud_service_provider: cloud_service_provider
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      en: en

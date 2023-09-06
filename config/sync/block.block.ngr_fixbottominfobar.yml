@@ -1,0 +1,25 @@
+uuid: e9ff7b80-3cda-44a1-9ec0-6b2fada88c10
+langcode: fr
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:1f53f878-2d40-4a29-8b59-5377921e75db'
+  module:
+    - block_content
+  theme:
+    - theme_obs_backoffice_claro
+id: ngr_fixbottominfobar
+theme: theme_obs_backoffice_claro
+region: content
+weight: 0
+provider: null
+plugin: 'block_content:1f53f878-2d40-4a29-8b59-5377921e75db'
+settings:
+  id: 'block_content:1f53f878-2d40-4a29-8b59-5377921e75db'
+  label: '[NGR] Fix bottom infobar'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

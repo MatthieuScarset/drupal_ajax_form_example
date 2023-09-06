@@ -1,0 +1,22 @@
+uuid: 40db6c9e-4440-4758-a1a0-e92d458a0f58
+langcode: en
+status: true
+dependencies:
+  theme:
+    - theme_oab_hub_one_i
+_core:
+  default_config_hash: c-06bbElRY5sKmglk74ppgTW93Et4-EJFyNiUZMb8JY
+id: theme_oab_hub_one_i_local_tasks
+theme: theme_oab_hub_one_i
+region: content
+weight: -48
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility: {  }

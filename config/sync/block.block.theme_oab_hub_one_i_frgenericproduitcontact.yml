@@ -1,0 +1,47 @@
+uuid: 686d7fd5-e699-4bf2-9d7f-248fd9309fa2
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:4e2bf84c-8cb7-4888-b183-934be790d1a3'
+  module:
+    - block_content
+    - language
+    - node
+    - system
+  theme:
+    - theme_oab_hub_one_i
+id: theme_oab_hub_one_i_frgenericproduitcontact
+theme: theme_oab_hub_one_i
+region: sidebar
+weight: -58
+provider: null
+plugin: 'block_content:4e2bf84c-8cb7-4888-b183-934be790d1a3'
+settings:
+  id: 'block_content:4e2bf84c-8cb7-4888-b183-934be790d1a3'
+  label: '[FR][Generic] Produit Contact'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    context_mapping: {  }
+    pages: "/produits/audio-et-web-conference\r\n/produits/cisco-webex\r\n/produits/contact-everyone\r\n/produits/customer-success-manager\r\n/produits/espace-client-entreprise\r\n/produits/flexible-365\r\n/produits/teaming\r\n/produits/working-together-ready\r\n/produits/incident-response\r\n/produits/flexible-storage\r\n/produits/flexible-web-publisher\r\n/produits/computer-vision\r\n/produits/ddos-protection\r\n/produits/flexible-identity-authentication\r\n/produits/flexible-workspace-remote-access\r\n/produits/guichet\r\n/produits/live-identity\r\n/produits/mobile-threat-protection\r\n/produits/my-business-place\r\n/produits/pack-id\r\n/produits/security-event-intelligence\r\n/produits/unified-commerce\r\n/produits/web-application-guardian\r\n/produits/mobile-threat-protection\r\n/produits/gamme-virtualisation-poste-travail-cloud\r\n/produits/enovacom-plan-durgence\r\n/produits/flexible-engine\r\n/produits/flux-vision\r\n/produits/gamme-cloud-computing-infrastructures-it\r\n/produits/gamme-professional-services-cloud\r\n/produits/gamme-protection-activite-cloud\r\n/produits/gamme-services-manages-cloud\r\n/produits/orange-event-solutions\r\n/produits/gamme-accompagnement-multi-cloud\r\n/produits/affichage-interactif\r\n/produits/gamme-m2miot\r\n/produits/live-button\r\n/produits/live-objects\r\n/produits/smart-operations\r\n/produits/smart-tracking\r\n/produits/diagnostic-cybersecurite"
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      product: product
+  language:
+    id: language
+    negate: false
+    context_mapping:
+      language: '@language.current_language_context:language_interface'
+    langcodes:
+      fr: fr

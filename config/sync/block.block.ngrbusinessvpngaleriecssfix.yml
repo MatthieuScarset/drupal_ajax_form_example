@@ -1,0 +1,30 @@
+uuid: 721922b3-bd72-451b-9f1d-9aa765c4be5c
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:cb3fd26c-d9d3-40f5-bfe0-23dea28ce6ee'
+  module:
+    - block_content
+    - system
+  theme:
+    - theme_boosted
+id: ngrbusinessvpngaleriecssfix
+theme: theme_boosted
+region: prefooter
+weight: -68
+provider: null
+plugin: 'block_content:cb3fd26c-d9d3-40f5-bfe0-23dea28ce6ee'
+settings:
+  id: 'block_content:cb3fd26c-d9d3-40f5-bfe0-23dea28ce6ee'
+  label: '[NGR] Business VPN Galerie - CSS Fix'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/products/business-vpn-galerie/cloud-services/map\r\n/products/business-vpn-galerie/cloud-services/list"
