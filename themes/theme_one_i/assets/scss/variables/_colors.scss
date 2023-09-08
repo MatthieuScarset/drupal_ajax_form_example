@@ -3,7 +3,7 @@
 
   .main-container, .region-top-zone {
     div:not(.alert), h1, h2, h3, span  {
-      @extend .text-white;
+      color: $white;
     }
 
     a:not(.btn_accept_cookie_youtube) {

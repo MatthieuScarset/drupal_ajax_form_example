@@ -1,0 +1,19 @@
+.list-item-number {
+  font-size: 1.625rem;
+  font-weight: bold;
+}
+
+.fixed-list-container {
+  @extend .bg-dark, .text-white;
+
+}
+
+.dark-mode {
+  .fixed-list-container {
+    @extend .bg-greige;
+
+    div, a, p {
+      @extend .text-dark;
+    }
+  }
+}

@@ -73,10 +73,10 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
   $max_char_long_title = $conf_modular_product->getLongTitleMaxCharacter();
   $max_char_description = $conf_modular_product->getLongDescriptionMaxCharacter();
   $field_title_markup = FieldFilteredMarkup::create("$max_char_short_title characters max");
+  $field_long_title_markup = FieldFilteredMarkup::create("$max_char_long_title characters max");
   $field_description_markup = FieldFilteredMarkup::create("$max_char_description characters max");
 
   $size_title_short = min(150, $conf_modular_product->getShortTitleMaxCharacter()+10);
-
 
   if (in_array($entity_form['#bundle'], $mp_modules) || in_array($entity_form['#bundle'], $module)) {
     $max_length = 0;
@@ -108,11 +108,16 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
           }
         }
         elseif ($field === 'field_title') {
-          $max_length = $max_char_short_title;
-          $markup = $field_title_markup;
           $entity_form[$field]['widget'][0]['value']['#size'] = $size_title_short;
-        }
 
+          if ($entity_form['#bundle'] === 'module_title_and_highlight') {
+            $max_length = $max_char_long_title;
+            $markup = $field_long_title_markup;
+          } else {
+            $max_length = $max_char_short_title;
+            $markup = $field_title_markup;
+          }
+        }
         $entity_form[$field]['widget'][0]['value']['#maxlength'] = $max_length;
         $entity_form[$field]['widget'][0]['value']['#description'] .= ' '.$markup;
       }
