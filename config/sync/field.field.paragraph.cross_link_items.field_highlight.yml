@@ -9,7 +9,7 @@ id: paragraph.cross_link_items.field_highlight
 field_name: field_highlight
 entity_type: paragraph
 bundle: cross_link_items
-label: Description
+label: Highlight
 description: ''
 required: false
 translatable: true

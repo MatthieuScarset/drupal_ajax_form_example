@@ -1,5 +1,5 @@
 uuid: 8be15536-c4bf-4f31-927b-3e21b0112018
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -9,7 +9,7 @@ id: paragraph.module_detail_offre.field_highlight
 field_name: field_highlight
 entity_type: paragraph
 bundle: module_detail_offre
-label: 'Description services et accompagnements'
+label: 'Highlight service and support'
 description: ''
 required: false
 translatable: true

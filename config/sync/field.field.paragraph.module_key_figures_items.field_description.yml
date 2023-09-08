@@ -9,7 +9,7 @@ id: paragraph.module_key_figures_items.field_description
 field_name: field_description
 entity_type: paragraph
 bundle: module_key_figures_items
-label: 'Key figures description'
+label: 'Highlight key figures'
 description: ''
 required: true
 translatable: true

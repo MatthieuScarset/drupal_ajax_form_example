@@ -1,5 +1,5 @@
 uuid: d34e8b7e-c089-4c4b-8f6b-65471360b47f
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -9,7 +9,7 @@ id: paragraph.titre_and_description_and_link.field_title
 field_name: field_title
 entity_type: paragraph
 bundle: titre_and_description_and_link
-label: Titre
+label: Title
 description: ''
 required: true
 translatable: true

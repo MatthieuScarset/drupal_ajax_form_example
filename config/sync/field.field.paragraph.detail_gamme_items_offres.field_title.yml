@@ -1,5 +1,5 @@
 uuid: 3abbdb60-1422-4844-a2d8-3ee365eca9dc
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -9,7 +9,7 @@ id: paragraph.detail_gamme_items_offres.field_title
 field_name: field_title
 entity_type: paragraph
 bundle: detail_gamme_items_offres
-label: Titre
+label: Title
 description: ''
 required: true
 translatable: true

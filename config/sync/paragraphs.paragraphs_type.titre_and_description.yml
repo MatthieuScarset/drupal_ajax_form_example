@@ -6,5 +6,5 @@ id: titre_and_description
 label: '[MP] [Offer details] Inclusion / exclusion'
 icon_uuid: null
 icon_default: null
-description: ''
+description: 'Is used in sub module offer detail items'
 behavior_plugins: {  }

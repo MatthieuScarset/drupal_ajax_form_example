@@ -11,7 +11,7 @@ id: paragraph.titre_and_description_and_link.field_redirection_url
 field_name: field_redirection_url
 entity_type: paragraph
 bundle: titre_and_description_and_link
-label: 'Lien en savoir plus'
+label: 'Link know more'
 description: ''
 required: false
 translatable: true

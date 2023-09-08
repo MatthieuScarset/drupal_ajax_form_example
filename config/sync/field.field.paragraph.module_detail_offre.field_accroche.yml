@@ -9,7 +9,7 @@ id: paragraph.module_detail_offre.field_accroche
 field_name: field_accroche
 entity_type: paragraph
 bundle: module_detail_offre
-label: 'Global offers description'
+label: 'Global highlight'
 description: 'Use only with multi-offers products'
 required: false
 translatable: true

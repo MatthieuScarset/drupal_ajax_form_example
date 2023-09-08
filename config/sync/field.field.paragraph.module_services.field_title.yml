@@ -1,5 +1,5 @@
 uuid: a03ef836-0955-4709-b948-6e5bc437494b
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -9,7 +9,7 @@ id: paragraph.module_services.field_title
 field_name: field_title
 entity_type: paragraph
 bundle: module_services
-label: 'Titre service'
+label: Title
 description: ''
 required: true
 translatable: true

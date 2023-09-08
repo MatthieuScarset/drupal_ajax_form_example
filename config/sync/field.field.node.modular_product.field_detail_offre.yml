@@ -1,5 +1,5 @@
 uuid: e9ee12f5-6f2f-49ea-b2ec-4988e7f9da50
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -18,7 +18,7 @@ id: node.modular_product.field_detail_offre
 field_name: field_detail_offre
 entity_type: node
 bundle: modular_product
-label: 'Détail de l''offre/gamme'
+label: 'Detail offer/gamme'
 description: ''
 required: false
 translatable: false

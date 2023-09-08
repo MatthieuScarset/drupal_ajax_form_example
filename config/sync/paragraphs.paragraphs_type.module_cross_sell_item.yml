@@ -1,10 +1,10 @@
 uuid: 4ef52c53-e4fd-40ef-8dba-49de46746c7b
-langcode: fr
+langcode: en
 status: true
 dependencies: {  }
 id: module_cross_sell_item
 label: '[MP] Module cross Sell Item'
 icon_uuid: null
 icon_default: null
-description: ''
+description: 'Is used in module Cross Sell'
 behavior_plugins: {  }

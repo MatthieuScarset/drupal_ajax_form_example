@@ -1,5 +1,5 @@
 uuid: 4416ed7b-0d4c-451f-b4a7-ad9aad1fc817
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -9,7 +9,7 @@ id: paragraph.module_detail_offre.field_key_points
 field_name: field_key_points
 entity_type: paragraph
 bundle: module_detail_offre
-label: 'Key points services et accompagnements'
+label: 'Key points service and support'
 description: ''
 required: false
 translatable: false

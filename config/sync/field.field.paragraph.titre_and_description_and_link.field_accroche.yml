@@ -1,5 +1,5 @@
 uuid: 98d0acc4-0fc4-4793-a91b-3dd5a4d7d995
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -9,7 +9,7 @@ id: paragraph.titre_and_description_and_link.field_accroche
 field_name: field_accroche
 entity_type: paragraph
 bundle: titre_and_description_and_link
-label: Description
+label: Highlight
 description: ''
 required: true
 translatable: true

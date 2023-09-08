@@ -1,5 +1,5 @@
 uuid: 25f1d050-855e-4abf-938e-df5d447d9469
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -9,7 +9,7 @@ id: paragraph.module_exemples_items.field_exemple_key_points
 field_name: field_exemple_key_points
 entity_type: paragraph
 bundle: module_exemples_items
-label: 'Points clés'
+label: 'Key points'
 description: ''
 required: false
 translatable: false

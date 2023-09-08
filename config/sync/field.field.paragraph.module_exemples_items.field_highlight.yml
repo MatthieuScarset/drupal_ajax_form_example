@@ -1,5 +1,5 @@
 uuid: 5c18dadf-faaf-42a5-884f-683012f7aab7
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -9,7 +9,7 @@ id: paragraph.module_exemples_items.field_highlight
 field_name: field_highlight
 entity_type: paragraph
 bundle: module_exemples_items
-label: 'Description item'
+label: Highlight
 description: ''
 required: false
 translatable: true

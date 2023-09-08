@@ -1,9 +1,9 @@
 uuid: 208284d8-07af-4832-9dbf-ebb0eb73624e
-langcode: fr
+langcode: en
 status: true
 dependencies: {  }
 id: module_3_4_colonnes
-label: '[MP] Module 3/6 Colonnes'
+label: '[MP] Module 3-6 Columns'
 icon_uuid: null
 icon_default: null
 description: ''
