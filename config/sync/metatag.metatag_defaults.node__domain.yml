@@ -5,4 +5,5 @@ dependencies: {  }
 id: node__domain
 label: 'Content: Domain'
 tags:
+  description: '[node:field_meta_description]'
   title: '[node:field_meta_title] | [site:name]'
