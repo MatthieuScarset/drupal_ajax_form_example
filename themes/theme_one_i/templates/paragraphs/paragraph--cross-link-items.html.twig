@@ -41,7 +41,8 @@
 {%
   set classes = [
   'paragraph',
-  'py-2 py-md-5',
+  'py-3 py-md-5',
+  'px-0 px-md-1',
   'col-12 offset-md-1 col-md-10 offset-xl-2 col-xl-8',
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
@@ -51,13 +52,18 @@
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
-      <div class="cross-link-image mb-1">
+      <div class="cross-link-image mb-1 mx--1 mx-mb-0">
         {{ content.field_visual }}
       </div>
       <h2 class="h3 mb-1">{{ content.field_title }}</h2>
       <span>{{ content.field_highlight }}</span>
       <a href="{{ content.field_redirection_url[0]['#url'] }}"
-         class="o-link-arrow p-0 mt-2">
+         class="o-link-arrow mt-1 p-0"
+         onmousedown="utag_link(utag_data.titre_page,'Crosslink',
+           '{{ paragraph.field_title.value|addslashes }}',
+           '{{ paragraph.field_redirection_url.title|addslashes }}'
+         )"
+      >
         {{ content.field_redirection_url[0]['#title'] }}
       </a>
     {% endblock %}

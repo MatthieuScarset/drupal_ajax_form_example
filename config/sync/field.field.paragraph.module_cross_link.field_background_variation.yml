@@ -1,0 +1,23 @@
+uuid: 59ad7d0a-3f1b-4b93-a56e-1519ffdaf40a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_background_variation
+    - paragraphs.paragraphs_type.module_cross_link
+  module:
+    - options
+id: paragraph.module_cross_link.field_background_variation
+field_name: field_background_variation
+entity_type: paragraph
+bundle: module_cross_link
+label: 'Background variation'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: light-double-color
+default_value_callback: ''
+settings: {  }
+field_type: list_string

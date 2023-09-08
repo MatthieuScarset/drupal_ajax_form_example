@@ -44,7 +44,7 @@
   'paragraph--type--' ~ paragraph.bundle|clean_class,
   view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
   not paragraph.isPublished() ? 'paragraph--unpublished',
-  'double-color',
+  paragraph.field_background_variation.value == 'bg-gray2' ? 'bg-gray2',
 ]
 %}
 {% set parent = paragraph._referringItem.parent.parent.entity %}
@@ -52,16 +52,25 @@
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
-        <div class="left-panel {% if not parent.field_dark_mode.value %} bg-greige {% endif %} px-1 px-md-0">
-          <div>
-            {{ content.field_cross_link_items[0] }}
+      {% if content.field_title['#items'] %}
+        <div class="site-width">
+          <div class="container-fluid">
+            <h2 class="no-signature pt-3 px-0 mb-0 ml-md-4">{{ content.field_title }}</h2>
           </div>
         </div>
-        <div class="right-panel px-1 px-md-0">
-          <div>
-            {{ content.field_cross_link_items[1] }}
+      {% endif %}
+      <div class="double-color {{ paragraph.field_background_variation.value }}">
+          <div class="left-panel px-1 px-md-0">
+            <div>
+              {{ content.field_cross_link_items[0] }}
+            </div>
           </div>
-        </div>
+          <div class="right-panel px-1 px-md-0">
+            <div>
+              {{ content.field_cross_link_items[1] }}
+            </div>
+          </div>
+    </div>
     {% endblock %}
   </div>
 {% endblock paragraph %}
