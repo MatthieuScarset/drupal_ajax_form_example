@@ -10,9 +10,15 @@ dependencies:
     - paragraphs.paragraphs_type.module_hook_text
     - paragraphs.paragraphs_type.module_key_figures
     - paragraphs.paragraphs_type.module_list
+    - paragraphs.paragraphs_type.module_testimonial
     - paragraphs.paragraphs_type.paragraph_wysiwyg
   module:
     - entity_reference_revisions
+    - require_on_publish
+third_party_settings:
+  require_on_publish:
+    require_on_publish: true
+    warn_on_empty: true
 id: node.svp.field_modules
 field_name: field_modules
 entity_type: node
@@ -32,6 +38,7 @@ settings:
       module_hook_text: module_hook_text
       module_key_figures: module_key_figures
       module_list: module_list
+      module_testimonial: module_testimonial
       paragraph_wysiwyg: paragraph_wysiwyg
     negate: 0
     target_bundles_drag_drop:
@@ -178,7 +185,7 @@ settings:
         enabled: false
       module_testimonial:
         weight: 108
-        enabled: false
+        enabled: true
       module_testimonial_item:
         weight: 109
         enabled: false
