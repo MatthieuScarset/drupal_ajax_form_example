@@ -5,9 +5,9 @@ dependencies:
   config:
     - field.storage.node.field_modules
     - node.type.corporate
+    - paragraphs.paragraphs_type.module_3_4_colonnes
     - paragraphs.paragraphs_type.module_blog
     - paragraphs.paragraphs_type.module_cross_link
-    - paragraphs.paragraphs_type.module_customer_space
     - paragraphs.paragraphs_type.module_hook_text
     - paragraphs.paragraphs_type.module_key_figures
     - paragraphs.paragraphs_type.module_list
@@ -33,8 +33,8 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
+      module_3_4_colonnes: module_3_4_colonnes
       module_blog: module_blog
-      module_customer_space: module_customer_space
       module_cross_link: module_cross_link
       module_text_video_image: module_text_video_image
       paragraph_wysiwyg: paragraph_wysiwyg
@@ -100,7 +100,7 @@ settings:
         enabled: false
       module_3_4_colonnes:
         weight: 67
-        enabled: false
+        enabled: true
       module_3_4_colonnes_items:
         weight: 68
         enabled: false
@@ -127,7 +127,7 @@ settings:
         enabled: false
       module_customer_space:
         weight: 75
-        enabled: true
+        enabled: false
       module_detail_gamme:
         weight: 76
         enabled: false
