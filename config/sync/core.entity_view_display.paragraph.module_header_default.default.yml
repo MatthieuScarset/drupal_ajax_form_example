@@ -3,22 +3,67 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.module_header_default.field_accroche
+    - field.field.paragraph.module_header_default.field_call_to_action_buton
+    - field.field.paragraph.module_header_default.field_call_to_action_link_simple
+    - field.field.paragraph.module_header_default.field_header_visuals
     - field.field.paragraph.module_header_default.field_highlight
     - field.field.paragraph.module_header_default.field_image_full
     - field.field.paragraph.module_header_default.field_title
-    - field.field.paragraph.module_header_default.field_visual
     - paragraphs.paragraphs_type.module_header_default
+  module:
+    - link
 id: paragraph.module_header_default.default
 targetEntityType: paragraph
 bundle: module_header_default
 mode: default
 content:
-  field_highlight:
+  field_accroche:
     type: basic_string
     label: hidden
     settings: {  }
     third_party_settings: {  }
     weight: 1
+    region: content
+  field_call_to_action_buton:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_call_to_action_link_simple:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_header_visuals:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_highlight:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
     region: content
   field_image_full:
     type: boolean
@@ -28,7 +73,7 @@ content:
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    weight: 2
+    weight: 5
     region: content
   field_title:
     type: string
@@ -37,14 +82,5 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 0
-    region: content
-  field_visual:
-    type: entity_reference_entity_view
-    label: hidden
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
-    weight: 3
     region: content
 hidden: {  }

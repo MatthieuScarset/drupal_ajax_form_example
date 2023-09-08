@@ -7,7 +7,13 @@
     }
 
     a:not(.btn_accept_cookie_youtube) {
-      @extend .o-link-reverse;
+      &:not(.btn) {
+        @extend .o-link-reverse;
+      }
+
+      &.btn {
+        @extend .btn-inverse;
+      }
     }
 
     ol {

@@ -1,0 +1,19 @@
+uuid: 46ef72c7-52fb-412b-8ebc-ca7943d82671
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_accroche
+    - paragraphs.paragraphs_type.module_header_default
+id: paragraph.module_header_default.field_accroche
+field_name: field_accroche
+entity_type: paragraph
+bundle: module_header_default
+label: Hook
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

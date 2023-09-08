@@ -1,0 +1,23 @@
+uuid: 18b175f0-489e-47f3-bf0e-7fcec4b9e8d9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_call_to_action_buton
+    - paragraphs.paragraphs_type.module_header_default
+  module:
+    - link
+id: paragraph.module_header_default.field_call_to_action_buton
+field_name: field_call_to_action_buton
+entity_type: paragraph
+bundle: module_header_default
+label: 'CTA Principal'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 2
+  link_type: 17
+field_type: link

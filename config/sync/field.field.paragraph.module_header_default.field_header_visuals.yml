@@ -1,0 +1,29 @@
+uuid: ebfb7e0e-b111-4525-8cf7-73a1889d4056
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_header_visuals
+    - media.type.image
+    - paragraphs.paragraphs_type.module_header_default
+id: paragraph.module_header_default.field_header_visuals
+field_name: field_header_visuals
+entity_type: paragraph
+bundle: module_header_default
+label: Images
+description: "<p>Attention:</p>\r\n\r\n<strong>If 1 image is added :</strong>\r\n<ul>\r\n<li>Image full is checked : Applied the <strong> crop 1320:420 </strong></li>\r\n<li>Image full is not checked : Applied the <strong> crop 645:520 </strong></li>\r\n</ul>\r\n\r\n<strong>If 2 images are added :</strong>\r\n<ul>\r\n<li>Image full is checked</li>\r\n<ul>\r\n<li>First image : Applied the <strong> crop 420:420 </strong></li>\r\n<li>Second image : Applied the <strong> crop 870:420  <strong></li>\r\n</ul>\r\n<li> Image full is not checked : Only the first image added will be visible </li>\r\n</ul>\r\n\r\n<p><strong>Make sure you apply the right crop to the right image to get the right rendering</strong></p>"
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
