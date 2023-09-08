@@ -15,9 +15,9 @@
 }
 
 /**
- * Do something on hover on an element. 
+ * Do something on hover on an element.
  *
- * @code 
+ * @code
  * .myclass {
  *   @include hover {
  *     background: nicecolor;
@@ -34,7 +34,7 @@
 }
 
 /**
- * Do something on hover on an element. 
+ * Do something on hover on an element.
  *
  * @see node--domain--teaser.html.twig
  * @endcode
@@ -51,5 +51,21 @@
     bottom: 0;
     left: 0;
     margin: auto;
+  }
+}
+
+img.play-svg {
+  position: absolute;
+  width: px-to-rem(70) !important;
+  height: px-to-rem(70) !important;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+
+  @include media-breakpoint-up(md) {
+    width: px-to-rem(90) !important;
+    height: px-to-rem(90) !important;
   }
 }

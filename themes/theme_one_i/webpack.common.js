@@ -11,6 +11,9 @@ module.exports = {
     "js/script.min": "./assets/js/_mainScript.js",
     "js/modularContent.min": './assets/js/modular_content/main.js',
     "js/productFormule.min": './assets/js/product_formule/main.js',
+
+    // Export Ytb-embed to be available with Theme Boosted without everything else that is in _mainScript
+    "js/ytb-embed.min": "./assets/js/ytb-embed.main.js"
   },
   output: {
     filename: '[name].js',

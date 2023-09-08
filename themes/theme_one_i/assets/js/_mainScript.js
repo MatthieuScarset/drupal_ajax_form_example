@@ -1,8 +1,8 @@
-import {defineCustomElement} from "vue";
-
+'use strict';
 
 /* Import OB1 */
 import '@ob1/web';
+import {defineCustomElement} from "vue";
 
 
 // Hack pour jQuery
@@ -13,17 +13,12 @@ $.animate = $.fn.animate;
 /*
   Import TS scripts
  */
-// require('./example-ts.ts');
 require('./sticky-content.ts');
 require('./sticky-header.js');
 
-
 /*
-  Import VueJS Components
+Custom elements
  */
-// import ExampleVue from "./ExampleVue.ce.vue";
+import YtbEmbed from "./custom_elements/ytb-embed.ce.vue";
 
-/*
-  Register VueJS custom elements
- */
-// customElements.define('example-vue', defineCustomElement(ExampleVue));
+customElements.define('ytb-embed', defineCustomElement(YtbEmbed));

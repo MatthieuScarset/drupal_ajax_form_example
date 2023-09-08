@@ -1,0 +1,29 @@
+uuid: d467f203-3f11-41e2-9c0d-b7fc4e4ab42f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_cover_image
+    - media.type.embed_video
+    - media.type.image
+id: media.embed_video.field_cover_image
+field_name: field_cover_image
+entity_type: media
+bundle: embed_video
+label: 'Cover Image'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference
