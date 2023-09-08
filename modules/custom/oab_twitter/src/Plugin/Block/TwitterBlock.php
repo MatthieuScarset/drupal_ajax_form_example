@@ -23,7 +23,11 @@ class TwitterBlock extends BlockBase {
   public function build() {
 
     $twitter_service = \Drupal::service('oab_twitter.twitter_service');
-    $tweet = $twitter_service->getTweet($this->configuration['position']);
+    try {
+      $tweet = $twitter_service->getTweet($this->configuration['position']);
+    } catch (\Exception $e) {
+      $tweet = [];
+    }
     return (count($tweet) > 0) ? array("tweets" => $tweet) : array();
   }
 
