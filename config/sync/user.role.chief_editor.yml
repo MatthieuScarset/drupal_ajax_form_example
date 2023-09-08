@@ -19,6 +19,7 @@ dependencies:
     - node.type.customer_story
     - node.type.distributor
     - node.type.document
+    - node.type.domain
     - node.type.external_content
     - node.type.full_html
     - node.type.homepage
@@ -36,6 +37,7 @@ dependencies:
     - node.type.region
     - node.type.simple_page
     - node.type.solution
+    - node.type.svp
     - node.type.webform
     - taxonomy.vocabulary.subhomes
     - workflows.workflow.content
@@ -101,6 +103,7 @@ permissions:
   - 'create customer_story content'
   - 'create distributor content'
   - 'create document content'
+  - 'create domain content'
   - 'create embed_video media'
   - 'create external_content content'
   - 'create file media'
@@ -126,6 +129,7 @@ permissions:
   - 'create region content'
   - 'create simple_page content'
   - 'create solution content'
+  - 'create svp content'
   - 'create url aliases'
   - 'delete all revisions'
   - 'delete any background media'
@@ -137,6 +141,7 @@ permissions:
   - 'delete any customer_story content'
   - 'delete any distributor content'
   - 'delete any document content'
+  - 'delete any domain content'
   - 'delete any embed_video media'
   - 'delete any external_content content'
   - 'delete any file media'
@@ -161,6 +166,7 @@ permissions:
   - 'delete any region content'
   - 'delete any simple_page content'
   - 'delete any solution content'
+  - 'delete any svp content'
   - 'delete background image entities'
   - 'delete blog_post revisions'
   - 'delete cloud_service_provider revisions'
@@ -170,6 +176,7 @@ permissions:
   - 'delete customer_story revisions'
   - 'delete distributor revisions'
   - 'delete document revisions'
+  - 'delete domain revisions'
   - 'delete external_content revisions'
   - 'delete full_html revisions'
   - 'delete industry revisions'
@@ -188,6 +195,7 @@ permissions:
   - 'delete own customer_story content'
   - 'delete own distributor content'
   - 'delete own document content'
+  - 'delete own domain content'
   - 'delete own embed_video media'
   - 'delete own external_content content'
   - 'delete own file media'
@@ -212,6 +220,7 @@ permissions:
   - 'delete own region content'
   - 'delete own simple_page content'
   - 'delete own solution content'
+  - 'delete own svp content'
   - 'delete partner revisions'
   - 'delete press_kit revisions'
   - 'delete press_release revisions'
@@ -220,6 +229,7 @@ permissions:
   - 'delete region revisions'
   - 'delete simple_page revisions'
   - 'delete solution revisions'
+  - 'delete svp revisions'
   - 'edit any background media'
   - 'edit any blog_post content'
   - 'edit any cloud_service_provider content'
@@ -229,6 +239,7 @@ permissions:
   - 'edit any customer_story content'
   - 'edit any distributor content'
   - 'edit any document content'
+  - 'edit any domain content'
   - 'edit any embed_video media'
   - 'edit any external_content content'
   - 'edit any file media'
@@ -253,6 +264,7 @@ permissions:
   - 'edit any region content'
   - 'edit any simple_page content'
   - 'edit any solution content'
+  - 'edit any svp content'
   - 'edit background image entities'
   - 'edit own background media'
   - 'edit own blog_post content'
@@ -264,6 +276,7 @@ permissions:
   - 'edit own customer_story content'
   - 'edit own distributor content'
   - 'edit own document content'
+  - 'edit own domain content'
   - 'edit own embed_video media'
   - 'edit own external_content content'
   - 'edit own file media'
@@ -288,6 +301,7 @@ permissions:
   - 'edit own region content'
   - 'edit own simple_page content'
   - 'edit own solution content'
+  - 'edit own svp content'
   - 'edit own webform content'
   - 'edit subhome entity entities'
   - 'edit terms in subhomes'
@@ -302,6 +316,7 @@ permissions:
   - 'revert customer_story revisions'
   - 'revert distributor revisions'
   - 'revert document revisions'
+  - 'revert domain revisions'
   - 'revert external_content revisions'
   - 'revert full_html revisions'
   - 'revert homepage revisions'
@@ -319,9 +334,12 @@ permissions:
   - 'revert region revisions'
   - 'revert simple_page revisions'
   - 'revert solution revisions'
+  - 'revert svp revisions'
   - 'skip comment approval'
   - 'translate corporate node'
+  - 'translate domain node'
   - 'translate profile node'
+  - 'translate svp node'
   - 'update any media'
   - 'update media'
   - 'use content transition archived'
@@ -342,6 +360,7 @@ permissions:
   - 'view customer_story revisions'
   - 'view distributor revisions'
   - 'view document revisions'
+  - 'view domain revisions'
   - 'view external_content revisions'
   - 'view full_html revisions'
   - 'view homepage revisions'
@@ -368,6 +387,7 @@ permissions:
   - 'view scheduled update entities'
   - 'view simple_page revisions'
   - 'view solution revisions'
+  - 'view svp revisions'
   - 'view the administration theme'
   - 'view unpublished background image entities'
   - 'view unpublished subhome entity entities'

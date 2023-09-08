@@ -1,0 +1,10 @@
+uuid: 12416a61-b786-4fd8-b26f-48234e7f60c0
+langcode: en
+status: true
+dependencies: {  }
+id: module_domains
+label: '[Module] Domains'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

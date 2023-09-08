@@ -1,0 +1,18 @@
+uuid: 1087b65e-eee1-4e3a-829c-382b8403aff6
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.domain
+id: node.domain.title
+field_name: title
+entity_type: node
+bundle: domain
+label: 'Backoffice title'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

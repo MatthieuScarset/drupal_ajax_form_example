@@ -1,0 +1,29 @@
+uuid: 2e389065-7c51-4b82-b9d7-3f58903a0ab8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_svp
+    - node.type.domain
+    - taxonomy.vocabulary.svp
+id: node.domain.field_svp
+field_name: field_svp
+entity_type: node
+bundle: domain
+label: SVP
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      svp: svp
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,21 @@
+uuid: dcd46cb7-e37a-47c8-a774-7293aeb09bfa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.module_domains.field_title
+    - paragraphs.paragraphs_type.module_domains
+id: paragraph.module_domains.default
+targetEntityType: paragraph
+bundle: module_domains
+mode: default
+content:
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

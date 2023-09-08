@@ -1,0 +1,11 @@
+.domain-teaser {
+  transition: transform 0.2s linear;
+
+  img {
+    max-width: 100%;
+  }
+  
+  @include hover {
+    transform: translate3d(-10px, -10px, 0);
+  }
+}

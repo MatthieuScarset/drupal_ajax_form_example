@@ -1,0 +1,48 @@
+uuid: cabb0d55-ea58-4855-a5b8-4b36524d3f46
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.svp.field_dark_mode
+    - field.field.node.svp.field_enable_wysiwyg_paragraph
+    - field.field.node.svp.field_header
+    - field.field.node.svp.field_meta_description
+    - field.field.node.svp.field_meta_title
+    - field.field.node.svp.field_modules
+    - field.field.node.svp.field_svp
+    - node.type.svp
+  module:
+    - entity_reference_revisions
+    - user
+id: node.svp.default
+targetEntityType: node
+bundle: svp
+mode: default
+content:
+  field_header:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_modules:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  content_moderation_control: true
+  field_dark_mode: true
+  field_enable_wysiwyg_paragraph: true
+  field_meta_description: true
+  field_meta_title: true
+  field_svp: true
+  langcode: true
+  links: true

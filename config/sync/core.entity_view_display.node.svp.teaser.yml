@@ -1,0 +1,35 @@
+uuid: 35092c90-1ce3-45e6-b559-4e3f4c3a4f79
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.svp.field_dark_mode
+    - field.field.node.svp.field_enable_wysiwyg_paragraph
+    - field.field.node.svp.field_header
+    - field.field.node.svp.field_meta_description
+    - field.field.node.svp.field_meta_title
+    - field.field.node.svp.field_modules
+    - field.field.node.svp.field_svp
+    - node.type.svp
+  module:
+    - user
+id: node.svp.teaser
+targetEntityType: node
+bundle: svp
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_dark_mode: true
+  field_enable_wysiwyg_paragraph: true
+  field_header: true
+  field_meta_description: true
+  field_meta_title: true
+  field_modules: true
+  field_svp: true
+  langcode: true

@@ -1,0 +1,22 @@
+uuid: b691562e-68d3-4256-aa14-23c512141b9e
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - oab_modular_product
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+  oab_modular_product:
+    ob1_theme: 1
+    background_e2e: 1
+name: SVP
+type: svp
+description: 'Create SVP pages to link to Action Areas pages.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

@@ -1,18 +1,33 @@
 <?php
 
-use Symfony\Component\HttpFoundation\Response;
+use Drupal\node\NodeInterface;
 
 function oab_tealium_page_attachments(array &$attachments) {
-    $attachments['#attached']['drupalSettings']['tealium']['sous_domaine'] = \Drupal::config('oab_tealium.tealium')->get('sous_domaine');
-    $attachments['#attached']['drupalSettings']['tealium']['univers_affichage'] = \Drupal::config('oab_tealium.tealium')->get('univers_affichage');
-    $attachments['#attached']['drupalSettings']['tealium']['sous_univers'] = \Drupal::config('oab_tealium.tealium')->get('sous_univers');
-    $attachments['#attached']['drupalSettings']['tealium']['domaine_marketing'] = \Drupal::config('oab_tealium.tealium')->get('domaine_marketing');
-    $attachments['#attached']['drupalSettings']['tealium']['code_univers'] = \Drupal::config('oab_tealium.tealium')->get('code_univers');
-    $attachments['#attached']['drupalSettings']['tealium']['tealium_url'] = \Drupal::config('oab_tealium.tealium')->get('tealium_url');
-    if (\Drupal::currentUser()->isAnonymous()) {
-        $attachments['#attached']['drupalSettings']['tealium']['profil_compte_navigation'] = 'Utilisateur';
-    } else {
-        $attachments['#attached']['drupalSettings']['tealium']['profil_compte_navigation'] = 'Gestionnaire';
+  $config = \Drupal::config('oab_tealium.tealium');
+  $attachments['#attached']['drupalSettings']['tealium']['sous_domaine'] = $config->get('sous_domaine');
+  $attachments['#attached']['drupalSettings']['tealium']['univers_affichage'] = $config->get('univers_affichage');
+  $attachments['#attached']['drupalSettings']['tealium']['sous_univers'] = $config->get('sous_univers');
+  $attachments['#attached']['drupalSettings']['tealium']['domaine_marketing'] = $config->get('domaine_marketing');
+  $attachments['#attached']['drupalSettings']['tealium']['code_univers'] = $config->get('code_univers');
+  $attachments['#attached']['drupalSettings']['tealium']['tealium_url'] = $config->get('tealium_url');
+
+  if (\Drupal::currentUser()->isAnonymous()) {
+    $attachments['#attached']['drupalSettings']['tealium']['profil_compte_navigation'] = 'Utilisateur';
+  } else {
+    $attachments['#attached']['drupalSettings']['tealium']['profil_compte_navigation'] = 'Gestionnaire';
+  }
+
+  $attachments['#attached']['drupalSettings']['tealium']['type_langue'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node instanceof NodeInterface) {
+    switch ($node->bundle()) {
+      case 'svp':
+        $attachments['#attached']['drupalSettings']['tealium']['type_page'] = 'SVP';
+        break;
+      case 'domain':
+        $attachments['#attached']['drupalSettings']['tealium']['type_page'] = 'Domain';
+        break;
     }
-    $attachments['#attached']['drupalSettings']['tealium']['type_langue'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  }
 }

@@ -1,0 +1,23 @@
+uuid: be752893-3595-4545-a9af-a942c59d7580
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_enable_wysiwyg_paragraph
+    - node.type.domain
+id: node.domain.field_enable_wysiwyg_paragraph
+field_name: field_enable_wysiwyg_paragraph
+entity_type: node
+bundle: domain
+label: 'Enable WYSIWYG paragraph'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -1,0 +1,8 @@
+uuid: 9908fcd8-ae2c-4638-b966-6a424e29d46d
+langcode: en
+status: true
+dependencies: {  }
+id: node__svp
+label: 'Content: SVP'
+tags:
+  title: '[node:field_meta_title] | [site:name]'

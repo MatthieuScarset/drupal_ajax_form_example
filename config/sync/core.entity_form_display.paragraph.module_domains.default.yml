@@ -1,0 +1,23 @@
+uuid: 5fbdb94a-e284-4070-9733-51cdc325699e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.module_domains.field_title
+    - paragraphs.paragraphs_type.module_domains
+id: paragraph.module_domains.default
+targetEntityType: paragraph
+bundle: module_domains
+mode: default
+content:
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

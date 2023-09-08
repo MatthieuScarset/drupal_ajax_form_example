@@ -1,0 +1,40 @@
+{%
+  set classes = [
+    'd-flex',
+    'flex-column',
+    'justify-content-between',
+    'align-items-stretch',
+    'bg-greige',
+    'p-2',
+    'text-break',
+    'fullclick',
+    'domain-teaser',
+  ]
+%}
+<section{{ attributes.addClass(classes) }}>
+  <div class="d-flex flex-column domain-teaser__top">
+    {% if content.field_logo.0 %}
+      <div class="m-0 pb-2 domain-teaser__logo">
+        {{ content.field_logo }}
+      </div>
+    {% endif %}
+    {% if content.field_teaser_title.0 %}
+      <div class="h3 m-0 pb-2 domain-teaser__title">
+        {{ content.field_teaser_title }}
+      </div>
+    {% endif %}
+    {% if content.field_teaser.0 %}
+      <div class="m-0 pb-2 domain-teaser__text">
+        {{ content.field_teaser }}
+      </div>
+    {% endif %}
+  </div>
+  <div class="d-flex flex-column justify-content-end domain-teaser__bottom">
+    <div class="pt-2 domain-teaser__link">
+      <a class="o-link-arrow" href="{{ path('entity.node.canonical', {'node': node.id() })}}"
+        onmousedown="utag_link(utag_data.titre_page, '{{ node.module_title }}', '{{ node.label() }}', '{{ "Read more"|t }}');">
+        {{ 'Read more'|t }}
+      </a>
+    </div>
+  </div>
+</section>

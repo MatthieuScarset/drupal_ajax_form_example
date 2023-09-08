@@ -24,3 +24,16 @@ function oab_modular_product_update_9002() {
 function oab_modular_product_update_9003() {
   include_once("updates/update_9003.inc");
 }
+
+/**
+ * Ajout des traductions pour le type "SVP".
+ */
+function oab_modular_product_update_9004() {
+  $translations = [
+    'Business needs' => [
+      'fr' => 'Vos enjeux'
+    ]
+  ];
+
+  \Drupal::service('oab_develop.helper.translations')->translateMultiple($translations);
+}

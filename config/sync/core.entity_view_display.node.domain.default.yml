@@ -1,0 +1,70 @@
+uuid: 5b584dac-f130-4fe2-b3b7-65f920eb1709
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.domain.field_dark_mode
+    - field.field.node.domain.field_enable_wysiwyg_paragraph
+    - field.field.node.domain.field_header
+    - field.field.node.domain.field_logo
+    - field.field.node.domain.field_meta_description
+    - field.field.node.domain.field_meta_title
+    - field.field.node.domain.field_modules
+    - field.field.node.domain.field_svp
+    - field.field.node.domain.field_teaser
+    - field.field.node.domain.field_teaser_title
+    - node.type.domain
+  module:
+    - entity_reference_revisions
+    - user
+id: node.domain.default
+targetEntityType: node
+bundle: domain
+mode: default
+content:
+  field_header:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_modules:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  changed: true
+  content_moderation_control: true
+  content_translation_outdated: true
+  content_translation_source: true
+  default_langcode: true
+  field_dark_mode: true
+  field_enable_wysiwyg_paragraph: true
+  field_logo: true
+  field_meta_description: true
+  field_meta_title: true
+  field_svp: true
+  field_teaser: true
+  field_teaser_title: true
+  langcode: true
+  links: true
+  nid: true
+  promote: true
+  revision_default: true
+  revision_log: true
+  revision_timestamp: true
+  revision_translation_affected: true
+  revision_uid: true
+  status: true
+  sticky: true
+  type: true
+  uuid: true
+  vid: true

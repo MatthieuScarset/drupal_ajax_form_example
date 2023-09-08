@@ -1,0 +1,31 @@
+{% 
+  set classes = [
+    'site-width',
+    'paragraph',
+    'paragraph--type--' ~ bundle|clean_class,
+    'paragraph--view-mode--' ~ view_mode|clean_class
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  <div class="container-fluid mt-1 mb-3 mb-md-5">
+    <div class="row">
+      <div class="col-12">
+        {% if content.field_title.0 %}
+          <h2 class="h1 my-3 pt-0 pb-md-2">{{ content.field_title }}</h2>
+        {% endif %}
+        {# See oab_modular_product_preprocess_paragraph__module_domains() #}
+        {% if domains|length %}
+          <div class="row d-flex">
+            {% for key, domain in domains if key|first != '#' %}
+              <div class="col-12 col-md-4 pb-2 d-flex">
+                <div class="bg-primary d-flex">
+                  {{ domain }}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

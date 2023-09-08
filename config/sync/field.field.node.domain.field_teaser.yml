@@ -1,0 +1,19 @@
+uuid: 9bc265fe-98a7-44cc-a6b7-1a0c77daa105
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_teaser
+    - node.type.domain
+id: node.domain.field_teaser
+field_name: field_teaser
+entity_type: node
+bundle: domain
+label: Teaser
+description: 'Unformatted long text used when Domain is displayed as a card.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long
