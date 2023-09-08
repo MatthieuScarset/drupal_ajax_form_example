@@ -87,6 +87,9 @@ class StickyHeader {
       }
       this._setHeaderTop(isOnInitialPos);
     });
+
+    // Fix the navbar position when page refresh
+    this._changeHeaderOnScroll(true,false);
   }
   _setHeaderTop($isOnTop) {
     let top = this._getBodyPaddingTop() - this.$header.offsetHeight;
