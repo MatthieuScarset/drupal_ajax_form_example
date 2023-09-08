@@ -6,5 +6,5 @@ id: module_title_and_highlight
 label: '[Module] Title and Highlight'
 icon_uuid: null
 icon_default: null
-description: 'Is used in module list'
+description: 'Is used in module : list, customer benefits'
 behavior_plugins: {  }

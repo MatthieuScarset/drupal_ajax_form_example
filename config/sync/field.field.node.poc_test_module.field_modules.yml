@@ -9,13 +9,14 @@ dependencies:
     - paragraphs.paragraphs_type.module_benefits
     - paragraphs.paragraphs_type.module_blog
     - paragraphs.paragraphs_type.module_cross_sell
+    - paragraphs.paragraphs_type.module_customer_benefits
     - paragraphs.paragraphs_type.module_customer_space
     - paragraphs.paragraphs_type.module_detail_gamme
     - paragraphs.paragraphs_type.module_exemples
     - paragraphs.paragraphs_type.module_faq
+    - paragraphs.paragraphs_type.module_header_default
     - paragraphs.paragraphs_type.module_key_figures
     - paragraphs.paragraphs_type.module_list
-    - paragraphs.paragraphs_type.module_header_default
     - paragraphs.paragraphs_type.module_partner
     - paragraphs.paragraphs_type.module_presentation
     - paragraphs.paragraphs_type.module_services
@@ -48,13 +49,14 @@ settings:
       module_exemples: module_exemples
       module_faq: module_faq
       module_partner: module_partner
-      module_list: module_list
       module_header_default: module_header_default
+      module_list: module_list
       module_presentation: module_presentation
       module_services: module_services
       module_key_figures: module_key_figures
       module_steps: module_steps
       module_testimonial: module_testimonial
+      module_customer_benefits: module_customer_benefits
       module_text_video_image: module_text_video_image
       paragraph_wysiwyg: paragraph_wysiwyg
     negate: 0
@@ -64,6 +66,9 @@ settings:
         enabled: false
       contact_button_item:
         weight: 52
+        enabled: false
+      customer_benefits_items:
+        weight: 67
         enabled: false
       default_button:
         weight: 53
@@ -131,6 +136,9 @@ settings:
       module_cross_sell_item:
         weight: 74
         enabled: false
+      module_customer_benefits:
+        weight: 91
+        enabled: true
       module_customer_space:
         weight: 75
         enabled: true

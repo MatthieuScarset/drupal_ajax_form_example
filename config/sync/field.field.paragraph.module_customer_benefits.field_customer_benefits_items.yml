@@ -1,0 +1,217 @@
+uuid: b00a51ba-89e9-4629-9c0b-58e165baa759
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_customer_benefits_items
+    - paragraphs.paragraphs_type.module_customer_benefits
+    - paragraphs.paragraphs_type.module_title_and_highlight
+  module:
+    - entity_reference_revisions
+id: paragraph.module_customer_benefits.field_customer_benefits_items
+field_name: field_customer_benefits_items
+entity_type: paragraph
+bundle: module_customer_benefits
+label: 'Customer Benefits Items'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      module_title_and_highlight: module_title_and_highlight
+    negate: 0
+    target_bundles_drag_drop:
+      call_to_action:
+        weight: 64
+        enabled: false
+      contact_button_item:
+        weight: 65
+        enabled: false
+      cross_link_items:
+        weight: 66
+        enabled: false
+      customer_benefits_items:
+        weight: 67
+        enabled: false
+      default_button:
+        weight: 68
+        enabled: false
+      detail_gamme_items_offres:
+        weight: 69
+        enabled: false
+      documentation:
+        weight: 70
+        enabled: false
+      home_banner:
+        weight: 74
+        enabled: false
+      home_caroussel:
+        weight: 75
+        enabled: false
+      home_column:
+        weight: 76
+        enabled: false
+      home_column_section:
+        weight: 77
+        enabled: false
+      home_playlist:
+        weight: 78
+        enabled: false
+      home_thematic_columns:
+        weight: 79
+        enabled: false
+      homepage_banner_experience:
+        weight: 71
+        enabled: false
+      homepage_banner_item:
+        weight: 72
+        enabled: false
+      homepage_news:
+        weight: 73
+        enabled: false
+      infography_partner:
+        weight: 80
+        enabled: false
+      marketo:
+        weight: 81
+        enabled: false
+      module_3_4_colonnes:
+        weight: 82
+        enabled: false
+      module_3_4_colonnes_items:
+        weight: 83
+        enabled: false
+      module_benefits:
+        weight: 84
+        enabled: false
+      module_benefits_item:
+        weight: 85
+        enabled: false
+      module_blog:
+        weight: 86
+        enabled: false
+      module_configurateur_details:
+        weight: 87
+        enabled: false
+      module_cross_link:
+        weight: 88
+        enabled: false
+      module_cross_sell:
+        weight: 89
+        enabled: false
+      module_cross_sell_item:
+        weight: 90
+        enabled: false
+      module_customer_benefits:
+        weight: 91
+        enabled: false
+      module_customer_space:
+        weight: 92
+        enabled: false
+      module_detail_gamme:
+        weight: 93
+        enabled: false
+      module_detail_gamme_items:
+        weight: 94
+        enabled: false
+      module_detail_offre:
+        weight: 95
+        enabled: false
+      module_detail_offre_items:
+        weight: 96
+        enabled: false
+      module_exemples:
+        weight: 97
+        enabled: false
+      module_exemples_items:
+        weight: 98
+        enabled: false
+      module_faq:
+        weight: 99
+        enabled: false
+      module_faq_quesions:
+        weight: 100
+        enabled: false
+      module_header_default:
+        weight: 101
+        enabled: false
+      module_hook_text:
+        weight: 102
+        enabled: false
+      module_key_figures:
+        weight: 103
+        enabled: false
+      module_key_figures_items:
+        weight: 104
+        enabled: false
+      module_list:
+        weight: 105
+        enabled: false
+      module_map:
+        weight: 106
+        enabled: false
+      module_partner:
+        weight: 107
+        enabled: false
+      module_presentation:
+        weight: 108
+        enabled: false
+      module_services:
+        weight: 109
+        enabled: false
+      module_step:
+        weight: 110
+        enabled: false
+      module_steps:
+        weight: 111
+        enabled: false
+      module_testimonial:
+        weight: 112
+        enabled: false
+      module_testimonial_item:
+        weight: 113
+        enabled: false
+      module_text_video_image:
+        weight: 114
+        enabled: false
+      module_title_and_highlight:
+        weight: 115
+        enabled: true
+      module_video:
+        weight: 116
+        enabled: false
+      paragraph_block_rebond:
+        weight: 117
+        enabled: false
+      paragraph_product_call_to_action:
+        weight: 118
+        enabled: false
+      paragraph_wysiwyg:
+        weight: 119
+        enabled: false
+      rebond_wysiwyg:
+        weight: 120
+        enabled: false
+      related_content:
+        weight: 121
+        enabled: false
+      subhome_presse_carrousel:
+        weight: 122
+        enabled: false
+      title_and_image:
+        weight: 123
+        enabled: false
+      title_and_link:
+        weight: 124
+        enabled: false
+      titre_and_description:
+        weight: 125
+        enabled: false
+      titre_and_description_and_link:
+        weight: 126
+        enabled: false
+field_type: entity_reference_revisions

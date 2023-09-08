@@ -1,0 +1,10 @@
+uuid: a1c2c68f-196a-4998-9ac2-45609cdbbf0c
+langcode: en
+status: true
+dependencies: {  }
+id: module_customer_benefits
+label: '[Module] Customer Benefits'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }
