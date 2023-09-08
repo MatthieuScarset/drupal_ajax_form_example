@@ -12,6 +12,7 @@ dependencies:
     - paragraphs.paragraphs_type.module_customer_benefits
     - paragraphs.paragraphs_type.module_customer_space
     - paragraphs.paragraphs_type.module_detail_gamme
+    - paragraphs.paragraphs_type.module_download
     - paragraphs.paragraphs_type.module_exemples
     - paragraphs.paragraphs_type.module_faq
     - paragraphs.paragraphs_type.module_header_default
@@ -58,6 +59,7 @@ settings:
       module_testimonial: module_testimonial
       module_customer_benefits: module_customer_benefits
       module_text_video_image: module_text_video_image
+      module_download: module_download
       paragraph_wysiwyg: paragraph_wysiwyg
     negate: 0
     target_bundles_drag_drop:
@@ -154,6 +156,9 @@ settings:
       module_detail_offre_items:
         weight: 79
         enabled: false
+      module_download:
+        weight: 94
+        enabled: true
       module_exemples:
         weight: 80
         enabled: true

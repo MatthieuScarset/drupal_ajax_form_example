@@ -64,12 +64,19 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
     'module_hook_text',
     'module_header_default',
     'module_business_case',
-    'module_business_case_item'
+    'module_business_case_item',
+    'module_header_default',
+    'module_download'
   ];
 
   $module_with_textarea = [
     'module_header_default',
     'module_hook_text'
+  ];
+
+  $module_with_short_highlight = [
+    'module_list',
+    'module_download'
   ];
 
   $max_char_short_title = $conf_modular_product->getShortTitleMaxCharacter();
@@ -101,7 +108,7 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
             $markup = FieldFilteredMarkup::create("$max_length characters max");
             $entity_form[$field]['widget'][0]['value']['#rows'] = 4;
           }
-          elseif ($entity_form['#bundle'] === 'module_list') {
+          elseif (in_array($entity_form['#bundle'], $module_with_short_highlight)) {
             $max_length = $max_char_long_title;
             $markup = FieldFilteredMarkup::create("$max_length characters max");
             $entity_form[$field]['widget'][0]['value']['#rows'] = 2;
