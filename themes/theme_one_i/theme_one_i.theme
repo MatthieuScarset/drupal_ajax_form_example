@@ -58,6 +58,8 @@ function theme_one_i_preprocess_region(&$variables) {
   if ($variables['region'] === 'top_zone') {
     if (isset($node) && $node->bundle() === 'corporate') {
       $variables['attributes']['class'][] = 'bg-transparent';
+    } elseif ($route_match->getRouteName() === 'view.category_page.category_page') {
+      $variables['attributes']['class'][] = 'bg-dark text-white';
     } else {
       $variables['attributes']['class'][] = 'bg-gray2';
     }
@@ -433,6 +435,8 @@ function theme_one_i_theme_suggestions_page_alter(array &$suggestions, array $va
  * Implements hook_theme_suggestions_HOOK().
  */
 function theme_one_i_theme_suggestions_region_alter(array &$suggestions, array $variables, $hook): void {
+  $route_name = Drupal::routeMatch()->getRouteName();
+
   if ($node = Drupal::routeMatch()->getParameter('node')) {
     if (is_object($node)) {
       $content_type = $node->bundle();
@@ -445,6 +449,9 @@ function theme_one_i_theme_suggestions_region_alter(array &$suggestions, array $
         $suggestions = array_merge($suggestions, __suggestion_nodes($hook, $variables['elements']['#region'], true));
       }
     }
+  } elseif ($route_name === 'view.category_page.category_page'
+    && $variables['elements']['#region'] === 'top_zone') {
+    $suggestions = array_merge($suggestions, __suggestion_nodes($hook, $variables['elements']['#region'], true));
   }
 }
 
