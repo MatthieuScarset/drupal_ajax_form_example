@@ -1,31 +1,3 @@
-.testimonial-right-img {
-  position: absolute;
-  bottom: -5.5rem;
-  right: 0;
-  width: 150px;
-
-  @include media-breakpoint-up(lg) {
-    bottom: -6.5rem;
-    right: -1rem;
-    width: 180px
-  }
-  @include media-breakpoint-up(xxl) {
-    right: -3rem;
-  }
-}
-
-.testimonial-left-img {
-  position: absolute;
-  top: -2rem;
-  left: 1rem;
-  width: 130px;
-
-  @include media-breakpoint-up(md) {
-    top: -2.5rem;
-    width: 180px
-  }
-}
-
 .testimonial-item-container {
   max-width: 100%;
   flex-wrap: inherit;
