@@ -84,12 +84,13 @@
 %}
 
 <article{{ attributes.addClass(classes) }}>
-  <div class="container-fluid-navbar"  style=" ">
-    {{ content.field_caroussel_header }}
-  </div>
-  <div class="claim-homepage-container">
-    {{ (content.field_claim) }}
-    <i class="arrow-down-claim-homepage"></i>
+  <div class="homepage-header">
+    <div class="claim-homepage-container">
+      {{ (content.field_claim) }}
+    </div>
+    <div class="container-fluid-navbar">
+      {{ content.field_caroussel_header }}
+    </div>
   </div>
 
 
