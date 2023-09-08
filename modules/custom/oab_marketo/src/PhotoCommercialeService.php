@@ -102,20 +102,26 @@ class PhotoCommercialeService {
    *
    * @return PhotoCommercialeItem|null
    */
-  public function getPhotoCommercialeItem(string $reg_numb_type, string $reg_numb, string $raison_sociale): ?PhotoCommercialeItem {
+  public function getPhotoCommercialeItem(string $reg_numb_type,
+                                          string $reg_numb,
+                                          string $raison_sociale
+  ): ?PhotoCommercialeItem {
 
     $siren = '';
     $photo_commerciale = [];
 
-    if (str_contains($reg_numb_type, 'SIREN')) {
-      $siren = $reg_numb;
-    } elseif (str_contains($reg_numb_type, "SIRET")) {
-      $siren = substr($reg_numb, 0, 9);
-    } elseif (str_contains($reg_numb_type, "Value Added Tax Number")) {
-      $siren = substr($reg_numb, 6, 9);
+    if (!empty($reg_numb_type) && !empty($reg_numb)) {
+      if (str_contains($reg_numb_type, 'SIREN')) {
+        $siren = $reg_numb;
+      } elseif (str_contains($reg_numb_type, "SIRET")) {
+        $siren = substr($reg_numb, 0, 9);
+      } elseif (str_contains($reg_numb_type, "Value Added Tax Number")) {
+        $siren = substr($reg_numb, 6, 9);
+      }
     }
 
-    if ($siren !== "") {
+
+    if (!empty($siren)) {
       $photo_commerciale = $this->getPhotoCommercialeBySiren($siren);
     } else {
       $photo_commerciale = $this->getPhotoCommercialeItemByRS($raison_sociale);

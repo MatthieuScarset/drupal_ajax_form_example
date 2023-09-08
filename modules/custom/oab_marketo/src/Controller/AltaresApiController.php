@@ -27,7 +27,10 @@ class AltaresApiController extends ControllerBase implements ContainerInjectionI
     private $altaresService;
     private $photoCommercialeService;
 
-    public function __construct(AltaresTokenService $altares_token_service, DnbService $altares_service, PhotoCommercialeService $photo_commerciale_service) {
+    public function __construct(AltaresTokenService $altares_token_service,
+                                DnbService $altares_service,
+                                PhotoCommercialeService $photo_commerciale_service
+    ) {
         $this->altaresTokenService = $altares_token_service;
         $this->altaresService = $altares_service;
         $this->photoCommercialeService = $photo_commerciale_service;
@@ -119,8 +122,8 @@ class AltaresApiController extends ControllerBase implements ContainerInjectionI
         $res = $this->altaresService->getInfo($duns);
 
         if (!empty($res)) {
-          $reg_numb_type = $res[0]["organization"]["registrationNumbers"][0]["typeDescription"];
-          $reg_numb = $res[0]["organization"]["registrationNumbers"][0]["registrationNumber"];
+          $reg_numb_type = $res[0]["organization"]["registrationNumbers"][0]["typeDescription"] ?? '';
+          $reg_numb = $res[0]["organization"]["registrationNumbers"][0]["registrationNumber"] ?? '';
           $raison_sociale = $res[0]["organization"]["primaryName"];
 
           $photo_commerciale = $this->photoCommercialeService->getPhotoCommercialeItem($reg_numb_type, $reg_numb, $raison_sociale);
