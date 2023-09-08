@@ -9,6 +9,12 @@
 
 <div{{ attributes.addClass(classes, 'row', 'benefits-item-container') }}>
   {% for item in items %}
+
+    {% set parent = item.content['#paragraph'].getParentEntity() %}
+    {% if parent.field_numericals_benefits %}
+      {% set is_numerical = parent.field_numericals_benefits.0.value %}
+    {% endif %}
+
     {% if 4 == items|length %}
       {% if not is_numerical %}
         <div{{ item.attributes.addClass('field--item', 'col-10', 'col-md-3', 'benefits-subitem-container') }}>{{ item.content }}</div>

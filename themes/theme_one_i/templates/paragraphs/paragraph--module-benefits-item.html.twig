@@ -1,32 +1,48 @@
 {% if not is_numerical %}
   <div class="row mt-1">
-    <div class="col-12 my-2">
-      <span class="icon icomoon {{ content.field_icon.0['#context']['value']|token_replace }} text-primary bg-gray2 rounded-circle benefits-item-icon" aria-hidden="true"></span>
-    </div>
+    {% if content.field_icon.0['#context']['value'] is not null  %}
+      <div class="col-12 my-2">
+        <span class="icon icomoon {{ content.field_icon.0['#context']['value']|token_replace }} text-primary bg-gray2 rounded-circle benefits-item-icon" aria-hidden="true"></span>
+      </div>
+    {% endif %}
     <div class="col-12">
-      <div class="row">
-        <h3 class="col-12 lead font-weight-bold mb-0">
+        <h3 class="lead font-weight-bold mb-0">
           {{ content.field_title }}
         </h3>
-        <span class="col-12 text-gray3 pt-O">
+        <span class="text-gray3 pt-O">
         {{ content.field_description }}
       </span>
-      </div>
+        {% if content.field_redirection_url[0]['#url']|length > 0 %}
+          <a href="{{ content.field_redirection_url[0]['#url'] }}"
+             class="o-link-arrow mt-1 mt-md-2"
+          >
+            {{ 'More information'|t }}
+          </a>
+        {% endif %}
     </div>
   </div>
 {% else %}
   <div class="row mt-2">
-    <div class="col-12 d-flex justify-content-md-center my-2">
-      <span class="icon icomoon {{ content.field_icon.0['#context']['value']|token_replace }} text-primary bg-gray2 rounded-circle benefits-item-icon" aria-hidden="true"></span>
-    </div>
+    {% if content.field_icon.0['#context']['value'] is not null  %}
+      <div class="col-12 d-flex justify-content-md-center my-2">
+        <span class="icon icomoon {{ content.field_icon.0['#context']['value']|token_replace }} text-primary bg-gray2 rounded-circle benefits-item-icon" aria-hidden="true"></span>
+      </div>
+    {% endif %}
     <div class="col-12">
-      <div class="row benefits-numerical-item-container">
-        <h3 class="col-12 mb-0">
+      <div class="benefits-numerical-item-container">
+        <h3 class="mb-0">
           {{ content.field_title }}
         </h3>
-        <span class="col-12 lead text-gray3 pt-0 px-md-2">
+        <span class="lead text-gray3 pt-0 px-md-2">
         {{ content.field_description.0 }}
       </span>
+        {% if content.field_redirection_url[0]['#url']|length > 0 %}
+          <a href="{{ content.field_redirection_url[0]['#url'] }}"
+             class="o-link-arrow mt-1 mt-md-2"
+          >
+            {{ 'More information'|t }}
+          </a>
+        {% endif %}
       </div>
     </div>
   </div>

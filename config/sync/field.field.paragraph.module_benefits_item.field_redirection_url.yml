@@ -1,17 +1,17 @@
-uuid: 55f16256-9c28-4939-ae9a-47d02a5e741e
+uuid: e3a3934d-c260-4ca9-910c-5a441b0d0de8
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_redirection_url
-    - paragraphs.paragraphs_type.module_3_4_colonnes_items
+    - paragraphs.paragraphs_type.module_benefits_item
   module:
     - link
-id: paragraph.module_3_4_colonnes_items.field_redirection_url
+id: paragraph.module_benefits_item.field_redirection_url
 field_name: field_redirection_url
 entity_type: paragraph
-bundle: module_3_4_colonnes_items
-label: 'URL to Know more'
+bundle: module_benefits_item
+label: 'Redirection URL'
 description: ''
 required: false
 translatable: true

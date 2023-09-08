@@ -1,5 +1,5 @@
 uuid: b5151aaa-91fb-4fdf-ac26-ff1fd8c3b752
-langcode: fr
+langcode: en
 status: true
 dependencies:
   config:
@@ -9,7 +9,7 @@ id: paragraph.module_3_4_colonnes.field_title
 field_name: field_title
 entity_type: paragraph
 bundle: module_3_4_colonnes
-label: 'Titre module'
+label: Title
 description: ''
 required: true
 translatable: true
