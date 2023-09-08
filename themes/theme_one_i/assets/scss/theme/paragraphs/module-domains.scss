@@ -1,11 +1,19 @@
-.domain-teaser {
+.domain-card {
   transition: transform 0.2s linear;
 
-  img {
-    max-width: 100%;
-  }
-  
   @include hover {
     transform: translate3d(-10px, -10px, 0);
+  }
+
+  img {
+    height: px-to-rem(60);
+    width: px-to-rem(60);
+  }
+  
+  &--default img {
+    @include media-breakpoint-up(md) {
+      height: px-to-rem(90);
+      width: px-to-rem(90);
+    }
   }
 }

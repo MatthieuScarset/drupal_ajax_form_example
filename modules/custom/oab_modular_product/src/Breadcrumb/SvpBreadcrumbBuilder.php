@@ -65,30 +65,35 @@ class SvpBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     $links[] = Link::createFromRoute($this->t('Home'), '<front>', [], ['language' => $current_language]);
     $links[] = Link::createFromRoute($this->t('Business needs'), '<nolink>');
 
-    if ($node->bundle == 'domain') {
-      // Load domains from SVP term.
-      $tid = $node->field_svp->target_id;
-      $nids = $this->entityTypeManager->getStorage('node')->getQuery()
-        ->condition('field_svp', $tid)
-        ->condition('status', NodeInterface::PUBLISHED)
-        ->condition('type', 'svp')
-        ->accessCheck(FALSE)
-        ->execute();
+    if ($node->bundle() == 'domain') {
+      $parents = [];
 
-      $nid = reset($nids) ?? NULL;
-      $parent = $nid ? $this->entityTypeManager->getStorage('node')->load($nid) : NULL;
+      // Load domains from SVP term.
+      if ($tid = $node->field_svp->target_id) {
+        $parents = $this->entityTypeManager->getStorage('node')->loadByProperties([
+          'field_svp' => $tid,
+          'status' => NodeInterface::PUBLISHED,
+          'type' => 'svp',
+        ]);
+      }
+
+      $parent = reset($parents) ?? NULL;
       if ($parent instanceof NodeInterface) {
         // Get title from Top Zone paragraph otherwise use node title.
-        $custom_title =  $parent?->field_header?->entity?->field_title?->value ?? $parent->label();
-        $links[] = Link::createFromRoute($custom_title, '<nolink>');
+        $custom_title = $parent?->field_header?->entity?->field_title?->value ?? $parent->label();
+        $links[] = Link::fromTextAndUrl($custom_title, $parent->toUrl('canonical'));
       }
     }
 
     $breadcrumb = new Breadcrumb();
     $breadcrumb->setLinks($links);
-    $breadcrumb->addCacheContexts(['languages:' . LanguageInterface::TYPE_CONTENT]);
-    $breadcrumb->addCacheableDependency($node);
+    $breadcrumb->addCacheContexts(['url']);
+
+    if (!$node->isNew()) {
+      $breadcrumb->addCacheTags(['node:' . $node->id()]);
+      $breadcrumb->addCacheableDependency($node);
+    }
+
     return $breadcrumb;
   }
-
 }

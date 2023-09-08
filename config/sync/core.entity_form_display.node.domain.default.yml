@@ -32,7 +32,7 @@ third_party_settings:
       label: Configuration
       region: content
       parent_name: group_onglets
-      weight: 5
+      weight: 1
       format_type: tab
       format_settings:
         classes: ''
@@ -48,7 +48,7 @@ third_party_settings:
       label: 'Top zone'
       region: content
       parent_name: group_onglets
-      weight: 8
+      weight: 3
       format_type: tab
       format_settings:
         classes: ''
@@ -64,7 +64,7 @@ third_party_settings:
       label: 'SEO Metatags'
       region: content
       parent_name: group_onglets
-      weight: 10
+      weight: 6
       format_type: tab
       format_settings:
         classes: ''
@@ -79,7 +79,7 @@ third_party_settings:
       label: Modules
       region: content
       parent_name: group_onglets
-      weight: 9
+      weight: 5
       format_type: tab
       format_settings:
         classes: ''
@@ -94,7 +94,7 @@ third_party_settings:
       label: Classify
       region: content
       parent_name: group_onglets
-      weight: 6
+      weight: 2
       format_type: tab
       format_settings:
         classes: ''
@@ -105,16 +105,17 @@ third_party_settings:
         required_fields: true
     group_onglets:
       children:
+        - group_language
         - group_configuration
         - group_classify
-        - group_teaser
         - group_top_zone
+        - group_teaser
         - group_modules
         - group_seo_metatags
       label: Onglets
       region: content
       parent_name: ''
-      weight: 0
+      weight: 1
       format_type: tabs
       format_settings:
         classes: ''
@@ -128,9 +129,24 @@ third_party_settings:
         - field_teaser_title
         - field_teaser
       label: Teaser
+      region: content
+      parent_name: group_onglets
+      weight: 4
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_language:
+      children:
+        - langcode
+      label: Language
       region: hidden
       parent_name: group_onglets
-      weight: 7
+      weight: 0
       format_type: tab
       format_settings:
         classes: ''
@@ -183,13 +199,12 @@ content:
     region: content
     settings:
       entity_browser: browse_logo_modal
-      field_widget_display: rendered_entity
+      field_widget_display: label
       field_widget_edit: false
       field_widget_remove: true
       field_widget_replace: false
       open: true
-      field_widget_display_settings:
-        view_mode: default
+      field_widget_display_settings: {  }
       selection_mode: selection_append
     third_party_settings: {  }
   field_meta_description:
@@ -239,7 +254,7 @@ content:
     third_party_settings: {  }
   field_teaser:
     type: string_textarea
-    weight: 10
+    weight: 11
     region: content
     settings:
       rows: 5
@@ -247,7 +262,7 @@ content:
     third_party_settings: {  }
   field_teaser_title:
     type: string_textfield
-    weight: 9
+    weight: 10
     region: content
     settings:
       size: 60
@@ -268,7 +283,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 1
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -294,7 +309,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 3
+    weight: 4
     region: content
     settings:
       match_operator: CONTAINS
@@ -303,7 +318,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 2
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
