@@ -8,6 +8,7 @@ import ModuleStorytelling from "./module-storytelling";
 import './tealium-modular-product';
 import ModuleCustomerBenefits from "./module-customer-benefits";
 
+import CustomAlignment from "./custom-alignment";
 
 export {
   CustomSlider,
@@ -15,6 +16,7 @@ export {
   ModuleDetailOffre,
   ModuleExempleSlider,
   ModuleMap,
+  CustomAlignment,
   ModuleStorytelling,
   ModuleCustomerBenefits
 };

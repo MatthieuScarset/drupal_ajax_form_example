@@ -61,7 +61,9 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
     'module_map',
     'module_video',
     'module_hook_text',
-    'module_header_default'
+    'module_header_default',
+    'module_business_case',
+    'module_business_case_item'
   ];
 
   $module_with_textarea = [
@@ -85,7 +87,9 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
     $fields = [
       'field_accroche',
       'field_highlight',
-      'field_title'
+      'field_title',
+      'field_subtitle',
+      'field_item_key_points'
       ];
 
     foreach ($fields as $field) {
@@ -118,6 +122,7 @@ function oab_modular_product_inline_entity_form_entity_form_alter(array &$entity
             $markup = $field_title_markup;
           }
         }
+
         $entity_form[$field]['widget'][0]['value']['#maxlength'] = $max_length;
         $entity_form[$field]['widget'][0]['value']['#description'] .= ' '.$markup;
       }
@@ -560,7 +565,8 @@ function oab_modular_product_entity_bundle_field_info_alter(&$fields, EntityType
     $constraint_fields = [
       'field_step' => ['module_steps'],
       'field_item' => ['module_customer_space', 'module_benefits'],
-      'field_customer_benefits_items' => ['module_customer_benefits']
+      'field_customer_benefits_items' => ['module_customer_benefits'],
+      'field_item_key_points' => ['module_business_case_item']
     ];
 
     foreach ($constraint_fields as $field_name => $modules) {
@@ -860,3 +866,18 @@ function oab_modular_product_preprocess_paragraph__module_faq(&$variables) {
     $variables['faq_description'] = $token->replace($paragraph->field_highlight->value, array('entity' => $paragraph->getParentEntity()));
   }
 }
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function oab_modular_product_preprocess_paragraph__module_business_case(&$variables) {
+  /** @var Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+  $items = $paragraph->get('field_business_case_item')->referencedEntities();
+  foreach ($items as $item) {
+    if (!$item->get('field_partners_logo')->isEmpty()) {
+      $variables['has_logo'] = true;
+    }
+  }
+}
+

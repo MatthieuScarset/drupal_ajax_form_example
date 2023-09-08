@@ -1,0 +1,35 @@
+.item-logo {
+  .logo-section {
+    min-height: 90px;
+    .customer-logo {
+      height: 60px;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      .contextual-region {
+        justify-content: left !important;
+      }
+      img {
+        height: 30px;
+      }
+    }
+  }
+}
+
+.business-case-items {
+  overflow-x: scroll;
+  flex-wrap: unset;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @include media-breakpoint-up(md) {
+    overflow-x: hidden;
+    flex-wrap: wrap;
+  }
+}
+
+
+
+

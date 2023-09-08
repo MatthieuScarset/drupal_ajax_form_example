@@ -1,0 +1,23 @@
+uuid: 2e75c75a-08f5-47fd-a33f-1c45d8d92578
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_call_to_action_buton
+    - paragraphs.paragraphs_type.module_business_case
+  module:
+    - link
+id: paragraph.module_business_case.field_call_to_action_buton
+field_name: field_call_to_action_buton
+entity_type: paragraph
+bundle: module_business_case
+label: 'Contact us button'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 2
+  link_type: 17
+field_type: link

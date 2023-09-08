@@ -1,0 +1,10 @@
+uuid: 7ef26b92-80e4-47a7-a38f-d5fb39b165ee
+langcode: en
+status: true
+dependencies: {  }
+id: module_business_case
+label: '[Module] Business Case'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }
