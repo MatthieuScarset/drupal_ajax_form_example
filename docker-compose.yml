@@ -47,11 +47,11 @@ services:
 
     nginx:
       build:
-        context: config/docker/local/nginx
+        context: config/docker/nginx
       container_name: $CONTAINER_NGINX
       working_dir: /application
-      environment:
-        CONTAINER_PHP_FPM: $CONTAINER_PHP_FPM
+      env_file:
+        - .env
       depends_on:
         - php-fpm
       volumes:
@@ -63,7 +63,7 @@ services:
 
     php-fpm:
       build:
-        context: config/docker/local/php-fpm
+        context: config/docker/php-fpm
         args:
           UID: $UID
           GID: $GID
@@ -71,10 +71,10 @@ services:
       working_dir: /application
       depends_on:
         - mysql
+      env_file:
+        - .env
       volumes:
         - .:/application
-        - ./config/docker/local/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
-        - ./config/docker/local/php-fpm/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
         - ${DRUPAL_SITES_FILES_DIR:-./sites/default/files}:/application/sites/default/files
       networks:
         - proxy
@@ -89,7 +89,7 @@ services:
         SIMPLESAMLPHP_SP_ENTITY_ID: saml-poc
         SIMPLESAMLPHP_SP_ASSERTION_CONSUMER_SERVICE: ${SAML_ASSERTION_CONSUMER_SERVICE:-http://localhost:8000}/en/saml/consume
       volumes:
-        - ./config/docker/local/saml/users.php:/var/www/simplesamlphp/config/authsources.php
+        - ./config/docker/saml/users.php:/var/www/simplesamlphp/config/authsources.php
       ports:
         - "8081:8080"
         - "8443:8443"

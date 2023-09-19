@@ -7,7 +7,10 @@ ARG DEBIAN_FRONTEND=noninteractive
 ARG UID
 ARG GID
 
-ADD php-ini-overrides.ini /usr/local/etc/php/conf.d/99-overrides.ini
+
+# NECESSAIRE POUR XDEBUG
+ENV PHP_IDE_CONFIG = $PHP_IDE_CONFIG
+
 
 # Install selected extensions and other stuff
 RUN apt-get update && apt-get -y --no-install-recommends install \
@@ -54,11 +57,14 @@ RUN chmod +x /usr/local/bin/mhsendmail
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
-# Install yarn
-RUN npm install -g yarn
-
 # REMOVE APT CACHES
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+
+
+# Add Specific php ini's
+ADD php.ini /usr/local/etc/php/php.ini
+ADD php-cli.ini /usr/local/etc/php/php-cli.ini
+
 
 # Verifie si le groupe oab_web existe et la crée s'il n'existe pas
 RUN [ ! $(getent group oab_web) ] && groupadd -o --gid $GID oab_web || true

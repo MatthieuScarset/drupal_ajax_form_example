@@ -147,7 +147,7 @@ Build Image:
     - docker login -u $COMPTE_PROJET -p $CP_PASSWORD $REGISTRY
   script:
     - mv themes/theme_one_i/dist build/themes/theme_one_i/dist
-    - docker build -t php_tmp -f config/docker/cloud/Dockerfile .
+    - docker build -t php_tmp -f ci/.cloud.d/Dockerfile .
     - docker image tag php_tmp $REGISTRY/$IMAGE_PATH/$IMAGE_NAME:$CI_JOB_ID
     - docker image tag php_tmp $REGISTRY/$IMAGE_PATH/$IMAGE_NAME:latest
     - docker image push --all-tags $REGISTRY/$IMAGE_PATH/$IMAGE_NAME
