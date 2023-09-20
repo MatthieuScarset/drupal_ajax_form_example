@@ -6,9 +6,9 @@ WORKDIR "/application"
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Copy confs
-COPY ./ci/cloud/nginx.conf /etc/nginx/sites-enabled/default
-COPY ./ci/cloud/entrypoint.sh /etc/entrypoint.sh
-ADD ./ci/cloud/php-ini-overrides.ini /usr/local/etc/php/conf.d/99-overrides.ini
+COPY ./ci/.cloud.d/nginx.conf /etc/nginx/sites-enabled/default
+COPY ./ci/.cloud.d/entrypoint.sh /etc/entrypoint.sh
+ADD ./ci/.cloud.d/php-ini-overrides.ini /usr/local/etc/php/conf.d/99-overrides.ini
 
 
 # Install nginx
