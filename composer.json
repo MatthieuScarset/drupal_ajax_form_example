@@ -74,13 +74,19 @@
         "vlucas/phpdotenv": "^5.3"
     },
     "require-dev": {
+        "drupal/coder": "^8.3",
         "drupal/console": "~1.0",
-        "drupal/devel": "^5.1",
-        "drupal/devel_php": "^1.5",
+        "drupal/devel": "^4.1",
+        "drupal/devel_php": "^1.3",
         "kint-php/kint": "^4.1"
     },
     "autoload": {
-        "files": ["load.environment.php"]
+        "classmap": [
+            "scripts/composer/ScriptHandler.php"
+        ],
+        "files": [
+            "load.environment.php"
+        ]
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -161,10 +167,10 @@
                 "      composer remove drupal/core-project-message"
             ]
         },
-		"patches": {
-			"drupal/scheduled_updates": {
-			  "Fix D9 compatibility": "https://www.drupal.org/files/issues/2021-03-08/3172330-24.patch"
-			},
+        "patches": {
+            "drupal/scheduled_updates": {
+                "Fix D9 compatibility": "https://www.drupal.org/files/issues/2021-03-08/3172330-24.patch"
+            },
             "drupal/core": {
                 "Fix LatestRevisionCheck": "https://www.drupal.org/files/issues/2021-12-28/3035113-33.patch",
                 "Give current request to RequestPath Condition when it call too soon": "patches/saml_sp/patch_core_system_requestpath.patch",
@@ -180,6 +186,14 @@
             "onelogin/php-saml": {
                 "Force https when recreating URL": "patches/saml_sp/patch_php_saml.patch"
             }
-		}
-	}
+        }
+    },
+    "scripts": {
+        "code-fix": [
+            "DrupalProject\\composer\\ScriptHandler::codeFix"
+        ],
+        "code-check": [
+            "DrupalProject\\composer\\ScriptHandler::codeCheck"
+        ]
+    }
 }

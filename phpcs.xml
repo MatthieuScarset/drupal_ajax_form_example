@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="phpcs-standard">
+  <description>Codestyle ruleset for Drupal</description>
+  <config name="drupal_core_version" value="9"/>
+
+  <!-- Specify standards. -->
+  <rule ref="vendor/drupal/coder/coder_sniffer/Drupal"/>
+  <rule ref="vendor/drupal/coder/coder_sniffer/DrupalPractice"/>
+
+  <!-- Set ignore extensions. -->
+  <!-- @todo remove .css to check also the css files. -->
+  <!-- @see https://www.drupal.org/node/2867601#comment-12075633 -->
+  <arg name="ignore" value="*.css,*.md,*.txt"/>
+
+  <!-- Specify folders. -->
+  <file>modules/custom</file>
+  <file>themes</file>
+</ruleset>
