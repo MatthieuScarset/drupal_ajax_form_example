@@ -56,6 +56,7 @@ Prepare Drupal:
     - cp -r patches build/
     - cp -r themes build/
     - cp -r sites build/
+    - cp -r scripts build/
     - cp composer.* build/
     - cp load.environment.php build/
 
@@ -119,8 +120,6 @@ Build Drupal:
     ## Clean Up Repo
     - rm composer.phar
     - cd build
-    - ls -la sites/
-    - ls -la sites/default
     - rm -r patches INSTALL.txt .ht.router.php .eslint* .csslintrc web.config
   artifacts:
     paths:
