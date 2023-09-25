@@ -60,7 +60,7 @@ Prepare Drupal:
     - cp -r scripts build/
     - cp composer.* build/
     - cp load.environment.php build/
-    - cp ci/.cloud.d/Dockerfile build/
+    - cp ci/.cloud.d/* .
 
     # Copy Commit/CI info
     - echo "CI_PIPELINE_ID=$CI_PIPELINE_ID" >> build/ci-data
@@ -138,7 +138,6 @@ Build Image:
     - Build assets Theme One I Hub
     - Vault
   variables:
-    BUILD_PATH: "./build"
     ARTIFACTORY_USER: "$COMPTE_PROJET"
     ARTIFACTORY_TOKEN: "$CP_PASSWORD"
     TAG: "$CI_JOB_ID"
