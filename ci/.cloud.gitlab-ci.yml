@@ -8,10 +8,11 @@ stages:          # List of stages for jobs, and their order of execution
 # Include job templates
 include:
   - '/ci/.templates.d/sonarqube.yml'
+  - project: 'obs-com/docker-dev/ci-templates'
+    file: '/docker-image-build.yml'
 
 variables:
   COMPTE_PROJET: $COMPTE_PROJET_DEV
-  REGISTRY: $INTERNAL_ARTIFACTORY_DOCKER_REGISTRY
   VAULT_ADDR: $VAULT_ADDR
   VAULT_PATH: /prj/portail-obs/compte-projet/
   VAULT_OPTS: "-tls-skip-verify=true"
@@ -59,6 +60,7 @@ Prepare Drupal:
     - cp -r scripts build/
     - cp composer.* build/
     - cp load.environment.php build/
+    - cp ci/.cloud.d/Dockerfile build/
 
     # Copy Commit/CI info
     - echo "CI_PIPELINE_ID=$CI_PIPELINE_ID" >> build/ci-data
@@ -126,30 +128,21 @@ Build Drupal:
       - build
     expire_in: 1 hour
 
+
 Build Image:
+  extends: .build_internal_image
   stage: build_image
-  image: docker:latest
-  services:
-    - name: docker:dind
-      command: ["--insecure-registry=multirepo-oab.si.fr.intraorange:5002", "--registry-mirror=https://multirepo-oab.si.fr.intraorange:5002"]
-  variables:
-    DOCKER_TLS_CERTDIR: "/certs"
-    DOCKER_OPTS: "--insecure-registry='multirepo-oab.si.fr.intraorange:5002'"
   dependencies:
     - Build Drupal
     - Build assets Theme One I
     - Build assets Theme One I Hub
     - Vault
-  before_script:
-    # Load Orange G2 certificates
-    - update-ca-certificates
-    - docker login -u $COMPTE_PROJET -p $CP_PASSWORD $REGISTRY
-  script:
-    - mv themes/theme_one_i/dist build/themes/theme_one_i/dist
-    - docker build -t php_tmp -f ci/.cloud.d/Dockerfile .
-    - docker image tag php_tmp $REGISTRY/$IMAGE_PATH/$IMAGE_NAME:$CI_JOB_ID
-    - docker image tag php_tmp $REGISTRY/$IMAGE_PATH/$IMAGE_NAME:latest
-    - docker image push --all-tags $REGISTRY/$IMAGE_PATH/$IMAGE_NAME
-  tags:
-    - image_build
+  variables:
+    BUILD_PATH: "./build"
+    ARTIFACTORY_USER: $COMPTE_PROJET
+    ARTIFACTORY_TOKEN: $CP_PASSWORD
+    IMAGE_PATH: $IMAGE_PATH
+    IMAGE_NAME: $IMAGE_NAME
+    TAG: $CI_JOB_ID
+    IS_LATEST: 1
 
