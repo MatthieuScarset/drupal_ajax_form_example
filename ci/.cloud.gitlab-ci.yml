@@ -19,6 +19,8 @@ variables:
   VAULT_NAMESPACE: "namespace-portail-obs"
   IMAGE_PATH: portail_obs/$CI_COMMIT_BRANCH
   IMAGE_NAME: php-fpm-nginx
+  BUILD_CXT: ci/.cloud.d
+  BUILD_DIR: $BUILD_PATH/build
 
 
 # Sonarqube analyze on .pre
@@ -52,42 +54,39 @@ Vault:
 Prepare Drupal:
   stage: prepare
   script:
-    - mkdir build
-    - cp -r modules build/
-    - cp -r patches build/
-    - cp -r themes build/
-    - cp -r sites build/
-    - cp -r scripts build/
-    - cp -r config/sync build/config/
-    - cp -r config/config_split build/config/
-    - cp composer.* build/
-    - cp load.environment.php build/
+    - mkdir -p $BUILD_DIR
+    - cp -r modules $BUILD_DIR/
+    - cp -r patches $BUILD_DIR/
+    - cp -r themes $BUILD_DIR/
+    - cp -r sites $BUILD_DIR/
+    - cp -r scripts $BUILD_DIR/
+    - cp -r config/sync $BUILD_DIR/config/
+    - cp -r config/config_split $BUILD_DIR/config/
+    - cp composer.* $BUILD_DIR/
+    - cp load.environment.php $BUILD_DIR/
 
     # Copy Commit/CI info
-    - echo "CI_PIPELINE_ID=$CI_PIPELINE_ID" >> build/ci-data
-    - echo "CI_PIPELINE_URL=$CI_PIPELINE_URL" >> build/ci-data
-    - echo "CI_COMMIT_TIMESTAMP=$CI_COMMIT_TIMESTAMP" >> build/ci-data
-    - echo "CI_COMMIT_MESSAGE=$CI_COMMIT_MESSAGE" >> build/ci-data
-    - echo "CI_PROJECT_URL=$CI_PROJECT_URL" >> build/ci-data
-    - echo "CI_COMMIT_SHA=$CI_COMMIT_SHA" >> build/ci-data
-
-    ## Finally move build dir in where Dockerfile is for docker context
-    - mv build ci/.cloud.d/build
+    - echo "CI_PIPELINE_ID=$CI_PIPELINE_ID" >> $BUILD_DIR/ci-data
+    - echo "CI_PIPELINE_URL=$CI_PIPELINE_URL" >> $BUILD_DIR/ci-data
+    - echo "CI_COMMIT_TIMESTAMP=$CI_COMMIT_TIMESTAMP" >> $BUILD_DIR/ci-data
+    - echo "CI_COMMIT_MESSAGE=$CI_COMMIT_MESSAGE" >> $BUILD_DIR/ci-data
+    - echo "CI_PROJECT_URL=$CI_PROJECT_URL" >> $BUILD_DIR/ci-data
+    - echo "CI_COMMIT_SHA=$CI_COMMIT_SHA" >> $BUILD_DIR/ci-data
   artifacts:
     paths:
-      - ci/.cloud.d/build
+      - $BUILD_DIR
     expire_in: 1 hour
 
 .build_assets: &build_assets
   stage: build_drupal
   image: node
   script:
-    - cd $THEME_DIR
+    - cd $BUILD_DIR/$THEME_DIR
     - yarn install
     - yarn build
   artifacts:
     paths:
-      - $THEME_DIR/dist
+      - $BUILD_DIR/$THEME_DIR/dist
     expire_in: 1 hour
 
 Build assets Theme One I:
@@ -119,17 +118,18 @@ Build Drupal:
     - docker-php-ext-configure gd --prefix=/usr --with-jpeg --with-freetype > /dev/null
     - docker-php-ext-install gd > /dev/null
     - docker-php-ext-enable gd > /dev/null
+    - mv composer.phar $BUILD_DIR
   script:
-    - cd build
-    - php ../composer.phar install
+    - cd $BUILD_DIR
+    - php composer.phar install
   after_script:
     ## Clean Up Repo
+    - cd $BUILD_DIR
     - rm composer.phar
-    - cd build
     - rm -r patches INSTALL.txt .ht.router.php .eslint* .csslintrc web.config
   artifacts:
     paths:
-      - build
+      - $BUILD_DIR
     expire_in: 1 hour
 
 
@@ -142,9 +142,9 @@ Build Image:
     - Build assets Theme One I Hub
     - Vault
   variables:
-    BUILD_PATH: "ci/.cloud.d"
-    ARTIFACTORY_USER: "$COMPTE_PROJET"
-    ARTIFACTORY_TOKEN: "$CP_PASSWORD"
-    TAG: "$CI_JOB_ID"
+    BUILD_PATH: $BUILD_CXT
+    ARTIFACTORY_USER: $COMPTE_PROJET
+    ARTIFACTORY_TOKEN: $CP_PASSWORD
+    TAG: $CI_JOB_ID
     IS_LATEST: 1
 
