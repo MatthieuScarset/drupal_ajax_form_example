@@ -14,7 +14,7 @@ RUN apt-get update -y \
 #############################################################################
 ## Copy Drupal
 
-ADD . /application
+ADD ./build /application
 #COPY ./config/sync /application/config/sync
 #COPY ./config/config_split /application/config/config_split
 
