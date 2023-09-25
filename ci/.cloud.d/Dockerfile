@@ -2,8 +2,8 @@ FROM multirepo-oab.si.fr.intraorange:5002/portail_obs/base_images/php-fpm-base:l
 
 
 # Copy confs
-COPY ../ci/.cloud.d/nginx.conf /etc/nginx/sites-enabled/default
-COPY ../ci/.cloud.d/entrypoint.sh /etc/entrypoint.sh
+COPY ./nginx.conf /etc/nginx/sites-enabled/default
+COPY ./entrypoint.sh /etc/entrypoint.sh
 
 # Install nginx
 RUN apt-get update -y \
