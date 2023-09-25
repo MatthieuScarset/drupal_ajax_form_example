@@ -60,6 +60,8 @@ Prepare Drupal:
     - cp -r themes $BUILD_DIR/
     - cp -r sites $BUILD_DIR/
     - cp -r scripts $BUILD_DIR/
+
+    - mkdir -p $BUILD_DIR/config
     - cp -r config/sync $BUILD_DIR/config/sync
     - cp -r config/config_split $BUILD_DIR/config/config_split
     - cp composer.* $BUILD_DIR/
