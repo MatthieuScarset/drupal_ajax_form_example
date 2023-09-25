@@ -74,7 +74,7 @@ Prepare Drupal:
     - echo "CI_COMMIT_SHA=$CI_COMMIT_SHA" >> $BUILD_DIR/ci-data
   artifacts:
     paths:
-      - $BUILD_DIR
+      - $BUILD_DIR/*
     expire_in: 1 hour
 
 .build_assets: &build_assets
@@ -129,7 +129,7 @@ Build Drupal:
     - rm -r patches INSTALL.txt .ht.router.php .eslint* .csslintrc web.config
   artifacts:
     paths:
-      - $BUILD_DIR
+      - $BUILD_DIR/*
     expire_in: 1 hour
 
 
