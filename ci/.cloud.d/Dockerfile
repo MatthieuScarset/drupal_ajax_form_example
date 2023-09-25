@@ -14,9 +14,9 @@ RUN apt-get update -y \
 #############################################################################
 ## Copy Drupal
 
-ADD ./build /application
-COPY ../config/sync /application/config/sync
-COPY ../config/config_split /application/config/config_split
+ADD . /application
+COPY ./config/sync /application/config/sync
+COPY ./config/config_split /application/config/config_split
 
 
 # Export vendor bin to get Drush

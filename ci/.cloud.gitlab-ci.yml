@@ -58,9 +58,10 @@ Prepare Drupal:
     - cp -r themes build/
     - cp -r sites build/
     - cp -r scripts build/
+    - cp -r config/sync build/config/
+    - cp -r config/config_split build/config/
     - cp composer.* build/
     - cp load.environment.php build/
-    - cp ci/.cloud.d/* .
 
     # Copy Commit/CI info
     - echo "CI_PIPELINE_ID=$CI_PIPELINE_ID" >> build/ci-data
@@ -69,9 +70,12 @@ Prepare Drupal:
     - echo "CI_COMMIT_MESSAGE=$CI_COMMIT_MESSAGE" >> build/ci-data
     - echo "CI_PROJECT_URL=$CI_PROJECT_URL" >> build/ci-data
     - echo "CI_COMMIT_SHA=$CI_COMMIT_SHA" >> build/ci-data
+
+    ## Finally move build dir in where Dockerfile is for docker context
+    - mv build ci/.cloud.d/build
   artifacts:
     paths:
-      - build
+      - ci/.cloud.d/build
     expire_in: 1 hour
 
 .build_assets: &build_assets
@@ -138,6 +142,7 @@ Build Image:
     - Build assets Theme One I Hub
     - Vault
   variables:
+    BUILD_PATH: "ci/.cloud.d"
     ARTIFACTORY_USER: "$COMPTE_PROJET"
     ARTIFACTORY_TOKEN: "$CP_PASSWORD"
     TAG: "$CI_JOB_ID"
