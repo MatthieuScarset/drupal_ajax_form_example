@@ -20,7 +20,7 @@ variables:
   IMAGE_PATH: portail_obs/$CI_COMMIT_BRANCH
   IMAGE_NAME: php-fpm-nginx
   BUILD_CXT: ci/.cloud.d
-  BUILD_DIR: $BUILD_PATH/build
+  BUILD_DIR: $BUILD_CXT/build
 
 
 # Sonarqube analyze on .pre
