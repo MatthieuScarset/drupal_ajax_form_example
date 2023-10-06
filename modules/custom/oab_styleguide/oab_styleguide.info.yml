@@ -1,0 +1,10 @@
+name: OAB Styleguide
+description: 'One page to show them all'
+type: module
+package: OAB
+core_version_requirement: ^9.0
+dependencies:
+  - drupal:node
+  - drupal:taxonomy
+  - drupal:user
+  - paragraphs:paragraphs

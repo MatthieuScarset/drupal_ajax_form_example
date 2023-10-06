@@ -1,0 +1,5 @@
+services:
+  theme.negotiator.oab_styleguide:
+    class: Drupal\oab_styleguide\Theme\OabStyleguideThemeNegotiator
+    tags:
+      - { name: theme_negotiator, priority: -50 }

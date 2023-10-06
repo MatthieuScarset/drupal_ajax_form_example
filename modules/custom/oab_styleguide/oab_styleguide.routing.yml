@@ -1,0 +1,9 @@
+oab_styleguide.settings:
+  path: '/styleguide'
+  defaults:
+    _controller: '\Drupal\oab_styleguide\Controller\OabStyleguideController::styleguide'
+    _title: 'Styleguide'
+  requirements:
+    _permission: 'administer site configuration'
+  options:
+    _custom_theme: 'theme_one_i'

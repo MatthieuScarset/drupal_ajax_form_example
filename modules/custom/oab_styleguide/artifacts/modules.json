@@ -1,0 +1,11 @@
+[
+  {
+    "label": "[Module] Hook Text",
+    "type": "paragraph",
+    "bundle": "module_hook_text",
+    "fields": {
+      "field_title": "Buvez-en",
+      "field_highlight": "Ceci est mon sang"
+    }
+  }
+]
