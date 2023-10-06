@@ -13,6 +13,16 @@
     -webkit-text-decoration:double;
             text-decoration:double;
   }
+  .oab-styleguide > details{
+    transition:box-shadow 0.2s linear;
+  }
+  .oab-styleguide > details[open],
+    .oab-styleguide > details:not([open]):hover{
+      box-shadow:-0.5rem 0 orange;
+    }
+  .oab-styleguide details + details{
+    margin-top:1rem;
+  }
   .oab-styleguide details > summary{
     background-color:#000;
     color:#fff;

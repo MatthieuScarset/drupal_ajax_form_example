@@ -134,7 +134,7 @@ class OabStyleguideController extends ControllerBase {
       $build[$i] = [
         '#type' => 'details',
         '#title' => $label,
-        '#open' => TRUE,
+        '#open' => FALSE,
       ];
 
       $variables = $this->entityTypeManager()->getViewBuilder($entity_type_id)
@@ -164,7 +164,7 @@ class OabStyleguideController extends ControllerBase {
       $build[$i][] = [
         '#type' => 'details',
         '#title' => $this->t('Info for developers'),
-        '#open' => TRUE,
+        '#open' => FALSE,
         'preprocess' => [
           '#theme' => 'item_list',
           '#title' => $this->t('Preprocess functions'),

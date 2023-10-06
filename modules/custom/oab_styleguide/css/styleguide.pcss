@@ -11,6 +11,19 @@
     text-decoration: double;
   }
   
+  > details {
+    transition: box-shadow 0.2s linear;
+    
+    &[open],
+    &:not([open]):hover {
+      box-shadow: -0.5rem 0 orange;
+    }
+  }
+
+  details + details {
+    margin-top: 1rem;
+  }
+
   details > summary {
     background-color: #000;
     color: #fff;
