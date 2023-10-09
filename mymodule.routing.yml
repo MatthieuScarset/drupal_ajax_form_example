@@ -1,0 +1,15 @@
+mymodule.page:
+  path: /mymodule
+  defaults:
+    _controller: Drupal\mymodule\Controller\ExampleController::page
+    _title: 'Demo form'
+  requirements:
+    _access: 'TRUE'
+
+mymodule.form:
+  path: /mymodule/form
+  defaults:
+    _form: Drupal\mymodule\Form\ExampleForm
+    _title: 'This is a form'
+  requirements:
+    _access: 'TRUE'
