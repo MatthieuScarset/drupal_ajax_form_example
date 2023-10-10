@@ -19,18 +19,19 @@ class OabStyleguideThemeNegotiator implements ThemeNegotiatorInterface {
     if (!$route instanceof Route) {
       return FALSE;
     }
-    $option = $route->getOption('_custom_theme');
-    if (!$option) {
-      return FALSE;
-    }
 
-    return $option == 'theme_one_i';
+    return (bool) $route->getOption('_custom_theme');
   }
 
   /**
    * {@inheritdoc}
    */
   public function determineActiveTheme(RouteMatchInterface $route_match) {
-    return 'theme_one_i';
+    $theme = $route_match->getParameter('theme');
+    if (!empty($theme)) {
+      return $theme;
+    }
+
+    return $route_match->getRouteObject()->getOption('_custom_theme');
   }
 }
