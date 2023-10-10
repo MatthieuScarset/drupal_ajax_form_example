@@ -3,3 +3,11 @@ services:
     class: Drupal\oab_styleguide\Theme\OabStyleguideThemeNegotiator
     tags:
       - { name: theme_negotiator, priority: -50 }
+
+  plugin.manager.styleguide_section:
+    class: Drupal\oab_styleguide\StyleguideSectionPluginManager
+    arguments: ['@module_handler', '@cache.discovery']
+
+  plugin.manager.styleguide_element:
+    class: Drupal\oab_styleguide\StyleguideElementPluginManager
+    parent: default_plugin_manager

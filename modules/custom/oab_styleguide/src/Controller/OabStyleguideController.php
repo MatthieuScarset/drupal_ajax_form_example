@@ -3,14 +3,17 @@
 namespace Drupal\oab_styleguide\Controller;
 
 use Drupal\Component\Serialization\Json;
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Link;
+use Drupal\Core\Render\Markup;
 use Drupal\Core\Url;
-use Drupal\migrate_drupal\Plugin\migrate\source\ContentEntity;
-use Drupal\user\Plugin\views\argument\Uid;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ *
+ */
 class OabStyleguideController extends ControllerBase {
 
   /**
@@ -42,7 +45,7 @@ class OabStyleguideController extends ControllerBase {
   protected $themeRegistry;
 
   /**
-   * The current route match
+   * The current route match.
    *
    * @var \Drupal\Core\Routing\RouteMatchInterface
    */
@@ -72,9 +75,11 @@ class OabStyleguideController extends ControllerBase {
     $info = $theme_registry->get($hook);
     $base_theme_hook = $info['base hook'] ?? $hook;
 
-    $suggestions = $this->moduleHandler->invokeAll('theme_suggestions_' . $base_theme_hook, [[
-      'elements' => $variables
-    ]]);
+    $suggestions = $this->moduleHandler->invokeAll('theme_suggestions_' . $base_theme_hook, [
+      [
+        'elements' => $variables,
+      ],
+    ]);
 
     return [
       'preprocess' => $info['preprocess functions'] ?? [],
@@ -185,7 +190,7 @@ class OabStyleguideController extends ControllerBase {
         ],
         '#attributes' => [
           'class' => ['styleguide__info'],
-        ]
+        ],
       ];
     }
 
@@ -198,7 +203,7 @@ class OabStyleguideController extends ControllerBase {
    * @return array
    *   The content as render array.
    */
-  public function styleguide(): array {
+  public function __styleguide(): array {
     $build = [];
 
     $build['intro'] = [
@@ -217,8 +222,8 @@ class OabStyleguideController extends ControllerBase {
       '#title' => $this->t('Modules'),
       '#open' => TRUE,
       '#attributes' => [
-        'class' => ['styleguide']
-      ]
+        'class' => ['styleguide'],
+      ],
     ];
 
     $build['modules']['content'] = $this->renderModules();
@@ -228,6 +233,43 @@ class OabStyleguideController extends ControllerBase {
     // Attach theme's library dynamically.
     if ($theme = $this->routeMatch->getParameter('theme')) {
       $build['#attached']['library'][] = "$theme/styleguide";
+    }
+
+    return $build;
+  }
+
+  /**
+   * Present the styleguide page.
+   *
+   * @return array
+   *   The content as render array.
+   */
+  public function styleguide(): array {
+    $this->sectionPluginManager = \Drupal::service('plugin.manager.styleguide_section');
+
+    foreach (array_keys($this->sectionPluginManager->getDefinitions()) as $section_id) {
+      try {
+        $section = $this->sectionPluginManager->createInstance($section_id);
+      } catch (\Exception $e) {
+        // Fail silently.
+        continue;
+      }
+
+      // $this->sectionPluginManager
+      $build[$section_id] = [
+        '#type' => 'details',
+        '#title' => $section->label(),
+        '#description' => $section->description(),
+        '#open' => $section->isOpen(),
+        '#attributes' => [
+          'id' => Html::getUniqueId($section_id),
+          'class' => ['section', Html::getClass('section--' . $section_id)],
+        ],
+      ];
+      foreach ($section->elements() as $element) {
+        $element_id = $element->getPluginId();
+        $build[$section_id][$element_id] = $element->render();
+      }
     }
 
     return $build;

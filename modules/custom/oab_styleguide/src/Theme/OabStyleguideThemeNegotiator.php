@@ -3,11 +3,11 @@
 namespace Drupal\oab_styleguide\Theme;
 
 use Drupal\Core\Routing\RouteMatchInterface;
-use Symfony\Component\Routing\Route;
 use Drupal\Core\Theme\ThemeNegotiatorInterface;
+use Symfony\Component\Routing\Route;
 
 /**
- * Our custom Theme Negotiator
+ * Our custom Theme Negotiator.
  */
 class OabStyleguideThemeNegotiator implements ThemeNegotiatorInterface {
 
@@ -34,4 +34,5 @@ class OabStyleguideThemeNegotiator implements ThemeNegotiatorInterface {
 
     return $route_match->getRouteObject()->getOption('_custom_theme');
   }
+
 }

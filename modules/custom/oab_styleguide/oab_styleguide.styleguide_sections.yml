@@ -1,0 +1,27 @@
+intro:
+  label: 'Introduction'
+  description: 'This styleguide demonstrates styles and components for [site:name] as of [date:short].'
+  elements:
+    intro: {}
+  weight: 0
+  open: true
+typography:
+  label: 'Typography'
+  description: 'All styles for commons HTML textual elements.'
+  elements:
+    typography: {
+      tags: {
+        'h1': 'This is the main title of a page',
+        'h2': 'This is a secondary title',
+        'h3': 'This is a third level title',
+        'h4': 'This is almost never used',
+        'h5': 'This is not really useful for most people',
+        'h6': "I'm not sure this level even exists...",
+        'p': null,
+        'a': null,
+        'em': '',
+        'strong': '',
+        'quote': ''
+      }
+    }
+  weight: -1
