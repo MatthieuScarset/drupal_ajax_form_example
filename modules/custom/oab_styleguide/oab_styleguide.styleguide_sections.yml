@@ -1,6 +1,6 @@
 intro:
   label: 'Introduction'
-  description: 'This styleguide demonstrates styles and components for [site:name] as of [date:short].'
+  description: 'This page demonstrates styles and components for [site:name] as of today ([date:long]).'
   elements:
     intro: {}
   weight: 0
