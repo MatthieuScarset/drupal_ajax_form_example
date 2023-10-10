@@ -1,0 +1,16 @@
+/**
+ * Custom styling for Styleguide page.
+ * 
+ * @see styleguide_preprocess_styleguide()
+ */
+.styleguide > details > summary {
+  background-color: #000;
+  color: #fff;
+}
+.styleguide > details {
+  transition: box-shadow 0.2s linear;
+}
+.styleguide > details[open],
+.styleguide > details:not([open]):hover {
+  box-shadow: -0.5rem 0 orange;
+}

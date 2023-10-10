@@ -42,6 +42,13 @@ class OabStyleguideController extends ControllerBase {
   protected $themeRegistry;
 
   /**
+   * The current route match
+   *
+   * @var \Drupal\Core\Routing\RouteMatchInterface
+   */
+  private $routeMatch;
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
@@ -50,6 +57,7 @@ class OabStyleguideController extends ControllerBase {
     $instance->moduleHandler = $container->get('module_handler');
     $instance->themeManager = $container->get('theme.manager');
     $instance->themeRegistry = $container->get('theme.registry');
+    $instance->routeMatch = $container->get('current_route_match');
     return $instance;
   }
 
@@ -176,14 +184,10 @@ class OabStyleguideController extends ControllerBase {
           '#items' => $info_suggestion_items,
         ],
         '#attributes' => [
-          'class' => ['oab-styleguide__info'],
+          'class' => ['styleguide__info'],
         ]
       ];
     }
-
-    // @todo Print Theme suggestion
-    // @todo Print Twig
-    // @todo Print Preprocess
 
     return $build;
   }
@@ -213,13 +217,18 @@ class OabStyleguideController extends ControllerBase {
       '#title' => $this->t('Modules'),
       '#open' => TRUE,
       '#attributes' => [
-        'class' => ['oab-styleguide']
+        'class' => ['styleguide']
       ]
     ];
 
     $build['modules']['content'] = $this->renderModules();
 
     $build['#attached']['library'][] = 'oab_styleguide/styleguide';
+
+    // Attach theme's library dynamically.
+    if ($theme = $this->routeMatch->getParameter('theme')) {
+      $build['#attached']['library'][] = "$theme/styleguide";
+    }
 
     return $build;
   }

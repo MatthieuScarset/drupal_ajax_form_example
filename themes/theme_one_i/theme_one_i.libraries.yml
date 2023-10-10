@@ -41,3 +41,9 @@ product_formule:
   version: VERSION
   js:
     dist/js/productFormule.min.js: {attributes: { type: module }}
+
+styleguide:
+  version: VERSION
+  css:
+    theme:
+      css/styleguide.css: {}

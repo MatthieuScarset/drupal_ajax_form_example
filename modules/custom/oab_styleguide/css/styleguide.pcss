@@ -1,4 +1,4 @@
-.oab-styleguide {
+.styleguide {
   summary {
     font-size: 2rem;
     font-weight: bold;
@@ -10,25 +10,11 @@
     font-size: 1rem;
     text-decoration: double;
   }
-  
-  > details {
-    transition: box-shadow 0.2s linear;
-    
-    &[open],
-    &:not([open]):hover {
-      box-shadow: -0.5rem 0 orange;
-    }
-  }
 
   details + details {
     margin-top: 1rem;
   }
 
-  details > summary {
-    background-color: #000;
-    color: #fff;
-  }
-  
   code {
     display: inline-flex;
     flex-wrap: nowrap;
